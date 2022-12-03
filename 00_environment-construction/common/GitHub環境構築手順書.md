@@ -19,9 +19,12 @@ git config --list
 
 ### GitHubでアカウントの作成
 https://github.com  
-User: 1ruyamaguchi  
+user: nob-islan
+email: nob.snail@gmail.com
+pass: 4r7ju34w
+<!-- User: 1ruyamaguchi  
 email: 1ru.yamaguchi@gmail.com  
-Pass: 4r7ju1ru  
+Pass: 4r7ju1ru   -->
 画面の表示通りに進めばうまくいく…はず。
 
 ### リモートリポジトリの作成
