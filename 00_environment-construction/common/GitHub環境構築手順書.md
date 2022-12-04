@@ -1,6 +1,6 @@
 ## GitHub環境構築手順書
 https://github.com/1ruyamaguchi  
-あらかじめコマンドラインでgitコマンドが叩けるようにしておく。（Homebrewを使ったgitのインストールなど）
+あらかじめコマンドラインでgitコマンドが叩けるようにしておく（Homebrewを使ったgitのインストールなど）。
 
 ### Gitの初期設定
 ターミナルで以下のコマンドを叩く：  
