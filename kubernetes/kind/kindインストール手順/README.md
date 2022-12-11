@@ -49,7 +49,7 @@ kind のダウンロード
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
 ```
 
-【M1 Mac 対応版】kind のダウンロード
+【M1 Mac 対応】kind のダウンロード
 ```
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
 ```
