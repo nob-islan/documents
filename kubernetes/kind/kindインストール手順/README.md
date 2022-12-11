@@ -28,10 +28,7 @@ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/
 
 kubectlのインストール
 ```
-sudo apt-get update
-```
-```
-sudo apt-get install -y kubectl
+sudo apt-get update && sudo apt-get install -y kubectl
 ```
 
 kubectlがインストールされていること、およびバージョンを確認する
