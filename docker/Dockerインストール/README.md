@@ -73,8 +73,8 @@ sudo usermod -aG docker $USER
 マシンの再起動後、必要であれば`sudo systemctl restart docker`でdockerを再起動する。
 
 ## docker-compose インストール
-【M1 Mac 対応】docker compose の v1 -> v2 移行に伴って、docker-composeをインストールする必要がなくなった。  
-`docker compose`コマンドを使えばいい、はず。
+【M1 Mac 対応】docker compose の v1 -> v2 移行に伴って、docker-composeをインストールする必要がなくなった。`docker compose`コマンドを使えばいい、はず。
+
 公式サイトを参考にすればなんとかなる　はず。https://docs.docker.com/compose/install/  
 <br>
 docker-composeの最新版ダウンロード
