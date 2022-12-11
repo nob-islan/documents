@@ -15,19 +15,26 @@
 
 ### kubectlのインストール
 
-kubectlのダウンロード
+必要パッケージのインストール
 ```
-curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
+```
+```
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+```
+```
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 ```
 
-kubectlバイナリを実行可能にする
+kubectlのインストール
 ```
-chmod +x ./kubectl
+sudo apt-get update
+sudo apt-get install -y kubectl
 ```
 
 kubectlバイナリをPATHに通す
 ```
-sudo mv ./kubectl /usr/local/bin/kubectl
+sudo mv /usr/bin/kubectl /usr/local/bin/kubectl
 ```
 
 kubectlがインストールされていること、およびバージョンを確認する
@@ -40,6 +47,11 @@ kubectl version --client
 kind のダウンロード
 ```
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
+```
+
+【M1 Mac 対応版】kind のダウンロード
+```
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
 ```
 
 kind バイナリを実行可能にする
