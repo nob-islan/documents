@@ -34,11 +34,6 @@ sudo apt-get update
 sudo apt-get install -y kubectl
 ```
 
-kubectlバイナリをPATHに通す
-```
-sudo mv /usr/bin/kubectl /usr/local/bin/kubectl
-```
-
 kubectlがインストールされていること、およびバージョンを確認する
 ```
 kubectl version --client  
