@@ -50,7 +50,7 @@ GitLab上にプロジェクトを作成し、アプリケーションのソー�
 
 以下のREST APIを実装して、GitLabにpushする。
 
-インターフェース
+- インターフェース
 ```java
 package com.example.firstcicd.service;
 
@@ -78,7 +78,7 @@ public interface SampleService {
 }
 ```
 
-実装
+- 実装
 ```java
 package com.example.firstcicd.service.impl;
 
