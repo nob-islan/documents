@@ -79,7 +79,7 @@ docker exec -it nob-gitlab-runner gitlab-runner register
 - Enter tags for the runner (comma-separated):  
 -> タグを任意に付与する
 
-- Enter an executor: 
+- Enter an executor:  
 -> `shell`を選択する
 
 
