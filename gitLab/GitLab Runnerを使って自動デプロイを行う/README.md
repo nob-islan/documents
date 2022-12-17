@@ -9,7 +9,7 @@ GitLabサーバとGitLab Runnerサーバを用意する。いずれもdockerで�
 version: '3'
 services:
   gitlab:
-    image: gitlab/gitlab-ce:15.4.2
+    image: gitlab/gitlab-ee:15.4.2
     container_name: nob-gitlab
     restart: always
     environment:
