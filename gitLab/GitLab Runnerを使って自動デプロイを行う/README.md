@@ -9,7 +9,7 @@ GitLabサーバとGitLab Runnerサーバを用意する。いずれもdockerで�
 version: '3'
 services:
   gitlab:
-    image: gitlab/gitlab-ee:15.4.2
+    image: gitlab/gitlab-ee:15.4.2-ee.0
     container_name: nob-gitlab
     restart: always
     environment:
@@ -52,12 +52,59 @@ GitLab上にプロジェクトを作成し、アプリケーションのソー�
 
 インターフェース
 ```java
-WIP
+package com.example.firstapp.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * サンプルサービスのインターフェースです。
+ * 
+ */
+@Service
+@RestController
+@RequestMapping("/cicd")
+public interface SampleService {
+
+    /**
+     * 固定メッセージを返すメソッドです。
+     * 
+     * @return 挨拶のメッセージ
+     */
+    @GetMapping(value = "/greet")
+    String greet();
+}
 ```
 
 実装
 ```java
-WIP
+package com.example.firstapp.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.example.firstapp.service.SampleService;
+
+/**
+ * サンプルサービスの実装クラスです。
+ * 
+ */
+@Service
+public class SampleServiceImpl implements SampleService {
+
+    /**
+     * {@inheritDoc}
+     * 
+     */
+    @Override
+    public String greet() {
+
+        String retMessage = "Hello, CICD! \n";
+
+        return retMessage;
+    }
+}
 ```
 
 ## Runnerの登録
