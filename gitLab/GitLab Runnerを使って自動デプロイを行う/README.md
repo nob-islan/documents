@@ -52,7 +52,7 @@ GitLab上にプロジェクトを作成し、アプリケーションのソー�
 
 インターフェース
 ```java
-package com.example.firstapp.service;
+package com.example.firstcicd.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,11 +80,11 @@ public interface SampleService {
 
 実装
 ```java
-package com.example.firstapp.service.impl;
+package com.example.firstcicd.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.example.firstapp.service.SampleService;
+import com.example.firstcicd.service.SampleService;
 
 /**
  * サンプルサービスの実装クラスです。
