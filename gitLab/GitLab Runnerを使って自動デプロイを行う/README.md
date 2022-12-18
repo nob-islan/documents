@@ -38,7 +38,7 @@ services:
     - '/var/run/docker.sock:/var/run/docker.sock'
 ```
 
-GitLab Runnerサーバについて、[Dockerのインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を参考にして、コンテナにdockerをインストールする必要がある。
+GitLab Runnerサーバについて、[Dockerのインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を参考にして、コンテナにdockerをインストールする必要がある。`sudo usermod -aG docker gitlab-runner`で、`gitlab-runner`ユーザが`docker`コマンドを使えるようにする。
 
 ## アプリの準備
 
