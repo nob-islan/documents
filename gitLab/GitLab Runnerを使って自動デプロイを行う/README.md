@@ -155,9 +155,9 @@ openjdk17コンテナをベースにしてjarファイルを作成し、コン�
 ```yaml
 build_image:
   script:
-    - docker build -t nobbb/firstapp:0.0.1 .
+    - docker build -t blownbear/firstapp:0.0.1 .
     - sh ./shell/docker-hub-login.sh
-    - docker push nobbb/firstapp:0.0.1
+    - docker push blownbear/firstapp:0.0.1
   only:
     - main
 ```
