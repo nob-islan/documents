@@ -75,11 +75,11 @@ GitLab上にプロジェクトを作成し、アプリケーションのソー�
 ### アプリの実装
 
 ディレクトリ構成
-```
+```shell
 first-cicd-project
   ├─firstcicd  #アプリのソース
   ├─shell  #runner内で使うシェルスクリプト
-  ├─.gitlab-ci,yml
+  ├─.gitlab-ci.yml
   └─Dockerfile
 ```
 
@@ -207,7 +207,7 @@ mainブランチにソースがマージされるとパイプラインが走る�
 `kube-deploy-project`を作成する。
 
 ディレクトリ構成
-```
+```shell
 kube-deploy-project
   └─firstcicd
       ├─firstcicd-deployment.yml
