@@ -2,8 +2,11 @@
 GitLab Runnerを使って、masterブランチにプッシュした際に自動でcontainer imageが作成される仕組みを作り、それを用いてアプリの自動デプロイを行う。
 
 ## 事前準備
-GitLabサーバとGitLab Runnerサーバを用意する。いずれもdockerで動かす。
-- GitLabサーバ
+
+### サーバ構築
+
+#### GitLab
+dockerで動かす。
 
 ```yaml
 version: '3'
@@ -24,7 +27,8 @@ services:
     - '/srv/gitlab/data:/var/opt/gitlab'
 ```
 
-- GitLab Runnerサーバ
+#### GitLab Runner
+こちらもdockerで動かす。
 
 ```yaml
 version: '3'
@@ -38,9 +42,10 @@ services:
     - '/var/run/docker.sock:/var/run/docker.sock'
 ```
 
-GitLab Runnerサーバについて、[Dockerのインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を参考にして、コンテナにdockerをインストールする必要がある。`sudo usermod -aG docker gitlab-runner`で、`gitlab-runner`ユーザが`docker`コマンドを使えるようにする。
+- GitLab Runnerサーバについて、[Dockerのインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を参考にして、コンテナにdockerをインストールする必要がある。
+- `sudo usermod -aG docker gitlab-runner`で、`gitlab-runner`ユーザが`docker`コマンドを使えるようにする。
 
-- kindサーバ
+#### kind
 
 [kindインストール手順](../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)に従ってkubernetesクラスタを稼働させておく。
 
@@ -61,7 +66,7 @@ nodes:
 - role: worker
 ```
 
-また、[kindでArgoCDを使う](../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)を参考にArgo CDを起動させておく。
+- [kindでArgoCDを使う](../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)を参考にArgo CDを起動させておく。
 
 ## アプリの準備
 
@@ -71,12 +76,16 @@ GitLab上にプロジェクトを作成し、アプリケーションのソー�
 
 ディレクトリ構成
 ```
-WIP
+first-cicd-project
+  ├─firstcicd  #アプリのソース
+  ├─shell  #runner内で使うシェルスクリプト
+  ├─.gitlab-ci,yml
+  └─Dockerfile
 ```
 
 以下のREST APIを実装して、GitLabにpushする。
 
-- インターフェース
+#### インターフェース
 ```java
 package com.example.firstcicd.service;
 
@@ -104,7 +113,7 @@ public interface SampleService {
 }
 ```
 
-- 実装
+#### 実装
 ```java
 package com.example.firstcicd.service.impl;
 
