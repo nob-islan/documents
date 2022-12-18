@@ -115,7 +115,7 @@ docker exec -it nob-gitlab-runner gitlab-runner register
 下記を対話形式で設定していく。
 
 - Enter the GitLab instance URL (for example, https://gitlab.com/):  
--> GitLabのページからコピー
+-> `Settings -> CD/CD -> Runners`に書いてあるものを転記
 
 - Enter the registration token:  
 -> 同上
