@@ -1,5 +1,5 @@
 # Gitlab Runner を使って自動デプロイを行う
-GitLab Runnerを使って、masterブランチにプッシュした際に自動でcontainer imageが作成される仕組みを作る。
+GitLab Runnerを使って、masterブランチにプッシュした際に自動でcontainer imageが作成される仕組みを作り、それを用いてアプリの自動デプロイを行う。
 
 ## 事前準備
 GitLabサーバとGitLab Runnerサーバを用意する。いずれもdockerで動かす。
@@ -40,19 +40,39 @@ services:
 
 GitLab Runnerサーバについて、[Dockerのインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を参考にして、コンテナにdockerをインストールする必要がある。`sudo usermod -aG docker gitlab-runner`で、`gitlab-runner`ユーザが`docker`コマンドを使えるようにする。
 
+- kindサーバ
+
+[kindインストール手順](../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)に従ってkubernetesクラスタを稼働させておく。
+
+クラスタ
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 30080
+    hostPort: 30070
+    protocol: TCP
+  - containerPort: 30090
+    hostPort: 30071
+    protocol: TCP
+- role: worker
+- role: worker
+```
+
+また、[kindでArgoCDを使う](../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)を参考にArgo CDを起動させておく。
+
 ## アプリの準備
 
 GitLab上にプロジェクトを作成し、アプリケーションのソースファイルをリポジトリ上に配置する。
 
-### ディレクトリ構成
+### アプリの実装
 
+ディレクトリ構成
 ```
 WIP
 ```
-
-### プロジェクトの作成
-
-### アプリの実装
 
 以下のREST APIを実装して、GitLabにpushする。
 
@@ -167,4 +187,66 @@ build_image:
   only:
     - main
 ```
-Runnerのコンテナ内でimageをビルドし、docker hubにpushする。mainブランチにpushされた時だけパイプラインが走るように制御している。
+Runnerのコンテナ内でimageをビルドし、docker hubにpushする。
+
+mainブランチにソースがマージされるとパイプラインが走る。パイプラインが走り切ると、docker hubにimageが登録されている。
+
+## アプリの自動デプロイ
+
+### デプロイ用プロジェクトの作成
+
+`kube-deploy-project`を作成する。
+
+ディレクトリ構成
+```
+kube-deploy-project
+  └─firstcicd
+      ├─firstcicd-deployment.yml
+      └─firstcicd-service.yml
+```
+
+deploymentおよびserviceは下記で定義する。
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: firstcicd-deployment
+spec:
+  selector:
+    matchLabels:
+      app: firstcicd
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: firstcicd
+    spec:
+      containers:
+        - name: firstcicd
+          image: nobbrownbear/firstcicd:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+```
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: firstcicd-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8099
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 30090
+  selector:
+    app: firstcicd
+```
+
+Argo CDに`kube-deploy-project`を登録すると、アプリが自動デプロイされる。
+
+```
+Nobuhiros-MacBook-Air:~ nob$ curl http://${kindサーバのIPアドレス}:30071/cicd/greet
+Hello, CICD! 
+```
