@@ -129,7 +129,7 @@ docker exec -it nob-gitlab-runner gitlab-runner register
 - Enter an executor:  
 -> `shell`を選択する
 
-
+runnerの登録後、`Run untagged jobs`にチェックを入れる。
 
 ## Container imageの自動作成
 
