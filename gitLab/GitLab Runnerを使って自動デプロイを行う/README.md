@@ -156,9 +156,9 @@ public class SampleServiceImpl implements SampleService {
 ```yaml
 build_image:
   script:
-    - docker build -t nobbrownbear/firstapp:0.0.1 .
+    - docker build -t nobbrownbear/firstcicd:0.0.1 .
     - sh ./shell/docker-hub-login.sh
-    - docker push nobbrownbear/firstapp:0.0.1
+    - docker push nobbrownbear/firstcicd:0.0.1
   only:
     - main
 ```
