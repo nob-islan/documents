@@ -1,7 +1,7 @@
 # Gitlab Runner を使って自動デプロイを行う
 GitLab Runnerを使って、masterブランチにプッシュした際に自動でcontainer imageが作成される仕組みを作り、それを用いてアプリの自動デプロイを行う。
 
-## 事前準備
+## インフラ側作業
 
 ### サーバ構築
 
@@ -68,7 +68,11 @@ nodes:
 
 - [kindでArgoCDを使う](../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)を参考にArgo CDを起動させておく。
 
-## アプリの準備
+### Container image リポジトリ構築
+
+docker hubにアカウントを作成し、リポジトリを作成する。後述のcontainer imageとリポジトリ名を合わせる必要があるので注意。
+
+## アプリ側作業
 
 GitLab上にプロジェクトを作成し、アプリケーションのソースファイルをリポジトリ上に配置する。
 
@@ -83,9 +87,11 @@ first-cicd-project
   └─Dockerfile
 ```
 
+#### firstcicd
+
 以下のREST APIを実装して、GitLabにpushする。
 
-#### インターフェース
+##### インターフェース
 ```java
 package com.example.firstcicd.service;
 
@@ -113,7 +119,7 @@ public interface SampleService {
 }
 ```
 
-#### 実装
+##### 実装
 ```java
 package com.example.firstcicd.service.impl;
 
@@ -142,37 +148,26 @@ public class SampleServiceImpl implements SampleService {
 }
 ```
 
-## Runnerの登録
-Runnerを登録する。
+#### gitlab-ci.yml
+
+パイプラインを走らせる際のジョブを定義する。
+- mainブランチにソースがpushされた際にcontainer imageをビルドする
+- ビルドしたimageをdocker hubにpushする
+```yaml
+build_image:
+  script:
+    - docker build -t nobbrownbear/firstapp:0.0.1 .
+    - sh ./shell/docker-hub-login.sh
+    - docker push nobbrownbear/firstapp:0.0.1
+  only:
+    - main
 ```
-docker exec -it nob-gitlab-runner gitlab-runner register
-```
-下記を対話形式で設定していく。
 
-- Enter the GitLab instance URL (for example, https://gitlab.com/):  
--> `Settings -> CD/CD -> Runners`に書いてあるものを転記
+#### Dockerfile
 
-- Enter the registration token:  
--> 同上
-
-- Enter a description for the runner:  
--> 登録するrunnerの説明を記載する
-
-- Enter tags for the runner (comma-separated):  
--> タグを任意に付与する
-
-- Enter an executor:  
--> `shell`を選択する
-
-runnerの登録後、`Run untagged jobs`にチェックを入れる。
-
-## Container imageの自動作成
-
-### 各種ファイルの作成
-
-- Dockerfile
-
-アプリのimageの作成に必要。
+アプリのcontainer imageの元となる。
+- imageの作成時にjarファイルをビルドする
+- コンテナの起動時にJavaアプリを起動する
 ```Dockerfile
 FROM openjdk:17
 
@@ -184,23 +179,36 @@ CMD java -jar /java/firstapp/target/firstapp-0.0.1-SNAPSHOT.jar
 ```
 openjdk17コンテナをベースにしてjarファイルを作成し、コンテナ起動時にアプリをスタートする。
 
-- gitlab-ci.yml
+## アプリのビルド
 
-パイプラインを走らせるのに必要。
-```yaml
-build_image:
-  script:
-    - docker build -t nobbrownbear/firstapp:0.0.1 .
-    - sh ./shell/docker-hub-login.sh
-    - docker push nobbrownbear/firstapp:0.0.1
-  only:
-    - main
+### Runnerの登録
 ```
-Runnerのコンテナ内でimageをビルドし、docker hubにpushする。
+docker exec -it nob-gitlab-runner gitlab-runner register
+```
+下記を対話形式で設定していく。
+
+- Enter the GitLab instance URL (for example, https://gitlab.com/):  
+`Settings -> CD/CD -> Runners`に書いてあるものを転記
+
+- Enter the registration token:  
+同上
+
+- Enter a description for the runner:  
+登録するrunnerの説明を記載する
+
+- Enter tags for the runner (comma-separated):  
+タグを任意に付与する
+
+- Enter an executor:  
+`shell`を選択する
+
+runnerの登録後、`Run untagged jobs`にチェックを入れる。
+
+### ソースのpush
 
 mainブランチにソースがマージされるとパイプラインが走る。パイプラインが走り切ると、docker hubにimageが登録されている。
 
-## アプリの自動デプロイ
+## アプリのデプロイ
 
 ### デプロイ用プロジェクトの作成
 
@@ -252,6 +260,8 @@ spec:
   selector:
     app: firstcicd
 ```
+
+### デプロイ実行
 
 Argo CDに`kube-deploy-project`を登録すると、アプリが自動デプロイされる。
 
