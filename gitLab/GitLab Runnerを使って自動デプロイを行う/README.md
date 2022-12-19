@@ -171,11 +171,11 @@ build_image:
 ```Dockerfile
 FROM openjdk:17
 
-COPY ./firstapp /java/firstapp
+COPY ./firstcicd /java/firstcicd
 
-RUN cd /java/firstapp && ./mvnw package
+RUN cd /java/firstcicd && ./mvnw package
 
-CMD java -jar /java/firstapp/target/firstapp-0.0.1-SNAPSHOT.jar
+CMD java -jar /java/firstcicd/target/firstcicd-0.0.1-SNAPSHOT.jar
 ```
 openjdk17コンテナをベースにしてjarファイルを作成し、コンテナ起動時にアプリをスタートする。
 
