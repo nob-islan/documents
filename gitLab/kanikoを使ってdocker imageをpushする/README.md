@@ -54,7 +54,7 @@ first-kaniko-project
 主に以下の流れで処理が進む。
 - 実行用のimageとして`kaniko-project/executor:debug`を使う。`latest`とかだとうまくいかないらしい。
 - `DOCKERHUB_TOKEN`を生成して`/kaniko/.docker/config.json`に記載する。これがdocker hubにpushする際の認証情報となる。
-- 実際にpushする、
+- 実際にpushする。
 ```
 stages:
   - build
