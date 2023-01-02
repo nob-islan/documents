@@ -16,7 +16,7 @@ cf. [公式ドキュメント](https://kind.sigs.k8s.io/docs/user/private-regist
 
 ### ECRリポジトリ
 
-- 画面からリポジトリを作成する
+- 画面から、例えば`first-ecr`という名前でリポジトリを作成する
 - 下記の要領でDockerfileを作成し、pushしておく
 ```
 FROM ubuntu:20.04
