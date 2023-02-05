@@ -1,6 +1,12 @@
 # First Prometheus
 インストールから動作確認まで行う。
 
+## 事前準備
+タイムゾーンがローカルPCとズレていると画面に警告が出るため、下記設定をしておく。
+```
+timedatectl set-timezone Asia/Tokyo
+```
+
 ## インストール
 dockerで動かすため、[Dockerインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を済ませておく。
 
@@ -27,3 +33,15 @@ docker run -d \
   -v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
   prom/prometheus
 ```
+
+下記にアクセスすると、グラフ描画ページが表示される。
+```
+http://${prometheusサーバのIPアドレス}:9090/
+```
+
+下記で監視項目の一覧を確認できる。
+```
+http://${prometheusサーバのIPアドレス}:9090/metrics
+```
+
+監視項目の一覧から適当なもの（`prometheus_http_requests_total`など）をグラフ描画ページの検索ボックスに投入すると、グラフが表示される。
