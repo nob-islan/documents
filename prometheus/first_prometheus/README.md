@@ -1,4 +1,5 @@
 # First Prometheus
+cf. https://changineer.info/server/monitoring/monitoring_prometheus_install_docker.html  
 インストールから動作確認まで行う。
 
 ## 事前準備
@@ -25,6 +26,8 @@ scrape_configs:
 EOF
 ```
 
+## 起動
+
 Prometheusコンテナを起動する。
 ```
 docker run -d \
@@ -45,3 +48,37 @@ http://${prometheusサーバのIPアドレス}:9090/metrics
 ```
 
 監視項目の一覧から適当なもの（`prometheus_http_requests_total`など）をグラフ描画ページの検索ボックスに投入すると、グラフが表示される。
+
+## 他サーバの監視
+`node exporter`を使うと、他サーバの各メトリクスを監視できる。
+
+監視したいサーバにて、node exporterを起動する。
+```
+docker run -d \
+  --name node-exporter \
+  --net="host" \
+  --pid="host" \
+  -v "/:/host:ro,rslave" \
+  quay.io/prometheus/node-exporter:latest \
+  --path.rootfs=/host
+```
+
+監視できているかどうかは下記コマンドで確認できる。
+```
+curl http://localhost:9100/metrics
+```
+
+Prometheusの設定ファイルに下記を追記する。
+```diff
+ scrape_configs:
+   - job_name: prometheus
+     static_configs:
+       - targets:
+         - localhost:9090
++  - job_name: node
++    static_configs:
++      - targets:
++        - ${監視対象サーバのIPアドレス}:9100
+```
+
+`docker restart prometheus`でコンテナをリスタートし、画面から`Targets`を参照すると、監視対象が追加されていることが確認できる。
