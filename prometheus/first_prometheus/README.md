@@ -82,3 +82,10 @@ Prometheusの設定ファイルに下記を追記する。
 ```
 
 `docker restart prometheus`でコンテナをリスタートし、画面から`Targets`を参照すると、監視対象が追加されていることが確認できる。
+
+## Grafana
+
+dockerで動かす。
+```
+docker run -d --name=grafana -p 3000:3000 grafana/grafana
+```
