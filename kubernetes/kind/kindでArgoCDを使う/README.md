@@ -36,7 +36,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 `argocd-server`サービスを一部変更してNodePortに対応させる。
 ```
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}, {"name": "https", "port": 443, "protocol": "TCP", "targetPort": 8080, "nodePort": 30081}]}}'
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}]}}'
 ```
 
 Argo CD CLIをインストールする。
