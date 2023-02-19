@@ -39,6 +39,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url "http://${IP_address}:80"
+        gitlab_rails['gitlab_shell_ssh_port'] = 2022
     ports:
     - '80:80'
     - '2022:22'
@@ -52,6 +53,8 @@ rootユーザのパスワードはサーバ内のファイルに記載されて�
 ```
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
 ```
+
+sshによってリポジトリのクローンなどをする場合は、2022ポート経由で行う。
 
 ## gitlab-runnerコンテナを構築
 gitlabコンテナ構築時に使用したdocker-compose.ymlに以下を追記する：
