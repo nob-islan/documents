@@ -17,6 +17,11 @@ Docker version 23.0.2, build 569dd73
 
 - Prometheus サーバ
 
+```
+nob@prometheus:~$ sudo docker --version
+Docker version 23.0.2, build 569dd73
+```
+
 ## 手順
 
 ### アプリケーションサーバ
@@ -112,7 +117,7 @@ management.endpoints.web.exposure.include=prometheus
 ディレクトリ構成は下記である。
 
 ```
-docker/
+docker
   └── java
       ├── docker-compose.yml
       └── volume
@@ -354,4 +359,35 @@ jvm_memory_committed_bytes{area="nonheap",id="CodeHeap 'non-profiled nmethods'",
 
 #### 構築
 
+Prometheus の監視対象に関する設定を`/etc/prometheus/prometheus.yml`に記載する。
+
+```
+scrape_configs:
+  - job_name: 'nob-java-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets:
+        - ${java-appのIPアドレス}:8080
+```
+
 #### 起動
+
+下記の内容で`docker-compose.yml`を作成する。
+
+```yaml
+version: "3.6"
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: nob-prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - type: bind
+        source: "/etc/prometheus/prometheus.yml"
+        target: "/etc/prometheus/prometheus.yml"
+```
+
+`docker compose up`でコンテナを起動後、`http://${prometheusサーバのIPアドレス}:9090`にアクセスして下記のような画面が出てくれば正常に起動している。
+
+![prom_init](./images/prom_init.png)
