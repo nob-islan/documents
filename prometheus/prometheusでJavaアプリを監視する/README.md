@@ -37,11 +37,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * サンプルサービスのインターフェースです。
+ *
+ */
 @Service
 @RestController
 @RequestMapping("/sample")
 public interface SampleService {
 
+    /**
+     * 固定メッセージを返すメソッドです。
+     *
+     * @return
+     */
     @GetMapping(value = "/greet")
     String greet();
 }
@@ -56,6 +65,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.prom.service.SampleService;
 
+/**
+ * サンプルサービスの実装クラスです。
+ *
+ */
 @Service
 public class SampleServiceImpl implements SampleService {
 
