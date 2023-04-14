@@ -6,8 +6,8 @@
 
 ### GitLab サーバ
 
-```
-version: '3'
+```yml
+version: "3"
 services:
   gitlab:
     image: gitlab/gitlab-ee:15.4.2-ee.0
@@ -17,26 +17,26 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url "http://${IP_address}:80"
     ports:
-    - '80:80'
-    - '2022:22'
+      - "80:80"
+      - "2022:22"
     volumes:
-    - '/srv/gitlab/config:/etc/gitlab'
-    - '/srv/gitlab/logs:/var/log/gitlab'
-    - '/srv/gitlab/data:/var/opt/gitlab'
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
 ### GitLab Runner サーバ
 
-```
-version: '3'
+```yml
+version: "3"
 services:
   gitlab-runner:
     image: gitlab/gitlab-runner:ubuntu-v15.7.0
     container_name: nob-gitlab-runner
     restart: always
     volumes:
-    - '/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner'
-    - '/var/run/docker.sock:/var/run/docker.sock'
+      - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
+      - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
 runner を登録します。executor は`docker`を選択してください。
@@ -65,7 +65,7 @@ first-kaniko-project
 - `DOCKERHUB_TOKEN`を生成して`/kaniko/.docker/config.json`に記載する。これが docker hub に push する際の認証情報となる。
 - push する。
 
-```
+```yml
 stages:
   - build
 
