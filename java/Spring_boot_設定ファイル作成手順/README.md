@@ -1,10 +1,12 @@
-# Spring boot環境構築
-プロジェクト構成、依存関係などのSpring bootでの環境構築方法をメモしておく
+# Spring boot 環境構築
+
+プロジェクト構成、依存関係などの Spring boot での環境構築方法のメモです。
 
 ## 使用環境
+
 - Java: jdk-17.0.2
 - エディター: VSCode  
-下記の拡張機能をインストール
+  下記の拡張機能をインストール
   - Debugger for Java
   - Extension Pack for Java
   - GitLens
@@ -22,13 +24,18 @@
   - Start git-bash
   - Test Runner for Java
   - Visual Studio IntelliCodeß
+
 ## プロジェクト構成
-###  依存関係
-  - Spring Web
-  - Validation
-  - Thymeleaf
-  - Lombok
+
+### 依存関係
+
+- Spring Web
+- Validation
+- Thymeleaf
+- Lombok
+
 ### パッケージ構成（自動生成される部分などは省略）
+
 ```
 projectName
 　├─src
@@ -38,7 +45,7 @@ projectName
 　│　│　│　│　└─XXXController.java
 　│　│　│　├─dao
 　│　│　│　│　├─impl
-　│　│　│　│　│　└─XXXDaoImpl.java 
+　│　│　│　│　│　└─XXXDaoImpl.java
 　│　│　│　│　└─XXXDao.java #各テーブルに対応したdao
 　│　│　│　├─dto
 　│　│　│　│　└─XXXDto.java
@@ -66,13 +73,16 @@ projectName
 　　　├─initial_data.sql #イニシャルデータ用のSQL文
 　　　└─sample_data.sql #サンプルデータ用のSQL文
 ```
-`test/java/com/example/projectName`配下は`src/java/com/example/projectName`配下と同一の構成にする。
 
-### DB関連の設定
+`test/java/com/example/projectName`配下は`src/java/com/example/projectName`配下と同一の構成にしてください。
 
-#### pom.xmlの追加設定
+### DB 関連の設定
+
+#### pom.xml の追加設定
+
 以下を追記：
-```
+
+```xml
 <dependency>
     <groupId>org.mariadb.jdbc</groupId>
     <artifactId>mariadb-java-client</artifactId>
@@ -94,9 +104,12 @@ projectName
     <artifactId>spring-boot-starter-jdbc</artifactId>
 </dependency>
 ```
-#### application.propertiesの追加設定
+
+#### application.properties の追加設定
+
 以下を追記：
-```
+
+```sh
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
@@ -106,9 +119,12 @@ spring.datasource.username=root
 #パスワード
 spring.datasource.password=
 ```
-#### mybatis-config.xmlの追加設定
-`projectName/src/main/resources`配下に`mybatis-config.xml`を以下の内容で作成する：
-```
+
+#### mybatis-config.xml の追加設定
+
+`projectName/src/main/resources`配下に`mybatis-config.xml`を以下の内容で作成します：
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC
         "-//mybatis.org//DTD Config 3.0//EN"
@@ -120,9 +136,12 @@ spring.datasource.password=
     </settings>
 </configuration>
 ```
-#### ProjectNameApplication.javaの追加設定
-ProjectNameApplication.javaを以下のように変更：
-```
+
+#### ProjectNameApplication.java の追加設定
+
+ProjectNameApplication.java を以下のように変更します：
+
+```java
 package com.example.projectName;
 
 import javax.sql.DataSource;

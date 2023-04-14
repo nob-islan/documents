@@ -1,12 +1,12 @@
 # First ansible
 
-構築から簡単な動作確認までを行う。
+構築から簡単な動作確認までを行います。
 
 ## 構築
 
 ### インストール
 
-[公式ドキュメント](https://docs.ansible.com/ansible/2.9_ja/installation_guide/intro_installation.html)を参考にansibleをインストールする。
+[公式ドキュメント](https://docs.ansible.com/ansible/2.9_ja/installation_guide/intro_installation.html)を参考に ansible をインストールします。
 
 ```
 sudo apt update
@@ -15,32 +15,38 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
-### ssh接続の準備
-管理ホスト（ansibleのプレイブックなどを管理するホスト）から対象ホスト（プレイブック内の処理が実行されるホスト）に対して、パスフレーズなしでssh接続できるようにする。
+### ssh 接続の準備
 
-sshキーを作成する。
+管理ホスト（ansible のプレイブックなどを管理するホスト）から対象ホスト（プレイブック内の処理が実行されるホスト）に対して、パスフレーズなしで ssh 接続できるようにします。
+
+ssh キーを作成します。
+
 ```
 ssh-keygen -t rsa
 ```
 
-対象ホストに公開鍵を記憶させる。
+対象ホストに公開鍵を記憶させます。
+
 ```
 ssh-copy-id -i ~/.ssh/id_rsa.pub ${user_name}@${ip_address}
 ```
 
 ## 使い方
 
-### pingモジュールの実行
+### ping モジュールの実行
+
 対象ホストで行う操作のことを`モジュール`というらしい。
 
-pingモジュールを実行する。
+ping モジュールを実行します。
+
 ```
 ansible ${対象ホストのIPアドレス} -m ping
 ```
 
-### hostsの記載
+### hosts の記載
 
-インベントリファイル`/etc/ansible/hosts`を作成する。
+インベントリファイル`/etc/ansible/hosts`を作成します。
+
 ```
 [master]
 ${管理ホストのIPアドレス}
@@ -48,15 +54,17 @@ ${管理ホストのIPアドレス}
 ${対象ホストのIPアドレス}
 ```
 
-プレイブックファイル`/etc/ansible/first.yaml`を作成する。
+プレイブックファイル`/etc/ansible/first.yaml`を作成します。
+
 ```yaml
-- hosts: node    #対象ホストを指定する。
-  tasks:         #実行するtaskを指定する。
+- hosts: node #対象ホストを指定する。
+  tasks: #実行するtaskを指定する。
     - name: ディレクトリを作成する。
       file: path=/tmp/nob/first state=directory
 ```
 
-プレイブックコマンドを実行する。`-i`はインベントリファイル指定のオプション。
+プレイブックコマンドを実行します。`-i`はインベントリファイル指定のオプションです。
+
 ```
 ansible-playbook first.yaml -i hosts
 ```

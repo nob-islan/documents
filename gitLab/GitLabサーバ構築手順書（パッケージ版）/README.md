@@ -1,48 +1,33 @@
-# GitLabサーバ構築手順書（パッケージ版）
+# GitLab サーバ構築手順書（パッケージ版）
 
-だいたい公式ドキュメント通り。https://about.gitlab.com/install/
+だいたい公式ドキュメント通りです。https://about.gitlab.com/install/
 
-## 使用環境
-VirtualBoxを使って以下の仮想マシンを動かす。
-- Ubuntu 20.04
+## GitLab サーバ手順
 
-## GitLabサーバ手順
+構成、必要な依存関係をインストールします。
 
-構成、必要な依存関係をインストール
 ```
 sudo apt-get update
 sudo apt-get install -y curl openssh-server ca-certificates tzdata perl
 ```
 
-postfixをインストール（メール関係が不要ならスキップしてもいいかも）
+postfix をインストールします（メール関係が不要ならスキップしてもいいかも）。
+
 ```
 sudo apt-get install -y postfix
 ```
 
-GitLabのパッケージリポジトリを追加、依存関係のインストール
+GitLab のパッケージリポジトリを追加、依存関係のインストールします
+
 ```
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash
 ```
 
-GitLabインストール
+GitLab インストール
+
 ```
 sudo apt install gitlab-ee
 ```
 
-
-DNSの設定をしないのであれば`http://localhost:80`でGitLabにアクセスできる。ただしログイン画面が表示されるまでに時間がかかる。Error: 502が出るようであればしばらく待ってみるとよい。  
-root用のログインパスワードは`/etc/gitlab/initial_root_password`に格納されている。24時間経つとファイルが消えるので早めにパスワードを変更する必要がある。
-
-## ネットワーク設定手順
-
-参考：https://www.it-poem.com/?p=310  
-<br>
-VirtualBoxを使ってGitLabサーバを立てた場合、ホスト側からGitLabにアクセスできるようにする設定をする。
-
-- VirtualBoxの「設定」を開く
-- ネットワーク -> 高度 -> ポートフォワーディング　を選択
-- 「ホストポート」および「ゲストポート」を設定。ゲストポートは80、ホストポートは（例えば）8888。
-
-`http://localhost:8888`にアクセスすればホスト側からGitLabを見れる。  
-<br>
-もしくは、「ブリッジアダプター」を適用すれば、自動的に外部から参照できるIPアドレスがゲストOSに付与される。
+DNS の設定をしないのであれば`http://localhost:80`で GitLab にアクセスできます。ただしログイン画面が表示されるまでに時間がかかる。Error: 502 が出るようであればしばらく待ってみるとよいです。  
+root 用のログインパスワードは`/etc/gitlab/initial_root_password`に格納されています。24 時間経つとファイルが消えるので早めにパスワードを変更する必要があります。

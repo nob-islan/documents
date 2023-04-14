@@ -1,55 +1,67 @@
-# DockerでDBサーバーを立ててJavaアプリと連携させる
+# Docker で DB サーバーを立てて Java アプリと連携させる
+
 ## 目標
-DockerでDBサーバを構築し、VSCodeからJavaアプリを動かしてデータのinsert, selectができることを確認する。
+
+Docker で DB サーバを構築し、VSCode から Java アプリを動かしてデータの insert, select ができることを確認します。
 
 ## 使用環境
+
 - Java: openjdk-17
 - DB: MariaDB
 
 ## プロジェクト構成
+
 ```
 mariadb_test
   ┣server
   ┃  ┣javadbtest
   ┃  ┃  ┗アプリケーションのソースファイル（省略）
   ┃  ┗sqls
-  ┃     ┗create_table.sql 
+  ┃     ┗create_table.sql
   ┗docker-compose.yml
 ```
+
 ### docker-compose.yml
-CREATE DATABASEおよびCREATE TABLEするためのSQLファイルをコンテナ側の`/higuchi/sqls`に配置する。  
+
+CREATE DATABASE および CREATE TABLE するための SQL ファイルをコンテナ側の`/higuchi/sqls`に配置します。  
 `MYSQL_ROOT_PASSWORD=password`に合わせてソースファイル側のパスワードも記載することを忘れずに。
+
 ```
 version: "3.6"
-services: 
-        
+services:
+
   db:
     image: mariadb
     restart: always
-    ports: 
+    ports:
       - 3306:3306
-    volumes: 
+    volumes:
       - type: bind
         source: "./server/sqls"
         target: "/higuchi/sqls"
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=password
-      
+
   adminer:
     image: adminer
     restart: always
     ports:
       - 8081:8080
 ```
-`adminer`はブラウザ上で、GUIにてDBを操作できるものらしい。トラシューに使えたりするのでセットにしておく。
+
+`adminer`はブラウザ上で、GUI にて DB を操作できるものらしい。トラシューに使えたりするのでセットにしておきます。
 
 ### アプリケーションのソースファイル
-具体的なコードは省略するが、以下のAPIを用意した：
-- userテーブルに１行insertするAPI
-- userテーブルの情報を全件取得するAPI
+
+具体的なコードは省略するが、以下の API を用意した：
+
+- user テーブルに１行 insert する API
+- user テーブルの情報を全件取得する API
 
 ### create_table.sql
-後にサーバ内で操作する際、このSQLファイルを実行するだけで下準備が整うようにしてある。イニシャルデータを仕込むことももちろん可能。
+
+後にサーバ内で操作する際、この SQL ファイルを実行するだけで下準備が整うようにしてあります。イニシャルデータを仕込むことももちろん可能です。
+
 ```
 CREATE DATABASE docker_java_db_test;
 
@@ -63,24 +75,33 @@ CREATE TABLE user(
 ```
 
 ## 実際にやってみる
-以下、起動確認までのコマンドを記載する。Docker Desktopを起動していないと冒頭からコケるので注意（２敗）。
+
+以下、起動確認までのコマンドを記載します。Docker Desktop を起動していないと冒頭からコケるので注意（２敗）。
 
 ### コンテナを作成
-今回作成したdocker-compose.ymlを配置してあるディレクトリにて以下を実行：
+
+今回作成した docker-compose.yml を配置してあるディレクトリにて以下を実行：
+
 ```
 docker-compose up -d
 ```
-imageが無ければpullしてくれて、コンテナをせっせとこしらえてくれる。
+
+image が無ければ pull してくれて、コンテナをせっせとこしらえてくれます。
 
 ### テーブルを仕込む
-以下を叩いてDBのコンテナに入る：
+
+以下を叩いて DB のコンテナに入ります：
+
 ```
 docker exec -it ${コンテナのID} /bin/bash
 ```
-SQLファイルを実行してテーブル作成、イニシャルデータの挿入などを行う：
+
+SQL ファイルを実行してテーブル作成、イニシャルデータの挿入などを行います：
+
 ```
 source ${path to sql}
 ```
 
 ### アプリケーションを起動
-VSCodeなどからいつも通りアプリを起動する。
+
+VSCode などからいつも通りアプリを起動します。

@@ -1,19 +1,23 @@
-# GitLabをAWS上のRDSに接続する
-AWSのRDSを利用して立ち上げたPostgreSQLにGitLabを接続する。
+# GitLab を AWS 上の RDS に接続する
 
-## PostgreSQLの設定
-事前準備として、AWSコンソールなどを利用してPostgreSQLを立ち上げる。  
+AWS の RDS を利用して立ち上げた PostgreSQL に GitLab を接続します。
+
+## PostgreSQL の設定
+
+事前準備として、AWS コンソールなどを利用して PostgreSQL を立ち上げます。  
 https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html
 
-GitLabサーバに`psql`をインストールする。
+GitLab サーバに`psql`をインストールします。
+
 ```
 sudo apt-get install postgresql-client-common
 sudo apt-get install postgresql-client
 ```
 
-以下、PostgreSQLサーバに設定を入れていく。  
+以下、PostgreSQL サーバに設定を入れていきます。  
 https://docs.gitlab.com/ee/administration/postgresql/external.html  
-AWSコンソール上に表示されるDBのエンドポイントを控えておき、デフォルトで用意されている`postgres`ユーザを使ってPostgreSQLに接続する。
+AWS コンソール上に表示される DB のエンドポイントを控えておき、デフォルトで用意されている`postgres`ユーザを使って PostgreSQL に接続します。
+
 ```
 psql \
   --host=${PostgreSQLのエンドポイント} \
@@ -22,7 +26,8 @@ psql \
   --password
 ```
 
-以下のように、PostgreSQL上の操作でGitLab用のユーザおよびデータベースを用意する。
+以下のように、PostgreSQL 上の操作で GitLab 用のユーザおよびデータベースを用意します。
+
 ```
 # ユーザを作成
 CREATE USER gitlab WITH PASSWORD 'gitlab_secret' CREATEDB;
@@ -41,7 +46,8 @@ CREATE DATABASE gitlabhq_production OWNER gitlab;
 GRANT rds_superuser TO gitlab;
 ```
 
-以降は、以下のコマンドで直接GitLab用のデータベースに接続できる。
+以降は、以下のコマンドで直接 GitLab 用のデータベースに接続できます。
+
 ```
 psql \
   --host=${PostgreSQLのエンドポイント} \
@@ -51,10 +57,12 @@ psql \
   --password
 ```
 
-## GitLabの設定
-dockerで動かすため、`docker-compose.yml`を以下で作成する。
-```docker-compose.yml
-version: '3'
+## GitLab の設定
+
+docker で動かすため、`docker-compose.yml`を以下で作成します。
+
+```yaml
+version: "3"
 services:
   gitlab:
     image: gitlab/gitlab-ee:latest
@@ -72,16 +80,18 @@ services:
         gitlab_rails['db_encoding'] = 'utf8'
         gitlab_rails['db_host'] = '${DBのエンドポイント}'
     ports:
-    - '80:80'
-    - '2022:22'
+      - "80:80"
+      - "2022:22"
     volumes:
-    - '/srv/gitlab/config:/etc/gitlab'
-    - '/srv/gitlab/logs:/var/log/gitlab'
-    - '/srv/gitlab/data:/var/opt/gitlab'
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
 ## 起動
-`docker-compose up`でOK。初期パスワードは以下で確認できる。
+
+`docker-compose up`で OK。初期パスワードは以下で確認できます。
+
 ```
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
 ```

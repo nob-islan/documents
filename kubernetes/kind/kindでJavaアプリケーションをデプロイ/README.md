@@ -1,12 +1,15 @@
-# kindでJavaアプリケーションをデプロイ
-DBとの繋ぎこみすら行わない、curlによる疎通確認をするだけのアプリケーションをkind上でデプロイします。
+# kind で Java アプリケーションをデプロイ
+
+DB との繋ぎこみすら行わない、curl による疎通確認をするだけのアプリケーションを kind 上でデプロイします。
 
 ## 事前準備
-- kindのインストールされたマシン
+
+- kind のインストールされたマシン
 
 ## デプロイ手順
 
 ### ディレクトリ構成
+
 ```
 first-k8s-restapi
     ├─docker
@@ -16,7 +19,7 @@ first-k8s-restapi
     └─kube
         ├─java-cluster.yml
         ├─java-deployment.yml
-        └─java-service.yml  
+        └─java-service.yml
 ```
 
 ### デプロイ手順
@@ -24,41 +27,46 @@ first-k8s-restapi
 #### クラスタ構築
 
 `java-cluster.yml`には、
-- ワーカーノードを2台にすること
-- service向けのポートを30080にすること
-- 外部からは30070ポートで通信すること
 
-が記載されている。
-```java-cluster.yml
+- ワーカーノードを 2 台にすること
+- service 向けのポートを 30080 にすること
+- 外部からは 30070 ポートで通信すること
+
+が記載されています。
+
+```yml
 # クラスタ構築
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
-# コントロールプレーン1台
-- role: control-plane
-  extraPortMappings:
-    # ServiceのnodePortとして指定するポート
-  - containerPort: 30080
-    # ホスト側のポートを指定
-    hostPort: 30070
-# ワーカーノード2台
-- role: worker
-- role: worker
+  # コントロールプレーン1台
+  - role: control-plane
+    extraPortMappings:
+      # ServiceのnodePortとして指定するポート
+      - containerPort: 30080
+        # ホスト側のポートを指定
+        hostPort: 30070
+  # ワーカーノード2台
+  - role: worker
+  - role: worker
 ```
 
-以下のコマンドで`java-cluster`クラスターを構築する。
+以下のコマンドで`java-cluster`クラスターを構築します。
+
 ```
 kind create cluster --config java-cluster.yml --name java-cluster
 ```
 
-#### dockerイメージ作成
+#### docker イメージ作成
 
-`Dockerfile`では、openjdk17をベースとして、
+`Dockerfile`では、openjdk17 をベースとして、
+
 - ログ格納用のディレクトリを作成すること
-- jarファイルをコピーしておくこと
-- Pod作成時にjavaアプリケーションを起動すること
+- jar ファイルをコピーしておくこと
+- Pod 作成時に java アプリケーションを起動すること
 
-が記載されている。
+が記載されています。
+
 ```Dockerfile
 FROM openjdk:17
 
@@ -70,19 +78,23 @@ COPY ./jar/app-0.0.1-SNAPSHOT.jar /nob/server/jar
 CMD java -jar /nob/server/jar/app-0.0.1-SNAPSHOT.jar
 ```
 
-`first-k8s-restapi/docker`にてdockerイメージを作成する。`-t`オプションで名前をつけておく。
+`first-k8s-restapi/docker`にて docker イメージを作成します。`-t`オプションで名前をつけておきます。
+
 ```
 docker build ./ -t nob-openjdk17
 ```
 
-各ワーカーノードにdockerイメージをロードする。これを忘れるとデプロイメント起動時にPodがimageを取得できずに`CrashLoopBackOff`し続ける。
+各ワーカーノードに docker イメージをロードします。これを忘れるとデプロイメント起動時に Pod が image を取得できずに`CrashLoopBackOff`し続けます。
+
 ```
 kind load docker-image nob-openjdk17 --name java-cluster
 ```
 
 #### デプロイメント起動
-`java-deployment.yml`でPodに関する設定を記載する。`containers`配下にて、ローカルの`nob-openjdk17`を使うことを宣言している。
-```java-deployment.yml
+
+`java-deployment.yml`で Pod に関する設定を記載します。`containers`配下にて、ローカルの`nob-openjdk17`を使うことを宣言しています。
+
+```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -98,21 +110,24 @@ spec:
         app: java-app
     spec:
       containers:
-      - name: java-containers
-        image: nob-openjdk17:latest
-        imagePullPolicy: IfNotPresent
-        ports: 
-        - containerPort: 8080
+        - name: java-containers
+          image: nob-openjdk17:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
 ```
 
-デプロイメントをapplyする。
+デプロイメントを apply します。
+
 ```
 kubectl apply -f java-deployment.yml
 ```
 
 #### サービス起動
-`java-service.yml`によって外部から通信できるようにする。
-```java-service.yml
+
+`java-service.yml`によって外部から通信できるようにします。
+
+```yml
 apiVersion: v1
 kind: Service
 metadata:
@@ -120,18 +135,20 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "java-port"
-    protocol: "TCP"
-    port: 8080
-    nodePort: 30080
+    - name: "java-port"
+      protocol: "TCP"
+      port: 8080
+      nodePort: 30080
   selector:
     app: java-app
 ```
 
-サービスをapplyする。
+サービスを apply します。
+
 ```
 kubectl apply -f java-service.yml
 ```
 
 #### 動作確認
-`curl http://${kindサーバのIPアドレス}:30070/k8s/date`で本日日時が返って来れば正常動作している。`k8s/date`はjava側の設定になるので、変える場合はソースファイルの変更、jarの再作成、imageの再作成が必要になる。
+
+`curl http://${kindサーバのIPアドレス}:30070/k8s/date`で本日日時が返って来れば正常動作しています。`k8s/date`は java 側の設定になるので、変える場合はソースファイルの変更、jar の再作成、image の再作成が必要になります。

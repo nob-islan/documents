@@ -1,13 +1,16 @@
-# KubernetesでJavaアプリケーションをデプロイ
-curlによる疎通確認をするだけのアプリケーションをKubernetesクラスター上でデプロイします。
+# Kubernetes で Java アプリケーションをデプロイ
+
+curl による疎通確認をするだけのアプリケーションを Kubernetes クラスター上でデプロイします。
 
 ## 事前準備
-- Kubernetesクラスター
-- docker hubの（パブリック）リポジトリ
+
+- Kubernetes クラスター
+- docker hub の（パブリック）リポジトリ
 
 ## デプロイ手順
 
 ### ディレクトリ構成
+
 ```
 first-k8s-restapi
     ├─docker
@@ -16,11 +19,13 @@ first-k8s-restapi
     │       └─app-0.0.1-SNAPSHOT.jar
     └─kube
         ├─java-deployment.yml
-        └─java-service.yml  
+        └─java-service.yml
 ```
 
-### dockerイメージ作成
-あらかじめdockerイメージを作成して、docker hubに登録しておく必要があるため、以下の内容でDockerfileを作成する。
+### docker イメージ作成
+
+あらかじめ docker イメージを作成して、docker hub に登録しておく必要があるため、以下の内容で Dockerfile を作成してください。
+
 ```Dockerfile
 FROM openjdk:17
 
@@ -40,8 +45,9 @@ COPY ./jar/${jarFile} ${jarFilePath}
 CMD java -jar ${JAR_FILE_PATH}/${JAR_FILE}
 ```
 
-イメージ名は`${userName}/${repositoryName}`にする必要がある。以下のシェルを叩けばイメージが作成できる。
-```docker-build.sh
+イメージ名は`${userName}/${repositoryName}`にする必要があります。以下のシェルを叩けばイメージが作成できます。
+
+```sh
 USER_NAME="1ruyamaguchi"
 REPOSITORY_NAME="kube-restapi"
 
@@ -49,14 +55,17 @@ REPOSITORY_NAME="kube-restapi"
 docker build -t ${USER_NAME}/${REPOSITORY_NAME} .
 ```
 
-docker hubにイメージをpushする。
+docker hub にイメージを push します。
+
 ```
 docker image push 1ruyamaguchi/kube-restapi:latest
 ```
 
 ### デプロイメント起動
-`java-deployment.yml`でPodに関する設定を記載する。`containers`配下にて、`1ruyamaguchi/kube-restapi`をpullして使うことを宣言している。
-```java-deployment.yml
+
+`java-deployment.yml`で Pod に関する設定を記載します。`containers`配下にて、`1ruyamaguchi/kube-restapi`を pull して使うことを宣言しています。
+
+```yml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -72,21 +81,24 @@ spec:
         app: java-app
     spec:
       containers:
-      - name: java-containers
-        image: 1ruyamaguchi/kube-restapi:latest
-        imagePullPolicy: IfNotPresent
-        ports: 
-        - containerPort: 8080
+        - name: java-containers
+          image: 1ruyamaguchi/kube-restapi:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
 ```
 
-デプロイメントを起動する
+デプロイメントを起動します。
+
 ```
 kubectl apply -f java-deployment.yml
 ```
 
 ### サービス起動
-`java-service.yml`によって外部から通信できるようにする。
-```java-service.yml
+
+`java-service.yml`によって外部から通信できるようにします。
+
+```yml
 apiVersion: v1
 kind: Service
 metadata:
@@ -94,18 +106,20 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "java-port"
-    protocol: "TCP"
-    port: 8080
-    nodePort: 30080
+    - name: "java-port"
+      protocol: "TCP"
+      port: 8080
+      nodePort: 30080
   selector:
     app: java-app
 ```
 
-サービスをapplyする。
+サービスを apply します。
+
 ```
 kubectl apply -f java-service.yml
 ```
 
 ### 動作確認
-`curl http://${コントロールプレーンのIPアドレス}:30080/k8s/date`で本日日時が返って来れば正常動作している。`k8s/date`はjava側の設定になるので、変える場合はソースファイルの変更、jarの再作成、imageの再作成が必要になる。
+
+`curl http://${コントロールプレーンのIPアドレス}:30080/k8s/date`で本日日時が返って来れば正常動作しています。`k8s/date`は java 側の設定になるので、変える場合はソースファイルの変更、jar の再作成、image の再作成が必要になります。

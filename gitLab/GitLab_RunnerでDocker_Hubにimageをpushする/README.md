@@ -2,7 +2,7 @@
 
 ## 共通事前準備
 
-サーバを用意する。いずれもコンテナで動かす。
+サーバを用意する。いずれもコンテナで動かします。
 
 ### GitLab サーバ
 
@@ -39,7 +39,7 @@ services:
     - '/var/run/docker.sock:/var/run/docker.sock'
 ```
 
-runner を登録する。executor は`docker`を選択する。
+runner を登録します。executor は`docker`を選択してください。
 
 ```
 docker exec -it nob-gitlab-runner gitlab-runner register
@@ -59,7 +59,7 @@ first-kaniko-project
 
 #### .gitlab-ci.yml
 
-主に以下の流れで処理が進む。
+主に以下の流れで処理が進みます。
 
 - 実行用の image として`kaniko-project/executor:debug`を使う。`latest`とかだとうまくいかないらしい。
 - `DOCKERHUB_TOKEN`を生成して`/kaniko/.docker/config.json`に記載する。これが docker hub に push する際の認証情報となる。
@@ -87,7 +87,7 @@ build:
 
 #### Dockerfile
 
-ただ適当なファイルを touch しただけの ubuntu コンテナ。
+ただ適当なファイルを touch しただけの ubuntu コンテナです。
 
 ```
 FROM ubuntu:20.04
@@ -99,11 +99,11 @@ RUN mkdir /nob && cd /nob && touch snail-test
 
 #### 準備
 
-各種環境変数を用意する必要があるので、画面の`Settings -> CI/CD -> Variables`から定義する。
+各種環境変数を用意する必要があるので、画面の`Settings -> CI/CD -> Variables`から定義します。
 
 - `DOCKERHUB_USER`: docker hub のユーザ名
 - `DOCKERHUB_PASSWORD`: ログイン用のパスワードか、hub から発行できるアクセストークン
 
 #### パイプライン実行
 
-`Repository -> Tags`からタグを発行する、Tag name が image のタグとなる。あとはパイプラインが走るので見守るだけ。
+`Repository -> Tags`からタグを発行すると、Tag name が image のタグとなります。あとはパイプラインが走るので見守ってください。

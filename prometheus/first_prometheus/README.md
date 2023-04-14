@@ -1,17 +1,22 @@
 # First Prometheus
+
 cf. https://changineer.info/server/monitoring/monitoring_prometheus_install_docker.html  
-インストールから動作確認まで行う。
+インストールから動作確認まで行います。
 
 ## 事前準備
-タイムゾーンがローカルPCとズレていると画面に警告が出るため、下記設定をしておく。
+
+タイムゾーンがローカル PC とズレていると画面に警告が出るため、下記設定をしておきます。
+
 ```
 timedatectl set-timezone Asia/Tokyo
 ```
 
 ## インストール
-dockerで動かすため、[Dockerインストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を済ませておく。
 
-最低限の設定ファイルを作成する。
+docker で動かすため、[Docker インストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)を済ませておいてください。
+
+最低限の設定ファイルを作成します。
+
 ```
 # 作業用ディレクトリ作成
 mkdir /etc/prometheus
@@ -28,7 +33,8 @@ EOF
 
 ## 起動
 
-Prometheusコンテナを起動する。
+Prometheus コンテナを起動します。
+
 ```
 docker run -d \
   --name prometheus \
@@ -37,22 +43,26 @@ docker run -d \
   prom/prometheus
 ```
 
-下記にアクセスすると、グラフ描画ページが表示される。
+下記にアクセスすると、グラフ描画ページが表示されます。
+
 ```
 http://${prometheusサーバのIPアドレス}:9090/
 ```
 
-下記で監視項目の一覧を確認できる。
+下記で監視項目の一覧を確認できます。
+
 ```
 http://${prometheusサーバのIPアドレス}:9090/metrics
 ```
 
-監視項目の一覧から適当なもの（`prometheus_http_requests_total`など）をグラフ描画ページの検索ボックスに投入すると、グラフが表示される。
+監視項目の一覧から適当なもの（`prometheus_http_requests_total`など）をグラフ描画ページの検索ボックスに投入すると、グラフが表示されます。
 
 ## 他サーバの監視
-`node exporter`を使うと、他サーバの各メトリクスを監視できる。
 
-監視したいサーバにて、node exporterを起動する。
+`node exporter`を使うと、他サーバの各メトリクスを監視できます。
+
+監視したいサーバにて、node exporter を起動します。
+
 ```
 docker run -d \
   --name node-exporter \
@@ -63,12 +73,14 @@ docker run -d \
   --path.rootfs=/host
 ```
 
-監視できているかどうかは下記コマンドで確認できる。
+監視できているかどうかは下記コマンドで確認できます。
+
 ```
 curl http://localhost:9100/metrics
 ```
 
-Prometheusの設定ファイルに下記を追記する。
+Prometheus の設定ファイルに下記を追記します。
+
 ```diff
  scrape_configs:
    - job_name: prometheus
@@ -81,11 +93,12 @@ Prometheusの設定ファイルに下記を追記する。
 +        - ${監視対象サーバのIPアドレス}:9100
 ```
 
-`docker restart prometheus`でコンテナをリスタートし、画面から`Targets`を参照すると、監視対象が追加されていることが確認できる。
+`docker restart prometheus`でコンテナをリスタートし、画面から`Targets`を参照すると、監視対象が追加されていることが確認できます。
 
 ## Grafana
 
-dockerで動かす。
+docker で動かします。
+
 ```
 docker run -d --name=grafana -p 3000:3000 grafana/grafana
 ```

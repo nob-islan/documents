@@ -1,31 +1,38 @@
-# Kubernetesクラスター構築手順
-公式ドキュメントに従ってKubernetesクラスターを構築する。
+# Kubernetes クラスター構築手順
+
+公式ドキュメントに従って Kubernetes クラスターを構築します。
 
 ## 事前準備
+
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/
 
 ### マシン
-VirtualBox上で仮想マシンを立てて構築。ドキュメントに記載されている最低条件ギリギリ  
+
+VirtualBox 上で仮想マシンを立てて構築します。ドキュメントに記載されている最低条件ギリギリです。
+
 - メモリ：2GB
-- CPU：2コア
+- CPU：2 コア
 - HDD: 32GB
 - OS: Ubuntu 20.04.3
 
 ### エラー回避のための設定
 
-swapの無効化
+swap を無効化します。
+
 ```
 sudo swapoff -a
 ```
 
-ただし、上記の方法だとノードを再起動するとswapが再度有効化されてしまう。永続的に無効化したい場合は`/etc/fstab`ファイルのswapに関する行をコメントアウトしてリブートする。
+ただし、上記の方法だとノードを再起動すると swap が再度有効化されてしまいます。永続的に無効化したい場合は`/etc/fstab`ファイルの swap に関する行をコメントアウトしてリブートします。
 
 ## コントロールプレーン構築
 
 ### ランタイムのインストール
-cf. https://kubernetes.io/ja/docs/setup/production-environment/container-runtimes/  
 
-必要な設定の追加
+cf. https://kubernetes.io/ja/docs/setup/production-environment/container-runtimes/
+
+必要な設定を追加します。
+
 ```
 cat | sudo tee /etc/modules-load.d/containerd.conf <<EOF
 overlay
@@ -45,16 +52,19 @@ EOF
 sudo sysctl --system
 ```
 
-containerdのインストール
+containerd をインストールします。
+
 ```
-# HTTPS越しのリポジトリの使用をaptに許可するために、パッケージをインストール
-sudo apt-get update 
+# HTTPS越しのリポジトリの使用をaptに許可するためにパッケージをインストール
+sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 ```
+
 ```
 # Docker公式のGPG鍵を追加
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
+
 ```
 # Dockerのaptリポジトリの追加
 sudo add-apt-repository \
@@ -62,23 +72,27 @@ sudo add-apt-repository \
     $(lsb_release -cs) \
     stable"
 ```
+
 ```
 # containerdのインストール
-sudo apt-get update 
+sudo apt-get update
 sudo apt-get install -y containerd.io
 ```
+
 ```
 # containerdの設定
 sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
 ```
+
 ```
 # containerdの再起動
 sudo systemctl restart containerd
 ```
 
-### kubeadm, kubelet, kubectlのインストール
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/#kubeadm-kubelet-kubectlのインストール  
+### kubeadm, kubelet, kubectl のインストール
+
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/#kubeadm-kubelet-kubectlのインストール
 
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
@@ -92,32 +106,38 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ### コントロールプレーンの起動
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/#pg-134ed1f6142a98e6ac681a1ba4920e53  
 
-コントロールプレーンノードの初期化。`kubeadm join`コマンドを控えておく。
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/#pg-134ed1f6142a98e6ac681a1ba4920e53
+
+コントロールプレーンノードを初期化します。`kubeadm join`コマンドを控えておいてください。
+
 ```
 sudo kubeadm init
 ```
 
-一般ユーザでも`kubectl`コマンドを叩けるようにする。
+一般ユーザでも`kubectl`コマンドを叩けるようにします。
+
 ```
 mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-CNIプラグインを適用する。これが無いと`kubectl get node`で確認した際のノードのStatusが`NotReady`のまま動かない。  
+CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。  
 cf. https://www.weave.works/docs/net/latest/kubernetes/kube-addon/#-installation
+
 ```
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 ```
 
 ## ワーカーノード構築
+
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/#join-nodes
 
-### kubeXXXインストール
-コントロールプレーン構築の[ランタイムのインストール](#ランタイムのインストール)および[kubeadm, kubelet, kubectlのインストール](#kubeadm-kubelet-kubectlのインストール)と同様の手順を踏む。
+### kubeXXX インストール
+
+コントロールプレーン構築の[ランタイムのインストール](#ランタイムのインストール)および[kubeadm, kubelet, kubectl のインストール](#kubeadm-kubelet-kubectlのインストール)と同様の手順を踏んでください。
 
 ### ノードをクラスターに参加させる
-先に控えた`kubeadm join`コマンドを叩く。しばらく経ってから`kubectl get nodes`するとノードのStatusが`Ready`になる。
 
+先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードの Status が`Ready`になります。

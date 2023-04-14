@@ -1,7 +1,9 @@
 # kind Tips
-## nginx起動
+
+## nginx 起動
 
 sample-cluster-1.yml
+
 ```yaml:sample-cluster-1.yaml
 # クラスタ構築
 kind: Cluster
@@ -20,6 +22,7 @@ nodes:
 ```
 
 sample-service-deployment-1.yml
+
 ```yaml:sample-service-deployment-1.yaml
 # サービスおよびデプロイメント構築
 ---
@@ -56,38 +59,45 @@ spec:
   selector:
     app: sample-app
 ```
-`http://${ホスト側のIPアドレス}:30070`にアクセスしてnginxが起動していることを確認できる。
+
+`http://${ホスト側のIPアドレス}:30070`にアクセスして nginx が起動していることを確認できる。
 
 ## ボリュームのマウント
+
 あらかじめ各ワーカーノードにディレクトリ・ファイルを仕込んでおく。
-```docker-compose.yml
+
+```yml
 spec:
   containers:
-  - name: java-containers
-    image: nob-openjdk17:latest
-    imagePullPolicy: IfNotPresent
-    volumeMounts: 
-    - mountPath: /nob
-      name: java-volume
+    - name: java-containers
+      image: nob-openjdk17:latest
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /nob
+          name: java-volume
   volumes:
-  - name: java-volume
-    hostPath: 
-      path: /nob/server
+    - name: java-volume
+      hostPath:
+        path: /nob/server
 ```
-上の場合だと、ノード上の`/nob/server`がPodの`/nob`にマウントされる。どのノードのボリュームがマウントされるかはランダムに決まるらしい。
 
-## ホストマシンのdocker imageをワーカーノードにロード
-openjdkのPodを立ち上げようとして、`CrashLoopBackOff`でハマった際の対応。  
-cf. https://qiita.com/yokawasa/items/bba45ad775bbf8ac25c3  
+上の場合だと、ノード上の`/nob/server`が Pod の`/nob`にマウントされます。どのノードのボリュームがマウントされるかはランダムに決まるらしいです。
 
-ローカルにopenjdkのdocker imageを作成、立ち上がった瞬間落ちないようにするおまじないを追加
+## ホストマシンの docker image をワーカーノードにロード
+
+openjdk の Pod を立ち上げようとして、`CrashLoopBackOff`でハマった際の対応です。  
+cf. https://qiita.com/yokawasa/items/bba45ad775bbf8ac25c3
+
+ローカルに openjdk の docker image を作成、立ち上がった瞬間落ちないようにするおまじないを追加します。
+
 ```Dockerfile
 FROM openjdk:17
 
 CMD tail -f /dev/null
 ```
 
-各ワーカーノードにdocker imageをロード
+各ワーカーノードに docker image をロードします。
+
 ```
 kind load docker-image ${docker image name} --name ${cluster name}
 ```

@@ -1,6 +1,6 @@
 # Prometheus で Java アプリを監視する
 
-Prometheus で Java アプリの API を監視できるようにするまでの構築手順。ついでに Grafana も導入する。
+Prometheus で Java アプリの API を監視できるようにするまでの構築手順です。ついでに Grafana も導入します。
 
 cf.
 
@@ -11,7 +11,7 @@ cf.
 
 ### サーバ
 
-いずれも docker で動かす。[Docker インストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/)をしておく。
+いずれも docker で動かします。[Docker インストール](../../docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/)をしておいてください。
 
 - アプリケーションサーバ
 
@@ -35,7 +35,7 @@ Docker version 23.0.2, build 569dd73
 
 ##### 検証用アプリ作成
 
-固定メッセージを返すだけの検証用の API を作成し、API を`/sample/greet`としておく。
+固定メッセージを返すだけの検証用の API を作成し、API を`/sample/greet`としておきます。
 
 - インターフェース
 
@@ -96,7 +96,7 @@ public class SampleServiceImpl implements SampleService {
 
 ##### 依存関係追加
 
-メトリクス収集には`Micrometer`を使う。`pom.xml`に下記の依存関係を追記する。
+メトリクス収集には`Micrometer`を使います。`pom.xml`に下記の依存関係を追記してください。
 
 ```xml
     <dependency>
@@ -111,15 +111,15 @@ public class SampleServiceImpl implements SampleService {
 
 ##### メトリクス収集用のエンドポイント作成
 
-Prometheus がアプリからメトリクスを収集する用のエンドポインタを作成する。`src/main/resources/application.properties`に下記を追記する。
+Prometheus がアプリからメトリクスを収集する用のエンドポインタを作成します。`src/main/resources/application.properties`に下記を追記してください。
 
-```properties
+```
 management.endpoints.web.exposure.include=prometheus
 ```
 
 #### 起動
 
-ディレクトリ構成は下記である。
+下記でディレクトリを構成してください。
 
 ```
 docker
@@ -130,7 +130,7 @@ docker
               └── prom-0.0.1-SNAPSHOT.jar
 ```
 
-下記の内容で`docker-compose.yml`を作成し、コンテナ起動時にアプリが立ち上がるようにしておく。
+下記の内容で`docker-compose.yml`を作成し、コンテナ起動時にアプリが立ち上がるようにしておきます。
 
 ```yaml
 version: "3.6"
@@ -148,14 +148,14 @@ services:
         target: "/nob/volume"
 ```
 
-`docker compose up`でコンテナを起動、API を叩いてレスポンスが帰ってくれば正常に起動できている。
+`docker compose up`でコンテナを起動、API を叩いてレスポンスが帰ってくれば正常に起動できています。
 
 ```
 $ curl http://${java-appのIPアドレス}/sample/greet
 Hello, Prometheus!
 ```
 
-また、Prometheus 向けのエンドポイントにアクセスしてメトリクスを取得することも可能。
+また、Prometheus 向けのエンドポイントにアクセスしてメトリクスを取得することも可能です。
 
 <details><summary>メトリクス一覧</summary><div>
 
@@ -364,7 +364,7 @@ jvm_memory_committed_bytes{area="nonheap",id="CodeHeap 'non-profiled nmethods'",
 
 #### 構築
 
-Prometheus の監視対象に関する設定を`/etc/prometheus/prometheus.yml`に記載する。
+Prometheus の監視対象に関する設定を`/etc/prometheus/prometheus.yml`に記載します。
 
 ```
 scrape_configs:
@@ -377,7 +377,7 @@ scrape_configs:
 
 #### 起動
 
-下記の内容で`docker-compose.yml`を作成する。
+下記の内容で`docker-compose.yml`を作成します。
 
 ```yaml
 version: "3.6"
@@ -393,33 +393,33 @@ services:
         target: "/etc/prometheus/prometheus.yml"
 ```
 
-`docker compose up`でコンテナを起動後、`http://${prometheusサーバのIPアドレス}:9090`にアクセスして下記のような画面が出てくれば正常に起動している。
+`docker compose up`でコンテナを起動後、`http://${prometheusサーバのIPアドレス}:9090`にアクセスして下記のような画面が出てくれば正常に起動しています。
 
 ![prom_init](./images/prom_init.png)
 
-`http://${prometheusサーバのIPアドレス}:9090/targets`にアクセスして、アプリケーションサーバを監視できていることを確認する。
+`http://${prometheusサーバのIPアドレス}:9090/targets`にアクセスして、アプリケーションサーバを監視できていることを確認します。
 
 ![prom_metrics_target](./images/prom_metrics_target.png)
 
 ## 監視設定
 
-メトリクスの表示など、監視周りの設定を入れる。また、Grafana を起動してメトリクスを連携する。
+メトリクスの表示など、監視周りの設定を入れます。また、Grafana を起動してメトリクスを連携します。
 
 ### 取得したメトリクスの表示
 
-`http://${prometheusサーバのIPアドレス}:9090/targets`から、メトリクスの一覧が確認できる。今回は例として`http_server_requests_seconds_count`を扱い、API が叩かれた回数を確認する。
+`http://${prometheusサーバのIPアドレス}:9090/targets`から、メトリクスの一覧が確認できます。今回は例として`http_server_requests_seconds_count`を扱い、API が叩かれた回数を確認します。
 
-`http://${prometheusサーバのIPアドレス}:9090/graph`にて上のメトリクス名を入力すると、メトリクスが表示される。
+`http://${prometheusサーバのIPアドレス}:9090/graph`にて上のメトリクス名を入力すると、メトリクスが表示されます。
 
 ![prom_metrics_sample_greet](./images/prom_metrics_sample_greet.png)
 
-一番下のメトリクスが今回作成した API の情報になる。「Graph」タブでグラフを確認できる。
+一番下のメトリクスが今回作成した API の情報になります。「Graph」タブでグラフを確認できます。
 
 ![prom_metrics_graph](./images/prom_metrics_graph.png)
 
 ### Grafana 起動
 
-Grafana を起動する。Prometheus の`docker-compose.yml`を下記にように書き換える。
+Grafana を起動します。Prometheus の`docker-compose.yml`を下記にように書き換えます。
 
 ```yaml
 version: "3.6"
@@ -441,28 +441,28 @@ services:
       - 3000:3000
 ```
 
-`docker compose up`でコンテナを起動した後、`http://${prometheusサーバのIPアドレス}:3000`にアクセスして下記のような画面が表示されれば正常に起動している。
+`docker compose up`でコンテナを起動した後、`http://${prometheusサーバのIPアドレス}:3000`にアクセスして下記のような画面が表示されれば正常に起動しています。
 
 ![grafana_init](./images/grafana_init.png)
 
-初期ユーザ名/パスワード：admin/admin でログインできる。
+初期ユーザ名/パスワード：admin/admin でログインできます。
 
 #### データソースの設定
 
-Grafana がどこからデータを取り込むかを設定する。「Configuration」->「Data sources」を選択する。
+Grafana がどこからデータを取り込むかを設定します。「Configuration」->「Data sources」を選択してください。
 
 ![grafana_configuration_data_sources](./images/grafana_configuration_data_sources.png)
 
-「Add data source」->「Prometheus」を選択し、「URL」欄に Prometheus サーバの IP アドレスを入力する。
+「Add data source」->「Prometheus」を選択し、「URL」欄に Prometheus サーバの IP アドレスを入力します。
 
 ![grafana_data_source_url](./images/grafana_data_source_url.png)
 
 #### ボードの作成
 
-メトリクスを可視化する。「Dashboards」->「+ New dashboard」を選択する。「Add a new panel」から新しいパネルの作成画面に遷移する。
+メトリクスを可視化します。「Dashboards」->「+ New dashboard」を選択し、「Add a new panel」から新しいパネルの作成画面に遷移します。
 
 ![grafana_add_new_panel](./images/grafana_add_new_panel.png)
 
-「Metric」欄に監視対象のメトリクスを入力する。今回は`http_server_requests_seconds_count`とする。「Apply」ボタンを押下すればパネルが作成される。
+「Metric」欄に監視対象のメトリクスを入力します。今回は`http_server_requests_seconds_count`とする。「Apply」ボタンを押下すればパネルが作成されます。
 
 ![grafana_app_graph](./images/grafana_app_graph.png)

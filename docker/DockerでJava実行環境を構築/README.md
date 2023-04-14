@@ -1,11 +1,15 @@
-# DockerでJava実行環境を構築
+# Docker で Java 実行環境を構築
+
 ## 目標
-公式のopenjdkイメージを使ってJavaの実行環境をDockerで用意する。
+
+公式の openjdk イメージを使って Java の実行環境を Docker で用意します。
 
 ## 使用環境
+
 - Java: openjdk-17
 
 ## プロジェクト構成
+
 ```
 java-test
   ┣server
@@ -14,28 +18,32 @@ java-test
 ```
 
 ### docker-compose.yml
+
 ```
 version: "3.6"
-services: 
-  java: 
+services:
+  java:
     image: openjdk:17
-    ports: 
+    ports:
       - 8080:8080
     tty: true
-    volumes: 
+    volumes:
       - type: bind
         source: "./server"
         target: "/higuchi/server"
 ```
-`./server`配下のファイル（今回はソースファイルのみだが、仕込みたいシェルスクリプトなど）を`/higuchi/server`にバインドする。
+
+`./server`配下のファイル（今回はソースファイルのみですが、仕込みたいシェルスクリプトなど）を`/higuchi/server`にバインドします。
 
 ### アプリケーションのソースファイル
-Hello World程度のものなので省略。
 
+Hello World 程度のものなので省略します。
 
 ## 実際にやってみる
+
 起動までの流れ
-- `docker-compose up -d`にて、yamlファイルを読み込ませる。トイレに行っている間にコンテナが完成している。
-- `docker exec -it ${container ID} /bin/bash`にてコンテナに入る。  
-- 適切なディレクトリにて`./mvnw package`を叩く。コンパイルが始まる。
-- `java -jar ${path to jar}`を叩けばアプリケーションが起動する。jarファイルはtarget配下に格納されている。
+
+- `docker-compose up -d`にて、yaml ファイルを読み込ませると、トイレに行っている間にコンテナが完成しています。
+- `docker exec -it ${container ID} /bin/bash`にてコンテナに入ります。
+- 適切なディレクトリにて`./mvnw package`を叩く。コンパイルが始まります。
+- `java -jar ${path to jar}`を叩けばアプリケーションが起動します。jar ファイルは target 配下に格納されています。

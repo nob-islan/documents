@@ -1,10 +1,14 @@
-# Jacocoテストレポート出力手順
+# Jacoco テストレポート出力手順
+
 参考：https://tosi-tech.net/2020/06/coverage-report-of-jacoco/  
-MavenおよびGradleプロジェクトについて記載。
+Maven および Gradle プロジェクトについて記載。
 
 ## Maven
+
 ### 手順
-`pom.xml`の`<plugins>`内に以下を追記する：
+
+`pom.xml`の`<plugins>`内に以下を追記します：
+
 ```
 <plugin>
     <groupId>org.jacoco</groupId>
@@ -26,7 +30,9 @@ MavenおよびGradleプロジェクトについて記載。
     </executions>
 </plugin>
 ```
-また、`<project>`の中に以下を追加する：
+
+また、`<project>`の中に以下を追加します：
+
 ```
 <reporting>
 <plugins>
@@ -44,17 +50,25 @@ MavenおよびGradleプロジェクトについて記載。
 </plugins>
 </reporting>
 ```
-追記後、`./mvnw test jacoco:report`コマンドを叩く。うまくいけば`target/site/jacoco`内にhtml形式でレポートが作成される。
+
+追記後、`./mvnw test jacoco:report`コマンドを叩きます。うまくいけば`target/site/jacoco`内に html 形式でレポートが作成されます。
 
 ### ハマったところ
-- 以下のようなエラーが出てBUILD FAILUREする場合：
+
+- 以下のようなエラーが出て BUILD FAILURE する場合：
+
 ```
 Error while creating report: Error while analyzing /Users/nobuhiro/higuchi/GitLab/monitoring/Monitoring/monitoring/target/classes/com/example/monitoring/dto/InputDto.class. Unsupported class file major version
 ```
-`jacoco-maven-pluginjacoco-maven-plugin`内のversionを最新にすると直る（はず）。
+
+`jacoco-maven-pluginjacoco-maven-plugin`内の version を最新にすると直る（はず）。
+
 ## Gradle
+
 `build.gradle`ファイルの`plugins`ブロック内に
+
 ```
 id 'jacoco'
 ```
-を追記する。追記後`./gradlew test jacocoTestReport`コマンドを叩く。うまくいけば`build/reports/jacoco/test/html`内にレポートが作成される。
+
+を追記する。追記後`./gradlew test jacocoTestReport`コマンドを叩きます。うまくいけば`build/reports/jacoco/test/html`内にレポートが作成されます。
