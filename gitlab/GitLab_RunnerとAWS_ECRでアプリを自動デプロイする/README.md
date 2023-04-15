@@ -278,7 +278,7 @@ spec:
     spec:
       containers:
         - name: firstcicd
-          image: nobbrownbear/firstcicd:0.0.1
+          image: ${ECRリポジトリ上のimage URL}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
