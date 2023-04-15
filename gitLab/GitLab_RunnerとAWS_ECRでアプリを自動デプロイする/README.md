@@ -155,7 +155,7 @@ public class SampleServiceImpl implements SampleService {
 
 パイプラインを走らせる際のジョブを定義します。
 
-- タグが切られた際に container image をビルドする
+- タグが切られた際に kaniko を使って container image をビルドする
 - ビルドした image を ECR に push する
 
 ```yaml
