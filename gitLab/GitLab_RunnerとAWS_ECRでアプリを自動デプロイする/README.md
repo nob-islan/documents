@@ -92,7 +92,7 @@ first-cicd-project
 
 以下の REST API を実装して、GitLab に push します。
 
-##### インターフェース
+- インターフェース
 
 ```java
 package com.example.firstcicd.service;
@@ -121,7 +121,7 @@ public interface SampleService {
 }
 ```
 
-##### 実装
+- 実装
 
 ```java
 package com.example.firstcicd.service.impl;
