@@ -1,6 +1,6 @@
 # GitLab Runner と AWS ECR でアプリを自動デプロイする
 
-GitLab Runner を使って、master ブランチにプッシュした際に自動で container image が作成される仕組みを作り、それを用いてアプリの自動デプロイを行う。
+GitLab Runner を使って、自動で ECR リポジトリに container image が push される仕組みを作り、アプリの自動デプロイを行う。
 
 ## インフラ側作業
 
