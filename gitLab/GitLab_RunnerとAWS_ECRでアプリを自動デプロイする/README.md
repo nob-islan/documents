@@ -191,6 +191,8 @@ FROM openjdk:17
 
 ARG app_name='firstcicd'
 ARG server_work_dir='/nob/java'
+ENV APP_NAME=${app_name}
+ENV SERVER_WORK_DIR=${server_work_dir}
 
 COPY ./firstcicd/ ${server_work_dir}
 
