@@ -1,4 +1,4 @@
-# kaniko を使って docker image を push する
+# GitLab Runner で Docker Hub に image を push する
 
 ## 共通事前準備
 
