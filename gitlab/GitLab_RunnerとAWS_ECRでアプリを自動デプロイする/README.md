@@ -302,7 +302,7 @@ spec:
 
 ### デプロイ実行
 
-Argo CD に`kube-deploy-project`を登録すると、アプリが自動デプロイされます。
+Argo CD に`first-kube-project`を登録すると、アプリが自動デプロイされます。
 
 ```
 Nobuhiros-MacBook-Air:~ nob$ curl http://${kindサーバのIPアドレス}:30071/cicd/greet
