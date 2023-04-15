@@ -190,15 +190,16 @@ build:
 FROM openjdk:17
 
 ARG app_name='firstcicd'
-ARG server_work_dir='/nob/java'
+ARG server_work_dir='/nob/firstcicd'
 ENV APP_NAME=${app_name}
 ENV SERVER_WORK_DIR=${server_work_dir}
+ENV JAR_DIR=${SERVER_WORK_DIR}'/target'
 
 COPY ./firstcicd/ ${server_work_dir}
 
 RUN cd ${server_work_dir} && ./mvnw package
 
-CMD java -jar ${server_work_dir}/${app_name}-0.0.1-SNAPSHOT.jar
+CMD java -jar ${JAR_DIR}/${APP_NAME}-0.0.1-SNAPSHOT.jar
 ```
 
 openjdk17 コンテナをベースにして jar ファイルを作成し、コンテナ起動時にアプリをスタートします。
