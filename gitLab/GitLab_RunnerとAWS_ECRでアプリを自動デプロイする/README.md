@@ -192,7 +192,7 @@ FROM openjdk:17
 ARG app_name='firstcicd'
 ARG server_work_dir='/nob/java'
 
-COPY ./ ${server_work_dir}
+COPY ./firstcicd/ ${server_work_dir}
 
 RUN cd ${server_work_dir} && ./mvnw package
 
@@ -234,6 +234,8 @@ runner の登録後、`Run untagged jobs`にチェックを入れる。
 
 - `AWS_ACCESS_KEY_ID`: AWS 上で発行するアクセスキー
 - `AWS_SECRET_ACCESS_KEY`: 上と同時に発行されるシークレットキー
+
+`Protected`を外さないとパイプライン実行時にエラーになるかもしれません。
 
 ### ソースの push
 
