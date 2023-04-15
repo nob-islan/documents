@@ -144,7 +144,7 @@ public class SampleServiceImpl implements SampleService {
     @Override
     public String greet() {
 
-        String retMessage = "Hello, CICD! \n";
+        String retMessage = "Hello, CI/CD! \n";
 
         return retMessage;
     }
@@ -302,7 +302,7 @@ spec:
 
 ### デプロイ実行
 
-Argo CD に`first-kube-project`を登録すると、アプリが自動デプロイされます。
+[kind で ArgoCD を使う](../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/)を参考に、Argo CD に`first-kube-project`を登録すると、アプリが自動デプロイされます。
 
 ```
 Nobuhiros-MacBook-Air:~ nob$ curl http://${kindサーバのIPアドレス}:30071/cicd/greet
