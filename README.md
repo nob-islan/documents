@@ -30,7 +30,7 @@
 - java
   - [CSV ファイルからのテストデータ挿入手順](./java/CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8B%E3%82%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E6%8C%BF%E5%85%A5%E6%89%8B%E9%A0%86/README.md)
   - [Jacoco テストレポート出力手順](./java/Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/README.md)
-  - [Spring*boot*設定ファイル作成手順](./java/Spring_boot_%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
+  - [Spring_boot\_設定ファイル作成手順](./java/Spring_boot_%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
 - kubernetes
 - oracle
 - postgresql
