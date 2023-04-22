@@ -32,6 +32,18 @@
   - [Jacoco テストレポート出力手順](./java/Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/README.md)
   - [Spring_boot\_設定ファイル作成手順](./java/Spring_boot_%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
 - kubernetes
+  - kind
+    - [kind インストール手順](./kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
+    - [kind で ArgoCD を使う](./kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)
+    - [kind で ECR のプライベートリポジトリから image を pull](./kubernetes/kind/kind%E3%81%A7ECR%E3%81%AE%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%8B%E3%82%89image%E3%82%92pull/README.md)
+    - [kind で Java アプリケーションをデプロイ](./kubernetes/kind/kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
+    - [Tips](./kubernetes/kind/Tips/README.md)
+  - minikube
+    - [minikube インストール手順](./kubernetes/minikube/minikube%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
+  - pure_kubernetes
+    - [Kubernetes クラスター構築手順](./kubernetes/pure_kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
+    - [Kubernetes で Java アプリケーションをデプロイ](./kubernetes/pure_kubernetes/Kubernetes%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
+    - [Tips](./kubernetes/pure_kubernetes/Tips/README.md)
 - oracle
 - postgresql
 - prometheus
