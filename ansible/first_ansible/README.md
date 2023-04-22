@@ -31,7 +31,7 @@ ssh-keygen -t rsa
 ssh-copy-id -i ~/.ssh/id_rsa.pub ${user_name}@${ip_address}
 ```
 
-## 使い方
+## 使用例
 
 ### ping モジュールの実行
 
@@ -43,7 +43,7 @@ ping モジュールを実行します。
 ansible ${対象ホストのIPアドレス} -m ping
 ```
 
-### hosts の記載
+### hosts を記載してプレイブックを実行
 
 インベントリファイル`/etc/ansible/hosts`を作成します。
 
