@@ -1,4 +1,4 @@
-# WIP: Docker インストールを自動化
+# Docker インストールを Ansible で実行
 
 [Docker インストールシェル](./docker_install.sh)を応用して、docker インストールおよび、ユーザの docker グループへの追加自動化します。
 
