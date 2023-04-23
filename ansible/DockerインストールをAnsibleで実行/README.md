@@ -25,6 +25,7 @@ ansible
     - name: vimインストール
       apt:
         name: vim
+      become: yes
     - name: vimrcファイル作成
       shell: |
         cat << EOF > ~/.vimrc
