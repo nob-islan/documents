@@ -9,7 +9,7 @@ Maven および Gradle プロジェクトについて記載。
 
 `pom.xml`の`<plugins>`内に以下を追記します：
 
-```
+```xml
 <plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
@@ -33,7 +33,7 @@ Maven および Gradle プロジェクトについて記載。
 
 また、`<project>`の中に以下を追加します：
 
-```
+```xml
 <reporting>
 <plugins>
     <plugin>

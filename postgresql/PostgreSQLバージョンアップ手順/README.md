@@ -92,7 +92,7 @@ sudo vim /etc/postgresql/12/main/postgresql.conf
 
 `port = 5432` -> `port = 5433`
 
-また、必要であれば`pg_hba.conf`についても新しいファイルに設定を追記する
+また、必要であれば`pg_hba.conf`についても新しいファイルに設定を追記
 
 ```
 sudo vim /etc/postgresql/13/main/pg_hba.conf

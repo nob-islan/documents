@@ -15,35 +15,27 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ```
 
-### ssh 接続の準備
+### 接続
+
+#### 接続準備
 
 管理ホスト（ansible のプレイブックなどを管理するホスト）から対象ホスト（プレイブック内の処理が実行されるホスト）に対して、パスフレーズなしで ssh 接続できるようにします。
 
 ssh キーを作成します。
 
 ```
-ssh-keygen -t rsa
+ssh-keygen -t rsa -f ~/.ssh/first-key
 ```
 
 対象ホストに公開鍵を記憶させます。
 
 ```
-ssh-copy-id -i ~/.ssh/id_rsa.pub ${user_name}@${ip_address}
+# 管理ホストから対象ホストへ公開鍵を転送
+scp ~/.ssh/first-key.pub ${ユーザ名}@${ホスト名}:~/.ssh
+
+# 対象ホストにて、公開鍵をauthorized_keysに追加
+mv ~/.ssh/first-key.pub ~/.ssh/authorized_keys
 ```
-
-## 使用例
-
-### ping モジュールの実行
-
-対象ホストで行う操作のことを`モジュール`というらしい。
-
-ping モジュールを実行します。
-
-```
-ansible ${対象ホストのIPアドレス} -m ping
-```
-
-### hosts を記載してプレイブックを実行
 
 インベントリファイル`/etc/ansible/hosts`を作成します。
 
@@ -54,17 +46,10 @@ ${管理ホストのIPアドレス}
 ${対象ホストのIPアドレス}
 ```
 
-プレイブックファイル`/etc/ansible/first.yaml`を作成します。
+#### 接続確認
 
-```yaml
-- hosts: node #対象ホストを指定する。
-  tasks: #実行するtaskを指定する。
-    - name: ディレクトリを作成する。
-      file: path=/tmp/nob/first state=directory
-```
-
-プレイブックコマンドを実行します。`-i`はインベントリファイル指定のオプションです。
+ping モジュールを実行します（対象ホストで行う操作のことを`モジュール`というらしい）。
 
 ```
-ansible-playbook first.yaml -i hosts
+ansible ${対象ホストのIPアドレス} -m ping --private-key ~/.ssh/first-key
 ```
