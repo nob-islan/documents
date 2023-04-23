@@ -34,7 +34,7 @@ ssh-keygen -t rsa -f ~/.ssh/first-key
 scp ~/.ssh/first-key.pub ${ユーザ名}@${ホスト名}:~/.ssh
 
 # 対象ホストにて、公開鍵をauthorized_keysに追加
-mv ~/.ssh/first-key.pub ~/.ssh/authorized_keys
+cat ~/.ssh/first-key.pub >> ~/.ssh/authorized_keys
 ```
 
 インベントリファイル`/etc/ansible/hosts`を作成します。
