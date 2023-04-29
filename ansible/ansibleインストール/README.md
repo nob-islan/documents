@@ -1,4 +1,4 @@
-# First ansible
+# ansible インストール
 
 構築から簡単な動作確認までを行います。
 

@@ -4,7 +4,7 @@
 
 ## 下準備
 
-[first_ansible](../first_ansible/README.md)を参考にして ansible サーバを構築します。
+[ansible インストール](../ansibleインストール/README.md)を参考にして ansible サーバを構築します。
 
 ## ディレクトリ構成
 
