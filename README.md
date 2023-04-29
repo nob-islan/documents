@@ -6,7 +6,7 @@
 
 - ansible
   - [Docker インストールを Ansible で実行](./ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/README.md)
-  - [first_ansible](./ansible/first_ansible/README.md)
+  - [ansible インストール](./ansible/ansible%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)
 - aws
   - [00_common](./aws/00_common/README.md)
   - [CloudWatch](./aws/CloudWatch/README.md)
