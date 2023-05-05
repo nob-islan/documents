@@ -3,7 +3,7 @@
 スキーマの新規作成手順です。
 
 cf.  
-https://blog.dreamhanks.com/oracle-database%E3%81%A7%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
+https://blog.dreamhanks.com/oracle-databaseでユーザを作成する方法/
 
 ## 前提
 
@@ -30,13 +30,13 @@ SQL>
 - コンテナデータベースに接続していることを確認
 
 ```sql
-show con_name;
+SHOW con_name;
 ```
 
 - プラガブルデータベースの名前を確認
 
 ```sql
-show pdbs;
+SHOW pdbs;
 ```
 
 - プラガブルデータベースに接続
@@ -64,12 +64,14 @@ GRANT
     , create sequence --シーケンス作成権限
     , create trigger --データベーストリガー作成権限
     , create synonym --シノニム作成権限
+TO
+    ${ユーザ名}
 ;
 ```
 
 - tnsnames.ora への設定記述
 
-下記接続情報を記載します。
+（必要であれば）下記接続情報を記載します。
 
 ```tnsnames.ora
 ${ネットワークサービス名} =
