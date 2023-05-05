@@ -69,22 +69,6 @@ TO
 ;
 ```
 
-- tnsnames.ora への設定記述
-
-（必要であれば）下記接続情報を記載します。
-
-```tnsnames.ora
-${ネットワークサービス名} =
-  (DESCRIPTION =
-    (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-      (SERVICE_NAME = ${PDB名})
-    )
-  )
-```
-
 - 接続確認
 
 ```
