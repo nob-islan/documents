@@ -2,6 +2,9 @@
 
 PDB の作成手順です。
 
+cf.  
+https://xn--w8j8bac3czf5bl7e.com/2018/07/09/pdbの作成方法/
+
 ## 前提
 
 DBA として CDB に接続しておいてください。
