@@ -47,7 +47,7 @@ FILE_NAME
 -- CDBに接続
 conn / as sysdba;
 -- pdbseedと同列になるようにディレクトリを作成
-!mkdir /opt/oracle/oradata/XE/nobtest
+!mkdir /opt/oracle/oradata/XE/${PDBディレクトリ名}
 ```
 
 - PDB 作成
@@ -57,7 +57,7 @@ CREATE
     pluggable database ${PDB名}
     admin user ${adminユーザ名}
     identified by ${パスワード}
-    file_name_convert = ('/opt/oracle/oradata/XE/pdbseed/', '/opt/oracle/oradata/XE/nobtest')
+    file_name_convert = ('/opt/oracle/oradata/XE/pdbseed/', '/opt/oracle/oradata/XE/${PDBディレクトリ名}')
 ;
 ```
 
