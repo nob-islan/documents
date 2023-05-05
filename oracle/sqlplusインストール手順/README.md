@@ -2,13 +2,16 @@
 
 `sqlplus`コマンドをインストールします。
 
+cf.  
+https://go-journey.club/archives/9473
+
 ## インストール手順
 
 ### 下準備
 
 - sqlplus パッケージをコンバートするためのパッケージをインストールしておきます。
 
-```
+```sh
 sudo apt update
 sudo apt install alien dpkg-dev debhelper build-essential
 ```
@@ -20,20 +23,21 @@ sudo apt install alien dpkg-dev debhelper build-essential
 
 - パッケージのコンバート
 
-```
-sudo alien <rpmのパッケージ名>.rpm
+```sh
+sudo alien ${rpmのパッケージ名}.rpm
 ```
 
 - インストール
 
-```
-sudo dpkg -i <コンバートしたrpm>.deb
+```sh
+sudo dpkg -i ${コンバートしたrpm}.deb
 ```
 
 - 共有ライブラリのパスを通す
 
-```
+```sh
 # 特権ユーザで下記を実行（バージョンなどに従って微妙にディレクトリが変わります）
 echo "/usr/lib/oracle/21/client64/lib" >> /etc/ld.so.conf
+# 設定の適用
 ldconfig
 ```
