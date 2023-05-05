@@ -10,7 +10,7 @@ https://xn--w8j8bac3czf5bl7e.com/2018/07/09/pdbの作成方法/
 DBA として CDB に接続しておいてください。
 
 ```
-SQL> show con_name;
+SQL> SHOW con_name;
 
 CON_NAME
 ------------------------------
@@ -25,7 +25,7 @@ CDB$ROOT
 -- PDBシードに接続
 ALTER session SET container = PDB$SEED;
 -- ファイルの位置を確認
-select file_name from dba_data_files;
+SELECT file_name FROM dba_data_files;
 ```
 
 出力例
