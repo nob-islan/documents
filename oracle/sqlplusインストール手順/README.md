@@ -29,3 +29,11 @@ sudo alien <rpmのパッケージ名>.rpm
 ```
 sudo dpkg -i <コンバートしたrpm>.deb
 ```
+
+- 共有ライブラリのパスを通す
+
+```
+# 特権ユーザで下記を実行（バージョンなどに従って微妙にディレクトリが変わります）
+echo "/usr/lib/oracle/21/client64/lib" >> /etc/ld.so.conf
+ldconfig
+```
