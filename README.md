@@ -46,6 +46,8 @@
     - [Tips](./kubernetes/pure_kubernetes/Tips/README.md)
 - oracle
   - [DB セットアップ Tips](./oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97Tips/README.md)
+  - [PDB 作成手順](./oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
+  - [スキーマ作成手順](./oracle/%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
   - [ローカルで OracleDB を起動する](./oracle/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7OracleDB%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B/README.md)
 - postgresql
   - [PostgreSQL サーバ構築手順](./postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
