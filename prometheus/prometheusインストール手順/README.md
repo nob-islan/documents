@@ -43,6 +43,22 @@ docker run -d \
   prom/prometheus
 ```
 
+もしくは`docker-compose.yml`を下記で記載します。
+
+```yml
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: nob-prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - type: bind
+        source: "/etc/prometheus/prometheus.yml"
+        target: "/etc/prometheus/prometheus.yml"
+```
+
 下記にアクセスすると、グラフ描画ページが表示されます。
 
 ```
@@ -101,4 +117,25 @@ docker で動かします。
 
 ```
 docker run -d --name=grafana -p 3000:3000 grafana/grafana
+```
+
+もしくは`docker-compose.yml`に下記を追記します。
+
+```diff
+version: "3.7"
+ services:
+   prometheus:
+     image: prom/prometheus
+     container_name: nob-prometheus
+     ports:
+       - 9090:9090
+     volumes:
+       - type: bind
+         source: "./volume/prometheus.yml"
+         target: "/etc/prometheus/prometheus.yml"
++  grafana:
++    image: grafana/grafana
++    container_name: nob-grafana
++    ports:
++      - 3000:3000
 ```
