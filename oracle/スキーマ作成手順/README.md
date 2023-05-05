@@ -1,0 +1,90 @@
+# スキーマ作成手順
+
+スキーマの新規作成手順です。
+
+cf.  
+https://blog.dreamhanks.com/oracle-database%E3%81%A7%E3%83%A6%E3%83%BC%E3%82%B6%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
+
+## 前提
+
+Oracle DB を構築して、DBA としてログインできるようにしておいてください。
+
+```
+$ sqlplus / as sysdba
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri May 5 00:38:20 2023
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL>
+```
+
+## 作成手順
+
+- コンテナデータベースに接続していることを確認
+
+```sql
+show con_name;
+```
+
+- プラガブルデータベースの名前を確認
+
+```sql
+show pdbs;
+```
+
+- プラガブルデータベースに接続
+
+```sql
+ALTER session SET container = ${PDB名};
+```
+
+- スキーマの作成
+
+```sql
+CREATE
+    user ${ユーザ名}
+    identified by ${パスワード}
+;
+```
+
+- ユーザへの権限付与
+
+```sql
+GRANT
+    create session --DB接続権限
+    , create table --テーブル作成権限
+    , create view --view作成権限
+    , create sequence --シーケンス作成権限
+    , create trigger --データベーストリガー作成権限
+    , create synonym --シノニム作成権限
+;
+```
+
+- tnsnames.ora への設定記述
+
+下記接続情報を記載します。
+
+```tnsnames.ora
+${ネットワークサービス名} =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = 1521))
+    )
+    (CONNECT_DATA =
+      (SERVICE_NAME = ${PDB名})
+    )
+  )
+```
+
+- 接続確認
+
+```
+sqlplus ${スキーマ名}/${パスワード}@${ネットワークサービス名}
+```
