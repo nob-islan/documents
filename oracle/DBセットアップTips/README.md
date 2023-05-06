@@ -32,3 +32,9 @@ ALTER session SET container = XXX;
 SELECT * FROM all_users;
 SELECT * FROM dba_users;
 ```
+
+DBA 権限の付与
+
+```
+GRANT dba TO ${ユーザ名}
+```
