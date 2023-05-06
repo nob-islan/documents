@@ -64,6 +64,7 @@ GRANT
     , create sequence --シーケンス作成権限
     , create trigger --データベーストリガー作成権限
     , create synonym --シノニム作成権限
+    , unlimited tablespace --表領域への権限
 TO
     ${ユーザ名}
 ;
