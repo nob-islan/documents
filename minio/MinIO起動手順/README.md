@@ -2,7 +2,7 @@
 
 cf. https://min.io/docs/minio/container/index.html
 
-下記の内容で`docker-compose.yml`を作成する：
+下記の内容で`docker-compose.yml`を作成します：
 
 ```yml
 version: "3.6"
