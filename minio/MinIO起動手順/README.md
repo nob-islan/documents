@@ -22,3 +22,5 @@ services:
         source: "./data"
         target: "/data"
 ```
+
+`http://${IPアドレス}:9090`にアクセスするとログイン画面が表示されます。
