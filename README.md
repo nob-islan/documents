@@ -47,6 +47,7 @@
     - [Tips](./kubernetes/pure_kubernetes/Tips/README.md)
 - minio
   - [MinIO 起動手順](./minio/MinIO%E8%B5%B7%E5%8B%95%E6%89%8B%E9%A0%86/README.md)
+  - [Tips](./minio/Tips/README.md)
 - oracle
   - [DB セットアップ Tips](./oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97Tips/README.md)
   - [PDB 作成手順](./oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
