@@ -29,11 +29,11 @@ services:
       - 9090:9090
     volumes:
       - type: bind
-        source: "./data/prometheus/prometheus.yml"
+        source: "/srv/prometheus/prometheus.yml"
         target: "/etc/prometheus/prometheus.yml"
 ```
 
-`docker-compose.yml`が配置してあるファイルの下に`data/prometheus`ディレクトリを切り、`prometheus.yml`を下記で作成します。
+`/srv/prometheus`ディレクトリを切り、`prometheus.yml`を下記で作成します。
 
 ```yml
 scrape_configs:
@@ -109,7 +109,7 @@ version: "3.7"
        - 9090:9090
      volumes:
        - type: bind
-         source: "./data/prometheus/prometheus.yml"
+         source: "/srv/prometheus/prometheus.yml"
          target: "/etc/prometheus/prometheus.yml"
 +  grafana:
 +    image: grafana/grafana
@@ -117,7 +117,8 @@ version: "3.7"
 +    ports:
 +      - 3000:3000
 +    volumes:
-+      - "/etc/grafana:/var/lib/grafana"
++      - "/srv/grafana/config:/etc/grafana"
++      - "/srv/grafana:/var/lib/grafana"
 +    user: "$PID:$GID"
 ```
 
