@@ -117,7 +117,8 @@ version: "3.7"
 +    ports:
 +      - 3000:3000
 +    volumes:
-+      - type: bind
-+        source: "./data/grafana"
-+        target: "/var/lib/grafana"
++      - "/etc/grafana:/var/lib/grafana"
++    user: "$PID:$GID"
 ```
+
+`user: "$PID:$GID"`はボリューム用のディレクトリを作成するためのユーザ指定です。
