@@ -117,7 +117,6 @@ version: "3.7"
 +    ports:
 +      - 3000:3000
 +    volumes:
-+      - "/srv/grafana/config:/etc/grafana"
 +      - "/srv/grafana:/var/lib/grafana"
 +    user: "$PID:$GID"
 ```
