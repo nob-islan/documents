@@ -97,28 +97,28 @@ Prometheus の設定ファイルに下記を追記します。
 
 ## Grafana
 
-もしくは`docker-compose.yml`に下記を追記します。
+`docker-compose.yml`に下記を追記します。
 
-```diff
+```yml
 version: "3.7"
- services:
-   prometheus:
-     image: prom/prometheus
-     container_name: nob-prometheus
-     ports:
-       - 9090:9090
-     volumes:
-       - type: bind
-         source: "/srv/prometheus/prometheus.yml"
-         target: "/etc/prometheus/prometheus.yml"
-+  grafana:
-+    image: grafana/grafana
-+    container_name: nob-grafana
-+    ports:
-+      - 3000:3000
-+    volumes:
-+      - "/srv/grafana:/var/lib/grafana"
-+    user: "$PID:$GID"
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: nob-prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - type: bind
+        source: "/srv/prometheus/prometheus.yml"
+        target: "/etc/prometheus/prometheus.yml"
+  grafana:
+    image: grafana/grafana
+    container_name: nob-grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - "/srv/grafana:/var/lib/grafana"
+    user: "$PID:$GID"
 ```
 
 `user: "$PID:$GID"`はボリューム用のディレクトリを作成するためのユーザ指定です。
