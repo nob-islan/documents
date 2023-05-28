@@ -8,6 +8,10 @@ Java アプリ内でメトリクスを作成して Prometheus で収集します
 
 メトリクスおよび Prometheus 向けエンドポイントの作成例です：
 
+### Counter
+
+値の増加のみに対応したメトリクスです。
+
 ```java
 /**
  * prometheusのメトリクスを定義するクラスです。
@@ -41,4 +45,55 @@ public class SampleMetrics {
 }
 ```
 
-Prometheus を起動すると、`nobtest`のメトリクスが収集できます。
+### Gauge
+
+値の増減に対応したメトリクスです。
+
+```java
+/**
+ * prometheusのメトリクスを定義するクラスです。
+ *
+ */
+@RestController
+@RequestMapping("/metrics")
+public class SampleMetrics {
+
+    @Autowired
+    MeterRegistry meterRegistry;
+
+    /**
+     * gaugeメトリクスの値をnumberの値に変更します。
+     *
+     * @return
+     */
+    @GetMapping(value = "/sample/{number}")
+    public String increment(@PathVariable("number") Integer number) {
+
+        // numberが偶数であればfirstを、奇数であればsecondを更新します。
+        if (number % 2 == 0) {
+            this.removeOldGauge("nobtest", "type", "first");
+            meterRegistry.gauge("nobtest", Tags.of("type", "first"), number);
+        } else {
+            this.removeOldGauge("nobtest", "type", "second");
+            meterRegistry.gauge("nobtest", Tags.of("type", "second"), number);
+        }
+
+        return "success the api";
+    }
+
+    /**
+     * 古いgaugeを削除します。
+     *
+     * @param name
+     * @param tag
+     */
+    private void removeOldGauge(String name, String tagKey, String tagValue) {
+
+        // タグ指定でメトリクスを検索し、ヒットしたら削除します。
+        Gauge gauge = meterRegistry.find(name).tag(tagKey, tagValue).gauge();
+        if (gauge != null) {
+            meterRegistry.remove(gauge);
+        }
+    }
+}
+```
