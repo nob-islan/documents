@@ -85,6 +85,8 @@ build:
     - if: $CI_COMMIT_TAG
 ```
 
+`CI_REGISTRY_IMAGE`は GitLab の画面から環境変数として登録するか、`.gitlab-ci.yml`にベタ書きするかしてください。
+
 #### Dockerfile
 
 ただ適当なファイルを touch しただけの ubuntu コンテナです。
