@@ -11,3 +11,10 @@ curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbo
 curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
 docker-compose up
 ```
+
+- 起動前に`EXT_ENDPOINT`を変更してください。これが pull, push などをする際のアドレスとなります。
+- 初期ユーザ名は`admin`です。パスワードは下記コマンドで確認できます。
+
+```
+cat docker-compose.yml | grep HARBOR_ADMIN_PASSWORD
+```
