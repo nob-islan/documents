@@ -1,6 +1,6 @@
 # harbor 構築手順
 
-![docker_hubのドキュメント](https://hub.docker.com/r/bitnami/harbor-registry/)に従って構築していきます。
+[docker_hub のドキュメント](https://hub.docker.com/r/bitnami/harbor-registry/)に従って構築していきます。
 
 ## 起動
 
