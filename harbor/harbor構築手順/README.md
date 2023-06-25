@@ -18,3 +18,13 @@ docker-compose up
 ```
 cat docker-compose.yml | grep HARBOR_ADMIN_PASSWORD
 ```
+
+## リポジトリの管理
+
+- `Robot Accounts`からアカウントを作成して、アクセストークンを取得すれば、属人化しないアカウントで pull, push などができます。下記コマンドでログインできます。
+
+```
+docker login ${harborサーバのIPアドレス} -u ${robot_name} -p ${access_token}
+```
+
+`robot_name`をクオートで囲まないとエラーになるので注意してください。
