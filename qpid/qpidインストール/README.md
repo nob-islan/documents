@@ -93,7 +93,7 @@ https://github.com/apache/qpid-jms/tree/main/qpid-jms-examples/src/main/java/org
 - pom.xml
 
 ```xml
-<!-- 下記を追記する -->
+<!-- 下記を追記してください。 -->
 <dependency>
     <groupId>org.apache.qpid</groupId>
     <artifactId>qpid-jms-client</artifactId>
@@ -218,6 +218,7 @@ public class SampleServiceImpl implements SampleService {
 - jndi.properties
 
 ```shell
+#################### resources配下に配置してください。 ####################
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
