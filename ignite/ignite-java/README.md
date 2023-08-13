@@ -9,6 +9,13 @@
 
 ## ignite インストール・起動
 
+- OpenJDK をインストールする
+
+```
+sudo apt update
+sudo apt install openjdk-17-jre-headless
+```
+
 - [公式サイト](https://ignite.apache.org/download.cgi#binaries)からダウンロードしたバイナリファイルを配置、`unzip`する
 
 ```
@@ -22,14 +29,6 @@ unzip ./apache-ignite-2.15.0-bin.zip
 ```
 
 ## Java アプリケーションの準備
-
-### OpenJDK のインストール
-
-- OpenJDK をインストールする
-
-```
-sudo apt install openjdk-17-jre-headless
-```
 
 ### アプリの実装
 
