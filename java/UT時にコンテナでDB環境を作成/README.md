@@ -8,7 +8,7 @@ UT 実行時にコンテナでデータベースを起動し、毎回綺麗な D
 
 ### 依存関係
 
-`pom.xml`に下記を追記してください。
+`pom.xml`に下記を追記します。
 
 ```xml
 <!--  testcontainers  -->
@@ -32,7 +32,7 @@ UT 実行時にコンテナでデータベースを起動し、毎回綺麗な D
 
 ### SQL
 
-`test/resources`配下に、初期実行用の SQL ファイルを作成してください。今回はファイル名を`create_table.sql`と想定します。
+`test/resources`配下に、初期実行用の SQL ファイルを作成します。今回はファイル名を`create_table.sql`と想定します。
 
 ```sql
 -- テーブル作成
@@ -56,7 +56,7 @@ INSERT INTO account (
 
 ### テスト作成
 
-下記でテストクラスを作成してください。
+下記でテストクラスを作成します。
 
 ```java
 package com.example.utsample.dao;
