@@ -135,3 +135,5 @@ java -jar \
 --add-opens=java.base/java.lang=ALL-UNNAMED \
 ${jar-file-name}
 ```
+
+キャッシュが登録されているか等を確認する際は[Control Script](https://ignite.apache.org/docs/latest/tools/control-script)を実行します。
