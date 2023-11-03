@@ -38,6 +38,7 @@
   - [Oracle_DB への接続方法](./java/Oracle_DB%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95/README.md)
   - [Spring_boot\_設定ファイル作成手順](./java/Spring_boot_%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
   - [UT 時にコンテナで DB 環境を作成](./java/UT時にコンテナでDB環境を作成/README.md)
+  - [UT 時にコンテナで nginx 環境を作成](./java/UT時にコンテナでnginx環境を構築/)
 - kubernetes
   - kind
     - [kind インストール手順](./kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
