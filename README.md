@@ -19,6 +19,7 @@
   - [Docker で java+db 環境を構築](./docker/Docker%E3%81%A7java%2Bdb%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で Java 実行環境を構築](./docker/Docker%E3%81%A7Java%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で RedMine を構築](./docker/DockerでRedMineを構築/REAMDE..md)
+  - [VSCode 上でコンテナの Java アプリをデバッグ](./docker/VSCodeでコンテナのJavaアプリをデバッグ/README.md)
 - gitlab
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
   - [GitLab_Runner と AWS_ECR でアプリを自動デプロイする](./gitlab/GitLab_Runner%E3%81%A8AWS_ECR%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E8%87%AA%E5%8B%95%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B/README.md)
