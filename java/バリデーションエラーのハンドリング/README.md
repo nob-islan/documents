@@ -201,3 +201,253 @@ sampleInModel.age.NotEmpty  = {sampleInModel.age}が空白です。
 sampleInModel.sampleDto.job = 職業
 sampleInModel.sampleDto.job.NotEmpty = {sampleInModel.sampleDto.job}が空白です。
 ```
+
+- 例外ハンドラ
+
+```java
+package com.example.uttest.handler;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+/**
+ * サンプルの例外ハンドラです。
+ *
+ */
+@RestControllerAdvice
+public class SampleHandler {
+
+    /**
+     * バリデーションによる例外が投げられた際に呼ばれるメソッドです。
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<List<String>> validatorExceptionHandle(MethodArgumentNotValidException e) {
+
+        // エラーメッセージをリストに詰め込む
+        List<String> errorList = new ArrayList<String>();
+        for (int i = 0; i < e.getAllErrors().size(); i++) {
+            errorList.add(e.getAllErrors().get(i).getDefaultMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorList);
+    }
+}
+```
+
+- 補助クラス
+
+```java
+package com.example.uttest.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import lombok.Data;
+
+/**
+ * バリデーションに関する共通メソッドを定義するクラスです。
+ *
+ */
+public class ValidatorUtil {
+
+    /**
+     * バリデーションエラーの情報を独自infoクラスに移し替えます。
+     *
+     * @param e
+     * @return sampleErrorInfoList
+     */
+    public static List<SampleErrorInfo> convertToSampleErrorInfoList(ConstraintViolationException e) {
+
+        // 返却地の宣言
+        List<SampleErrorInfo> sampleErrorInfoList = new ArrayList<SampleErrorInfo>();
+
+        // エラー情報をinfoクラスに詰め替えてリストを作成
+        for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+            SampleErrorInfo sampleErrorInfo = new SampleErrorInfo();
+            sampleErrorInfo.setErrorMessage(constraintViolation.getMessage());
+            sampleErrorInfoList.add(sampleErrorInfo);
+        }
+
+        return sampleErrorInfoList;
+    }
+
+    /**
+     * サンプルのエラー情報を格納するクラスです。
+     *
+     */
+    @Data
+    public static class SampleErrorInfo {
+
+        // エラーメッセージ
+        private String errorMessage;
+    }
+}
+```
+
+- テストクラス
+
+```java
+package com.example.uttest.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import com.example.uttest.config.ValidatorConfig;
+import com.example.uttest.dto.SampleInModel;
+import com.example.uttest.dto.SampleInModel.SampleDto;
+import com.example.uttest.service.impl.SampleServiceImpl;
+import com.example.uttest.util.ValidatorUtil;
+import com.example.uttest.util.ValidatorUtil.SampleErrorInfo;
+
+import jakarta.validation.ConstraintViolationException;
+
+/**
+ * SampleServiceImplのテストクラスです。
+ *
+ */
+@SpringBootTest
+@SpringJUnitConfig(classes = { SampleServiceImplTest.TestConfig.class, ValidatorConfig.class }) // 必要なコンフィグクラスをロードします。
+public class SampleServiceImplTest {
+
+    /**
+     * テスト設定を行います。
+     *
+     */
+    @Configuration
+    public static class TestConfig {
+
+        /**
+         * テスト対象のクラスをBean宣言します。
+         *
+         * @return sampleServiceImpl
+         */
+        @Bean
+        SampleServiceImpl sampleServiceImpl() {
+            return new SampleServiceImpl();
+        }
+    }
+
+    @Autowired
+    private SampleService sampleService;
+
+    /**
+     * 異常系 名前が空のケース
+     *
+     */
+    @Test
+    public void testGreet_name_empty() {
+
+        // 入力値の設定
+        SampleInModel sampleInModel = new SampleInModel();
+        sampleInModel.setName("");
+        sampleInModel.setAge("13");
+        SampleDto sampleDto = sampleInModel.new SampleDto();
+        sampleDto.setJob("なし");
+        sampleInModel.setSampleDto(sampleDto);
+
+        // テスト実行
+        List<SampleErrorInfo> list = new ArrayList<SampleErrorInfo>();
+        try {
+            sampleService.greet(sampleInModel);
+            fail();
+        } catch (ConstraintViolationException e) {
+            // 例外を独自のinfoクラスに詰め替え
+            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+        }
+
+        // 結果の検証
+        assertEquals(1, list.size());
+        assertEquals("名前が空白です。", list.get(0).getErrorMessage());
+    }
+
+    /**
+     * 異常系 職業が空のケース
+     *
+     */
+    @Test
+    public void testGreet_job_empty() {
+
+        // 入力値の設定
+        SampleInModel sampleInModel = new SampleInModel();
+        sampleInModel.setName("nob");
+        sampleInModel.setAge("13");
+        SampleDto sampleDto = sampleInModel.new SampleDto();
+        sampleDto.setJob("");
+        sampleInModel.setSampleDto(sampleDto);
+
+        // テスト実行
+        List<SampleErrorInfo> list = new ArrayList<SampleErrorInfo>();
+        try {
+            sampleService.greet(sampleInModel);
+            fail();
+        } catch (ConstraintViolationException e) {
+            // 例外を独自のinfoクラスに詰め替え
+            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+        }
+
+        // 結果の検証
+        assertEquals(1, list.size());
+        assertEquals("職業が空白です。", list.get(0).getErrorMessage());
+    }
+
+    /**
+     * 異常系 名前と年齢が空のケース
+     *
+     */
+    @Test
+    public void testGreet_name_age_empty() {
+
+        // 入力値の設定
+        SampleInModel sampleInModel = new SampleInModel();
+        sampleInModel.setName("");
+        sampleInModel.setAge("");
+        SampleDto sampleDto = sampleInModel.new SampleDto();
+        sampleDto.setJob("なし");
+        sampleInModel.setSampleDto(sampleDto);
+
+        // テスト実行
+        List<SampleErrorInfo> list = new ArrayList<SampleErrorInfo>();
+        try {
+            sampleService.greet(sampleInModel);
+            fail();
+        } catch (ConstraintViolationException e) {
+            // 例外を独自のinfoクラスに詰め替え
+            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+        }
+
+        // 結果の検証
+        assertEquals(2, list.size());
+        assertEquals("名前が空白です。", list.get(0).getErrorMessage());
+        assertEquals("年齢が空白です。", list.get(1).getErrorMessage());
+    }
+}
+```
+
+## 動確
+
+```
+Nobs-MacBook-Air:~ nob$ curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"nob\" , \"age\": \"13\", \"sampleDto\": {\"job\": \"\"}}" localhost:8080/sample/greet
+職業が空白です。
+```
