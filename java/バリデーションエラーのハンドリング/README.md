@@ -449,5 +449,8 @@ public class SampleServiceImplTest {
 
 ```
 Nobs-MacBook-Air:~ nob$ curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"nob\" , \"age\": \"13\", \"sampleDto\": {\"job\": \"\"}}" localhost:8080/sample/greet
-職業が空白です。
+["職業が空白です。"]
+
+Nobs-MacBook-Air:~ nob$ curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"\" , \"age\": \"\", \"sampleDto\": {\"job\": \"no\"}}" localhost:8080/sample/greet
+["名前が空白です。","年齢が空白です。"]
 ```
