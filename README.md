@@ -14,7 +14,7 @@
   - [ECR](./aws/ECR/README.md)
 - docker
   - [Docker インストール](./docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)
-  - [Docker で DB サーバを立てて Java アプリと連携させる](./docker/Docker%E3%81%A7DB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%81%A6Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%A8%E9%80%A3%E6%90%BA%E3%81%95%E3%81%9B%E3%82%8B/README.md)
+  - [Docker で DB サーバを立てる](./docker/DockerでDBサーバを立てる/README.md)
   - [Docker で GitLab サーバを構築](./docker/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で java+db 環境を構築](./docker/Docker%E3%81%A7java%2Bdb%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で Java 実行環境を構築](./docker/Docker%E3%81%A7Java%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
