@@ -19,7 +19,6 @@
   - [Docker で java+db 環境を構築](./docker/Docker%E3%81%A7java%2Bdb%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で Java 実行環境を構築](./docker/Docker%E3%81%A7Java%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で RedMine を構築](./docker/DockerでRedMineを構築/REAMDE..md)
-  - [VSCode 上でコンテナの Java アプリをデバッグ](./docker/VSCodeでコンテナのJavaアプリをデバッグ/README.md)
 - gitlab
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
   - [GitLab_Runner と AWS_ECR でアプリを自動デプロイする](./gitlab/GitLab_Runner%E3%81%A8AWS_ECR%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E8%87%AA%E5%8B%95%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B/README.md)
@@ -41,6 +40,7 @@
   - [Spring_boot\_設定ファイル作成手順](./java/Spring_boot_%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/README.md)
   - [UT 時にコンテナで DB 環境を作成](./java/UT時にコンテナでDB環境を作成/README.md)
   - [UT 時にコンテナで nginx 環境を作成](./java/UT時にコンテナでnginx環境を構築/)
+  - [VSCode でコンテナの Java アプリをデバッグ](./java/VSCodeでコンテナのJavaアプリをデバッグ/README.md)
   - [バリデーションエラーのハンドリング](./java/バリデーションエラーのハンドリング/README.md)
 - kubernetes
   - kind
