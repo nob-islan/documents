@@ -48,6 +48,42 @@ dao などではなく、SQL コマンドをベタ書きして実行します。
 </dependency>
 ```
 
+- データベース作成用の SQL を`test/resources/create_table.sql`として配置します。
+
+```sql
+-- テーブル作成
+CREATE TABLE IF NOT EXISTS account (
+    id INT AUTO_INCREMENT PRIMARY KEY
+    , name VARCHAR(20) NOT NULL
+    , inp_date TIMESTAMP
+);
+
+-- テストデータ挿入
+INSERT INTO account (
+    name
+) VALUES (
+    'first-nob'
+), (
+    'second-nob'
+), (
+    'third-nob'
+)
+;
+```
+
+テストクラス実装後、テストをデバッグで止めてコンテナ内を確認すると下記のようにデータが入ってることが見えます。
+
+```
+MariaDB [nobdb]> SELECT * FROM account;
++----+------------+---------------------+
+| id | name       | inp_date            |
++----+------------+---------------------+
+|  1 | first-nob  | 2023-12-09 03:20:03 |
+|  2 | second-nob | 2023-12-09 03:20:03 |
+|  3 | third-nob  | 2023-12-09 03:20:03 |
++----+------------+---------------------+
+```
+
 - 下記でサンプルのテストクラスを実装します。テストクラス実行時にテスト用のコンテナデータベースを起動し、そこに向けて SQL コマンドを発行します。
 
 ```java
@@ -146,40 +182,4 @@ public class SampleTest {
         }
     }
 }
-```
-
-- データベース作成用の SQL を`test/resources/create_table.sql`として配置します。
-
-```sql
--- テーブル作成
-CREATE TABLE IF NOT EXISTS account (
-    id INT AUTO_INCREMENT PRIMARY KEY
-    , name VARCHAR(20) NOT NULL
-    , inp_date TIMESTAMP
-);
-
--- テストデータ挿入
-INSERT INTO account (
-    name
-) VALUES (
-    'first-nob'
-), (
-    'second-nob'
-), (
-    'third-nob'
-)
-;
-```
-
-テストをデバッグで止めてコンテナ内を確認すると、下記のようにデータが入ってることが見えます。
-
-```
-MariaDB [nobdb]> SELECT * FROM account;
-+----+------------+---------------------+
-| id | name       | inp_date            |
-+----+------------+---------------------+
-|  1 | first-nob  | 2023-12-09 03:20:03 |
-|  2 | second-nob | 2023-12-09 03:20:03 |
-|  3 | third-nob  | 2023-12-09 03:20:03 |
-+----+------------+---------------------+
 ```
