@@ -330,7 +330,7 @@ app-project を依存関係に追加：
 
 #### pom.xml
 
-`packaging`タグを`pom`とします。
+`packaging`タグを`pom`とし、`modules`タグにビルドするモジュールたちを記載します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
