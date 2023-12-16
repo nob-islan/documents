@@ -146,8 +146,69 @@ CMD java -jar /app/first-app-0.0.1-SNAPSHOT.jar
 
 #### ビルド実行
 
+「ビルドを開始」ボタンを押下します。
+
+![build-start](./images/build-start.png)
+
+ビルドに成功すると ECR リポジトリにイメージがプッシュされます。
+
+![repo-success](./images/repo-success.png)
+
 ## CodePipeline
 
 ### サービス概要
 
+**CodePipeline**を用いてアプリケーションをビルドします。
+
 ### やったこと
+
+#### ECS サービス作成
+
+今回はコンテナアプリケーションをデプロイするため、あらかじめ ECS サービスをデプロイしておき、CodePipeline でモジュールを更新する手順を踏みます。
+
+クラスターを作成します。クラスターはコンテナを実行する EC2 インスタンスの管理単位です。
+
+![cluster-create](./images/cluster-create.png)
+
+タスク定義を作成します。タスクは実行対象のコンテナイメージとその実行設定とをセットにした概念です。
+
+![task-create](./images/task-create.png)
+
+サービスを作成します。サービスは実行されるコンテナそのものを指す概念です。上で作成したタスクを指定し、起動する VPC などを設定します。
+
+![service-create](./images/service-create.png)
+
+サービスが正常に作成されると、java アプリが動いていることが確認できます（下の 13.231.93.36 が EC2 インスタンスのパブリック IP です）。
+
+```
+$ curl 13.231.93.36:8080/sample/greet
+Hello, CodeCommit!
+```
+
+#### パイプライン作成
+
+パイプラインを作成し、上でデプロイしたアプリに簡単な改修を入れます。
+
+まずはアプリの改修を行います。
+
+![modify-sample-service](./images/modify-sample-service.png)
+
+次にパイプラインを作成します。
+
+ソースステージ: デプロイ対象のリポジトリを指定します。
+
+![source-stage](./images/source-stage.png)
+
+ビルドステージ: ビルドプロジェクトを指定します。
+
+![build-stage](./images/build-stage.png)
+
+デプロイステージ: デプロイ対象のサービス名を指定します。
+
+#### デプロイ
+
+「変更をリリースする」ボタンを押下します。CodePipeline, CodeBuild, ECS などへのアクセス権をサービスポリシーにアタッチしていないとコケるので、適切なポリシーをアタッチしてください（n 敗）。
+
+[S3 側にもバケットポリシーを追加設定しないといけないよう](https://docs.aws.amazon.com/ja_jp/codepipeline/latest/userguide/troubleshooting.html#troubleshooting-S3-access-denied-list)です。完全に罠だと思います。
+
+![do-build](./images/do-build.png)
