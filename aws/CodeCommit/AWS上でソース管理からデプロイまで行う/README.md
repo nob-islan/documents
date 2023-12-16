@@ -4,7 +4,7 @@ AWS のサービスを利用しつつ、下記要領でアプリケーション�
 
 - CodeCommit: ソース管理
 - CodeBuild: コンテナイメージの作成
-- CodePipeline: アプリケーションのデプロイ
+- ECS: アプリデプロイ
 
 ## CodeCommit
 
@@ -154,15 +154,15 @@ CMD java -jar /app/first-app-0.0.1-SNAPSHOT.jar
 
 ![repo-success](./images/repo-success.png)
 
-## CodePipeline
+## ECS
 
 ### サービス概要
 
-**CodePipeline**を用いてアプリケーションをビルドします。
+**ECS**を用いてコンテナアプリケーションをビルドします。今回は**Fargate**を使うため、コンテナを動かす EC2 インスタンスの管理すら意識する必要がありません。
 
 ### やったこと
 
-#### ECS サービス作成
+#### サービス作成
 
 今回はコンテナアプリケーションをデプロイするため、あらかじめ ECS サービスをデプロイしておき、CodePipeline でモジュールを更新する手順を踏みます。
 
@@ -184,31 +184,3 @@ CMD java -jar /app/first-app-0.0.1-SNAPSHOT.jar
 $ curl 13.231.93.36:8080/sample/greet
 Hello, CodeCommit!
 ```
-
-#### パイプライン作成
-
-パイプラインを作成し、上でデプロイしたアプリに簡単な改修を入れます。
-
-まずはアプリの改修を行います。
-
-![modify-sample-service](./images/modify-sample-service.png)
-
-次にパイプラインを作成します。
-
-ソースステージ: デプロイ対象のリポジトリを指定します。
-
-![source-stage](./images/source-stage.png)
-
-ビルドステージ: ビルドプロジェクトを指定します。
-
-![build-stage](./images/build-stage.png)
-
-デプロイステージ: デプロイ対象のサービス名を指定します。
-
-#### デプロイ
-
-「変更をリリースする」ボタンを押下します。CodePipeline, CodeBuild, ECS などへのアクセス権をサービスポリシーにアタッチしていないとコケるので、適切なポリシーをアタッチしてください（n 敗）。
-
-[S3 側にもバケットポリシーを追加設定しないといけないよう](https://docs.aws.amazon.com/ja_jp/codepipeline/latest/userguide/troubleshooting.html#troubleshooting-S3-access-denied-list)です。完全に罠だと思います。
-
-![do-build](./images/do-build.png)
