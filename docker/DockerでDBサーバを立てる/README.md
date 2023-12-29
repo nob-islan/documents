@@ -9,12 +9,14 @@
 ```shell
 root
   ├─volume
+  │   ├─csv
+  │   │   └─sample-data.csv
   │   └─initdb.d
-  │       └─create_db.sql
+  │       └─01_create_db.sql
   └─docker-compose.yml
 ```
 
-コンテナ起動時に、`initdb.d`配下の SQL（shell も OK らしい）が自動実行されます。
+コンテナ起動時に、`initdb.d`配下の sql ファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。
 
 ## 設定ファイル
 
@@ -32,6 +34,7 @@ services:
       - 3306:3306
     volumes:
       - ./volume/initdb.d:/docker-entrypoint-initdb.d
+      - ./volume/csv:/csv
     environment:
       - MYSQL_ROOT_PASSWORD=password
       # - MYSQL_ALLOW_EMPTY_PASSWORD=true # 空パスワードを許容する
@@ -60,17 +63,20 @@ CREATE TABLE nob_table (
 );
 
 -- 初期データ投入
-INSERT INTO nob_table (
-    code_name
-    , age
-) VALUES (
-    'first_nob'
-    , '13'
-)
-, (
-    'second_nob'
-    , '5'
-);
+LOAD DATA LOCAL INFILE '/csv/sample-data.csv' -- コンテナ上のCSVファイル
+	INTO TABLE nob_table -- テーブル名
+	FIELDS TERMINATED BY ',' -- フィールドの区切り文字
+	LINES TERMINATED BY '\n' -- ラインの区切り文字
+	IGNORE 1 ROWS -- 最初の1行目を無視する
+    (id, code_name, age); -- DBのどのカラムに相当するかを明記
+```
+
+サンプルデータは下記で作成しています。
+
+```
+id,code_name,age
+1,first-nob,13
+2,second-nob,5
 ```
 
 コンテナ起動後、コンテナ内から`mariadb -u root -p`で DB にログインできます。
