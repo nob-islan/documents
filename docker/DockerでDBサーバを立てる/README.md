@@ -64,11 +64,15 @@ CREATE TABLE nob_table (
 
 -- 初期データ投入
 LOAD DATA LOCAL INFILE '/csv/sample-data.csv' -- コンテナ上のCSVファイル
-	INTO TABLE nob_table -- テーブル名
-	FIELDS TERMINATED BY ',' -- フィールドの区切り文字
-	LINES TERMINATED BY '\n' -- ラインの区切り文字
-	IGNORE 1 ROWS -- 最初の1行目を無視する
-    (id, code_name, age); -- DBのどのカラムに相当するかを明記
+    INTO TABLE
+        nob_table -- テーブル名
+    FIELDS
+        TERMINATED BY ',' -- フィールドの区切り文字
+        -- ENCLOSED BY '"' -- 各カラムの囲い文字
+    LINES
+        TERMINATED BY '\n' -- ラインの区切り文字
+    IGNORE 1 ROWS -- 最初の1行目を無視する
+        (id, code_name, age); -- DBのどのカラムに相当するかを明記
 ```
 
 サンプルデータは下記で作成しています。
