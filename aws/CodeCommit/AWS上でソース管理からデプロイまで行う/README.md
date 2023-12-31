@@ -8,50 +8,27 @@ AWS のサービスを利用しつつ、下記要領でアプリケーション�
 
 ## CodeCommit
 
-### サービス概要
-
-**CodeCommit**サービスを利用して、AWS 上にリポジトリを立ててソース管理を行います。CodeCommit を利用するメリットとしては
-
-- フルマネージドサービスなので可用性は AWS の責任範疇。利用者はサーバ管理などを意識する必要がない、
-- 閉塞的なネットワーク内でソースを管理できる
-
-ことがあげられます。
+ソース管理を行うサービスです。マネージドサービスなのでサーバの存在を意識せずにリポジトリを使うことができます。
 
 ### やったこと
+
+Java アプリケーションのソースファイルを管理できる状態にします。
 
 #### リポジトリ作成
 
 AWS のコンソール上からリポジトリを作成します。リポジトリ名を指定するだけで簡単に作成できます。
 
-![repo-create](./images/repo-create.png)
-
 リポジトリの初期ページに、SSH キーの登録方法が記載されています。ドキュメントに従ってキーを登録してクローンの準備をします。
-
-![nob-first-repo-init](./images/nob-first-repo-init.png)
 
 #### ソースのプッシュ
 
 ローカルで java プロジェクトを立ち上げ、リモートリポジトリにプッシュします。
 
-![first-commit](./images/first-commit.png)
-
 `first-app`がアプリケーションの実体です。作業用ブランチを切ってサンプルメソッドの実装をしてみます。
-
-![create-branch](./images/create-branch.png)
 
 ローカルでソースを編集後、プッシュしてプルリクエストを作成します。
 
-![pull-request](./images/pull-request.png)
-
 ## CodeBuild
-
-### サービス概要
-
-**CodeBuild**を使って、CodeCommit 上のソースからアプリケーションのモジュールをビルドします。本サービス利用のメリットとしては
-
-- クラウド上で実行されるため、サーバリソースを気にしなくてよい
-
-です。
 
 ### やったこと
 
@@ -59,21 +36,11 @@ AWS のコンソール上からリポジトリを作成します。リポジト�
 
 アプリのコンテナイメージ格納先となる ECR リポジトリを作成します。
 
-![ecr-repo](./images/ecr-repo.png)
-
 #### プロジェクト作成
 
 今回はアプリのコンテナイメージ作成し、ECR にプッシュすることを目標とします。最初にビルドプロジェクトを作成します。
 
-![codebuild-create-project](./images/codebuild-create-project-1.png)
-
 先ほどソースをプッシュしたリポジトリを紐づけます。
-
-![codebuild-create-project](./images/codebuild-create-project-2.png)
-
-SpringBoot 提供の`mvnw`でアプリをコンパイルするので、`openjdk`を環境イメージとして選択します。
-
-![codebuild-create-project](./images/codebuild-create-project-3.png)
 
 CodeBuild サービスロールにアタッチしている許可ポリシーに下記を追加して、CodeBuild から ECR に向けてイメージのプッシュができるようにします：
 
@@ -109,56 +76,45 @@ CodeBuild は`buildspec.yml`に従ってビルドを進めます。この yml �
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - mvn install -f first-app/pom.xml
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 ```
 
 上の設定ファイルでは
 
 - pre_build: AWS ログイン
-- build: コンテナイメージをビルド
-- post_build: イメージをプッシュ
+- build: Java アプリのビルド
+- post_build: コンテナイメージの作成および ECR へのプッシュ
 
 を行っています。下記 Dockerfile を使ってイメージをビルドします：
 
 ```
 FROM openjdk:17
 
-COPY ./first-app-0.0.1-SNAPSHOT.jar /app/
+COPY first-app/target/first-app-0.0.1-SNAPSHOT.jar /java/jar/first-app-0.0.1-SNAPSHOT.jar
 
-CMD java -jar /app/first-app-0.0.1-SNAPSHOT.jar
+CMD java -jar /java/jar/first-app-0.0.1-SNAPSHOT.jar
 ```
-
-本来であれば pre_build フェーズでアプリの jar ファイルを作成するのが正攻法ですが、`aws`コマンドおよび`java`コマンドを叩ける環境イメージを用意するのが手間だったので、今回はあらかじめ jar ファイルをローカルでビルドし、プロジェクトのルートディレクトリに配置します。
 
 #### ビルド実行
 
 「ビルドを開始」ボタンを押下します。
 
-![build-start](./images/build-start.png)
-
 ビルドに成功すると ECR リポジトリにイメージがプッシュされます。
 
-![repo-success](./images/repo-success.png)
-
 ## ECS
-
-### サービス概要
-
-**ECS**を用いてコンテナアプリケーションをビルドします。今回は**Fargate**を使うため、コンテナを動かす EC2 インスタンスの管理すら意識する必要がありません。
 
 ### やったこと
 
@@ -168,19 +124,8 @@ CMD java -jar /app/first-app-0.0.1-SNAPSHOT.jar
 
 クラスターを作成します。クラスターはコンテナを実行する EC2 インスタンスの管理単位です。
 
-![cluster-create](./images/cluster-create.png)
-
 タスク定義を作成します。タスクは実行対象のコンテナイメージとその実行設定とをセットにした概念です。
-
-![task-create](./images/task-create.png)
 
 サービスを作成します。サービスは実行されるコンテナそのものを指す概念です。上で作成したタスクを指定し、起動する VPC などを設定します。
 
-![service-create](./images/service-create.png)
-
-サービスが正常に作成されると、java アプリが動いていることが確認できます（下の 13.231.93.36 が EC2 インスタンスのパブリック IP です）。
-
-```
-$ curl 13.231.93.36:8080/sample/greet
-Hello, CodeCommit!
-```
+サービスが正常に作成されると、java アプリが動いていることが確認できます。
