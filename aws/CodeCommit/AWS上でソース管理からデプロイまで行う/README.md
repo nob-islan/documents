@@ -16,31 +16,43 @@ Java アプリケーションのソースファイルを管理できる状態に
 
 #### リポジトリ作成
 
-AWS のコンソール上からリポジトリを作成します。リポジトリ名を指定するだけで簡単に作成できます。
+AWS のコンソール上からリポジトリを作成します。
 
-リポジトリの初期ページに、SSH キーの登録方法が記載されています。ドキュメントに従ってキーを登録してクローンの準備をします。
+![code-commit-create](./images/code-commit-create.png)
+
+リポジトリの初期ページに、SSH キーの登録方法が記載されています。[ドキュメント](https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-ssh-unixes.html?icmpid=docs_acc_console_connect_np)に従ってキーを登録してクローンの準備をします。
+
+![code-commit-first-page](./images/code-commit-first-page.png)
 
 #### ソースのプッシュ
 
-ローカルで java プロジェクトを立ち上げ、リモートリポジトリにプッシュします。
+ローカルで java プロジェクトを立ち上げ、リモートリポジトリにプッシュします。`app`がアプリケーションの実体です。
 
-`first-app`がアプリケーションの実体です。作業用ブランチを切ってサンプルメソッドの実装をしてみます。
+![code-commit-first-commit](./images/code-commit-first-commit.png)
 
-ローカルでソースを編集後、プッシュしてプルリクエストを作成します。
+作業用ブランチを切ってサンプルメソッドの実装をしてみます。ローカルでソースを編集後、プッシュしてプルリクエストを作成します。
+
+![pull-request](./images/pull-request.png)
 
 ## CodeBuild
 
+アプリケーションのテスト、ビルドが行えるサービスです。
+
 ### やったこと
+
+CodeCommit 上で管理しているソースファイルからアプリのコンテナイメージをビルドし、ECR へプッシュします。
 
 #### ECR リポジトリ作成
 
 アプリのコンテナイメージ格納先となる ECR リポジトリを作成します。
 
+![ecr-repo](./images/ecr-repo.png)
+
 #### プロジェクト作成
 
-今回はアプリのコンテナイメージ作成し、ECR にプッシュすることを目標とします。最初にビルドプロジェクトを作成します。
+先ほどソースをプッシュしたリポジトリを紐づけて CodeBuild のビルドプロジェクトを作成します。
 
-先ほどソースをプッシュしたリポジトリを紐づけます。
+![code-build-source](./images/code-build-source.png)
 
 CodeBuild サービスロールにアタッチしている許可ポリシーに下記を追加して、CodeBuild から ECR に向けてイメージのプッシュができるようにします：
 
@@ -61,12 +73,12 @@ CodeBuild サービスロールにアタッチしている許可ポリシーに�
 
 また、CodeBuild の管理画面から、下記環境変数をあらかじめ設定しておきます。
 
-| 環境変数名         | 概要                         |
-| ------------------ | ---------------------------- |
-| AWS_DEFAULT_REGION | リージョン名                 |
-| AWS_ACCOUNT_ID     | アカウント ID                |
-| IMAGE_TAG          | イメージタグ                 |
-| IMAGE_REPO_NAME    | イメージ格納先リポジトリ URL |
+| 環境変数名         | 概要                       |
+| ------------------ | -------------------------- |
+| AWS_DEFAULT_REGION | リージョン名               |
+| AWS_ACCOUNT_ID     | アカウント ID              |
+| IMAGE_TAG          | イメージタグ               |
+| IMAGE_REPO_NAME    | イメージ格納先リポジトリ名 |
 
 #### buildspec 記載
 
@@ -84,7 +96,7 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
   build:
     commands:
-      - mvn install -f first-app/pom.xml
+      - mvn install -f app/pom.xml
   post_build:
     commands:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
@@ -103,29 +115,46 @@ phases:
 ```
 FROM openjdk:17
 
-COPY first-app/target/first-app-0.0.1-SNAPSHOT.jar /java/jar/first-app-0.0.1-SNAPSHOT.jar
+COPY app/target/app-0.0.1-SNAPSHOT.jar /java/jar/app-0.0.1-SNAPSHOT.jar
 
-CMD java -jar /java/jar/first-app-0.0.1-SNAPSHOT.jar
+CMD java -jar /java/jar/app-0.0.1-SNAPSHOT.jar
 ```
 
 #### ビルド実行
 
-「ビルドを開始」ボタンを押下します。
+「ビルドを開始」ボタンを押下します。ビルドに成功すると ECR リポジトリにイメージがプッシュされます。
 
-ビルドに成功すると ECR リポジトリにイメージがプッシュされます。
+![code-build-success](./images/code-build-success.png)
+
+ECR のリポジトリ上で、指定したタグでイメージが作られていることが確認できます。
+
+![ecr-image-push](./images/ecr-image-push.png)
 
 ## ECS
 
+コンテナアプリケーションをデプロイできるサービスです。
+
 ### やったこと
+
+ECR 上のイメージを使ってアプリケーションをデプロイ、疎通確認を行います。
 
 #### サービス作成
 
-今回はコンテナアプリケーションをデプロイするため、あらかじめ ECS サービスをデプロイしておき、CodePipeline でモジュールを更新する手順を踏みます。
-
 クラスターを作成します。クラスターはコンテナを実行する EC2 インスタンスの管理単位です。
+
+![ecs-cluster-create](./images/ecs-cluster-create.png)
 
 タスク定義を作成します。タスクは実行対象のコンテナイメージとその実行設定とをセットにした概念です。
 
-サービスを作成します。サービスは実行されるコンテナそのものを指す概念です。上で作成したタスクを指定し、起動する VPC などを設定します。
+![ecs-task-def-create](./images/ecs-task-def-create.png)
+
+サービスを作成します。サービスは実行されるコンテナそのものを指す概念です。上で作成したタスクを指定し、起動する VPC などを設定します。「デプロイ不具合の検出」で「Amazon ECS デプロイサーキットブレーカーを使用する」のチェックを外さないとエラーになります（原因不明）。
+
+![ecs-service-create](./images/ecs-service-create.png)
 
 サービスが正常に作成されると、java アプリが動いていることが確認できます。
+
+```
+Nobs-MacBook-Air:~ nob$ curl 54.249.78.92:8080/sample/greet
+Hello, ECS!
+```
