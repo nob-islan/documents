@@ -27,15 +27,18 @@ Java 環境構築のためのサンプルソースです。
 // README at: https://github.com/devcontainers/templates/tree/main/src/java
 {
   "name": "Java",
+
   "build": {
     "dockerfile": "Dockerfile" // 後述のDockerfileに従って起動する
   },
+
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "none",
       "installMaven": "true", // mvnコマンドを使えるようにする
       "installGradle": "false"
-    }
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
   }
 }
 ```
@@ -46,7 +49,7 @@ Java 環境構築のためのサンプルソースです。
 
 ```Dockerfile
 # microsoftから提供されているJava開発環境用イメージ
-FROM mcr.microsoft.com/devcontainers/java:1-17-bookworm
+FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
 
 # mavenの設定ファイルをコンテナにコピーする
 COPY materials/settings.xml /home/vscode/.m2/settings.xml
