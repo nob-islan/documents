@@ -39,6 +39,11 @@ Java 環境構築のためのサンプルソースです。
       "installGradle": "false"
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["vscjava.vscode-spring-initializr"] // SpringBoot用の拡張機能をコンテナ側でインストールする
+    }
   }
 }
 ```
