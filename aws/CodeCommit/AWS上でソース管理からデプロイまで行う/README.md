@@ -5,6 +5,7 @@ AWS のサービスを利用しつつ、下記要領でアプリケーション�
 - CodeCommit: ソース管理
 - CodeBuild: コンテナイメージの作成
 - ECS: アプリデプロイ
+- CodePipeline: ビルド、デプロイの自動化
 
 ## CodeCommit
 
@@ -160,4 +161,49 @@ ECR 上のイメージを使ってアプリケーションをデプロイ、疎�
 ```
 Nobs-MacBook-Air:~ nob$ curl 54.249.78.92:8080/sample/greet
 Hello, ECS!
+```
+
+## CodePipeline
+
+ビルド、デプロイを自動化します。
+
+### やったこと
+
+コンテナイメージのビルドからアプリケーションのデプロイまでを自動化し、動作確認を行います。
+
+#### アプリ改修
+
+動作確認のためにアプリに改修を入れます。
+
+![app-modify](./images/app-modify.png)
+
+#### パイプライン作成
+
+パイプラインの名前を指定します。
+
+![create-pipeline-name](./images/create-pipeline-name.png)
+
+ソースを指定してソースステージを作成します。
+
+![create-pipeline-source](./images/create-pipeline-source.png)
+
+ビルドプロジェクトを指定してビルドステージを作成します。
+
+![create-pipeline-build](./images/create-pipeline-build.png)
+
+デプロイプロバイダを指定してデプロイステージを作成します。
+
+![create-pipeline-deploy](./images/create-pipeline-deploy.png)
+
+#### パイプライン実行
+
+パイプラインの作成が完了すると、変更のリリースが始まります。
+
+![pipeline-process](./images/pipeline-process.png)
+
+マネジメントコンソール上でパイプラインが成功したことを確認した後、再度 API を叩くと変更が反映されていることが確認できます。
+
+```
+Nobs-MacBook-Air:~ nob$ curl 13.114.42.135:8080/sample/greet
+Hello, CodePipeline!
 ```
