@@ -102,15 +102,18 @@ phases:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - printf '[{"name":"nob-java","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
 ```
 
 上の設定ファイルでは
 
 - pre_build: AWS ログイン
 - build: Java アプリのビルド
-- post_build: コンテナイメージの作成および ECR へのプッシュ
+- post_build: コンテナイメージの作成および ECR へのプッシュ、および CodePipeline 用のアーティファクト作成
 
-を行っています。下記 Dockerfile を使ってイメージをビルドします：
+を行っています。`imagedefinitions.json`は ECS のサービス更新に必須です。下記 Dockerfile を使ってイメージをビルドします：
 
 ```
 FROM openjdk:17
