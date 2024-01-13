@@ -14,6 +14,7 @@
   - [CodeCommit](./aws/CodeCommit/README.md)
   - [ECR](./aws/ECR/README.md)
 - dev-container
+  - [Code_Suggestions サンプル](./dev-container/Code_Suggestionsサンプル/README.md)
   - [Java 環境サンプル](./dev-container/Java環境サンプル/README.md)
   - [開発環境構築](./dev-container/開発環境構築/README.md)
 - docker
