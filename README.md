@@ -32,6 +32,7 @@
   - [GitLab を外部の PostgreSQL に接続する](./gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/README.md)
 - harbor
   - [harbor 構築手順](./harbor/harbor%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
+  - [リポジトリにライフサイクルポリシーを設定する](./harbor/リポジトリにライフサイクルポリシーを設定する/README.md)
 - ignite
   - [ignite-install](./ignite/ignite-install/README.md)
   - [ignite-java](./ignite/ignite-java/README.md)
