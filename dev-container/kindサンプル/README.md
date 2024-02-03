@@ -15,8 +15,24 @@ kind 環境構築のためのサンプルソースです。
 
 ### devcontainer.json
 
-```
-まだです
+```json
+{
+  "name": "kind",
+
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "nob-kind",
+  "workspaceFolder": "/workspace",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-kubernetes-tools.kind-vscode",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}
 ```
 
 ### Dockerfile
