@@ -5,10 +5,12 @@ kind 環境構築のためのサンプルソースです。
 ## ディレクトリ構成
 
 ```
-.devcontainer/
-  ├─devcontainer.json
-  ├─docker-compose.yml
-  └─Dockerfile
+kind/
+  ├─.devcontainer/
+  │    ├─devcontainer.json
+  │    ├─docker-compose.yml
+  │    └─Dockerfile
+  └─workspace/
 ```
 
 ## 設定
@@ -42,8 +44,6 @@ kind 環境構築のためのサンプルソースです。
 ```Dockerfile
 FROM docker:dind
 
-RUN mkdir /nob
-
 RUN apk update && apk add curl kubectl
 RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
 RUN chmod +x ./kind
@@ -52,7 +52,7 @@ RUN mv ./kind /usr/local/bin/kind
 
 ### docker-compose.yml
 
-Dockerfile をビルドし、特権ユーザでコンテナを起動します。
+Dockerfile をビルドし、特権ユーザでコンテナを起動します。`workspace`ディレクトリに各種マニフェストなどを格納する想定です。
 
 ```yml
 version: "3.7"
@@ -61,4 +61,6 @@ services:
     container_name: nob-kind
     build: .
     privileged: true
+    volumes:
+      - "../workspace:/workspace"
 ```
