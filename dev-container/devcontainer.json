@@ -1,0 +1,15 @@
+{
+    "name": "kind",
+  
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "nob-kind",
+    "workspaceFolder": "/nob"
+  
+    // "features": {},
+
+    // "customizations": {
+    //   "vscode": {
+    //     "extensions": []
+    //   }
+    // }
+  }
