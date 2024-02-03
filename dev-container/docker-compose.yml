@@ -1,6 +1,0 @@
-version: "3.7"
-services:
-  nob-kind:
-    container_name: nob-kind
-    build: .
-    privileged: true
