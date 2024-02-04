@@ -15,7 +15,7 @@
   - [ECR](./aws/ECR/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
-  - [code_Suggestions サンプル](./dev-container/Code_Suggestionsサンプル/README.md)
+  - [code_suggestions サンプル](./dev-container/Code_Suggestionsサンプル/README.md)
   - [java 環境サンプル](./dev-container/Java環境サンプル/README.md)
   - [kind サンプル](./dev-container/kindサンプル/README.md)
   - [開発環境構築](./dev-container/開発環境構築/README.md)

@@ -48,6 +48,8 @@ app-test:
         - ${WEB_PROJECT}/target/failsafe-reports/TEST-*.xml
         - ${APP_PROJECT}/target/surefire-reports/TEST-*.xml
         - ${APP_PROJECT}/target/failsafe-reports/TEST-*.xml
+  rules:
+    - if: $CI_COMMIT_TAG
 
 app-build:
   stage: app-build
@@ -59,6 +61,8 @@ app-build:
     expire_in: "1 days"
     paths:
       - ${ARTIFACT_JAR_PATH}
+  rules:
+    - if: $CI_COMMIT_TAG
 
 image-push:
   stage: image-push
@@ -111,6 +115,8 @@ app-test:
         - ${WEB_PROJECT}/target/failsafe-reports/TEST-*.xml
         - ${APP_PROJECT}/target/surefire-reports/TEST-*.xml
         - ${APP_PROJECT}/target/failsafe-reports/TEST-*.xml
+  rules:
+    - if: $CI_COMMIT_TAG
 ```
 
 #### app-build ステージ
@@ -128,6 +134,8 @@ app-build:
     expire_in: "1 days" # artifactの保存期間
     paths:
       - ${ARTIFACT_JAR_PATH}
+  rules:
+    - if: $CI_COMMIT_TAG
 ```
 
 #### image-push ステージ
