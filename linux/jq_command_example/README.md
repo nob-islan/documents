@@ -90,3 +90,79 @@ $ cat sample.json | jq  '.items[] | {id: .id, owner: .owner}'
 $ cat sample.json | jq  -c '[.items[] | {id: .id, owner: .owner}]'
 [{"id":111,"owner":{"id":1111111,"type":"Organization"}},{"id":222,"owner":{"id":2222222,"type":"User"}},{"id":333,"owner":{"id":3333333,"type":"Organization"}}]
 ```
+
+- 特定の属性を置換
+
+```shell
+$ cat sample.json | jq '.total_count="replaced"'
+{
+  "total_count": "replaced",
+  "items": [
+    {
+      "id": 111,
+      "name": "aaa",
+      "owner": {
+        "id": 1111111,
+        "type": "Organization"
+      },
+      "size": 10
+    },
+    {
+      "id": 222,
+      "name": "bbb",
+      "owner": {
+        "id": 2222222,
+        "type": "User"
+      },
+      "size": 30
+    },
+    {
+      "id": 333,
+      "name": "ccc",
+      "owner": {
+        "id": 3333333,
+        "type": "Organization"
+      },
+      "size": 25
+    }
+  ]
+}
+```
+
+- 条件付き置換
+
+```shell
+$ cat sample.json | jq '. | if .total_count == 3 then .total_count = 706 else . end'
+{
+  "total_count": 706,
+  "items": [
+    {
+      "id": 111,
+      "name": "aaa",
+      "owner": {
+        "id": 1111111,
+        "type": "Organization"
+      },
+      "size": 10
+    },
+    {
+      "id": 222,
+      "name": "bbb",
+      "owner": {
+        "id": 2222222,
+        "type": "User"
+      },
+      "size": 30
+    },
+    {
+      "id": 333,
+      "name": "ccc",
+      "owner": {
+        "id": 3333333,
+        "type": "Organization"
+      },
+      "size": 25
+    }
+  ]
+}
+```
