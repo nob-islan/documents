@@ -53,6 +53,8 @@ services:
       - "../workspace:/workspace"
 ```
 
+#### Dockerfile
+
 ```Dockerfile
 FROM docker:dind
 ```
