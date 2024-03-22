@@ -7,18 +7,21 @@ Java 環境構築のためのサンプルソースです。
 いつもの java プロジェクトに`.devcontainer`ディレクトリを下記要領で追加します。
 
 ```
-.devcontainer/
-  ├─devcontainer.json
-  ├─Dockerfile
-  └─materials/
-      └─settings.xml
+root/
+  ├─.devcontainer/
+  │    ├─devcontainer.json
+  │    └─Dockerfile
+  └─.vscode/
+       └─settings.json
 ```
 
 ## 設定
 
 各種ファイルの設定内容です。
 
-### devcontainer.json
+### .devcontainer
+
+#### devcontainer.json
 
 開発コンテナのイメージなど、起動向けの設定を記載するファイルです。
 
@@ -59,7 +62,7 @@ Java 環境構築のためのサンプルソースです。
   },
 ```
 
-### Dockerfile
+#### Dockerfile
 
 開発コンテナのイメージを指定するなど、コンテナの元となるファイルです。
 
@@ -67,34 +70,18 @@ Java 環境構築のためのサンプルソースです。
 # microsoftから提供されているJava開発環境用イメージ
 FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
 
-# mavenの設定ファイルをコンテナにコピーする
-COPY materials/settings.xml /home/vscode/.m2/settings.xml
 ```
 
-### materials
+### vscode
 
-Dockerfile における`COPY`でコンテナに配置することなどを想定したファイル群です。
+#### settings.json
 
-#### settings.xml
+VSCode の設定ファイルです。
 
-maven 向けの設定ファイルです。
-
-```xml
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <localRepository>
-        /home/vscode/.m2-nob <!-- ローカルリポジトリの場所を変更（ほぼ動作確認用） -->
-    </localRepository>
-    <interactiveMode/>
-    <usePluginRegistry/>
-    <offline/>
-    <pluginGroups/>
-    <servers/>
-    <mirrors/>
-    <proxies/>
-    <profiles/>
-    <activeProfiles/>
-</settings>
+```json
+{
+  "java.inlayHints.parameterNames.enabled": "none",
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.configuration.updateBuildConfiguration": "interactive"
+}
 ```
