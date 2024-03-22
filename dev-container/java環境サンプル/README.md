@@ -23,8 +23,6 @@ Java 環境構築のためのサンプルソースです。
 開発コンテナのイメージなど、起動向けの設定を記載するファイルです。
 
 ```json
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/java
 {
   "name": "Java",
 
@@ -32,6 +30,25 @@ Java 環境構築のためのサンプルソースです。
     "dockerfile": "Dockerfile" // 後述のDockerfileに従って起動する
   },
 
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack",
+        "vscjava.vscode-lombok",
+        "arjun.swagger-viewer",
+        "shd101wyy.markdown-preview-enhanced",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
+```
+
+必要に応じて、下記の要領で feature を追加してください。
+
+```json
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "none",
@@ -40,12 +57,6 @@ Java 環境構築のためのサンプルソースです。
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
   },
-  "customizations": {
-    "vscode": {
-      "extensions": ["vscjava.vscode-spring-initializr"] // SpringBoot用の拡張機能をコンテナ側でインストールする
-    }
-  }
-}
 ```
 
 ### Dockerfile
