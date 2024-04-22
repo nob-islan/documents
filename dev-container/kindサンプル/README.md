@@ -8,9 +8,8 @@ kind 環境構築のためのサンプルソースです。
 kind/
   ├─.devcontainer/
   │    ├─devcontainer.json
-  │    ├─docker-compose.yml
   │    └─Dockerfile
-  └─workspace/
+  └─materials/
 ```
 
 ## 設定
@@ -20,11 +19,13 @@ kind/
 ```json
 {
   "name": "kind",
-
-  "dockerComposeFile": "./docker-compose.yml",
-  "service": "nob-kind",
-  "workspaceFolder": "/workspace",
-
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/kind/materials",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -39,28 +40,16 @@ kind/
 
 ### Dockerfile
 
-`dind`をベースイメージとし、`kubectl`および`kind`コマンドをインストールします。
+`debian`をベースイメージとし、`kubectl`および`kind`コマンドをインストールします。
 
 ```Dockerfile
-FROM docker:dind
+FROM mcr.microsoft.com/devcontainers/base:dev-debian
 
-RUN apk update && apk add curl kubectl
-RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
+RUN apt update && apt install curl
+RUN curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin/kubectl
+RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.18.0/kind-linux-amd64
 RUN chmod +x ./kind
 RUN mv ./kind /usr/local/bin/kind
-```
-
-### docker-compose.yml
-
-Dockerfile をビルドし、特権ユーザでコンテナを起動します。`workspace`ディレクトリに各種マニフェストなどを格納する想定です。
-
-```yml
-version: "3.7"
-services:
-  nob-kind:
-    container_name: nob-kind
-    build: .
-    privileged: true
-    volumes:
-      - "../workspace:/workspace"
 ```
