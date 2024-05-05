@@ -25,8 +25,7 @@
   - [Docker インストール](./docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)
   - [Docker で DB サーバを立てる](./docker/DockerでDBサーバを立てる/README.md)
   - [Docker で GitLab サーバを構築](./docker/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
-  - [Docker で java+db 環境を構築](./docker/Docker%E3%81%A7java%2Bdb%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
-  - [Docker で Java 実行環境を構築](./docker/Docker%E3%81%A7Java%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
+  - [Docker で react 実行環境を構築](./docker/Dockerでreact実行環境を構築/README.md)
   - [Docker で RedMine を構築](./docker/DockerでRedMineを構築/REAMDE..md)
 - gitlab
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
