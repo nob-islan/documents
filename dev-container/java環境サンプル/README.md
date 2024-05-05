@@ -9,8 +9,7 @@ Java 環境構築のためのサンプルソースです。
 ```
 root/
   ├─.devcontainer/
-  │    ├─devcontainer.json
-  │    └─Dockerfile
+  │    └─devcontainer.json
   └─.vscode/
        └─settings.json
 ```
@@ -28,11 +27,7 @@ root/
 ```json
 {
   "name": "Java",
-
-  "build": {
-    "dockerfile": "Dockerfile" // 後述のDockerfileに従って起動する
-  },
-
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
   "features": {},
   "customizations": {
     "vscode": {
@@ -60,16 +55,6 @@ root/
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
   },
-```
-
-#### Dockerfile
-
-開発コンテナのイメージを指定するなど、コンテナの元となるファイルです。
-
-```Dockerfile
-# microsoftから提供されているJava開発環境用イメージ
-FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
-
 ```
 
 ### vscode
