@@ -57,7 +57,7 @@ root/
   },
 ```
 
-### vscode
+### .vscode
 
 #### settings.json
 
