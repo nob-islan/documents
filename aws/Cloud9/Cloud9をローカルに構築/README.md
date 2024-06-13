@@ -11,6 +11,13 @@ aws 開発ツールを利用できる Web IDE: Cloud9 をローカルに構築�
   npm -v
   ```
 
+- python が必要です。なければインストールしてください。
+
+  ```shell
+  sudo apt update
+  sudo apt install -y python2
+  ```
+
 - cloud9 を github からダウンロードします。
 
   ```shell
