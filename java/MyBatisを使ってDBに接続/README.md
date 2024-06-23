@@ -212,6 +212,12 @@ public interface UsersMapper {
 
 SQL の実体を記載するファイルです。`src/resources`配下に、mapper インターフェースと同じパッケージ構成で配置します。例として、mapper インターフェースが`src/main/java/nob/example/firstrestapi/mapper`に配置されている場合、xml ファイルは`src/main/resources/nob/example/firstrestapi/mapper`に配置します。
 
+- mapper タグ
+  - `namespace`: mapper が配置されているパッケージ
+- update, insert, select, delete タグ
+  - `id`: インターフェース側のメソッド名
+  - `resultType`: 戻りの型
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC
