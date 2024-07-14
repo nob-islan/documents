@@ -18,27 +18,43 @@
 
 ### kubectl のインストール
 
-必要パッケージのインストール
+kubectl のダウンロード
 
 ```
-sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
 
-```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-```
+【M1 Mac 対応】kubectl のダウンロード
 
 ```
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+```
+
+kubectl のチェックサムファイルをダウンロード
+
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+```
+
+【M1 Mac 対応】kubectl のチェックサムファイルをダウンロード
+
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
+```
+
+チェックサムファイルに対してkubectlバイナリを検証
+
+```
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 ```
 
 kubectl のインストール
 
 ```
-sudo apt-get update && sudo apt-get install -y kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
-kubectl がインストールされていること、およびバージョンの確認
+インストールされていることを確認
 
 ```
 kubectl version --client
