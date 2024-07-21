@@ -29,6 +29,7 @@
   - [Docker で Java 実行環境を構築](./docker/DockerでJava実行環境を構築/README.md)
   - [Docker で React 実行環境を構築](./docker/Dockerでreact実行環境を構築/README.md)
   - [Docker で RedMine を構築](./docker/DockerでRedMineを構築/REAMDE..md)
+  - [JpaRepository 起動時の Java アプリ制御](./docker/JpaRepository利用時のJavaアプリ起動制御/README.md)
 - gitlab
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
   - [GitLab_Runner で harbor に image を push する](./gitlab/GitLab_Runnerでharborにimageをpushする/README.md)
@@ -94,5 +95,5 @@
   - [qpid インストール](./qpid/qpidインストール/README.md)
 - react
   - [react から API 呼び出し](./react/reactからAPI呼び出し/README.md)
-  - [reactの環境変数設定方法](./react/reactの環境変数設定方法/README.md)
+  - [react の環境変数設定方法](./react/reactの環境変数設定方法/README.md)
   - [react 環境構築](./react/react環境構築/README.md)
