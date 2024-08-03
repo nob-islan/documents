@@ -88,7 +88,7 @@ import com.example.utsample.entity.Account;
  */
 @SpringBootTest
 @Testcontainers(disabledWithoutDocker = true) // docker環境が無い場合はテストがスキップされます。
-@Sql("classpath:event/create-table.sql") // 各メソッド実行前にSQLファイルを読み込みます。
+@Sql("classpath:create_table.sql") // 各メソッド実行前にSQLファイルを読み込みます。
 public class SampleDaoTest {
 
     // データベースのコンテナイメージなど、DB構築に必要な設定値です。
