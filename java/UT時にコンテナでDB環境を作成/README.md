@@ -35,6 +35,9 @@ UT 実行時にコンテナでデータベースを起動し、毎回綺麗な D
 `test/resources`配下に、初期実行用の SQL ファイルを作成します。今回はファイル名を`create_table.sql`と想定します。
 
 ```sql
+-- 古いテーブルが存在すれば削除
+DROP TABLE IF EXISTS account;
+
 -- テーブル作成
 CREATE TABLE IF NOT EXISTS account (
     id INT AUTO_INCREMENT PRIMARY KEY
@@ -85,6 +88,7 @@ import com.example.utsample.entity.Account;
  */
 @SpringBootTest
 @Testcontainers(disabledWithoutDocker = true) // docker環境が無い場合はテストがスキップされます。
+@Sql("classpath:event/create-table.sql") // 各メソッド実行前にSQLファイルを読み込みます。
 public class SampleDaoTest {
 
     // データベースのコンテナイメージなど、DB構築に必要な設定値です。
@@ -98,8 +102,7 @@ public class SampleDaoTest {
     static final MariaDBContainer<?> mariaDbContainer = new MariaDBContainer<>(MARIA_DB_IMAGE_NAME)
             .withDatabaseName(DATABASE_NAME)
             .withUsername(USER_NAME)
-            .withPassword(PASSWORD)
-            .withInitScript("create_table.sql"); // ここで初期値投入用のSQLファイルを読み込んでいます。
+            .withPassword(PASSWORD);
 
     // 接続情報などの設定値を投入します。
     @DynamicPropertySource
