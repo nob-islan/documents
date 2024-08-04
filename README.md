@@ -57,6 +57,7 @@
   - [UT 時にコンテナで nginx 環境を作成](./java/UT時にコンテナでnginx環境を構築/)
   - [VSCode でコンテナの Java アプリをデバッグ](./java/VSCodeでコンテナのJavaアプリをデバッグ/README.md)
   - [バリデーションエラーのハンドリング](./java/バリデーションエラーのハンドリング/README.md)
+  - [バリデーション向けアノテーションを作成](./java/バリデーション向けアノテーションを作成/README.md)
   - [独自例外クラスおよびハンドラを作成](./java/独自例外クラスおよびハンドラを作成/README.md)
 - kubernetes
   - kind
