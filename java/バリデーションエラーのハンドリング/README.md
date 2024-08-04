@@ -191,6 +191,8 @@ public class ValidatorConfig {
 }
 ```
 
+- `validatorDictionary.properties`
+
 ```properties
 # エラーメッセージの辞書ファイルです。
 
@@ -260,7 +262,7 @@ import lombok.Data;
  * バリデーションに関する共通メソッドを定義するクラスです。
  *
  */
-public class ValidatorUtil {
+public class ValidatorTestUtil {
 
     /**
      * バリデーションエラーの情報を独自infoクラスに移し替えます。
@@ -318,8 +320,8 @@ import com.example.uttest.config.ValidatorConfig;
 import com.example.uttest.dto.SampleInModel;
 import com.example.uttest.dto.SampleInModel.SampleDto;
 import com.example.uttest.service.impl.SampleServiceImpl;
-import com.example.uttest.util.ValidatorUtil;
-import com.example.uttest.util.ValidatorUtil.SampleErrorInfo;
+import com.example.uttest.util.ValidatorTestUtil;
+import com.example.uttest.util.ValidatorTestUtil.SampleErrorInfo;
 
 import jakarta.validation.ConstraintViolationException;
 
@@ -374,7 +376,7 @@ public class SampleServiceImplTest {
             fail();
         } catch (ConstraintViolationException e) {
             // 例外を独自のinfoクラスに詰め替え
-            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+            list = ValidatorTestUtil.convertToSampleErrorInfoList(e);
         }
 
         // 結果の検証
@@ -404,7 +406,7 @@ public class SampleServiceImplTest {
             fail();
         } catch (ConstraintViolationException e) {
             // 例外を独自のinfoクラスに詰め替え
-            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+            list = ValidatorTestUtil.convertToSampleErrorInfoList(e);
         }
 
         // 結果の検証
@@ -434,7 +436,7 @@ public class SampleServiceImplTest {
             fail();
         } catch (ConstraintViolationException e) {
             // 例外を独自のinfoクラスに詰め替え
-            list = ValidatorUtil.convertToSampleErrorInfoList(e);
+            list = ValidatorTestUtil.convertToSampleErrorInfoList(e);
         }
 
         // 結果の検証
