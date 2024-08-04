@@ -1,0 +1,174 @@
+# バリデーション向けアノテーションを作成
+
+バリデーションに使うアノテーションを自作します。今回は例として、クラスに付与することを想定した、2 つの日付の前後関係をチェックするアノテーションを作成します。
+
+- アノテーション
+
+```java
+package nob.example.firstapp.validator;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
+/**
+ * サンプルのバリデーションです。
+ *
+ */
+@Documented
+@Constraint(validatedBy = { SampleValidator.class }) // バリデータクラスを指定
+@Target({ ElementType.TYPE }) // クラスに対して付与することを宣言
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Sample {
+
+    /**
+     * 開始日
+     */
+    String startDate();
+
+    /**
+     * 終了日
+     *
+     */
+    String endDate();
+
+    /**
+     * エラーメッセージ
+     */
+    String message() default "サンプルエラー";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+- バリデーションの実装
+
+```java
+package nob.example.firstapp.validator;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+/**
+ * サンプルのバリデータクラスです。
+ *
+ */
+@NoArgsConstructor
+@AllArgsConstructor
+public class SampleValidator implements ConstraintValidator<Sample, Object> {
+
+    /**
+     * 開始日
+     */
+    private String startDate;
+
+    /**
+     * 終了日
+     */
+    private String endDate;
+
+    @Override
+    public void initialize(Sample annotation) {
+        this.startDate = annotation.startDate();
+        this.endDate = annotation.endDate();
+    }
+
+    /**
+     * 今回はクラスに対するアノテーションなので、第一引数の型をObjectとして、各フィールドの値が格納されるようにしています。
+     * フィールドに対して付与するアノテーションの場合、例えばString型にすることでそのフィールドの値が格納されます。
+     *
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+
+        BeanWrapper beanWrapper = new BeanWrapperImpl(value);
+        String startDateStr = (String) beanWrapper.getPropertyValue(startDate);
+        String endDateStr = (String) beanWrapper.getPropertyValue(endDate);
+
+        boolean result = false;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startDate = simpleDateFormat.parse(startDateStr);
+            Date endDate = simpleDateFormat.parse(endDateStr);
+            // 開始日が終了日より前か同日であればOK
+            if (startDate.compareTo(endDate) <= 0) {
+                return true;
+            }
+        } catch (ParseException e) {
+            // 日付の形式が不正な場合はチェックしない
+            return true;
+        }
+
+        return result;
+    }
+}
+```
+
+- テストクラス
+
+```java
+package nob.example.firstapp.validator;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import lombok.Data;
+
+/**
+ * SampleValidatorのテストクラスです。
+ *
+ */
+public class SampleValidatorTest {
+
+    @Test
+    public void test() {
+
+        SampleValidator sampleValidator = new SampleValidator("startDate", "endDate");
+
+        SampleValidatorTestDto sampleValidatorTestDto = new SampleValidatorTestDto();
+        sampleValidatorTestDto.setStartDate("2024-07-01");
+        sampleValidatorTestDto.setEndDate("2024-07-02");
+        assertTrue(sampleValidator.isValid(sampleValidatorTestDto, null));
+        sampleValidatorTestDto.setStartDate("2024-07-03");
+        sampleValidatorTestDto.setEndDate("2024-07-02");
+        assertFalse(sampleValidator.isValid(sampleValidatorTestDto, null));
+    }
+
+    /**
+     * SampleValidatorのテスト用dtoです。
+     *
+     */
+    @Data
+    private class SampleValidatorTestDto {
+
+        /**
+         * 開始日
+         */
+        private String startDate;
+
+        /**
+         * 終了日
+         */
+        private String endDate;
+    }
+}
+```
