@@ -1,4 +1,4 @@
-# Spring_boot でマルチモジュールアプリを作成
+# Spring_Boot でマルチモジュールアプリを作成
 
 依存関係を持つ複数のプロジェクトを用いてアプリをビルドする手順です。  
 cf. https://spring.pleiades.io/guides/gs/multi-module/
