@@ -151,4 +151,4 @@ kubectl apply -f java-service.yml
 
 #### 動作確認
 
-`curl http://${kindサーバのIPアドレス}:30070/k8s/date`で本日日時が返って来れば正常動作しています。`k8s/date`は java 側の設定になるので、変える場合はソースファイルの変更、jar の再作成、image の再作成が必要になります。
+`curl http://${kindサーバのIPアドレス}:30070/{path}`でレスポンスが返って来れば正常動作しています。
