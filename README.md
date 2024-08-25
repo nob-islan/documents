@@ -16,7 +16,8 @@
   - [ECR](./aws/ECR/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
-  - [code_suggestions サンプル](./dev-container/Code_Suggestionsサンプル/README.md)
+  - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
+  - [go 環境サンプル](./dev-container/go環境サンプル/README.md)
   - [java 環境サンプル](./dev-container/java環境サンプル/README.md)
   - [react 環境サンプル](./dev-container/react環境サンプル/README.md)
   - [kind サンプル](./dev-container/kindサンプル/README.md)
