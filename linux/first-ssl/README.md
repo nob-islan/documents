@@ -216,7 +216,7 @@ serve -s --ssl-cert ssl/server.crt --ssl-key ssl/server.key  build/
 
 ## Kubernetes クラスタ上の nginx サーバに https でアクセスできるようにする
 
-### configMap
+### secret
 
 各種証明書の内容について secret に転記します。
 
@@ -232,7 +232,9 @@ data:
     LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUdIQWdFQU1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhCRzB3YXdJQkFRUWduK2VtR0syMEFaUHNjUUlvDQpoYmpVRmZYNzFJelIrYVNRMUVVbURDVjhPeG1oUkFOQ0FBUTkzSFRPeG9BM2ZlR1JUTTBRQkhTOHdvYnJ2NFlrDQpCUUJ0YjVoNUJqb2lNNjM1K1V0S1pheEx3STdGUlVPbWIzQXA1bHdiK29iV1FaTFFBU0RxM2ROeg0KLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ==
 ```
 
-nginx の default.conf についても configMap に記載します。
+### configMap
+
+nginx の default.conf について configMap に記載します。
 
 ```yml
 apiVersion: v1
