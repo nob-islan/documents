@@ -9,7 +9,6 @@
 事前に`ip a`コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yml を作成します。
 
 ```yaml
-version: "3"
 services:
   gitlab:
     image: gitlab/gitlab-ce:latest
@@ -35,20 +34,35 @@ root ユーザのパスワードはサーバ内のファイルに記載されて
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
-ssh によってリポジトリのクローンなどをする場合は、2022 ポート経由で行います。
+### SSL 通信をできるようにする
+
+下記を追加すると`https://${設定したドメイン}`で GitLab にアクセスできます:
+
+```yaml
+environment:
+  GITLAB_OMNIBUS_CONFIG: |
+    external_url "https://{ドメイン}:443"
+    nginx['redirect_http_to_https'] = true
+    nginx['listen_port'] = 443
+    nginx['ssl_certificate'] = "/etc/gitlab/ssl/server.crt"
+    nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/server.key"
+
+volumes:
+  - "./volumes/ssl:/etc/gitlab/ssl"
+```
 
 ## gitlab-runner コンテナを構築
 
 gitlab コンテナ構築時に使用した docker-compose.yml に以下を追記します：
 
-```
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner-test
-    restart: always
-    volumes:
-    - '/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner'
-    - '/var/run/docker.sock:/var/run/docker.sock'
+```yaml
+gitlab-runner:
+  image: gitlab/gitlab-runner:latest
+  container_name: gitlab-runner-test
+  restart: always
+  volumes:
+    - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
+    - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
 `docker-compose up -d`を実行してコンテナを作成。  
