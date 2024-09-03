@@ -46,8 +46,8 @@ environment:
     nginx['listen_port'] = 443
     nginx['ssl_certificate'] = "/etc/gitlab/ssl/server.crt"
     nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/server.key"
-  ports:
-    - "443:443"
+ports:
+  - "443:443"
 
 volumes:
   - "./volumes/ssl:/etc/gitlab/ssl"
