@@ -68,7 +68,7 @@ gitlab-runner:
 ```
 
 `docker-compose up -d`を実行してコンテナを作成。  
-コンテナ起動後、`docker exec -it gitlab-runner-test /bin/bash`でコンテナの中に入ります。`gitlab-runner register`で各種設定を対話形式で進めます：
+コンテナ起動後、`docker exec -it gitlab-runner-test gitlab-runner register`で各種設定を対話形式で進めます：
 
 ```
 Enter the GitLab instance URL (for example, https://gitlab.com/):
@@ -86,7 +86,19 @@ Enter the default Docker image (for example, ruby:2.7):
 ${ruby:2.7}
 ```
 
-`${instance URL}`および`${dregistration token}`については GitLab の Settings -> CI/CD -> Runners で設定を確認して入力します。  
+`${instance URL}`および`${dregistration token}`については GitLab の Settings -> CI/CD -> Runners で設定を確認して入力します。
+
+### GitLab が SSL 通信をしている場合
+
+runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yml`に下記を追加してください:
+
+```yml
+volumes:
+  - "./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt"
+```
+
+## CI 構築
+
 リポジトリにて`.gitlab-ci.yml`ファイルを作成します、以下テストファイル：
 
 ```
@@ -108,4 +120,4 @@ push すれば runner が走ります。
     extra_hosts = ["${ドメイン名}:${ホストOSのIPアドレス}"]
 ```
 
-`apt-get update` `apt-get install vim`で vim とかを入れておく必要があるので注意。
+`apt-get update` `apt-get install vim`で vim とかを入れておく必要があるので注意してください。
