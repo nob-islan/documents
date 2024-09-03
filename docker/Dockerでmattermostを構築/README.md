@@ -11,7 +11,7 @@ cf. https://docs.mattermost.com/install/install-docker.html
   cd docker
   ```
 
-- env ファイルをコピーします。コピー後、`DOMAIN`の項目を適切な値に修正してください。:
+- env ファイルをコピーします。コピー後、`DOMAIN`の項目を適切な値に修正してください:
 
   ```shell
   cp env.example .env
