@@ -19,10 +19,10 @@ cf. https://docs.mattermost.com/install/install-docker.html
 
 - 必要なディレクトリを作成し、権限を設定します:
 
-  ```shell
-  mkdir -p ./volumes/app/mattermost/{config,data,logs,plugins,client/plugins,bleve-indexes}
-  sudo chown -R 2000:2000 ./volumes/app/mattermost
-  ```
+```shell
+mkdir -p ./volumes/app/mattermost/{config,data,logs,plugins,client/plugins,bleve-indexes}
+sudo chown -R 2000:2000 ./volumes/app/mattermost
+```
 
 - （https で通信をする場合のみ）あらかじめ用意しておいた SSL 通信向けの証明書および秘密鍵を配置します:
 
