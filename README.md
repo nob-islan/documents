@@ -77,9 +77,10 @@
     - [Kubernetes で Java アプリケーションをデプロイ](./kubernetes/pure_kubernetes/Kubernetes%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
     - [Tips](./kubernetes/pure_kubernetes/Tips/README.md)
 - linux
-  - [初めての Let's Encript](./linux/first-letsencript/README.md)
+  - [はじめての Let's Encript](./linux/first-letsencript/README.md)
   - [はじめての squid](./linux/first-squid/README.md)
   - [はじめての SSL 通信](./linux/first-ssl/README.md)
+  - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
   - [jq コマンド例](./linux/jq-command-example/README.md)
 - minio
   - [MinIO を GitLab_LFS のストレージとする](./minio/MinIO%E3%82%92GitLab_LFS%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%99%E3%82%8B/README.md)
