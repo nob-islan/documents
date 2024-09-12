@@ -74,7 +74,7 @@
 - ディレクトリの書き込み権限を変更します。
 
   ```shell
-  chmod 777 /var/spool/mail
+  sudo chmod 777 /var/spool/mail
   ```
 
 - 自分自身にメールを送信します。下記はコマンド例です。コメント部分は出力内容です。
