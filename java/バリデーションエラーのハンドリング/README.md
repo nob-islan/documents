@@ -4,6 +4,17 @@ REST API のバリデーションエラーをハンドリングし、`curl`で�
 
 ## 実装
 
+### 設定ファイル
+
+- pom.xml
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+
 ### 業務ロジック
 
 - サービスインターフェース
