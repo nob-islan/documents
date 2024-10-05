@@ -53,3 +53,9 @@ VSCode 上で markdown 形式でスライドを作成できる**Marp**の環境�
 
   章立てができます。
   ```
+
+拡張機能 **Markdown Preview Enhanced** をインストール済みの場合、この拡張機能によって提供されるプレビューではスライドとして表示されないため、下記の設定で VSCode が提供するデフォルトのプレビューボタンを表示させるようにしてください:
+
+```json
+"markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,
+```
