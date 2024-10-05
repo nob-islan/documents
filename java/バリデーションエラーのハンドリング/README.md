@@ -159,7 +159,7 @@ public class ValidatorConfig {
         // 返却値を宣言
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         // エラーメッセージの辞書ファイルを指定
-        messageSource.setBasename("validatorDictionary"); // validatorDictionary.propertiesをresources配下に作成します。
+        messageSource.setBasename("validator-dictionary"); // validator-dictionary.propertiesをresources配下に作成します。
         messageSource.setDefaultEncoding("UTF-8");
 
         return messageSource;
@@ -202,7 +202,7 @@ public class ValidatorConfig {
 }
 ```
 
-- `validatorDictionary.properties`
+- `validator-dictionary.properties`
 
 ```properties
 # エラーメッセージの辞書ファイルです。
@@ -253,58 +253,6 @@ public class SampleHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(errorList);
-    }
-}
-```
-
-- 補助クラス
-
-```java
-package com.example.uttest.util;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ConstraintViolationException;
-import lombok.Data;
-
-/**
- * バリデーションに関する共通メソッドを定義するクラスです。
- *
- */
-public class ValidatorTestUtil {
-
-    /**
-     * バリデーションエラーの情報を独自infoクラスに移し替えます。
-     *
-     * @param e
-     * @return sampleErrorInfoList
-     */
-    public static List<SampleErrorInfo> convertToSampleErrorInfoList(ConstraintViolationException e) {
-
-        // 返却地の宣言
-        List<SampleErrorInfo> sampleErrorInfoList = new ArrayList<SampleErrorInfo>();
-
-        // エラー情報をinfoクラスに詰め替えてリストを作成
-        for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-            SampleErrorInfo sampleErrorInfo = new SampleErrorInfo();
-            sampleErrorInfo.setErrorMessage(constraintViolation.getMessage());
-            sampleErrorInfoList.add(sampleErrorInfo);
-        }
-
-        return sampleErrorInfoList;
-    }
-
-    /**
-     * サンプルのエラー情報を格納するクラスです。
-     *
-     */
-    @Data
-    public static class SampleErrorInfo {
-
-        // エラーメッセージ
-        private String errorMessage;
     }
 }
 ```
@@ -454,6 +402,58 @@ public class SampleServiceImplTest {
         assertEquals(2, list.size());
         assertEquals("名前が空白です。", list.get(0).getErrorMessage());
         assertEquals("年齢が空白です。", list.get(1).getErrorMessage());
+    }
+}
+```
+
+- テスト向け補助クラス
+
+```java
+package com.example.uttest.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import lombok.Data;
+
+/**
+ * バリデーションに関する共通メソッドを定義するクラスです。
+ *
+ */
+public class ValidatorTestUtil {
+
+    /**
+     * バリデーションエラーの情報を独自infoクラスに移し替えます。
+     *
+     * @param e
+     * @return sampleErrorInfoList
+     */
+    public static List<SampleErrorInfo> convertToSampleErrorInfoList(ConstraintViolationException e) {
+
+        // 返却地の宣言
+        List<SampleErrorInfo> sampleErrorInfoList = new ArrayList<SampleErrorInfo>();
+
+        // エラー情報をinfoクラスに詰め替えてリストを作成
+        for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
+            SampleErrorInfo sampleErrorInfo = new SampleErrorInfo();
+            sampleErrorInfo.setErrorMessage(constraintViolation.getMessage());
+            sampleErrorInfoList.add(sampleErrorInfo);
+        }
+
+        return sampleErrorInfoList;
+    }
+
+    /**
+     * サンプルのエラー情報を格納するクラスです。
+     *
+     */
+    @Data
+    public static class SampleErrorInfo {
+
+        // エラーメッセージ
+        private String errorMessage;
     }
 }
 ```
