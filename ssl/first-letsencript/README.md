@@ -6,7 +6,7 @@ Let's Encript を使って nginx で SSL 通信ができるようにします。
 
 ### ドメイン取得
 
-Let's Encript で証明書を作成するにはドメインが必要です（IP アドレスのみだと不可）。[Dynamic DO!.jp](https://ddo.jp/contact.php) などから無料でドメインを発行できます。
+Let's Encript で証明書を作成するにはドメインが必要です（IP アドレスのみだと不可）。[Dynamic DO!.jp](https://ddo.jp/contact.php) などから無料でドメインを発行できます。また、ドメイン発行に必要なアドレスは[Proton](https://proton.me/)で無料発行できます。
 
 ### 証明書作成
 
