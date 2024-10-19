@@ -114,3 +114,5 @@
 - ssl
   - [はじめての Let's Encript](./ssl/first-letsencript/README.md)
   - [はじめての SSL 通信](./ssl/first-ssl/README.md)
+- zabbix
+  - [Zabbix インストール手順](./zabbix/zabbix-install/README.md)
