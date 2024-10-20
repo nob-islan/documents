@@ -135,6 +135,6 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
 ### ホスト登録手順
 
 - **Data collection** > **Hosts** から **Create host** を選択
-  - **Templates**について適当に選択
+  - **Templates** について適当に選択
   - **Interfaces** については **Agent** を選択し、監視対象の IP アドレスを入力
 - 10 ~ 15 分後に **Availability** が点灯したら監視開始
