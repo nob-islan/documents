@@ -36,7 +36,7 @@ cf. https://docs.mattermost.com/install/install-docker.html
 
   ```shell
   # http://{IPアドレス}:8065にアクセスできるようになればOK
-  sudo docker compose -f docker-compose.yml -f docker-compose.without-nginx.yml down
+  sudo docker compose -f docker-compose.yml -f docker-compose.without-nginx.yml up -d
   ```
 
 - （https で通信をする場合のみ）nginx 込みで起動します:
