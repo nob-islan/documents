@@ -86,6 +86,8 @@
   - [MinIO を GitLab_LFS のストレージとする](./minio/MinIO%E3%82%92GitLab_LFS%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%99%E3%82%8B/README.md)
   - [MinIO 起動手順](./minio/MinIO%E8%B5%B7%E5%8B%95%E6%89%8B%E9%A0%86/README.md)
   - [Tips](./minio/Tips/README.md)
+- multipass
+  - [はじめての multipass](./multipass/first-multipass/README.md)
 - nginx
   - [nginx サーバでファイルをアップロード、ダウンロードする](./nginx/nginxサーバでファイルをアップロード、ダウンロードする/README.md)
 - oracle
