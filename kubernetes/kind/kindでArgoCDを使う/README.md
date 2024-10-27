@@ -139,6 +139,12 @@ GUI にて「+ NEW APP」を押下して、以下を入力します。
 - Cluster: "https://kubernetes.default.svc"
 - Namespace: "default"
 
+プライベートリポジトリを指定する場合は下記のコマンドで認証を通してください: 
+
+```
+argocd repo add https://gitlab.com/nob/first-cluster-inspection.git --username <username> --password <password>
+```
+
 アプリケーションが作成されていることを確認します。
 
 ```
