@@ -8,7 +8,7 @@ cf. https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs
 
 ### インストール
 
-```
+```shell
 # ダウンロード
 curl https://dl.min.io/client/mc/release/linux-amd64/mc \
   --create-dirs \
@@ -28,15 +28,22 @@ mc --help
 
 - エイリアス一覧
 
-```
-mc alias list
-```
+  ```shell
+  mc alias list
+  ```
 
 - エイリアス登録
 
-```
-mc alias set http://sample.com:9000 root password
-```
+  ```shell
+  # アクセスキー、シークレットキーは画面から発行できます
+  mc alias set {エイリアス名} http://sample.com:9000 {アクセスキー} {シークレットキー}
+  ```
+
+- バケットのオブジェクト一覧
+
+  ```shell
+  mc ls {エイリアス名}/{バケット名}
+  ```
 
 ### GitLab との連携
 
