@@ -10,15 +10,13 @@ cf. https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs
 
 ```shell
 # ダウンロード
-curl https://dl.min.io/client/mc/release/linux-amd64/mc \
-  --create-dirs \
-  -o $HOME/minio-binaries/mc
+wgethttps://dl.min.io/client/mc/release/linux-amd64/mc
 
 # 権限変更
-chmod +x $HOME/minio-binaries/mc
+chmod +x ./mc
 
-# 環境変数追記
-export PATH=$PATH:$HOME/minio-binaries/
+# パスを通す
+mv ./mc /usr/local/bin
 
 # インストールされていることを確認
 mc --help
