@@ -10,7 +10,7 @@ cf. https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs
 
 ```shell
 # ダウンロード
-wgethttps://dl.min.io/client/mc/release/linux-amd64/mc
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
 
 # 権限変更
 chmod +x ./mc
