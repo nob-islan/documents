@@ -3,9 +3,11 @@
 cf. https://min.io/docs/minio/linux/administration/server-side-encryption/server-side-encryption-sse-kms.html#minio-encryption-sse-kms-quickstart  
 KMS プロバイダとして HashiCorp Vault キーストアを選択します。
 
-## Hashicorp Vault キーストア構築
+## 構築手順
 
-### Vault インスタンス起動
+### Vault サーバ構築
+
+#### 初期起動
 
 cf. https://min.io/docs/kes/integrations/hashicorp-vault-keystore/
 
@@ -17,20 +19,52 @@ sudo apt update && sudo apt install vault
 ```
 
 ```shell
-# vaultを開発モードで起動
-vault server -dev
+# 設定ファイル作成
+cat << EOF > config.hcl
+storage "raft" {
+  path    = "./vault/data"
+  node_id = "node1"
+}
+
+listener "tcp" {
+  address     = "{vaultサーバのIP}:8200"
+  tls_disable = "true"
+}
+
+api_addr = "http://{vaultサーバのIP}:8200"
+cluster_addr = "https://127.0.0.1:8201"
+ui = true
+EOF
 ```
 
-### Vault を Vault CLI に接続
+```shell
+# データ保管用のディレクトリを作成
+mkdir -p ./vault/data
+```
+
+```shell
+# vaultサーバ起動
+vault server -config=config.hcl
+```
 
 ```shell
 # vaultエンドポイントを設定
-export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_ADDR='http://{vaultサーバのIP}:8200'
 ```
 
 ```shell
-# vault CLIが使う認証トークンを登録
-export VAULT_TOKEN={`vault server -dev`で出力されたhvs.xxxx}
+# vault初期起動 アンシールキーおよびRoot tokenを保管
+vault operator init
+```
+
+```shell
+# vaultアンシール（3回繰り返す）
+vault operator unseal
+```
+
+```shell
+# vaultに認証を通す（Root tokenを入力）
+vault login
 ```
 
 ```shell
@@ -38,7 +72,7 @@ export VAULT_TOKEN={`vault server -dev`で出力されたhvs.xxxx}
 vault secrets enable -version=1 kv
 ```
 
-### Vault への KES アクセスを設定
+#### Vault への KES アクセスを設定
 
 ```shell
 # vault ポリシーを作成
@@ -79,7 +113,9 @@ vault read auth/approle/role/kes-server/role-id
 vault write -f auth/approle/role/kes-server/secret-id
 ```
 
-### KES サーバ構築
+### MinIO + KES サーバ構築
+
+#### KES インスタンス起動
 
 ```shell
 # KESインストール; see also https://min.io/docs/kes/tutorials/getting-started/
@@ -110,7 +146,7 @@ tls:
 
 keystore:
    vault:
-     endpoint: http://127.0.0.1:8200
+     endpoint: http://{vaultサーバのIP}:8200
      version:  v1 # The K/V engine version - either "v1" or "v2".
      engine:   kv # The engine path of the K/V engine. The default is "kv".
      approle:
@@ -124,7 +160,7 @@ EOF
 kes server --config config.yml
 ```
 
-### KES CLI アクセス設定
+#### KES アクセス設定
 
 ```shell
 # KES CLIが通信するKESサーバを指定
@@ -141,9 +177,7 @@ export KES_API_KEY={kes identity generated above by 'kes identity new --key=clie
 kes status -k
 ```
 
-## MinIO 構築
-
-### インスタンス起動
+#### MinIO インスタンス起動
 
 cf. https://min.io/docs/kes/tutorials/kes-for-minio/#minio-server-setup
 
