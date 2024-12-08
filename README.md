@@ -12,7 +12,7 @@
   - 00_common
     - [AWS CLI インストール](./aws/00_common/aws_cliインストール/README.md)
   - Cloud9
-    - [Cloud9 をローカルに構築](./aws/Cloud9/cloud9をローカルに構築/README.md)
+    - [ローカルに Cloud9 を構築](./aws/Cloud9/ローカルにcloud9を構築/README.md)
   - CloudWatch
     - [カスタムメトリクスの設定方法](./aws/CloudWatch/カスタムメトリクスの設定方法/README.md)
   - CodeCommit
