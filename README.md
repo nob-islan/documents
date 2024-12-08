@@ -9,11 +9,16 @@
   - [Docker インストールを Ansible で実行](./ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/README.md)
   - [Nginx インストールを Ansible で実行](./ansible/NginxインストールをAnsibleで実行/README.md)
 - aws
-  - [00_common](./aws/00_common/README.md)
-  - [Cloud9](./aws/Cloud9/README.md)
-  - [CloudWatch](./aws/CloudWatch/README.md)
-  - [CodeCommit](./aws/CodeCommit/README.md)
-  - [ECR](./aws/ECR/README.md)
+  - 00_common
+    - [AWS CLI インストール](./aws/00_common/aws_cliインストール/README.md)
+  - Cloud9
+    - [Cloud9 をローカルに構築](./aws/Cloud9/cloud9をローカルに構築/README.md)
+  - CloudWatch
+    - [カスタムメトリクスの設定方法](./aws/CloudWatch/カスタムメトリクスの設定方法/README.md)
+  - CodeCommit
+    - [AWS 上でソース管理からデプロイまで行う](./aws/CodeCommit/AWS上でソース管理からデプロイまで行う/README.md)
+  - ECR
+    - [image を push する](./aws/ECR/imageをpushする/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
