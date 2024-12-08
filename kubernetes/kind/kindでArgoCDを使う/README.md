@@ -124,7 +124,7 @@ spec:
     - port: 8099
       targetPort: 80
       protocol: TCP
-      nodePort: 30090
+      nodePort: 30080
   selector:
     app: first-nginx
 ```
