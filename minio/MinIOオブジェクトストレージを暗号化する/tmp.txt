@@ -1,0 +1,9 @@
+root@nob-minio:~# printenv | grep MINIO
+MINIO_ROOT_PASSWORD=minio123
+MINIO_KMS_KES_API_KEY=kes:v1:ACAFUphO5ebhtMSBC5+N9eKCAM2d3VxZPg1zBsTpIx2x
+MINIO_ROOT_USER=minio
+MINIO_KMS_KES_ENDPOINT=https://192.168.151.62:7373
+MINIO_KMS_KES_KEY_NAME=minio-default-key
+MINIO_KMS_KES_CAPATH=public.crt
+
+cf. https://min.io/docs/minio/linux/reference/minio-server/settings/kes.html
