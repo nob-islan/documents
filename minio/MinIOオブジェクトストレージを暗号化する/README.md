@@ -113,7 +113,7 @@ vault read auth/approle/role/kes-server/role-id
 vault write -f auth/approle/role/kes-server/secret-id
 ```
 
-### MinIO + KES サーバ構築
+### KES サーバ構築
 
 #### KES インスタンス起動
 
@@ -126,7 +126,7 @@ mv ./kes-linux-amd64 /usr/local/bin/kes
 
 ```shell
 # KES実行用の自己証明書を作成
-kes identity new --ip "127.0.0.1" --key "private.key" --cert "public.crt" localhost
+kes identity new --ip "{KESサーバのIP}" --key "private.key" --cert "public.crt" localhost
 ```
 
 ```shell
@@ -160,10 +160,10 @@ EOF
 kes server --config config.yml
 ```
 
-#### KES アクセス設定
+#### KES 起動確認
 
 ```shell
-# KES CLIが通信するKESサーバを指定
+# KESサーバを指定
 export KES_SERVER=http://127.0.0.1:7373
 ```
 
@@ -177,7 +177,7 @@ export KES_API_KEY={kes identity generated above by 'kes identity new --key=clie
 kes status -k
 ```
 
-#### MinIO インスタンス起動
+### MinIO サーバ構築
 
 cf. https://min.io/docs/kes/tutorials/kes-for-minio/#minio-server-setup
 
@@ -190,15 +190,14 @@ sudo dpkg -i minio.deb
 ```shell
 ### 各種環境変数を設定
 # KESサーバのエンドポイント
-export MINIO_KMS_KES_ENDPOINT=https://127.0.0.1:7373
-# MinIOクライアントの資格情報
-export MINIO_KMS_KES_CERT_FILE=client.crt
-export MINIO_KMS_KES_KEY_FILE=client.key
+export MINIO_KMS_KES_ENDPOINT=https://{KESサーバのIP}:7373
+# KES向けのAPIキー
+export MINIO_KMS_KES_API_KEY={kes identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO' such as kes:v1:xxxx}
 # 暗号化キーを指定しなかった場合のデフォルトキー
 export MINIO_KMS_KES_KEY_NAME=minio-default-key
 # 信頼するKESサーバ証明書
 export MINIO_KMS_KES_CAPATH=public.crt
-# MinIOルート資格情報
+# MinIO root資格情報
 export MINIO_ROOT_USER=minio
 export MINIO_ROOT_PASSWORD=minio123
 ```
