@@ -57,3 +57,9 @@ multipass を使って仮想マシンを起動します。
   ```shell
   multipass launch 20.04 second-ubuntu
   ```
+
+- 仮想マシンのログを tail します。
+
+  ```shell
+  multipass exec first-ubuntu -- tail -f /var/log/cloud-init-output.log
+  ```
