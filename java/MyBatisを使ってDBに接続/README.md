@@ -29,6 +29,13 @@ MyBatis を使って Java アプリから DB に接続する方法、および�
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-jdbc</artifactId>
 </dependency>
+
+<dependency>
+    <groupId>jakarta.persistence</groupId>
+    <artifactId>jakarta.persistence-api</artifactId>
+    <version>3.2.0</version>
+</dependency>
+
 ```
 
 ### application.properties
