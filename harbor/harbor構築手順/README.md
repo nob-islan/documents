@@ -18,13 +18,17 @@
   cp harbor.yml.tmpl harbor.yml
   ```
 
-- `harbor.yml`について、http または https 通信いずれかの設定をコメントアウトします。
-  - https 通信をする場合は証明書の配置が必要です。
+- `harbor.yml`を編集します。
+  - ホスト名を記載します。
+  - http または https 通信いずれかの設定をコメントアウトします。
+    - https 通信をする場合は証明書の配置が必要です。
 - シェルを使って起動します。
 
   ```shell
   sudo ./install.sh
   ```
+
+初期ユーザ/パスワードは`admin/Harbor12345`です。
 
 ## リポジトリの管理
 
