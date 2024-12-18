@@ -1,23 +1,30 @@
 # harbor 構築手順
 
-[docker_hub のドキュメント](https://hub.docker.com/r/bitnami/harbor-registry/)に従って構築していきます。
+[ドキュメント](https://goharbor.io/docs/2.12.0/install-config/)に従って構築していきます。
 
 ## 起動
 
-下記コマンドで、必要なソース類のダウンロードおよびコンテナの起動を実行します。
+- `docker`をインストールします。
+- [リリースページ](https://github.com/goharbor/harbor/releases)から tar ファイルをダウンロードします。
+- tar ファイルを展開します。
 
-```shell
-curl -LO https://raw.githubusercontent.com/bitnami/containers/main/bitnami/harbor-portal/docker-compose.yml
-curl -L https://github.com/bitnami/containers/archive/main.tar.gz | tar xz --strip=2 containers-main/bitnami/harbor-portal && cp -RL harbor-portal/config . && rm -rf harbor-portal
-docker-compose up
-```
+  ```shell
+  tar xzvf ${ダウンロードしたファイル}
+  ```
 
-- 起動前に`EXT_ENDPOINT`を変更してください。これが pull, push などをする際のアドレスとなります。
-- 初期ユーザ名は`admin`です。パスワードは下記コマンドで確認できます。
+- `harbor.yml`をテンプレートからコピーして作成します。
 
-```shell
-cat docker-compose.yml | grep HARBOR_ADMIN_PASSWORD
-```
+  ```shell
+  cp harbor.yml.tmpl harbor.yml
+  ```
+
+- `harbor.yml`について、http または https 通信いずれかの設定をコメントアウトします。
+  - https 通信をする場合は証明書の配置が必要です。
+- シェルを使って起動します。
+
+  ```shell
+  sudo ./install.sh
+  ```
 
 ## リポジトリの管理
 
