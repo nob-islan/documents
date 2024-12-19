@@ -20,7 +20,7 @@
   - ECR
     - [image を push する](./aws/ECR/imageをpushする/README.md)
 - code-server
-  - [初めての code-server](./code-server/初めてのcode-server/README.md)
+  - [はじめての code-server](./code-server/はじめてのcode-server/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)

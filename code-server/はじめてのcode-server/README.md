@@ -1,4 +1,4 @@
-# 初めての code-server
+# はじめての code-server
 
 VSCode を Web 上で利用できる**code-server**（パッケージ版）構築方法です。
 
