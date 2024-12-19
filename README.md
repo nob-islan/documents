@@ -19,6 +19,8 @@
     - [AWS 上でソース管理からデプロイまで行う](./aws/CodeCommit/AWS上でソース管理からデプロイまで行う/README.md)
   - ECR
     - [image を push する](./aws/ECR/imageをpushする/README.md)
+- code-server
+  - [初めての code-server](./code-server/初めてのcode-server/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
