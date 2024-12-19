@@ -98,6 +98,7 @@
 - multipass
   - [はじめての multipass](./multipass/first-multipass/README.md)
 - nginx
+  - [nginx でリバースプロキシを設定する](./nginx/nginxでリバースプロキシを設定する/README.md)
   - [nginx サーバでファイルをアップロード、ダウンロードする](./nginx/nginxサーバでファイルをアップロード、ダウンロードする/README.md)
 - oracle
   - [DB セットアップ Tips](./oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97Tips/README.md)

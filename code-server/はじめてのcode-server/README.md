@@ -12,6 +12,12 @@ cf. https://coder.com/docs/code-server/install#installsh
   curl -fsSL https://code-server.dev/install.sh | sh
   ```
 
+- code-server を起動します。
+
+  ```shell
+  sudo systemctl start code-server@{ユーザ}
+  ```
+
 - 設定ファイルを編集します。
 
   ```shell
@@ -19,10 +25,10 @@ cf. https://coder.com/docs/code-server/install#installsh
   vim ~/.config/code-server/config.yml
   ```
 
-- code-server を起動します。
+- code-server を再起動します。
 
   ```shell
-  sudo systemctl start code-server@{ユーザ}
+  sudo systemctl restart code-server@{ユーザ}
   ```
 
 ## 各種設定手順
