@@ -1,4 +1,4 @@
-# Java から Prometheus 向けのメトリクス作成
+# Java REST APIからprometheus向けのメトリクス作成
 
 Java アプリ内でメトリクスを作成して Prometheus で収集します。
 

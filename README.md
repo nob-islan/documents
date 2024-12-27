@@ -112,9 +112,10 @@
   - [PostgreSQL サーバ構築手順](./postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
   - [PostgreSQL バージョンアップ手順](./postgresql/PostgreSQL%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86/README.md)
 - prometheus
-  - [java から prometheus 向けのメトリクス作成](./prometheus/java%E3%81%8B%E3%82%89prometheus%E5%90%91%E3%81%91%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E4%BD%9C%E6%88%90/README.md)
-  - [prometheus インストール手順](./prometheus/prometheus%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
-  - [prometheus で Java アプリを監視する](./prometheus/prometheus%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B/README.md)
+  - [Java REST API から Prometheus 向けのメトリクス作成](./prometheus/Java_REST_APIからprometheus向けのメトリクス作成/README.md)
+  - [Prometheus インストール手順](./prometheus/Prometheusインストール手順/README.md)
+  - [Prometheus で Java アプリを監視する](./prometheus/PrometheusでJavaアプリを監視する/README.md)
+  - [Spring Batch から Prometheus 向けのメトリクス作成](./prometheus/Spring_Batchからprometheus向けのメトリクス作成/README.md)
 - qpid
   - [qpid インストール](./qpid/qpidインストール/README.md)
 - react
