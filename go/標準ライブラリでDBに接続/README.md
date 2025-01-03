@@ -56,7 +56,7 @@ func connectDB() (*sql.DB, error) {
 // クエリを実行します。
 func queryData(db *sql.DB) {
 
-	rows, err := db.Query("SELECT * FROM user_info")
+	rows, err := db.Query("SELECT * FROM user_info WHERE age < ?", 30) // 30歳未満を抽出
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -92,5 +92,5 @@ func (u userInfo) String() string {
 ```
 $ go run main.go
 Id: 1, Name: nob, Age: 13
-Id: 2, Name: nob2, Age: 706
+Id: 2, Name: nob2, Age: 7
 ```
