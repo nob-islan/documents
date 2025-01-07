@@ -22,7 +22,7 @@ cf. https://coder.com/docs/code-server/install#installsh
 
   ```shell
   # bind-addr, certなど
-  vim ~/.config/code-server/config.yml
+  vim ~/.config/code-server/config.yaml
   ```
 
 - code-server を再起動します。
