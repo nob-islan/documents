@@ -11,7 +11,7 @@ Spring Batch はエンドポイントを持たないため、java で作った�
 
 ```yml
 services:
-  portainer:
+  pushgateway:
     container_name: nob-pushgateway
     image: prom/pushgateway:latest
     ports:
