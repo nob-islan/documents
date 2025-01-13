@@ -50,7 +50,9 @@
   - [GitLab を AWS 上の RDS に接続する](./gitlab/GitLab%E3%82%92AWS%E4%B8%8A%E3%81%AERDS%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/README.md)
   - [GitLab を外部の PostgreSQL に接続する](./gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/README.md)
 - go
+  - [API ドキュメント作成](./go/APIドキュメント作成/README.md)
   - [環境構築](./go/環境構築/README.md)
+  - [単体テスト作成](./go/単体テスト作成/README.md)
   - [標準ライブラリで DB に接続](./go/標準ライブラリでDBに接続/README.md)
   - [標準ライブラリで REST API を実装](./go/標準ライブラリでREST_APIを実装/README.md)
 - harbor
