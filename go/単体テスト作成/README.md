@@ -2,6 +2,14 @@
 
 単体テストの書き方およびカバレッジの確認方法を説明します。
 
+## 事前準備
+
+**testify**をインストールします。
+
+```shell
+go get github.com/stretchr/testify
+```
+
 ## 作成手順
 
 ### handler, service テスト作成
