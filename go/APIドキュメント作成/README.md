@@ -66,6 +66,16 @@ cf.
   出力した swagger.json をアプリ上でルーティングするため、下記設定を追記します:
 
   ```go
+  import (
+      "net/http"
+
+      _ "firstapp/docs" // 自モジュール配下のdocsをimportしないとswagger画面で500エラーとなるので注意
+
+      httpSwagger "github.com/swaggo/http-swagger"
+  )
+  ```
+
+  ```go
   // 各ハンドラに紐づくルーティングを設定
   m := http.NewServeMux()
 
