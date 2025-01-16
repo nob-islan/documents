@@ -35,7 +35,7 @@
 - `Robot Accounts`からアカウントを作成して、アクセストークンを取得すれば、属人化しないアカウントで pull, push などができます。下記コマンドでログインできます。
 
 ```shell
-docker login ${harborサーバのIPアドレス} -u ${robot_name} -p ${access_token}
+docker login ${harborサーバのIPアドレス}:80 -u ${robot_name} -p ${access_token}
 ```
 
 `robot_name`をクオートで囲まないとエラーになるので注意してください。
@@ -49,7 +49,7 @@ docker login ${harborサーバのIPアドレス} -u ${robot_name} -p ${access_to
 - 下記を pull したいサーバの`/etc/docker/daemon.json`に追記してください。
 
 ```json
-{ "insecure-registries": [${harborサーバのIPアドレス}] }
+{ "insecure-registries": [${harborサーバのIPアドレス}:80] }
 ```
 
 - 下記で docker を再起動してください。

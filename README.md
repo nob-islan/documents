@@ -53,7 +53,7 @@
   - [API ドキュメント作成](./go/APIドキュメント作成/README.md)
   - [環境構築](./go/環境構築/README.md)
   - [単体テスト作成](./go/単体テスト作成/README.md)
-  - [標準ライブラリで DB に接続](./go/標準ライブラリでDBに接続/README.md)
+  - [データベースに接続](./go/データベースに接続/README.md)
   - [標準ライブラリで REST API を実装](./go/標準ライブラリでREST_APIを実装/README.md)
 - harbor
   - [harbor 構築手順](./harbor/harbor%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
