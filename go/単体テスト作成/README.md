@@ -65,6 +65,9 @@ tests := []struct {
 testcase に沿ってテストを実行していきます。
 
 ```go
+// モックサービス初期化
+mockService := new(MockUserInfoService)
+
 for _, testcase := range tests {
     t.Run(testcase.name, func(t *testing.T) {
         // モックの期待される動作を定義
