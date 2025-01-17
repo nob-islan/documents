@@ -19,6 +19,8 @@ CMD ["/main"]
 
 ### .gitlab-ci.yml
 
+cf.
+
 - [UT 結果を Web で確認](https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html#go)
 - [ジョブのアーティファクト](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 - [kaniko を使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
