@@ -35,4 +35,9 @@ go build main.go
 
 ### モジュールをデバッグ
 
+```shell
+# デバッグ向けツールをインストール
+go install github.com/go-delve/delve/cmd/dlv@latest
+```
+
 ソースコードにブレークポイントを置いて**F5**キーを押下するとデバッグが開始されます。
