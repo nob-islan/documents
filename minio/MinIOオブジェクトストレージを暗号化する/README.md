@@ -181,6 +181,8 @@ kes status -k
 
 cf. https://min.io/docs/kes/tutorials/kes-for-minio/#minio-server-setup
 
+KES サーバにて作成した`public.crt`を MinIO 側に持ってくる必要があるため注意してください。
+
 ```shell
 # MinIOインストール
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20241107005220.0.0_amd64.deb -O minio.deb
