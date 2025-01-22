@@ -215,12 +215,12 @@ minio server /data --console-address :9001
 
 ```shell
 # cat /root/minio-config
-export MINIO_KMS_KES_ENDPOINT=https://{KESサーバのIP}:7373
-export MINIO_KMS_KES_API_KEY={kes identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO' such as kes:v1:xxxx}
-export MINIO_KMS_KES_KEY_NAME=minio-default-key
-export MINIO_KMS_KES_CAPATH=public.crt
-export MINIO_ROOT_USER=minio
-export MINIO_ROOT_PASSWORD=minio123
+MINIO_KMS_KES_ENDPOINT=https://{KESサーバのIP}:7373
+MINIO_KMS_KES_API_KEY={kes identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO' such as kes:v1:xxxx}
+MINIO_KMS_KES_KEY_NAME=minio-default-key
+MINIO_KMS_KES_CAPATH=public.crt
+MINIO_ROOT_USER=minio
+MINIO_ROOT_PASSWORD=minio123
 
 # MinIO向け環境変数を記載したファイルパス指定
 export MINIO_CONFIG_ENV_FILE=/root/minio-config
