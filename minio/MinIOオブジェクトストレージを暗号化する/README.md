@@ -209,7 +209,9 @@ export MINIO_ROOT_PASSWORD=minio123
 minio server /data --console-address :9001
 ```
 
-※上記環境変数を設定ファイルに書き留めておきたい場合は`MINIO_CONFIG_ENV_FILE`を利用してください:
+<details><summary>上記環境変数を設定ファイルに書き留めておきたい場合</summary>
+
+`MINIO_CONFIG_ENV_FILE`を利用してください:
 
 ```shell
 # cat /root/minio-config
@@ -226,6 +228,8 @@ export MINIO_CONFIG_ENV_FILE=/root/minio-config
 # minio server {オブジェクト保存先} --console-address {WebUIのポート指定}
 minio server /data --console-address :9001
 ```
+
+</details>
 
 ### 暗号化設定
 
