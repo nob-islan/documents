@@ -206,7 +206,25 @@ export MINIO_ROOT_PASSWORD=minio123
 
 ```shell
 # MinIOサーバを起動
-minio server /data
+minio server /data --console-address :9001
+```
+
+※上記環境変数を設定ファイルに書き留めておきたい場合は`MINIO_CONFIG_ENV_FILE`を利用してください:
+
+```shell
+# cat /root/minio-config
+export MINIO_KMS_KES_ENDPOINT=https://{KESサーバのIP}:7373
+export MINIO_KMS_KES_API_KEY={kes identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO' such as kes:v1:xxxx}
+export MINIO_KMS_KES_KEY_NAME=minio-default-key
+export MINIO_KMS_KES_CAPATH=public.crt
+export MINIO_ROOT_USER=minio
+export MINIO_ROOT_PASSWORD=minio123
+
+# MinIO向け環境変数を記載したファイルパス指定
+export MINIO_CONFIG_ENV_FILE=/root/minio-config
+
+# minio server {オブジェクト保存先} --console-address {WebUIのポート指定}
+minio server /data --console-address :9001
 ```
 
 ### 暗号化設定
