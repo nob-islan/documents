@@ -91,7 +91,7 @@
   - pure_kubernetes
     - [Kubernetes クラスター構築手順](./kubernetes/pure_kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
     - [Kubernetes で Java アプリケーションをデプロイ](./kubernetes/pure_kubernetes/Kubernetes%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
-    - [カスタムコントローラサンプル](./kubernetes/pure_kubernetes/カスタムコントローラサンプル/README.md)
+    - [カスタムリソース定義サンプル](./kubernetes/pure_kubernetes/カスタムリソース定義サンプル/README.md)
 - linux
   - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
   - [jq コマンド例](./linux/jq-command-example/README.md)
