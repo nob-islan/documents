@@ -82,6 +82,7 @@
   - [独自例外クラスおよびハンドラを作成](./java/独自例外クラスおよびハンドラを作成/README.md)
 - kubernetes
   - kind
+    - [http 通信でコンテナレジストリと通信する](./kubernetes/kind/http通信でコンテナレジストリと通信する/README.md)
     - [kind インストール手順](./kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
     - [kind で ArgoCD を使う](./kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)
     - [kind で ECR のプライベートリポジトリから image を pull](./kubernetes/kind/kind%E3%81%A7ECR%E3%81%AE%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%8B%E3%82%89image%E3%82%92pull/README.md)

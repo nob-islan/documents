@@ -1,5 +1,7 @@
 # http 通信でコンテナレジストリと通信する
 
+Pod 起動時などに、リポジトリからコンテナイメージを pull できない場合（下記ログ参照）について、それを回避するための Kind の設定です。
+
 ```
 $ kubectl describe pod sample-pod-6cf8d8d57f-6d47z
   ...中略
@@ -9,6 +11,8 @@ $ kubectl describe pod sample-pod-6cf8d8d57f-6d47z
   Normal   BackOff    9s (x2 over 38s)   kubelet            Back-off pulling image "192.168.151.5:80/first-kube-operator/sample-controller:latest"
   Warning  Failed     9s (x2 over 38s)   kubelet            Error: ImagePullBackOff
 ```
+
+下記のように、レジストリの IP を指定して検証スキップ設定を追加します:
 
 ```yml
 kind: Cluster
@@ -20,9 +24,9 @@ nodes:
   - role: worker
   - role: worker
 containerdConfigPatches:
-- |-
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."{レジストリのIP}:80"]
-    endpoint = ["http://{レジストリのIP}:80"]
-  [plugins."io.containerd.grpc.v1.cri".registry.configs."{レジストリのIP}:80".tls]
-    insecure_skip_verify = true 
+  - |-
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."{レジストリのIP}:80"]
+      endpoint = ["http://{レジストリのIP}:80"]
+    [plugins."io.containerd.grpc.v1.cri".registry.configs."{レジストリのIP}:80".tls]
+      insecure_skip_verify = true
 ```
