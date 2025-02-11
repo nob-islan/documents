@@ -49,7 +49,7 @@ docker login ${harborサーバのIPアドレス}:80 -u ${robot_name} -p ${access
 - 下記を pull したいサーバの`/etc/docker/daemon.json`に追記してください。
 
 ```json
-{ "insecure-registries": [${harborサーバのIPアドレス}:80] }
+{ "insecure-registries": ["${harborサーバのIPアドレス}:80"] }
 ```
 
 - 下記で docker を再起動してください。
