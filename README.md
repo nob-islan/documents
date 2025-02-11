@@ -86,12 +86,12 @@
     - [kind で ArgoCD を使う](./kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)
     - [kind で ECR のプライベートリポジトリから image を pull](./kubernetes/kind/kind%E3%81%A7ECR%E3%81%AE%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%8B%E3%82%89image%E3%82%92pull/README.md)
     - [kind で Java アプリケーションをデプロイ](./kubernetes/kind/kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
-    - [WSL 上に kubebuilder 環境構築](./kubernetes/pure_kubernetes/WSL上にkubebuilder環境構築/README.md)
   - minikube
     - [minikube インストール手順](./kubernetes/minikube/minikube%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
   - pure_kubernetes
     - [Kubernetes クラスター構築手順](./kubernetes/pure_kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
     - [Kubernetes で Java アプリケーションをデプロイ](./kubernetes/pure_kubernetes/Kubernetes%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/README.md)
+    - [WSL 上に kubebuilder 環境構築](./kubernetes/pure_kubernetes/WSL上にkubebuilder環境構築/README.md)
     - [カスタムリソース定義サンプル](./kubernetes/pure_kubernetes/カスタムリソース定義サンプル/README.md)
 - linux
   - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
