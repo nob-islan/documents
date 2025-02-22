@@ -51,6 +51,7 @@
   - [GitLab を外部の PostgreSQL に接続する](./gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/README.md)
 - go
   - [API ドキュメント作成](./go/APIドキュメント作成/README.md)
+  - [Gemini API を実行](./go/Gemini_APIを実行/README.md)
   - [godoc 出力](./go/godoc出力/README.md)
   - [アプリイメージをビルド](./go/アプリイメージをビルド/README.md)
   - [環境構築](./go/環境構築/README.md)
