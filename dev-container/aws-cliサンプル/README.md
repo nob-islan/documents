@@ -9,13 +9,10 @@
 ```json
 {
   "name": "aws cli",
-
   "image": "ubuntu:22.04",
-
   "features": {
     "ghcr.io/devcontainers/features/aws-cli:1": {}
   },
-
   "customizations": {
     "vscode": {
       "extensions": [

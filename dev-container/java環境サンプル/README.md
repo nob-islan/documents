@@ -28,9 +28,21 @@ root/
 {
   "name": "Java",
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
-  "features": {},
+  "features": {
+    // "ghcr.io/devcontainers/features/java:1": {
+    //   "version": "none",
+    //   "installMaven": "true", // mvnコマンドを使えるようにする
+    //   "installGradle": "false"
+    // },
+    // "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
+  },
   "customizations": {
     "vscode": {
+      "settings": {
+        "java.inlayHints.parameterNames.enabled": "none",
+        "java.compile.nullAnalysis.mode": "disabled",
+        "java.configuration.updateBuildConfiguration": "interactive"
+      },
       "extensions": [
         "vscjava.vscode-java-pack",
         "vmware.vscode-boot-dev-pack",
@@ -41,32 +53,5 @@ root/
       ]
     }
   }
-}
-```
-
-必要に応じて、下記の要領で feature を追加してください。
-
-```json
-  "features": {
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "none",
-      "installMaven": "true", // mvnコマンドを使えるようにする
-      "installGradle": "false"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {} // dockerコマンドを叩けるようにする
-  },
-```
-
-### .vscode
-
-#### settings.json
-
-VSCode の設定ファイルです。
-
-```json
-{
-  "java.inlayHints.parameterNames.enabled": "none",
-  "java.compile.nullAnalysis.mode": "disabled",
-  "java.configuration.updateBuildConfiguration": "interactive"
 }
 ```

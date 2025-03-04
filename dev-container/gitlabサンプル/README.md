@@ -25,11 +25,9 @@ dind をベースとして、コンテナ上で GitLab コンテナを起動し�
 ```json
 {
   "name": "nob-gitlab",
-
   "dockerComposeFile": "./docker-compose.yml",
   "service": "nob-gitlab",
   "workspaceFolder": "/workspace",
-
   "customizations": {
     "vscode": {
       "extensions": []
