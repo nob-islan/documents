@@ -1,4 +1,4 @@
-# MinIO 起動手順
+# Docker で MinIO を構築
 
 cf. https://min.io/docs/minio/container/index.html
 

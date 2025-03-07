@@ -37,6 +37,7 @@
   - [Docker で GitLab サーバを構築](./docker/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で Java 実行環境を構築](./docker/DockerでJava実行環境を構築/README.md)
   - [Docker で mattermost を構築](./docker/Dockerでmattermostを構築/README.md)
+  - [Docker で MinIO を構築](./docker/DockerでMinIOを構築/README.md)
   - [Docker で openvscode-server を構築](./docker/Dockerでopenvscode-serverを構築/README.md)
   - [Docker で Portainer を構築](./docker/DockerでPortainerを構築/README.md)
   - [Docker で React 実行環境を構築](./docker/Dockerでreact実行環境を構築/README.md)
@@ -103,7 +104,6 @@
 - minio
   - [MinIO オブジェクトストレージを暗号化する](./minio/MinIOオブジェクトストレージを暗号化する/README.md)
   - [MinIO を GitLab_LFS のストレージとする](./minio/MinIO%E3%82%92GitLab_LFS%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%99%E3%82%8B/README.md)
-  - [MinIO 起動手順](./minio/MinIO%E8%B5%B7%E5%8B%95%E6%89%8B%E9%A0%86/README.md)
   - [Tips](./minio/Tips/README.md)
 - multipass
   - [はじめての multipass](./multipass/first-multipass/README.md)
