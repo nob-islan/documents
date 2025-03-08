@@ -67,6 +67,7 @@
   - [ignite-java](./ignite/ignite-java/README.md)
   - [ignite-rest-api](./ignite/ignite-rest-api/README.md)
 - java
+  - [CORS 設定](./java/CORS設定/README.md)
   - [CSV ファイルからのテストデータ挿入手順](./java/CSV%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%8B%E3%82%89%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E6%8C%BF%E5%85%A5%E6%89%8B%E9%A0%86/README.md)
   - [Jacoco テストレポート出力手順](./java/Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/README.md)
   - [Java アプリから web サーバにファイルを送信](./java/Javaアプリからwebサーバにファイルを送信/README.md)
@@ -129,7 +130,6 @@
 - qpid
   - [qpid インストール](./qpid/qpidインストール/README.md)
 - react
-  - [react から API 呼び出し](./react/reactからAPI呼び出し/README.md)
   - [react の環境変数設定方法](./react/reactの環境変数設定方法/README.md)
   - [react 環境構築](./react/react環境構築/README.md)
 - squid
