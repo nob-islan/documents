@@ -23,7 +23,18 @@ cf.
 
 - swagger 向けコメント記載
 
-  URI やリクエスト・レスポンスに関する情報は handler メソッド上に記載します:
+  swagger 全体にかかる情報は main 関数上に記載します:
+
+  ```go
+  // @title Go Sample API
+  // @version 1.0.0
+  // @description Go言語で書いたサンプルREST APIです。
+  //
+  // @BasePath /v1/api
+  func main() {
+  ```
+
+  URI やリクエスト・レスポンスに関する情報は handler 関数上に記載します:
 
   ```go
   // @Summary ユーザ作成
@@ -56,7 +67,7 @@ cf.
 - swagger ファイル出力
 
   ```shell
-  swag init
+  swag init -g cmd/main.go
   ```
 
   `docs`配下に json ファイルが出力されます。
