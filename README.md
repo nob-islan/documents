@@ -44,6 +44,10 @@
   - [Docker で RedMine を構築](./docker/DockerでRedMineを構築/REAMDE..md)
   - [JpaRepository 起動時の Java アプリ制御](./docker/JpaRepository利用時のJavaアプリ起動制御/README.md)
 - gitlab
+  - GitLab Runner サンプル
+    - [Go アプリをビルド](./gitlab//GitLab_Runnerサンプル/Goアプリをビルド/README.md)
+    - [React アプリをビルド](./gitlab/GitLab_Runnerサンプル/Reactアプリをビルド/README.md)
+    - [Spring Boot アプリをビルド](./gitlab/GitLab_Runnerサンプル/Spring_Bootアプリをビルド/README.md)
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
   - [GitLab_Runner で harbor に image を push する](./gitlab/GitLab_Runnerでharborにimageをpushする/README.md)
   - [GitLab_Runner と AWS_ECR でアプリを自動デプロイする](./gitlab/GitLab_Runner%E3%81%A8AWS_ECR%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E8%87%AA%E5%8B%95%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%99%E3%82%8B/README.md)
@@ -55,7 +59,6 @@
   - [CORS 設定](./go/CORS設定/README.md)
   - [Gemini API を実行](./go/Gemini_APIを実行/README.md)
   - [godoc 出力](./go/godoc出力/README.md)
-  - [アプリイメージをビルド](./go/アプリイメージをビルド/README.md)
   - [環境構築](./go/環境構築/README.md)
   - [単体テスト作成](./go/単体テスト作成/README.md)
   - [データベースに接続](./go/データベースに接続/README.md)

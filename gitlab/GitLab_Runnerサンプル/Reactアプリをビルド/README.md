@@ -1,33 +1,27 @@
-# アプリイメージをビルド
+# React アプリをビルド
 
-GitLab Runner を使ってアプリケーションのコンテナイメージをビルドします。
+GitLab Runner を使って React アプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
 
 ### Dockerfile
 
 ```Dockerfile
-FROM golang:1.23
+FROM node:20-bullseye
 
 # 後述のci.ymlから渡される環境変数
 ARG ARTIFACT_PATH
 
-COPY ${ARTIFACT_PATH} /main
+RUN npm install -g serve
+COPY ${ARTIFACT_PATH} /build
 
-CMD ["/main"]
+CMD ["serve", "-s", "build"]
 ```
 
 ### .gitlab-ci.yml
 
-cf.
-
-- [UT 結果を Web で確認](https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html#go)
-- [ジョブのアーティファクト](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
-- [kaniko を使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
-
 下記ステージで構成します:
 
-- UT 一括実行
 - モジュールビルド
 - コンテナイメージ push
 
@@ -35,33 +29,18 @@ push 先は harbor を想定しています。
 
 ```yml
 stages:
-  - test
   - build
   - push
-
 variables:
-  MODULE: "easyapp" # アプリのモジュール名
-  ARTIFACT_PATH: ${MODULE}/main # ビルド成果物のパス
-
-test:
-  image: golang:1.23
-  stage: test
-  script:
-    - cd ${MODULE}
-    - go install gotest.tools/gotestsum@latest
-    - gotestsum --junitfile report.xml --format testname
-  artifacts:
-    when: always
-    reports:
-      junit: ${MODULE}/report.xml
-  rules:
-    - if: $CI_COMMIT_TAG
+  MODULE: easyweb # アプリのモジュール名
+  ARTIFACT_PATH: ${MODULE}/build # ビルド成果物のパス
 build:
-  image: golang:1.23
   stage: build
+  image: node:20-bullseye
   script:
     - cd ${MODULE}
-    - go build cmd/main.go
+    - npm install
+    - npm run build
   artifacts:
     paths:
       - ${ARTIFACT_PATH}
