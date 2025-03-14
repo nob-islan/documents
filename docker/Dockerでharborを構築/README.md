@@ -1,4 +1,4 @@
-# harbor 構築手順
+# Docker で harbor を構築
 
 [ドキュメント](https://goharbor.io/docs/2.12.0/install-config/)に従って構築していきます。
 

@@ -35,6 +35,7 @@
   - [Docker インストール](./docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)
   - [Docker で DB サーバを立てる](./docker/DockerでDBサーバを立てる/README.md)
   - [Docker で GitLab サーバを構築](./docker/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
+  - [Docker で harbor を構築](./docker/Dockerでharborを構築/README.md)
   - [Docker で Java 実行環境を構築](./docker/DockerでJava実行環境を構築/README.md)
   - [Docker で mattermost を構築](./docker/Dockerでmattermostを構築/README.md)
   - [Docker で MinIO を構築](./docker/DockerでMinIOを構築/README.md)
@@ -64,7 +65,6 @@
   - [データベースに接続](./go/データベースに接続/README.md)
   - [標準ライブラリで REST API を実装](./go/標準ライブラリでREST_APIを実装/README.md)
 - harbor
-  - [harbor 構築手順](./harbor/harbor%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
   - [リポジトリにライフサイクルポリシーを設定する](./harbor/リポジトリにライフサイクルポリシーを設定する/README.md)
 - ignite
   - [ignite-install](./ignite/ignite-install/README.md)
