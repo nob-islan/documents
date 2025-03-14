@@ -194,6 +194,16 @@ func Test_userInfoRepository_Insert(t *testing.T) {
 
 handler, service と同様のため省略します。
 
+## テスト起動
+
+```shell
+# 特定のディレクトリ内の関数をテストする場合
+go test {テスト対象ディレクトリ}
+
+# 全ての関数をテストする場合
+go test ./...
+```
+
 ## カバレッジ出力
 
 - カバレッジレポートをテキストファイルで出力します（下記は handler の例）:
