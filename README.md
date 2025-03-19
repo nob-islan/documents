@@ -98,9 +98,9 @@
   - minikube
     - [minikube インストール手順](./kubernetes/minikube/minikube%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
   - pure-kubernetes
-    - [Kubernetes クラスター構築手順](./kubernetes/pure_kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
-    - [WSL 上に kubebuilder 環境構築](./kubernetes/pure_kubernetes/WSL上にkubebuilder環境構築/README.md)
-    - [カスタムリソース定義サンプル](./kubernetes/pure_kubernetes/カスタムリソース定義サンプル/README.md)
+    - [Kubernetes クラスター構築手順](./kubernetes/pure-kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
+    - [WSL 上に kubebuilder 環境構築](./kubernetes/pure-kubernetes/WSL上にkubebuilder環境構築/README.md)
+    - [カスタムリソース定義サンプル](./kubernetes/pure-kubernetes/カスタムリソース定義サンプル/README.md)
 - linux
   - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
   - [jq コマンド例](./linux/jq-command-example/README.md)
