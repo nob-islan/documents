@@ -1,0 +1,78 @@
+# アプリのデバッグ
+
+Go アプリのデバッグ方法を記載します。
+
+## 事前準備
+
+```shell
+# デバッグ向けツールをインストール
+go install github.com/go-delve/delve/cmd/dlv@latest
+```
+
+VSCode 上でソースコードにブレークポイントを置いて main.go クラスで **F5** キーを押下するとデバッグが開始されます。
+
+## REST API をリモートデバッグ
+
+`net/http`などで実装した REST API をデバッグします。
+
+- デバッグポートを開放してアプリ起動
+
+```shell
+# バイナリを起動（listenに任意のポートを指定）
+dlv exec --headless --continue --accept-multiclient --listen=:8484 main
+# コンパイルして起動（listenに任意のポートを指定）
+dlv debug --headless --continue --accept-multiclient --listen=:8484 ./cmd/main.go
+```
+
+- デバッガ接続
+
+```shell
+# dlv connect {デバッグ先アドレス}:{起動時に指定したポート}
+dlv connect localhost:8484
+```
+
+- ブレークポイント設定
+
+```shell
+# 関数名を指定して設定
+(dlv) break handler.Greet
+# 行数を指定して設定
+(dlv) break handler/sample_handler.go:30
+```
+
+- API 呼び出し
+
+```shell
+curl localhost:8080/sample/greet?name=nob
+```
+
+- ブレークポイントまで処理を実行
+
+```
+(dlv) continue
+```
+
+## ローカルアプリをリモートデバッグ
+
+外部からのリクエストを必要としないアプリをデバッグします。
+
+- アプリ起動
+
+```shell
+# 外部からデバッグ（dlv connect localhost:8484 で接続）
+dlv debug --headless  --accept-multiclient --listen=:8484 ./main.go
+# （参考）ローカルでデバッグ
+dlv debug main.go
+```
+
+- ブレークポイント設定
+
+```shell
+break main.go:7
+```
+
+- ブレークポイントまで処理を実行
+
+```
+(dlv) continue
+```
