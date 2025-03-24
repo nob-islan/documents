@@ -8,10 +8,8 @@ Java 環境構築のためのサンプルソースです。
 
 ```
 root/
-  ├─.devcontainer/
-  │    └─devcontainer.json
-  └─.vscode/
-       └─settings.json
+  └─.devcontainer/
+       └─devcontainer.json
 ```
 
 ## 設定
