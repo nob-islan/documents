@@ -2,6 +2,8 @@
 
 aws 開発ツールを利用できる Web IDE: Cloud9 をローカルに構築する方法です。
 
+cf. https://github.com/c9/core
+
 ## 構築手順
 
 - node および nvm が入っている必要があります。
