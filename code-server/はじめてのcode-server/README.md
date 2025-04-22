@@ -8,47 +8,31 @@ cf. https://coder.com/docs/code-server/install#installsh
 
 - インストールシェルを実行します。
 
-  ```shell
-  curl -fsSL https://code-server.dev/install.sh | sh
-  ```
+```shell
+curl -fsSL https://code-server.dev/install.sh | sh
+```
 
 - code-server を起動します。
 
-  ```shell
-  sudo systemctl start code-server@{ユーザ}
-  ```
+```shell
+sudo systemctl start code-server@{ユーザ}
+```
 
 - 設定ファイルを編集します。
 
-  ```shell
-  # bind-addr, certなど
-  vim ~/.config/code-server/config.yaml
-  ```
+```shell
+# bind-addr, certなど
+vim ~/.config/code-server/config.yaml
+```
 
 - code-server を再起動します。
 
-  ```shell
-  sudo systemctl restart code-server@{ユーザ}
-  ```
+```shell
+sudo systemctl restart code-server@{ユーザ}
+```
 
 ## 各種設定手順
 
 `~/.config/code-server/config.yml`を編集して設定を入れます。
 
 cf. https://coder.com/docs/code-server/guide
-
-### HTTPS でアクセスできるようにする
-
-- `cert: false`を`cert: true`に書き換えます。
-- `bind-addr`のポートを 443 に書き換えます。
-- code-server が 443 ポートをリッスンできるようにします。
-
-  ```shell
-  sudo setcap cap_net_bind_service=+ep /usr/lib/code-server/lib/node
-  ```
-
-- code-server サービスを再起動します。
-
-  ```shell
-  sudo systemctl restart code-server@ubuntu
-  ```
