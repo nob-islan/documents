@@ -13,7 +13,6 @@ services:
   gitlab:
     image: gitlab/gitlab-ce:latest
     container_name: gitlab-test
-    restart: always
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url "http://${IP_address}:80"
@@ -34,7 +33,30 @@ root ユーザのパスワードはサーバ内のファイルに記載されて
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
-### SSL 通信をできるようにする
+### Let's Encrypt を使って SSL 通信をできるようにする
+
+`external_url`を HTTPS プロトコルで設定すると Let’s Encrypt で SSL 通信ができるようにしてくれます。cf. https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration
+
+```yaml
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: nob-gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url "https://nob-gitlab.ddo.jp"
+        gitlab_rails['gitlab_shell_ssh_port'] = 2022
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2022:22"
+    volumes:
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
+```
+
+### 自己証明書を使って SSL 通信をできるようにする
 
 下記を追加すると`https://${設定したドメイン}`で GitLab にアクセスできます:
 
@@ -61,7 +83,6 @@ gitlab コンテナ構築時に使用した docker-compose.yml に以下を追�
 gitlab-runner:
   image: gitlab/gitlab-runner:latest
   container_name: gitlab-runner-test
-  restart: always
   volumes:
     - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
     - "/var/run/docker.sock:/var/run/docker.sock"
@@ -88,7 +109,7 @@ ${ruby:2.7}
 
 `${instance URL}`および`${dregistration token}`については GitLab の Settings -> CI/CD -> Runners で設定を確認して入力します。
 
-### GitLab が SSL 通信をしている場合
+### GitLab が 自己証明書で SSL 通信をしている場合
 
 runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yml`に下記を追加してください:
 
