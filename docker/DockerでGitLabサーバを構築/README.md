@@ -118,27 +118,12 @@ volumes:
   - "./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt"
 ```
 
-## CI 構築
+## Runner トラブルシュート
 
-リポジトリにて`.gitlab-ci.yml`ファイルを作成します、以下テストファイル：
-
-```
-job1:
-  stage: deploy
-  tags:
-    - ${tags}
-  script:
-    - echo "test"
-```
-
-push すれば runner が走ります。
-
-ジョブを走らせている際に「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の`/etc/gitlab-runner/config.toml`に下記を追加します。
+GitLab にドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の`/srv/gitlab/gitlab-runner/config/config.toml`に下記を追加します。
 
 ```
   [runners.docker]
   ...
     extra_hosts = ["${ドメイン名}:${ホストOSのIPアドレス}"]
 ```
-
-`apt-get update` `apt-get install vim`で vim とかを入れておく必要があるので注意してください。
