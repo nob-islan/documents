@@ -50,7 +50,7 @@ domain=nob.jp
 192.168.151.1 ${任意のホスト名}
 ```
 
-- `/etc/dnsmasq_resolv.conf`を作成
+- `/etc/dnsmasq-resolv.conf`を作成
 
 ```conf
 nameserver 8.8.8.8
