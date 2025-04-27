@@ -30,7 +30,7 @@ services:
 root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
 
 ```
-sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
+docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
 ### Let's Encrypt を使って SSL 通信をできるようにする
@@ -58,21 +58,37 @@ services:
 
 ### 自己証明書を使って SSL 通信をできるようにする
 
-下記を追加すると`https://${設定したドメイン}`で GitLab にアクセスできます:
+下記でコンテナを起動すると`https://${設定したドメイン}`で GitLab にアクセスできます:
 
 ```yaml
-environment:
-  GITLAB_OMNIBUS_CONFIG: |
-    external_url "https://{ドメイン}:443"
-    nginx['redirect_http_to_https'] = true
-    nginx['listen_port'] = 443
-    nginx['ssl_certificate'] = "/etc/gitlab/ssl/server.crt"
-    nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/server.key"
-ports:
-  - "443:443"
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: nob-gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url "https://gitlab.nob.jp"
+        gitlab_rails['gitlab_shell_ssh_port'] = 2022
+        nginx['redirect_http_to_https'] = true
+        letsencrypt['enable'] = false
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2022:22"
+    volumes:
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
+      # 証明書をコンテナに配置
+      - "./volume/ssl:/etc/gitlab/ssl"
+```
 
-volumes:
-  - "./volumes/ssl:/etc/gitlab/ssl"
+```
+$ ls -l volume/ssl/
+total 12
+-rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.nob.jp.crt
+-rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.nob.jp.csr
+-rw------- 1 root root 1704 Apr 27 12:25 gitlab.nob.jp.key
 ```
 
 ## gitlab-runner コンテナを構築
