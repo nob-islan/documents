@@ -22,6 +22,8 @@
 - code-server
   - [Let's Encrypt を使って SSL 通信を行う](./code-server/lets_encryptを使ってSSL通信を行う/README.md)
   - [はじめての code-server](./code-server/はじめてのcode-server/README.md)
+- coder
+  - [はじめての coder](./coder/はじめてのcoder/README.md)
 - dev-container
   - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
