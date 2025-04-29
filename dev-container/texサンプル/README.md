@@ -71,14 +71,14 @@ tex ファイルをコンパイルするための設定、およびプレビュ�
 {
   // LaTeX
   "latex-workshop.intellisense.package.enabled": true,
-  //latexmkのビルドレシピ
+  // latexmkのビルドレシピ
   "latex-workshop.latex.recipes": [
     {
       "name": "ptex2pdf (uplatex)",
       "tools": ["ptex2pdf (uplatex)", "ptex2pdf (uplatex)"]
     }
   ],
-  //latexmkのビルドツール
+  // latexmkのビルドツール
   "latex-workshop.latex.tools": [
     {
       "name": "ptex2pdf (uplatex)",
