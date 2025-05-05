@@ -35,9 +35,9 @@ dlv connect localhost:8484
 
 ```shell
 # 関数名を指定して設定
-(dlv) break handler.Greet
+(dlv) break controller.Greet
 # 行数を指定して設定
-(dlv) break handler/sample_handler.go:30
+(dlv) break controller/sample_controller.go:30
 ```
 
 - API 呼び出し

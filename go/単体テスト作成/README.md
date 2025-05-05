@@ -12,9 +12,9 @@ go get github.com/stretchr/testify
 
 ## 作成手順
 
-### handler, service テスト作成
+### controller, service テスト作成
 
-handler のテスト作成を例に解説します。
+controller のテスト作成を例に解説します。
 
 #### service のモック化
 
@@ -73,8 +73,8 @@ for _, testcase := range tests {
         // モックの期待される動作を定義
         mockService.On("Search", inout.UserSearchIn{Username: testcase.requestParam.Username}).Return(testcase.mockReturnOut, testcase.mockReturnError)
 
-        // handlerの初期化
-        h := &userInfoHandler{
+        // controllerの初期化
+        h := &userInfoController{
             userInfoService: mockService,
         }
 
@@ -192,7 +192,7 @@ func Test_userInfoRepository_Insert(t *testing.T) {
 
 #### テストケースの定義、テスト実行
 
-handler, service と同様のため省略します。
+controller, service と同様のため省略します。
 
 ## テスト起動
 
@@ -206,14 +206,14 @@ go test ./...
 
 ## カバレッジ出力
 
-- カバレッジレポートをテキストファイルで出力します（下記は handler の例）:
+- カバレッジレポートをテキストファイルで出力します（下記は controller の例）:
 
   ```shell
-  go test -cover -coverprofile=./handler/coverage.txt ./handler/
+  go test -cover -coverprofile=./controller/coverage.txt ./controller/
   ```
 
 - カバレッジレポートを html で出力します:
 
   ```shell
-  go tool cover -html=./handler/coverage.txt -o ./handler/coverage.html
+  go tool cover -html=./controller/coverage.txt -o ./controller/coverage.html
   ```
