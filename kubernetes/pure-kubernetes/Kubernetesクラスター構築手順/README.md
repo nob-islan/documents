@@ -116,6 +116,7 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/cre
 コントロールプレーンノードを初期化します。`kubeadm join`コマンドを控えておいてください。
 
 ```
+sudo kubeadm config images pull
 sudo kubeadm init
 ```
 
