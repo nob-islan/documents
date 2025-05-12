@@ -131,15 +131,14 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ### CNI のインストール
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
+各 CNI については下記を参照ください:  
+cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
 CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。
 
 ```
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
-
-各 CNI については下記を参照ください:  
-cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
 ## ワーカーノード構築
 
