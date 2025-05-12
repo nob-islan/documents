@@ -132,7 +132,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
-CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。
+CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。ここでは Weave Net を採用します。  
+cf. https://github.com/weaveworks/weave/blob/master/site/kubernetes/kube-addon.md#-installation
 
 ```
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
