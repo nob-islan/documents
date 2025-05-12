@@ -139,6 +139,9 @@ cf. https://github.com/weaveworks/weave/blob/master/site/kubernetes/kube-addon.m
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 ```
 
+これ以外の CNI については下記を参照ください:  
+cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
+
 ## ワーカーノード構築
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
