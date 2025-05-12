@@ -130,7 +130,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ### CNI のインストール
 
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network  
 各 CNI については下記を参照ください:  
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
