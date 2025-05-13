@@ -138,7 +138,7 @@ cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networ
 CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。
 
 ```
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 ```
 
 ## ワーカーノード構築
