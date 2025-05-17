@@ -2,6 +2,8 @@
 
 SQL クエリを構築するライブラリ **Squirrel** を使ってデータベースにアクセスします。標準ライブラリより動的で柔軟な SQL 構築が可能です。
 
+cf. https://github.com/Masterminds/squirrel
+
 ## 事前準備
 
 ### データベース構築
