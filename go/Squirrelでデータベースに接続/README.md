@@ -79,7 +79,7 @@ func main() {
 
 	// クエリ作成
 	builder := sq.Select("*").From("users")
-    // name := nob
+	// name := nob
 	// if name != "" {
 	// 	builder = builder.Where(sq.Eq{"user_name": name}) // 必要に応じてwhere区の追加などができます
 	// }
