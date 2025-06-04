@@ -17,6 +17,8 @@ sudo apt install golang-golang-x-tools
 ## ドキュメント閲覧
 
 ```shell
+# go.modが配置してあるディレクトリに移動
+cd {ディレクトリ}
 # 8080ポートでドキュメントを公開
 godoc -http=:8080
 ```
