@@ -93,15 +93,16 @@ total 12
 
 ## gitlab-runner コンテナを構築
 
-gitlab コンテナ構築時に使用した docker-compose.yml に以下を追記します：
+gitlab-runner は下記で起動できます:
 
 ```yaml
-gitlab-runner:
-  image: gitlab/gitlab-runner:latest
-  container_name: gitlab-runner-test
-  volumes:
-    - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
-    - "/var/run/docker.sock:/var/run/docker.sock"
+services:
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner-test
+    volumes:
+      - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
+      - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
 `docker-compose up -d`を実行してコンテナを作成。  
