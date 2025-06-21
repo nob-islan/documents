@@ -125,11 +125,11 @@ H2DB を使ってテストします。
 
 ```xml
         <!-- h2db導入 -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
 ```
 
 - `src/test/resources/application-test.properties`を下記内容で作成します:
