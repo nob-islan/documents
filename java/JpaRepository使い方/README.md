@@ -135,8 +135,14 @@ H2DB を使ってテストします。
 - `src/test/resources/application-test.properties`を下記内容で作成します:
 
 ```properties
-# エンティティからのテーブル自動生成をしない
+# エンティティクラスからスキーマを自動生成しない
 spring.jpa.hibernate.ddl-auto=none
+# h2db接続設定
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
 - 下記要領でテストクラスを作成します:
