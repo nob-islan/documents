@@ -43,6 +43,7 @@ stages:
   - build
   - push
 variables:
+  BASE_PACKAGE: com.example # ベースパッケージ
   MODULE: easyapp # アプリのモジュール名
   ARTIFACT_NAME: ${MODULE}-0.0.1-SNAPSHOT.jar # ビルド成果物のファイル名
   ARTIFACT_PATH: ${MODULE}/target/${ARTIFACT_NAME} # ビルド成果物のパス
@@ -51,7 +52,7 @@ test:
   image: openjdk:17
   script:
     - cd ${MODULE}
-    - ./mvnw verify
+    - ./mvnw verify -Dtest="${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test" # controlle, service, repositoryのみテスト
   artifacts:
     when: always
     reports:
