@@ -2,28 +2,26 @@
 
 `JpaRepository`を使うことで、インターフェースにメソッドを宣言するだけで SQL を実行する処理を実装できます。本ドキュメントで、JpaRepository の導入方法および実装例を解説します。
 
-## 導入方法
+## 実装例
 
-`pom.xml`に下記を追記します:
+- `pom.xml`に下記を追記します:
 
 ```xml
         <!-- JpaRepository導入 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <!-- MariaDB接続 -->
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>
 ```
-
-## 実装例
 
 see also; https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
-下記で構築されるテーブルを想定して実装を進めます:
+- 下記で構築されるテーブルを想定して実装を進めます:
 
 ```sql
 CREATE TABLE IF NOT EXISTS users(
@@ -62,7 +60,7 @@ public class Users {
     /** ユーザID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", columnDefinition = "PRIMARY KEY", length = 11, nullable = false)
+    @Column(name = "user_id", length = 11, nullable = false)
     private Integer userId;
 
     /** ユーザ名 */
@@ -70,7 +68,7 @@ public class Users {
     private String userName;
 
     /** 年齢 */
-    @Column(name = "age", length = 11, nullable = false)
+    @Column(name = "age", nullable = false)
     private Integer age;
 
     /** 住所 */
@@ -117,4 +115,96 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
      */
     List<Users> findByUserNameContainingAndAddressContaining(String userName, String address);
 }
+```
+
+## テスト例
+
+H2DB を使ってテストします。
+
+- h2db の依存関係を追記します:
+
+```xml
+        <!-- h2db導入 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+```
+
+- `src/test/resources/application-test.properties`を下記内容で作成します:
+
+```properties
+# エンティティからのテーブル自動生成をしない
+spring.jpa.hibernate.ddl-auto=none
+```
+
+- 下記要領でテストクラスを作成します:
+
+```java
+package com.example.easyapp.repository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+
+import com.example.easyapp.model.entity.Users;
+
+/**
+ * SampleRepositoryのテストクラスです。
+ *
+ * @author nob
+ */
+@DataJpaTest
+@ActiveProfiles("test") // application-test.properties読み込み
+@TestPropertySource(properties = {
+        "spring.sql.init.schema-locations=classpath:/samplerepository/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/samplerepository/data.sql" // データ投入SQLのパス
+})
+public class SampleRepositoryTest {
+
+    @Autowired
+    private SampleRepository sampleRepository;
+
+    /**
+     * テスト
+     */
+    @Test
+    void test() {
+
+        // テストケース
+    }
+}
+```
+
+- `src/test/resources/schema.sql`および`src/test/resources/data.sql`は下記要領で作成します:
+
+```sql
+-- schema.sql
+CREATE TABLE users(
+    user_id INT PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age INT NOT NULL
+    , address TEXT
+);
+```
+
+```sql
+-- data.sql
+INSERT INTO users(
+    user_name
+    , age
+    , remarks
+) VALUES (
+    'test_nob'
+    , 13
+    , 'test address01'
+);
 ```
