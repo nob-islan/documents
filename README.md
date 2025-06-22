@@ -65,6 +65,7 @@
   - [CORS 設定](./go/CORS設定/README.md)
   - [Gemini API を実行](./go/Gemini_APIを実行/README.md)
   - [godoc 出力](./go/godoc出力/README.md)
+  - [testcontainers を使ってテスト実行](./go/testcontainersを使ってテスト実行/README.md)
   - [Squirrel でデータベースに接続](./go/Squirrelでデータベースに接続/README.md)
   - [Web 画面を出力](./go/Web画面を出力/README.md)
   - [アプリのデバッグ](./go/アプリのデバッグ/README.md)
