@@ -96,7 +96,46 @@ for _, testcase := range tests {
 
 ### repository テスト作成
 
-WIP: SQLite を使う
+テスト向けの一時的なデータベースを用意するため、**sqlite3**をインストールします。
+
+```shell
+go get github.com/mattn/go-sqlite3
+```
+
+テスト向けインメモリデータベース作成用の関数を定義します。
+
+```go
+// テスト用データベースに接続します。
+func connectTestDB(t *testing.T) *sql.DB {
+
+    db, err := sql.Open("sqlite3", ":memory:")
+    if err != nil {
+        t.Fatalf("failed to open in-memory db: %v", err)
+    }
+
+    // schema.sql を読み込み・実行
+    schema, err := os.ReadFile("testdata/user_info/schema.sql")
+    if err != nil {
+        t.Fatalf("failed to read schema: %v", err)
+    }
+    _, err = db.Exec(string(schema))
+    if err != nil {
+        t.Fatalf("failed to execute schema: %v", err)
+    }
+
+    // data.sql を読み込み・実行
+    data, err := os.ReadFile("testdata/user_info/data.sql")
+    if err != nil {
+        t.Fatalf("failed to read data: %v", err)
+    }
+    _, err = db.Exec(string(data))
+    if err != nil {
+        t.Fatalf("failed to execute data: %v", err)
+    }
+
+    return db
+}
+```
 
 #### テストケースの定義、テスト実行
 
@@ -116,12 +155,12 @@ go test ./...
 
 - カバレッジレポートをテキストファイルで出力します（下記は controller の例）:
 
-  ```shell
-  go test -cover -coverprofile=./controller/coverage.txt ./controller/
-  ```
+```shell
+go test -cover -coverprofile=./controller/coverage.txt ./controller/
+```
 
 - カバレッジレポートを html で出力します:
 
-  ```shell
-  go tool cover -html=./controller/coverage.txt -o ./controller/coverage.html
-  ```
+```shell
+go tool cover -html=./controller/coverage.txt -o ./controller/coverage.html
+```
