@@ -114,7 +114,7 @@ func connectTestDB(t *testing.T) *sql.DB {
     }
 
     // schema.sql を読み込み・実行
-    schema, err := os.ReadFile("testdata/user_info/schema.sql")
+    schema, err := os.ReadFile("testdata/userinfo/schema.sql")
     if err != nil {
         t.Fatalf("failed to read schema: %v", err)
     }
@@ -124,7 +124,7 @@ func connectTestDB(t *testing.T) *sql.DB {
     }
 
     // data.sql を読み込み・実行
-    data, err := os.ReadFile("testdata/user_info/data.sql")
+    data, err := os.ReadFile("testdata/userinfo/data.sql")
     if err != nil {
         t.Fatalf("failed to read data: %v", err)
     }
