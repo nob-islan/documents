@@ -54,91 +54,127 @@ go get github.com/go-sql-driver/mysql
 
 ## サンプルコード
 
-### select サンプル
+### データベース接続関数
 
 ```go
-package main
+// データベース接続用の関数です。
+func connectDB() (*sql.DB, error) {
+
+	const (
+		user     = "root"           // データベースのユーザ名
+		password = "password"       // データベースのパスワード
+		host     = "localhost:3306" // データベースのホスト
+		database = "snaildb"        // データベース名
+	)
+
+	// データベース接続
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, host, database)
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		return nil, err
+	}
+
+	// 実際に接続できるかを確認
+	err = db.Ping()
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}
+```
+
+### サンプル repository
+
+```go
+package repository
 
 import (
 	"database/sql"
-	"fmt"
 
 	sq "github.com/Masterminds/squirrel"
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func main() {
+// usersテーブルのエンティティ構造体です。
+type Users struct {
+	UserId   string // 管理ID
+	Username string // ユーザ名
+	Age      string // 年齢
+	Remarks  string // 備考
+}
 
-	// データベースに接続
-	dsn := "root:password@tcp(localhost:3306)/snaildb"
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+// サンプルrepositoryのインターフェースです。
+type SampleRepository interface {
+	FindByUsername(username string) []Users
+	Insert(u Users)
+}
+
+// サンプルrepositoryの構造体です。
+type sampleRepository struct {
+	db *sql.DB
+}
+
+// SampleRepositoryのコンストラクタです。
+func NewSampleRepository(db *sql.DB) SampleRepository {
+	return &sampleRepository{db: db}
+}
+
+// ユーザ名をキーとしてデータベースからユーザ情報を検索します。
+func (r *sampleRepository) FindByUsername(username string) []Users {
 
 	// クエリ作成
 	builder := sq.Select("*").From("users")
-	// name := nob
-	// if name != "" {
-	// 	builder = builder.Where(sq.Eq{"user_name": name}) // 必要に応じてwhere区の追加などができます
-	// }
+	if username != "" {
+		builder = builder.Where(sq.Eq{"username": username})
+	}
 	query, args, err := builder.ToSql()
 	if err != nil {
 		panic(err)
 	}
 
 	// クエリ実行
-	rows, err := db.Query(query, args...)
+	rows, err := r.db.Query(query, args...)
 	if err != nil {
 		panic(err)
 	}
 	defer rows.Close()
 
 	// 検索結果をマッピング
+	var usersList []Users
 	for rows.Next() {
-		var userId, userName, age, remarks string
-		if err := rows.Scan(&userId, &userName, &age, &remarks); err != nil {
+		var userId, username, age, remarks string
+		if err := rows.Scan(&userId, &username, &age, &remarks); err != nil {
 			panic(err)
 		}
-		fmt.Printf("%s, %s, %s, %s\n", userId, userName, age, remarks)
+		usersList = append(
+			usersList,
+			Users{
+				UserId:   userId,
+				Username: username,
+				Age:      age,
+				Remarks:  remarks,
+			},
+		)
 	}
+
+	return usersList
 }
-```
 
-### insert サンプル
-
-```go
-package main
-
-import (
-	"database/sql"
-
-	sq "github.com/Masterminds/squirrel"
-	_ "github.com/go-sql-driver/mysql"
-)
-
-func main() {
-
-	// データベースに接続
-	dsn := "root:password@tcp(localhost:3306)/snaildb"
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
+// ユーザ情報を登録します。
+func (r *sampleRepository) Insert(u Users) {
 
 	// クエリ作成
 	builder := sq.
 		Insert("users").
-		Columns("user_name", "age", "remarks").
-		Values("nob3", "99", "This is a insert test")
+		Columns("username", "age", "remarks").
+		Values(u.Username, u.Age, u.Remarks)
 	query, args, err := builder.ToSql()
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Exec(query, args...)
+	_, err = r.db.Exec(query, args...)
 	if err != nil {
 		panic(err)
 	}
