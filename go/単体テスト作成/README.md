@@ -105,6 +105,11 @@ go get github.com/mattn/go-sqlite3
 テスト向けインメモリデータベース作成用の関数を定義します。`schema.sql`にスキーマ定義、`data.sql`にテストデータの SQL を記載しています。一部 SQLite 特有の記法が必要なため注意してください。
 
 ```go
+
+import (
+	_ "github.com/mattn/go-sqlite3"
+)
+
 // テスト用データベースに接続します。
 func connectTestDB(t *testing.T) *sql.DB {
 
