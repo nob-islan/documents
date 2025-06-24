@@ -17,7 +17,7 @@ cf. https://github.com/flannel-io/flannel#deploying-flannel-manually
 #   --pod-network-cidr={podのcidr} \
 #   --apiserver-advertise-address={コントロールプレーンノードのIP}
 sudo kubeadm init \
-  --pod-network-cidr=192.168.152.0/24 \
+  --pod-network-cidr=10.20.0.0/16 \
   --apiserver-advertise-address=192.168.1.1
 ```
 
@@ -65,7 +65,7 @@ cf. https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed
 #   --pod-network-cidr={podのcidr} \
 #   --apiserver-advertise-address={コントロールプレーンノードのIP}
 sudo kubeadm init \
-  --pod-network-cidr=192.168.152.0/24 \
+  --pod-network-cidr=10.20.0.0/16 \
   --apiserver-advertise-address=192.168.1.1
 ```
 
