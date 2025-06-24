@@ -4,6 +4,54 @@
 
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
+## flannel
+
+cf. https://github.com/flannel-io/flannel#deploying-flannel-manually
+
+### 手順
+
+- kubelet, kubeadm, kubectl インストール後、コントロールプレーンノードを初期化します:
+
+```shell
+# sudo kubeadm init \
+#   --pod-network-cidr={podのcidr} \
+#   --apiserver-advertise-address={コントロールプレーンノードのIP}
+sudo kubeadm init \
+  --pod-network-cidr=192.168.152.0/24 \
+  --apiserver-advertise-address=192.168.1.1
+```
+
+- flannel のマニフェストをダウンロードします:
+
+```shell
+wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+```
+
+- `net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
+
+```yml
+net-conf.json: |
+  {
+    "Network": "10.244.0.0/16", 
+    "EnableNFTables": false,
+    "Backend": {
+      "Type": "vxlan"
+    }
+  }
+```
+
+- flannel のリソースを作成します:
+
+```shell
+kubectl apply -f kube-flannel.yml
+```
+
+- flanne のリソースが作成されることを確認します:
+
+```shell
+watch kubectl get pods -n kube-flannel
+```
+
 ## Calico
 
 cf. https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises#install-calico
