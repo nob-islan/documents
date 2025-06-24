@@ -46,7 +46,7 @@ net-conf.json: |
 kubectl apply -f kube-flannel.yml
 ```
 
-- flanne のリソースが作成されることを確認します:
+- flannel のリソースが作成されることを確認します:
 
 ```shell
 watch kubectl get pods -n kube-flannel
