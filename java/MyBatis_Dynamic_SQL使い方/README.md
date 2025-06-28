@@ -32,8 +32,6 @@ INSERT INTO users(
 - `application.properties`に接続情報を記載します:
 
 ```properties
-spring.application.name=easyapp
-
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
@@ -100,7 +98,7 @@ public class MyBatisConfig {
 
     // MyBatisの設定
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
 

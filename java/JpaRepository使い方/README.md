@@ -75,7 +75,7 @@ public class Users {
     /** ユーザID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", length = 11, nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Integer userId;
 
     /** ユーザ名 */
