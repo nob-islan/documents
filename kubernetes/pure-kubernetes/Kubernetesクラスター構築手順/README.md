@@ -164,6 +164,12 @@ flannel のリソースが作成されることを確認します:
 watch kubectl get pods -n kube-flannel
 ```
 
+ノードのステータスが`Ready`になっていれば完了です。
+
+```shell
+kubectl get nodes
+```
+
 ## ワーカーノード構築
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
