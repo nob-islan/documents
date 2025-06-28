@@ -88,6 +88,8 @@ containerd config default | sudo tee /etc/containerd/config.toml
 Ubuntu 22.04 あたりから、上記 config.toml の `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]` について、`SystemdCgroup = true` に書き換えないといけなくなったようです。
 
 ```shell
+# SystemdCgroup設定書き換え
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
 # containerdの再起動
 sudo systemctl restart containerd
 ```
