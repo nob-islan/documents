@@ -148,15 +148,8 @@ wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel
 
 `net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
 
-```yml
-net-conf.json: |
-  {
-    "Network": "10.244.0.0/16", 
-    "EnableNFTables": false,
-    "Backend": {
-      "Type": "vxlan"
-    }
-  }
+```shell
+sudo sed -i 's/"Network": "10.244.0.0\/16"/"Network": "10.20.0.0\/16"/' kube-flannel.yml
 ```
 
 flannel のリソースを作成します:
