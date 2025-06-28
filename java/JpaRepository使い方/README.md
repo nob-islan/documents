@@ -4,7 +4,22 @@
 
 ## 実装例
 
-- `pom.xml`に下記を追記します:
+- `application.properties`に接続情報を記載します:
+
+```properties
+spring.application.name=easyapp
+
+#MariaDBのドライバ設定
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+#接続用URL
+spring.datasource.url=jdbc:mariadb://localhost/snaildb
+#ユーザ名
+spring.datasource.username=root
+#パスワード
+spring.datasource.password=password
+```
+
+- `pom.xml`に下記依存関係を追記します:
 
 ```xml
         <!-- JpaRepository導入 -->
