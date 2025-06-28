@@ -120,7 +120,7 @@ sudo kubeadm config images pull
 export APISERVER_ADVERTISE_ADDRESS=`hostname -I | awk '{print $1}'`
 sudo kubeadm init \
   --pod-network-cidr=10.20.0.0/16 \
-  --apiserver-advertise-address=192.168.1.1
+  --apiserver-advertise-address=${APISERVER_ADVERTISE_ADDRESS}
 ```
 
 一般ユーザでも`kubectl`コマンドを叩けるようにします。
