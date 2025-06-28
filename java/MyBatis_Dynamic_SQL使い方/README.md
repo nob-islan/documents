@@ -251,3 +251,101 @@ public class UsersRepository {
     }
 }
 ```
+
+## テスト例
+
+H2DB を使ってテストします。
+
+- h2db の依存関係を追記します:
+
+```xml
+        <!-- h2db導入 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+```
+
+- `src/test/resources/application-test.properties`を下記内容で作成します:
+
+```properties
+# エンティティクラスからスキーマを自動生成しない
+spring.jpa.hibernate.ddl-auto=none
+# h2db接続設定
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+```
+
+- 下記要領でテストクラスを作成します:
+
+```java
+package com.example.easyapp.repository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+
+import com.example.easyapp.model.entity.Users;
+
+/**
+ * SampleRepositoryのテストクラスです。
+ *
+ * @author nob
+ */
+@SpringBootTest
+@ActiveProfiles("test") // application-test.properties読み込み
+@TestPropertySource(properties = {
+        "spring.sql.init.schema-locations=classpath:/samplerepository/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/samplerepository/data.sql" // データ投入SQLのパス
+})
+public class SampleRepositoryTest {
+
+    @Autowired
+    private SampleRepository sampleRepository;
+
+    /**
+     * テスト
+     */
+    @Test
+    void test() {
+
+        // テストケース
+    }
+}
+```
+
+- `src/test/resources/schema.sql`および`src/test/resources/data.sql`は下記要領で作成します:
+
+```sql
+-- schema.sql
+CREATE TABLE users(
+    user_id INT PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age INT NOT NULL
+    , address TEXT
+);
+```
+
+```sql
+-- data.sql
+INSERT INTO users(
+    user_name
+    , age
+    , remarks
+) VALUES (
+    'test_nob'
+    , 13
+    , 'test address01'
+);
+```
