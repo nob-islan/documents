@@ -225,8 +225,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.easyapp.entity.Users;
-import com.example.easyapp.mapper.UsersDynamicSqlSupport;
 import com.example.easyapp.mapper.UsersMapper;
+import com.example.easyapp.mapper.UsersSqlSupport;
+import com.example.easyapp.model.condition.UsersSelectCondition;
 
 /**
  * usersテーブルのrepositoryクラスです。
@@ -242,15 +243,39 @@ public class UsersRepository {
     /**
      * ユーザを検索します。
      *
+     * @param condition 検索条件
      * @return ヒットしたユーザのリスト
      */
-    public List<Users> select() {
+    public List<Users> selectByCondition(UsersSelectCondition condition) {
 
-        SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
-                .from(UsersDynamicSqlSupport.users).build().render(RenderingStrategies.MYBATIS3);
+        SelectStatementProvider selectStatement = SqlBuilder.select(UsersSqlSupport.users.allColumns())
+                .from(UsersSqlSupport.users)
+                .where(UsersSqlSupport.users.userName, SqlBuilder.isEqualToWhenPresent(condition.getUserName()))
+                .build()
+                .render(RenderingStrategies.MYBATIS3);
 
         return usersMapper.select(selectStatement);
     }
+}
+```
+
+`UsersSelectCondition`については下記モデルクラスを作成しています:
+
+```java
+package com.example.easyapp.model.condition;
+
+import lombok.Value;
+
+/**
+ * usersテーブル検索時の条件を格納するモデルです。
+ *
+ * @author nob
+ */
+@Value
+public class UsersSelectCondition {
+
+    /** ユーザ名 */
+    private String userName;
 }
 ```
 
