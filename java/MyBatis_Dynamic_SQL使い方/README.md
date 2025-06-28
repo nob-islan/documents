@@ -21,9 +21,9 @@ INSERT INTO users(
     , age
     , remarks
 ) VALUES (
-    "nob"
+    'nob'
     , 13
-    , "This is a test data"
+    , 'This is a test data'
 );
 ```
 
@@ -330,10 +330,10 @@ public class SampleRepositoryTest {
 ```sql
 -- schema.sql
 CREATE TABLE users(
-    user_id INT PRIMARY KEY AUTO_INCREMENT
+    user_id int PRIMARY KEY AUTO_INCREMENT
     , user_name VARCHAR(20) NOT NULL
-    , age INT NOT NULL
-    , address TEXT
+    , age int NOT NULL
+    , remarks TEXT
 );
 ```
 
@@ -344,8 +344,8 @@ INSERT INTO users(
     , age
     , remarks
 ) VALUES (
-    'test_nob'
+    'nob'
     , 13
-    , 'test address01'
+    , 'This is a test data'
 );
 ```
