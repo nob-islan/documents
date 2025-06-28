@@ -2,6 +2,8 @@
 
 **MyBatis Dynamic SQL**を使って動的に SQL を発行します。
 
+cf. https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html
+
 ## 前提
 
 下記 DDL で作成されるテーブルにアクセスします:
