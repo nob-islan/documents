@@ -19,7 +19,7 @@ VirtualBox 上で仮想マシンを立てて構築します。ドキュメント
 
 swap を無効化します。
 
-```
+```shell
 sudo swapoff -a
 ```
 
@@ -35,7 +35,7 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/ins
 
 必要な設定を追加します。
 
-```
+```shell
 cat | sudo tee /etc/modules-load.d/containerd.conf <<EOF
 overlay
 br_netfilter
@@ -58,7 +58,7 @@ sudo sysctl --system
 
 cf. https://github.com/containerd/containerd/blob/main/docs/getting-started.md
 
-```
+```shell
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
@@ -73,13 +73,13 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-```
+```shell
 # containerdのインストール
 sudo apt-get update
 sudo apt-get install -y containerd.io
 ```
 
-```
+```shell
 # containerdの設定
 sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
@@ -87,7 +87,7 @@ containerd config default | sudo tee /etc/containerd/config.toml
 
 Ubuntu 22.04 あたりから、上記 config.toml の `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]` について、`SystemdCgroup = true` に書き換えないといけなくなったようです。
 
-```
+```shell
 # containerdの再起動
 sudo systemctl restart containerd
 ```
@@ -96,7 +96,7 @@ sudo systemctl restart containerd
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#kubeadm-kubelet-kubectlのインストール
 
-```
+```shell
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 
@@ -115,14 +115,17 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/cre
 
 コントロールプレーンノードを初期化します。`kubeadm join`コマンドを控えておいてください。
 
-```
+```shell
 sudo kubeadm config images pull
-sudo kubeadm init
+export APISERVER_ADVERTISE_ADDRESS=`hostname -I | awk '{print $1}'`
+sudo kubeadm init \
+  --pod-network-cidr=10.20.0.0/16 \
+  --apiserver-advertise-address=192.168.1.1
 ```
 
 一般ユーザでも`kubectl`コマンドを叩けるようにします。
 
-```
+```shell
 mkdir -p $HOME/.kube
 sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -132,13 +135,38 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
-各 CNI については下記を参照ください:  
+CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。各 CNI については下記を参照ください:  
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
-CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。
+flannel のマニフェストをダウンロードします:
 
+```shell
+wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+`net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
+
+```yml
+net-conf.json: |
+  {
+    "Network": "10.244.0.0/16", 
+    "EnableNFTables": false,
+    "Backend": {
+      "Type": "vxlan"
+    }
+  }
+```
+
+flannel のリソースを作成します:
+
+```shell
+kubectl apply -f kube-flannel.yml
+```
+
+flannel のリソースが作成されることを確認します:
+
+```shell
+watch kubectl get pods -n kube-flannel
 ```
 
 ## ワーカーノード構築
