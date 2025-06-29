@@ -19,6 +19,8 @@
     - [AWS 上でソース管理からデプロイまで行う](./aws/CodeCommit/AWS上でソース管理からデプロイまで行う/README.md)
   - ECR
     - [image を push する](./aws/ECR/imageをpushする/README.md)
+  - EKS
+    - [はじめての EKS クラスタデプロイ](./aws/EKS/はじめてのEKSクラスタデプロイ/README.md)
 - code-server
   - [Let's Encrypt を使って SSL 通信を行う](./code-server/lets_encryptを使ってSSL通信を行う/README.md)
   - [はじめての code-server](./code-server/はじめてのcode-server/README.md)
