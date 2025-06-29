@@ -36,7 +36,7 @@ func connectTestDB(t *testing.T) *sql.DB {
 	const user string = "root"
 	const password string = ""
 	const host string = "localhost"
-	const dbName string = "nobdb"
+	const dbName string = "snaildb"
 	const driverName string = "mysql"
 
 	// MariaDBコンテナ起動

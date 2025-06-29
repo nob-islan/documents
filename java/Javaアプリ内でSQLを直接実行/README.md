@@ -74,7 +74,7 @@ INSERT INTO account (
 テストクラス実装後、テストをデバッグで止めてコンテナ内を確認すると下記のようにデータが入ってることが見えます。
 
 ```
-MariaDB [nobdb]> SELECT * FROM account;
+MariaDB [snaildb]> SELECT * FROM account;
 +----+------------+---------------------+
 | id | name       | inp_date            |
 +----+------------+---------------------+
@@ -118,7 +118,7 @@ public class SampleTest {
 
     // データベースのコンテナイメージなど、DB構築に必要な設定値
     static final DockerImageName MARIA_DB_IMAGE_NAME = DockerImageName.parse("mariadb").withTag("10.5");
-    static final String DATABASE_NAME = "nobdb";
+    static final String DATABASE_NAME = "snaildb";
     static final String USER_NAME = "root";
     static final String PASSWORD = "";
 

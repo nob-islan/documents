@@ -52,8 +52,8 @@ services:
 
 ```sql
 -- データベース作成
-CREATE DATABASE nobdb;
-USE nobdb;
+CREATE DATABASE snaildb;
+USE snaildb;
 
 -- テーブル作成
 CREATE TABLE nob_table (

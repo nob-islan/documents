@@ -38,7 +38,7 @@ func main() {
 func connectDB() (*sql.DB, error) {
 
 	// ユーザー名:パスワード@tcp(ホスト:ポート)/データベース名
-	dsn := "root:password@tcp(localhost:3306)/nobdb"
+	dsn := "root:password@tcp(localhost:3306)/snaildb"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		return nil, err
