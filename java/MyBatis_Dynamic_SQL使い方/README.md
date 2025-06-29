@@ -184,9 +184,11 @@ package com.example.easyapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
+import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 
@@ -200,6 +202,12 @@ import com.example.easyapp.entity.Users;
 @Mapper
 public interface UsersMapper {
 
+    /**
+     * select
+     *
+     * @param selectStatement
+     * @return
+     */
     @SelectProvider(type = SqlProviderAdapter.class, method = "select")
     @Results(id = "usersResult", value = {
             @Result(column = "user_id", property = "userId"),
@@ -208,6 +216,15 @@ public interface UsersMapper {
             @Result(column = "remarks", property = "remarks"),
     })
     List<Users> select(SelectStatementProvider selectStatement);
+
+    /**
+     * insert
+     *
+     * @param insertStatement
+     * @return
+     */
+    @InsertProvider(type = SqlProviderAdapter.class, method = "insert")
+    int insert(InsertStatementProvider<Users> insertStatement);
 }
 ```
 
@@ -219,6 +236,7 @@ package com.example.easyapp.repository;
 import java.util.List;
 
 import org.mybatis.dynamic.sql.SqlBuilder;
+import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
 import org.mybatis.dynamic.sql.render.RenderingStrategies;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,7 +244,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.easyapp.entity.Users;
 import com.example.easyapp.mapper.UsersMapper;
-import com.example.easyapp.mapper.UsersSqlSupport;
+import com.example.easyapp.mapper.UsersDynamicSqlSupport;
 import com.example.easyapp.model.condition.UsersSelectCondition;
 
 /**
@@ -248,13 +266,34 @@ public class UsersRepository {
      */
     public List<Users> selectByCondition(UsersSelectCondition condition) {
 
-        SelectStatementProvider selectStatement = SqlBuilder.select(UsersSqlSupport.users.allColumns())
-                .from(UsersSqlSupport.users)
-                .where(UsersSqlSupport.users.userName, SqlBuilder.isEqualToWhenPresent(condition.getUserName()))
+        SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
+                .from(UsersDynamicSqlSupport.users)
+                .where(UsersDynamicSqlSupport.users.userName, SqlBuilder.isEqualToWhenPresent(condition.getUserName()))
+                .and(UsersDynamicSqlSupport.users.userId, SqlBuilder.isEqualToWhenPresent(condition.getUserId()))
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
 
         return usersMapper.select(selectStatement);
+    }
+
+    /**
+     * ユーザを登録します。
+     *
+     * @param users エンティティ
+     * @return
+     */
+    public void insert(Users users) {
+
+        InsertStatementProvider<Users> insertStatement = SqlBuilder.insert(users)
+                .into(UsersDynamicSqlSupport.users)
+                .map(UsersDynamicSqlSupport.userId).toProperty("userId")
+                .map(UsersDynamicSqlSupport.userName).toProperty("userName")
+                .map(UsersDynamicSqlSupport.age).toProperty("age")
+                .map(UsersDynamicSqlSupport.remarks).toProperty("remarks")
+                .build()
+                .render(RenderingStrategies.MYBATIS3);
+
+        usersMapper.insert(insertStatement);
     }
 }
 ```
@@ -286,12 +325,12 @@ H2DB を使ってテストします。
 - h2db の依存関係を追記します:
 
 ```xml
-        <!-- h2db導入 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<!-- h2db導入 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 ```
 
 - `src/test/resources/application-test.properties`を下記内容で作成します:
@@ -312,34 +351,27 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```java
 package com.example.easyapp.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import com.example.easyapp.model.entity.Users;
-
 /**
- * SampleRepositoryのテストクラスです。
+ * UsersRepositoryのテストクラスです。
  *
  * @author nob
  */
 @SpringBootTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/samplerepository/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/samplerepository/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/testdata/users/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/testdata/users/data.sql" // データ投入SQLのパス
 })
-public class SampleRepositoryTest {
+public class UsersRepositoryTest {
 
     @Autowired
-    private SampleRepository sampleRepository;
+    private UsersRepository usersRepository;
 
     /**
      * テスト
@@ -352,7 +384,7 @@ public class SampleRepositoryTest {
 }
 ```
 
-- `src/test/resources/schema.sql`および`src/test/resources/data.sql`は下記要領で作成します:
+- `src/test/resources/testdata/users/schema.sql`および`src/test/resources/testdata/users/data.sql`は下記要領で作成します:
 
 ```sql
 -- schema.sql
