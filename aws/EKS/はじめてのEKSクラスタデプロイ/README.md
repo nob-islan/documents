@@ -45,6 +45,8 @@ sudo ./aws/install
 aws --version
 ```
 
+AWS CLI の使い方については[リファレンス](https://docs.aws.amazon.com/ja_jp/cli/latest/index.html)を参照ください。
+
 - 認証情報設定
 
 ```shell
@@ -118,4 +120,25 @@ sudo mv /tmp/eksctl /usr/local/bin
 
 ```shell
 eksctl version
+```
+
+## クラスタ構築
+
+- クラスタをデプロイ
+
+```shell
+eksctl create cluster --name nob-eks --region ap-northeast-1
+```
+
+## クラスタ疎通確認
+
+```shell
+kubectl get nodes
+```
+
+## クラスタ削除
+
+```shell
+# VPCやサブネットなど自動で作成したものが諸々削除されます
+eksctl delete cluster --name nob-eks --region ap-northeast-1
 ```
