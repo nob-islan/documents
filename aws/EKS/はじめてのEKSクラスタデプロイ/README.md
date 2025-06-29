@@ -14,11 +14,28 @@ cf. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/setting-up.html
 
 cf. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/install-awscli.html
 
-- AWS CLI インストール
+- 必要なパッケージを準備
+
+```shell
+sudo apt update
+sudo apt install unzip
+```
+
+- AWS CLI ダウンロード
 
 ```shell
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+```
+
+- 解凍
+
+```shell
 unzip awscliv2.zip
+```
+
+- インストール
+
+```shell
 sudo ./aws/install
 ```
 
