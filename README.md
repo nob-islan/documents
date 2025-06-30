@@ -27,14 +27,13 @@
 - coder
   - [はじめての coder](./coder/はじめてのcoder/README.md)
 - dev-container
-  - [aws-cli サンプル](./dev-container/aws-cliサンプル/README.md)
+  - [eks クライアントサンプル](./dev-container/eksクライアントサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
   - [go 環境サンプル](./dev-container/go環境サンプル/README.md)
   - [java 環境サンプル](./dev-container/java環境サンプル/README.md)
   - [react 環境サンプル](./dev-container/react環境サンプル/README.md)
   - [kind サンプル](./dev-container/kindサンプル/README.md)
   - [marp サンプル](./dev-container/marpサンプル/README.md)
-  - [tex サンプル](./dev-container/texサンプル/README.md)
   - [開発環境構築](./dev-container/開発環境構築/README.md)
 - dnsmasq
   - [はじめての dnsmasq](./dnsmasq/はじめてのdnsmasq/README.md)
