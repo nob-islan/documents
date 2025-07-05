@@ -117,6 +117,8 @@
 - linux
   - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
   - [jq コマンド例](./linux/jq-command-example/README.md)
+  - [ローカルネットワークで名前解決してもらう](./linux/local-name-resolve/README.md)
+  - [ノート PC を閉じてもスリープしないようにする](./linux/non-sleep-linux/README.md)
 - mdwiki
   - [MDWiki で Web ページを作成](./mdwiki/MDWikiでwebページを作成/README.md)
 - minio
