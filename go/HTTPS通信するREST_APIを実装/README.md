@@ -28,8 +28,8 @@ func main() {
 
 	// サーバーの起動
 	fmt.Println("Server started at https://localhost:443")
-	// main.goと同じディレクトリにある鍵ファイルを指定
-	log.Fatal(http.ListenAndServeTLS(":443", "cert.pem", "key.pem", nil))
+	// main.goまたはビルドしたモジュールから見た相対パスにある鍵ファイルを指定
+	log.Fatal(http.ListenAndServeTLS(":443", "ssl/cert.pem", "ssl/key.pem", nil))
 }
 
 // ユーザ情報を取得します。
