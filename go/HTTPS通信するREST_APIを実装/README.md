@@ -65,7 +65,7 @@ type userInfo struct {
 }
 ```
 
-- `go run main.go`でアプリ起動後、https に向けて curl を実行できます:
+- `go run main.go`またはビルドしたモジュールでアプリ起動後、https に向けて curl を実行できます:
 
 ```shell
 # 自己証明書を使う場合はSSLの検証に引っかかる可能性があるので -k オプションで回避しています。
