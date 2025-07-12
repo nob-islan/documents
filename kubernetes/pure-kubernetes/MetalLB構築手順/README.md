@@ -75,8 +75,6 @@ spec:
     - first-pool
 ```
 
-- それぞれのリソースを apply します:
-
 ```shell
 kubectl apply -f l2advertisement.yml
 ```
