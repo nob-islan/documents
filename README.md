@@ -107,7 +107,7 @@
     - [minikube インストール手順](./kubernetes/minikube/minikube%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
   - pure-kubernetes
     - ArgoCD
-      - [ArgoCD 構築手順](./kubernetes/pure-kubernetes/ArgoCD構築手順/README.md)
+      - [ArgoCD 構築手順](./kubernetes/pure-kubernetes/argocd/ArgoCD構築手順/README.md)
       - [GitLab リポジトリを登録](./kubernetes/pure-kubernetes/argocd/GitLabリポジトリを登録/README.md)
     - [k9s インストール手順](./kubernetes/pure-kubernetes/k9sインストール手順/README.md)
     - [Kubernetes クラスター構築手順](./kubernetes/pure-kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
