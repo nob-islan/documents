@@ -13,10 +13,13 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-- ArgoCD の API Server にアクセスできるよう、サービスタイプを NodePort にします:
+- ArgoCD の API Server にアクセスできるよう、サービスタイプを変更します:
 
 ```shell
-# LoadBalancerがある場合は kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+# ロードバランサがある場合 type: LoadBalancer
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+# ロードバランサがない場合 type: NodePort
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}]}}'
 ```
 
