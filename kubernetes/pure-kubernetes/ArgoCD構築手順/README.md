@@ -13,12 +13,25 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
+- ArgoCD の API Server にアクセスできるよう、サービスタイプを NodePort にします:
+
+```shell
+# LoadBalancerがある場合は kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}]}}'
+```
+
 - ArgoCD CLI をインストールします:
 
 ```shell
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
+```
+
+- CLI がインストールされていることを確認します:
+
+```shell
+argocd version
 ```
 
 - admin ユーザのパスワードを取得します:
