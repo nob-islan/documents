@@ -108,3 +108,53 @@ done
 
 sleep $working_time
 ```
+
+## ディスク
+
+### ディスク使用率固定ツール
+
+`/tmp`に一時ファイルを作成し、ディスクが指定された割合だけ使用された状態を維持します。
+
+```shell
+#!/bin/bash
+
+#======================================================
+# メモリの使用率を指定された割合で規定時間維持するスクリプトです。
+#======================================================
+
+# パラメータ
+working_time=300 # 負荷時間[秒]
+load_ratio=0.7  # 負荷割合
+
+# 定数
+TOTAL_DISK_MB=$(df -m / | awk 'NR==2 {print $2}')
+USED_DISK_MB=$(df -m / | awk 'NR==2 {print $3}')
+TMP_DIR="/tmp/diskstress" # メモリ確保用の一時的な作業ディレクトリ
+
+# スクリプト終了時にメモリを開放する関数
+function cleanup() {
+    rm -rf $TMP_DIR
+}
+
+#==========
+# 以下実処理
+#==========
+
+# 正常終了時および強制終了時にクリーンアップを実行
+trap cleanup SIGINT SIGTERM EXIT
+
+mkdir -p $TMP_DIR
+
+target_mb=$(echo "$TOTAL_DISK_MB * $load_ratio" | bc)
+target_mb=${target_mb%.*} # 小数点以下を切り捨てて -lt できるようにする
+current_disk_mb=$USED_DISK_MB
+file_num=0
+
+while [ "$current_disk_mb" -lt "$target_mb" ]; do
+    dd if=/dev/zero of="$TMP_DIR/file_$file_num" bs=1M count=100 status=none
+    current_disk_mb=$((current_disk_mb + 100))
+    file_num=$((file_num + 1))
+done
+
+sleep $working_time
+```
