@@ -368,6 +368,7 @@ import org.springframework.test.context.TestPropertySource;
         "spring.sql.init.schema-locations=classpath:/testdata/users/schema.sql", // テーブル作成SQLのパス
         "spring.sql.init.data-locations=classpath:/testdata/users/data.sql" // データ投入SQLのパス
 })
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UsersRepositoryTest {
 
     @Autowired
@@ -388,7 +389,9 @@ public class UsersRepositoryTest {
 
 ```sql
 -- schema.sql
-CREATE TABLE users(
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users(
     user_id int PRIMARY KEY AUTO_INCREMENT
     , user_name VARCHAR(20) NOT NULL
     , age int NOT NULL
