@@ -31,7 +31,7 @@ cf.
 - UT 一括実行
   - テスト結果およびカバレッジの達成率についてはパイプラインのジョブ上から確認できます。
   - カバレッジの詳細についてはアーティファクトに出力しているのでダウンロードすることで確認できます。
-  - 下記サンプルでは、カバレッジの正確な計測のために`controller`, `service`, `repository`パッケージ配下のみテストしています。
+  - 下記サンプルでは、カバレッジの正確な計測のために`handler`, `usecase`, `repository`パッケージ配下のみテストしています。
 - モジュールビルド
 - コンテナイメージ push
   - push 先は harbor を想定しています。
@@ -50,7 +50,7 @@ test:
   script:
     - cd ${MODULE}
     - go install gotest.tools/gotestsum@latest
-    - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./controller/... ./service/... ./repository/...
+    - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository
     - go tool cover -html=coverage.txt -o coverage.html
     - go tool cover -func=coverage.txt
   coverage: '/total:\s+\(statements\)\s+.+%/'

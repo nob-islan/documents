@@ -34,19 +34,19 @@ cf.
   func main() {
   ```
 
-  URI やリクエスト・レスポンスに関する情報は controller 関数上に記載します:
+  URI やリクエスト・レスポンスに関する情報は handler 関数上に記載します:
 
   ```go
   // @Summary ユーザ作成
   // @Description リクエストの内容でユーザを作成します。
-  // @Tags Users
+  // @Tags Userinfo
   // @Accept json
   // @Produce json
-  // @Param UserRegistReq body reqres.UserRegistReq true "ユーザ新規登録リクエスト"
-  // @Success 200 {object} reqres.UserRegistRes
-  // @Success 400 {object} errs.validateErrorRes
-  // @Router /user [post]
-  func (h *userInfoController) Regist(w http.ResponseWriter, r *http.Request) {
+  // @Param UserRegistReq body model.UserRegistReq true "ユーザ新規登録リクエスト"
+  // @Success 200 {object} model.UserRegistRes
+  // @Failure 400 {object} apperrors.validateErrorRes
+  // @Router /userinfo [post]
+  func (h *userinfoHandler) Regist(w http.ResponseWriter, r *http.Request) {
   ```
 
   モデルの各パラメータに関する説明のコメントがそのまま swagger に反映されます。
@@ -94,8 +94,4 @@ cf.
   m.Handle("/swagger/", httpSwagger.WrapHandler)
   ```
 
-  アプリ起動後、下記から swagger を参照できます:
-
-  ```
-  http://localhost:8080/swagger/index.html
-  ```
+  アプリ起動後、http://localhost:8080/swagger/index.html から swagger を参照できます。
