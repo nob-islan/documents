@@ -14,7 +14,7 @@ React など、別オリジンから API を呼び出す際の設定例です。
 func corsHandleFunc(
 	m *http.ServeMux,
 	pattern string,
-	controller func(http.ResponseWriter, *http.Request),
+	handler func(http.ResponseWriter, *http.Request),
 ) {
 	m.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -22,7 +22,7 @@ func corsHandleFunc(
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-		controller(w, r)
+		handler(w, r)
 	})
 }
 ```
@@ -37,20 +37,20 @@ func Routing() *http.ServeMux {
 	m := http.NewServeMux()
 
 	// First
-	firstController := controller.NewFirstController()
+	firstHandler := handler.NewFirstHandler()
 	corsHandleFunc(m, "/first", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			firstController.First(w, r)
+			firstHandler.First(w, r)
 		}
 	})
 
 	// Second
-	secondController := controller.NewSecondController()
+	secondHandler := handler.NewSecondHandler()
 	corsHandleFunc(m, "/second", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			secondController.Second(w, r)
+			secondHandler.Second(w, r)
 		}
 	})
 

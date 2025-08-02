@@ -16,8 +16,8 @@ import (
 
 func main() {
 	// エンドポイントのルーティング
-	http.HandleFunc("/user", getUserInfo)
-	http.HandleFunc("/user/regist", postUserInfo)
+	http.HandleFunc("/user", getUserinfo)
+	http.HandleFunc("/user/regist", postUserinfo)
 
 	// サーバーの起動
 	fmt.Println("Server started at http://localhost:8080")
@@ -25,23 +25,23 @@ func main() {
 }
 
 // ユーザ情報を取得します。
-func getUserInfo(w http.ResponseWriter, r *http.Request) {
+func getUserinfo(w http.ResponseWriter, r *http.Request) {
 
 	// 戻りのデータ作成（本来はusecaseで行う）
-	var userInfos []userInfo
-	userInfos = append(userInfos, userInfo{Id: 1, Name: "nob", Age: 13}, userInfo{Id: 2, Name: "nob2", Age: 706})
+	var userinfos []userinfo
+	userinfos = append(userinfos, userinfo{Id: 1, Name: "nob", Age: 13}, userinfo{Id: 2, Name: "nob2", Age: 706})
 
 	// レスポンス作成
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(userInfos)
+	json.NewEncoder(w).Encode(userinfos)
 }
 
 // ユーザ情報を登録します。
-func postUserInfo(w http.ResponseWriter, r *http.Request) {
+func postUserinfo(w http.ResponseWriter, r *http.Request) {
 
 	// リクエストボディをデコード
-	var u userInfo
+	var u userinfo
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&u); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -58,7 +58,7 @@ func postUserInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 // ユーザ情報
-type userInfo struct {
+type userinfo struct {
 	Id   int    // ID
 	Name string // 名前
 	Age  int    // 年齢

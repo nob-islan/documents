@@ -12,21 +12,21 @@ go get github.com/stretchr/testify
 
 ## 作成手順
 
-### controller, service テスト作成
+### handler, usecase テスト作成
 
-controller のテスト作成を例に解説します。
+handler のテスト作成を例に解説します。
 
-#### service のモック化
+#### usecase のモック化
 
-service のモック構造体を定義し、各メソッドを mock を使って実装します。
+usecase のモック構造体を定義し、各メソッドを mock を使って実装します。
 
 ```go
 // モックの定義
-type MockUserInfoService struct {
+type MockUserinfoUsecase struct {
     mock.Mock
 }
 
-func (m *MockUserInfoService) Search(in inout.UserSearchIn) (inout.UserSearchOut, error) {
+func (m *MockUserinfoUsecase) Search(in inout.UserSearchIn) (inout.UserSearchOut, error) {
     args := m.Called(in)
     return args.Get(0).(inout.UserSearchOut), args.Error(1)
 }
@@ -66,16 +66,16 @@ testcase に沿ってテストを実行していきます。
 
 ```go
 // モックサービス初期化
-mockService := new(MockUserInfoService)
+mockUsecase := new(MockUserinfoUsecase)
 
 for _, testcase := range tests {
     t.Run(testcase.name, func(t *testing.T) {
         // モックの期待される動作を定義
-        mockService.On("Search", inout.UserSearchIn{Username: testcase.requestParam.Username}).Return(testcase.mockReturnOut, testcase.mockReturnError)
+        mockUsecase.On("Search", inout.UserSearchIn{Username: testcase.requestParam.Username}).Return(testcase.mockReturnOut, testcase.mockReturnError)
 
-        // controllerの初期化
-        h := &userInfoController{
-            userInfoService: mockService,
+        // handlerの初期化
+        h := &userinfoHandler{
+            userinfoUsecase: mockUsecase,
         }
 
         // リクエストとレスポンスの準備
@@ -144,7 +144,7 @@ func connectTestDB(t *testing.T) *sql.DB {
 
 #### テストケースの定義、テスト実行
 
-controller, service と同様のため省略します。
+handler, usecase と同様のため省略します。
 
 ## テスト起動
 
@@ -158,14 +158,14 @@ go test ./...
 
 ## カバレッジ出力
 
-- カバレッジレポートをテキストファイルで出力します（下記は controller の例）:
+- カバレッジレポートをテキストファイルで出力します（下記は handler の例）:
 
 ```shell
-go test -cover -coverprofile=./controller/coverage.txt ./controller/
+go test -cover -coverprofile=./handler/coverage.txt ./handler/
 ```
 
 - カバレッジレポートを html で出力します:
 
 ```shell
-go tool cover -html=./controller/coverage.txt -o ./controller/coverage.html
+go tool cover -html=./handler/coverage.txt -o ./handler/coverage.html
 ```

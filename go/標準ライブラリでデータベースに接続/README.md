@@ -69,20 +69,20 @@ func queryData(db *sql.DB) {
 		if err := rows.Scan(&id, &name, &age); err != nil {
 			log.Fatal(err)
 		}
-		u := userInfo{Id: id, Name: name, Age: age}
+		u := userinfo{Id: id, Name: name, Age: age}
 		fmt.Println(u)
 	}
 }
 
 // user_infoテーブル向けのモデルです。
-type userInfo struct {
+type userinfo struct {
 	Id   int    // ID
 	Name string // 名前
 	Age  int    // 年齢
 }
 
 // user_infoのデータ出力用の関数です。
-func (u userInfo) String() string {
+func (u userinfo) String() string {
 	return fmt.Sprintf("Id: %d, Name: %s, Age: %d", u.Id, u.Name, u.Age)
 }
 ```
