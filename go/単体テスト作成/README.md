@@ -12,9 +12,9 @@ go get github.com/stretchr/testify
 
 ## 作成手順
 
-### handler, usecase テスト作成
+### handler テスト作成
 
-handler のテスト作成を例に解説します。
+http 通信を行う handler のテスト作成例です。
 
 #### usecase のモック化
 
@@ -39,25 +39,33 @@ func (m *MockUserinfoUsecase) Search(in inout.UserSearchIn) (inout.UserSearchOut
 テストケースを表す構造体を定義し、必要なケースを作成していきます。
 
 ```go
-tests := []struct {
-    name               string               // テストケース名
-    requestParam       reqres.UserSearchReq // リクエストパラメータ
-    mockReturnOut      inout.UserSearchOut  // モック返却値
-    mockReturnError    error                // モックエラー
-    expectedStatusCode int                  // 期待されるHTTPステータス
-    expectedBody       string               // 期待されるレスポンスボディ
-}{
-    {
-        name:         "success",
-        requestParam: reqres.UserSearchReq{Username: "testnob"},
-        mockReturnOut: inout.UserSearchOut{
-            Users: []dto.User{{Id: 1, Username: "testnob", Age: 13}},
-        },
-        mockReturnError:    nil,
-        expectedStatusCode: http.StatusOK,
-        expectedBody:       `{"users":[{"age":13,"id":1,"username":"testnob"}]}`,
-    },
-}
+	tests := []struct {
+		name               string                          // テストケース名
+		requestParam       map[string]string               // リクエストパラメータ
+		setupMock          func(mock *MockUserinfoUsecase) // モック設定
+		expectedStatusCode int                             // 期待されるHTTPステータス
+		expectedBody       string                          // 期待されるレスポンスボディ
+	}{
+		{
+			name:         "success",
+			requestParam: map[string]string{"username": "testnob"},
+			setupMock: func(mock *MockUserinfoUsecase) {
+				mock.On(
+					"Search",
+					payload.UserSearchIn{
+						Username: "testnob",
+					},
+				).Return(
+					payload.UserSearchOut{
+						Users: []types.User{{Id: 1, Username: "testnob", Age: 13}},
+					},
+					nil,
+				)
+			},
+			expectedStatusCode: http.StatusOK,
+			expectedBody:       `{"users":[{"age":13,"id":1,"username":"testnob"}]}`,
+		},
+    }
 ```
 
 #### テスト実行
@@ -65,36 +73,110 @@ tests := []struct {
 testcase に沿ってテストを実行していきます。
 
 ```go
-// モックサービス初期化
-mockUsecase := new(MockUserinfoUsecase)
+	for _, testcase := range tests {
 
-for _, testcase := range tests {
-    t.Run(testcase.name, func(t *testing.T) {
-        // モックの期待される動作を定義
-        mockUsecase.On("Search", inout.UserSearchIn{Username: testcase.requestParam.Username}).Return(testcase.mockReturnOut, testcase.mockReturnError)
+		// モックusecase初期化
+		mockUsecase := new(MockUserinfoUsecase)
 
-        // handlerの初期化
-        h := &userinfoHandler{
-            userinfoUsecase: mockUsecase,
-        }
+		t.Run(testcase.name, func(t *testing.T) {
+			// モックの期待される動作を定義
+			testcase.setupMock(mockUsecase)
 
-        // リクエストとレスポンスの準備
-        uri := "/user?username=" + testcase.requestParam.Username
-        req := httptest.NewRequest(http.MethodGet, uri, nil)
-        res := httptest.NewRecorder()
+			// handlerの初期化
+			h := NewUserinfoHandler(mockUsecase)
 
-        // ハンドラーの実行
-        h.Search(res, req)
+			// リクエストとレスポンスの準備
+			uri := "/userinfo?username=" + testcase.requestParam["username"]
+			req := httptest.NewRequest(http.MethodGet, uri, nil)
+			res := httptest.NewRecorder()
 
-        // レスポンスの検証
-        assert.Equal(t, testcase.expectedStatusCode, res.Code)
-        if testcase.expectedBody != "" {
-            assert.JSONEq(t, testcase.expectedBody, res.Body.String())
-        }
-    })
+			// handlerの実行
+			h.Search(res, req)
+
+			// レスポンスの検証
+			assert.Equal(t, testcase.expectedStatusCode, res.Code)
+			if testcase.expectedBody != "" {
+				assert.JSONEq(t, testcase.expectedBody, res.Body.String())
+			}
+		})
+	}
+```
+
+### usecase テスト作成
+
+業務処理を行う usecase のテスト作成例です。
+
+#### repository のモック化
+
+repository のモック構造体を定義し、各メソッドを mock を使って実装します。書き方は usecase のモック化と同様です。
+
+#### テストケースの定義
+
+テストケースを表す構造体を定義し、必要なケースを作成していきます。
+
+```go
+	tests := []struct {
+		name          string                             // テストケース名
+		requestBody   payload.UserSearchIn               // リクエストボディ
+		setupMock     func(mock *MockUserinfoRepository) // モック設定
+		expectedBody  payload.UserSearchOut              // 期待されるレスポンスボディ
+		expectedError error                              // 期待されるエラー
+	}{
+		{
+			name:        "success",
+			requestBody: payload.UserSearchIn{Username: "testnob"},
+			setupMock: func(mock *MockUserinfoRepository) {
+				mock.On(
+					"SelectByUsername",
+					"testnob",
+				).Return([]domain.Userinfo{{Id: 706, Username: "testnob", Age: 13}}, nil)
+			},
+			expectedBody: payload.UserSearchOut{
+				Users: []types.User{
+					{
+						Id:       706,
+						Username: "testnob",
+						Age:      13,
+					},
+				},
+			},
+			expectedError: nil,
+		}
+    }
+```
+
+#### テスト実行
+
+testcase に沿ってテストを実行していきます。
+
+```go
+	for _, testcase := range tests {
+
+		// モックリポジトリ初期化
+		mockRepository := new(MockUserinfoRepository)
+
+		t.Run(testcase.name, func(t *testing.T) {
+			// モックの期待される動作を定義
+			testcase.setupMock(mockRepository)
+
+			// usecaseの初期化
+			s := NewUserinfoUsecase(mockRepository)
+
+			// usecaseの実行
+			result, err := s.Search(testcase.requestBody)
+
+			// レスポンスの検証
+			assert.Equal(t, testcase.expectedBody, result)
+			assert.Equal(t, testcase.expectedError, err)
+		})
+	}
 ```
 
 ### repository テスト作成
+
+データベースへのアクセスを行う repository のテスト作成例です。
+
+#### 一時データベース準備
 
 テスト向けの一時的なデータベースを用意するため、**sqlite3**をインストールします。
 
@@ -142,9 +224,65 @@ func connectTestDB(t *testing.T) *sql.DB {
 }
 ```
 
-#### テストケースの定義、テスト実行
+#### テストケースの定義
 
-handler, usecase と同様のため省略します。
+テストケースを表す構造体を定義し、必要なケースを作成していきます。
+
+```go
+	tests := []struct {
+		name                 string            // テストケース名
+		queryParam           string            // クエリパラメータ
+		setup                func(db *sql.DB)  // 事前セットアップ関数
+		expectedBody         []domain.Userinfo // 期待されるレスポンスボディ
+		expectedErrorMessage string            // 期待されるエラーメッセージ
+	}{
+		{
+			name:       "success",
+			queryParam: "testnob",
+			setup:      func(db *sql.DB) {},
+			expectedBody: []domain.Userinfo{
+				{
+					Id:       1,
+					Username: "testnob01",
+					Age:      13,
+				}, {
+					Id:       2,
+					Username: "testnob02",
+					Age:      14,
+				},
+			},
+			expectedErrorMessage: "",
+		}
+    }
+```
+
+#### テスト実行
+
+testcase に沿ってテストを実行していきます。
+
+```go
+	for _, testcase := range tests {
+
+		t.Run(testcase.name, func(t *testing.T) {
+
+			// テストデータベースおよびrepository初期化
+			db := util.ConnectTestDB(t, "userinfo")
+			r := NewUserinfoRepository(db)
+
+			// 事前セットアップ
+			testcase.setup(db)
+
+			// repositoryの実行
+			result, err := r.SelectByUsername(testcase.queryParam)
+
+			// レスポンスの確認
+			assert.Equal(t, testcase.expectedBody, result)
+			if err != nil {
+				assert.Equal(t, testcase.expectedErrorMessage, err.Error())
+			}
+		})
+	}
+```
 
 ## テスト起動
 
