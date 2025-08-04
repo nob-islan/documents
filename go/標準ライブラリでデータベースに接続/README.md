@@ -81,10 +81,43 @@ type userinfo struct {
 	Age  int    // 年齢
 }
 
-// user_infoのデータ出力用の関数です。
+// user_infoのデータ出力用の関数です。Println時の挙動を定めます。
 func (u userinfo) String() string {
 	return fmt.Sprintf("Id: %d, Name: %s, Age: %d", u.Id, u.Name, u.Age)
 }
+```
+
+下記のテストデータを用意しておきます:
+
+```sql
+-- データベース作成
+CREATE DATABASE snaildb;
+
+USE snaildb;
+
+-- テーブル作成
+CREATE TABLE userinfo(
+    user_id int PRIMARY KEY AUTO_INCREMENT
+    , username VARCHAR(20) NOT NULL
+    , age int NOT NULL
+);
+
+-- テストデータ
+INSERT INTO userinfo(
+    username
+    , age
+) VALUES (
+    "nob"
+    , 13
+);
+
+INSERT INTO userinfo(
+    username
+    , age
+) VALUES (
+    "nob2"
+    , 7
+);
 ```
 
 下記のように実行結果が得られます:
