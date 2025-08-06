@@ -67,6 +67,7 @@
   - [Web 画面を出力](./go/Web画面を出力/README.md)
   - [アプリのデバッグ](./go/アプリのデバッグ/README.md)
   - [環境構築](./go/環境構築/README.md)
+  - [他プロジェクトのパッケージを import](./go/他プロジェクトのパッケージをimport/README.md)
   - [単体テスト作成](./go/単体テスト作成/README.md)
   - [標準ライブラリで REST API を実装](./go/標準ライブラリでREST_APIを実装/README.md)
   - [標準ライブラリでデータベースに接続](./go/標準ライブラリでデータベースに接続/README.md)
