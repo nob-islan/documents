@@ -105,26 +105,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
-`docker-compose up -d`を実行してコンテナを作成。  
-コンテナ起動後、`docker exec -it gitlab-runner-test gitlab-runner register`で各種設定を対話形式で進めます：
-
-```
-Enter the GitLab instance URL (for example, https://gitlab.com/):
-${instance URL}
-Enter the registration token:
-${registration token}
-Enter a description for the runner:
-[0d7a963169c9]: ${description for the runner}
-Enter tags for the runner (comma-separated):
-${tags}
-Registering runner... succeeded                     runner=cgdeSzvu
-Enter an executor: custom, docker-ssh, ssh, docker+machine, docker, parallels, shell, virtualbox, docker-ssh+machine, kubernetes:
-${docker}
-Enter the default Docker image (for example, ruby:2.7):
-${ruby:2.7}
-```
-
-`${instance URL}`および`${dregistration token}`については GitLab の Settings -> CI/CD -> Runners で設定を確認して入力します。
+`docker-compose up -d`を実行してコンテナを作成。起動後、GitLab GUI 上の "Create project runner" から作成したコマンドから、対話形式で runner を構築できます。
 
 ### GitLab が 自己証明書で SSL 通信をしている場合
 
@@ -143,4 +124,27 @@ GitLab にドメインを当てているなどしていて「名前解決がで�
   [runners.docker]
   ...
     extra_hosts = ["${ドメイン名}:${ホストOSのIPアドレス}"]
+```
+
+## .gitlab-ci.yml サンプル
+
+```yml
+stages:
+  - build
+  - test
+
+job_build:
+  stage: build
+  script:
+    - echo "Building the project"
+
+job_test1:
+  stage: test
+  script:
+    - echo "This is the first test"
+
+job_test2:
+  stage: test
+  script:
+    - echo "This is the second test"
 ```
