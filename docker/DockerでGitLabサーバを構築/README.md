@@ -120,6 +120,8 @@ volumes:
 
 GitLab にドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の`/srv/gitlab/gitlab-runner/config/config.toml`に下記を追加します。
 
+cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
+
 ```
   [runners.docker]
   ...
