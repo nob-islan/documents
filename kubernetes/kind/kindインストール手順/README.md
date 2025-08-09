@@ -113,7 +113,9 @@ kind delete cluster
 kind create cluster --config first-kind.yml
 ```
 
-以下の yaml に従って、マルチノードのクラスタが立ち上がります。
+## クラスタ設定 yml サンプル
+
+- ワーカーノード 2 台を起動
 
 ```yml
 kind: Cluster
@@ -122,6 +124,22 @@ nodes:
   # コントロールプレーン1台
   - role: control-plane
   # ワーカーノード2台
+  - role: worker
+  - role: worker
+```
+
+- NodePort 向けのポートを開放
+
+```yml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+    extraPortMappings:
+      # ServiceのNodePortに30080を指定するとホストマシンの30070へのアクセスがワーカーノードの30080に転送される
+      - containerPort: 30080
+        hostPort: 30070
+        protocol: TCP
   - role: worker
   - role: worker
 ```
