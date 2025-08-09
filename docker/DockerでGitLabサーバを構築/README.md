@@ -125,7 +125,7 @@ cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
 ```
   [runners.docker]
   ...
-    extra_hosts = ["${ドメイン名}:${ホストOSのIPアドレス}"]
+    extra_hosts = ["${ドメイン名}:${GitLabのIPアドレス}"]
 ```
 
 ## .gitlab-ci.yml サンプル
