@@ -42,7 +42,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl.sha256"
 ```
 
-チェックサムファイルに対してkubectlバイナリを検証
+チェックサムファイルに対して kubectl バイナリを検証
 
 ```
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
@@ -115,13 +115,13 @@ kind create cluster --config first-kind.yml
 
 以下の yaml に従って、マルチノードのクラスタが立ち上がります。
 
-```yaml:first-kind.yml
+```yml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
-# コントロールプレーン1台
-- role: control-plane
-# ワーカーノード2台
-- role: worker
-- role: worker
+  # コントロールプレーン1台
+  - role: control-plane
+  # ワーカーノード2台
+  - role: worker
+  - role: worker
 ```
