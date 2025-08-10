@@ -75,6 +75,7 @@
   - [標準ライブラリで REST API を実装](./go/標準ライブラリでREST_APIを実装/README.md)
   - [標準ライブラリでデータベースに接続](./go/標準ライブラリでデータベースに接続/README.md)
 - harbor
+  - [http 通信での push を許可](./harbor/http通信でのpushを許可/README.md)
   - [リポジトリにライフサイクルポリシーを設定する](./harbor/リポジトリにライフサイクルポリシーを設定する/README.md)
 - ignite
   - [ignite-install](./ignite/ignite-install/README.md)

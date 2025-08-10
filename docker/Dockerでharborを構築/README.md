@@ -39,21 +39,3 @@ docker login ${harborサーバのIPアドレス}:80 -u ${robot_name} -p ${access
 ```
 
 `robot_name`をシングルクオートで囲まないとエラーになるので注意してください。
-
-## Tips
-
-各種トラブルシュートです。
-
-### docker pull 時に`Error response from daemon: Get "-": http: server gave HTTP response to HTTPS client`エラー
-
-- 下記を pull したいサーバの`/etc/docker/daemon.json`に追記してください。
-
-```json
-{ "insecure-registries": ["${harborサーバのIPアドレス}:80"] }
-```
-
-- 下記で docker を再起動してください。
-
-```shell
-sudo systemctl restart docker
-```
