@@ -23,6 +23,9 @@
 - coder
   - [はじめての coder](./coder/はじめてのcoder/README.md)
 - dev-container
+  - 00_common
+    - [開発環境構築](./dev-container/共通/開発環境構築/README.md)
+    - [volume 設定方法](./dev-container/共通/volume設定方法/README.md)
   - [eks クライアントサンプル](./dev-container/eksクライアントサンプル/README.md)
   - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
   - [go 環境サンプル](./dev-container/go環境サンプル/README.md)
@@ -31,9 +34,6 @@
   - [kind サンプル](./dev-container/kindサンプル/README.md)
   - [kubebuilder 環境サンプル](./dev-container/kubebuilder環境サンプル/README.md)
   - [marp サンプル](./dev-container/marpサンプル/README.md)
-  - 共通
-    - [開発環境構築](./dev-container/共通/開発環境構築/README.md)
-    - [volume 設定方法](./dev-container/共通/volume設定方法/README.md)
 - dnsmasq
   - [はじめての dnsmasq](./dnsmasq/はじめてのdnsmasq/README.md)
 - docker
