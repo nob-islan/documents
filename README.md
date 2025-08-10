@@ -102,7 +102,7 @@
   - [独自例外クラスおよびハンドラを作成](./java/独自例外クラスおよびハンドラを作成/README.md)
 - kubernetes
   - kind
-    - [http 通信でコンテナレジストリと通信する](./kubernetes/kind/http通信でコンテナレジストリと通信する/README.md)
+    - [http 通信でコンテナレジストリと疎通する](./kubernetes/kind/http通信でコンテナレジストリと疎通する/README.md)
     - [kind インストール手順](./kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/README.md)
     - [kind で ArgoCD を使う](./kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/README.md)
     - [kind で ECR のプライベートリポジトリから image を pull](./kubernetes/kind/kind%E3%81%A7ECR%E3%81%AE%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%8B%E3%82%89image%E3%82%92pull/README.md)
@@ -113,6 +113,7 @@
     - ArgoCD
       - [ArgoCD 構築手順](./kubernetes/pure-kubernetes/argocd/ArgoCD構築手順/README.md)
       - [GitLab リポジトリを登録](./kubernetes/pure-kubernetes/argocd/GitLabリポジトリを登録/README.md)
+    - [http 通信でコンテナレジストリと疎通する](./kubernetes/pure-kubernetes/http通信でコンテナレジストリと疎通する/README.md)
     - [k9s インストール手順](./kubernetes/pure-kubernetes/k9sインストール手順/README.md)
     - [Kubernetes クラスター構築手順](./kubernetes/pure-kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
     - [MetalLB 構築手順](./kubernetes/pure-kubernetes/MetalLB構築手順/README.md)
