@@ -31,7 +31,9 @@
   - [kind サンプル](./dev-container/kindサンプル/README.md)
   - [kubebuilder 環境サンプル](./dev-container/kubebuilder環境サンプル/README.md)
   - [marp サンプル](./dev-container/marpサンプル/README.md)
-  - [開発環境構築](./dev-container/開発環境構築/README.md)
+  - 共通
+    - [開発環境構築](./dev-container/共通/開発環境構築/README.md)
+    - [volume 設定方法](./dev-container/共通/volume設定方法/README.md)
 - dnsmasq
   - [はじめての dnsmasq](./dnsmasq/はじめてのdnsmasq/README.md)
 - docker
