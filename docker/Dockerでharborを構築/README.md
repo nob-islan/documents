@@ -38,7 +38,7 @@
 docker login ${harborサーバのIPアドレス}:80 -u ${robot_name} -p ${access_token}
 ```
 
-`robot_name`をクオートで囲まないとエラーになるので注意してください。
+`robot_name`をシングルクオートで囲まないとエラーになるので注意してください。
 
 ## Tips
 
