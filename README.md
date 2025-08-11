@@ -52,6 +52,7 @@
 - gitlab
   - GitLab Runner サンプル
     - [Go アプリをビルド](./gitlab//GitLab_Runnerサンプル/Goアプリをビルド/README.md)
+    - [Kubernetes カスタムコントローラーをビルド](./gitlab/GitLab_Runnerサンプル/Kubernetesカスタムコントローラーをビルド/README.md)
     - [React アプリをビルド](./gitlab/GitLab_Runnerサンプル/Reactアプリをビルド/README.md)
     - [Spring Boot アプリをビルド](./gitlab/GitLab_Runnerサンプル/Spring_Bootアプリをビルド/README.md)
   - [GitLab_Runner で Docker_Hub に image を push する](./gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/README.md)
