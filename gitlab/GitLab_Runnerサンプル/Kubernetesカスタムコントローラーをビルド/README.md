@@ -47,13 +47,14 @@ image_build:
 
 ### Makefile
 
-kubebuilder によって自動生成される Makefile に下記を追記します:
+kubebuilder によって自動生成される Makefile に下記を追記します。`make deploy`で作成されるそれと同じマニフェストを`deployments`配下に配置します。このディレクトリに`custom_resource.yml`も併せて配置することで、この配下のマニフェストを apply することでカスタムリソースを機能させることができるようになっています:
 
 ```Makefile
 .PHONY: manifest
 manifest: manifests kustomize ## Deploy controller to the K8s cluster specified in ~/.kube/config.
 	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG}
-	$(KUSTOMIZE) build config/default > config/samples/controller.yml
+	mkdir -p deployments
+	$(KUSTOMIZE) build config/default > deployments/controller.yml
 ```
 
 ## デプロイ手順
@@ -83,5 +84,5 @@ make manifest
 kubectl apply -f /path/to/controller.yml
 
 # カスタムリソース作成
-kubectl apply -f /path/to/custom-resource.yml
+kubectl apply -f /path/to/custom_resource.yml
 ```
