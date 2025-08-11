@@ -12,7 +12,7 @@ stages:
   - build
 variables:
   CONTROLLER: nob-controller # コントローラーのプロジェクト名
-controller_test:
+test:
   stage: test
   image:
     name: golang:1.23
@@ -28,7 +28,7 @@ controller_test:
       - ${CONTROLLER}/coverage.html
   rules:
     - if: $CI_COMMIT_TAG
-image_build:
+build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
