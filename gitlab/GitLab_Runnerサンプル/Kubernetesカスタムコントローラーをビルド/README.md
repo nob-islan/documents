@@ -8,9 +8,26 @@ GitLab Runner を使って Kubernetes カスタムコントローラーのコン
 
 ```yml
 stages:
+  - test
   - build
 variables:
   CONTROLLER: nob-controller # コントローラーのプロジェクト名
+controller_test:
+  stage: test
+  image:
+    name: golang:1.23
+  script:
+    - cd ${CONTROLLER}
+    - go install gotest.tools/gotestsum@latest
+    - make test
+    - go tool cover -html=cover.out -o coverage.html
+    - go tool cover -func=cover.out
+  artifacts:
+    when: always
+    paths:
+      - ${CONTROLLER}/coverage.html
+  rules:
+    - if: $CI_COMMIT_TAG
 image_build:
   stage: build
   image:
