@@ -57,11 +57,7 @@ test:
   artifacts:
     when: always
     paths:
-      - coverage.html
-    reports:
-      junit: report.xml
-  artifacts:
-    when: always
+      - ${MODULE}/coverage.html
     reports:
       junit: ${MODULE}/report.xml
   rules:
