@@ -27,7 +27,6 @@
     - [開発環境構築](./dev-container/00_common/開発環境構築/README.md)
     - [volume 設定方法](./dev-container/00_common/volume設定方法/README.md)
   - [eks クライアントサンプル](./dev-container/eksクライアントサンプル/README.md)
-  - [gitlab サンプル](./dev-container/gitlabサンプル/README.md)
   - [go 環境サンプル](./dev-container/go環境サンプル/README.md)
   - [java 環境サンプル](./dev-container/java環境サンプル/README.md)
   - [react 環境サンプル](./dev-container/react環境サンプル/README.md)
