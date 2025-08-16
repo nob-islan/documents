@@ -9,7 +9,11 @@ Let's Encript で証明書を作成するにはドメインが必要です（IP 
 ## 証明書作成
 
 ```shell
-# 証明書の作成のみ行う
+# certbotインストール
+sudo apt update
+sudo apt install certbot
+
+# 証明書の作成を行う
 certbot certonly --standalone -d {ドメイン名}
 ```
 
