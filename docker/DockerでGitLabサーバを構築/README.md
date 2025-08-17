@@ -12,7 +12,7 @@
 services:
   gitlab:
     image: gitlab/gitlab-ce:latest
-    container_name: gitlab-test
+    container_name: nob-gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url "http://${IP_address}:80"
@@ -30,7 +30,7 @@ services:
 root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
 
 ```
-docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
+docker exec -it nob-gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
 ### Let's Encrypt を使って SSL 通信をできるようにする
@@ -99,7 +99,7 @@ gitlab-runner は下記で起動できます:
 services:
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner-test
+    container_name: nob-gitlab-runner
     volumes:
       - "/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner"
       - "/var/run/docker.sock:/var/run/docker.sock"
