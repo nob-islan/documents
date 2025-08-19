@@ -4,6 +4,11 @@ GitHub Actions を使って Go アプリケーションをビルドし、コン�
 
 ## 設定
 
+cf.
+
+- [Go build and test](https://docs.github.com/ja/actions/tutorials/build-and-test-code/go)
+- [Publish docker image](https://docs.github.com/ja/actions/tutorials/publish-packages/publish-docker-images)
+
 タグが切られた際に下記を実行します:
 
 - 指定したパッケージ配下のテスト実行
