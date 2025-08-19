@@ -55,6 +55,7 @@
     - [Go アプリをビルド](./github/GitHub_Actions/Goアプリをビルド/README.md)
 - gitlab
   - GitLab Runner サンプル
+    - [Go CLI をビルド](./gitlab/GitLab_Runnerサンプル/Go%20CLIをビルド/README.md)
     - [Go アプリをビルド](./gitlab//GitLab_Runnerサンプル/Goアプリをビルド/README.md)
     - [Kubernetes カスタムコントローラーをビルド](./gitlab/GitLab_Runnerサンプル/Kubernetesカスタムコントローラーをビルド/README.md)
     - [React アプリをビルド](./gitlab/GitLab_Runnerサンプル/Reactアプリをビルド/README.md)
