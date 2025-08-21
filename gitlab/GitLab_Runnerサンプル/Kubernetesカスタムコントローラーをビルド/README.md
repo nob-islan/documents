@@ -81,8 +81,8 @@ make manifest
 
 ```shell
 # カスタムコントローラー起動
-kubectl apply -f /path/to/controller.yml
+kubectl apply -f /path/to/controller.yaml
 
 # カスタムリソース作成
-kubectl apply -f /path/to/custom_resource.yml
+kubectl apply -f /path/to/custom_resource.yaml
 ```
