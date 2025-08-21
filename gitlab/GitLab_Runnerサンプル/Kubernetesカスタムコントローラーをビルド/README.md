@@ -47,21 +47,17 @@ build:
 
 ### Makefile
 
-kubebuilder によって自動生成される Makefile に下記を追記します。`make deploy`で作成されるそれと同じマニフェストを`deployments`配下に配置します。このディレクトリに`custom_resource.yml`も併せて配置することで、この配下のマニフェストを apply することでカスタムリソースを機能させることができるようになっています:
+kubebuilder によって自動生成される Makefile に下記を追記します。`make deploy`で作成されるそれと同じマニフェストを`deploy`配下に配置します。`config/samples`配下のカスタムリソースマニフェストと併せてコントローラーを動かす想定です:
 
 ```Makefile
 .PHONY: manifest
 manifest: manifests kustomize ## Deploy controller to the K8s cluster specified in ~/.kube/config.
 	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG}
-	mkdir -p deployments
-	$(KUSTOMIZE) build config/default > deployments/controller.yml
+	mkdir -p deploy
+	$(KUSTOMIZE) build config/default > deploy/controller.yaml
 ```
 
 ## デプロイ手順
-
-### Runner 側の操作
-
-- タグを切って GitLab Runner を実行し、コンテナイメージをレジストリに push します。
 
 ### カスタムコントローラープロジェクト側の操作
 
@@ -74,6 +70,10 @@ export IMG=nob-harbor.ddo.jp/first-kube-operator/nob-controller:latest
 # マニフェスト生成
 make manifest
 ```
+
+### Runner 側の操作
+
+- タグを切って GitLab Runner を実行し、コンテナイメージをレジストリに push します。
 
 ### Kubernetes クラスタ側の操作
 
