@@ -29,12 +29,12 @@ test:
     - cd ${CONTROLLER}
     - go install gotest.tools/gotestsum@latest
     - make test
-    - go tool cover -html=cover.out -o coverage.html
+    - go tool cover -html=cover.out -o ../coverage.html
     - go tool cover -func=cover.out
   artifacts:
     when: always
     paths:
-      - ${CONTROLLER}/coverage.html
+      - coverage.html
 build:
   stage: build
   image:
