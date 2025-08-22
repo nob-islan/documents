@@ -6,17 +6,26 @@ GitLab Runner を使って Kubernetes カスタムコントローラーのコン
 
 ### .gitlab-ci.yml
 
+下記ステージで構成します:
+
+- テスト実行
+  - テスト関数を一括実行し、カバレッジを出力します。
+- イメージビルド
+  - kaniko を使ってコントローラーのコンテナイメージをビルドします。
+  - `.env`ファイルについて main ブランチと差分がある場合のみ実行されます。
+    - `TAG`が書き換わってバージョンが上がる場合のみ実装される想定です。
+  - 各種環境変数は`.env`で管理しますが、harbor のユーザ ID およびシークレットキーについてはセキュリティの関係上 GitLab の Environment 上で管理することを想定しています。
+
 ```yml
 stages:
   - test
   - build
-variables:
-  CONTROLLER: nob-controller # コントローラーのプロジェクト名
 test:
   stage: test
   image:
     name: golang:1.23
   script:
+    - . ${CI_PROJECT_DIR}/.env
     - cd ${CONTROLLER}
     - go install gotest.tools/gotestsum@latest
     - make test
@@ -26,32 +35,49 @@ test:
     when: always
     paths:
       - ${CONTROLLER}/coverage.html
-  rules:
-    - if: $CI_COMMIT_TAG
 build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
+    - . ${CI_PROJECT_DIR}/.env
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${HARBOR_HOST}\":{\"auth\":\"$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/${CONTROLLER}"
       --dockerfile "${CI_PROJECT_DIR}/${CONTROLLER}/Dockerfile"
-      --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:${CI_COMMIT_TAG}"
+      --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:${TAG}"
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH
+      changes:
+        compare_to: "refs/heads/main"
+        paths:
+          - ".env"
 ```
 
 ### Makefile
 
+環境変数の管理向けに`.env`ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yml および Makefile から読み取れるようにします:
+
+```shell
+TAG=v1.0.0
+HARBOR_HOST=nob-harbor.ddo.jp
+HARBOR_PROJECT=first-kube-operator
+CONTROLLER=nob-controller
+IMG=${HARBOR_HOST}:80/${HARBOR_PROJECT}/${CONTROLLER}:${TAG}
+```
+
 kubebuilder によって自動生成される Makefile に下記を追記します。`make deploy`で作成されるそれと同じマニフェストを`deploy`配下に配置します。`config/samples`配下のカスタムリソースマニフェストと併せてコントローラーを動かす想定です:
 
 ```Makefile
-.PHONY: manifest
-manifest: manifests kustomize ## Deploy controller to the K8s cluster specified in ~/.kube/config.
+include ../.env
+```
+
+```Makefile
+.PHONY: release
+release: manifests kustomize ## Deploy controller to the K8s cluster specified in ~/.kube/config.
 	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG}
 	mkdir -p deploy
 	$(KUSTOMIZE) build config/default > deploy/controller.yaml
@@ -59,30 +85,6 @@ manifest: manifests kustomize ## Deploy controller to the K8s cluster specified 
 
 ## デプロイ手順
 
-### カスタムコントローラープロジェクト側の操作
-
-- カスタムコントローラープロジェクトにて各種マニフェストの生成を行います:
-
-```shell
-# export IMG={コンテナレジストリ}/{プロジェクト}/{リポジトリ}:{タグ}
-export IMG=nob-harbor.ddo.jp/first-kube-operator/nob-controller:latest
-
-# マニフェスト生成
-make manifest
-```
-
-### Runner 側の操作
-
-- タグを切って GitLab Runner を実行し、コンテナイメージをレジストリに push します。
-
-### Kubernetes クラスタ側の操作
-
-- 作成したマニフェストを apply してコントローラーを起動します:
-
-```shell
-# カスタムコントローラー起動
-kubectl apply -f /path/to/controller.yaml
-
-# カスタムリソース作成
-kubectl apply -f /path/to/custom_resource.yaml
-```
+- `.env`を書き換えてバージョンを更新します。
+- `make release`コマンドでカスタムコントローラープロジェクトにて各種マニフェストの生成を行います:
+- push 時に runner が動き、コンテナイメージが push されます。
