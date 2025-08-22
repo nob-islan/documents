@@ -88,3 +88,7 @@ release: manifests kustomize ## Deploy controller to the K8s cluster specified i
 - `.env`を書き換えてバージョンを更新します。
 - `make release`コマンドでカスタムコントローラープロジェクトにて各種マニフェストの生成を行います:
 - push 時に runner が動き、コンテナイメージが push されます。
+
+## 成果物の利用手順
+
+マニフェストを apply してリソースを利用する際は`deploy`配下のコントローラー向けマニフェストおよび`nob-controller/config/samples`配下のカスタムリソース向けマニフェストを利用してください。
