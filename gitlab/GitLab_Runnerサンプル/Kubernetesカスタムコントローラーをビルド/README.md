@@ -91,4 +91,4 @@ release: manifests kustomize ## Deploy controller to the K8s cluster specified i
 
 ## 成果物の利用手順
 
-マニフェストを apply してリソースを利用する際は`deploy`配下のコントローラー向けマニフェストおよび`nob-controller/config/samples`配下のカスタムリソース向けマニフェストを利用してください。
+マニフェストを apply してリソースを利用する際は`deploy`配下のコントローラー向けマニフェストおよび`config/samples`配下のカスタムリソース向けマニフェストを利用してください。
