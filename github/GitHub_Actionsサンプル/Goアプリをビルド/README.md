@@ -20,12 +20,12 @@ name: Go
 on:
   release:
     types: [published]
+env:
+  module: easyapp # GOアプリケーションのモジュール名
 jobs:
   test:
     name: test
     runs-on: ubuntu-latest
-    env:
-      module: easyapp # GOアプリケーションのモジュール名
     steps:
       - uses: actions/checkout@v4
       - name: Setup Go
@@ -48,8 +48,6 @@ jobs:
     name: build
     needs: test
     runs-on: ubuntu-latest
-    env:
-      module: easyapp
     steps:
       - uses: actions/checkout@v4
       - name: Setup Go
