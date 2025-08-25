@@ -8,17 +8,17 @@ GitLab Runner を使って Go の CLI アプリをビルドします。
 
 cf.
 
-- [Releases](https://docs.gitlab.com/user/project/releases/)
 - [Job artifacts](https://docs.gitlab.com/api/job_artifacts/)
+- [Releases](https://docs.gitlab.com/user/project/releases/)
 
 下記ステージで構成します:
 
 - ビルド
   - `go build`でバイナリを作成します。
+    - サンプルとして linux 向けの arm64, amd64 対応版をビルドしています。
   - 複数 OS, アーキに対応する場合はそれぞれのバージョンに対してビルドしてください。
 - リリース
-  - `release-cli`コマンドを使います。
-    - FIXME: `glab`への移行が推奨されていますが、http 通信での login ができないようだったので見送っています。
+  - `gitlab-cli`を使います。
   - build ジョブで作成した artifact をダウンロードし、release 時の asset に追加します。
 
 ```yml
@@ -43,15 +43,19 @@ build:
     - if: $CI_COMMIT_TAG
 release:
   stage: release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  image: registry.gitlab.com/gitlab-org/cli:latest
   script:
-    - |
-      release-cli create \
-        --name "${CI_COMMIT_TAG}" \
-        --tag-name "${CI_COMMIT_TAG}" \
-        --description "Release ${CI_COMMIT_TAG}" \
-        --assets-link "{\"name\":\"${MODULE}_${CI_COMMIT_TAG}_linux_arm64 \", \"url\":\"${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${COMMAND}/${MODULE}_${CI_COMMIT_TAG}_linux_arm64?job=build\"}" \
-        --assets-link "{\"name\":\"${MODULE}_${CI_COMMIT_TAG}_linux_amd64 \", \"url\":\"${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${COMMAND}/${MODULE}_${CI_COMMIT_TAG}_linux_amd64?job=build\"}"
+    - echo "Running the release job."
+  release:
+    tag_name: ${CI_COMMIT_TAG}
+    name: ${CI_COMMIT_TAG}
+    description: Release version ${CI_COMMIT_TAG}
+    assets:
+      links:
+        - name: ${MODULE}_${CI_COMMIT_TAG}_linux_arm64
+          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${COMMAND}/${MODULE}_${CI_COMMIT_TAG}_linux_arm64?job=build
+        - name: ${MODULE}_${CI_COMMIT_TAG}_linux_amd64
+          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${COMMAND}/${MODULE}_${CI_COMMIT_TAG}_linux_amd64?job=build
   rules:
     - if: $CI_COMMIT_TAG
 ```
