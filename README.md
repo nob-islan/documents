@@ -51,9 +51,9 @@
 - github
   - GitHub Actions サンプル
     - 00_common
-      - [セルフホストランナー構築](./github/GitHub_Actions/00_common/セルフホストランナー構築/README.md)
+      - [セルフホストランナー構築](./github/GitHub_Actionsサンプル/00_common/セルフホストランナー構築/README.md)
     - [Go CLI をビルド](./github/GitHub_Actionsサンプル/Go%20CLIをビルド/README.md)
-    - [Go アプリをビルド](./github/GitHub_Actions/Goアプリをビルド/README.md)
+    - [Go アプリをビルド](./github/GitHub_Actionsサンプル/Goアプリをビルド/README.md)
 - gitlab
   - GitLab Runner サンプル
     - [Go CLI をビルド](./gitlab/GitLab_Runnerサンプル/Go%20CLIをビルド/README.md)
