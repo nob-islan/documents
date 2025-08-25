@@ -6,6 +6,12 @@ GitLab Runner を使って Kubernetes カスタムコントローラーのコン
 
 ### .gitlab-ci.yml
 
+cf.
+
+- [Using kaniko](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
+- [Code coverage](https://docs.gitlab.com/ci/testing/code_coverage/)
+- [GitLab CLI](https://docs.gitlab.com/editor_extensions/gitlab_cli/)
+
 下記ステージで構成します:
 
 - テスト実行
@@ -15,11 +21,14 @@ GitLab Runner を使って Kubernetes カスタムコントローラーのコン
   - `.env`ファイルについて main ブランチと差分がある場合のみ実行されます。
     - `TAG`が書き換わってバージョンが上がる場合のみ実行される想定です。
   - 各種環境変数は`.env`で管理しますが、harbor のユーザ ID およびシークレットキーについてはセキュリティの関係上 GitLab の Environment 上で管理することを想定しています。
+- リリース
+  - `.env`が書き換わったブランチ（i.e., バージョンが上がったブランチ）がマージされたタイミングでリリースタグを作成します。
 
 ```yml
 stages:
   - test
   - build
+  - release
 test:
   stage: test
   image:
@@ -55,6 +64,17 @@ build:
         compare_to: "refs/heads/main"
         paths:
           - ".env"
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/cli:latest
+  script:
+    - . ${CI_PROJECT_DIR}/.env
+    - glab auth login --hostname ${CI_SERVER_HOST} --job-token ${CI_JOB_TOKEN} --api-host ${CI_SERVER_HOST}:80 --api-protocol http
+    - glab release create ${TAG}
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - ".env"
 ```
 
 ### Makefile
@@ -85,9 +105,12 @@ release: manifests kustomize ## Deploy controller to the K8s cluster specified i
 
 ## デプロイ手順
 
+任意の feature ブランチにて下記手順を踏むことでデプロイが進みます:
+
 - `.env`を書き換えてバージョンを更新します。
 - `make release`コマンドでカスタムコントローラープロジェクトにて各種マニフェストの生成を行います:
 - push 時に runner が動き、コンテナイメージが push されます。
+- 作業ブランチがマージされたタイミングでリリースタグが切られます。
 
 ## 成果物の利用手順
 
