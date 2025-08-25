@@ -89,7 +89,7 @@ CONTROLLER=nob-controller
 IMG=${HARBOR_HOST}:80/${HARBOR_PROJECT}/${CONTROLLER}:${TAG}
 ```
 
-kubebuilder によって自動生成される Makefile に下記を追記します。`make deploy`で作成されるそれと同じマニフェストを`deploy`配下に配置します。`config/samples`配下のカスタムリソースマニフェストと併せてコントローラーを動かす想定です:
+kubebuilder によって自動生成される Makefile に下記を追記し、`make release`コマンドを用意します。`make deploy`で作成されるそれと同じマニフェストを`deploy`配下に配置します。`config/samples`配下のカスタムリソースマニフェストと併せてコントローラーを動かす想定です:
 
 ```Makefile
 include ../.env
