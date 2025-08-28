@@ -10,8 +10,8 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_pr
 
 VirtualBox 上で仮想マシンを立てて構築します。ドキュメントに記載されている最低条件ギリギリです。
 
-- メモリ：2GB
-- CPU：2 コア
+- メモリ: 2GB
+- CPU: 2 コア
 - HDD: 32GB
 - OS: Ubuntu 20.04.3
 
