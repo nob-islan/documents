@@ -34,7 +34,7 @@ bogus-priv
 resolv-file=/etc/dnsmasq-resolv.conf
 
 # ローカルエリア内のドメインを指定
-local=/nob.jp/
+local=/nob.com/
 
 # hostsとして参照させたいファイル
 addn-hosts=/etc/dnsmasq-hosts
