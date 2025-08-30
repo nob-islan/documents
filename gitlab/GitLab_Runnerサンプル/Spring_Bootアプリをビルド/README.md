@@ -26,27 +26,27 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
 カバレッジレポートを出力するために依存関係を追加する必要があります:
 
 ```xml
-    <plugins>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.5</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-		</plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 ```
 
 ```xml
@@ -54,18 +54,18 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
     <reporting>
         <plugins>
             <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <reportSets>
-                <reportSet>
-                <reports>
-                    <report>report</report>
-                </reports>
-                </reportSet>
-            </reportSets>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                    <reports>
+                        <report>report</report>
+                    </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
-          </plugins>
-      </reporting>
+        </plugins>
+    </reporting>
 </project>
 ```
 
