@@ -1,0 +1,20 @@
+# ジョブアーティファクトをブラウザ上で確認する
+
+cf.
+
+- https://docs.gitlab.com/ci/jobs/job_artifacts/#browse-the-contents-of-the-artifacts-archive
+- https://docs.gitlab.com/administration/pages/#access-control
+
+## 設定
+
+- GitLab Pages の有効化
+- アクセスコントロールの有効化
+
+をすることでブラウザ上で html 等のページをブラウザ上で直接閲覧できます。
+
+```yml
+GITLAB_OMNIBUS_CONFIG: |
+  pages_external_url "http://pages.example.nob"
+  gitlab_pages['enable'] = true
+  gitlab_pages['access_control'] = true
+```
