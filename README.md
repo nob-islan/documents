@@ -55,6 +55,7 @@
     - [Go CLI をビルド](./github/GitHub_Actionsサンプル/Go%20CLIをビルド/README.md)
     - [Go アプリをビルド](./github/GitHub_Actionsサンプル/Goアプリをビルド/README.md)
 - gitlab
+  - [GitLab Pages を有効化する](./gitlab/GitLab_Pagesを有効化する/README.md)
   - GitLab Runner サンプル
     - [Go CLI をビルド](./gitlab/GitLab_Runnerサンプル/Go%20CLIをビルド/README.md)
     - [Go アプリをビルド](./gitlab//GitLab_Runnerサンプル/Goアプリをビルド/README.md)
