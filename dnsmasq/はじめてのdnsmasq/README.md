@@ -34,14 +34,14 @@ bogus-priv
 resolv-file=/etc/dnsmasq-resolv.conf
 
 # ローカルエリア内のドメインを指定
-local=/nob.com/
+local=/example.nob/
 
 # hostsとして参照させたいファイル
 addn-hosts=/etc/dnsmasq-hosts
 
 # ホスト名で問合せされた時、下記で指定されたドメイン名を補完
 expand-hosts
-domain=nob.jp
+domain=example.nob
 ```
 
 - `/etc/dnsmasq-hosts`を作成
