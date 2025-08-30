@@ -30,7 +30,7 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.13</version>
                 <executions>
                     <execution>
                         <goals>
