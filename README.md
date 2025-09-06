@@ -21,6 +21,7 @@
   - [Let's Encrypt を使って SSL 通信を行う](./code-server/lets_encryptを使ってSSL通信を行う/README.md)
   - [はじめての code-server](./code-server/はじめてのcode-server/README.md)
 - coder
+  - [template 作成](./coder/template作成/README.md)
   - [はじめての coder](./coder/はじめてのcoder/README.md)
 - dev-container
   - 00_common
