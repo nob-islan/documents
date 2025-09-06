@@ -13,7 +13,8 @@ kind 環境構築のためのサンプルソースです。
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/mpriscella/features/kind:1": {},
-    "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {}
+    "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
+    "ghcr.io/rio/features/kustomize:1": {}
   },
   "customizations": {
     "vscode": {
