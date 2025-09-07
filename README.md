@@ -126,6 +126,7 @@
       - [GitLab リポジトリを登録](./kubernetes/pure-kubernetes/argocd/GitLabリポジトリを登録/README.md)
     - [http 通信でコンテナレジストリと疎通する](./kubernetes/pure-kubernetes/http通信でコンテナレジストリと疎通する/README.md)
     - [k9s インストール手順](./kubernetes/pure-kubernetes/k9sインストール手順/README.md)
+    - [kubeconfig 書き方](./kubernetes/pure-kubernetes/kubeconfig書き方/README.md)
     - [Kubernetes クラスター構築手順](./kubernetes/pure-kubernetes/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/README.md)
     - [Kustomize 書き方](./kubernetes/pure-kubernetes/Kustomize書き方/README.md)
     - [MetalLB 構築手順](./kubernetes/pure-kubernetes/MetalLB構築手順/README.md)
