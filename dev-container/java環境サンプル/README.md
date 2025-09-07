@@ -45,8 +45,6 @@ root/
         "vscjava.vscode-java-pack",
         "vmware.vscode-boot-dev-pack",
         "vscjava.vscode-lombok",
-        "arjun.swagger-viewer",
-        "shd101wyy.markdown-preview-enhanced",
         "esbenp.prettier-vscode"
       ]
     }
