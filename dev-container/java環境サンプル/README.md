@@ -27,14 +27,12 @@ root/
   "name": "Java",
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
   "features": {
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "none",
-      "installMaven": "true",
-      "installGradle": "false"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
-    "ghcr.io/mpriscella/features/kind:1": {}
+    // "ghcr.io/devcontainers/features/java:1": {
+    //   "version": "none",
+    //   "installMaven": "true",
+    //   "installGradle": "false"
+    // }
+    // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
     "vscode": {
