@@ -31,7 +31,7 @@ root/
     //   "version": "none",
     //   "installMaven": "true",
     //   "installGradle": "false"
-    // }
+    // },
     // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "customizations": {
