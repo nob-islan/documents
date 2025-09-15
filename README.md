@@ -106,7 +106,7 @@
   - [Spring_Boot_Restdocs でドキュメントを自動生成する](./java/Spring_Boot_Restdocsでドキュメントを自動生成する/README.md)
   - [Spring_Boot でマルチモジュールアプリを作成](./java/Spring_Bootでマルチモジュールアプリを作成/README.md)
   - [UT 時にコンテナで DB 環境を作成](./java/UT時にコンテナでDB環境を作成/README.md)
-  - [UT 時にコンテナで nginx 環境を作成](./java/UT時にコンテナでnginx環境を構築/)
+  - [UT 時にコンテナで nginx 環境を作成](./java/UT時にコンテナでnginx環境を作成/README.md)
   - [VSCode でコンテナの Java アプリをデバッグ](./java/VSCodeでコンテナのJavaアプリをデバッグ/README.md)
   - [バリデーションエラーのハンドリング](./java/バリデーションエラーのハンドリング/README.md)
   - [バリデーション向けアノテーションを作成](./java/バリデーション向けアノテーションを作成/README.md)
