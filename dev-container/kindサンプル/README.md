@@ -18,10 +18,16 @@ kind 環境構築のためのサンプルソースです。
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
       "extensions": [
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "ms-kubernetes-tools.kind-vscode",
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode"
       ]
     }
   }

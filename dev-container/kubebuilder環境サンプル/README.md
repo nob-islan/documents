@@ -6,7 +6,7 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
 
 ```json
 {
-  "name": "first-kubebuilder",
+  "name": "kubebuilder",
   "build": {
     "dockerfile": "Dockerfile"
   },
@@ -21,6 +21,9 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
         "[go]": {
           "editor.formatOnSave": true,
           "editor.rulers": [100]
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         }
       },
       "extensions": [

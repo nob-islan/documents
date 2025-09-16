@@ -22,6 +22,20 @@ React 環境構築のためのサンプルです。
   "features": {},
   "customizations": {
     "vscode": {
+      "settings": {
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "vscode.typescript-language-features"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "vscode.typescript-language-features"
+        },
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[scss]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
       "extensions": [
         "jawandarajbir.react-vscode-extension-pack",
         "esbenp.prettier-vscode"

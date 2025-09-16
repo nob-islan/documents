@@ -13,12 +13,18 @@
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "[yaml]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
       "extensions": [
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "redhat.vscode-yaml",
         "amazonwebservices.aws-toolkit-vscode",
         "vscode-aws-console.vscode-aws-console",
-        "mark-tucker.aws-cli-configure"
+        "mark-tucker.aws-cli-configure",
+        "esbenp.prettier-vscode"
       ]
     }
   }
