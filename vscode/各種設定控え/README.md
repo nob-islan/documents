@@ -2,6 +2,30 @@
 
 VSCode の設定などを書き留めておきます。
 
+## settings.json
+
+```json
+{
+  "docker.extension.enableComposeLanguageServer": false,
+  "editor.parameterHints.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.stickyScroll.enabled": false,
+  "editor.suggestSelection": "first",
+  "markdown-preview-enhanced.previewTheme": "atom-dark.css",
+  "redhat.telemetry.enabled": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.stickyScroll.enabled": true,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.tree.enableStickyScroll": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
 ## テーマ設定
 
 ### 背景色をネイビーにしたやつ
