@@ -14,7 +14,7 @@ VSCode の設定などを書き留めておきます。
   "markdown-preview-enhanced.previewTheme": "atom-dark.css",
   "redhat.telemetry.enabled": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.stickyScroll.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.tree.enableStickyScroll": false,
   "[json]": {
