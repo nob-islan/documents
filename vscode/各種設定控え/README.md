@@ -9,13 +9,15 @@ VSCode の設定などを書き留めておきます。
   "editor.formatOnSave": true,
   "editor.stickyScroll.enabled": false,
   "markdown-preview-enhanced.previewTheme": "atom-dark.css",
+  "redhat.telemetry.enabled": false,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.stickyScroll.enabled": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.tree.enableStickyScroll": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[yaml]": {
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
