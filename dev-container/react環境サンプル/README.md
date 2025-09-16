@@ -17,7 +17,7 @@ React 環境構築のためのサンプルです。
 
 ```json
 {
-  "name": "react",
+  "name": "React",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:20-bullseye",
   "features": {},
   "customizations": {

@@ -24,7 +24,7 @@ root/
 
 ```json
 {
-  "name": "java",
+  "name": "Java",
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
   "features": {
     // "ghcr.io/devcontainers/features/java:1": {

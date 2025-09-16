@@ -6,7 +6,7 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
 
 ```json
 {
-  "name": "kubebuilder",
+  "name": "Kubebuilder",
   "build": {
     "dockerfile": "Dockerfile"
   },

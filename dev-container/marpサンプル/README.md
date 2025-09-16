@@ -6,7 +6,7 @@ VSCode 上で markdown 形式でスライドを作成できる**Marp**の環境�
 
 ```json
 {
-  "name": "marp",
+  "name": "Marp",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {},
   "customizations": {

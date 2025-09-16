@@ -4,7 +4,7 @@
 
 ```json
 {
-  "name": "go",
+  "name": "Go",
   "image": "mcr.microsoft.com/devcontainers/go:1.23-bullseye",
   "features": {
     // "ghcr.io/devcontainers/features/docker-in-docker:2": {}

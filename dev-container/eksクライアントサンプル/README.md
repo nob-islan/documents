@@ -4,7 +4,7 @@
 
 ```json
 {
-  "name": "eks client",
+  "name": "EKS client",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},

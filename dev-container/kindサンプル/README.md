@@ -8,7 +8,7 @@ kind 環境構築のためのサンプルソースです。
 
 ```json
 {
-  "name": "kind",
+  "name": "Kind",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
