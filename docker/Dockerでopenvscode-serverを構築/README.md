@@ -14,7 +14,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./volume:/home/workspace
+      - ./volumes:/home/workspace
 ```
 
 `{サーバのアドレス}:3000`にアクセスすると VSCode の画面が表示されます。

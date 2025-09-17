@@ -1,4 +1,4 @@
-# Docker コンテナで GitLab サーバを立てる
+# Docker コンテナで GitLab サーバを構築
 
 ## Docker のインストール
 
@@ -29,7 +29,7 @@ services:
 `docker-compose up -d`でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502 であれば根気良く待ってください。しばらく待って`http://${IP_address}:80`にアクセスすると gitlab の画面が表示されます。  
 root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
 
-```
+```shell
 docker exec -it nob-gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
@@ -80,11 +80,11 @@ services:
       - "/srv/gitlab/logs:/var/log/gitlab"
       - "/srv/gitlab/data:/var/opt/gitlab"
       # 証明書をコンテナに配置
-      - "./volume/ssl:/etc/gitlab/ssl"
+      - "./volumes/ssl:/etc/gitlab/ssl"
 ```
 
 ```
-$ ls -l volume/ssl/
+$ ls -l volumes/ssl/
 total 12
 -rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.nob.jp.crt
 -rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.nob.jp.csr
@@ -111,7 +111,7 @@ services:
 
 runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yml`に下記を追加してください:
 
-```yml
+```yaml
 volumes:
   - "./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt"
 ```

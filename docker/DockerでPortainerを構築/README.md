@@ -13,7 +13,7 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volume/data:/data
+      - ./volumes/data:/data
 ```
 
 `http://localhost:9000`にアクセスすると admin のパスワード設定画面に遷移します。

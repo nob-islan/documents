@@ -5,7 +5,6 @@
 下記`docker-compose.yml`を記述して起動します。
 
 ```yml
-version: "3.7"
 services:
   redmine:
     image: redmine:latest
@@ -16,7 +15,6 @@ services:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: example
       REDMINE_SECRET_KEY_BASE: supersecretkey
-
   db:
     image: mysql:latest
     restart: always

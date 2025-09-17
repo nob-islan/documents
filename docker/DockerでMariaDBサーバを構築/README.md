@@ -1,4 +1,4 @@
-# Docker で DB サーバーを立てる
+# Docker で MariaDB サーバを構築
 
 ## 使用環境
 
@@ -8,7 +8,7 @@
 
 ```shell
 root
-  ├─volume
+  ├─volumes
   │   ├─csv
   │   │   └─sample-data.csv
   │   └─initdb.d
@@ -25,7 +25,6 @@ root
 DB サーバおよび GUI で DB を管理できる`adminer`を起動します。
 
 ```yml
-version: "3.7"
 services:
   db:
     container_name: nob-mariadb
@@ -33,12 +32,11 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./volume/initdb.d:/docker-entrypoint-initdb.d
-      - ./volume/csv:/csv
+      - ./volumes/initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/csv:/csv
     environment:
       - MYSQL_ROOT_PASSWORD=password
       # - MYSQL_ALLOW_EMPTY_PASSWORD=true # 空パスワードを許容する
-
   adminer:
     container_name: nob-adminer
     image: adminer
