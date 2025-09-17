@@ -40,7 +40,7 @@
   - [Docker インストール](./docker/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/README.md)
   - [Docker で GitLab サーバを構築](./docker/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/README.md)
   - [Docker で harbor を構築](./docker/Dockerでharborを構築/README.md)
-  - [Docker で Java 実行環境をビルド](./docker/DockerでJava実行環境を構築/README.md)
+  - [Docker で Java 実行環境をビルド](./docker/DockerでJava実行環境をビルド/README.md)
   - [Docker で MariaDB サーバを構築](./docker/DockerでMariaDBサーバを構築/README.md)
   - [Docker で mattermost を構築](./docker/Dockerでmattermostを構築/README.md)
   - [Docker で MinIO を構築](./docker/DockerでMinIOを構築/README.md)
