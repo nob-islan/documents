@@ -14,6 +14,7 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.formatOnSave": true,
         "[yaml]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         }

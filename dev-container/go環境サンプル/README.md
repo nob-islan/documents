@@ -12,6 +12,7 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.formatOnSave": true,
         "[go]": {
           "editor.formatOnSave": true,
           "editor.rulers": [100]

@@ -19,6 +19,7 @@ kind 環境構築のためのサンプルソースです。
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.formatOnSave": true,
         "[yaml]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         }

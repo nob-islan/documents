@@ -23,6 +23,7 @@ React 環境構築のためのサンプルです。
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.formatOnSave": true,
         "[typescriptreact]": {
           "editor.defaultFormatter": "vscode.typescript-language-features"
         },

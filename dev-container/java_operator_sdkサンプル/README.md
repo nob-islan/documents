@@ -19,6 +19,7 @@ Java Operator SDK で Kubernetes のカスタムコントローラーを実装�
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.formatOnSave": true,
         "java.inlayHints.parameterNames.enabled": "none",
         "java.compile.nullAnalysis.mode": "disabled",
         "java.configuration.updateBuildConfiguration": "interactive",

@@ -11,6 +11,9 @@ VSCode 上で markdown 形式でスライドを作成できる**Marp**の環境�
   "features": {},
   "customizations": {
     "vscode": {
+      "settings": {
+        "editor.formatOnSave": true
+      },
       "extensions": ["marp-team.marp-vscode", "esbenp.prettier-vscode"]
     }
   }
