@@ -30,14 +30,28 @@ fi
 
 controller_name=`echo ${kind} | tr [A-Z] [a-z]`controller
 
-# 変数
-group_id_slash_divided=`echo ${group_id} | sed 's#\.#/#g'`
+# javaパッケージ作成向け変数作成
+OLD_IFS="$IFS"
+IFS='.' read -ra group_id_array <<< "$group_id"
+IFS="$OLD_IFS"
+java_package_path="" # スラッシュ区切りのパッケージパス
+java_package_name="" # ドット区切りのパッケージ名
+for ((i=${#group_id_array[@]}-1; i>=0; i--)); do
+    java_package_path=${java_package_path}${group_id_array[i]}
+    if [ $i -gt 0 ]; then
+        java_package_path=${java_package_path}"/"
+    fi
+    java_package_name=${java_package_name}${group_id_array[i]}
+    if [ $i -gt 0 ]; then
+        java_package_name=${java_package_name}"."
+    fi
+done
 
 # ディレクトリ作成
 k8s_resource_dir=${controller_name}/k8s
-java_class_dir=${controller_name}/src/main/java/${group_id_slash_divided}
+java_class_dir=${controller_name}/src/main/java/${java_package_path}
 java_resources_dir=${controller_name}/src/main/resources
-java_test_dir=${controller_name}/src/test/java/${group_id_slash_divided}
+java_test_dir=${controller_name}/src/test/java/${java_package_path}
 mkdir -p ${k8s_resource_dir}
 mkdir -p ${java_class_dir}
 mkdir -p ${java_resources_dir}
@@ -61,7 +75,7 @@ cat << EOF > ${controller_name}/pom.xml
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>${group_id}</groupId>
+    <groupId>${java_package_name}</groupId>
     <artifactId>${controller_name}</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
@@ -157,7 +171,7 @@ cat << EOF > ${controller_name}/pom.xml
                         <createDependencyReducedPom>false</createDependencyReducedPom>
                         <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>${group_id}.Main</mainClass>
+                            <mainClass>${java_package_name}.Main</mainClass>
                         </transformer>
                         </transformers>
                     </configuration>
@@ -171,7 +185,7 @@ EOF
 
 # Main.java作成
 cat << EOF > ${java_class_dir}/Main.java
-package ${group_id};
+package ${java_package_name};
 
 import io.javaoperatorsdk.operator.Operator;
 
@@ -187,7 +201,7 @@ EOF
 
 # Spec.java作成
 cat << EOF > ${java_class_dir}/${kind}Spec.java
-package ${group_id};
+package ${java_package_name};
 
 import lombok.Data;
 
@@ -202,7 +216,7 @@ EOF
 
 # Status.java作成
 cat << EOF > ${java_class_dir}/${kind}Status.java
-package ${group_id};
+package ${java_package_name};
 
 import lombok.Data;
 
@@ -215,7 +229,7 @@ EOF
 
 # CustomResource作成
 cat << EOF > ${java_class_dir}/${kind}CustomResource.java
-package ${group_id};
+package ${java_package_name};
 
 import io.fabric8.kubernetes.client.CustomResource;
 import io.fabric8.kubernetes.api.model.Namespaced;
@@ -230,7 +244,7 @@ EOF
 
 # Reconciler作成
 cat << EOF > ${java_class_dir}/${kind}Reconciler.java
-package ${group_id};
+package ${java_package_name};
 
 import io.javaoperatorsdk.operator.api.reconciler.Context;
 import io.javaoperatorsdk.operator.api.reconciler.Reconciler;
@@ -252,7 +266,7 @@ EOF
 
 # ReconcilerTest作成
 cat << EOF > ${java_test_dir}/${kind}ReconcilerTest.java
-package ${group_id};
+package ${java_package_name};
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
