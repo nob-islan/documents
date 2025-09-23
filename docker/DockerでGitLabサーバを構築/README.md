@@ -67,7 +67,7 @@ services:
     container_name: nob-gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url "https://gitlab.nob.jp"
+        external_url "https://gitlab.example.nob"
         gitlab_rails['gitlab_shell_ssh_port'] = 2022
         nginx['redirect_http_to_https'] = true
         letsencrypt['enable'] = false
@@ -86,9 +86,9 @@ services:
 ```
 $ ls -l volumes/ssl/
 total 12
--rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.nob.jp.crt
--rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.nob.jp.csr
--rw------- 1 root root 1704 Apr 27 12:25 gitlab.nob.jp.key
+-rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.example.nob.crt
+-rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.example.nob.csr
+-rw------- 1 root root 1704 Apr 27 12:25 gitlab.example.nob.key
 ```
 
 ## gitlab-runner コンテナを構築
