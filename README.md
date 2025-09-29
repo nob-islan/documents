@@ -145,6 +145,7 @@
   - [MDWiki で Web ページを作成](./mdwiki/MDWikiでwebページを作成/README.md)
 - minio
   - [MinIO オブジェクトストレージを暗号化する](./minio/MinIOオブジェクトストレージを暗号化する/README.md)
+  - [MinIO で静的コンテンツをホスティングする](./minio/MinIOで静的コンテンツをホスティングする/README.md)
   - [MinIO を GitLab_LFS のストレージとする](./minio/MinIO%E3%82%92GitLab_LFS%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%81%A8%E3%81%99%E3%82%8B/README.md)
   - [Tips](./minio/Tips/README.md)
 - multipass
