@@ -136,6 +136,7 @@
     - [MetalLB 構築手順](./kubernetes/pure-kubernetes/MetalLB構築手順/README.md)
     - [WSL 上に kubebuilder 環境構築](./kubernetes/pure-kubernetes/WSL上にkubebuilder環境構築/README.md)
     - [カスタムリソース定義サンプル](./kubernetes/pure-kubernetes/カスタムリソース定義サンプル/README.md)
+    - [コンテナレジストリの認証情報を登録する](./kubernetes/pure-kubernetes/コンテナレジストリの認証情報を登録する/README.md)
     - [各種 CNI インストール手順](./kubernetes/pure-kubernetes/各種CNIインストール手順/README.md)
 - linux
   - [はじめての FTP サーバ](./linux/first-ftp/README.md)
