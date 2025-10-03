@@ -139,7 +139,8 @@
     - [コンテナレジストリの認証情報を登録する](./kubernetes/pure-kubernetes/コンテナレジストリの認証情報を登録する/README.md)
     - [各種 CNI インストール手順](./kubernetes/pure-kubernetes/各種CNIインストール手順/README.md)
 - linux
-  - [はじめての FTP サーバ](./linux/first-ftp/README.md)
+  - [はじめての ftp サーバ](./linux/first-ftp/README.md)
+  - [はじめての nfs サーバ](./linux/first-nfs/README.md)
   - [Ubuntu デスクトップをインストールする](./linux/install-ubuntu-desktop/README.md)
   - [jq コマンド例](./linux/jq-command-example/README.md)
   - [ローカルネットワークで名前解決してもらう](./linux/local-name-resolve/README.md)
