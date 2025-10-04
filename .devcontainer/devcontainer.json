@@ -1,6 +1,7 @@
 {
   "name": "Documents",
   "image": "mcr.microsoft.com/devcontainers/python:3",
+  "postCreateCommand": "bash .devcontainer/scripts/postcreate.sh",
   "features": {},
   "customizations": {
     "vscode": {
