@@ -2,9 +2,9 @@
 
 cf. https://min.io/docs/minio/container/index.html
 
-下記の内容で`docker-compose.yml`を作成します：
+下記の内容で`docker-compose.yaml`を作成します：
 
-```yml
+```yaml
 services:
   minio:
     image: minio/minio:latest

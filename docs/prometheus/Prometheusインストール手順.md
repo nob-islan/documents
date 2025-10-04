@@ -17,9 +17,9 @@ timedatectl set-timezone Asia/Tokyo
 
 ## 起動
 
-`docker-compose.yml`を下記で記載します。
+`docker-compose.yaml`を下記で記載します。
 
-```yml
+```yaml
 version: "3.7"
 services:
   prometheus:
@@ -29,13 +29,13 @@ services:
       - 9090:9090
     volumes:
       - type: bind
-        source: "/srv/prometheus/prometheus.yml"
-        target: "/etc/prometheus/prometheus.yml"
+        source: "/srv/prometheus/prometheus.yaml"
+        target: "/etc/prometheus/prometheus.yaml"
 ```
 
-`/srv/prometheus`ディレクトリを切り、`prometheus.yml`を下記で作成します。
+`/srv/prometheus`ディレクトリを切り、`prometheus.yaml`を下記で作成します。
 
-```yml
+```yaml
 scrape_configs:
   - job_name: prometheus
     static_configs:
@@ -97,9 +97,9 @@ Prometheus の設定ファイルに下記を追記します。
 
 ## Grafana
 
-`docker-compose.yml`に下記を追記します。
+`docker-compose.yaml`に下記を追記します。
 
-```yml
+```yaml
 version: "3.7"
 services:
   prometheus:
@@ -109,8 +109,8 @@ services:
       - 9090:9090
     volumes:
       - type: bind
-        source: "/srv/prometheus/prometheus.yml"
-        target: "/etc/prometheus/prometheus.yml"
+        source: "/srv/prometheus/prometheus.yaml"
+        target: "/etc/prometheus/prometheus.yaml"
   grafana:
     image: grafana/grafana
     container_name: nob-grafana

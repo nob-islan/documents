@@ -9,7 +9,7 @@ GitLab Runner を使って React アプリケーションのコンテナイメ�
 ```Dockerfile
 FROM node:20-bullseye
 
-# 後述のci.ymlから渡される環境変数
+# 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
 
 RUN npm install -g serve
@@ -18,7 +18,7 @@ COPY ${ARTIFACT_PATH} /build
 CMD ["serve", "-s", "build"]
 ```
 
-### .gitlab-ci.yml
+### .gitlab-ci.yaml
 
 下記ステージで構成します:
 
@@ -27,7 +27,7 @@ CMD ["serve", "-s", "build"]
 
 push 先は harbor を想定しています。
 
-```yml
+```yaml
 stages:
   - build
   - push

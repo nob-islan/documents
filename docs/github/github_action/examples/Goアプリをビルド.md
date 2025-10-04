@@ -15,7 +15,7 @@ cf.
 - モジュールビルド
 - コンテナイメージのビルド、レジストリへの push
 
-```yml
+```yaml
 name: Go
 on:
   release:

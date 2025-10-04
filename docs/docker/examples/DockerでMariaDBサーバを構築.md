@@ -13,18 +13,18 @@ root
   │   │   └─sample-data.csv
   │   └─initdb.d
   │       └─01_create_db.sql
-  └─docker-compose.yml
+  └─docker-compose.yaml
 ```
 
 コンテナ起動時に、`initdb.d`配下の sql ファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。
 
 ## 設定ファイル
 
-### docker-compose.yml
+### docker-compose.yaml
 
 DB サーバおよび GUI で DB を管理できる`adminer`を起動します。
 
-```yml
+```yaml
 services:
   db:
     container_name: nob-mariadb

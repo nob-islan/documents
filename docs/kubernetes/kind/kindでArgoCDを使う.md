@@ -24,7 +24,7 @@ nodes:
 ```
 
 ```
-kind create cluster --name first-cluster --config first-cluster.yml
+kind create cluster --name first-cluster --config first-cluster.yaml
 ```
 
 ## Argo CD 起動
@@ -87,7 +87,7 @@ argocd account update-password
 
 事前に別途リポジトリを用意し、例えば以下のような Deployment および Service の各種マニフェストファイルを格納しておきます。
 
-`first-deployment.yml`
+`first-deployment.yaml`
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +111,7 @@ spec:
             - containerPort: 80
 ```
 
-`first-service.yml`
+`first-service.yaml`
 
 ```yaml
 apiVersion: v1

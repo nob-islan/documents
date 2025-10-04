@@ -39,7 +39,7 @@ sudo systemctl restart dnsmasq
 
 下記で docker-compose を作成します:
 
-```yml
+```yaml
 services:
   gitlab:
     image: gitlab/gitlab-ee:latest

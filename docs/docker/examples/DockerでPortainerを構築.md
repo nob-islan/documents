@@ -2,9 +2,9 @@
 
 ## Portainer 起動
 
-下記`docker-compose.yml`を記述して起動します。
+下記`docker-compose.yaml`を記述して起動します。
 
-```yml
+```yaml
 services:
   portainer:
     container_name: nob-portainer

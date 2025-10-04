@@ -69,14 +69,14 @@ kind delete cluster
 
 ```
 # マルチノードクラスタ構築
-kind create cluster --config first-kind.yml
+kind create cluster --config first-kind.yaml
 ```
 
-## クラスタ設定 yml サンプル
+## クラスタ設定 yaml サンプル
 
 - ワーカーノード 2 台を起動
 
-```yml
+```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
@@ -89,7 +89,7 @@ nodes:
 
 - NodePort 向けのポートを開放
 
-```yml
+```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:

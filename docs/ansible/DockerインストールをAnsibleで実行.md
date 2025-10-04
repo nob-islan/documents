@@ -11,14 +11,14 @@ docker インストールおよび、ユーザの docker グループへの追�
 ```sh
 ansible
   └─playbook
-      └─docker_install.yml
+      └─docker_install.yaml
 ```
 
 ## 実装、実行手順
 
-`docker_install.yml`を下記で作成します。
+`docker_install.yaml`を下記で作成します。
 
-```yml
+```yaml
 - hosts: node # 対象ホストを指定する。
   tasks: # 実行するtaskを指定する。
     # 下準備
@@ -78,5 +78,5 @@ ansible
 プレイブックを実行します。
 
 ```
-ansible-playbook ~/ansible/playbook/docker_install.yml -i /etc/ansible/hosts --private-key ~/.ssh/first-key -u ubuntu
+ansible-playbook ~/ansible/playbook/docker_install.yaml -i /etc/ansible/hosts --private-key ~/.ssh/first-key -u ubuntu
 ```

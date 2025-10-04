@@ -13,7 +13,7 @@ cf.
 
 また、Settings > Actions > General > Workflow permissions で read and write 権限を与えないと`Resource not accessible by integration`が起きるので注意してください。
 
-```yml
+```yaml
 name: Go
 on:
   release:

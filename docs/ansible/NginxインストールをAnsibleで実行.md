@@ -30,5 +30,5 @@
 ## 実行
 
 ```shell
-ansible-playbook ~/ansible/playbook/nginx.yml -i /etc/ansible/hosts --private-key ~/.ssh/first-key -u ubuntu
+ansible-playbook ~/ansible/playbook/nginx.yaml -i /etc/ansible/hosts --private-key ~/.ssh/first-key -u ubuntu
 ```

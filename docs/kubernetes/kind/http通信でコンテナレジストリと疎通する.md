@@ -14,7 +14,7 @@ $ kubectl describe pod sample-pod-6cf8d8d57f-6d47z
 
 下記のように、レジストリの IP を指定して検証スキップ設定を追加します:
 
-```yml
+```yaml
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:

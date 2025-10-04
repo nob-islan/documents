@@ -7,9 +7,9 @@ Spring Batch フレームワークを使って Prometheus で扱えるメトリ�
 ### PushGateway
 
 Spring Batch はエンドポイントを持たないため、java で作ったメトリクスを Prometheus がプルできるように別途エンドポイントを用意する必要があります。
-下記`docker-compose.yml`で PushGateway を起動すると、後述のバッチ処理で作られたメトリクスを取得する用のエンドポイントを提供してくれます:
+下記`docker-compose.yaml`で PushGateway を起動すると、後述のバッチ処理で作られたメトリクスを取得する用のエンドポイントを提供してくれます:
 
-```yml
+```yaml
 services:
   pushgateway:
     container_name: nob-pushgateway

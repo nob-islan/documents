@@ -2,7 +2,7 @@
 
 ## gitlab コンテナを構築
 
-事前に`ip a`コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yml を作成します。
+事前に`ip a`コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yaml を作成します。
 
 ```yaml
 services:
@@ -105,7 +105,7 @@ services:
 
 ### GitLab が 自己証明書で SSL 通信をしている場合
 
-runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yml`に下記を追加してください:
+runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yaml`に下記を追加してください:
 
 ```yaml
 volumes:
@@ -124,9 +124,9 @@ cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
     extra_hosts = ["${ドメイン名}:${GitLabのIPアドレス}"]
 ```
 
-## .gitlab-ci.yml サンプル
+## .gitlab-ci.yaml サンプル
 
-```yml
+```yaml
 stages:
   - build
   - test

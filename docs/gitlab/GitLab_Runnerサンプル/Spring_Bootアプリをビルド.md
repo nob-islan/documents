@@ -9,7 +9,7 @@ GitLab Runner を使って Spring Boot アプリケーションのコンテナ�
 ```Dockerfile
 FROM openjdk:17
 
-# 後述のci.ymlから渡される環境変数
+# 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
 ARG ARTIFACT_NAME
 
@@ -69,7 +69,7 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
 </project>
 ```
 
-### .gitlab-ci.yml
+### .gitlab-ci.yaml
 
 cf.
 
@@ -85,7 +85,7 @@ cf.
 
 push 先は harbor を想定しています。
 
-```yml
+```yaml
 stages:
   - test
   - build

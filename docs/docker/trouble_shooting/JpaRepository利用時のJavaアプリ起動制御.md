@@ -2,7 +2,7 @@
 
 JpaRepository を利用して repository 層を実装した Java アプリについて、docker-compose に Java, DB の設定を単純に記載しただけだと起動がうまくいきませんでした。Java 側から DB に接続しに行くのに DB の起動が間に合わず、接続に失敗して落ちることが原因だったため、下記のように順序制御を入れる必要があります:
 
-```yml
+```yaml
 services:
   db:
     container_name: db

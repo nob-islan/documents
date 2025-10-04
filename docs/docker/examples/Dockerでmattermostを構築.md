@@ -36,12 +36,12 @@ cp /path/to/privkey.pem ./volumes/web/cert/key-no-password.pem
 
 ```shell
 # http://{IPアドレス}:8065にアクセスできるようになればOK
-sudo docker compose -f docker-compose.yml -f docker-compose.without-nginx.yml up -d
+sudo docker compose -f docker-compose.yaml -f docker-compose.without-nginx.yaml up -d
 ```
 
 - （https で通信をする場合のみ）nginx 込みで起動します:
 
 ```shell
 # https://{ドメイン名}にアクセスできるようになればOK
-sudo docker compose -f docker-compose.yml -f docker-compose.nginx.yml up -d
+sudo docker compose -f docker-compose.yaml -f docker-compose.nginx.yaml up -d
 ```

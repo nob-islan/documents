@@ -4,7 +4,7 @@ GitLab Runner を使って Go の CLI アプリをビルドします。
 
 ## 設定ファイル
 
-### .gitlab-ci.yml
+### .gitlab-ci.yaml
 
 cf.
 
@@ -21,7 +21,7 @@ cf.
   - `gitlab-cli`を使います。
   - build ジョブで作成した artifact をダウンロードし、release 時の asset に追加します。
 
-```yml
+```yaml
 stages:
   - build
   - release

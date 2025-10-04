@@ -15,7 +15,7 @@ Java アプリ内でファイルを作成、web サーバ上に格納します�
 
 ```
 root
-  ├─docker-compose.yml
+  ├─docker-compose.yaml
   ├─Dockerfile
   └─volume
       └─default.conf
@@ -88,9 +88,9 @@ RUN mkdir -p /var/www/data /var/www/data_temp
 RUN chown -R nginx /var/www/data /var/www/data_temp
 ```
 
-`docker-compose.yml`を下記で作成します。先に作成した設定ファイルをマウントしています。
+`docker-compose.yaml`を下記で作成します。先に作成した設定ファイルをマウントしています。
 
-```yml
+```yaml
 version: "3.7"
 services:
   nginx:

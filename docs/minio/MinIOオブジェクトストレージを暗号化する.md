@@ -136,7 +136,7 @@ kes identity new --key=client.key --cert=client.crt MinIO
 
 ```shell
 # KES サーバー構成ファイルを作成
-cat << EOF > config.yml
+cat << EOF > config.yaml
 admin:
   identity: {identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO'}
 
@@ -157,7 +157,7 @@ EOF
 
 ```shell
 # KESサーバを起動
-kes server --config config.yml
+kes server --config config.yaml
 ```
 
 #### KES 起動確認

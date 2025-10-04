@@ -9,7 +9,7 @@ GitLab Runner を使って Go アプリケーションのコンテナイメー�
 ```Dockerfile
 FROM golang:1.23
 
-# 後述のci.ymlから渡される環境変数
+# 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
 
 COPY ${ARTIFACT_PATH} /main
@@ -17,7 +17,7 @@ COPY ${ARTIFACT_PATH} /main
 CMD ["/main"]
 ```
 
-### .gitlab-ci.yml
+### .gitlab-ci.yaml
 
 cf.
 
@@ -36,7 +36,7 @@ cf.
 - コンテナイメージ push
   - push 先は harbor を想定しています。
 
-```yml
+```yaml
 stages:
   - test
   - build

@@ -44,7 +44,7 @@ sudo reboot
 
 ### vim のインストール
 
-docker-compse.yml を編集する際に使います。
+docker-compse.yaml を編集する際に使います。
 
 vim のインストール
 

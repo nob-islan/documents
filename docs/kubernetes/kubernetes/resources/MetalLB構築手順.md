@@ -46,7 +46,7 @@ cf. https://metallb.io/configuration/
 
 - Service に割り当てる IP アドレス範囲を定義する `IPAddressPool` リソースを作成します:
 
-```yml
+```yaml
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
@@ -59,12 +59,12 @@ spec:
 ```
 
 ```shell
-kubectl apply -f ipaddresspool.yml
+kubectl apply -f ipaddresspool.yaml
 ```
 
 - Layer 2 mode で起動するための `L2Advertisement` リソースを作成します:
 
-```yml
+```yaml
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
@@ -76,12 +76,12 @@ spec:
 ```
 
 ```shell
-kubectl apply -f l2advertisement.yml
+kubectl apply -f l2advertisement.yaml
 ```
 
 - 動作確認用の nginx コンテナをデプロイします:
 
-```yml
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -104,12 +104,12 @@ spec:
 ```
 
 ```shell
-kubectl apply -f deployment.yml
+kubectl apply -f deployment.yaml
 ```
 
 - サービスをデプロイします:
 
-```yml
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -124,7 +124,7 @@ spec:
 ```
 
 ```shell
-kubectl apply -f service.yml
+kubectl apply -f service.yaml
 ```
 
 - 正常に動作していれば、`EXTERNAL-IP`に IP アドレスが振られ、クラスタ外から疎通をとることができます。

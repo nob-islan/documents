@@ -62,12 +62,12 @@ sudo service postgresql restart
 
 ## GitLab サーバ側の設定
 
-以下の設定を追記します。パッケージ版であれば`gitlab.rb`ファイルを編集してください。コンテナ版であれば`docker-compose.yml`の`services.gitlab.environment.GITLAB_OMNIBUS_CONFIG`に以下を追記します。
+以下の設定を追記します。パッケージ版であれば`gitlab.rb`ファイルを編集してください。コンテナ版であれば`docker-compose.yaml`の`services.gitlab.environment.GITLAB_OMNIBUS_CONFIG`に以下を追記します。
 
 ```yaml
 # Disable the built-in Postgres
 postgresql['enable'] = false
-# Fill in the connection details for database.yml
+# Fill in the connection details for database.yaml
 gitlab_rails['db_adapter'] = 'postgresql'
 gitlab_rails['db_encoding'] = 'utf8'
 gitlab_rails['db_username'] = 'gitlab'

@@ -33,6 +33,6 @@ sudo systemctl restart code-server@{ユーザ}
 
 ## 各種設定手順
 
-`~/.config/code-server/config.yml`を編集して設定を入れます。
+`~/.config/code-server/config.yaml`を編集して設定を入れます。
 
 cf. https://coder.com/docs/code-server/guide

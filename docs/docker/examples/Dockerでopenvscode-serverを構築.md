@@ -4,9 +4,9 @@
 
 ### 起動
 
-`docker-compose.yml`を下記で作成します:
+`docker-compose.yaml`を下記で作成します:
 
-```yml
+```yaml
 services:
   openvscode:
     container_name: nob-openvscode

@@ -59,7 +59,7 @@ psql \
 
 ## GitLab の設定
 
-docker で動かすため、`docker-compose.yml`を以下で作成します。
+docker で動かすため、`docker-compose.yaml`を以下で作成します。
 
 ```yaml
 version: "3"
@@ -73,7 +73,7 @@ services:
         external_url "http://${IP address}:80"
         # Disable the built-in Postgres
         postgresql['enable'] = false
-        # Fill in the connection details for database.yml
+        # Fill in the connection details for database.yaml
         gitlab_rails['db_adapter'] = 'postgresql'
         gitlab_rails['db_username'] = 'gitlab'
         gitlab_rails['db_password'] = 'gitlab_secret'

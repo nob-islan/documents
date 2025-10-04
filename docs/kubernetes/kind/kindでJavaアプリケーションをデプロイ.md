@@ -17,16 +17,16 @@ first-k8s-restapi
     │   └─jar
     │       └─app-0.0.1-SNAPSHOT.jar
     └─kube
-        ├─java-cluster.yml
-        ├─java-deployment.yml
-        └─java-service.yml
+        ├─java-cluster.yaml
+        ├─java-deployment.yaml
+        └─java-service.yaml
 ```
 
 ### デプロイ手順
 
 #### クラスタ構築
 
-`java-cluster.yml`には、
+`java-cluster.yaml`には、
 
 - ワーカーノードを 2 台にすること
 - service 向けのポートを 30080 にすること
@@ -34,7 +34,7 @@ first-k8s-restapi
 
 が記載されています。
 
-```yml
+```yaml
 # クラスタ構築
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -54,7 +54,7 @@ nodes:
 以下のコマンドで`java-cluster`クラスターを構築します。
 
 ```
-kind create cluster --config java-cluster.yml --name java-cluster
+kind create cluster --config java-cluster.yaml --name java-cluster
 ```
 
 #### docker イメージ作成
@@ -92,9 +92,9 @@ kind load docker-image nob-openjdk17 --name java-cluster
 
 #### デプロイメント起動
 
-`java-deployment.yml`で Pod に関する設定を記載します。`containers`配下にて、ローカルの`nob-openjdk17`を使うことを宣言しています。
+`java-deployment.yaml`で Pod に関する設定を記載します。`containers`配下にて、ローカルの`nob-openjdk17`を使うことを宣言しています。
 
-```yml
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -120,14 +120,14 @@ spec:
 デプロイメントを apply します。
 
 ```
-kubectl apply -f java-deployment.yml
+kubectl apply -f java-deployment.yaml
 ```
 
 #### サービス起動
 
-`java-service.yml`によって外部から通信できるようにします。
+`java-service.yaml`によって外部から通信できるようにします。
 
-```yml
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -146,7 +146,7 @@ spec:
 サービスを apply します。
 
 ```
-kubectl apply -f java-service.yml
+kubectl apply -f java-service.yaml
 ```
 
 #### 動作確認

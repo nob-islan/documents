@@ -16,9 +16,9 @@ CMD java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484
 
 上記`CMD`によって、8484 ポートでデバッグを待ち受けます。
 
-- docker-compose.yml
+- docker-compose.yaml
 
-```yml
+```yaml
 version: "3.7"
 services:
   java:

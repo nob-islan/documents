@@ -29,7 +29,7 @@ wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel
 
 - `net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
 
-```yml
+```yaml
 net-conf.json: |
   {
     "Network": "10.244.0.0/16", 

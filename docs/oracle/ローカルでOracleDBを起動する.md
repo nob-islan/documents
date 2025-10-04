@@ -31,7 +31,7 @@ cd docker-images/OracleDatabase/SingleInstance/dockerfiles
 
 ## コンテナを起動
 
-`docker-compose.yml`を作成
+`docker-compose.yaml`を作成
 
 ```yaml
 version: "3"
