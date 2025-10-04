@@ -3,6 +3,11 @@ theme:
   name: material
   features:
     - content.code.copy
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/nob-islan/documents
+  copyright: "© nob-islan"
 markdown_extensions:
   - codehilite:
       guess_lang: false
