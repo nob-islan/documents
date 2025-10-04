@@ -21,10 +21,8 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/nob-islan/documents
   generator: false
-copyright: "© nob-islan"
+copyright: Copyright &copy; nob-islan
 markdown_extensions:
-  - codehilite:
-      guess_lang: false
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.magiclink
