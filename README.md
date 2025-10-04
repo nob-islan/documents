@@ -10,7 +10,7 @@ https://nob-islan.github.io/documents/
 
 ## 開発方法
 
-開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown 形式で作成されたドキュメントについて [MkDocs](https://www.mkdocs.org/) にてレンダリングします。
+開発環境は [.devcontainer](.devcontainer/devcontainer.json) にて提供しています。markdown 形式で作成されたドキュメントについて [MkDocs](https://www.mkdocs.org/) にてレンダリングします。
 
 ### ドキュメント追加
 
