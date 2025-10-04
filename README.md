@@ -4,9 +4,9 @@
 
 ## 成果物
 
-本プロジェクトにて作成したドキュメントは下記で公開されます:
+本プロジェクトは [Netlify](https://app.netlify.com/) と連携しています。成果物は下記で公開されています:
 
-https://nob-islan.github.io/documents/
+https://nob-islan-document.netlify.app/
 
 ## 開発方法
 
@@ -28,4 +28,5 @@ mkdocs serve
 
 ## デプロイ方法
 
-main ブランチに push されると github action が実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pages ブランチに push され、その内容で github pages が更新されます。
+- main ブランチに push されると github action が実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pages ブランチに push されます。
+- gh-pages ブランチに変更が入ると Netlify 上の nob-islan-document プロジェクトでビルドが走り、ドキュメントが更新されます。
