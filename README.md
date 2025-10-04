@@ -4,7 +4,9 @@
 
 ## 成果物
 
-WIP: github pages
+本プロジェクトにて作成したドキュメントは下記で公開されます:
+
+https://nob-islan.github.io/documents/
 
 ## 開発方法
 
@@ -26,6 +28,4 @@ mkdocs serve
 
 ## デプロイ方法
 
-WIP: github action 解説
-
-test3
+main ブランチに push されると github action が実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pages ブランチに push され、その内容で github pages が更新されます。
