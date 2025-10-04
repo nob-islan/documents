@@ -1,0 +1,11 @@
+site_name: Nob docs
+theme:
+  name: material
+  features:
+    - content.code.copy
+markdown_extensions:
+  - codehilite:
+      guess_lang: false
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.magiclink

@@ -1,0 +1,13 @@
+{
+  "name": "Documents",
+  "image": "mcr.microsoft.com/devcontainers/python:3",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true
+      },
+      "extensions": ["esbenp.prettier-vscode"]
+    }
+  }
+}
