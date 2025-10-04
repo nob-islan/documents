@@ -29,5 +29,3 @@ mkdocs serve
 ## デプロイ方法
 
 main ブランチに push されると github action が実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pages ブランチに push され、その内容で github pages が更新されます。
-
-test
