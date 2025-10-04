@@ -18,6 +18,7 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/nob-islan/documents
+  generator: false
 copyright: "© nob-islan"
 markdown_extensions:
   - codehilite:
