@@ -80,12 +80,16 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: indigo # Used for the header, the sidebar, text links, and so on
+      accent: blue # Used to denote elements that can be interacted with, e.g. hovered links, and so on
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
