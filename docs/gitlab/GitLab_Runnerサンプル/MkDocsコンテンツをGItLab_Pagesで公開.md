@@ -16,6 +16,8 @@
 
 ### .gitlab-ci.yaml
 
+デフォルトブランチに push した際に runner が実行され、pages が更新されます。
+
 ```yaml
 stages:
   - deploy
