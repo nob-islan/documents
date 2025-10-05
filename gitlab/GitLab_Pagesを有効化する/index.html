@@ -2156,13 +2156,37 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      トラブルシュート
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="トラブルシュート">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pages-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pages にアクセスした際に 502 エラーが発生した場合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       パッケージ版手順
     </span>
@@ -2172,7 +2196,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       事前準備
     </span>
@@ -2181,7 +2205,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       手順
     </span>
@@ -5559,13 +5583,37 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      トラブルシュート
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="トラブルシュート">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pages-502" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pages にアクセスした際に 502 エラーが発生した場合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       パッケージ版手順
     </span>
@@ -5575,7 +5623,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       事前準備
     </span>
@@ -5584,7 +5632,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       手順
     </span>
@@ -5690,15 +5738,34 @@ address=/.pages.example.nob/{gitlab IP}
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
 </code></pre></div>
-<h2 id="_4">パッケージ版手順</h2>
-<h3 id="_5">事前準備</h3>
+<h3 id="_4">トラブルシュート</h3>
+<h4 id="pages-502">Pages にアクセスした際に 502 エラーが発生した場合</h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K6SJK15KDNGSCH26TNTTH5K9&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Get \&quot;http://gitlab.example.nob/api/v4/internal/pages?host=first-page-c0136b.pages.example.nob\&quot;: dial tcp: lookup gitlab.example.nob on 127.0.0.11:53: no such host&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;first-page-c0136b.pages.example.nob&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;could not fetch domain information from a source&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/favicon.ico&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-10-05T06:57:46Z&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>上記のような、ドメインが名前解決できないエラーが発生した場合は docker-compose で DNS サーバを明示的に指定する必要があります。
+docker-compose の <code>services.gitlab.dns</code>を下記容量で追加してください:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="w"> </span><span class="nv">dnsmasq IP</span><span class="w"> </span><span class="p p-Indicator">}</span>
+</code></pre></div>
+<h2 id="_5">パッケージ版手順</h2>
+<h3 id="_6">事前準備</h3>
 <p>下記を構築しておいてください:</p>
 <ul>
 <li>GitLab (パッケージ版)</li>
 <li>GitLab Runner (パッケージ版)</li>
 <li>dnsmasq</li>
 </ul>
-<h3 id="_6">手順</h3>
+<h3 id="_7">手順</h3>
 <h4 id="dnsmasq_1">dnsmasq</h4>
 <ul>
 <li>GitLab 本体は<code>gitlab.example.nob</code>, Pages は<code>pages.example.nob</code>で名前解決できるようにします:</li>
