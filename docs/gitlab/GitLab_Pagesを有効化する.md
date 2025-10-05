@@ -66,6 +66,32 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
+### トラブルシュート
+
+#### Pages にアクセスした際に 502 エラーが発生した場合
+
+```json
+{
+  "correlation_id": "01K6SJK15KDNGSCH26TNTTH5K9",
+  "error": "Get \"http://gitlab.example.nob/api/v4/internal/pages?host=first-page-c0136b.pages.example.nob\": dial tcp: lookup gitlab.example.nob on 127.0.0.11:53: no such host",
+  "host": "first-page-c0136b.pages.example.nob",
+  "level": "error",
+  "msg": "could not fetch domain information from a source",
+  "path": "/favicon.ico",
+  "time": "2025-10-05T06:57:46Z"
+}
+```
+
+上記のような、ドメインが名前解決できないエラーが発生した場合は docker-compose で DNS サーバを明示的に指定する必要があります。
+docker-compose の `services.gitlab.dns`を下記容量で追加してください:
+
+```yaml
+services:
+  gitlab:
+    dns:
+      - { dnsmasq IP }
+```
+
 ## パッケージ版手順
 
 ### 事前準備
