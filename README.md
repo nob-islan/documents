@@ -4,9 +4,9 @@
 
 ## 成果物
 
-本プロジェクトは [Netlify](https://app.netlify.com/) と連携しています。成果物は下記で公開されています:
+本プロジェクトは [Cloudflare](https://www.cloudflare.com/) と連携しています。成果物は下記で公開されています:
 
-https://nob-islan-document.netlify.app/
+https://nobislandocuments.pages.dev/
 
 ## 開発方法
 

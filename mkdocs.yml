@@ -1,6 +1,7 @@
 site_name: Nob docs
 theme:
   favicon: 00_config/favicon.png
+  logo: 00_config/favicon.png
   name: material
   features:
     - content.code.copy
