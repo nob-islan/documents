@@ -235,6 +235,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -246,6 +259,76 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      よく読むドキュメント
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="よく読むドキュメント">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#devcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Devcontainer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -5326,6 +5409,65 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      よく読むドキュメント
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="よく読むドキュメント">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#devcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Devcontainer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kubernetes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -5342,6 +5484,37 @@
 
 <h1 id="home">Home</h1>
 <p>作成したドキュメントや手順書などを捨てておきます。</p>
+<h2 id="_1">よく読むドキュメント</h2>
+<h3 id="devcontainer">Devcontainer</h3>
+<div class="grid cards">
+<ul>
+<li><strong><a href="dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">go 環境サンプル</a></strong></li>
+<li><strong><a href="dev-container/examples/kind%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">kind サンプル</a></strong></li>
+<li><strong><a href="dev-container/examples/kubebuilder%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">kubebuilder 環境サンプル</a></strong></li>
+<li><strong><a href="dev-container/examples/java%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">java 環境サンプル</a></strong></li>
+</ul>
+</div>
+<h3 id="docker">Docker</h3>
+<div class="grid cards">
+<ul>
+<li><strong><a href="docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/">Docker インストール</a></strong>
+  <br> Docker のインストール手順です。スクリプトによって自動化しています。</li>
+</ul>
+</div>
+<h3 id="kubernetes">Kubernetes</h3>
+<div class="grid cards">
+<ul>
+<li><strong><a href="kubernetes/kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/">Kubernetes クラスター構築手順</a></strong>
+  <br> kubeadm を使った Kubernetes クラスター構築手順書です。</li>
+</ul>
+</div>
+<h3 id="go">Go</h3>
+<div class="grid cards">
+<ul>
+<li><strong><a href="go/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/">echo で REST API を実装</a></strong>
+  <br> echo フレームワークで REST API を実装するサンプルです。</li>
+</ul>
+</div>
 
 
 
