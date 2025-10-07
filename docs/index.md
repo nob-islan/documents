@@ -4,7 +4,7 @@
 
 ## よく読むドキュメント
 
-### Devcontainer
+### Dev container
 
 <div class="grid cards" markdown>
 
