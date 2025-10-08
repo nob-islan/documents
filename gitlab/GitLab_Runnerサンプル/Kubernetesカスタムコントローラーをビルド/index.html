@@ -2291,9 +2291,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gitlab-ciyaml" class="md-nav__link">
+  <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
-      .gitlab-ci.yaml
+      .gitlab-ci.yml
     </span>
   </a>
   
@@ -5432,9 +5432,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gitlab-ciyaml" class="md-nav__link">
+  <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
-      .gitlab-ci.yaml
+      .gitlab-ci.yml
     </span>
   </a>
   
@@ -5491,7 +5491,7 @@
 <h1 id="kubernetes">Kubernetes カスタムコントローラーをビルド</h1>
 <p>GitLab Runner を使って Kubernetes カスタムコントローラーのコンテナイメージをビルドします。カスタムコントローラーは kubebuilder をベースに実装されていることを前提とします。</p>
 <h2 id="_1">設定ファイル</h2>
-<h3 id="gitlab-ciyaml">.gitlab-ci.yaml</h3>
+<h3 id="gitlab-ciyml">.gitlab-ci.yml</h3>
 <p>cf.</p>
 <ul>
 <li><a href="https://docs.gitlab.com/ee/ci/docker/using_kaniko.html">Using kaniko</a></li>
@@ -5564,7 +5564,7 @@
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;.env&quot;</span>
 </code></pre></div>
 <h3 id="makefile">Makefile</h3>
-<p>環境変数の管理向けに<code>.env</code>ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yaml および Makefile から読み取れるようにします:</p>
+<p>環境変数の管理向けに<code>.env</code>ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yml および Makefile から読み取れるようにします:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">TAG</span><span class="o">=</span>v1.0.0
 <span class="nv">HARBOR_HOST</span><span class="o">=</span>nob-harbor.ddo.jp
 <span class="nv">HARBOR_PROJECT</span><span class="o">=</span>first-kube-operator

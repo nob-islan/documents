@@ -2133,9 +2133,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gitlab-ciyaml" class="md-nav__link">
+  <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
-      .gitlab-ci.yaml
+      .gitlab-ci.yml
     </span>
   </a>
   
@@ -5536,9 +5536,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gitlab-ciyaml" class="md-nav__link">
+  <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
-      .gitlab-ci.yaml
+      .gitlab-ci.yml
     </span>
   </a>
   
@@ -5651,10 +5651,10 @@
 <h3 id="_2">プロジェクト作成</h3>
 <p>ディレクトリ構成</p>
 <div class="highlight"><pre><span></span><code>first-kaniko-project
-  ├─.gitlab-ci.yaml
+  ├─.gitlab-ci.yml
   └─Dockerfile
 </code></pre></div>
-<h4 id="gitlab-ciyaml">.gitlab-ci.yaml</h4>
+<h4 id="gitlab-ciyml">.gitlab-ci.yml</h4>
 <p>主に以下の流れで処理が進みます。</p>
 <ul>
 <li>実行用の image として<code>kaniko-project/executor:debug</code>を使う。<code>latest</code>とかだとうまくいかないらしい。</li>
@@ -5679,7 +5679,7 @@
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 </code></pre></div>
-<p><code>CI_REGISTRY_IMAGE</code>は GitLab の画面から環境変数として登録するか、<code>.gitlab-ci.yaml</code>にベタ書きするかしてください。</p>
+<p><code>CI_REGISTRY_IMAGE</code>は GitLab の画面から環境変数として登録するか、<code>.gitlab-ci.yml</code>にベタ書きするかしてください。</p>
 <h4 id="dockerfile">Dockerfile</h4>
 <p>ただ適当なファイルを touch しただけの ubuntu コンテナです。</p>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:20.04</span>
