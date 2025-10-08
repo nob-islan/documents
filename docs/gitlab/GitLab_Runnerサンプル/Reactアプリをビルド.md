@@ -18,7 +18,7 @@ COPY ${ARTIFACT_PATH} /build
 CMD ["serve", "-s", "build"]
 ```
 
-### .gitlab-ci.yaml
+### .gitlab-ci.yml
 
 下記ステージで構成します:
 

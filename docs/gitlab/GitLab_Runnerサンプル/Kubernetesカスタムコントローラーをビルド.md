@@ -4,7 +4,7 @@ GitLab Runner を使って Kubernetes カスタムコントローラーのコン
 
 ## 設定ファイル
 
-### .gitlab-ci.yaml
+### .gitlab-ci.yml
 
 cf.
 
@@ -79,7 +79,7 @@ release:
 
 ### Makefile
 
-環境変数の管理向けに`.env`ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yaml および Makefile から読み取れるようにします:
+環境変数の管理向けに`.env`ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yml および Makefile から読み取れるようにします:
 
 ```shell
 TAG=v1.0.0

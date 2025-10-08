@@ -124,7 +124,7 @@ cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
     extra_hosts = ["${ドメイン名}:${GitLabのIPアドレス}"]
 ```
 
-## .gitlab-ci.yaml サンプル
+## .gitlab-ci.yml サンプル
 
 ```yaml
 stages:

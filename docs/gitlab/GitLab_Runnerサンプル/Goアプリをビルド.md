@@ -17,7 +17,7 @@ COPY ${ARTIFACT_PATH} /main
 CMD ["/main"]
 ```
 
-### .gitlab-ci.yaml
+### .gitlab-ci.yml
 
 cf.
 

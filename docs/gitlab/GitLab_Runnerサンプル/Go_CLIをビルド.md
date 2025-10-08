@@ -4,7 +4,7 @@ GitLab Runner を使って Go の CLI アプリをビルドします。
 
 ## 設定ファイル
 
-### .gitlab-ci.yaml
+### .gitlab-ci.yml
 
 cf.
 

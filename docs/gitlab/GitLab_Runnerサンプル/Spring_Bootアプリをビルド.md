@@ -69,7 +69,7 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
 </project>
 ```
 
-### .gitlab-ci.yaml
+### .gitlab-ci.yml
 
 cf.
 

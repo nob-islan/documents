@@ -53,11 +53,11 @@ docker exec -it nob-gitlab-runner gitlab-runner register
 
 ```
 first-kaniko-project
-  ├─.gitlab-ci.yaml
+  ├─.gitlab-ci.yml
   └─Dockerfile
 ```
 
-#### .gitlab-ci.yaml
+#### .gitlab-ci.yml
 
 主に以下の流れで処理が進みます。
 
@@ -85,7 +85,7 @@ build:
     - if: $CI_COMMIT_TAG
 ```
 
-`CI_REGISTRY_IMAGE`は GitLab の画面から環境変数として登録するか、`.gitlab-ci.yaml`にベタ書きするかしてください。
+`CI_REGISTRY_IMAGE`は GitLab の画面から環境変数として登録するか、`.gitlab-ci.yml`にベタ書きするかしてください。
 
 #### Dockerfile
 
