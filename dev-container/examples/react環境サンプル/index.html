@@ -1163,19 +1163,6 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    React 環境サンプル
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1187,58 +1174,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ディレクトリ構成
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      設定
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#devcontainerjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      devcontainer.json
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -5420,47 +5355,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      ディレクトリ構成
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      設定
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#devcontainerjson" class="md-nav__link">
-    <span class="md-ellipsis">
-      devcontainer.json
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -5477,13 +5371,6 @@
 
 <h1 id="react">React 環境サンプル</h1>
 <p>React 環境構築のためのサンプルです。</p>
-<h2 id="_1">ディレクトリ構成</h2>
-<div class="highlight"><pre><span></span><code>.devcontainer/
-  └─devcontainer.json
-</code></pre></div>
-<h2 id="_2">設定</h2>
-<p>各種ファイルの設定内容です。</p>
-<h3 id="devcontainerjson">devcontainer.json</h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;React&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mcr.microsoft.com/devcontainers/typescript-node:20-bullseye&quot;</span><span class="p">,</span>
@@ -5493,15 +5380,19 @@
 <span class="w">      </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;[typescriptreact]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 <span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vscode.typescript-language-features&quot;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;[typescript]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 <span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vscode.typescript-language-features&quot;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;[css]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="nt">&quot;[scss]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">      </span><span class="p">},</span>
