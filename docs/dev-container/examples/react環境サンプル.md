@@ -20,11 +20,9 @@ React 環境構築のためのサンプルです。
           "editor.defaultFormatter": "vscode.typescript-language-features"
         },
         "[css]": {
-          "editor.tabSize": 4,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[scss]": {
-          "editor.tabSize": 4,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         }
       },
