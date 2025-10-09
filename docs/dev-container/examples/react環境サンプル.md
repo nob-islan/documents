@@ -2,19 +2,6 @@
 
 React 環境構築のためのサンプルです。
 
-## ディレクトリ構成
-
-```
-.devcontainer/
-  └─devcontainer.json
-```
-
-## 設定
-
-各種ファイルの設定内容です。
-
-### devcontainer.json
-
 ```json
 {
   "name": "React",
@@ -25,15 +12,19 @@ React 環境構築のためのサンプルです。
       "settings": {
         "editor.formatOnSave": true,
         "[typescriptreact]": {
+          "editor.tabSize": 2,
           "editor.defaultFormatter": "vscode.typescript-language-features"
         },
         "[typescript]": {
+          "editor.tabSize": 2,
           "editor.defaultFormatter": "vscode.typescript-language-features"
         },
         "[css]": {
+          "editor.tabSize": 4,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[scss]": {
+          "editor.tabSize": 4,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         }
       },
