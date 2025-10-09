@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/">
+        <link rel="prev" href="../first-nfs/">
       
       
-        <link rel="next" href="../kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/">
+        <link rel="next" href="../install-ubuntu-desktop/">
       
       
-      <link rel="icon" href="../../../00_config/favicon.png">
+      <link rel="icon" href="../../00_config/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
     
     
       
-        <title>kind で Ingress を使う - Nob docs</title>
+        <title>はじめての nip.io - Nob docs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a3383ac.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kind-ingress" class="md-skip">
+        <a href="#nipio" class="md-skip">
           Skip to content
         </a>
       
@@ -88,9 +88,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Nob docs" class="md-header__button md-logo" aria-label="Nob docs" data-md-component="logo">
+    <a href="../.." title="Nob docs" class="md-header__button md-logo" aria-label="Nob docs" data-md-component="logo">
       
-  <img src="../../../00_config/favicon.png" alt="logo">
+  <img src="../../00_config/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              kind で Ingress を使う
+              はじめての nip.io
             
           </span>
         </div>
@@ -211,9 +211,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Nob docs" class="md-nav__button md-logo" aria-label="Nob docs" data-md-component="logo">
+    <a href="../.." title="Nob docs" class="md-nav__button md-logo" aria-label="Nob docs" data-md-component="logo">
       
-  <img src="../../../00_config/favicon.png" alt="logo">
+  <img src="../../00_config/favicon.png" alt="logo">
 
     </a>
     Nob docs
@@ -228,7 +228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -288,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -311,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/Nginx%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../ansible/Nginx%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -334,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/ansible%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
+      <a href="../../ansible/ansible%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -440,7 +440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../aws/Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../aws/ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -578,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
+      <a href="../../aws/EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
         
   
   
@@ -654,7 +654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../code-server/lets_encrypt%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6SSL%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86/" class="md-nav__link">
+      <a href="../../code-server/lets_encrypt%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6SSL%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86/" class="md-nav__link">
         
   
   
@@ -677,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../code-server/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcode-server/" class="md-nav__link">
+      <a href="../../code-server/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcode-server/" class="md-nav__link">
         
   
   
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../coder/template%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../coder/template%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -768,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../coder/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcoder/" class="md-nav__link">
+      <a href="../../coder/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcoder/" class="md-nav__link">
         
   
   
@@ -874,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/common/volume%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../dev-container/common/volume%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -897,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/common/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../dev-container/common/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -966,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/eks%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/eks%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -989,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1012,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/java_operator_sdk%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/java_operator_sdk%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1035,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/java%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/java%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1058,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/kind%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/kind%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1081,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/kubebuilder%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/kubebuilder%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1104,7 +1104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/marp%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/marp%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1127,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/mkdocs%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/mkdocs%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1150,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1226,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/" class="md-nav__link">
+      <a href="../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/" class="md-nav__link">
         
   
   
@@ -1332,7 +1332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1355,7 +1355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1378,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1401,7 +1401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7MinIO%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7MinIO%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1424,7 +1424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1447,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1470,7 +1470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1493,7 +1493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1516,7 +1516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1539,7 +1539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7react%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7react%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -1608,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
+      <a href="../../docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1677,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
+      <a href="../../docker/trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -1829,7 +1829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github_action/common/%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../github/github_action/common/%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1898,7 +1898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github_action/examples/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../github/github_action/examples/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -1921,7 +1921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github_action/examples/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../github/github_action/examples/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2005,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Pages%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Pages%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2028,7 +2028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2051,7 +2051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%92AWS%E4%B8%8A%E3%81%AERDS%20%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%92AWS%E4%B8%8A%E3%81%AERDS%20%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2074,7 +2074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2097,7 +2097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86%E6%9B%B8%EF%BC%88%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%89%88%EF%BC%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86%E6%9B%B8%EF%BC%88%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%89%88%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -2120,7 +2120,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/%E3%82%B8%E3%83%A7%E3%83%96%E3%82%A2%E3%83%BC%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E4%B8%8A%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/%E3%82%B8%E3%83%A7%E3%83%96%E3%82%A2%E3%83%BC%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E4%B8%8A%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2181,7 +2181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2204,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2227,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Kubernetes%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Kubernetes%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2250,7 +2250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/MkDocs%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92GItLab_Pages%E3%81%A7%E5%85%AC%E9%96%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/MkDocs%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92GItLab_Pages%E3%81%A7%E5%85%AC%E9%96%8B/" class="md-nav__link">
         
   
   
@@ -2273,7 +2273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2296,7 +2296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2372,7 +2372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -2395,7 +2395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../go/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -2418,7 +2418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/HTTPS%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8BREST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/HTTPS%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8BREST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2441,7 +2441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../go/Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -2464,7 +2464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%87%BA%E5%8A%9B/" class="md-nav__link">
+      <a href="../../go/Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%87%BA%E5%8A%9B/" class="md-nav__link">
         
   
   
@@ -2487,7 +2487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2510,7 +2510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/godoc%E5%87%BA%E5%8A%9B/" class="md-nav__link">
+      <a href="../../go/godoc%E5%87%BA%E5%8A%9B/" class="md-nav__link">
         
   
   
@@ -2533,7 +2533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../go/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -2556,7 +2556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../go/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -2579,7 +2579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
+      <a href="../../go/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
         
   
   
@@ -2602,7 +2602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -2625,7 +2625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2648,7 +2648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../go/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -2671,7 +2671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../go/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../go/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -2739,7 +2739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../harbor/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%81%AEpush%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+      <a href="../../harbor/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%81%AEpush%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
         
   
   
@@ -2807,7 +2807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../java/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -2830,7 +2830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../java/Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -2853,7 +2853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -2876,7 +2876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
+      <a href="../../java/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
         
   
   
@@ -2899,7 +2899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../java/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -2922,7 +2922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../java/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -2945,7 +2945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../java/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2968,7 +2968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../java/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -2991,7 +2991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../java/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -3014,7 +3014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Oracle_DB%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../java/Oracle_DB%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -3037,7 +3037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../java/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -3060,7 +3060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3083,7 +3083,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/UT%E6%99%82%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7DB%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/UT%E6%99%82%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7DB%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3106,7 +3106,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../java/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -3129,7 +3129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../java/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -3152,7 +3152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3175,7 +3175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3202,20 +3202,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
         
           
           <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
@@ -3231,7 +3229,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             Kubernetes
@@ -3242,20 +3240,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14_1" >
         
           
           <label class="md-nav__link" for="__nav_14_1" id="__nav_14_1_label" tabindex="0">
@@ -3271,7 +3267,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_14_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_14_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_14_1">
             <span class="md-nav__icon md-icon"></span>
             Kind
@@ -3285,7 +3281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../kubernetes/kind/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -3308,7 +3304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
         
   
   
@@ -3328,32 +3324,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    kind で Ingress を使う
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../kubernetes/kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
         
   
   
@@ -3364,68 +3338,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      手順
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="手順">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      クラスタ作成
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      リソース作成
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      動作確認
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3438,7 +3350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
         
   
   
@@ -3461,7 +3373,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3568,7 +3480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3591,7 +3503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/argocd/GitLab%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E7%99%BB%E9%8C%B2/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/argocd/GitLab%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%82%92%E7%99%BB%E9%8C%B2/" class="md-nav__link">
         
   
   
@@ -3660,7 +3572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3683,7 +3595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -3706,7 +3618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3775,7 +3687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3798,7 +3710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3821,7 +3733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/resources/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E5%AE%9A%E7%BE%A9%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/resources/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E5%AE%9A%E7%BE%A9%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -3844,7 +3756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/resources/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%AE%E8%AA%8D%E8%A8%BC%E6%83%85%E5%A0%B1%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/resources/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%AE%E8%AA%8D%E8%A8%BC%E6%83%85%E5%A0%B1%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3913,7 +3825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/settings/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/settings/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -3936,7 +3848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/settings/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/settings/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -3959,7 +3871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/settings/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/settings/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -3982,7 +3894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../kubernetes/settings/kubeconfig%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
+      <a href="../../kubernetes/kubernetes/settings/kubeconfig%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4025,18 +3937,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -4052,7 +3966,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             Linux
@@ -4066,7 +3980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/first-ftp/" class="md-nav__link">
+      <a href="../first-ftp/" class="md-nav__link">
         
   
   
@@ -4089,7 +4003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/first-nfs/" class="md-nav__link">
+      <a href="../first-nfs/" class="md-nav__link">
         
   
   
@@ -4109,10 +4023,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../linux/first-nipio/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    はじめての nip.io
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4123,6 +4059,44 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      概要
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用例
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4135,7 +4109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/install-ubuntu-desktop/" class="md-nav__link">
+      <a href="../install-ubuntu-desktop/" class="md-nav__link">
         
   
   
@@ -4158,7 +4132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/local-name-resolve/" class="md-nav__link">
+      <a href="../local-name-resolve/" class="md-nav__link">
         
   
   
@@ -4181,7 +4155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/non-sleep-linux/" class="md-nav__link">
+      <a href="../non-sleep-linux/" class="md-nav__link">
         
   
   
@@ -4204,7 +4178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/stress-tool/" class="md-nav__link">
+      <a href="../stress-tool/" class="md-nav__link">
         
   
   
@@ -4272,7 +4246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mdwiki/MDWiki%E3%81%A7web%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../mdwiki/MDWiki%E3%81%A7web%E3%83%9A%E3%83%BC%E3%82%B8%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4340,7 +4314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/MinIO%E3%81%A7%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../minio/MinIO%E3%81%A7%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4363,7 +4337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/MinIO%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%92%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../minio/MinIO%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%92%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4386,7 +4360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/Minio_CLI/" class="md-nav__link">
+      <a href="../../minio/Minio_CLI/" class="md-nav__link">
         
   
   
@@ -4454,7 +4428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mkdocs/first-mkdocs/" class="md-nav__link">
+      <a href="../../mkdocs/first-mkdocs/" class="md-nav__link">
         
   
   
@@ -4522,7 +4496,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../multipass/first-multipass/" class="md-nav__link">
+      <a href="../../multipass/first-multipass/" class="md-nav__link">
         
   
   
@@ -4590,7 +4564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nginx/nginx%E3%81%A7%E3%83%AA%E3%83%90%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../nginx/nginx%E3%81%A7%E3%83%AA%E3%83%90%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4613,7 +4587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nginx/nginx%E3%82%B5%E3%83%BC%E3%83%90%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89%E3%80%81%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../nginx/nginx%E3%82%B5%E3%83%BC%E3%83%90%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89%E3%80%81%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4681,7 +4655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -4704,7 +4678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4727,7 +4701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../oracle/%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4750,7 +4724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7OracleDB%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../oracle/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7OracleDB%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4818,7 +4792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postfix/local-postfix/" class="md-nav__link">
+      <a href="../../postfix/local-postfix/" class="md-nav__link">
         
   
   
@@ -4886,7 +4860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4909,7 +4883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postgresql/PostgreSQL%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../postgresql/PostgreSQL%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4977,7 +4951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../prometheus/Prometheus%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../prometheus/Prometheus%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5000,7 +4974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../prometheus/Spring_Batch%E3%81%8B%E3%82%89prometheus%E5%90%91%E3%81%91%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../prometheus/Spring_Batch%E3%81%8B%E3%82%89prometheus%E5%90%91%E3%81%91%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5068,7 +5042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/react%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../react/react%E3%81%AE%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -5091,7 +5065,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/react%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../react/react%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -5159,7 +5133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../squid/first-squid/" class="md-nav__link">
+      <a href="../../squid/first-squid/" class="md-nav__link">
         
   
   
@@ -5227,7 +5201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ssl/first-letsencript/" class="md-nav__link">
+      <a href="../../ssl/first-letsencript/" class="md-nav__link">
         
   
   
@@ -5250,7 +5224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ssl/first-ssl/" class="md-nav__link">
+      <a href="../../ssl/first-ssl/" class="md-nav__link">
         
   
   
@@ -5318,7 +5292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vscode/%E5%90%84%E7%A8%AE%E8%A8%AD%E5%AE%9A%E6%8E%A7%E3%81%88/" class="md-nav__link">
+      <a href="../../vscode/%E5%90%84%E7%A8%AE%E8%A8%AD%E5%AE%9A%E6%8E%A7%E3%81%88/" class="md-nav__link">
         
   
   
@@ -5386,7 +5360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zabbix/zabbix-install/" class="md-nav__link">
+      <a href="../../zabbix/zabbix-install/" class="md-nav__link">
         
   
   
@@ -5438,42 +5412,18 @@
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      手順
+      概要
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="手順">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      クラスタ作成
+      使用例
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      リソース作成
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      動作確認
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -5493,101 +5443,36 @@
 
 
 
-<h1 id="kind-ingress">kind で Ingress を使う</h1>
-<p>cf. <a href="https://kind.sigs.k8s.io/docs/user/ingress">https://kind.sigs.k8s.io/docs/user/ingress</a></p>
-<h2 id="_1">手順</h2>
-<p>サンプルとして、<code>/sample/greet</code>および<code>/sample/bye</code>エンドポイントを用意したアプリをデプロイすることを想定します。</p>
-<h3 id="_2">クラスタ作成</h3>
-<p>Ingress 向けにポートを開放したクラスタを構築する必要があるので注意してください:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
-<span class="nt">nodes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control-plane</span>
-<span class="w">    </span><span class="nt">extraPortMappings</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-<span class="w">        </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-<span class="w">        </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<span class="w">        </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">443</span>
-<span class="w">        </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
-</code></pre></div>
-<h3 id="_3">リソース作成</h3>
-<ul>
-<li>Ingress nginx を起動:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
-</code></pre></div>
-<ul>
-<li>リソースが構築されるまで待機:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>--namespace<span class="w"> </span>ingress-nginx<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--for<span class="o">=</span><span class="nv">condition</span><span class="o">=</span>ready<span class="w"> </span>pod<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--selector<span class="o">=</span>app.kubernetes.io/component<span class="o">=</span>controller<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--timeout<span class="o">=</span>90s
-</code></pre></div>
-<ul>
-<li>Ingress リソース作成</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-ingress</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">http</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/sample</span>
-<span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
-<span class="w">              </span><span class="nt">service</span><span class="p">:</span>
-<span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-service</span>
-<span class="w">                </span><span class="nt">port</span><span class="p">:</span>
-<span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</code></pre></div>
-<ul>
-<li>動作確認用アプリリソース作成</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-service</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
-<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-<span class="nn">---</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
-<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
-<span class="nt">metadata</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-deploy</span>
-<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
-<span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
-<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
-<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
-<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
-<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nobexample/easyapp:latest</span>
-<span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
-</code></pre></div>
-<h3 id="_4">動作確認</h3>
-<ul>
-<li>curl で疎通確認をとります:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>$ curl localhost:80/sample/greet
-Hello, World!
-
-$ curl localhost:80/sample/bye
-GoodBye, World!
+<h1 id="nipio">はじめての nip.io</h1>
+<p>フリーで使えるドメイン <code>nip.io</code> について説明します。</p>
+<p>cf. <a href="https://nip.io/">https://nip.io/</a></p>
+<h2 id="_1">概要</h2>
+<p><code>sample.192.168.151.10.nip.io</code> などのドメインについて<code>192.168.151.10</code>と返すなど、登録など不要でドメインを設定することができます。</p>
+<h2 id="_2">使用例</h2>
+<p>GitLab Pages を簡単にセットアップすることができます:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">external_url &quot;http://gitlab.{server_ip}.nip.io&quot;</span>
+<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
+<span class="w">        </span><span class="no">pages_external_url &quot;http://pages.{server_ip}.nip.io&quot;</span>
+<span class="w">        </span><span class="no">gitlab_pages[&#39;enable&#39;] = true</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
+<span class="w">  </span><span class="nt">gitlab-runner</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-runner:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab-runner</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
 </code></pre></div>
 
 
@@ -5652,10 +5537,10 @@ GoodBye, World!
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>
