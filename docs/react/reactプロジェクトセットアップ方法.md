@@ -29,7 +29,7 @@ npm install redux react-redux redux-thunk react-router-dom axios
 npm install sass node-sass
 ```
 
-## Redux 向けソースコード改修
+## Redux 向け実装
 
 Redux を動かすために必要な改修およびサンプルコードについて記載します。サンプルでは + ボタンと - ボタンによってカウンターを増減させる画面を実装します。
 
