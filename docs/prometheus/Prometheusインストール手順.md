@@ -1,6 +1,6 @@
 # Prometheus インストール手順
 
-cf. https://changineer.info/server/monitoring/monitoring_prometheus_install_docker.html  
+cf. https://prometheus.io/docs/prometheus/latest/getting_started/
 インストールから動作確認まで行います。
 
 ## 事前準備
