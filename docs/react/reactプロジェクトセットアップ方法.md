@@ -52,12 +52,26 @@ Redux を動かすために必要な改修およびサンプルコードにつ�
     │       ├── counterState.ts    # 各コンポーネントの状態定義
     │       └── Counter.tsx        # 各コンポーネントの本体定義
     ├── index.module.scss          # ページ全体の装飾
-    └── index.tsx                  # アプリケーションのエントリ
+    ├── index.tsx                  # アプリケーションのエントリ
+    └── .prettierrc                # コードフォーマットの定義
 ```
 
 ### クラス一覧
 
 各クラスに必要な修正、または新規作成方法について記載します。
+
+#### .prettierrc
+
+コードのフォーマットに関する設定を定義します。
+
+```json
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "none",
+  "semi": true
+}
+```
 
 #### index.tsx
 
