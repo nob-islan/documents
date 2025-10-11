@@ -5880,7 +5880,7 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <h4 id="approotreducerts">app/rootReducer.ts</h4>
 <p>reducer を統合します。reducer が増えるたびに<code>rootReducer</code>への追記が必要です。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">combineReducers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">counterReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../features/counter/counter/counterReducer&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">counterReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../features/counter/counterReducer&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * reducerを統合します。</span>
@@ -5899,7 +5899,7 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <p>ルーティングを設定します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./app.module.scss&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BrowserRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./features/counter/counter/Counter&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./features/counter/Counter&quot;</span><span class="p">;</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
@@ -5980,7 +5980,7 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * Counterのaction typeを定義します。</span>
 <span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">ActionTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">CounterActionTypeConst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">INCREMENT</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;INCREMENT&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">DECREMENT</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DECREMENT&quot;</span><span class="p">,</span>
 <span class="p">}</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kd">const</span><span class="p">;</span>
@@ -5993,14 +5993,14 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <span class="cm">   * 値を増加させます。</span>
 <span class="cm">   */</span>
 <span class="w">  </span><span class="nx">increment</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
-<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="nx">ActionTypes</span><span class="p">.</span><span class="nx">INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="nx">CounterActionTypeConst</span><span class="p">.</span><span class="nx">INCREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="p">}),</span>
 
 <span class="w">  </span><span class="cm">/**</span>
 <span class="cm">   * 値を減少させます。</span>
 <span class="cm">   */</span>
 <span class="w">  </span><span class="nx">decrement</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
-<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="nx">ActionTypes</span><span class="p">.</span><span class="nx">DECREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="nx">CounterActionTypeConst</span><span class="p">.</span><span class="nx">DECREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="p">}),</span>
 <span class="p">};</span>
 
@@ -6010,7 +6010,7 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 </code></pre></div>
 <h4 id="featurescountercounterreducerts">features/counter/counterReducer.ts</h4>
 <p>各コンポーネントの状態変化を返す関数を定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ActionTypes</span><span class="p">,</span><span class="w"> </span><span class="nx">CounterActionTypes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterAction&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CounterActionTypeConst</span><span class="p">,</span><span class="w"> </span><span class="nx">CounterActionTypes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterAction&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">CounterState</span><span class="p">,</span><span class="w"> </span><span class="nx">initialCounterState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterState&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -6025,12 +6025,12 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <span class="w">  </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kt">CounterActionTypes</span>
 <span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">CounterState</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="kr">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">ActionTypes.INCREMENT</span><span class="o">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">CounterActionTypeConst.INCREMENT</span><span class="o">:</span>
 <span class="w">      </span><span class="kt">return</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">...</span><span class="nx">state</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">state.value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">      </span><span class="p">};</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">ActionTypes.DECREMENT</span><span class="o">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">CounterActionTypeConst.DECREMENT</span><span class="o">:</span>
 <span class="w">      </span><span class="kt">return</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="p">...</span><span class="nx">state</span><span class="p">,</span>
 <span class="w">        </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">state.value</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
@@ -6043,7 +6043,6 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <h4 id="indexmodulescss">index.module.scss</h4>
 <p>Web ページ全体の装飾を定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// 共通スタイル</span>
 <span class="w">  </span><span class="nt">background-color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#050027</span><span class="o">;</span>
 <span class="w">  </span><span class="nt">color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#dddddd</span><span class="o">;</span>
 <span class="p">}</span>
