@@ -1,4 +1,4 @@
-# kubebuilder 環境サンプル
+# Kubebuilder 環境サンプル
 
 Kubernetes のカスタムコントローラーを実装するための kubebuilder を利用するためのサンプルです。
 

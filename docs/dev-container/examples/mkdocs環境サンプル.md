@@ -1,4 +1,4 @@
-# mkdocs 環境サンプル
+# MkDocs 環境サンプル
 
 [MkDocs](https://www.mkdocs.org/) によるドキュメント作成ができる環境を用意します。ベースイメージを python とし、必要なライブラリを `postcreate.sh` でインストールします。
 
