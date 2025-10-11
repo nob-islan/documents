@@ -5149,24 +5149,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#indextsx" class="md-nav__link">
-    <span class="md-ellipsis">
-      index.tsx
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apptsx" class="md-nav__link">
-    <span class="md-ellipsis">
-      App.tsx
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       app/store.ts
@@ -5179,6 +5161,24 @@
   <a href="#approotreducerts" class="md-nav__link">
     <span class="md-ellipsis">
       app/rootReducer.ts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indextsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      index.tsx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apptsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      App.tsx
     </span>
   </a>
   
@@ -5689,24 +5689,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#indextsx" class="md-nav__link">
-    <span class="md-ellipsis">
-      index.tsx
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apptsx" class="md-nav__link">
-    <span class="md-ellipsis">
-      App.tsx
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       app/store.ts
@@ -5719,6 +5701,24 @@
   <a href="#approotreducerts" class="md-nav__link">
     <span class="md-ellipsis">
       app/rootReducer.ts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indextsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      index.tsx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apptsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      App.tsx
     </span>
   </a>
   
@@ -5867,6 +5867,28 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <span class="w">  </span><span class="nt">&quot;semi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="appstorets">app/store.ts</h4>
+<p>各種 reducer を取りまとめた store を作成します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">legacy_createStore</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./rootReducer&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createStore</span><span class="p">(</span><span class="nx">rootReducer</span><span class="p">);</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="approotreducerts">app/rootReducer.ts</h4>
+<p>reducer を統合します。reducer が増えるたびに<code>rootReducer</code>への追記が必要です。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">combineReducers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">counterReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../features/counter/counter/counterReducer&quot;</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * reducerを統合します。</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">combineReducers</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">counter</span><span class="o">:</span><span class="w"> </span><span class="kt">counterReducer</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
 <h4 id="indextsx">index.tsx</h4>
 <p><code>Provider</code>コンポーネントで<code>App</code>コンポーネントをラップします。</p>
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">Provider</span><span class="w"> </span><span class="na">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}&gt;</span>
@@ -5892,28 +5914,6 @@ npm<span class="w"> </span>install<span class="w"> </span>redux<span class="w"> 
 <span class="p">}</span>
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">App</span><span class="p">;</span>
-</code></pre></div>
-<h4 id="appstorets">app/store.ts</h4>
-<p>各種 reducer を取りまとめた store を作成します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">legacy_createStore</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./rootReducer&quot;</span><span class="p">;</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createStore</span><span class="p">(</span><span class="nx">rootReducer</span><span class="p">);</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
-</code></pre></div>
-<h4 id="approotreducerts">app/rootReducer.ts</h4>
-<p>reducer を統合します。reducer が増えるたびに<code>rootReducer</code>への追記が必要です。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">combineReducers</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">counterReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../features/counter/counter/counterReducer&quot;</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * reducerを統合します。</span>
-<span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">combineReducers</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">counter</span><span class="o">:</span><span class="w"> </span><span class="kt">counterReducer</span><span class="p">,</span>
-<span class="p">});</span>
 </code></pre></div>
 <h4 id="featurescountercountertsx">features/counter/Counter.tsx</h4>
 <p>画面コンテンツおよび action の呼び出しを定義します。</p>
