@@ -93,7 +93,7 @@ reducer を統合します。reducer が増えるたびに`rootReducer`への追
 
 ```ts
 import { combineReducers } from "redux";
-import { counterReducer } from "../features/counter/counter/counterReducer";
+import { counterReducer } from "../features/counter/counterReducer";
 
 /**
  * reducerを統合します。
@@ -120,7 +120,7 @@ export const rootReducer = combineReducers({
 ```tsx
 import style from "./app.module.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Counter from "./features/counter/counter/Counter";
+import Counter from "./features/counter/Counter";
 
 function App() {
   return (
@@ -213,7 +213,7 @@ export const initialCounterState: CounterState = {
 /**
  * Counterのaction typeを定義します。
  */
-export const ActionTypes = {
+export const CounterActionTypeConst = {
   INCREMENT: "INCREMENT",
   DECREMENT: "DECREMENT",
 } as const;
@@ -226,14 +226,14 @@ export const counterActions = {
    * 値を増加させます。
    */
   increment: () => ({
-    type: ActionTypes.INCREMENT,
+    type: CounterActionTypeConst.INCREMENT,
   }),
 
   /**
    * 値を減少させます。
    */
   decrement: () => ({
-    type: ActionTypes.DECREMENT,
+    type: CounterActionTypeConst.DECREMENT,
   }),
 };
 
@@ -247,7 +247,7 @@ export type CounterActionTypes = ReturnType<
 各コンポーネントの状態変化を返す関数を定義します。
 
 ```ts
-import { ActionTypes, CounterActionTypes } from "./counterAction";
+import { CounterActionTypeConst, CounterActionTypes } from "./counterAction";
 import { CounterState, initialCounterState } from "./counterState";
 
 /**
@@ -262,12 +262,12 @@ export const counterReducer = (
   action: CounterActionTypes
 ): CounterState => {
   switch (action.type) {
-    case ActionTypes.INCREMENT:
+    case CounterActionTypeConst.INCREMENT:
       return {
         ...state,
         value: state.value + 1,
       };
-    case ActionTypes.DECREMENT:
+    case CounterActionTypeConst.DECREMENT:
       return {
         ...state,
         value: state.value - 1,
@@ -284,7 +284,6 @@ Web ページ全体の装飾を定義します。
 
 ```scss
 body {
-  // 共通スタイル
   background-color: #050027;
   color: #dddddd;
 }
