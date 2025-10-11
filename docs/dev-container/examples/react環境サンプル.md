@@ -5,7 +5,7 @@ React 環境構築向けのサンプルです。
 ```json
 {
   "name": "React",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:20-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bullseye",
   "features": {},
   "customizations": {
     "vscode": {
@@ -13,11 +13,11 @@ React 環境構築向けのサンプルです。
         "editor.formatOnSave": true,
         "[typescriptreact]": {
           "editor.tabSize": 2,
-          "editor.defaultFormatter": "vscode.typescript-language-features"
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[typescript]": {
           "editor.tabSize": 2,
-          "editor.defaultFormatter": "vscode.typescript-language-features"
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[css]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
