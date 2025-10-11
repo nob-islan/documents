@@ -4,7 +4,7 @@ Java Operator SDK で Kubernetes のカスタムコントローラーを実装�
 
 ```json
 {
-  "name": "Java operator SDK",
+  "name": "Java Operator SDK",
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {

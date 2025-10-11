@@ -1,26 +1,6 @@
 # Java 環境サンプル
 
-Java 環境構築のためのサンプルソースです。
-
-## ディレクトリ構成
-
-いつもの java プロジェクトに`.devcontainer`ディレクトリを下記要領で追加します。
-
-```
-root/
-  └─.devcontainer/
-       └─devcontainer.json
-```
-
-## 設定
-
-各種ファイルの設定内容です。
-
-### .devcontainer
-
-#### devcontainer.json
-
-開発コンテナのイメージなど、起動向けの設定を記載するファイルです。
+下記で開発コンテナを起動させます:
 
 ```json
 {

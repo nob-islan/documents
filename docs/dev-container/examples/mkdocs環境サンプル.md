@@ -17,7 +17,7 @@
 
 ```json
 {
-  "name": "test-page",
+  "name": "MkDocs",
   "image": "mcr.microsoft.com/devcontainers/python:3",
   "postCreateCommand": "bash .devcontainer/scripts/postcreate.sh",
   "features": {},
