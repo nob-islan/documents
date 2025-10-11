@@ -62,7 +62,7 @@ const Message: React.FC<Props> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
 
   /**
-   * API呼び出しボタンクリック時の動作を定義します。
+   * API呼び出しボタン押下時の動作を定義します。
    */
   const handleOnClickButton = () => {
     dispatch(getMessage());
