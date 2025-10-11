@@ -73,6 +73,36 @@ Redux を動かすために必要な改修およびサンプルコードにつ�
 }
 ```
 
+#### app/store.ts
+
+各種 reducer を取りまとめた store を作成します。
+
+```ts
+import { legacy_createStore as createStore } from "redux";
+import { rootReducer } from "./rootReducer";
+
+export const store = createStore(rootReducer);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+```
+
+#### app/rootReducer.ts
+
+reducer を統合します。reducer が増えるたびに`rootReducer`への追記が必要です。
+
+```ts
+import { combineReducers } from "redux";
+import { counterReducer } from "../features/counter/counter/counterReducer";
+
+/**
+ * reducerを統合します。
+ */
+export const rootReducer = combineReducers({
+  counter: counterReducer,
+});
+```
+
 #### index.tsx
 
 `Provider`コンポーネントで`App`コンポーネントをラップします。
@@ -105,36 +135,6 @@ function App() {
 }
 
 export default App;
-```
-
-#### app/store.ts
-
-各種 reducer を取りまとめた store を作成します。
-
-```ts
-import { legacy_createStore as createStore } from "redux";
-import { rootReducer } from "./rootReducer";
-
-export const store = createStore(rootReducer);
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-```
-
-#### app/rootReducer.ts
-
-reducer を統合します。reducer が増えるたびに`rootReducer`への追記が必要です。
-
-```ts
-import { combineReducers } from "redux";
-import { counterReducer } from "../features/counter/counter/counterReducer";
-
-/**
- * reducerを統合します。
- */
-export const rootReducer = combineReducers({
-  counter: counterReducer,
-});
 ```
 
 #### features/counter/Counter.tsx
