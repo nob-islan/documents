@@ -1,4 +1,4 @@
-# Spring Boot プロジェクトセットアップ方法
+# Spring Boot プロジェクトセットアップ
 
 Spring Boot で実装する REST API のプロジェクトの初期セットアップ方法について記載します。
 
