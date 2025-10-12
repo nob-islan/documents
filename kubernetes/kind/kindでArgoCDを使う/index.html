@@ -5672,7 +5672,7 @@ rm argocd-linux-arm64
 <li>Namespace: "default"</li>
 </ul>
 <p>プライベートリポジトリを指定する場合は下記のコマンドで認証を通してください:</p>
-<div class="highlight"><pre><span></span><code>argocd repo add https://gitlab.com/nob/first-cluster-inspection.git --username &lt;username&gt; --password &lt;password&gt;
+<div class="highlight"><pre><span></span><code>argocd repo add https://gitlab.example.nob/nob/first-argocd.git --username &lt;username&gt; --password &lt;password&gt;
 </code></pre></div>
 <p>アプリケーションが作成されていることを確認します。</p>
 <div class="highlight"><pre><span></span><code>argocd app get ${Application Name}
