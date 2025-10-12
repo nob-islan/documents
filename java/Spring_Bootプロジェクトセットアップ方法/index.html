@@ -5847,7 +5847,7 @@
 <h2 id="_1">プロジェクト作成</h2>
 <p>cf. <a href="https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line">https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line</a></p>
 <ul>
-<li><a href="https://start.spring.io/">Spring initializer</a> を使ってプロジェクトを新規作成します:</li>
+<li><a href="https://start.spring.io/">Spring initializer</a> を使ってプロジェクトを新規作成します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>https://start.spring.io/starter.zip<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="nv">dependencies</span><span class="o">=</span>web,lombok,data-jpa,mariadb<span class="w"> </span><span class="se">\</span>
@@ -5866,7 +5866,7 @@
 <h2 id="_2">実装</h2>
 <p>サンプルコードを掲載します。ここでは擬似的なログイン画面を実装します。</p>
 <h3 id="_3">事前準備</h3>
-<p>データベースを docker で構築し、Java プロジェクト側に接続情報を記載します:</p>
+<p>データベースを docker で構築し、Java プロジェクト側に接続情報を記載します。</p>
 <h4 id="docker-composeyaml">docker-compose.yaml</h4>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">easyappdb</span><span class="p">:</span>
@@ -6102,7 +6102,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/sample&quot;</span><span class="p">)</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">LoginController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
@@ -6191,8 +6191,8 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_6">起動</h2>
-<p>VSCode の <strong>Run Java</strong> などからアプリを起動します。下記コマンドで API を打鍵できます:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/sample/auth
+<p>VSCode の <strong>Run Java</strong> などからアプリを起動します。下記コマンドで API を打鍵できます。</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/api/v1/auth
 </code></pre></div>
 
 
