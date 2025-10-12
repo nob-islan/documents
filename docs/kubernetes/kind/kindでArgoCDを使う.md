@@ -142,7 +142,7 @@ GUI にて「+ NEW APP」を押下して、以下を入力します。
 プライベートリポジトリを指定する場合は下記のコマンドで認証を通してください:
 
 ```
-argocd repo add https://gitlab.com/nob/first-cluster-inspection.git --username <username> --password <password>
+argocd repo add https://gitlab.example.nob/nob/first-argocd.git --username <username> --password <password>
 ```
 
 アプリケーションが作成されていることを確認します。
