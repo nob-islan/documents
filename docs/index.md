@@ -8,10 +8,10 @@
 
 <div class="grid cards" markdown>
 
-- **[go 環境サンプル](./dev-container/examples/go環境サンプル.md)**
-- **[kind サンプル](./dev-container/examples/kindサンプル.md)**
-- **[kubebuilder 環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)**
-- **[java 環境サンプル](./dev-container/examples/java環境サンプル.md)**
+- **[Go 環境サンプル](./dev-container/examples/go環境サンプル.md)**
+- **[Kind サンプル](./dev-container/examples/kindサンプル.md)**
+- **[Kubebuilder 環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)**
+- **[Java 環境サンプル](./dev-container/examples/java環境サンプル.md)**
 
 </div>
 
