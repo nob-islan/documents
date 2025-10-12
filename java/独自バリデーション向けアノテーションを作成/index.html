@@ -3232,6 +3232,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    独自バリデーション向けアノテーションを作成
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -3243,6 +3256,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      単一パラメータに関わるバリデーション
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      複数パラメータに関わるバリデーション
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -5446,6 +5496,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      単一パラメータに関わるバリデーション
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      複数パラメータに関わるバリデーション
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -5461,7 +5537,68 @@
 
 
 <h1 id="_1">独自バリデーション向けアノテーションを作成</h1>
-<p>バリデーションに使うアノテーションを自作します。今回は例として、クラスに付与することを想定した、2 つの日付の前後関係をチェックするアノテーションを作成します。</p>
+<p>バリデーションに使うアノテーションを自作します。</p>
+<h2 id="_2">単一パラメータに関わるバリデーション</h2>
+<p>指定したパラメータが特定の値であるかをチェックするアノテーションを作成します。</p>
+<ul>
+<li>アノテーション</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstapp.validator</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.annotation.Documented</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.annotation.ElementType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.annotation.Retention</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.annotation.RetentionPolicy</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.annotation.Target</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Constraint</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Payload</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * サンプルのバリデーションです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@Documented</span>
+<span class="nd">@Constraint</span><span class="p">(</span><span class="n">validatedBy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SampleValidator</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@Target</span><span class="p">({</span><span class="w"> </span><span class="n">ElementType</span><span class="p">.</span><span class="na">FIELD</span><span class="w"> </span><span class="p">})</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/** エラーメッセージ */</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">message</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s">&quot;バリデーションエラーが発生しました。&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Class</span><span class="o">&lt;?&gt;[]</span><span class="w"> </span><span class="nf">groups</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="n">Class</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Payload</span><span class="o">&gt;[]</span><span class="w"> </span><span class="nf">payload</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>バリデーションの実装</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstapp.validator</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.ConstraintValidator</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.ConstraintValidatorContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
+
+<span class="nd">@NoArgsConstructor</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleValidator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConstraintValidator</span><span class="o">&lt;</span><span class="n">Sample</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">ConstraintValidatorContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// ユーザ名&quot;root&quot;は許可しない</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">複数パラメータに関わるバリデーション</h2>
+<p>2 つの日付の前後関係をチェックするアノテーションを作成します。</p>
 <ul>
 <li>アノテーション</li>
 </ul>
@@ -5486,20 +5623,13 @@
 <span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="nd">@interface</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 開始日</span>
-<span class="cm">     */</span>
+<span class="w">    </span><span class="cm">/** 開始日 */</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">startDate</span><span class="p">();</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 終了日</span>
-<span class="cm">     *</span>
-<span class="cm">     */</span>
+<span class="w">    </span><span class="cm">/** 終了日 */</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">endDate</span><span class="p">();</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * エラーメッセージ</span>
-<span class="cm">     */</span>
+<span class="w">    </span><span class="cm">/** エラーメッセージ */</span>
 <span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">message</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s">&quot;サンプルエラー&quot;</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">Class</span><span class="o">&lt;?&gt;[]</span><span class="w"> </span><span class="nf">groups</span><span class="p">()</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="p">{};</span>
@@ -5532,14 +5662,10 @@
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleValidator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConstraintValidator</span><span class="o">&lt;</span><span class="n">Sample</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 開始日</span>
-<span class="cm">     */</span>
+<span class="w">    </span><span class="cm">/** 開始日 */</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">startDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 終了日</span>
-<span class="cm">     */</span>
+<span class="w">    </span><span class="cm">/** 終了日 */</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">endDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
@@ -5618,14 +5744,10 @@
 <span class="w">    </span><span class="nd">@Data</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleValidatorTestDto</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="cm">/**</span>
-<span class="cm">         * 開始日</span>
-<span class="cm">         */</span>
+<span class="w">        </span><span class="cm">/** 開始日 */</span>
 <span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">startDate</span><span class="p">;</span>
 
-<span class="w">        </span><span class="cm">/**</span>
-<span class="cm">         * 終了日</span>
-<span class="cm">         */</span>
+<span class="w">        </span><span class="cm">/** 終了日 */</span>
 <span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">endDate</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
