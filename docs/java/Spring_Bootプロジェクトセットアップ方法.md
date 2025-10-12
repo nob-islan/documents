@@ -119,7 +119,7 @@ import org.springframework.stereotype.Repository;
 import nob.example.easyapp.repository.entity.Users;
 
 /**
- * usersテーブル向けのrepositoryクラスです。
+ * usersテーブル向けrepositoryのインターフェースです。
  *
  * @author nob
  */
