@@ -5591,36 +5591,36 @@
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>kind create cluster --name first-cluster --config first-cluster.yaml
+<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>first-cluster<span class="w"> </span>--config<span class="w"> </span>first-cluster.yaml
 </code></pre></div>
 <h2 id="argo-cd">Argo CD 起動</h2>
 <p>namespace を作成します。</p>
-<div class="highlight"><pre><span></span><code>kubectl create namespace argocd
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>argocd
 </code></pre></div>
 <p>マニフェストを読み込んで Argo CD を起動します。</p>
-<div class="highlight"><pre><span></span><code>kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-n<span class="w"> </span>argocd<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 </code></pre></div>
 <p><code>argocd-server</code>サービスを一部変更して NodePort に対応させます。</p>
-<div class="highlight"><pre><span></span><code>kubectl patch svc argocd-server -n argocd -p &#39;{&quot;spec&quot;: {&quot;type&quot;: &quot;NodePort&quot;, &quot;ports&quot;: [{&quot;name&quot;: &quot;http&quot;, &quot;port&quot;: 80, &quot;protocol&quot;: &quot;TCP&quot;, &quot;targetPort&quot;: 8080, &quot;nodePort&quot;: 30080}]}}&#39;
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>argocd-server<span class="w"> </span>-n<span class="w"> </span>argocd<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;: {&quot;type&quot;: &quot;NodePort&quot;, &quot;ports&quot;: [{&quot;name&quot;: &quot;http&quot;, &quot;port&quot;: 80, &quot;protocol&quot;: &quot;TCP&quot;, &quot;targetPort&quot;: 8080, &quot;nodePort&quot;: 30080}]}}&#39;</span>
 </code></pre></div>
 <p>Argo CD CLI をインストールします。</p>
-<div class="highlight"><pre><span></span><code>curl -SL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-rm argocd-linux-amd64
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-SL<span class="w"> </span>-o<span class="w"> </span>argocd-linux-amd64<span class="w"> </span>https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">555</span><span class="w"> </span>argocd-linux-amd64<span class="w"> </span>/usr/local/bin/argocd
+rm<span class="w"> </span>argocd-linux-amd64
 </code></pre></div>
 <p>【M1 Mac 対応】Argo CD CLI をインストールします。</p>
-<div class="highlight"><pre><span></span><code>curl -SL -o argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64
-sudo install -m 555 argocd-linux-arm64 /usr/local/bin/argocd
-rm argocd-linux-arm64
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-SL<span class="w"> </span>-o<span class="w"> </span>argocd-linux-arm64<span class="w"> </span>https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64
+sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">555</span><span class="w"> </span>argocd-linux-arm64<span class="w"> </span>/usr/local/bin/argocd
+rm<span class="w"> </span>argocd-linux-arm64
 </code></pre></div>
 <p>初回ログイン用のパスワードを入手します。</p>
-<div class="highlight"><pre><span></span><code>kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=&quot;{.data.password}&quot; | base64 -d; echo
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>-n<span class="w"> </span>argocd<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>argocd-initial-admin-secret<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
 </code></pre></div>
 <p>CLI を使ってログインします。</p>
-<div class="highlight"><pre><span></span><code>argocd login ${ホストサーバのIPアドレス}:30070
+<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>login<span class="w"> </span><span class="si">${</span><span class="nv">ホストサーバのIPアドレス</span><span class="si">}</span>:30070
 </code></pre></div>
 <p>パスワードを更新します。</p>
-<div class="highlight"><pre><span></span><code>argocd account update-password
+<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>account<span class="w"> </span>update-password
 </code></pre></div>
 <p><code>http://${ホストサーバのIPアドレス}:30070</code>にアクセスすれば GUI でログインができます。</p>
 <h2 id="_3">アプリケーションのデプロイ</h2>
@@ -5672,13 +5672,13 @@ rm argocd-linux-arm64
 <li>Namespace: "default"</li>
 </ul>
 <p>プライベートリポジトリを指定する場合は下記のコマンドで認証を通してください:</p>
-<div class="highlight"><pre><span></span><code>argocd repo add https://gitlab.example.nob/nob/first-argocd.git --username &lt;username&gt; --password &lt;password&gt;
+<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>https://gitlab.example.nob/nob/first-argocd.git<span class="w"> </span>--username<span class="w"> </span>&lt;username&gt;<span class="w"> </span>--password<span class="w"> </span>&lt;password&gt;
 </code></pre></div>
 <p>アプリケーションが作成されていることを確認します。</p>
-<div class="highlight"><pre><span></span><code>argocd app get ${Application Name}
+<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>app<span class="w"> </span>get<span class="w"> </span><span class="si">${</span><span class="nv">Application</span><span class="p"> Name</span><span class="si">}</span>
 </code></pre></div>
 <p>アプリケーションをデプロイします。</p>
-<div class="highlight"><pre><span></span><code>argocd app sync ${Application Name}
+<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>app<span class="w"> </span>sync<span class="w"> </span><span class="si">${</span><span class="nv">Application</span><span class="p"> Name</span><span class="si">}</span>
 </code></pre></div>
 
 
