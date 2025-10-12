@@ -2923,15 +2923,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      ハマったところ
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3307,12 +3298,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    バリデーション向けアノテーションを作成
+    独自バリデーション向けアノテーションを作成
     
   </span>
   
@@ -5545,15 +5536,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      ハマったところ
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5628,13 +5610,6 @@ Maven および Gradle プロジェクトについて記載。</p>
 <span class="nt">&lt;/reporting&gt;</span>
 </code></pre></div>
 <p>追記後、<code>./mvnw test jacoco:report</code>コマンドを叩きます。うまくいけば<code>target/site/jacoco</code>内に html 形式でレポートが作成されます。</p>
-<h3 id="_2">ハマったところ</h3>
-<ul>
-<li>以下のようなエラーが出て BUILD FAILURE する場合：</li>
-</ul>
-<div class="highlight"><pre><span></span><code>Error while creating report: Error while analyzing /Users/nobuhiro/higuchi/GitLab/monitoring/Monitoring/monitoring/target/classes/com/example/monitoring/dto/InputDto.class. Unsupported class file major version
-</code></pre></div>
-<p><code>jacoco-maven-pluginjacoco-maven-plugin</code>内の version を最新にすると直る（はず）。</p>
 <h2 id="gradle">Gradle</h2>
 <p><code>build.gradle</code>ファイルの<code>plugins</code>ブロック内に</p>
 <div class="highlight"><pre><span></span><code>id &#39;jacoco&#39;
