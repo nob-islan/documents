@@ -2,7 +2,7 @@
 
 cf. https://www.mkdocs.org/
 
-markdown で作成したドキュメントを html 形式でビルドする**MkDocs**の構築および実装方法について記載します。
+markdown で作成したドキュメントを html 形式でビルドする **MkDocs** の構築および実装方法について記載します。
 
 ## Getting started
 
