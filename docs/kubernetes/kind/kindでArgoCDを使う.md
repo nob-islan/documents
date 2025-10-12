@@ -23,7 +23,7 @@ nodes:
   - role: worker
 ```
 
-```
+```shell
 kind create cluster --name first-cluster --config first-cluster.yaml
 ```
 
@@ -31,25 +31,25 @@ kind create cluster --name first-cluster --config first-cluster.yaml
 
 namespace を作成します。
 
-```
+```shell
 kubectl create namespace argocd
 ```
 
 マニフェストを読み込んで Argo CD を起動します。
 
-```
+```shell
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 `argocd-server`サービスを一部変更して NodePort に対応させます。
 
-```
+```shell
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}]}}'
 ```
 
 Argo CD CLI をインストールします。
 
-```
+```shell
 curl -SL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64
@@ -57,7 +57,7 @@ rm argocd-linux-amd64
 
 【M1 Mac 対応】Argo CD CLI をインストールします。
 
-```
+```shell
 curl -SL -o argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-arm64
 sudo install -m 555 argocd-linux-arm64 /usr/local/bin/argocd
 rm argocd-linux-arm64
@@ -65,19 +65,19 @@ rm argocd-linux-arm64
 
 初回ログイン用のパスワードを入手します。
 
-```
+```shell
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
 CLI を使ってログインします。
 
-```
+```shell
 argocd login ${ホストサーバのIPアドレス}:30070
 ```
 
 パスワードを更新します。
 
-```
+```shell
 argocd account update-password
 ```
 
@@ -141,18 +141,18 @@ GUI にて「+ NEW APP」を押下して、以下を入力します。
 
 プライベートリポジトリを指定する場合は下記のコマンドで認証を通してください:
 
-```
+```shell
 argocd repo add https://gitlab.example.nob/nob/first-argocd.git --username <username> --password <password>
 ```
 
 アプリケーションが作成されていることを確認します。
 
-```
+```shell
 argocd app get ${Application Name}
 ```
 
 アプリケーションをデプロイします。
 
-```
+```shell
 argocd app sync ${Application Name}
 ```
