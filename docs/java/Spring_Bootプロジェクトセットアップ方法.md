@@ -86,22 +86,22 @@ spring.datasource.password=password
 .
 ├── controller
 │   ├── impl
-│   │   └── LoginControllerImpl.java  # APIインターフェースの実装
-│   ├── LoginController.java          # APIとしてのインターフェース
+│   │   └── AuthControllerImpl.java  # APIインターフェースの実装
+│   ├── AuthController.java          # APIとしてのインターフェース
 │   └── model
-│       ├── LoginRequest.java         # APIのリクエストモデル
-│       └── LoginResponse.java        # APIのレスポンスモデル
+│       ├── AuthRequest.java         # APIのリクエストモデル
+│       └── AuthResponse.java        # APIのレスポンスモデル
 ├── repository
 │   ├── entity
 │   │   └── Users.java                # データベースのテーブル定義に対応するエンティティ
 │   └── UsersRepository.java          # データベース操作のインターフェース
 └── service
     ├── impl
-    │   └── LoginServiceImpl.java     # 業務処理の実装
-    ├── LoginService.java             # 業務処理のインターフェース
+    │   └── AuthServiceImpl.java     # 業務処理の実装
+    ├── AuthService.java             # 業務処理のインターフェース
     └── model
-        ├── LoginInModel.java         # 業務処理の入力モデル
-        └── LoginOutModel.java        # 業務処理の出力モデル
+        ├── AuthInModel.java         # 業務処理の入力モデル
+        └── AuthOutModel.java        # 業務処理の出力モデル
 ```
 
 ### クラス一覧
@@ -174,7 +174,7 @@ public class Users {
 }
 ```
 
-#### service/LoginService.java
+#### service/AuthService.java
 
 業務処理を担うクラスのインターフェースを定義します。
 
@@ -183,8 +183,8 @@ package nob.example.easyapp.service;
 
 import org.springframework.stereotype.Service;
 
-import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.service.model.AuthInModel;
+import nob.example.easyapp.service.model.AuthOutModel;
 
 /**
  * 認証サービスのインターフェースです。
@@ -192,7 +192,7 @@ import nob.example.easyapp.service.model.LoginOutModel;
  * @author nob
  */
 @Service
-public interface LoginService {
+public interface AuthService {
 
     /**
      * 認証処理を行います。
@@ -200,11 +200,11 @@ public interface LoginService {
      * @param inModel 認証情報
      * @return 認証結果
      */
-    LoginOutModel auth(LoginInModel inModel);
+    AuthOutModel login(AuthInModel inModel);
 }
 ```
 
-#### service/impl/LoginServiceImpl.java
+#### service/impl/AuthServiceImpl.java
 
 サービスを実装します。アプリの業務処理はこのクラスで行います。
 
@@ -215,29 +215,29 @@ import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
 import nob.example.easyapp.repository.UsersRepository;
-import nob.example.easyapp.service.LoginService;
-import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.service.AuthService;
+import nob.example.easyapp.service.model.AuthInModel;
+import nob.example.easyapp.service.model.AuthOutModel;
 
 /**
- * LoginServiceの実装クラスです。
+ * AuthServiceの実装クラスです。
  *
  * @author nob
  */
 @Service
-public class LoginServiceImpl implements LoginService {
+public class AuthServiceImpl implements AuthService {
 
     @NonNull
     private UsersRepository usersRepository;
 
-    public LoginServiceImpl(UsersRepository usersRepository) {
+    public AuthServiceImpl(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
     @Override
-    public LoginOutModel auth(LoginInModel inModel) {
+    public AuthOutModel login(AuthInModel inModel) {
 
-        return new LoginOutModel(
+        return new AuthOutModel(
                 usersRepository.findByName(inModel.getName()).getPassword().equals(inModel.getPassword()));
     }
 }
@@ -258,7 +258,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class LoginInModel {
+public class AuthInModel {
 
     /** ユーザ名 */
     private String name;
@@ -279,14 +279,14 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class LoginOutModel {
+public class AuthOutModel {
 
     /** 認証可否 */
     private boolean valid;
 }
 ```
 
-#### controller/LoginController.java
+#### controller/AuthController.java
 
 API のインターフェースを定義します。
 
@@ -298,8 +298,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.AuthRequest;
+import nob.example.easyapp.controller.model.AuthResponse;
 
 /**
  * 認証コントローラーのインターフェースです。
@@ -308,7 +308,7 @@ import nob.example.easyapp.controller.model.LoginResponse;
  */
 @RestController
 @RequestMapping(value = "/api/v1")
-public interface LoginController {
+public interface AuthController {
 
     /**
      * 認証処理を呼び出します。
@@ -316,12 +316,12 @@ public interface LoginController {
      * @param request 認証リクエスト
      * @return 認証結果
      */
-    @PostMapping(value = "/auth")
-    LoginResponse auth(@RequestBody LoginRequest request);
+    @PostMapping(value = "/login")
+    AuthResponse login(@RequestBody AuthRequest request);
 }
 ```
 
-#### controller/impl/LoginControllerImpl.java
+#### controller/impl/AuthControllerImpl.java
 
 コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。
 
@@ -331,34 +331,34 @@ package nob.example.easyapp.controller.impl;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
-import nob.example.easyapp.controller.LoginController;
-import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.service.LoginService;
-import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.controller.AuthController;
+import nob.example.easyapp.controller.model.AuthRequest;
+import nob.example.easyapp.controller.model.AuthResponse;
+import nob.example.easyapp.service.AuthService;
+import nob.example.easyapp.service.model.AuthInModel;
+import nob.example.easyapp.service.model.AuthOutModel;
 
 /**
- * LoginControllerの実装クラスです。
+ * AuthControllerの実装クラスです。
  *
  * @author nob
  */
 @RestController
-public class LoginControllerImpl implements LoginController {
+public class AuthControllerImpl implements AuthController {
 
     @NonNull
-    private LoginService loginService;
+    private AuthService authService;
 
-    public LoginControllerImpl(LoginService loginService) {
-        this.loginService = loginService;
+    public AuthControllerImpl(AuthService authService) {
+        this.authService = authService;
     }
 
     @Override
-    public LoginResponse auth(LoginRequest request) {
+    public AuthResponse login(AuthRequest request) {
 
-        LoginOutModel outModel = loginService.auth(new LoginInModel(request.getName(), request.getPassword()));
+        AuthOutModel outModel = authService.login(new AuthInModel(request.getName(), request.getPassword()));
 
-        return new LoginResponse(outModel.isValid());
+        return new AuthResponse(outModel.isValid());
     }
 }
 ```
@@ -378,7 +378,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class LoginRequest {
+public class AuthRequest {
 
     /** ユーザ名 */
     private String name;
@@ -399,7 +399,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class LoginResponse {
+public class AuthResponse {
 
     /** 認証可否 */
     private boolean valid;
@@ -411,5 +411,5 @@ public class LoginResponse {
 VSCode の **Run Java** などからアプリを起動します。下記コマンドで API を打鍵できます。
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/auth
+curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
 ```
