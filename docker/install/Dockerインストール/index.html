@@ -1681,15 +1681,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      スペック
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vim" class="md-nav__link">
     <span class="md-ellipsis">
       vim のインストール
@@ -1707,15 +1698,6 @@
   <a href="#docker_1" class="md-nav__link">
     <span class="md-ellipsis">
       Docker のインストール
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
-    <span class="md-ellipsis">
-      docker-compose インストール
     </span>
   </a>
   
@@ -5566,15 +5548,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      スペック
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#vim" class="md-nav__link">
     <span class="md-ellipsis">
       vim のインストール
@@ -5592,15 +5565,6 @@
   <a href="#docker_1" class="md-nav__link">
     <span class="md-ellipsis">
       Docker のインストール
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
-    <span class="md-ellipsis">
-      docker-compose インストール
     </span>
   </a>
   
@@ -5654,71 +5618,64 @@ sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> <
 sudo<span class="w"> </span>reboot
 </code></pre></div>
 <h2 id="_2">事前準備</h2>
-<p>マシンおよび数々のエラーと戦う時間を用意します。</p>
-<h3 id="_3">スペック</h3>
-<ul>
-<li>ubuntu: 20.04</li>
-</ul>
 <h3 id="vim">vim のインストール</h3>
 <p>docker-compse.yaml を編集する際に使います。</p>
 <p>vim のインストール</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get install vim
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>vim
 </code></pre></div>
 <p>.vimrc ファイルの作成</p>
-<div class="highlight"><pre><span></span><code>vi ~/.vimrc
+<div class="highlight"><pre><span></span><code>vi<span class="w"> </span>~/.vimrc
 </code></pre></div>
-<p>ファイル内に<code>set nocompatible</code>と記入。</p>
+<p>ファイル内に<code>set nocompatible</code>と記入します。</p>
 <h2 id="docker_1">Docker のインストール</h2>
-<p>cf. <a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a><br />
-<br>
-必要なパッケージをインストール</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get update
+<p>cf. <a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></p>
+<ul>
+<li>必要なパッケージをインストールします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </code></pre></div>
-<div class="highlight"><pre><span></span><code> sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+<div class="highlight"><pre><span></span><code><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ca-certificates<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gnupg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>lsb-release
 </code></pre></div>
-<p>GPG 鍵の入手<br />
-GPG 鍵はメールやファイルの暗号化、ファイルの署名に使うらしい。</p>
-<div class="highlight"><pre><span></span><code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+<ul>
+<li>GPG 鍵を入手します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/docker-archive-keyring.gpg
 </code></pre></div>
-<p>リポジトリの登録</p>
-<div class="highlight"><pre><span></span><code>echo \
-  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+<ul>
+<li>リポジトリを登録します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span>
+<span class="s2">  </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/docker.list<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </code></pre></div>
-<p>Docker Engine インストール</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get update
+<ul>
+<li>Docker Engine をインストールします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span>docker-compose-plugin
 </code></pre></div>
-<p>インストールが成功していることを確認</p>
-<div class="highlight"><pre><span></span><code>sudo docker --version
+<ul>
+<li>インストールが成功していることを確認します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>docker<span class="w"> </span>--version
 </code></pre></div>
-<p>docker が起動していることを確認</p>
-<div class="highlight"><pre><span></span><code>systemctl status docker
+<ul>
+<li>docker が起動していることを確認します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>docker
 </code></pre></div>
-<p><code>active(running)</code>になっていれば OK</p>
-<p>ユーザを docker グループに追加</p>
-<div class="highlight"><pre><span></span><code>sudo usermod -aG docker $USER
+<p><code>active(running)</code>になっていれば OK です。</p>
+<ul>
+<li>ユーザを docker グループに追加します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
 </code></pre></div>
-<p>グループが存在しない場合は<code>sudo groupadd docker</code>で作成します。</p>
-<p>マシンの再起動後、必要であれば<code>sudo systemctl restart docker</code>で docker を再起動します。</p>
-<h2 id="docker-compose">docker-compose インストール</h2>
-<p>【M1 Mac 対応】docker compose の v1 -&gt; v2 移行に伴って、docker-compose をインストールする必要がなくなりました。<code>docker compose</code>コマンドを使えばいい、はず。</p>
-<p>公式サイトを参考にすればなんとかなる　はず。<a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a><br />
-<br>
-docker-compose の最新版ダウンロード</p>
-<div class="highlight"><pre><span></span><code>sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-</code></pre></div>
-<p>バイナリに対して実行権限を付与</p>
-<div class="highlight"><pre><span></span><code>sudo chmod +x /usr/local/bin/docker-compose
-</code></pre></div>
-<p>インストールが成功していることを確認</p>
-<div class="highlight"><pre><span></span><code>sudo docker-compose --version
-</code></pre></div>
+<p>グループが存在しない場合は<code>sudo groupadd docker</code>で作成します。マシンの再起動後、必要であれば<code>sudo systemctl restart docker</code>で docker を再起動します。</p>
 
 
 
