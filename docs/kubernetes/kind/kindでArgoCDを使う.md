@@ -133,7 +133,7 @@ GUI にて「+ NEW APP」を押下して、以下を入力します。
 
 - Application Name: 任意のアプリ名
 - Project: "default"
-- Repository URL: リポジトリの URL（例: https://github.com/1ruyamaguchi/argocd-first-kube-deploy.git）
+- Repository URL: リポジトリの URL（例: https://gitlab.example.nob/nob/first-argocd.git）
 - Revision: "HEAD"
 - Path: デプロイに使うファイルのパス
 - Cluster: "https://kubernetes.default.svc"
