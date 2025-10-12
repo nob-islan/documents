@@ -243,9 +243,9 @@ public class AuthServiceImpl implements AuthService {
 }
 ```
 
-#### service/model/
+#### service/model/AuthInModel.java
 
-業務処理を担うクラスの入力モデル・出力モデルを定義します。
+業務処理を担うクラスの入力モデルを定義します。
 
 ```java
 package nob.example.easyapp.service.model;
@@ -267,6 +267,10 @@ public class AuthInModel {
     private String password;
 }
 ```
+
+#### service/model/AuthOutModel.java
+
+業務処理を担うクラスの出力モデルを定義します。
 
 ```java
 package nob.example.easyapp.service.model;
@@ -363,9 +367,9 @@ public class AuthControllerImpl implements AuthController {
 }
 ```
 
-#### controller/model/
+#### controller/model/AuthRequest.java
 
-コントローラーのリクエストモデル・レスポンスモデルを定義します。
+コントローラーのリクエストモデルを定義します。
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -387,6 +391,10 @@ public class AuthRequest {
     private String password;
 }
 ```
+
+#### controller/model/AuthResponse.java
+
+コントローラーのレスポンスモデルを定義します。
 
 ```java
 package nob.example.easyapp.controller.model;
