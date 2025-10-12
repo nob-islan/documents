@@ -6,7 +6,7 @@ Spring Boot で実装する REST API のプロジェクトの初期セットア�
 
 cf. https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line
 
-- [Spring initializer](https://start.spring.io/) を使ってプロジェクトを新規作成します:
+- [Spring initializer](https://start.spring.io/) を使ってプロジェクトを新規作成します。
 
 ```shell
 curl https://start.spring.io/starter.zip \
@@ -31,7 +31,7 @@ unzip easyapp.zip && rm -rf easyapp.zip
 
 ### 事前準備
 
-データベースを docker で構築し、Java プロジェクト側に接続情報を記載します:
+データベースを docker で構築し、Java プロジェクト側に接続情報を記載します。
 
 #### docker-compose.yaml
 
@@ -307,7 +307,7 @@ import nob.example.easyapp.controller.model.LoginResponse;
  * @author nob
  */
 @RestController
-@RequestMapping(value = "/sample")
+@RequestMapping(value = "/api/v1")
 public interface LoginController {
 
     /**
@@ -408,8 +408,8 @@ public class LoginResponse {
 
 ## 起動
 
-VSCode の **Run Java** などからアプリを起動します。下記コマンドで API を打鍵できます:
+VSCode の **Run Java** などからアプリを起動します。下記コマンドで API を打鍵できます。
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/sample/auth
+curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/auth
 ```
