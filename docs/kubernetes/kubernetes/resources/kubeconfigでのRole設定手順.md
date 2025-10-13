@@ -1,4 +1,4 @@
-# kubeconfig 書き方
+# kubeconfig での Role 設定手順
 
 `kubeconfig`を記載することで Role によって Kubernetes の操作権限を制御します。
 
