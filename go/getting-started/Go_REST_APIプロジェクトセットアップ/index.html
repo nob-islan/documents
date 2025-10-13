@@ -2966,6 +2966,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internallogging" class="md-nav__link">
+    <span class="md-ellipsis">
+      internal/logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalusecase_1" class="md-nav__link">
     <span class="md-ellipsis">
       internal/usecase
@@ -6735,6 +6744,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internallogging" class="md-nav__link">
+    <span class="md-ellipsis">
+      internal/logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalusecase_1" class="md-nav__link">
     <span class="md-ellipsis">
       internal/usecase
@@ -7230,6 +7248,7 @@
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>router<span class="w">      </span><span class="c1"># httpリクエストのルーティング</span>
 │<span class="w">   </span>├──<span class="w"> </span>infrastructure<span class="w">  </span><span class="c1"># データベースなど外部接続設定</span>
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>repository<span class="w">  </span><span class="c1"># データベースへのアクセス</span>
+│<span class="w">   </span>├──<span class="w"> </span>logging<span class="w">         </span><span class="c1"># ログ出力制御</span>
 │<span class="w">   </span>└──<span class="w"> </span>usecase<span class="w">         </span><span class="c1"># 業務処理</span>
 │<span class="w">       </span>└──<span class="w"> </span>payload<span class="w">     </span><span class="c1"># 業務処理の入力・出力モデル</span>
 └──<span class="w"> </span>scripts<span class="w">             </span><span class="c1"># 開発支援ツール</span>
@@ -7255,6 +7274,8 @@
 <p>データベースや他 API などの外部接続に関する設定を行う関数を格納するパッケージです。</p>
 <h4 id="internalinfrastructurerepository_1">internal/infrastructure/repository</h4>
 <p>データベースにアクセスして SQL を実行する関数を格納するパッケージです。</p>
+<h4 id="internallogging">internal/logging</h4>
+<p>ログレベル別の文言出力など、ログ出力を制御するパッケージです。</p>
 <h4 id="internalusecase_1">internal/usecase</h4>
 <p>業務処理を行う関数を格納するパッケージです。関数内に直接処理を実装するか、domain 内の処理を呼び出す形で業務を実施します。</p>
 <h4 id="internalusecasepayload_1">internal/usecase/payload</h4>
