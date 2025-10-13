@@ -6689,9 +6689,9 @@
 <p>データベースを docker で構築し、Java プロジェクト側に接続情報を記載します。</p>
 <h4 id="docker-composeyaml">docker-compose.yaml</h4>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">easyappdb</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">eadb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyappdb</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eadb</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
@@ -6700,15 +6700,18 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
 <h4 id="volumesinitdbdcreate-databasesql">volumes/initdb.d/create-database.sql</h4>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">easyappdb</span><span class="p">;</span>
-<span class="n">USE</span><span class="w"> </span><span class="n">easyappdb</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
 <span class="p">);</span>
 
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span>
 <span class="p">);</span>
@@ -6717,7 +6720,7 @@
 <div class="highlight"><pre><span></span><code><span class="c1">#MariaDBのドライバ設定</span>
 spring.datasource.driver-class-name<span class="o">=</span>org.mariadb.jdbc.Driver
 <span class="c1">#接続用URL</span>
-spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/easyappdb
+spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/eadb
 <span class="c1">#ユーザ名</span>
 spring.datasource.username<span class="o">=</span>root
 <span class="c1">#パスワード</span>
