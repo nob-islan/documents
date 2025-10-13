@@ -6272,7 +6272,7 @@
 <ul>
 <li>例外クラス</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstapp.exception</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.exception</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * サンプルの自作例外クラスです。</span>
@@ -6288,7 +6288,7 @@
 <ul>
 <li>例外ハンドラ</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstapp.handler</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.handler</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
@@ -6296,7 +6296,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestControllerAdvice</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstapp.exception.SampleException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.exception.SampleException</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * サンプル例外のハンドラです。</span>
@@ -6315,40 +6315,40 @@
 <span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">SampleException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// SampleExceptionが投げられた際に動く</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">ResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">sampleExceptionHandle</span><span class="p">(</span><span class="n">SampleException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">ResponseBody</span><span class="w"> </span><span class="n">responseBody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseBody</span><span class="p">();</span>
-<span class="w">        </span><span class="n">responseBody</span><span class="p">.</span><span class="na">setMessage</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">(</span><span class="n">responseBody</span><span class="p">,</span><span class="w"> </span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">UNPROCESSABLE_ENTITY</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ResponseBody</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">()),</span><span class="w"> </span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">UNPROCESSABLE_ENTITY</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * サンプル例外発生時のレスポンスボディです。</span>
-<span class="cm">     *</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@Data</span>
+<span class="w">    </span><span class="nd">@Value</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResponseBody</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="cm">/**</span>
-<span class="cm">         * エラーメッセージ</span>
-<span class="cm">         */</span>
+<span class="w">        </span><span class="cm">/** エラーメッセージ */</span>
 <span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>上記で例外クラスおよびハンドラを実装し、下記のように例外を投げると</p>
-<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * サンプル例外を投げるメソッドです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @throws SampleException</span>
-<span class="cm"> */</span>
-<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">error</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SampleException</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 挨拶メッセージを返します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param name ユーザ名</span>
+<span class="cm">     * @return 挨拶メッセージ</span>
+<span class="cm">     * @throws SampleException サンプルの例外</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SampleException</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleException</span><span class="p">(</span><span class="s">&quot;テスト例外です。&quot;</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleException</span><span class="p">(</span><span class="s">&quot;ユーザ名が空白です。&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <p>以下のように API レスポンスが返却されます:</p>
-<div class="highlight"><pre><span></span><code>$ curl localhost:8080/api/sample/error
-{&quot;message&quot;:&quot;テスト例外です。&quot;}
+<div class="highlight"><pre><span></span><code>$ curl localhost:8080/api/v1/greet
+{&quot;message&quot;:&quot;ユーザ名が空白です。&quot;}
 </code></pre></div>
 
 
