@@ -497,6 +497,7 @@ Go プロジェクトのパッケージ構成について一つの指針とな�
 │   │   └── router      # httpリクエストのルーティング
 │   ├── infrastructure  # データベースなど外部接続設定
 │   │   └── repository  # データベースへのアクセス
+│   ├── logging         # ログ出力制御
 │   └── usecase         # 業務処理
 │       └── payload     # 業務処理の入力・出力モデル
 └── scripts             # 開発支援ツール
@@ -543,6 +544,10 @@ http リクエストのルーティングを行う関数を格納するパッケ
 #### internal/infrastructure/repository
 
 データベースにアクセスして SQL を実行する関数を格納するパッケージです。
+
+#### internal/logging
+
+ログレベル別の文言出力など、ログ出力を制御するパッケージです。
 
 #### internal/usecase
 
