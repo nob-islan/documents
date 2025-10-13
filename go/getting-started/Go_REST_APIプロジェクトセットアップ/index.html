@@ -7240,73 +7240,7 @@
 <h4 id="cmd_1">cmd</h4>
 <p>アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に <code>main.go</code> のみが格納されます。</p>
 <h4 id="internalapperrors">internal/apperrors</h4>
-<p>アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。下記の例だと、独自エラーのインターフェースとして<code>EasyappError</code>を定義し、その一種として<code>SampleError</code>が実装されています。</p>
-<p>handler が usecase から error を受け取った際に <code>apperrors.HandleError(w, err)</code> を呼び出し、エラーの種類によってハンドリング処理をさせることを想定しています。</p>
-<ul>
-<li>internal/apperrors/base.go</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="s">&quot;net/http&quot;</span>
-
-<span class="c1">// エラーのインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">EasyappError</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// エラーメッセージを管理します。</span>
-<span class="w">    </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
-
-<span class="w">    </span><span class="c1">// エラー向けのレスポンスモデルを作成します。</span>
-<span class="w">    </span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// エラーのハンドリングを行います。</span>
-<span class="c1">// EasyappErrorを実装したエラーであればそのハンドリング処理を呼び出し、それ以外は500エラーを返します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">HandleError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="nx">EasyappError</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Internal server error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<ul>
-<li>internal/apperrors/sample_error.go</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
-<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// サンプルのエラーです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">SampleError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">EasyappError</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">SampleError</span><span class="p">{</span><span class="nx">message</span><span class="p">:</span><span class="w"> </span><span class="nx">message</span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">SampleError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">SampleError</span><span class="p">)</span><span class="w"> </span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sampleErrorRes</span><span class="p">{</span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// サンプルエラーのレスポンスモデルです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">sampleErrorRes</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
-<span class="p">}</span>
-</code></pre></div>
+<p>アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。</p>
 <h4 id="internaldomain_1">internal/domain</h4>
 <p>業務処理の中心となるドメイン構造体およびそれを取得する repository インターフェースを格納するパッケージです。</p>
 <p>値のチェックなど、1 つの domain で完結する業務処理についてはこのパッケージ内で実装してください。</p>
