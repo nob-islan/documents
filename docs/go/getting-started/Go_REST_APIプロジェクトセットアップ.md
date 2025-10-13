@@ -514,76 +514,7 @@ swagger などの API ドキュメント、およびそれを生成する関数�
 
 #### internal/apperrors
 
-アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。下記の例だと、独自エラーのインターフェースとして`EasyappError`を定義し、その一種として`SampleError`が実装されています。
-
-handler が usecase から error を受け取った際に `apperrors.HandleError(w, err)` を呼び出し、エラーの種類によってハンドリング処理をさせることを想定しています。
-
-- internal/apperrors/base.go
-
-```go
-package apperrors
-
-import "net/http"
-
-// エラーのインターフェースです。
-type EasyappError interface {
-
-	// エラーメッセージを管理します。
-	Error() string
-
-	// エラー向けのレスポンスモデルを作成します。
-	ReturnError(w http.ResponseWriter)
-}
-
-// エラーのハンドリングを行います。
-// EasyappErrorを実装したエラーであればそのハンドリング処理を呼び出し、それ以外は500エラーを返します。
-func HandleError(w http.ResponseWriter, err error) {
-
-	if e, ok := err.(EasyappError); ok {
-		e.ReturnError(w)
-		return
-	}
-
-	http.Error(w, "Internal server error", http.StatusInternalServerError)
-}
-```
-
-- internal/apperrors/sample_error.go
-
-```go
-package apperrors
-
-import (
-	"encoding/json"
-	"net/http"
-)
-
-// サンプルのエラーです。
-type SampleError struct {
-	message string // エラーメッセージ
-}
-
-func NewSampleError(message string) EasyappError {
-	return &SampleError{message: message}
-}
-
-func (e *SampleError) Error() string {
-	return e.message
-}
-
-func (e *SampleError) ReturnError(w http.ResponseWriter) {
-
-	res := sampleErrorRes{Message: e.message}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusInternalServerError)
-	json.NewEncoder(w).Encode(res)
-}
-
-// サンプルエラーのレスポンスモデルです。
-type sampleErrorRes struct {
-	Message string `json:"message"` // エラーメッセージ
-}
-```
+アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。
 
 #### internal/domain
 
