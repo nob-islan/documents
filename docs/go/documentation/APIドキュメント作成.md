@@ -80,7 +80,7 @@ cf.
   import (
       "net/http"
 
-      _ "firstapp/docs" // 自モジュール配下のdocsをimportしないとswagger画面で500エラーとなるので注意
+      _ "easyapp/docs" // 自モジュール配下のdocsをimportしないとswagger画面で500エラーとなるので注意
 
       httpSwagger "github.com/swaggo/http-swagger"
   )
