@@ -37,9 +37,9 @@ unzip easyapp.zip && rm -rf easyapp.zip
 
 ```yaml
 services:
-  easyappdb:
+  eadb:
     image: mariadb:latest
-    container_name: easyappdb
+    container_name: eadb
     ports:
       - 3306:3306
     volumes:
@@ -51,8 +51,8 @@ services:
 #### volumes/initdb.d/create-database.sql
 
 ```sql
-CREATE DATABASE easyappdb;
-USE easyappdb;
+CREATE DATABASE eadb;
+USE eadb;
 
 CREATE TABLE users (
     name VARCHAR(8) PRIMARY KEY
@@ -74,7 +74,7 @@ INSERT INTO users (
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
-spring.datasource.url=jdbc:mariadb://localhost/easyappdb
+spring.datasource.url=jdbc:mariadb://localhost/eadb
 #ユーザ名
 spring.datasource.username=root
 #パスワード

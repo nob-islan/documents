@@ -26,9 +26,9 @@ go get github.com/go-sql-driver/mysql
 
 ```yaml
 services:
-  easyappdb:
+  eadb:
     image: mariadb:latest
-    container_name: easyappdb
+    container_name: eadb
     ports:
       - 3306:3306
     volumes:
@@ -40,8 +40,8 @@ services:
 #### volumes/initdb.d/create-database.sql
 
 ```sql
-CREATE DATABASE easyappdb;
-USE easyappdb;
+CREATE DATABASE eadb;
+USE eadb;
 
 CREATE TABLE users (
     name VARCHAR(8) PRIMARY KEY
@@ -141,7 +141,7 @@ func ConnectDB() *sql.DB {
 		user       string = "root"
 		password   string = "password"
 		domain     string = "localhost:3306"
-		dbName     string = "easyappdb"
+		dbName     string = "eadb"
 		driverName string = "mysql"
 	)
 
