@@ -59,7 +59,10 @@ CREATE TABLE users (
     , password VARCHAR(32)
 );
 
-INSERT INTO users VALUES (
+INSERT INTO users (
+    name
+    , password
+) VALUES (
     'nob'
     , 'passwd'
 );
