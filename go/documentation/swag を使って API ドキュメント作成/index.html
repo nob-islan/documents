@@ -6527,9 +6527,9 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="w"> </span> import (
 <span class="w"> </span>     &quot;net/http&quot;
-<span class="gi">+</span>
+
 <span class="gi">+     _ &quot;easyapp/api&quot;</span>
-<span class="gi">+</span>
+
 <span class="gi">+     httpSwagger &quot;github.com/swaggo/http-swagger&quot;</span>
 <span class="w"> </span> )
 
@@ -6548,7 +6548,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="w"> </span>     // 各handlerに紐づくルーティングを設定
 <span class="w"> </span>     m := http.NewServeMux()
-<span class="gi">+</span>
+
 <span class="gi">+     // swagger UI のルーティング</span>
 <span class="gi">+     m.Handle(&quot;/swagger/&quot;, httpSwagger.WrapHandler)</span>
 
