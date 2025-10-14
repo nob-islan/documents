@@ -53,9 +53,9 @@ swagger ページへのルーティングを設定します。
 
   import (
 	  "net/http"
-+
+
 +	  _ "easyapp/api"
-+
+
 +	  httpSwagger "github.com/swaggo/http-swagger"
   )
 
@@ -74,7 +74,7 @@ swagger ページへのルーティングを設定します。
 
 	  // 各handlerに紐づくルーティングを設定
 	  m := http.NewServeMux()
-+
+
 +	  // swagger UI のルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
