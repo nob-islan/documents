@@ -6733,7 +6733,7 @@
 <span class="w"> </span>      * @throws SampleException 登録失敗時の例外
 <span class="w"> </span>      */
 <span class="w"> </span>     @PostMapping(value = &quot;/user&quot;)
-<span class="gi">+     @Operation(summary = &quot;ユーザ情報の登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;)</span>
+<span class="gi">+     @Operation(summary = &quot;ユーザ情報登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;)</span>
 <span class="gi">+     @ApiResponses(value = {</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;),</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;422&quot;, description = &quot;エラーが発生した場合&quot;, content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))</span>
