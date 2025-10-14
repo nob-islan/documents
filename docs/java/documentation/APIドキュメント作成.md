@@ -393,3 +393,13 @@ easyappdoc:
 ## 動作確認
 
 アプリ起動後、http://localhost:8080/swagger-ui/index.html で swagger ドキュメントを確認できます。
+
+## Tips
+
+### **Try it out** ボタンを無効化したい場合
+
+application.properties に下記を追加すればボタンが非表示になります:
+
+```properties
+springdoc.swagger-ui.supported-submit-methods=[]
+```
