@@ -389,3 +389,7 @@ easyappdoc:
         user: |
           ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスが返ります。
 ```
+
+## 動作確認
+
+アプリ起動後、http://localhost:8080/swagger-ui/index.html で swagger ドキュメントを確認できます。
