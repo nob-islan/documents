@@ -114,7 +114,7 @@ spring.profiles.active=swagger
        * @throws SampleException 登録失敗時の例外
        */
       @PostMapping(value = "/user")
-+     @Operation(summary = "ユーザ情報の登録", description = "${easyappdoc.describe.api.v1.user:説明文}")
++     @Operation(summary = "ユーザ情報登録", description = "${easyappdoc.describe.api.v1.user:説明文}")
 +     @ApiResponses(value = {
 +             @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
 +             @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))
