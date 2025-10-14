@@ -1,4 +1,4 @@
-# springdoc を使って API ドキュメント作成
+# springdoc で API ドキュメント作成
 
 API 設計書の作成方法について説明します。springdoc-openapi によって swagger を自動生成するようにしています。
 
