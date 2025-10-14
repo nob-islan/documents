@@ -1,106 +1,8 @@
-# API ドキュメント作成
+# springdoc-openapi を使って API ドキュメント作成
 
 API 設計書の作成方法について説明します。springdoc-openapi によって swagger を自動生成するようにしています。
 
 cf. https://springdoc.org/
-
-## 前提
-
-下記のインターフェースおよび例外ハンドラに対して API ドキュメント向けのアノテーションを付与します:
-
-- SampleController.java
-
-```java
-package nob.example.easyapp.controller;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import nob.example.easyapp.controller.model.GreetRequest;
-import nob.example.easyapp.controller.model.GreetResponse;
-import nob.example.easyapp.controller.model.RegistRequest;
-import nob.example.easyapp.controller.model.RegistResponse;
-import nob.example.easyapp.exception.SampleException;
-
-/**
- * サンプルコントローラーのインターフェースです。
- *
- * @author nob
- */
-@RestController
-@RequestMapping(value = "/api/v1")
-public interface SampleController {
-
-    /**
-     * 挨拶メッセージを返します。
-     *
-     * @param greetRequest 挨拶リクエスト
-     * @return 挨拶メッセージ
-     */
-    @GetMapping(value = "/greet")
-    GreetResponse greet(GreetRequest greetRequest);
-
-    /**
-     * ユーザ登録処理を行います。
-     *
-     * @param registRequest 登録リクエスト
-     * @return 登録完了メッセージ
-     * @throws SampleException 登録失敗時の例外
-     */
-    @PostMapping(value = "/user")
-    RegistResponse regist(@RequestBody RegistRequest registRequest) throws SampleException;
-}
-```
-
-- SampleExceptionHandler.java
-
-```java
-package nob.example.easyapp.handler;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
-import nob.example.easyapp.exception.SampleException;
-
-/**
- * サンプル例外のハンドラです。
- *
- * @author nob
- */
-@RestControllerAdvice
-public class SampleExceptionHandler {
-
-    /**
-     * サンプル例外が投げられた際に呼ばれるメソッドです。
-     *
-     * @param e
-     * @return 例外メッセージ
-     */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @ExceptionHandler(SampleException.class)
-    public ResponseEntity<SampleExceptionResponseBody> handleSampleException(SampleException e) {
-
-        return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    /**
-     * サンプル例外発生時のレスポンスボディです。
-     */
-    @Value
-    public class SampleExceptionResponseBody {
-
-        /** エラーメッセージ */
-        private String message;
-    }
-}
-```
 
 ## 実装
 
@@ -221,57 +123,6 @@ spring.profiles.active=swagger
   }
 ```
 
-### SampleExceptionHandler.java
-
-例外発生時レスポンスモデルのスキーマ定義を記載します:
-
-```diff
-package nob.example.easyapp.handler;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
-import nob.example.easyapp.exception.SampleException;
-
-  /**
-   * サンプル例外のハンドラです。
-   *
-   * @author nob
-   */
-  @RestControllerAdvice
-  public class SampleExceptionHandler {
-
-      /**
-       * サンプル例外が投げられた際に呼ばれるメソッドです。
-       *
-       * @param e
-       * @return 例外メッセージ
-       */
-      @SuppressWarnings({ "unchecked", "rawtypes" })
-      @ExceptionHandler(SampleException.class)
-      public ResponseEntity<SampleExceptionResponseBody> handleSampleException(SampleException e) {
-
-          return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
-      }
-
-      /**
-       * サンプル例外発生時のレスポンスボディです。
-       */
-      @Value
-+     @Schema(description = "サンプルエラーのレスポンス", type = "object")
-      public class SampleExceptionResponseBody {
-
-          /** エラーメッセージ */
-+         @Schema(description = "エラーメッセージ", type = "string", example = "業務エラーが発生しました。")
-          private String message;
-      }
-  }
-```
-
 ### model
 
 各モデルクラスのスキーマ定義を記載します:
@@ -369,6 +220,57 @@ import nob.example.easyapp.exception.SampleException;
       /** 登録メッセージ */
 +     @Schema(description = "登録メッセージ", type = "string", example = "登録が完了しました。")
       private String message;
+  }
+```
+
+### SampleExceptionHandler.java
+
+例外発生時レスポンスモデルのスキーマ定義を記載します:
+
+```diff
+package nob.example.easyapp.handler;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Value;
+import nob.example.easyapp.exception.SampleException;
+
+  /**
+   * サンプル例外のハンドラです。
+   *
+   * @author nob
+   */
+  @RestControllerAdvice
+  public class SampleExceptionHandler {
+
+      /**
+       * サンプル例外が投げられた際に呼ばれるメソッドです。
+       *
+       * @param e
+       * @return 例外メッセージ
+       */
+      @SuppressWarnings({ "unchecked", "rawtypes" })
+      @ExceptionHandler(SampleException.class)
+      public ResponseEntity<SampleExceptionResponseBody> handleSampleException(SampleException e) {
+
+          return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+      }
+
+      /**
+       * サンプル例外発生時のレスポンスボディです。
+       */
+      @Value
++     @Schema(description = "サンプルエラーのレスポンス", type = "object")
+      public class SampleExceptionResponseBody {
+
+          /** エラーメッセージ */
++         @Schema(description = "エラーメッセージ", type = "string", example = "業務エラーが発生しました。")
+          private String message;
+      }
   }
 ```
 
