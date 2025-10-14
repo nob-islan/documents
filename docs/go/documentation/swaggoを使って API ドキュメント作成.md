@@ -125,7 +125,7 @@ swagger ページへのルーティングを設定します。
 + // @Accept json
 + // @Produce json
 + // @Param GreetReq query model.GreetReq false "挨拶APIのリクエストモデル"
-+ // @Success 200 {object} model.GreetRes
++ // @Success 200 {object} model.GreetRes "正常に処理された場合"
 + // @Router /greet [get]
   func (h sampleHandler) Greet(w http.ResponseWriter, r *http.Request) {
 
@@ -145,8 +145,8 @@ swagger ページへのルーティングを設定します。
 + // @Accept json
 + // @Produce json
 + // @Param RegistReq body model.RegistReq true "登録APIのリクエストモデル"
-+ // @Success 200 {object} model.RegistRes
-+ // @Failure 422 {object} apperrors.sampleErrorRes
++ // @Success 200 {object} model.RegistRes "正常に処理された場合"
++ // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
 + // @Router /user [post]
   func (h sampleHandler) Regist(w http.ResponseWriter, r *http.Request) {
 
