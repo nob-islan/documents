@@ -6595,7 +6595,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param GreetReq query model.GreetReq false &quot;挨拶APIのリクエストモデル&quot;</span>
-<span class="gi">+ // @Success 200 {object} model.GreetRes</span>
+<span class="gi">+ // @Success 200 {object} model.GreetRes &quot;正常に処理された場合&quot;</span>
 <span class="gi">+ // @Router /greet [get]</span>
 <span class="w"> </span> func (h sampleHandler) Greet(w http.ResponseWriter, r *http.Request) {
 
@@ -6615,8 +6615,8 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param RegistReq body model.RegistReq true &quot;登録APIのリクエストモデル&quot;</span>
-<span class="gi">+ // @Success 200 {object} model.RegistRes</span>
-<span class="gi">+ // @Failure 422 {object} apperrors.sampleErrorRes</span>
+<span class="gi">+ // @Success 200 {object} model.RegistRes &quot;正常に処理された場合&quot;</span>
+<span class="gi">+ // @Failure 422 {object} apperrors.sampleErrorRes &quot;エラーが発生した場合&quot;</span>
 <span class="gi">+ // @Router /user [post]</span>
 <span class="w"> </span> func (h sampleHandler) Regist(w http.ResponseWriter, r *http.Request) {
 
