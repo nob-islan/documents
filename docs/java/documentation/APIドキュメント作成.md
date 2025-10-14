@@ -788,7 +788,7 @@ easyappdoc:
 
 ## Tips
 
-### **Try it out** ボタンを無効化したい場合
+### Try it out ボタンを無効化したい場合
 
 application.properties に下記を追加すればボタンが非表示になります:
 
