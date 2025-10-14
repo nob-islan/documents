@@ -1,4 +1,4 @@
-# Spring Boot Restdocs でドキュメントを自動生成する
+# Spring Boot Restdocs でドキュメント作成
 
 Restdocs および asciidocs を使って、単体テストの結果から API 設計書を自動作成します。
 
