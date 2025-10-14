@@ -139,7 +139,7 @@ swagger ページへのルーティングを設定します。
 	  json.NewEncoder(w).Encode(res)
   }
 
-+ // @Summary ユーザ情報の登録
++ // @Summary ユーザ情報登録
 + // @Description ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスを返し、それ以外はエラーレスポンスを返します。
 + // @Tags Sample
 + // @Accept json
