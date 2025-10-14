@@ -3717,39 +3717,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      動作確認
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tips
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tips">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#try-it-out" class="md-nav__link">
-    <span class="md-ellipsis">
-      Try it out ボタンを無効化したい場合
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -6605,39 +6572,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      動作確認
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tips" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tips
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tips">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#try-it-out" class="md-nav__link">
-    <span class="md-ellipsis">
-      Try it out ボタンを無効化したい場合
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -6845,7 +6779,7 @@
 <span class="w"> </span>      * @throws SampleException 登録失敗時の例外
 <span class="w"> </span>      */
 <span class="w"> </span>     @PostMapping(value = &quot;/user&quot;)
-<span class="gi">+     @Operation(summary = &quot;ユーザ情報の登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;) // TODO</span>
+<span class="gi">+     @Operation(summary = &quot;ユーザ情報の登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;)</span>
 <span class="gi">+     @ApiResponses(value = {</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;),</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;422&quot;, description = &quot;エラーが発生した場合&quot;, content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))</span>
@@ -6914,11 +6848,11 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w"> </span>  * @author nob
 <span class="w"> </span>  */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;挨拶APIのリクエストモデル&quot;, type = &quot;object&quot;) // TODO</span>
+<span class="gi">+ @Schema(description = &quot;挨拶APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
 <span class="w"> </span> public class GreetRequest {
 
 <span class="w"> </span>   /** ユーザ名 */
-<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;) // TODO</span>
+<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
 <span class="w"> </span>     private String name;
 <span class="w"> </span> }
 </code></pre></div>
@@ -6934,11 +6868,11 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w"> </span>  * @author nob
 <span class="w"> </span>  */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;挨拶APIのレスポンスモデル&quot;, type = &quot;object&quot;) // TODO</span>
+<span class="gi">+ @Schema(description = &quot;挨拶APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
 <span class="w"> </span> public class GreetResponse {
 
 <span class="w"> </span>     /** 挨拶メッセージ */
-<span class="gi">+     @Schema(description = &quot;挨拶メッセージ&quot;, type = &quot;string&quot;, example = &quot;Hello, nob!&quot;) // TODO</span>
+<span class="gi">+     @Schema(description = &quot;挨拶メッセージ&quot;, type = &quot;string&quot;, example = &quot;Hello, nob!&quot;)</span>
 <span class="w"> </span>     private String message;
 <span class="w"> </span> }
 </code></pre></div>
@@ -6954,15 +6888,15 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w"> </span> * @author nob
 <span class="w"> </span> */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;登録APIのリクエストモデル&quot;, type = &quot;object&quot;) // TODO</span>
+<span class="gi">+ @Schema(description = &quot;登録APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
 <span class="w"> </span> public class RegistRequest {
 
 <span class="w"> </span>     /** ユーザ名 */
-<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;) // TODO</span>
+<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
 <span class="w"> </span>     private String name;
 
 <span class="w"> </span>     /** 年齢 */
-<span class="gi">+     @Schema(description = &quot;年齢&quot;, type = &quot;integer&quot;, example = &quot;13&quot;) // TODO</span>
+<span class="gi">+     @Schema(description = &quot;年齢&quot;, type = &quot;integer&quot;, example = &quot;13&quot;)</span>
 <span class="w"> </span>     private Integer age;
 <span class="w"> </span> }
 </code></pre></div>
@@ -6978,11 +6912,11 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w"> </span> * @author nob
 <span class="w"> </span> */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;登録APIのレスポンスモデル&quot;, type = &quot;object&quot;) // TODO</span>
+<span class="gi">+ @Schema(description = &quot;登録APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
 <span class="w"> </span> public class RegistResponse {
 
 <span class="w"> </span>     /** 登録メッセージ */
-<span class="gi">+     @Schema(description = &quot;登録メッセージ&quot;, type = &quot;string&quot;, example = &quot;登録が完了しました。&quot;) // TODO</span>
+<span class="gi">+     @Schema(description = &quot;登録メッセージ&quot;, type = &quot;string&quot;, example = &quot;登録が完了しました。&quot;)</span>
 <span class="w"> </span>     private String message;
 <span class="w"> </span> }
 </code></pre></div>
@@ -7000,7 +6934,353 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">          </span><span class="no">ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスが返ります。</span>
 </code></pre></div>
-<h2 id="_3">動作確認</h2>
+<h1 id="api_1">API ドキュメント作成</h1>
+<p>API 設計書の作成方法について説明します。springdoc-openapi によって swagger を自動生成するようにしています。</p>
+<p>cf. <a href="https://springdoc.org/">https://springdoc.org/</a></p>
+<h2 id="_3">前提</h2>
+<p>下記のインターフェースおよび例外ハンドラに対して API ドキュメント向けのアノテーションを付与します:</p>
+<ul>
+<li>SampleController.java</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.GreetRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.GreetResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.RegistRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.RegistResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.exception.SampleException</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * サンプルコントローラーのインターフェースです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SampleController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 挨拶メッセージを返します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param greetRequest 挨拶リクエスト</span>
+<span class="cm">     * @return 挨拶メッセージ</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">GreetResponse</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">GreetRequest</span><span class="w"> </span><span class="n">greetRequest</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ登録処理を行います。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param registRequest 登録リクエスト</span>
+<span class="cm">     * @return 登録完了メッセージ</span>
+<span class="cm">     * @throws SampleException 登録失敗時の例外</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">RegistResponse</span><span class="w"> </span><span class="nf">regist</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">RegistRequest</span><span class="w"> </span><span class="n">registRequest</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SampleException</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>SampleExceptionHandler.java</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.handler</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.ExceptionHandler</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestControllerAdvice</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.v3.oas.annotations.media.Schema</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.exception.SampleException</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * サンプル例外のハンドラです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@RestControllerAdvice</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleExceptionHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * サンプル例外が投げられた際に呼ばれるメソッドです。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param e</span>
+<span class="cm">     * @return 例外メッセージ</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="w"> </span><span class="s">&quot;unchecked&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rawtypes&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">SampleException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">SampleExceptionResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">handleSampleException</span><span class="p">(</span><span class="n">SampleException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleExceptionResponseBody</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">()),</span><span class="w"> </span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">UNPROCESSABLE_ENTITY</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * サンプル例外発生時のレスポンスボディです。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Value</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleExceptionResponseBody</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="cm">/** エラーメッセージ */</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_4">実装</h2>
+<h3 id="pomxml_1">pom.xml</h3>
+<p>下記の依存関係を追加します:</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-starter-webmvc-ui<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>2.8.13<span class="nt">&lt;/version&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<h3 id="applicationproperties_1">application.properties</h3>
+<p>下記設定を追記します:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># swagger出力用ymlファイルのエンドポイント</span>
+<span class="na">springdoc.api-docs.path</span><span class="o">=</span><span class="s">/api-docs</span>
+<span class="c1"># swaggerドキュメント閲覧用エンドポイント</span>
+<span class="na">springdoc.swagger-ui.path</span><span class="o">=</span><span class="s">/swagger-ui.html</span>
+<span class="c1"># application-swagger.ymlを読み込ませる</span>
+<span class="na">spring.profiles.active</span><span class="o">=</span><span class="s">swagger</span>
+</code></pre></div>
+<h3 id="easyappapplicationjava_1">EasyappApplication.java</h3>
+<p>下記アノテーションを追記し、API の概要を記載します:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp;
+
+<span class="w"> </span> import org.springframework.boot.SpringApplication;
+<span class="w"> </span> import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.info.Info;
+
+<span class="w"> </span> @SpringBootApplication
+<span class="gi">+ @OpenAPIDefinition(info = @Info(title = &quot;Easy App&quot;, version = &quot;1.0.0&quot;, description = &quot;サンプルのREST APIです。&quot;))</span>
+<span class="w"> </span> public class EasyappApplication {
+
+<span class="w"> </span>     public static void main(String[] args) {
+<span class="w"> </span>         SpringApplication.run(EasyappApplication.class, args);
+<span class="w"> </span>     }
+<span class="w"> </span> }
+</code></pre></div>
+<h3 id="samplecontrollerjava_1">SampleController.java</h3>
+<p>下記アノテーションを追記し、各 API のインターフェース仕様を記載します:</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller;
+
+<span class="w"> </span> import org.springdoc.core.annotations.ParameterObject;
+<span class="w"> </span> import org.springframework.web.bind.annotation.GetMapping;
+<span class="w"> </span> import org.springframework.web.bind.annotation.PostMapping;
+<span class="w"> </span> import org.springframework.web.bind.annotation.RequestBody;
+<span class="w"> </span> import org.springframework.web.bind.annotation.RequestMapping;
+<span class="w"> </span> import org.springframework.web.bind.annotation.RestController;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.Operation;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Content;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.responses.ApiResponse;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.responses.ApiResponses;
+<span class="w"> </span> import io.swagger.v3.oas.annotations.tags.Tag;
+<span class="w"> </span> import nob.example.easyapp.controller.model.GreetRequest;
+<span class="w"> </span> import nob.example.easyapp.controller.model.GreetResponse;
+<span class="w"> </span> import nob.example.easyapp.controller.model.RegistRequest;
+<span class="w"> </span> import nob.example.easyapp.controller.model.RegistResponse;
+<span class="w"> </span> import nob.example.easyapp.exception.SampleException;
+<span class="w"> </span> import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * サンプルコントローラーのインターフェースです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @RestController
+<span class="w"> </span> @RequestMapping(value = &quot;/api/v1&quot;)
+<span class="gi">+ @Tag(name = &quot;Sample&quot;, description = &quot;サンプルのAPIです。&quot;)</span>
+<span class="w"> </span> public interface SampleController {
+
+<span class="w"> </span>     /**
+<span class="w"> </span>      * 挨拶メッセージを返します。
+<span class="w"> </span>      *
+<span class="w"> </span>      * @param greetRequest 挨拶リクエスト
+<span class="w"> </span>      * @return 挨拶メッセージ
+<span class="w"> </span>      */
+<span class="w"> </span>     @GetMapping(value = &quot;/greet&quot;)
+<span class="gi">+     @Operation(summary = &quot;挨拶メッセージ取得&quot;, description = &quot;${easyappdoc.describe.api.v1.greet:説明文}&quot;)</span>
+<span class="gi">+     @ApiResponses(value = {</span>
+<span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;)</span>
+<span class="gi">+     })</span>
+<span class="gd">-     GreetResponse greet(GreetRequest greetRequest);</span>
+<span class="gi">+     GreetResponse greet(@ParameterObject GreetRequest greetRequest);</span>
+
+<span class="w"> </span>     /**
+<span class="w"> </span>      * ユーザ登録処理を行います。
+<span class="w"> </span>      *
+<span class="w"> </span>      * @param registRequest 登録リクエスト
+<span class="w"> </span>      * @return 登録完了メッセージ
+<span class="w"> </span>      * @throws SampleException 登録失敗時の例外
+<span class="w"> </span>      */
+<span class="w"> </span>     @PostMapping(value = &quot;/user&quot;)
+<span class="gi">+     @Operation(summary = &quot;ユーザ情報の登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;)</span>
+<span class="gi">+     @ApiResponses(value = {</span>
+<span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;),</span>
+<span class="gi">+             @ApiResponse(responseCode = &quot;422&quot;, description = &quot;エラーが発生した場合&quot;, content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))</span>
+<span class="gi">+     })</span>
+<span class="w"> </span>     RegistResponse regist(@RequestBody RegistRequest registRequest) throws SampleException;
+<span class="w"> </span> }
+</code></pre></div>
+<h3 id="sampleexceptionhandlerjava_1">SampleExceptionHandler.java</h3>
+<p>例外発生時レスポンスモデルのスキーマ定義を記載します:</p>
+<div class="highlight"><pre><span></span><code>package nob.example.easyapp.handler;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Value;
+import nob.example.easyapp.exception.SampleException;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * サンプル例外のハンドラです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @RestControllerAdvice
+<span class="w"> </span> public class SampleExceptionHandler {
+
+<span class="w"> </span>     /**
+<span class="w"> </span>      * サンプル例外が投げられた際に呼ばれるメソッドです。
+<span class="w"> </span>      *
+<span class="w"> </span>      * @param e
+<span class="w"> </span>      * @return 例外メッセージ
+<span class="w"> </span>      */
+<span class="w"> </span>     @SuppressWarnings({ &quot;unchecked&quot;, &quot;rawtypes&quot; })
+<span class="w"> </span>     @ExceptionHandler(SampleException.class)
+<span class="w"> </span>     public ResponseEntity&lt;SampleExceptionResponseBody&gt; handleSampleException(SampleException e) {
+
+<span class="w"> </span>         return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+<span class="w"> </span>     }
+
+<span class="w"> </span>     /**
+<span class="w"> </span>      * サンプル例外発生時のレスポンスボディです。
+<span class="w"> </span>      */
+<span class="w"> </span>     @Value
+<span class="gi">+     @Schema(description = &quot;サンプルエラーのレスポンス&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span>     public class SampleExceptionResponseBody {
+
+<span class="w"> </span>         /** エラーメッセージ */
+<span class="gi">+         @Schema(description = &quot;エラーメッセージ&quot;, type = &quot;string&quot;, example = &quot;業務エラーが発生しました。&quot;)</span>
+<span class="w"> </span>         private String message;
+<span class="w"> </span>     }
+<span class="w"> </span> }
+</code></pre></div>
+<h3 id="model_1">model</h3>
+<p>各モデルクラスのスキーマ定義を記載します:</p>
+<h4 id="greetrequestjava_1">GreetRequest.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * 挨拶APIのリクエストモデルです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;挨拶APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class GreetRequest {
+
+<span class="w"> </span>   /** ユーザ名 */
+<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
+<span class="w"> </span>     private String name;
+<span class="w"> </span> }
+</code></pre></div>
+<h4 id="greetresponsejava_1">GreetResponse.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * 挨拶APIのレスポンスモデルです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;挨拶APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class GreetResponse {
+
+<span class="w"> </span>     /** 挨拶メッセージ */
+<span class="gi">+     @Schema(description = &quot;挨拶メッセージ&quot;, type = &quot;string&quot;, example = &quot;Hello, nob!&quot;)</span>
+<span class="w"> </span>     private String message;
+<span class="w"> </span> }
+</code></pre></div>
+<h4 id="registrequestjava_1">RegistRequest.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span> * 登録APIのリクエストモデルです。
+<span class="w"> </span> *
+<span class="w"> </span> * @author nob
+<span class="w"> </span> */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;登録APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class RegistRequest {
+
+<span class="w"> </span>     /** ユーザ名 */
+<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
+<span class="w"> </span>     private String name;
+
+<span class="w"> </span>     /** 年齢 */
+<span class="gi">+     @Schema(description = &quot;年齢&quot;, type = &quot;integer&quot;, example = &quot;13&quot;)</span>
+<span class="w"> </span>     private Integer age;
+<span class="w"> </span> }
+</code></pre></div>
+<h4 id="registresponsejava_1">RegistResponse.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span> * 登録APIのレスポンスモデルです。
+<span class="w"> </span> *
+<span class="w"> </span> * @author nob
+<span class="w"> </span> */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;登録APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class RegistResponse {
+
+<span class="w"> </span>     /** 登録メッセージ */
+<span class="gi">+     @Schema(description = &quot;登録メッセージ&quot;, type = &quot;string&quot;, example = &quot;登録が完了しました。&quot;)</span>
+<span class="w"> </span>     private String message;
+<span class="w"> </span> }
+</code></pre></div>
+<h3 id="resourcesapplication-swaggeryaml_1">resources/application-swagger.yaml</h3>
+<p>API の description について記載します:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">########################</span>
+<span class="c1">### Easy App documents</span>
+<span class="c1">########################</span>
+<span class="nt">easyappdoc</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">describe</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">v1</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">greet</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">入力されたユーザ目に対して挨拶メッセージを返します。</span>
+<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスが返ります。</span>
+</code></pre></div>
+<h2 id="_5">動作確認</h2>
 <p>アプリ起動後、<a href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a> で swagger ドキュメントを確認できます。</p>
 <h2 id="tips">Tips</h2>
 <h3 id="try-it-out"><strong>Try it out</strong> ボタンを無効化したい場合</h3>
