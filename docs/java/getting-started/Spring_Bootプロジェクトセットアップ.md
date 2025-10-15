@@ -344,7 +344,6 @@ import nob.example.easyapp.controller.model.AuthRequest;
 import nob.example.easyapp.controller.model.AuthResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.AuthInModel;
-import nob.example.easyapp.service.model.AuthOutModel;
 
 /**
  * AuthControllerの実装クラスです。
@@ -364,9 +363,7 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public AuthResponse login(AuthRequest request) {
 
-        AuthOutModel outModel = authService.login(new AuthInModel(request.getName(), request.getPassword()));
-
-        return new AuthResponse(outModel.isValid());
+        return new AuthResponse(authService.login(new AuthInModel(request.getName(), request.getPassword())).isValid());
     }
 }
 ```
