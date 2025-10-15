@@ -5,7 +5,7 @@
 ```json
 {
   "name": "Java",
-  "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
   "features": {
     // "ghcr.io/devcontainers/features/java:1": {
     //   "version": "none",
