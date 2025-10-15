@@ -6439,45 +6439,44 @@
 <p>サンプルとして、簡単な GET メソッドおよび POST メソッドの API 設計書を作成します。</p>
 <h3 id="_2">依存関係の追加</h3>
 <p><code>pom.xml</code>に下記を追加します:</p>
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- for restdocs --&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.restdocs<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-restdocs-mockmvc<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- for asciidocs --&gt;</span>
-<span class="nt">&lt;plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.asciidoctor<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.5.8<span class="nt">&lt;/version&gt;</span>
-<span class="w">    </span><span class="nt">&lt;executions&gt;</span>
-<span class="w">        </span><span class="nt">&lt;execution&gt;</span>
-<span class="w">            </span><span class="nt">&lt;id&gt;</span>generate-docs<span class="nt">&lt;/id&gt;</span>
-<span class="w">            </span><span class="nt">&lt;phase&gt;</span>prepare-package<span class="nt">&lt;/phase&gt;</span>
-<span class="w">            </span><span class="nt">&lt;goals&gt;</span>
-<span class="w">                </span><span class="nt">&lt;goal&gt;</span>process-asciidoc<span class="nt">&lt;/goal&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/goals&gt;</span>
-<span class="w">            </span><span class="nt">&lt;configuration&gt;</span>
-<span class="w">                </span><span class="nt">&lt;backend&gt;</span>html<span class="nt">&lt;/backend&gt;</span>
-<span class="w">                </span><span class="nt">&lt;doctype&gt;</span>book<span class="nt">&lt;/doctype&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/configuration&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/execution&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/executions&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.restdocs<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-restdocs-asciidoctor<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;version&gt;</span>${spring-restdocs.version}<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-restdocs-mockmvc<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
-<span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.asciidoctor<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>asciidoctor-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;version&gt;</span>1.5.8<span class="nt">&lt;/version&gt;</span>
+<span class="w">                </span><span class="nt">&lt;executions&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;execution&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;id&gt;</span>generate-docs<span class="nt">&lt;/id&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;phase&gt;</span>prepare-package<span class="nt">&lt;/phase&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;goals&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;goal&gt;</span>process-asciidoc<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;backend&gt;</span>html<span class="nt">&lt;/backend&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;doctype&gt;</span>book<span class="nt">&lt;/doctype&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/configuration&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/executions&gt;</span>
+<span class="w">                </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;groupId&gt;</span>org.springframework.restdocs<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;artifactId&gt;</span>spring-restdocs-asciidoctor<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;version&gt;</span>${spring-restdocs.version}<span class="nt">&lt;/version&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
 </code></pre></div>
 <h3 id="api">API 実装</h3>
 <ul>
 <li>コントローラインターフェース</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.controller</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="p">;</span>
@@ -6485,108 +6484,126 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SampleGetRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SampleGetResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SamplePostRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SamplePostResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostResponse</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * サンプルのコントローラインターフェースです。</span>
+<span class="cm"> * サンプルコントローラーのインターフェースです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/sample&quot;</span><span class="p">)</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SampleController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * サンプルのGETメソッドです。</span>
+<span class="cm">     * 挨拶メッセージを返します。</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param sampleGetRequest 名前</span>
-<span class="cm">     * @return メッセージ</span>
+<span class="cm">     * @return 挨拶メッセージ</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/get&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">sampleGet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * サンプルのPOSTメソッドです。</span>
+<span class="cm">     * ユーザ情報の登録を行います。</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param samplePostRequest 名前、年齢</span>
-<span class="cm">     * @return メッセージ</span>
+<span class="cm">     * @return 登録メッセージ</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/post&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">samplePost</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">regist</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>コントローラ実装</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.impl</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.SampleController</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SampleGetRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SampleGetResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SamplePostRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SamplePostResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.SampleController</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.SampleService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostInModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * サンプルのコントローラ実装クラスです。</span>
+<span class="cm"> * SampleControllerの実装です。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SampleController</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">sampleGet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="n">sampleGetResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sampleGetResponse</span><span class="p">.</span><span class="na">setMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sampleGetResponse</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SampleControllerImpl</span><span class="p">(</span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sampleService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">samplePost</span><span class="p">(</span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;(&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getAge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;)!&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="n">samplePostResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="p">();</span>
-<span class="w">        </span><span class="n">samplePostResponse</span><span class="p">.</span><span class="na">setMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="n">sampleGetRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">samplePostResponse</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">regist</span><span class="p">(</span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="p">(</span><span class="n">sampleService</span>
+<span class="w">                </span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostInModel</span><span class="p">(</span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getAge</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>コントローラテスト</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.controller</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.bean.override.mockito.MockitoBean</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.controller.reqres.SamplePostRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.SampleService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostOutModel</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
+
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.requestFields</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.responseFields</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.parameterWithName</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.queryParameters</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * SampleControllerImplのテストクラスです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">SampleController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <span class="nd">@AutoConfigureRestDocs</span><span class="p">(</span><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;target/snippets&quot;</span><span class="p">)</span>
@@ -6598,50 +6615,57 @@
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span>
 
+<span class="w">    </span><span class="nd">@MockitoBean</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
+
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * sampleGetのテスト 正常系</span>
+<span class="cm">     * greetのテスト 正常系</span>
 <span class="cm">     *</span>
 <span class="cm">     * @throws Exception</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_sampleGet_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_greet_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetOutModel</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">));</span>
 
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mockMvc</span>
-<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/sample/get&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">param</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/sample/get&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/greet&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/api/v1/greet&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                        </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
 <span class="w">                        </span><span class="n">queryParameters</span><span class="p">(</span>
 <span class="w">                                </span><span class="n">parameterWithName</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;名前&quot;</span><span class="p">)),</span>
 <span class="w">                        </span><span class="n">responseFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;挨拶メッセージ&quot;</span><span class="p">))));</span>
+<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">))));</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * samplePostのテスト 正常系</span>
+<span class="cm">     * registのテスト 正常系</span>
 <span class="cm">     *</span>
 <span class="cm">     * @throws Exception</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_samplePost_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_regist_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="p">();</span>
-<span class="w">        </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+<span class="w">        </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostOutModel</span><span class="p">(</span><span class="s">&quot;登録に成功しました。&quot;</span><span class="p">));</span>
 
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mockMvc</span>
-<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/sample/post&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">samplePostRequest</span><span class="p">))</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/sample/post&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/v1/user&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/api/v1/user&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                        </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
 <span class="w">                        </span><span class="n">requestFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;名前&quot;</span><span class="p">),</span>
+<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;ユーザ名&quot;</span><span class="p">),</span>
 <span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;年齢&quot;</span><span class="p">)),</span>
 <span class="w">                        </span><span class="n">responseFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;挨拶メッセージ&quot;</span><span class="p">))));</span>
+<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;登録に成功しました。&quot;</span><span class="p">))));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -6660,50 +6684,56 @@
 
 サンプルAPIです。
 
-:sample: {base_path}/sample
+:sample: {base_path}/api/v1
 
-=== Sample get
+=== Greet
 
-サンプルのGET APIです。
+挨拶APIです。
 
-:sample_get: {sample}/get
+:sample_greet: {sample}/greet
 
 .query parameter
-include::{sample_get}/query-parameters.adoc[]
+include::{sample_greet}/query-parameters.adoc[]
 
 .response field
-include::{sample_get}/response-fields.adoc[]
+include::{sample_greet}/response-fields.adoc[]
 
 .example request
-include::{sample_get}/curl-request.adoc[]
+include::{sample_greet}/curl-request.adoc[]
 
 .example response
-include::{sample_get}/response-body.adoc[]
+include::{sample_greet}/response-body.adoc[]
 
-=== Sample post
+=== Regist
 
-サンプルのPOST APIです。
+ユーザ情報登録APIです。
 
-:sample_post: {sample}/post
+:sample_user: {sample}/user
 
 .request field
-include::{sample_post}/request-fields.adoc[]
+include::{sample_user}/request-fields.adoc[]
 
 .response field
-include::{sample_post}/response-fields.adoc[]
+include::{sample_user}/response-fields.adoc[]
 
 .example request
-include::{sample_post}/curl-request.adoc[]
+include::{sample_user}/curl-request.adoc[]
 
 .example response
-include::{sample_post}/response-body.adoc[]
+include::{sample_user}/response-body.adoc[]
 </code></pre></div>
 <p><code>:hogehoge:</code>で適宜変数を定め、<code>include::</code>で生成したスニペットを読み込んでいます。</p>
 <h2 id="_3">設計書生成手順</h2>
 <ul>
-<li>単体テストを実行します。上記の場合テストに成功すると<code>target/snippets</code>配下に、<code>document</code>内で定めたパスに各種スニペットが出力されます。</li>
-<li><code>./mvnw package</code>でパッケージをビルドします。<code>target/generated-docs</code>配下に設計書本体<code>index.html</code>が出力されます。</li>
+<li>単体テストを実行します。テストに成功すると、<code>target/snippets</code> 配下に、<code>document</code> 内で定めたパスに各種スニペットが出力されます。</li>
 </ul>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<ul>
+<li>パッケージをビルドします。<code>target/generated-docs</code> 配下に設計書本体 <code>index.html</code> が出力されます。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>package
+</code></pre></div>
 
 
 
