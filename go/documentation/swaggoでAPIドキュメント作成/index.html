@@ -6575,7 +6575,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span> type SampleHandler interface {
 
 <span class="w"> </span>     // 挨拶メッセージを返します。
-<span class="w"> </span>     Greet(w http.ResponseWriter, r *http.Request)
+<span class="w"> </span>     Greeting(w http.ResponseWriter, r *http.Request)
 
 <span class="w"> </span>     // ユーザ登録処理を行います。
 <span class="w"> </span>     Regist(w http.ResponseWriter, r *http.Request)
@@ -6597,11 +6597,11 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+ // @Param GreetReq query model.GreetReq false &quot;挨拶APIのリクエストモデル&quot;</span>
 <span class="gi">+ // @Success 200 {object} model.GreetRes &quot;正常に処理された場合&quot;</span>
 <span class="gi">+ // @Router /greet [get]</span>
-<span class="w"> </span> func (h sampleHandler) Greet(w http.ResponseWriter, r *http.Request) {
+<span class="w"> </span> func (h sampleHandler) Greeting(w http.ResponseWriter, r *http.Request) {
 
 <span class="w"> </span>     req := model.NewGreetReq(r)
 
-<span class="w"> </span>     out := h.sampleUsecase.Greet(payload.NewGreetIn(req.Name))
+<span class="w"> </span>     out := h.sampleUsecase.Greeting(payload.NewGreetIn(req.Name))
 
 <span class="w"> </span>     res := model.NewGreetRes(out.Message())
 <span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
