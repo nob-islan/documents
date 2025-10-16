@@ -105,7 +105,7 @@ swagger ページへのルーティングを設定します。
   type SampleHandler interface {
 
 	  // 挨拶メッセージを返します。
-	  Greet(w http.ResponseWriter, r *http.Request)
+	  Greeting(w http.ResponseWriter, r *http.Request)
 
 	  // ユーザ登録処理を行います。
 	  Regist(w http.ResponseWriter, r *http.Request)
@@ -127,11 +127,11 @@ swagger ページへのルーティングを設定します。
 + // @Param GreetReq query model.GreetReq false "挨拶APIのリクエストモデル"
 + // @Success 200 {object} model.GreetRes "正常に処理された場合"
 + // @Router /greet [get]
-  func (h sampleHandler) Greet(w http.ResponseWriter, r *http.Request) {
+  func (h sampleHandler) Greeting(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewGreetReq(r)
 
-	  out := h.sampleUsecase.Greet(payload.NewGreetIn(req.Name))
+	  out := h.sampleUsecase.Greeting(payload.NewGreetIn(req.Name))
 
 	  res := model.NewGreetRes(out.Message())
 	  w.Header().Set("Content-Type", "application/json")
