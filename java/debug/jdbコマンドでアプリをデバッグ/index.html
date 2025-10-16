@@ -6569,7 +6569,7 @@
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SampleService</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -6646,7 +6646,7 @@ Removed: breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 <ul>
 <li><code>locals</code> で変数一覧を確認できます:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>Breakpoint hit: &quot;thread=http-nio-8080-exec-3&quot;, nob.example.easyapp.service.impl.SampleServiceImpl.greet(), line=23 bci=16
+<div class="highlight"><pre><span></span><code>Breakpoint hit: &quot;thread=http-nio-8080-exec-3&quot;, nob.example.easyapp.service.impl.SampleServiceImpl.greeting(), line=23 bci=16
 
 http-nio-8080-exec-3[1] locals
 Method arguments:
@@ -6687,7 +6687,7 @@ name = &quot;snail&quot;
 <li><code>next</code> および <code>step</code> で処理を進めます。下記 (1) にブレークポイントを置いた場合、前者は (2), 後者は (3) に進みます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -6734,7 +6734,7 @@ nob.example.easyapp.EasyappApplication
 <div class="highlight"><pre><span></span><code>&gt; methods nob.example.easyapp.service.impl.SampleServiceImpl
 ** methods list **
 nob.example.easyapp.service.impl.SampleServiceImpl &lt;init&gt;()
-nob.example.easyapp.service.impl.SampleServiceImpl greet(nob.example.easyapp.service.model.SampleInModel)
+nob.example.easyapp.service.impl.SampleServiceImpl greeting(nob.example.easyapp.service.model.SampleInModel)
 nob.example.easyapp.service.impl.SampleServiceImpl complementName()
 java.lang.Object &lt;init&gt;()
 java.lang.Object getClass()
@@ -6748,7 +6748,7 @@ java.lang.Object wait()
 java.lang.Object wait(long)
 java.lang.Object wait(long, int)
 java.lang.Object finalize()
-nob.example.easyapp.service.SampleService greet(nob.example.easyapp.service.model.SampleInModel)
+nob.example.easyapp.service.SampleService greeting(nob.example.easyapp.service.model.SampleInModel)
 </code></pre></div>
 
 
