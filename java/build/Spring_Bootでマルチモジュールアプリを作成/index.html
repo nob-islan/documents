@@ -6684,7 +6684,7 @@ cf. <a href="https://spring.pleiades.io/guides/gs/multi-module/">https://spring.
 <span class="cm">     *</span>
 <span class="cm">     * @return 固定メッセージ</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">();</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="_4">サービス実装</h4>
@@ -6707,7 +6707,7 @@ cf. <a href="https://spring.pleiades.io/guides/gs/multi-module/">https://spring.
 <span class="cm">     *</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, multi module!&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -6816,7 +6816,7 @@ cf. <a href="https://spring.pleiades.io/guides/gs/multi-module/">https://spring.
 <span class="cm">     * @return</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">();</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="_7">サービス実装クラス</h4>
@@ -6845,10 +6845,10 @@ cf. <a href="https://spring.pleiades.io/guides/gs/multi-module/">https://spring.
 <span class="cm">     *</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// app service呼び出し</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sampleAppService</span><span class="p">.</span><span class="na">greet</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sampleAppService</span><span class="p">.</span><span class="na">greeting</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
