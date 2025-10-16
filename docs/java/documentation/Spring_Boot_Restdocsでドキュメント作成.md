@@ -83,7 +83,7 @@ public interface SampleController {
      * @return 挨拶メッセージ
      */
     @GetMapping(value = "/greet")
-    SampleGetResponse greet(SampleGetRequest sampleGetRequest);
+    SampleGetResponse greeting(SampleGetRequest sampleGetRequest);
 
     /**
      * ユーザ情報の登録を行います。
@@ -129,10 +129,10 @@ public class SampleControllerImpl implements SampleController {
     }
 
     @Override
-    public SampleGetResponse greet(SampleGetRequest sampleGetRequest) {
+    public SampleGetResponse greeting(SampleGetRequest sampleGetRequest) {
 
         return new SampleGetResponse(
-                sampleService.greet(new SampleGetInModel(sampleGetRequest.getName())).getMessage());
+                sampleService.greeting(new SampleGetInModel(sampleGetRequest.getName())).getMessage());
     }
 
     @Override
@@ -206,7 +206,7 @@ public class SampleControllerImplTest {
     @Test
     void test_greet_success() throws Exception {
 
-        Mockito.when(sampleService.greet(new SampleGetInModel("nob"))).thenReturn(new SampleGetOutModel("Hello, nob!"));
+        Mockito.when(sampleService.greeting(new SampleGetInModel("nob"))).thenReturn(new SampleGetOutModel("Hello, nob!"));
 
         this.mockMvc
                 .perform(get("/api/v1/greet")
