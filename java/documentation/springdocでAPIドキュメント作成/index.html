@@ -6722,8 +6722,8 @@
 <span class="gi">+     @ApiResponses(value = {</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;)</span>
 <span class="gi">+     })</span>
-<span class="gd">-     GreetResponse greet(GreetRequest greetRequest);</span>
-<span class="gi">+     GreetResponse greet(@ParameterObject GreetRequest greetRequest);</span>
+<span class="gd">-     GreetResponse greeting(GreetRequest greetRequest);</span>
+<span class="gi">+     GreetResponse greeting(@ParameterObject GreetRequest greetRequest);</span>
 
 <span class="w"> </span>     /**
 <span class="w"> </span>      * ユーザ登録処理を行います。
