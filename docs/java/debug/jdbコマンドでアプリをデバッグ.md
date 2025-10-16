@@ -29,7 +29,7 @@ import nob.example.easyapp.service.model.SampleInModel;
 public class SampleServiceImpl implements SampleService {
 
     @Override
-    public String greet(SampleInModel sampleInModel) {
+    public String greeting(SampleInModel sampleInModel) {
 
         String name = sampleInModel.getName();
         if (name == "") {
@@ -121,7 +121,7 @@ Removed: breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 - `locals` で変数一覧を確認できます:
 
 ```
-Breakpoint hit: "thread=http-nio-8080-exec-3", nob.example.easyapp.service.impl.SampleServiceImpl.greet(), line=23 bci=16
+Breakpoint hit: "thread=http-nio-8080-exec-3", nob.example.easyapp.service.impl.SampleServiceImpl.greeting(), line=23 bci=16
 
 http-nio-8080-exec-3[1] locals
 Method arguments:
@@ -167,7 +167,7 @@ name = "snail"
 
 ```java
     @Override
-    public String greet(SampleInModel sampleInModel) {
+    public String greeting(SampleInModel sampleInModel) {
 
         String name = sampleInModel.getName();
         if (name == "") {
@@ -218,7 +218,7 @@ nob.example.easyapp.EasyappApplication
 > methods nob.example.easyapp.service.impl.SampleServiceImpl
 ** methods list **
 nob.example.easyapp.service.impl.SampleServiceImpl <init>()
-nob.example.easyapp.service.impl.SampleServiceImpl greet(nob.example.easyapp.service.model.SampleInModel)
+nob.example.easyapp.service.impl.SampleServiceImpl greeting(nob.example.easyapp.service.model.SampleInModel)
 nob.example.easyapp.service.impl.SampleServiceImpl complementName()
 java.lang.Object <init>()
 java.lang.Object getClass()
@@ -232,5 +232,5 @@ java.lang.Object wait()
 java.lang.Object wait(long)
 java.lang.Object wait(long, int)
 java.lang.Object finalize()
-nob.example.easyapp.service.SampleService greet(nob.example.easyapp.service.model.SampleInModel)
+nob.example.easyapp.service.SampleService greeting(nob.example.easyapp.service.model.SampleInModel)
 ```
