@@ -47,7 +47,7 @@ public interface SampleAppService {
      *
      * @return 固定メッセージ
      */
-    String greet();
+    String greeting();
 }
 ```
 
@@ -74,7 +74,7 @@ public class SampleAppServiceImpl implements SampleAppService {
      *
      */
     @Override
-    public String greet() {
+    public String greeting() {
 
         return "Hello, multi module!";
     }
@@ -197,7 +197,7 @@ public interface SampleWebService {
      * @return
      */
     @GetMapping(value = "/greet")
-    String greet();
+    String greeting();
 }
 ```
 
@@ -230,10 +230,10 @@ public class SampleWebServiceImpl implements SampleWebService {
      *
      */
     @Override
-    public String greet() {
+    public String greeting() {
 
         // app service呼び出し
-        return sampleAppService.greet();
+        return sampleAppService.greeting();
     }
 }
 ```
