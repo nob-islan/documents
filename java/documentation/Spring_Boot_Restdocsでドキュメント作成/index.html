@@ -6505,7 +6505,7 @@
 <span class="cm">     * @return 挨拶メッセージ</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報の登録を行います。</span>
@@ -6550,10 +6550,10 @@
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="p">(</span>
-<span class="w">                </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="n">sampleGetRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">                </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="n">sampleGetRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
@@ -6626,7 +6626,7 @@
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_greet_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetOutModel</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetOutModel</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">));</span>
 
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mockMvc</span>
 <span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/greet&quot;</span><span class="p">)</span>
