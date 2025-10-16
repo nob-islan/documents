@@ -336,7 +336,6 @@ public interface AuthController {
 ```java
 package nob.example.easyapp.controller.impl;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
@@ -362,7 +361,7 @@ public class AuthControllerImpl implements AuthController {
     }
 
     @Override
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public AuthResponse login(AuthRequest request) {
 
         return new AuthResponse(authService.login(new AuthInModel(request.getName(), request.getPassword())).isValid());
     }
