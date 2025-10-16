@@ -103,8 +103,8 @@ spring.profiles.active=swagger
 +     @ApiResponses(value = {
 +             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
 +     })
--     GreetResponse greet(GreetRequest greetRequest);
-+     GreetResponse greet(@ParameterObject GreetRequest greetRequest);
+-     GreetResponse greeting(GreetRequest greetRequest);
++     GreetResponse greeting(@ParameterObject GreetRequest greetRequest);
 
       /**
        * ユーザ登録処理を行います。
