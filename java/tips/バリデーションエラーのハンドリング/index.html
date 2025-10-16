@@ -6474,7 +6474,7 @@
 <span class="cm">     * @return fixed message</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="nd">@Valid</span><span class="w"> </span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">);</span><span class="w"> </span><span class="c1">// @Validが付いているinModelについて検証を行います。</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="nd">@Valid</span><span class="w"> </span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">);</span><span class="w"> </span><span class="c1">// @Validが付いているinModelについて検証を行います。</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
@@ -6499,7 +6499,7 @@
 <span class="cm">     *</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;名前: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 <span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;年齢: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
@@ -6752,7 +6752,7 @@
 <span class="w">        </span><span class="c1">// テスト実行</span>
 <span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ConstraintViolationException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// 例外を独自のinfoクラスに詰め替え</span>
@@ -6782,7 +6782,7 @@
 <span class="w">        </span><span class="c1">// テスト実行</span>
 <span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ConstraintViolationException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// 例外を独自のinfoクラスに詰め替え</span>
@@ -6812,7 +6812,7 @@
 <span class="w">        </span><span class="c1">// テスト実行</span>
 <span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">SampleErrorInfo</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greet</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="n">sampleInModel</span><span class="p">);</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ConstraintViolationException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// 例外を独自のinfoクラスに詰め替え</span>
