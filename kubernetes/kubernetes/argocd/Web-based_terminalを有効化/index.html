@@ -20,7 +20,7 @@
     
     
       
-        <title>GitLab リポジトリを登録 - Nob docs</title>
+        <title>Web-based terminal を有効化 - Nob docs</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gitlab" class="md-skip">
+        <a href="#web-based-terminal" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GitLab リポジトリを登録
+              Web-based terminal を有効化
             
           </span>
         </div>
@@ -4291,6 +4291,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ArgoCD への http 通信を許可
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
@@ -4328,7 +4351,7 @@
   
   
   <span class="md-ellipsis">
-    GitLab リポジトリを登録
+    Web-based terminal を有効化
     
   </span>
   
@@ -4341,7 +4364,7 @@
   
   
   <span class="md-ellipsis">
-    GitLab リポジトリを登録
+    Web-based terminal を有効化
     
   </span>
   
@@ -6350,14 +6373,29 @@
 
 
 
-<h1 id="gitlab">GitLab リポジトリを登録</h1>
-<p>ArgoCD に GitLab のリポジトリを登録し、マニフェストから k8s リソースをデプロイできるようにします。</p>
-<p>cf. <a href="https://argo-cd.readthedocs.io/en/release-1.8/user-guide/private-repositories/">https://argo-cd.readthedocs.io/en/release-1.8/user-guide/private-repositories/</a></p>
+<h1 id="web-based-terminal">Web-based terminal を有効化</h1>
+<p>cf. <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/">https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/</a></p>
 <h2 id="_1">手順</h2>
 <ul>
-<li>プライベートリポジトリの認証情報を登録します:</li>
+<li>ConfigMap: argocd-cm に下記設定を追記します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>argocd<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>http://<span class="o">{</span>GitLab<span class="w"> </span>リポジトリのURL<span class="o">}</span><span class="w"> </span>--username<span class="w"> </span><span class="o">{</span>username<span class="o">}</span><span class="w"> </span>--password<span class="w"> </span><span class="o">{</span>password<span class="o">}</span>
+<div class="highlight"><pre><span></span><code><span class="nt">data</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">exec.enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</code></pre></div>
+<ul>
+<li>ClusterRole: argocd-server に下記設定を追記します（namespaced mode の場合は同名の Role に追記）:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiGroups</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">  </span><span class="nt">resources</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pods/exec</span>
+<span class="w">  </span><span class="nt">verbs</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create</span>
+</code></pre></div>
+<ul>
+<li>argocd-server を再起動します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deployment<span class="w"> </span>argocd-server
 </code></pre></div>
 
 
