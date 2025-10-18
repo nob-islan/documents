@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/">
+        <link rel="prev" href="../../http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/">
       
       
-        <link rel="next" href="../../tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/">
+        <link rel="next" href="../%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/">
       
       
       <link rel="icon" href="../../../00_config/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>UT 時にコンテナで DB 環境を作成 - Nob docs</title>
+        <title>testcontainers を使ってテスト実行 - Nob docs</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ut-db" class="md-skip">
+        <a href="#testcontainers" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              UT 時にコンテナで DB 環境を作成
+              testcontainers を使ってテスト実行
             
           </span>
         </div>
@@ -3812,29 +3812,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../Jacoco%E3%83%86%E3%82%B9%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E5%87%BA%E5%8A%9B%E6%89%8B%E9%A0%86/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Jacoco テストレポート出力手順
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -3852,7 +3829,7 @@
   
   
   <span class="md-ellipsis">
-    UT 時にコンテナで DB 環境を作成
+    testcontainers を使ってテスト実行
     
   </span>
   
@@ -3865,7 +3842,7 @@
   
   
   <span class="md-ellipsis">
-    UT 時にコンテナで DB 環境を作成
+    testcontainers を使ってテスト実行
     
   </span>
   
@@ -3933,6 +3910,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    単体テスト作成
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -6414,8 +6414,8 @@
 
 
 
-<h1 id="ut-db">UT 時にコンテナで DB 環境を作成</h1>
-<p>UT 実行時にコンテナでデータベースを起動し、毎回綺麗な DB 環境を提供します。</p>
+<h1 id="testcontainers">testcontainers を使ってテスト実行</h1>
+<p>テスト実行時のみデータベースコンテナを作成し、毎回綺麗な DB 環境を提供します。</p>
 <h2 id="_1">実装</h2>
 <p>例として、<code>MariaDB</code>をテスト用 DB として使用します。</p>
 <h3 id="_2">依存関係</h3>

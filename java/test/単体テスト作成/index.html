@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/">
+        <link rel="prev" href="../testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/">
       
       
-        <link rel="next" href="../UT%E6%99%82%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7DB%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E6%88%90/">
+        <link rel="next" href="../../tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/">
       
       
       <link rel="icon" href="../../../00_config/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Jacoco テストレポート出力手順 - Nob docs</title>
+        <title>単体テスト作成 - Nob docs</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jacoco" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Jacoco テストレポート出力手順
+              単体テスト作成
             
           </span>
         </div>
@@ -3812,6 +3812,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    testcontainers を使ってテスト実行
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -3829,7 +3852,7 @@
   
   
   <span class="md-ellipsis">
-    Jacoco テストレポート出力手順
+    単体テスト作成
     
   </span>
   
@@ -3842,7 +3865,7 @@
   
   
   <span class="md-ellipsis">
-    Jacoco テストレポート出力手順
+    単体テスト作成
     
   </span>
   
@@ -3865,19 +3888,121 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#maven" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      Maven
+      事前準備
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Maven">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      作成手順
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="作成手順">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      手順
+      前提
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      controller テスト作成
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      service テスト作成
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      repository テスト作成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="repository テスト作成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストデータ準備
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストケース作成
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      テスト起動
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      カバレッジ出力
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="カバレッジ出力">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      設定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      カバレッジレポート作成
     </span>
   </a>
   
@@ -3888,42 +4013,10 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#gradle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gradle
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../UT%E6%99%82%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A7DB%E7%92%B0%E5%A2%83%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    UT 時にコンテナで DB 環境を作成
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -6348,19 +6441,74 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#maven" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      Maven
+      事前準備
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Maven">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      作成手順
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="作成手順">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
-      手順
+      前提
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      controller テスト作成
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      service テスト作成
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      repository テスト作成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="repository テスト作成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストデータ準備
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストケース作成
     </span>
   </a>
   
@@ -6370,13 +6518,51 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#gradle" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
-      Gradle
+      テスト起動
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      カバレッジ出力
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="カバレッジ出力">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      設定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      カバレッジレポート作成
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6396,55 +6582,391 @@
 
 
 
-<h1 id="jacoco">Jacoco テストレポート出力手順</h1>
-<p>参考：<a href="https://tosi-tech.net/2020/06/coverage-report-of-jacoco/">https://tosi-tech.net/2020/06/coverage-report-of-jacoco/</a><br />
-Maven および Gradle プロジェクトについて記載。</p>
-<h2 id="maven">Maven</h2>
-<h3 id="_1">手順</h3>
-<p><code>pom.xml</code>の<code>&lt;plugins&gt;</code>内に以下を追記します：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>0.8.5<span class="nt">&lt;/version&gt;</span>
-<span class="w">    </span><span class="nt">&lt;executions&gt;</span>
-<span class="w">        </span><span class="nt">&lt;execution&gt;</span>
-<span class="w">            </span><span class="nt">&lt;goals&gt;</span>
-<span class="w">                </span><span class="nt">&lt;goal&gt;</span>prepare-agent<span class="nt">&lt;/goal&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/goals&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/execution&gt;</span>
-<span class="w">        </span><span class="nt">&lt;execution&gt;</span>
-<span class="w">            </span><span class="nt">&lt;id&gt;</span>report<span class="nt">&lt;/id&gt;</span>
-<span class="w">            </span><span class="nt">&lt;phase&gt;</span>test<span class="nt">&lt;/phase&gt;</span>
-<span class="w">            </span><span class="nt">&lt;goals&gt;</span>
-<span class="w">                </span><span class="nt">&lt;goal&gt;</span>report<span class="nt">&lt;/goal&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/goals&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/execution&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/executions&gt;</span>
-<span class="nt">&lt;/plugin&gt;</span>
+<h1 id="_1">単体テスト作成</h1>
+<p>cf. <a href="https://spring.pleiades.io/spring-boot/reference/testing/spring-boot-applications.html">https://spring.pleiades.io/spring-boot/reference/testing/spring-boot-applications.html</a></p>
+<h2 id="_2">事前準備</h2>
+<p>下記設定を追記します:</p>
+<ul>
+<li>application-test.properties</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
+<span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span>
+<span class="c1"># h2db接続設定</span>
+<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1</span>
+<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span>
+<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">sa</span>
+<span class="na">spring.datasource.password</span><span class="o">=</span>
+<span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span>
 </code></pre></div>
-<p>また、<code>&lt;project&gt;</code>の中に以下を追加します：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;reporting&gt;</span>
-<span class="nt">&lt;plugins&gt;</span>
-<span class="w">    </span><span class="nt">&lt;plugin&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;reportSets&gt;</span>
-<span class="w">        </span><span class="nt">&lt;reportSet&gt;</span>
-<span class="w">        </span><span class="nt">&lt;reports&gt;</span>
-<span class="w">            </span><span class="nt">&lt;report&gt;</span>report<span class="nt">&lt;/report&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/reports&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/reportSet&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/reportSets&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/plugin&gt;</span>
-<span class="nt">&lt;/plugins&gt;</span>
-<span class="nt">&lt;/reporting&gt;</span>
+<ul>
+<li>pom.xml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/com.h2database/h2 --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<p>追記後、<code>./mvnw test jacoco:report</code>コマンドを叩きます。うまくいけば<code>target/site/jacoco</code>内に html 形式でレポートが作成されます。</p>
-<h2 id="gradle">Gradle</h2>
-<p><code>build.gradle</code>ファイルの<code>plugins</code>ブロック内に</p>
-<div class="highlight"><pre><span></span><code>id &#39;jacoco&#39;
+<ul>
+<li>XxxApplicationTests.java</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// test配下の自動生成済みテストクラスに下記を追記</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>を追記する。追記後<code>./gradlew test jacocoTestReport</code>コマンドを叩きます。うまくいけば<code>build/reports/jacoco/test/html</code>内にレポートが作成されます。</p>
+<h2 id="_3">作成手順</h2>
+<h3 id="_4">前提</h3>
+<p>下記テーブルに対してデータを取得 / 登録する API を想定しています:</p>
+<table>
+<thead>
+<tr>
+<th>カラム名</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>INT PRIMARY_KEY</td>
+</tr>
+<tr>
+<td>username</td>
+<td>VARCHAR(20)</td>
+</tr>
+<tr>
+<td>age</td>
+<td>INT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="controller">controller テスト作成</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.bean.override.mockito.MockitoBean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MvcResult</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.UserRegistRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.UserRegistResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.UserSearchRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.UserSearchResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.dto.UsersDto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.UserinfoService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserRegistInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserRegistOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserSearchInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserSearchOutModel</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="p">;</span>
+
+<span class="nd">@WebMvcTest</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserinfoControllerImplTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@MockitoBean</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserinfoService</span><span class="w"> </span><span class="n">userinfoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * searchのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_search_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 入力値の作成</span>
+<span class="w">        </span><span class="n">UserSearchRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserSearchRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// serviceのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">userinfoService</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserSearchInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getUsername</span><span class="p">()))).</span><span class="na">thenReturn</span><span class="p">(</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UserSearchOutModel</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">706</span><span class="p">))));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// API呼び出し</span>
+<span class="w">            </span><span class="n">MvcResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/user&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getUsername</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andReturn</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserSearchResponse</span><span class="p">(</span>
+<span class="w">                            </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">706</span><span class="p">)))));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span><span class="w"> </span><span class="c1">// 例外をキャッチしたらテスト失敗</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * registのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_regist_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 入力値の作成</span>
+<span class="w">        </span><span class="n">UserRegistRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserRegistRequest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// serviceのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">userinfoService</span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserRegistInModel</span><span class="p">(</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getUsersDto</span><span class="p">().</span><span class="na">getUsername</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getUsersDto</span><span class="p">().</span><span class="na">getAge</span><span class="p">()))))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserRegistOutModel</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// API呼び出し</span>
+<span class="w">            </span><span class="n">MvcResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/v1/user&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andReturn</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserRegistResponse</span><span class="p">(</span><span class="kc">true</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span><span class="w"> </span><span class="c1">// 例外をキャッチしたらテスト失敗</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="service">service テスト作成</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.bean.override.mockito.MockitoBean</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.dto.UsersDto</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserRegistInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserRegistOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserSearchInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.UserSearchOutModel</span><span class="p">;</span>
+
+<span class="nd">@SpringBootTest</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserinfoServiceImplTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserinfoService</span><span class="w"> </span><span class="n">userinfoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@MockitoBean</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * searchのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_search_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 入力値の作成</span>
+<span class="w">        </span><span class="n">UserSearchInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserSearchInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// repositoryのモック化</span>
+<span class="w">        </span><span class="n">Users</span><span class="w"> </span><span class="n">users01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob1&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Users</span><span class="w"> </span><span class="n">users02</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;testnob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">706</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">selectByUsername</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getUsername</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">users01</span><span class="p">,</span><span class="w"> </span><span class="n">users02</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// service呼び出し</span>
+<span class="w">            </span><span class="n">UserSearchOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userinfoService</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">getUsersDtoList</span><span class="p">().</span><span class="na">size</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">getUsersDtoList</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="n">users01</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">users01</span><span class="p">.</span><span class="na">getUsername</span><span class="p">(),</span><span class="w"> </span><span class="n">users01</span><span class="p">.</span><span class="na">getAge</span><span class="p">()));</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">getUsersDtoList</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="n">users02</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">users02</span><span class="p">.</span><span class="na">getUsername</span><span class="p">(),</span><span class="w"> </span><span class="n">users02</span><span class="p">.</span><span class="na">getAge</span><span class="p">()));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span><span class="w"> </span><span class="c1">// 例外をキャッチしたらテスト失敗</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * registのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_regist_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 入力値の作成</span>
+<span class="w">        </span><span class="n">UserRegistInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserRegistInModel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersDto</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// repositoryのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span>
+<span class="w">                </span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">inModel</span><span class="p">.</span><span class="na">getUsersDto</span><span class="p">().</span><span class="na">getUsername</span><span class="p">(),</span><span class="w"> </span><span class="n">inModel</span><span class="p">.</span><span class="na">getUsersDto</span><span class="p">().</span><span class="na">getAge</span><span class="p">())))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">());</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// service呼び出し</span>
+<span class="w">            </span><span class="n">UserRegistOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userinfoService</span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">isSuccess</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span><span class="w"> </span><span class="c1">// 例外をキャッチしたらテスト失敗</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="repository">repository テスト作成</h3>
+<h4 id="_5">テストデータ準備</h4>
+<p><code>test/resources/repository/users</code> 配下にテストデータ投入向けの SQL を用意します:</p>
+<ul>
+<li>schema.sql</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>data.sql</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">username</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;nob&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
+<span class="p">);</span>
+</code></pre></div>
+<h4 id="_6">テストケース作成</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * UsersRepositoryのテストクラスです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@DataJpaTest</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/repository/users/schema.sql&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/repository/users/data.sql&quot;</span>
+<span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * selectByUsernameのテスト</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_selectByUsername</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// repository呼び出し</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">usersList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">selectByUsername</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">usersList</span><span class="p">.</span><span class="na">size</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">usersList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getId</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">usersList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUsername</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">usersList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span><span class="w"> </span><span class="c1">// 例外をキャッチしたらテスト失敗</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_7">テスト起動</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 特定のテストクラスを実行する場合</span>
+./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>UserinfoControllerImplTest
+
+<span class="c1"># 全てのテストクラスを実行する場合</span>
+./mvnw<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<h2 id="_8">カバレッジ出力</h2>
+<p>cf. <a href="https://www.jacoco.org/jacoco/trunk/doc/maven.html">https://www.jacoco.org/jacoco/trunk/doc/maven.html</a></p>
+<h3 id="_9">設定</h3>
+<p>下記設定を追記します:</p>
+<ul>
+<li>pom.xml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;version&gt;</span>0.8.14<span class="nt">&lt;/version&gt;</span>
+<span class="w">                </span><span class="nt">&lt;executions&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;execution&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;goals&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;goal&gt;</span>prepare-agent<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;execution&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;id&gt;</span>report<span class="nt">&lt;/id&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;phase&gt;</span>test<span class="nt">&lt;/phase&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;goals&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;goal&gt;</span>report<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/executions&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;reporting&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
+<span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                </span><span class="nt">&lt;reportSets&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;reportSet&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;reports&gt;</span>
+<span class="w">                        </span><span class="cm">&lt;!-- select non-aggregate reports --&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;report&gt;</span>report<span class="nt">&lt;/report&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/reports&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/reportSet&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/reportSets&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/plugins&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/reporting&gt;</span>
+</code></pre></div>
+<h3 id="_10">カバレッジレポート作成</h3>
+<ul>
+<li>カバレッジレポートを <code>target/site</code> 配下に出力します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>jacoco:report
+</code></pre></div>
 
 
 
