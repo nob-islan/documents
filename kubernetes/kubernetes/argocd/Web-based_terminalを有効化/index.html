@@ -4111,29 +4111,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kind/kind%E3%81%A7ArgoCD%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    kind で Argo CD を使う
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
         
   
@@ -6377,13 +6354,13 @@
 <p>cf. <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/">https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/</a></p>
 <h2 id="_1">手順</h2>
 <ul>
-<li>ConfigMap: argocd-cm に下記設定を追記します:</li>
+<li>ConfigMap: <code>argocd-cm</code> に下記設定を追記します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">exec.enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
 </code></pre></div>
 <ul>
-<li>ClusterRole: argocd-server に下記設定を追記します（namespaced mode の場合は同名の Role に追記）:</li>
+<li>ClusterRole: <code>argocd-server</code> に下記設定を追記します（namespaced mode の場合は同名の Role に追記）:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiGroups</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&quot;</span>
@@ -6391,11 +6368,6 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pods/exec</span>
 <span class="w">  </span><span class="nt">verbs</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">create</span>
-</code></pre></div>
-<ul>
-<li>argocd-server を再起動します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deployment<span class="w"> </span>argocd-server
 </code></pre></div>
 
 
