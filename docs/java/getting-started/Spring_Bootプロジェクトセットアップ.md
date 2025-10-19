@@ -97,8 +97,8 @@ spring.datasource.password=password
 │       └── AuthResponse.java        # APIのレスポンスモデル
 ├── repository
 │   ├── entity
-│   │   └── Users.java                # データベースのテーブル定義に対応するエンティティ
-│   └── UsersRepository.java          # データベース操作のインターフェース
+│   │   └── Users.java               # データベースのテーブル定義に対応するエンティティ
+│   └── UsersRepository.java         # データベース操作のインターフェース
 └── service
     ├── impl
     │   └── AuthServiceImpl.java     # 業務処理の実装
