@@ -224,7 +224,7 @@ import (
 type AuthUsecase interface {
 
 	// 認証処理を行います。
-	Login(in payload.AuthIn) payload.AuthOut
+	Login(in payload.LoginIn) payload.LoginOut
 }
 
 type authUsecase struct {
@@ -235,9 +235,9 @@ func NewAuthUsecase(authRepository domain.UsersRepository) AuthUsecase {
 	return &authUsecase{authRepository: authRepository}
 }
 
-func (u *authUsecase) Login(in payload.AuthIn) payload.AuthOut {
+func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
-	return payload.NewAuthOut(u.authRepository.FindByName(in.Name()).Password() == in.Password())
+	return payload.NewLoginOut(u.authRepository.FindByName(in.Name()).Password() == in.Password())
 }
 ```
 
@@ -251,33 +251,33 @@ usecase 向けの関数の入力・出力モデル構造体を定義します。
 package payload
 
 // 認証向けの入力モデルです。
-type AuthIn struct {
+type LoginIn struct {
 	name     string // ユーザ名
 	password string // パスワード
 }
 
-func NewAuthIn(name string, password string) AuthIn {
-	return AuthIn{name: name, password: password}
+func NewLoginIn(name string, password string) LoginIn {
+	return LoginIn{name: name, password: password}
 }
 
-func (i *AuthIn) Name() string {
+func (i *LoginIn) Name() string {
 	return i.name
 }
 
-func (i *AuthIn) Password() string {
+func (i *LoginIn) Password() string {
 	return i.password
 }
 
 // 認証向けの出力モデルです。
-type AuthOut struct {
+type LoginOut struct {
 	valid bool // 認証可否
 }
 
-func NewAuthOut(valid bool) AuthOut {
-	return AuthOut{valid: valid}
+func NewLoginOut(valid bool) LoginOut {
+	return LoginOut{valid: valid}
 }
 
-func (o *AuthOut) Valid() bool {
+func (o *LoginOut) Valid() bool {
 	return o.valid
 }
 ```
@@ -318,7 +318,7 @@ func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
-	out := h.authUsecase.Login(payload.NewAuthIn(req.Name, req.Password))
+	out := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
