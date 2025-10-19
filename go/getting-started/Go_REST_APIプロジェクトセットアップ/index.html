@@ -7163,7 +7163,7 @@
 <span class="kd">type</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">AuthIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">AuthOut</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">authUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -7174,9 +7174,9 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authUsecase</span><span class="p">{</span><span class="nx">authRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">authRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">AuthIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">AuthOut</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewAuthOut</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()).</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()).</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalusecasepayload">internal/usecase/payload/</h4>
@@ -7187,33 +7187,33 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">payload</span>
 
 <span class="c1">// 認証向けの入力モデルです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthIn</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">LoginIn</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
 <span class="w">    </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// パスワード</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthIn</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthIn</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">AuthIn</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">LoginIn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoginIn</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">AuthIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">AuthIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">password</span>
 <span class="p">}</span>
 
 <span class="c1">// 認証向けの出力モデルです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthOut</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">LoginOut</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">valid</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="c1">// 認証可否</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthOut</span><span class="p">(</span><span class="nx">valid</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthOut</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">AuthOut</span><span class="p">{</span><span class="nx">valid</span><span class="p">:</span><span class="w"> </span><span class="nx">valid</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">valid</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoginOut</span><span class="p">{</span><span class="nx">valid</span><span class="p">:</span><span class="w"> </span><span class="nx">valid</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="o">*</span><span class="nx">AuthOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Valid</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Valid</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">valid</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -7251,7 +7251,7 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewAuthIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 
 <span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Valid</span><span class="p">())</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
