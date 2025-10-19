@@ -93,8 +93,8 @@ spring.datasource.password=password
 │   │   └── AuthControllerImpl.java  # APIインターフェースの実装
 │   ├── AuthController.java          # APIとしてのインターフェース
 │   └── model
-│       ├── AuthRequest.java         # APIのリクエストモデル
-│       └── AuthResponse.java        # APIのレスポンスモデル
+│       ├── LoginRequest.java        # APIのリクエストモデル
+│       └── LoginResponse.java       # APIのレスポンスモデル
 ├── repository
 │   ├── entity
 │   │   └── Users.java               # データベースのテーブル定義に対応するエンティティ
@@ -104,8 +104,8 @@ spring.datasource.password=password
     │   └── AuthServiceImpl.java     # 業務処理の実装
     ├── AuthService.java             # 業務処理のインターフェース
     └── model
-        ├── AuthInModel.java         # 業務処理の入力モデル
-        └── AuthOutModel.java        # 業務処理の出力モデル
+        ├── LoginInModel.java        # 業務処理の入力モデル
+        └── LoginOutModel.java       # 業務処理の出力モデル
 ```
 
 ### クラス一覧
@@ -187,8 +187,8 @@ package nob.example.easyapp.service;
 
 import org.springframework.stereotype.Service;
 
-import nob.example.easyapp.service.model.AuthInModel;
-import nob.example.easyapp.service.model.AuthOutModel;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.LoginOutModel;
 
 /**
  * 認証サービスのインターフェースです。
@@ -204,7 +204,7 @@ public interface AuthService {
      * @param inModel 認証情報
      * @return 認証結果
      */
-    AuthOutModel login(AuthInModel inModel);
+    LoginOutModel login(LoginInModel inModel);
 }
 ```
 
@@ -220,8 +220,8 @@ import org.springframework.stereotype.Service;
 import lombok.NonNull;
 import nob.example.easyapp.repository.UsersRepository;
 import nob.example.easyapp.service.AuthService;
-import nob.example.easyapp.service.model.AuthInModel;
-import nob.example.easyapp.service.model.AuthOutModel;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.LoginOutModel;
 
 /**
  * AuthServiceの実装クラスです。
@@ -239,15 +239,15 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthOutModel login(AuthInModel inModel) {
+    public LoginOutModel login(LoginInModel inModel) {
 
-        return new AuthOutModel(
+        return new LoginOutModel(
                 usersRepository.findByName(inModel.getName()).getPassword().equals(inModel.getPassword()));
     }
 }
 ```
 
-#### service/model/AuthInModel.java
+#### service/model/LoginInModel.java
 
 業務処理を担うクラスの入力モデルを定義します。
 
@@ -262,7 +262,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class AuthInModel {
+public class LoginInModel {
 
     /** ユーザ名 */
     private String name;
@@ -272,7 +272,7 @@ public class AuthInModel {
 }
 ```
 
-#### service/model/AuthOutModel.java
+#### service/model/LoginOutModel.java
 
 業務処理を担うクラスの出力モデルを定義します。
 
@@ -287,7 +287,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class AuthOutModel {
+public class LoginOutModel {
 
     /** 認証可否 */
     private boolean valid;
@@ -306,8 +306,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nob.example.easyapp.controller.model.AuthRequest;
-import nob.example.easyapp.controller.model.AuthResponse;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.LoginResponse;
 
 /**
  * 認証コントローラーのインターフェースです。
@@ -325,7 +325,7 @@ public interface AuthController {
      * @return 認証結果
      */
     @PostMapping(value = "/login")
-    AuthResponse login(@RequestBody AuthRequest request);
+    LoginResponse login(@RequestBody LoginRequest request);
 }
 ```
 
@@ -340,10 +340,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
 import nob.example.easyapp.controller.AuthController;
-import nob.example.easyapp.controller.model.AuthRequest;
-import nob.example.easyapp.controller.model.AuthResponse;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.LoginResponse;
 import nob.example.easyapp.service.AuthService;
-import nob.example.easyapp.service.model.AuthInModel;
+import nob.example.easyapp.service.model.LoginInModel;
 
 /**
  * AuthControllerの実装クラスです。
@@ -361,14 +361,15 @@ public class AuthControllerImpl implements AuthController {
     }
 
     @Override
-    public AuthResponse login(AuthRequest request) {
+    public LoginResponse login(LoginRequest request) {
 
-        return new AuthResponse(authService.login(new AuthInModel(request.getName(), request.getPassword())).isValid());
+        return new LoginResponse(
+                authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
     }
 }
 ```
 
-#### controller/model/AuthRequest.java
+#### controller/model/LoginRequest.java
 
 コントローラーのリクエストモデルを定義します。
 
@@ -383,7 +384,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class AuthRequest {
+public class LoginRequest {
 
     /** ユーザ名 */
     private String name;
@@ -393,7 +394,7 @@ public class AuthRequest {
 }
 ```
 
-#### controller/model/AuthResponse.java
+#### controller/model/LoginResponse.java
 
 コントローラーのレスポンスモデルを定義します。
 
@@ -408,7 +409,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class AuthResponse {
+public class LoginResponse {
 
     /** 認証可否 */
     private boolean valid;
