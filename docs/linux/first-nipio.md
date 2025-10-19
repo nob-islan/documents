@@ -8,6 +8,8 @@ cf. https://nip.io/
 
 ## 使用例
 
+### GitLab Pages のドメインに利用
+
 GitLab Pages を簡単にセットアップすることができます:
 
 ```yaml
