@@ -2662,18 +2662,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handlersample_handlergo" class="md-nav__link">
+  <a href="#handlerauth_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
-      handler/sample_handler.go
+      handler/auth_handler.go
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modelsample_modelgo" class="md-nav__link">
+  <a href="#modelauth_modelgo" class="md-nav__link">
     <span class="md-ellipsis">
-      model/sample_model.go
+      model/auth_model.go
     </span>
   </a>
   
@@ -6430,18 +6430,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handlersample_handlergo" class="md-nav__link">
+  <a href="#handlerauth_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
-      handler/sample_handler.go
+      handler/auth_handler.go
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#modelsample_modelgo" class="md-nav__link">
+  <a href="#modelauth_modelgo" class="md-nav__link">
     <span class="md-ellipsis">
-      model/sample_model.go
+      model/auth_model.go
     </span>
   </a>
   
@@ -6514,7 +6514,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+ // @version 1.0.0</span>
 <span class="gi">+ // @description サンプルのREST APIです。</span>
 <span class="gi">+ //</span>
-<span class="gi">+ // @BasePath /v1/api</span>
+<span class="gi">+ // @BasePath /api/v1</span>
 <span class="w"> </span> func main() {
 
 <span class="w"> </span>     fmt.Println(&quot;Server started at http://localhost:8080&quot;)
@@ -6526,6 +6526,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package router
 
 <span class="w"> </span> import (
+<span class="w"> </span>     &quot;easyapp/internal/infrastructure&quot;
 <span class="w"> </span>     &quot;net/http&quot;
 
 <span class="gi">+     _ &quot;easyapp/api&quot;</span>
@@ -6546,19 +6547,22 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span> // ルーティングを設定します。
 <span class="w"> </span> func Routing() *http.ServeMux {
 
+<span class="w"> </span>     // データベースに接続
+<span class="w"> </span>     db := infrastructure.ConnectDB()
+
 <span class="w"> </span>     // 各handlerに紐づくルーティングを設定
 <span class="w"> </span>     m := http.NewServeMux()
 
 <span class="gi">+     // swagger UI のルーティング</span>
 <span class="gi">+     m.Handle(&quot;/swagger/&quot;, httpSwagger.WrapHandler)</span>
 
-<span class="w"> </span>     // sample
-<span class="w"> </span>     NewSampleRouter().SetRouting(m)
+<span class="w"> </span>     // auth
+<span class="w"> </span>     NewAuthRouter(db).SetRouting(m)
 
 <span class="w"> </span>     return m
-}
+<span class="w"> </span> }
 </code></pre></div>
-<h3 id="handlersample_handlergo">handler/sample_handler.go</h3>
+<h3 id="handlerauth_handlergo">handler/auth_handler.go</h3>
 <p>各 API のインターフェース仕様を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package handler
 
@@ -6571,70 +6575,70 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     &quot;net/http&quot;
 <span class="w"> </span> )
 
-<span class="w"> </span> // サンプルハンドラのインターフェースです。
-<span class="w"> </span> type SampleHandler interface {
+<span class="w"> </span> // 認証のハンドラインターフェースです。
+<span class="w"> </span> type AuthHandler interface {
 
-<span class="w"> </span>     // 挨拶メッセージを返します。
-<span class="w"> </span>     Greeting(w http.ResponseWriter, r *http.Request)
+<span class="w"> </span>     // 認証処理を呼び出します。
+<span class="w"> </span>     Login(w http.ResponseWriter, r *http.Request)
 
-<span class="w"> </span>     // ユーザ登録処理を行います。
-<span class="w"> </span>     Regist(w http.ResponseWriter, r *http.Request)
+<span class="w"> </span>     // ユーザ情報取得処理を呼び出します。
+<span class="w"> </span>     Me(w http.ResponseWriter, r *http.Request)
 <span class="w"> </span> }
 
-<span class="w"> </span> type sampleHandler struct {
-<span class="w"> </span>     sampleUsecase usecase.SampleUsecase
+<span class="w"> </span> type authHandler struct {
+<span class="w"> </span>     authUsecase usecase.AuthUsecase
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewSampleHandler(sampleUsecase usecase.SampleUsecase) SampleHandler {
-<span class="w"> </span>    return sampleHandler{sampleUsecase: sampleUsecase}
+<span class="w"> </span> func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
+<span class="w"> </span>     return &amp;authHandler{authUsecase: authUsecase}
 <span class="w"> </span> }
 
-<span class="gi">+ // @Summary 挨拶メッセージ取得</span>
-<span class="gi">+ // @Description 入力されたユーザ名に対して挨拶メッセージを返します。</span>
-<span class="gi">+ // @Tags Sample</span>
+<span class="gi">+ // @Summary 認証</span>
+<span class="gi">+ // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。</span>
+<span class="gi">+ // @Tags Auth</span>
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
-<span class="gi">+ // @Param GreetReq query model.GreetReq false &quot;挨拶APIのリクエストモデル&quot;</span>
-<span class="gi">+ // @Success 200 {object} model.GreetRes &quot;正常に処理された場合&quot;</span>
-<span class="gi">+ // @Router /greet [get]</span>
-<span class="w"> </span> func (h sampleHandler) Greeting(w http.ResponseWriter, r *http.Request) {
-
-<span class="w"> </span>     req := model.NewGreetReq(r)
-
-<span class="w"> </span>     out := h.sampleUsecase.Greeting(payload.NewGreetIn(req.Name))
-
-<span class="w"> </span>     res := model.NewGreetRes(out.Message())
-<span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
-<span class="w"> </span>     w.WriteHeader(http.StatusOK)
-<span class="w"> </span>     json.NewEncoder(w).Encode(res)
-<span class="w"> </span> }
-
-<span class="gi">+ // @Summary ユーザ情報登録</span>
-<span class="gi">+ // @Description ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスを返し、それ以外はエラーレスポンスを返します。</span>
-<span class="gi">+ // @Tags Sample</span>
-<span class="gi">+ // @Accept json</span>
-<span class="gi">+ // @Produce json</span>
-<span class="gi">+ // @Param RegistReq body model.RegistReq true &quot;登録APIのリクエストモデル&quot;</span>
-<span class="gi">+ // @Success 200 {object} model.RegistRes &quot;正常に処理された場合&quot;</span>
+<span class="gi">+ // @Param RegistReq body model.LoginReq true &quot;認証向けのリクエストモデル&quot;</span>
+<span class="gi">+ // @Success 200 {object} model.LoginRes &quot;正常に処理された場合&quot;</span>
 <span class="gi">+ // @Failure 422 {object} apperrors.sampleErrorRes &quot;エラーが発生した場合&quot;</span>
-<span class="gi">+ // @Router /user [post]</span>
-<span class="w"> </span> func (h sampleHandler) Regist(w http.ResponseWriter, r *http.Request) {
+<span class="gi">+ // @Router /login [post]</span>
+<span class="w"> </span> func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-<span class="w"> </span>     req := model.NewRegistReq(r)
+<span class="w"> </span>     req := model.NewLoginReq(r)
 
-<span class="w"> </span>     out, err := h.sampleUsecase.Regist(payload.NewRegistIn(req.Name, req.Age))
+<span class="w"> </span>     out, err := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 <span class="w"> </span>     if err != nil {
 <span class="w"> </span>         apperrors.HandleError(w, err)
 <span class="w"> </span>         return
 <span class="w"> </span>     }
 
-<span class="w"> </span>     res := model.NewRegistRes(out.Message())
+<span class="w"> </span>     res := model.NewLoginRes(out.Valid())
+<span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+<span class="w"> </span>     w.WriteHeader(http.StatusOK)
+<span class="w"> </span>     json.NewEncoder(w).Encode(res)
+<span class="w"> </span> }
+
+<span class="gi">+ // @Summary ユーザ情報取得</span>
+<span class="gi">+ // @Description ユーザ情報を取得します。</span>
+<span class="gi">+ // @Tags Auth</span>
+<span class="gi">+ // @Accept json</span>
+<span class="gi">+ // @Produce json</span>
+<span class="gi">+ // @Param MeReq query model.MeReq false &quot;ユーザ情報取得向けのリクエストモデル&quot;</span>
+<span class="gi">+ // @Success 200 {object} model.MeRes &quot;正常に処理された場合&quot;</span>
+<span class="gi">+ // @Router /me [get]</span>
+<span class="w"> </span> func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
+
+<span class="w"> </span>     req := model.NewMeReq(r)
+
+<span class="w"> </span>     out := h.authUsecase.Me(payload.NewMeIn(req.Name))
+
+<span class="w"> </span>     res := model.NewMeRes(out.Name(), out.Age())
 <span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
 <span class="w"> </span>     w.WriteHeader(http.StatusOK)
 <span class="w"> </span>     json.NewEncoder(w).Encode(res)
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="modelsample_modelgo">model/sample_model.go</h3>
+<h3 id="modelauth_modelgo">model/auth_model.go</h3>
 <p>各モデルクラスの example 記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package model
 
@@ -6643,53 +6647,54 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     &quot;net/http&quot;
 <span class="w"> </span> )
 
-<span class="w"> </span> // 挨拶APIのリクエストモデルです。
-<span class="w"> </span> type GreetReq struct {
+<span class="w"> </span> // 認証向けのリクエストモデルです。
+<span class="w"> </span> type LoginReq struct {
+<span class="gd">-     Name     string `json:&quot;name&quot;`     // ユーザ名</span>
+<span class="gd">-     Password string `json:&quot;password&quot;` // パスワード</span>
+<span class="gi">+     Name     string `json:&quot;name&quot; example:&quot;nob&quot;`        // ユーザ名</span>
+<span class="gi">+     Password string `json:&quot;password&quot; example:&quot;passwd&quot;` // パスワード</span>
+<span class="w"> </span> }
+
+<span class="w"> </span> func NewLoginReq(r *http.Request) LoginReq {
+
+<span class="w"> </span>     var req LoginReq
+<span class="w"> </span>     decoder := json.NewDecoder(r.Body)
+<span class="w"> </span>     if err := decoder.Decode(&amp;req); err != nil {
+<span class="w"> </span>         return *new(LoginReq)
+<span class="w"> </span>     }
+<span class="w"> </span>     return req
+<span class="w"> </span> }
+
+<span class="w"> </span> // 認証向けのレスポンスモデルです。
+<span class="w"> </span> type LoginRes struct {
+<span class="gd">-     Valid bool `json:&quot;valid&quot;` // 認証可否</span>
+<span class="gi">+     Valid bool `json:&quot;valid&quot; example:&quot;true&quot;` // 認証可否</span>
+<span class="w"> </span> }
+
+<span class="w"> </span> func NewLoginRes(valid bool) LoginRes {
+<span class="w"> </span>     return LoginRes{Valid: valid}
+<span class="w"> </span> }
+
+<span class="w"> </span> // ユーザ情報取得向けのリクエストモデルです。
+<span class="w"> </span> type MeReq struct {
 <span class="gd">-     Name string `json:&quot;name&quot;` // ユーザ名</span>
 <span class="gi">+     Name string `json:&quot;name&quot; example:&quot;nob&quot;` // ユーザ名</span>
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewGreetReq(r *http.Request) GreetReq {
-
-<span class="w"> </span>     return GreetReq{Name: r.URL.Query().Get(&quot;name&quot;)}
+<span class="w"> </span> func NewMeReq(r *http.Request) MeReq {
+<span class="w"> </span>     return MeReq{Name: r.URL.Query().Get(&quot;name&quot;)}
 <span class="w"> </span> }
 
-<span class="w"> </span> // 挨拶APIのレスポンスモデルです。
-<span class="w"> </span> type GreetRes struct {
-<span class="gd">-     Message string `json:&quot;message&quot;` // 挨拶メッセージ</span>
-<span class="gi">+     Message string `json:&quot;message&quot; example:&quot;Hello, nob!&quot;` // 挨拶メッセージ</span>
-<span class="w"> </span> }
-
-<span class="w"> </span> func NewGreetRes(message string) GreetRes {
-<span class="w"> </span>     return GreetRes{Message: message}
-<span class="w"> </span> }
-
-<span class="w"> </span> // 登録APIのリクエストモデルです。
-<span class="w"> </span> type RegistReq struct {
+<span class="w"> </span> // ユーザ情報取得向けのレスポンスモデルです。
+<span class="w"> </span> type MeRes struct {
 <span class="gd">-     Name string `json:&quot;name&quot;` // ユーザ名</span>
 <span class="gd">-     Age  int    `json:&quot;age&quot;`  // 年齢</span>
 <span class="gi">+     Name string `json:&quot;name&quot; example:&quot;nob&quot;` // ユーザ名</span>
 <span class="gi">+     Age  int    `json:&quot;age&quot; example:&quot;13&quot;`   // 年齢</span>
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewRegistReq(r *http.Request) RegistReq {
-
-<span class="w"> </span>     var req RegistReq
-<span class="w"> </span>     decoder := json.NewDecoder(r.Body)
-<span class="w"> </span>     if err := decoder.Decode(&amp;req); err != nil {
-<span class="w"> </span>         return *new(RegistReq)
-<span class="w"> </span>     }
-<span class="w"> </span>     return req
-<span class="w"> </span> }
-
-<span class="w"> </span> // 登録APIのレスポンスモデルです。
-<span class="w"> </span> type RegistRes struct {
-<span class="gd">-     Message string `json:&quot;message&quot;` // 登録メッセージ</span>
-<span class="gi">+     Message string `json:&quot;message&quot; example:&quot;登録が完了しました。&quot;` // 登録メッセージ</span>
-<span class="w"> </span> }
-
-<span class="w"> </span> func NewRegistRes(message string) RegistRes {
-<span class="w"> </span>     return RegistRes{Message: message}
+<span class="w"> </span> func NewMeRes(name string, age int) MeRes {
+<span class="w"> </span>     return MeRes{Name: name, Age: age}
 <span class="w"> </span> }
 </code></pre></div>
 <h3 id="apperrorssample_errorgo">apperrors/sample_error.go</h3>
