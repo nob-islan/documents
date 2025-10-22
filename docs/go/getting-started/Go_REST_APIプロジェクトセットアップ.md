@@ -46,11 +46,17 @@ USE eadb;
 CREATE TABLE users (
     name VARCHAR(8) PRIMARY KEY
     , password VARCHAR(32)
+    , age INT
 );
 
-INSERT INTO users VALUES (
+INSERT INTO users (
+    name
+    , password
+    , age
+) VALUES (
     'nob'
     , 'passwd'
+    , 13
 );
 ```
 
@@ -95,10 +101,11 @@ package domain
 type Users struct {
 	name     string // ユーザ名
 	password string // パスワード
+	age      int    // 年齢
 }
 
-func NewUsers(name string, password string) Users {
-	return Users{name: name, password: password}
+func NewUsers(name string, password string, age int) Users {
+	return Users{name: name, password: password, age: age}
 }
 
 func (u Users) Name() string {
@@ -109,11 +116,15 @@ func (u Users) Password() string {
 	return u.password
 }
 
+func (u Users) Age() int {
+	return u.age
+}
+
 // usersテーブル向けrepositoryのインターフェースです。
 type UsersRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(name string) Users
+	FindByName(name string) (Users, error)
 }
 ```
 
@@ -183,14 +194,14 @@ func NewUsersRepository(db *sql.DB) domain.UsersRepository {
 	return &usersRepository{db: db}
 }
 
-func (r *usersRepository) FindByName(name string) domain.Users {
+func (r *usersRepository) FindByName(name string) (domain.Users, error) {
 
 	const sql string = "SELECT * FROM users WHERE name = ?"
 
 	// クエリ実行
 	rows, err := r.db.Query(sql, name)
 	if err != nil {
-		return *new(domain.Users)
+		return *new(domain.Users), err
 	}
 	defer rows.Close()
 
@@ -198,11 +209,12 @@ func (r *usersRepository) FindByName(name string) domain.Users {
 	for rows.Next() {
 		var name string
 		var password string
-		rows.Scan(&name, &password)
-		users = domain.NewUsers(name, password)
+		var age int
+		rows.Scan(&name, &password, &age)
+		users = domain.NewUsers(name, password, age)
 	}
 
-	return users
+	return users, nil
 }
 ```
 
@@ -220,11 +232,14 @@ import (
 	"easyapp/internal/usecase/payload"
 )
 
-// 認証の業務処理インターフェースです。
+// 認証のusecaseインターフェースです。
 type AuthUsecase interface {
 
 	// 認証処理を行います。
 	Login(in payload.LoginIn) payload.LoginOut
+
+	// ユーザ情報を取得します。
+	Me(in payload.MeIn) payload.MeOut
 }
 
 type authUsecase struct {
@@ -237,7 +252,20 @@ func NewAuthUsecase(authRepository domain.UsersRepository) AuthUsecase {
 
 func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
-	return payload.NewLoginOut(u.authRepository.FindByName(in.Name()).Password() == in.Password())
+	user, err := u.authRepository.FindByName(in.Name())
+	if err != nil {
+		return payload.NewLoginOut(false)
+	}
+	return payload.NewLoginOut(user.Password() == in.Password())
+}
+
+func (u *authUsecase) Me(in payload.MeIn) payload.MeOut {
+
+	users, err := u.authRepository.FindByName(in.Name())
+	if err != nil {
+		return *new(payload.MeOut)
+	}
+	return payload.NewMeOut(users.Name(), users.Age())
 }
 ```
 
@@ -260,11 +288,11 @@ func NewLoginIn(name string, password string) LoginIn {
 	return LoginIn{name: name, password: password}
 }
 
-func (i *LoginIn) Name() string {
+func (i LoginIn) Name() string {
 	return i.name
 }
 
-func (i *LoginIn) Password() string {
+func (i LoginIn) Password() string {
 	return i.password
 }
 
@@ -277,8 +305,39 @@ func NewLoginOut(valid bool) LoginOut {
 	return LoginOut{valid: valid}
 }
 
-func (o *LoginOut) Valid() bool {
+func (o LoginOut) Valid() bool {
 	return o.valid
+}
+
+// ユーザ情報取得向けの入力モデルです。
+type MeIn struct {
+	name string // ユーザ名
+}
+
+func NewMeIn(name string) MeIn {
+	return MeIn{name: name}
+}
+
+func (i MeIn) Name() string {
+	return i.name
+}
+
+// ユーザ情報取得向けの出力モデルです。
+type MeOut struct {
+	name string // ユーザ名
+	age  int    // 年齢
+}
+
+func NewMeOut(name string, age int) MeOut {
+	return MeOut{name: name, age: age}
+}
+
+func (o MeOut) Name() string {
+	return o.name
+}
+
+func (o MeOut) Age() int {
+	return o.age
 }
 ```
 
@@ -299,11 +358,14 @@ import (
 	"net/http"
 )
 
-// 認証のハンドラインターフェースです。
+// 認証のhandlerインターフェースです。
 type AuthHandler interface {
 
 	// 認証処理を呼び出します。
 	Login(w http.ResponseWriter, r *http.Request)
+
+	// ユーザ情報取得処理を呼び出します。
+	Me(w http.ResponseWriter, r *http.Request)
 }
 
 type authHandler struct {
@@ -321,6 +383,18 @@ func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 	out := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(res)
+}
+
+func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
+
+	req := model.NewMeReq(r)
+
+	out := h.authUsecase.Me(payload.NewMeIn(req.Name))
+
+	res := model.NewMeRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -364,6 +438,25 @@ type LoginRes struct {
 
 func NewLoginRes(valid bool) LoginRes {
 	return LoginRes{Valid: valid}
+}
+
+// ユーザ情報取得向けのリクエストモデルです。
+type MeReq struct {
+	Name string `json:"name"` // ユーザ名
+}
+
+func NewMeReq(r *http.Request) MeReq {
+	return MeReq{Name: r.URL.Query().Get("name")}
+}
+
+// ユーザ情報取得向けのレスポンスモデルです。
+type MeRes struct {
+	Name string `json:"name"` // ユーザ名
+	Age  int    `json:"age"`  // 年齢
+}
+
+func NewMeRes(name string, age int) MeRes {
+	return MeRes{Name: name, Age: age}
 }
 ```
 
@@ -441,6 +534,15 @@ func (r *authRouter) SetRouting(m *http.ServeMux) {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	})
+
+	m.HandleFunc(basePath+"/me", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			h.Me(w, r)
+		default:
+			http.Error(w, "Forbidden", http.StatusForbidden)
+		}
+	})
 }
 ```
 
@@ -478,7 +580,10 @@ go run cmd/main.go
 下記コマンドで API を打鍵できます。
 
 ```shell
+# /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
+# /me
+curl -X GET localhost:8080/api/v1/me?name=nob
 ```
 
 ## パッケージ構成例
