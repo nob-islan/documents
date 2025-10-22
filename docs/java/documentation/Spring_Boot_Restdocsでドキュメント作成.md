@@ -62,37 +62,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nob.example.easyapp.controller.model.SampleGetRequest;
-import nob.example.easyapp.controller.model.SampleGetResponse;
-import nob.example.easyapp.controller.model.SamplePostRequest;
-import nob.example.easyapp.controller.model.SamplePostResponse;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.MeResponse;
 
 /**
- * サンプルコントローラーのインターフェースです。
+ * 認証コントローラーのインターフェースです。
  *
  * @author nob
  */
 @RestController
 @RequestMapping(value = "/api/v1")
-public interface SampleController {
+public interface AuthController {
 
     /**
-     * 挨拶メッセージを返します。
+     * 認証処理を呼び出します。
      *
-     * @param sampleGetRequest 名前
-     * @return 挨拶メッセージ
+     * @param request 認証リクエスト
+     * @return 認証結果
      */
-    @GetMapping(value = "/greet")
-    SampleGetResponse greeting(SampleGetRequest sampleGetRequest);
+    @PostMapping(value = "/login")
+    LoginResponse login(@RequestBody LoginRequest request);
 
     /**
-     * ユーザ情報の登録を行います。
+     * ユーザ情報取得処理を呼び出します。
      *
-     * @param samplePostRequest 名前、年齢
-     * @return 登録メッセージ
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
      */
-    @PostMapping(value = "/user")
-    SamplePostResponse regist(@RequestBody SamplePostRequest samplePostRequest);
+    @GetMapping(value = "/me")
+    MeResponse me(MeRequest request);
 }
 ```
 
@@ -104,42 +104,43 @@ package nob.example.easyapp.controller.impl;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
-import nob.example.easyapp.controller.SampleController;
-import nob.example.easyapp.controller.model.SampleGetRequest;
-import nob.example.easyapp.controller.model.SampleGetResponse;
-import nob.example.easyapp.controller.model.SamplePostRequest;
-import nob.example.easyapp.controller.model.SamplePostResponse;
-import nob.example.easyapp.service.SampleService;
-import nob.example.easyapp.service.model.SampleGetInModel;
-import nob.example.easyapp.service.model.SamplePostInModel;
+import nob.example.easyapp.controller.AuthController;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.MeResponse;
+import nob.example.easyapp.service.AuthService;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * SampleControllerの実装です。
+ * AuthControllerの実装クラスです。
  *
  * @author nob
  */
 @RestController
-public class SampleControllerImpl implements SampleController {
+public class AuthControllerImpl implements AuthController {
 
     @NonNull
-    private SampleService sampleService;
+    private AuthService authService;
 
-    public SampleControllerImpl(SampleService sampleService) {
-        this.sampleService = sampleService;
+    public AuthControllerImpl(AuthService authService) {
+        this.authService = authService;
     }
 
     @Override
-    public SampleGetResponse greeting(SampleGetRequest sampleGetRequest) {
+    public LoginResponse login(LoginRequest request) {
 
-        return new SampleGetResponse(
-                sampleService.greeting(new SampleGetInModel(sampleGetRequest.getName())).getMessage());
+        return new LoginResponse(
+                authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
     }
 
     @Override
-    public SamplePostResponse regist(SamplePostRequest samplePostRequest) {
+    public MeResponse me(MeRequest request) {
 
-        return new SamplePostResponse(sampleService
-                .regist(new SamplePostInModel(samplePostRequest.getName(), samplePostRequest.getAge())).getMessage());
+        MeOutModel meOutModel = authService.me(new MeInModel(request.getName()));
+        return new MeResponse(meOutModel.getName(), meOutModel.getAge());
     }
 }
 ```
@@ -149,6 +150,21 @@ public class SampleControllerImpl implements SampleController {
 ```java
 package nob.example.easyapp.controller;
 
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -158,36 +174,22 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nob.example.easyapp.controller.model.SamplePostRequest;
-import nob.example.easyapp.service.SampleService;
-import nob.example.easyapp.service.model.SampleGetInModel;
-import nob.example.easyapp.service.model.SampleGetOutModel;
-import nob.example.easyapp.service.model.SamplePostInModel;
-import nob.example.easyapp.service.model.SamplePostOutModel;
-
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.service.AuthService;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * SampleControllerImplのテストクラスです。
+ * AuthControllerImplのテストクラスです。
  *
  * @author nob
  */
-@WebMvcTest(SampleController.class)
+@WebMvcTest
 @AutoConfigureRestDocs(outputDir = "target/snippets")
-public class SampleControllerImplTest {
+public class AuthControllerImplTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -196,56 +198,68 @@ public class SampleControllerImplTest {
     private ObjectMapper objectMapper;
 
     @MockitoBean
-    private SampleService sampleService;
+    private AuthService authService;
 
     /**
-     * greetのテスト 正常系
-     *
-     * @throws Exception
+     * loginのテスト 正常系
      */
     @Test
-    void test_greet_success() throws Exception {
+    void test_login_success() {
 
-        Mockito.when(sampleService.greeting(new SampleGetInModel("nob"))).thenReturn(new SampleGetOutModel("Hello, nob!"));
+        // リクエストの作成
+        LoginRequest request = new LoginRequest("nob", "passwd");
 
-        this.mockMvc
-                .perform(get("/api/v1/greet")
-                        .queryParam("name", "nob")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(document("asciidoc/api/v1/greet",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        queryParameters(
-                                parameterWithName("name").description("名前")),
-                        responseFields(
-                                fieldWithPath("message").description("Hello, nob!"))));
+        // serviceのモック化
+        Mockito.when(authService.login(new LoginInModel(request.getName(), request.getPassword())))
+                .thenReturn(new LoginOutModel(true));
+
+        try {
+            mockMvc.perform(post("/api/v1/login")
+                    .content(objectMapper.writeValueAsString(request))
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andDo(document(
+                            "asciidoc/api/v1/login",
+                            preprocessRequest(prettyPrint()),
+                            preprocessResponse(prettyPrint()),
+                            requestFields(
+                                    fieldWithPath("name").description("ユーザ名"),
+                                    fieldWithPath("password").description("パスワード")),
+                            responseFields(
+                                    fieldWithPath("valid").description("認証可否"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 
     /**
-     * registのテスト 正常系
-     *
-     * @throws Exception
+     * meのテスト 正常系
      */
     @Test
-    void test_regist_success() throws Exception {
+    void test_me_success() {
 
-        SamplePostRequest request = new SamplePostRequest("nob", 13);
+        // リクエストの作成
+        MeRequest request = new MeRequest("nob");
 
-        Mockito.when(sampleService.regist(new SamplePostInModel("nob", 13)))
-                .thenReturn(new SamplePostOutModel("登録に成功しました。"));
+        // serviceのモック化
+        Mockito.when(authService.me(new MeInModel(request.getName()))).thenReturn(new MeOutModel("nob", 13));
 
-        this.mockMvc
-                .perform(post("/api/v1/user")
-                        .content(objectMapper.writeValueAsString(request))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(document("asciidoc/api/v1/user",
-                        preprocessRequest(prettyPrint()),
-                        preprocessResponse(prettyPrint()),
-                        requestFields(
-                                fieldWithPath("name").description("ユーザ名"),
-                                fieldWithPath("age").description("年齢")),
-                        responseFields(
-                                fieldWithPath("message").description("登録に成功しました。"))));
+        try {
+            mockMvc.perform(get("/api/v1/me")
+                    .queryParam("name", "nob")
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andDo(document("asciidoc/api/v1/me",
+                            preprocessRequest(prettyPrint()),
+                            preprocessResponse(prettyPrint()),
+                            queryParameters(
+                                    parameterWithName("name").description("ユーザ名")),
+                            responseFields(
+                                    fieldWithPath("name").description("ユーザ名"),
+                                    fieldWithPath("age").description("年齢"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
 ```
@@ -264,50 +278,50 @@ public class SampleControllerImplTest {
 
 :base_path: ../../../target/snippets/asciidoc
 
-== Sample
+== Auth
 
-サンプルAPIです。
+認証APIです。
 
-:sample: {base_path}/api/v1
+:auth: {base_path}/api/v1
 
-=== Greet
+=== Login
 
-挨拶APIです。
+認証処理を行います。
 
-:sample_greet: {sample}/greet
-
-.query parameter
-include::{sample_greet}/query-parameters.adoc[]
-
-.response field
-include::{sample_greet}/response-fields.adoc[]
-
-.example request
-include::{sample_greet}/curl-request.adoc[]
-
-.example response
-include::{sample_greet}/response-body.adoc[]
-
-=== Regist
-
-ユーザ情報登録APIです。
-
-:sample_user: {sample}/user
+:login: {auth}/login
 
 .request field
-include::{sample_user}/request-fields.adoc[]
+include::{login}/request-fields.adoc[]
 
 .response field
-include::{sample_user}/response-fields.adoc[]
+include::{login}/response-fields.adoc[]
 
 .example request
-include::{sample_user}/curl-request.adoc[]
+include::{login}/curl-request.adoc[]
 
 .example response
-include::{sample_user}/response-body.adoc[]
+include::{login}/response-body.adoc[]
+
+=== Me
+
+ユーザ情報を取得します。
+
+:me: {auth}/me
+
+.query parameter
+include::{me}/query-parameters.adoc[]
+
+.response field
+include::{me}/response-fields.adoc[]
+
+.example request
+include::{me}/curl-request.adoc[]
+
+.example response
+include::{me}/response-body.adoc[]
 ```
 
-`:hogehoge:`で適宜変数を定め、`include::`で生成したスニペットを読み込んでいます。
+`:xxx:`で適宜変数を定め、`include::`で生成したスニペットを読み込んでいます。
 
 ## 設計書生成手順
 
