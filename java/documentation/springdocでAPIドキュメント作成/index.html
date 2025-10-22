@@ -6732,7 +6732,7 @@
 <span class="w"> </span>      * @return ユーザ情報
 <span class="w"> </span>      */
 <span class="w"> </span>     @GetMapping(value = &quot;/me&quot;)
-<span class="w"> </span>     @Operation(summary = &quot;ユーザ情報取得&quot;, description = &quot;${easyappdoc.describe.api.v1.me:説明文}&quot;)
+<span class="gi">+     @Operation(summary = &quot;ユーザ情報取得&quot;, description = &quot;${easyappdoc.describe.api.v1.me:説明文}&quot;)</span>
 <span class="gi">+     @ApiResponses(value = {</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;)</span>
 <span class="gi">+     })</span>
