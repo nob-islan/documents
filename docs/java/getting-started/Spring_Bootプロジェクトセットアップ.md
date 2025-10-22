@@ -58,14 +58,17 @@ USE eadb;
 CREATE TABLE users (
     name VARCHAR(8) PRIMARY KEY
     , password VARCHAR(32)
+    , age INT
 );
 
 INSERT INTO users (
     name
     , password
+    , age
 ) VALUES (
     'nob'
     , 'passwd'
+    , 13
 );
 ```
 
@@ -88,24 +91,28 @@ spring.datasource.password=password
 
 ```shell
 .
-├── controller
-│   ├── impl
-│   │   └── AuthControllerImpl.java  # APIインターフェースの実装
-│   ├── AuthController.java          # APIとしてのインターフェース
-│   └── model
-│       ├── LoginRequest.java        # APIのリクエストモデル
-│       └── LoginResponse.java       # APIのレスポンスモデル
-├── repository
-│   ├── entity
-│   │   └── Users.java               # データベースのテーブル定義に対応するエンティティ
-│   └── UsersRepository.java         # データベース操作のインターフェース
-└── service
-    ├── impl
-    │   └── AuthServiceImpl.java     # 業務処理の実装
-    ├── AuthService.java             # 業務処理のインターフェース
-    └── model
-        ├── LoginInModel.java        # 業務処理の入力モデル
-        └── LoginOutModel.java       # 業務処理の出力モデル
+├── controller                       # APIとしてのインターフェース
+│   ├── AuthController.java
+│   ├── impl                         # APIの実装
+│   │   └── AuthControllerImpl.java
+│   └── model                        # APIのリクエスト・レスポンスモデル
+│       ├── LoginRequest.java
+│       ├── LoginResponse.java
+│       ├── MeRequest.java
+│       └── MeResponse.java
+├── repository                       # データベース操作のインターフェース
+│   ├── entity                       # データベースのテーブル定義に対応するエンティティ
+│   │   └── Users.java
+│   └── UsersRepository.java
+└── service                          # 業務処理のインターフェース
+    ├── AuthService.java
+    ├── impl                         # 業務処理の実装
+    │   └── AuthServiceImpl.java
+    └── model                        # 業務処理の入力・出力モデル
+        ├── LoginInModel.java
+        ├── LoginOutModel.java
+        ├── MeInModel.java
+        └── MeOutModel.java
 ```
 
 ### クラス一覧
@@ -175,6 +182,10 @@ public class Users {
     /** パスワード */
     @Column(name = "password", length = 32, nullable = false)
     private String password;
+
+    /** 年齢 */
+    @Column(name = "age", nullable = false)
+    private Integer age;
 }
 ```
 
@@ -189,6 +200,8 @@ import org.springframework.stereotype.Service;
 
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
  * 認証サービスのインターフェースです。
@@ -205,6 +218,14 @@ public interface AuthService {
      * @return 認証結果
      */
     LoginOutModel login(LoginInModel inModel);
+
+    /**
+     * ユーザ情報を取得します。
+     *
+     * @param inModel ユーザ情報検索条件
+     * @return ユーザ情報
+     */
+    MeOutModel me(MeInModel inModel);
 }
 ```
 
@@ -219,9 +240,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
 import nob.example.easyapp.repository.UsersRepository;
+import nob.example.easyapp.repository.entity.Users;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
  * AuthServiceの実装クラスです。
@@ -243,6 +267,13 @@ public class AuthServiceImpl implements AuthService {
 
         return new LoginOutModel(
                 usersRepository.findByName(inModel.getName()).getPassword().equals(inModel.getPassword()));
+    }
+
+    @Override
+    public MeOutModel me(MeInModel inModel) {
+
+        Users users = usersRepository.findByName("nob");
+        return new MeOutModel(users.getName(), users.getAge());
     }
 }
 ```
@@ -294,6 +325,49 @@ public class LoginOutModel {
 }
 ```
 
+#### service/model/MeInModel.java
+
+```java
+package nob.example.easyapp.service.model;
+
+import lombok.Value;
+
+/**
+ * ユーザ情報取得向けの入力モデルです。
+ *
+ * @author nob
+ */
+@Value
+public class MeInModel {
+
+    /** ユーザ名 */
+    private String name;
+}
+```
+
+#### service/model/MeOutModel.java
+
+```java
+package nob.example.easyapp.service.model;
+
+import lombok.Value;
+
+/**
+ * ユーザ情報取得向けの出力モデルです。
+ *
+ * @author nob
+ */
+@Value
+public class MeOutModel {
+
+    /** ユーザ名 */
+    private String name;
+
+    /** 年齢 */
+    private Integer age;
+}
+```
+
 #### controller/AuthController.java
 
 API のインターフェースを定義します。
@@ -301,6 +375,7 @@ API のインターフェースを定義します。
 ```java
 package nob.example.easyapp.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -308,6 +383,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.MeResponse;
 
 /**
  * 認証コントローラーのインターフェースです。
@@ -326,6 +403,15 @@ public interface AuthController {
      */
     @PostMapping(value = "/login")
     LoginResponse login(@RequestBody LoginRequest request);
+
+    /**
+     * ユーザ情報取得処理を呼び出します。
+     *
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
+     */
+    @GetMapping(value = "/me")
+    MeResponse me(MeRequest request);
 }
 ```
 
@@ -342,8 +428,12 @@ import lombok.NonNull;
 import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.MeResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
  * AuthControllerの実装クラスです。
@@ -365,6 +455,13 @@ public class AuthControllerImpl implements AuthController {
 
         return new LoginResponse(
                 authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
+    }
+
+    @Override
+    public MeResponse me(MeRequest request) {
+
+        MeOutModel meOutModel = authService.me(new MeInModel(request.getName()));
+        return new MeResponse(meOutModel.getName(), meOutModel.getAge());
     }
 }
 ```
@@ -416,10 +513,56 @@ public class LoginResponse {
 }
 ```
 
+#### controller/model/MeRequest.java
+
+```java
+package nob.example.easyapp.controller.model;
+
+import lombok.Value;
+
+/**
+ * ユーザ情報取得向けのリクエストモデルです。
+ *
+ * @author nob
+ */
+@Value
+public class MeRequest {
+
+    /** ユーザ名 */
+    private String name;
+}
+```
+
+#### controller/model/MeResponse.java
+
+```java
+package nob.example.easyapp.controller.model;
+
+import lombok.Value;
+
+/**
+ * ユーザ情報取得向けのレスポンスモデルです。
+ *
+ * @author nob
+ */
+@Value
+public class MeResponse {
+
+    /** ユーザ名 */
+    private String name;
+
+    /** 年齢 */
+    private Integer age;
+}
+```
+
 ## 起動
 
 VSCode の **Run Java** などからアプリを起動します。下記コマンドで API を打鍵できます。
 
 ```shell
+# /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
+# /me
+curl -X GET localhost:8080/api/v1/me?name=nob
 ```
