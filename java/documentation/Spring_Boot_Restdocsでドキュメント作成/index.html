@@ -6484,37 +6484,37 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * サンプルコントローラーのインターフェースです。</span>
+<span class="cm"> * 認証コントローラーのインターフェースです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SampleController</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 挨拶メッセージを返します。</span>
+<span class="cm">     * 認証処理を呼び出します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param sampleGetRequest 名前</span>
-<span class="cm">     * @return 挨拶メッセージ</span>
+<span class="cm">     * @param request 認証リクエスト</span>
+<span class="cm">     * @return 認証結果</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/greet&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報の登録を行います。</span>
+<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param samplePostRequest 名前、年齢</span>
-<span class="cm">     * @return 登録メッセージ</span>
+<span class="cm">     * @param request ユーザ情報取得リクエスト</span>
+<span class="cm">     * @return ユーザ情報</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">regist</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
@@ -6525,42 +6525,43 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.SampleController</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SampleGetResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.SampleService</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetInModel</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.AuthController</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * SampleControllerの実装です。</span>
+<span class="cm"> * AuthControllerの実装クラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SampleController</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AuthController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@NonNull</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SampleControllerImpl</span><span class="p">(</span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">sampleService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthControllerImpl</span><span class="p">(</span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">authService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleGetRequest</span><span class="w"> </span><span class="n">sampleGetRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetResponse</span><span class="p">(</span>
-<span class="w">                </span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="n">sampleGetRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getPassword</span><span class="p">())).</span><span class="na">isValid</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="w"> </span><span class="nf">regist</span><span class="p">(</span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostResponse</span><span class="p">(</span><span class="n">sampleService</span>
-<span class="w">                </span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostInModel</span><span class="p">(</span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">samplePostRequest</span><span class="p">.</span><span class="na">getAge</span><span class="p">())).</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">meOutModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -6569,6 +6570,21 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.requestFields</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.responseFields</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.parameterWithName</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.queryParameters</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
@@ -6578,36 +6594,22 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.SamplePostRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.SampleService</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetInModel</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SampleGetOutModel</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostInModel</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.SamplePostOutModel</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.requestFields</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.payload.PayloadDocumentation.responseFields</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.parameterWithName</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.request.RequestDocumentation.queryParameters</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * SampleControllerImplのテストクラスです。</span>
+<span class="cm"> * AuthControllerImplのテストクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">SampleController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@WebMvcTest</span>
 <span class="nd">@AutoConfigureRestDocs</span><span class="p">(</span><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;target/snippets&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleControllerImplTest</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerImplTest</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
@@ -6616,56 +6618,68 @@
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@MockitoBean</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleService</span><span class="w"> </span><span class="n">sampleService</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * greetのテスト 正常系</span>
-<span class="cm">     *</span>
-<span class="cm">     * @throws Exception</span>
+<span class="cm">     * loginのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_greet_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_login_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">greeting</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleGetOutModel</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// リクエストの作成</span>
+<span class="w">        </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mockMvc</span>
-<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/greet&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/api/v1/greet&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
-<span class="w">                        </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
-<span class="w">                        </span><span class="n">queryParameters</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">parameterWithName</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;名前&quot;</span><span class="p">)),</span>
-<span class="w">                        </span><span class="n">responseFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;Hello, nob!&quot;</span><span class="p">))));</span>
+<span class="w">        </span><span class="c1">// serviceのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getPassword</span><span class="p">())))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="kc">true</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/v1/login&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span>
+<span class="w">                            </span><span class="s">&quot;asciidoc/api/v1/login&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                            </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                            </span><span class="n">requestFields</span><span class="p">(</span>
+<span class="w">                                    </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;ユーザ名&quot;</span><span class="p">),</span>
+<span class="w">                                    </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;パスワード&quot;</span><span class="p">)),</span>
+<span class="w">                            </span><span class="n">responseFields</span><span class="p">(</span>
+<span class="w">                                    </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;valid&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;認証可否&quot;</span><span class="p">))));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * registのテスト 正常系</span>
-<span class="cm">     *</span>
-<span class="cm">     * @throws Exception</span>
+<span class="cm">     * meのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_regist_success</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_me_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">SamplePostRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// リクエストの作成</span>
+<span class="w">        </span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">sampleService</span><span class="p">.</span><span class="na">regist</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)))</span>
-<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SamplePostOutModel</span><span class="p">(</span><span class="s">&quot;登録に成功しました。&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// serviceのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
 
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mockMvc</span>
-<span class="w">                </span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/v1/user&quot;</span><span class="p">)</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
-<span class="w">                </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/api/v1/user&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
-<span class="w">                        </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
-<span class="w">                        </span><span class="n">requestFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;ユーザ名&quot;</span><span class="p">),</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;年齢&quot;</span><span class="p">)),</span>
-<span class="w">                        </span><span class="n">responseFields</span><span class="p">(</span>
-<span class="w">                                </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;登録に成功しました。&quot;</span><span class="p">))));</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/me&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">document</span><span class="p">(</span><span class="s">&quot;asciidoc/api/v1/me&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">preprocessRequest</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                            </span><span class="n">preprocessResponse</span><span class="p">(</span><span class="n">prettyPrint</span><span class="p">()),</span>
+<span class="w">                            </span><span class="n">queryParameters</span><span class="p">(</span>
+<span class="w">                                    </span><span class="n">parameterWithName</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;ユーザ名&quot;</span><span class="p">)),</span>
+<span class="w">                            </span><span class="n">responseFields</span><span class="p">(</span>
+<span class="w">                                    </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;ユーザ名&quot;</span><span class="p">),</span>
+<span class="w">                                    </span><span class="n">fieldWithPath</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">).</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;年齢&quot;</span><span class="p">))));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -6680,49 +6694,49 @@
 
 :base_path: ../../../target/snippets/asciidoc
 
-== Sample
+== Auth
 
-サンプルAPIです。
+認証APIです。
 
-:sample: {base_path}/api/v1
+:auth: {base_path}/api/v1
 
-=== Greet
+=== Login
 
-挨拶APIです。
+認証処理を行います。
 
-:sample_greet: {sample}/greet
-
-.query parameter
-include::{sample_greet}/query-parameters.adoc[]
-
-.response field
-include::{sample_greet}/response-fields.adoc[]
-
-.example request
-include::{sample_greet}/curl-request.adoc[]
-
-.example response
-include::{sample_greet}/response-body.adoc[]
-
-=== Regist
-
-ユーザ情報登録APIです。
-
-:sample_user: {sample}/user
+:login: {auth}/login
 
 .request field
-include::{sample_user}/request-fields.adoc[]
+include::{login}/request-fields.adoc[]
 
 .response field
-include::{sample_user}/response-fields.adoc[]
+include::{login}/response-fields.adoc[]
 
 .example request
-include::{sample_user}/curl-request.adoc[]
+include::{login}/curl-request.adoc[]
 
 .example response
-include::{sample_user}/response-body.adoc[]
+include::{login}/response-body.adoc[]
+
+=== Me
+
+ユーザ情報を取得します。
+
+:me: {auth}/me
+
+.query parameter
+include::{me}/query-parameters.adoc[]
+
+.response field
+include::{me}/response-fields.adoc[]
+
+.example request
+include::{me}/curl-request.adoc[]
+
+.example response
+include::{me}/response-body.adoc[]
 </code></pre></div>
-<p><code>:hogehoge:</code>で適宜変数を定め、<code>include::</code>で生成したスニペットを読み込んでいます。</p>
+<p><code>:xxx:</code>で適宜変数を定め、<code>include::</code>で生成したスニペットを読み込んでいます。</p>
 <h2 id="_3">設計書生成手順</h2>
 <ul>
 <li>単体テストを実行します。テストに成功すると、<code>target/snippets</code> 配下に、<code>document</code> 内で定めたパスに各種スニペットが出力されます。</li>
