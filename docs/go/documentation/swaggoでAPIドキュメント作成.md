@@ -36,10 +36,10 @@ go get -u github.com/swaggo/http-swagger
 + // @version 1.0.0
 + // @description サンプルのREST APIです。
 + //
-+ // @BasePath /v1/api
++ // @BasePath /api/v1
   func main() {
 
-  	  fmt.Println("Server started at http://localhost:8080")
+	  fmt.Println("Server started at http://localhost:8080")
 	  log.Fatal(http.ListenAndServe(":8080", router.Routing()))
   }
 ```
@@ -52,6 +52,7 @@ swagger ページへのルーティングを設定します。
   package router
 
   import (
+	  "easyapp/internal/infrastructure"
 	  "net/http"
 
 +	  _ "easyapp/api"
@@ -72,20 +73,23 @@ swagger ページへのルーティングを設定します。
   // ルーティングを設定します。
   func Routing() *http.ServeMux {
 
+	  // データベースに接続
+	  db := infrastructure.ConnectDB()
+
 	  // 各handlerに紐づくルーティングを設定
 	  m := http.NewServeMux()
 
 +	  // swagger UI のルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
-	  // sample
-	  NewSampleRouter().SetRouting(m)
+	  // auth
+	  NewAuthRouter(db).SetRouting(m)
 
 	  return m
-}
+  }
 ```
 
-### handler/sample_handler.go
+### handler/auth_handler.go
 
 各 API のインターフェース仕様を記載します:
 
@@ -101,71 +105,71 @@ swagger ページへのルーティングを設定します。
 	  "net/http"
   )
 
-  // サンプルハンドラのインターフェースです。
-  type SampleHandler interface {
+  // 認証のハンドラインターフェースです。
+  type AuthHandler interface {
 
-	  // 挨拶メッセージを返します。
-	  Greeting(w http.ResponseWriter, r *http.Request)
+	  // 認証処理を呼び出します。
+	  Login(w http.ResponseWriter, r *http.Request)
 
-	  // ユーザ登録処理を行います。
-	  Regist(w http.ResponseWriter, r *http.Request)
+	  // ユーザ情報取得処理を呼び出します。
+	  Me(w http.ResponseWriter, r *http.Request)
   }
 
-  type sampleHandler struct {
-	  sampleUsecase usecase.SampleUsecase
+  type authHandler struct {
+	  authUsecase usecase.AuthUsecase
   }
 
-  func NewSampleHandler(sampleUsecase usecase.SampleUsecase) SampleHandler {
-	 return sampleHandler{sampleUsecase: sampleUsecase}
+  func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
+	  return &authHandler{authUsecase: authUsecase}
   }
 
-+ // @Summary 挨拶メッセージ取得
-+ // @Description 入力されたユーザ名に対して挨拶メッセージを返します。
-+ // @Tags Sample
++ // @Summary 認証
++ // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
++ // @Tags Auth
 + // @Accept json
 + // @Produce json
-+ // @Param GreetReq query model.GreetReq false "挨拶APIのリクエストモデル"
-+ // @Success 200 {object} model.GreetRes "正常に処理された場合"
-+ // @Router /greet [get]
-  func (h sampleHandler) Greeting(w http.ResponseWriter, r *http.Request) {
-
-	  req := model.NewGreetReq(r)
-
-	  out := h.sampleUsecase.Greeting(payload.NewGreetIn(req.Name))
-
-	  res := model.NewGreetRes(out.Message())
-	  w.Header().Set("Content-Type", "application/json")
-	  w.WriteHeader(http.StatusOK)
-	  json.NewEncoder(w).Encode(res)
-  }
-
-+ // @Summary ユーザ情報登録
-+ // @Description ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスを返し、それ以外はエラーレスポンスを返します。
-+ // @Tags Sample
-+ // @Accept json
-+ // @Produce json
-+ // @Param RegistReq body model.RegistReq true "登録APIのリクエストモデル"
-+ // @Success 200 {object} model.RegistRes "正常に処理された場合"
++ // @Param RegistReq body model.LoginReq true "認証向けのリクエストモデル"
++ // @Success 200 {object} model.LoginRes "正常に処理された場合"
 + // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
-+ // @Router /user [post]
-  func (h sampleHandler) Regist(w http.ResponseWriter, r *http.Request) {
++ // @Router /login [post]
+  func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	  req := model.NewRegistReq(r)
+	  req := model.NewLoginReq(r)
 
-	  out, err := h.sampleUsecase.Regist(payload.NewRegistIn(req.Name, req.Age))
+	  out, err := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 	  if err != nil {
 		  apperrors.HandleError(w, err)
 		  return
 	  }
 
-	  res := model.NewRegistRes(out.Message())
+	  res := model.NewLoginRes(out.Valid())
+	  w.Header().Set("Content-Type", "application/json")
+	  w.WriteHeader(http.StatusOK)
+	  json.NewEncoder(w).Encode(res)
+  }
+
++ // @Summary ユーザ情報取得
++ // @Description ユーザ情報を取得します。
++ // @Tags Auth
++ // @Accept json
++ // @Produce json
++ // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
++ // @Success 200 {object} model.MeRes "正常に処理された場合"
++ // @Router /me [get]
+  func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
+
+	  req := model.NewMeReq(r)
+
+	  out := h.authUsecase.Me(payload.NewMeIn(req.Name))
+
+	  res := model.NewMeRes(out.Name(), out.Age())
 	  w.Header().Set("Content-Type", "application/json")
 	  w.WriteHeader(http.StatusOK)
 	  json.NewEncoder(w).Encode(res)
   }
 ```
 
-### model/sample_model.go
+### model/auth_model.go
 
 各モデルクラスの example 記載します:
 
@@ -177,53 +181,54 @@ swagger ページへのルーティングを設定します。
 	  "net/http"
   )
 
-  // 挨拶APIのリクエストモデルです。
-  type GreetReq struct {
--	  Name string `json:"name"` // ユーザ名
+  // 認証向けのリクエストモデルです。
+  type LoginReq struct {
+-	  Name     string `json:"name"`     // ユーザ名
+-	  Password string `json:"password"` // パスワード
++	  Name     string `json:"name" example:"nob"`        // ユーザ名
++	  Password string `json:"password" example:"passwd"` // パスワード
+  }
+
+  func NewLoginReq(r *http.Request) LoginReq {
+
+	  var req LoginReq
+	  decoder := json.NewDecoder(r.Body)
+	  if err := decoder.Decode(&req); err != nil {
+		  return *new(LoginReq)
+	  }
+	  return req
+  }
+
+  // 認証向けのレスポンスモデルです。
+  type LoginRes struct {
+- 	  Valid bool `json:"valid"` // 認証可否
++	  Valid bool `json:"valid" example:"true"` // 認証可否
+  }
+
+  func NewLoginRes(valid bool) LoginRes {
+	  return LoginRes{Valid: valid}
+  }
+
+  // ユーザ情報取得向けのリクエストモデルです。
+  type MeReq struct {
+- 	  Name string `json:"name"` // ユーザ名
 +	  Name string `json:"name" example:"nob"` // ユーザ名
   }
 
-  func NewGreetReq(r *http.Request) GreetReq {
-
-	  return GreetReq{Name: r.URL.Query().Get("name")}
+  func NewMeReq(r *http.Request) MeReq {
+	  return MeReq{Name: r.URL.Query().Get("name")}
   }
 
-  // 挨拶APIのレスポンスモデルです。
-  type GreetRes struct {
--	  Message string `json:"message"` // 挨拶メッセージ
-+	  Message string `json:"message" example:"Hello, nob!"` // 挨拶メッセージ
-  }
-
-  func NewGreetRes(message string) GreetRes {
-	  return GreetRes{Message: message}
-  }
-
-  // 登録APIのリクエストモデルです。
-  type RegistReq struct {
+  // ユーザ情報取得向けのレスポンスモデルです。
+  type MeRes struct {
 -	  Name string `json:"name"` // ユーザ名
 -	  Age  int    `json:"age"`  // 年齢
 +	  Name string `json:"name" example:"nob"` // ユーザ名
 +	  Age  int    `json:"age" example:"13"`   // 年齢
   }
 
-  func NewRegistReq(r *http.Request) RegistReq {
-
-	  var req RegistReq
-	  decoder := json.NewDecoder(r.Body)
-	  if err := decoder.Decode(&req); err != nil {
-		  return *new(RegistReq)
-	  }
-	  return req
-  }
-
-  // 登録APIのレスポンスモデルです。
-  type RegistRes struct {
-- 	  Message string `json:"message"` // 登録メッセージ
-+ 	  Message string `json:"message" example:"登録が完了しました。"` // 登録メッセージ
-  }
-
-  func NewRegistRes(message string) RegistRes {
-	  return RegistRes{Message: message}
+  func NewMeRes(name string, age int) MeRes {
+	  return MeRes{Name: name, Age: age}
   }
 ```
 
