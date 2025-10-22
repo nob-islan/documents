@@ -7,7 +7,7 @@ GitLab Runner を使って Go アプリケーションのコンテナイメー�
 ### Dockerfile
 
 ```Dockerfile
-FROM golang:1.23
+FROM golang:1.24
 
 # 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
@@ -46,7 +46,7 @@ variables:
   ARTIFACT_PATH: ${MODULE}/main # ビルド成果物のパス
 test:
   stage: test
-  image: golang:1.23
+  image: golang:1.24
   script:
     - cd ${MODULE}
     - go install gotest.tools/gotestsum@latest
@@ -64,7 +64,7 @@ test:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
-  image: golang:1.23
+  image: golang:1.24
   script:
     - cd ${MODULE}
     - go build cmd/main.go

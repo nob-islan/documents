@@ -30,7 +30,7 @@ variables:
   COMMAND: cmd/${MODULE} # バイナリの生成場所
 build:
   stage: build
-  image: golang:1.23
+  image: golang:1.24
   script:
     - cd ${COMMAND}
     - GOOS=linux GOARCH=arm64 go build -o ${MODULE}_${CI_COMMIT_TAG}_linux_arm64
