@@ -113,7 +113,7 @@ spring.profiles.active=swagger
        * @return ユーザ情報
        */
       @GetMapping(value = "/me")
-      @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
++     @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
 +     @ApiResponses(value = {
 +             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
 +     })
