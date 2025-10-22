@@ -7001,11 +7001,17 @@
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span>
 <span class="p">);</span>
 
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
 <span class="p">);</span>
 </code></pre></div>
 <h3 id="_4">パッケージ構成</h3>
@@ -7043,10 +7049,11 @@
 <span class="kd">type</span><span class="w"> </span><span class="nx">Users</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
 <span class="w">    </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// パスワード</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">      </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 年齢</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsers</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Users</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsers</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Users</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="nx">Users</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
@@ -7057,11 +7064,15 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">password</span>
 <span class="p">}</span>
 
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="nx">Users</span><span class="p">)</span><span class="w"> </span><span class="nx">Age</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">age</span>
+<span class="p">}</span>
+
 <span class="c1">// usersテーブル向けrepositoryのインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UsersRepository</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// ユーザ情報を取得します。</span>
-<span class="w">    </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span>
+<span class="w">    </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Users</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalinfrastructure">internal/infrastructure/</h4>
@@ -7125,14 +7136,14 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersRepository</span><span class="p">{</span><span class="nx">db</span><span class="p">:</span><span class="w"> </span><span class="nx">db</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sql</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM users WHERE name = ?&quot;</span>
 
 <span class="w">    </span><span class="c1">// クエリ実行</span>
 <span class="w">    </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span><span class="w"> </span><span class="nx">err</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
@@ -7140,11 +7151,12 @@
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">        </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">password</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">users</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">        </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">age</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">users</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">users</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">users</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalusecase">internal/usecase/</h4>
@@ -7159,11 +7171,14 @@
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// 認証の業務処理インターフェースです。</span>
+<span class="c1">// 認証のusecaseインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span>
+
+<span class="w">    </span><span class="c1">// ユーザ情報を取得します。</span>
+<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">authUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -7176,7 +7191,20 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()).</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">users</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">())</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalusecasepayload">internal/usecase/payload/</h4>
@@ -7196,11 +7224,11 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoginIn</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">password</span>
 <span class="p">}</span>
 
@@ -7213,8 +7241,39 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoginOut</span><span class="p">{</span><span class="nx">valid</span><span class="p">:</span><span class="w"> </span><span class="nx">valid</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="o">*</span><span class="nx">LoginOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Valid</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="nx">LoginOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Valid</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">valid</span>
+<span class="p">}</span>
+
+<span class="c1">// ユーザ情報取得向けの入力モデルです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MeIn</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">MeIn</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeIn</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">name</span>
+<span class="p">}</span>
+
+<span class="c1">// ユーザ情報取得向けの出力モデルです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MeOut</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 年齢</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">MeOut</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeOut</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="nx">MeOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">name</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="nx">MeOut</span><span class="p">)</span><span class="w"> </span><span class="nx">Age</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">age</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalhandler">internal/handler/</h4>
@@ -7232,11 +7291,14 @@
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// 認証のハンドラインターフェースです。</span>
+<span class="c1">// 認証のhandlerインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">AuthHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// ユーザ情報取得処理を呼び出します。</span>
+<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">authHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -7254,6 +7316,18 @@
 <span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 
 <span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Valid</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">authHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
+
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">Age</span><span class="p">())</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
@@ -7294,6 +7368,25 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">valid</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="nx">LoginRes</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoginRes</span><span class="p">{</span><span class="nx">Valid</span><span class="p">:</span><span class="w"> </span><span class="nx">valid</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ユーザ情報取得向けのリクエストモデルです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MeReq</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span><span class="w"> </span><span class="c1">// ユーザ名</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="nx">MeReq</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeReq</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Query</span><span class="p">().</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)}</span>
+<span class="p">}</span>
+
+<span class="c1">// ユーザ情報取得向けのレスポンスモデルです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MeRes</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span><span class="w"> </span><span class="c1">// ユーザ名</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;age&quot;`</span><span class="w">  </span><span class="c1">// 年齢</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeRes</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">MeRes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeRes</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalhandlerrouter">internal/handler/router/</h4>
@@ -7367,6 +7460,15 @@
 <span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Forbidden&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Method</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">MethodGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">h</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Forbidden&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="cmd">cmd/</h4>
@@ -7394,7 +7496,10 @@
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>run<span class="w"> </span>cmd/main.go
 </code></pre></div>
 <p>下記コマンドで API を打鍵できます。</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/api/v1/login
+<div class="highlight"><pre><span></span><code><span class="c1"># /login</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/api/v1/login
+<span class="c1"># /me</span>
+curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>localhost:8080/api/v1/me?name<span class="o">=</span>nob
 </code></pre></div>
 <h2 id="_7">パッケージ構成例</h2>
 <p>Go プロジェクトのパッケージ構成について一つの指針となるサンプルを記載します。</p>
