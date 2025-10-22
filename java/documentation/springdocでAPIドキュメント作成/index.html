@@ -3649,9 +3649,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#samplecontrollerjava" class="md-nav__link">
+  <a href="#authcontrollerjava" class="md-nav__link">
     <span class="md-ellipsis">
-      SampleController.java
+      AuthController.java
     </span>
   </a>
   
@@ -3668,36 +3668,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#greetrequestjava" class="md-nav__link">
+  <a href="#loginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
-      GreetRequest.java
+      LoginRequest.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#greetresponsejava" class="md-nav__link">
+  <a href="#loginresponsejava" class="md-nav__link">
     <span class="md-ellipsis">
-      GreetResponse.java
+      LoginResponse.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#registrequestjava" class="md-nav__link">
+  <a href="#merequestjava" class="md-nav__link">
     <span class="md-ellipsis">
-      RegistRequest.java
+      MeRequest.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#registresponsejava" class="md-nav__link">
+  <a href="#meresponsejava" class="md-nav__link">
     <span class="md-ellipsis">
-      RegistResponse.java
+      MeResponse.java
     </span>
   </a>
   
@@ -6505,9 +6505,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#samplecontrollerjava" class="md-nav__link">
+  <a href="#authcontrollerjava" class="md-nav__link">
     <span class="md-ellipsis">
-      SampleController.java
+      AuthController.java
     </span>
   </a>
   
@@ -6524,36 +6524,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#greetrequestjava" class="md-nav__link">
+  <a href="#loginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
-      GreetRequest.java
+      LoginRequest.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#greetresponsejava" class="md-nav__link">
+  <a href="#loginresponsejava" class="md-nav__link">
     <span class="md-ellipsis">
-      GreetResponse.java
+      LoginResponse.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#registrequestjava" class="md-nav__link">
+  <a href="#merequestjava" class="md-nav__link">
     <span class="md-ellipsis">
-      RegistRequest.java
+      MeRequest.java
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#registresponsejava" class="md-nav__link">
+  <a href="#meresponsejava" class="md-nav__link">
     <span class="md-ellipsis">
-      RegistResponse.java
+      MeResponse.java
     </span>
   </a>
   
@@ -6665,8 +6665,8 @@
 <span class="w"> </span> import org.springframework.boot.SpringApplication;
 <span class="w"> </span> import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-<span class="w"> </span> import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.info.Info;
+<span class="gi">+ import io.swagger.v3.oas.annotations.OpenAPIDefinition;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.info.Info;</span>
 
 <span class="w"> </span> @SpringBootApplication
 <span class="gi">+ @OpenAPIDefinition(info = @Info(title = &quot;Easy App&quot;, version = &quot;1.0.0&quot;, description = &quot;サンプルのREST APIです。&quot;))</span>
@@ -6677,126 +6677,149 @@
 <span class="w"> </span>     }
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="samplecontrollerjava">SampleController.java</h3>
+<h3 id="authcontrollerjava">AuthController.java</h3>
 <p>下記アノテーションを追記し、各 API のインターフェース仕様を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller;
 
-<span class="w"> </span> import org.springdoc.core.annotations.ParameterObject;
+<span class="gi">+ import org.springdoc.core.annotations.ParameterObject;</span>
 <span class="w"> </span> import org.springframework.web.bind.annotation.GetMapping;
 <span class="w"> </span> import org.springframework.web.bind.annotation.PostMapping;
 <span class="w"> </span> import org.springframework.web.bind.annotation.RequestBody;
 <span class="w"> </span> import org.springframework.web.bind.annotation.RequestMapping;
 <span class="w"> </span> import org.springframework.web.bind.annotation.RestController;
 
-<span class="w"> </span> import io.swagger.v3.oas.annotations.Operation;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Content;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.responses.ApiResponse;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.responses.ApiResponses;
-<span class="w"> </span> import io.swagger.v3.oas.annotations.tags.Tag;
-<span class="w"> </span> import nob.example.easyapp.controller.model.GreetRequest;
-<span class="w"> </span> import nob.example.easyapp.controller.model.GreetResponse;
-<span class="w"> </span> import nob.example.easyapp.controller.model.RegistRequest;
-<span class="w"> </span> import nob.example.easyapp.controller.model.RegistResponse;
+<span class="gi">+ import io.swagger.v3.oas.annotations.Operation;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Content;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.responses.ApiResponse;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.responses.ApiResponses;</span>
+<span class="gi">+ import io.swagger.v3.oas.annotations.tags.Tag;</span>
+<span class="w"> </span> import nob.example.easyapp.controller.model.LoginRequest;
+<span class="w"> </span> import nob.example.easyapp.controller.model.LoginResponse;
+<span class="w"> </span> import nob.example.easyapp.controller.model.MeRequest;
+<span class="w"> </span> import nob.example.easyapp.controller.model.MeResponse;
 <span class="w"> </span> import nob.example.easyapp.exception.SampleException;
-<span class="w"> </span> import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;
+<span class="gi">+ import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;</span>
 
 <span class="w"> </span> /**
-<span class="w"> </span>  * サンプルコントローラーのインターフェースです。
+<span class="w"> </span>  * 認証コントローラーのインターフェースです。
 <span class="w"> </span>  *
 <span class="w"> </span>  * @author nob
 <span class="w"> </span>  */
 <span class="w"> </span> @RestController
 <span class="w"> </span> @RequestMapping(value = &quot;/api/v1&quot;)
-<span class="gi">+ @Tag(name = &quot;Sample&quot;, description = &quot;サンプルのAPIです。&quot;)</span>
-<span class="w"> </span> public interface SampleController {
+<span class="gi">+ @Tag(name = &quot;Auth&quot;, description = &quot;認証APIです。&quot;)</span>
+<span class="w"> </span> public interface AuthController {
 
 <span class="w"> </span>     /**
-<span class="w"> </span>      * 挨拶メッセージを返します。
+<span class="w"> </span>      * 認証処理を呼び出します。
 <span class="w"> </span>      *
-<span class="w"> </span>      * @param greetRequest 挨拶リクエスト
-<span class="w"> </span>      * @return 挨拶メッセージ
+<span class="w"> </span>      * @param request 認証リクエスト
+<span class="w"> </span>      * @return 認証結果
 <span class="w"> </span>      */
-<span class="w"> </span>     @GetMapping(value = &quot;/greet&quot;)
-<span class="gi">+     @Operation(summary = &quot;挨拶メッセージ取得&quot;, description = &quot;${easyappdoc.describe.api.v1.greet:説明文}&quot;)</span>
-<span class="gi">+     @ApiResponses(value = {</span>
-<span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;)</span>
-<span class="gi">+     })</span>
-<span class="gd">-     GreetResponse greeting(GreetRequest greetRequest);</span>
-<span class="gi">+     GreetResponse greeting(@ParameterObject GreetRequest greetRequest);</span>
-
-<span class="w"> </span>     /**
-<span class="w"> </span>      * ユーザ登録処理を行います。
-<span class="w"> </span>      *
-<span class="w"> </span>      * @param registRequest 登録リクエスト
-<span class="w"> </span>      * @return 登録完了メッセージ
-<span class="w"> </span>      * @throws SampleException 登録失敗時の例外
-<span class="w"> </span>      */
-<span class="w"> </span>     @PostMapping(value = &quot;/user&quot;)
-<span class="gi">+     @Operation(summary = &quot;ユーザ情報登録&quot;, description = &quot;${easyappdoc.describe.api.v1.user:説明文}&quot;)</span>
+<span class="w"> </span>     @PostMapping(value = &quot;/login&quot;)
+<span class="gi">+     @Operation(summary = &quot;認証&quot;, description = &quot;${easyappdoc.describe.api.v1.login:説明文}&quot;)</span>
 <span class="gi">+     @ApiResponses(value = {</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;),</span>
 <span class="gi">+             @ApiResponse(responseCode = &quot;422&quot;, description = &quot;エラーが発生した場合&quot;, content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))</span>
 <span class="gi">+     })</span>
-<span class="w"> </span>     RegistResponse regist(@RequestBody RegistRequest registRequest) throws SampleException;
+<span class="w"> </span>     LoginResponse login(@RequestBody LoginRequest request) throws SampleException;
+
+<span class="w"> </span>     /**
+<span class="w"> </span>      * ユーザ情報取得処理を呼び出します。
+<span class="w"> </span>      *
+<span class="w"> </span>      * @param request ユーザ情報取得リクエスト
+<span class="w"> </span>      * @return ユーザ情報
+<span class="w"> </span>      */
+<span class="w"> </span>     @GetMapping(value = &quot;/me&quot;)
+<span class="w"> </span>     @Operation(summary = &quot;ユーザ情報取得&quot;, description = &quot;${easyappdoc.describe.api.v1.me:説明文}&quot;)
+<span class="gi">+     @ApiResponses(value = {</span>
+<span class="gi">+             @ApiResponse(responseCode = &quot;200&quot;, description = &quot;正常に処理された場合&quot;)</span>
+<span class="gi">+     })</span>
+<span class="gd">-     MeResponse me(MeRequest request);</span>
+<span class="gi">+     MeResponse me(@ParameterObject MeRequest request);</span>
 <span class="w"> </span> }
 </code></pre></div>
 <h3 id="model">model</h3>
 <p>各モデルクラスのスキーマ定義を記載します:</p>
-<h4 id="greetrequestjava">GreetRequest.java</h4>
+<h4 id="loginrequestjava">LoginRequest.java</h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
 <span class="w"> </span> import lombok.Value;
 
 <span class="w"> </span> /**
-<span class="w"> </span>  * 挨拶APIのリクエストモデルです。
+<span class="w"> </span>  * 認証向けのリクエストモデルです。
 <span class="w"> </span>  *
 <span class="w"> </span>  * @author nob
 <span class="w"> </span>  */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;挨拶APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
-<span class="w"> </span> public class GreetRequest {
+<span class="gi">+ @Schema(description = &quot;認証向けのリクエストモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class LoginRequest {
 
-<span class="w"> </span>   /** ユーザ名 */
+<span class="w"> </span>     /** ユーザ名 */
+<span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
+<span class="w"> </span>     private String name;
+
+<span class="w"> </span>     /** パスワード */
+<span class="gi">+     @Schema(description = &quot;パスワード&quot;, type = &quot;string&quot;, example = &quot;passwd&quot;)</span>
+<span class="w"> </span>     private String password;
+<span class="w"> </span> }
+</code></pre></div>
+<h4 id="loginresponsejava">LoginResponse.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * 認証向けのレスポンスモデルです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;認証向けのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class LoginResponse {
+
+<span class="w"> </span>     /** 認証可否 */
+<span class="gi">+     @Schema(description = &quot;認証可否&quot;, type = &quot;boolean&quot;, example = &quot;true&quot;)</span>
+<span class="w"> </span>     private boolean valid;
+<span class="w"> </span> }
+</code></pre></div>
+<h4 id="merequestjava">MeRequest.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
+
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
+<span class="w"> </span> import lombok.Value;
+
+<span class="w"> </span> /**
+<span class="w"> </span>  * ユーザ情報取得向けのリクエストモデルです。
+<span class="w"> </span>  *
+<span class="w"> </span>  * @author nob
+<span class="w"> </span>  */
+<span class="w"> </span> @Value
+<span class="gi">+ @Schema(description = &quot;ユーザ情報取得向けのリクエストモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class MeRequest {
+
+<span class="w"> </span>     /** ユーザ名 */
 <span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
 <span class="w"> </span>     private String name;
 <span class="w"> </span> }
 </code></pre></div>
-<h4 id="greetresponsejava">GreetResponse.java</h4>
+<h4 id="meresponsejava">MeResponse.java</h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
 <span class="w"> </span> import lombok.Value;
 
 <span class="w"> </span> /**
-<span class="w"> </span>  * 挨拶APIのレスポンスモデルです。
+<span class="w"> </span>  * ユーザ情報取得向けのレスポンスモデルです。
 <span class="w"> </span>  *
 <span class="w"> </span>  * @author nob
 <span class="w"> </span>  */
 <span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;挨拶APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
-<span class="w"> </span> public class GreetResponse {
-
-<span class="w"> </span>     /** 挨拶メッセージ */
-<span class="gi">+     @Schema(description = &quot;挨拶メッセージ&quot;, type = &quot;string&quot;, example = &quot;Hello, nob!&quot;)</span>
-<span class="w"> </span>     private String message;
-<span class="w"> </span> }
-</code></pre></div>
-<h4 id="registrequestjava">RegistRequest.java</h4>
-<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
-
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
-<span class="w"> </span> import lombok.Value;
-
-<span class="w"> </span> /**
-<span class="w"> </span> * 登録APIのリクエストモデルです。
-<span class="w"> </span> *
-<span class="w"> </span> * @author nob
-<span class="w"> </span> */
-<span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;登録APIのリクエストモデル&quot;, type = &quot;object&quot;)</span>
-<span class="w"> </span> public class RegistRequest {
+<span class="gi">+ @Schema(description = &quot;ユーザ情報取得向けのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
+<span class="w"> </span> public class MeResponse {
 
 <span class="w"> </span>     /** ユーザ名 */
 <span class="gi">+     @Schema(description = &quot;ユーザ名&quot;, type = &quot;string&quot;, example = &quot;nob&quot;)</span>
@@ -6807,38 +6830,18 @@
 <span class="w"> </span>     private Integer age;
 <span class="w"> </span> }
 </code></pre></div>
-<h4 id="registresponsejava">RegistResponse.java</h4>
-<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
-
-<span class="w"> </span> import io.swagger.v3.oas.annotations.media.Schema;
-<span class="w"> </span> import lombok.Value;
-
-<span class="w"> </span> /**
-<span class="w"> </span> * 登録APIのレスポンスモデルです。
-<span class="w"> </span> *
-<span class="w"> </span> * @author nob
-<span class="w"> </span> */
-<span class="w"> </span> @Value
-<span class="gi">+ @Schema(description = &quot;登録APIのレスポンスモデル&quot;, type = &quot;object&quot;)</span>
-<span class="w"> </span> public class RegistResponse {
-
-<span class="w"> </span>     /** 登録メッセージ */
-<span class="gi">+     @Schema(description = &quot;登録メッセージ&quot;, type = &quot;string&quot;, example = &quot;登録が完了しました。&quot;)</span>
-<span class="w"> </span>     private String message;
-<span class="w"> </span> }
-</code></pre></div>
 <h3 id="sampleexceptionhandlerjava">SampleExceptionHandler.java</h3>
 <p>例外発生時レスポンスモデルのスキーマ定義を記載します:</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.handler;
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.handler;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+<span class="w"> </span> import org.springframework.http.HttpStatus;
+<span class="w"> </span> import org.springframework.http.ResponseEntity;
+<span class="w"> </span> import org.springframework.web.bind.annotation.ExceptionHandler;
+<span class="w"> </span> import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
-import nob.example.easyapp.exception.SampleException;
+<span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
+<span class="w"> </span> import lombok.Value;
+<span class="w"> </span> import nob.example.easyapp.exception.SampleException;
 
 <span class="w"> </span> /**
 <span class="w"> </span>  * サンプル例外のハンドラです。
@@ -6849,13 +6852,13 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w"> </span> public class SampleExceptionHandler {
 
 <span class="w"> </span>     /**
-<span class="w"> </span>      * サンプル例外が投げられた際に呼ばれるメソッドです。
+<span class="w"> </span>      * サンプル例外が投げられた際のハンドリングを行います。
 <span class="w"> </span>      *
 <span class="w"> </span>      * @param e
 <span class="w"> </span>      * @return 例外メッセージ
 <span class="w"> </span>      */
 <span class="w"> </span>     @SuppressWarnings({ &quot;unchecked&quot;, &quot;rawtypes&quot; })
-<span class="w"> </span>     @ExceptionHandler(SampleException.class)
+<span class="w"> </span>     @ExceptionHandler(SampleException.class) // SampleExceptionが投げられた際に動く
 <span class="w"> </span>     public ResponseEntity&lt;SampleExceptionResponseBody&gt; handleSampleException(SampleException e) {
 
 <span class="w"> </span>         return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
@@ -6883,10 +6886,10 @@ import nob.example.easyapp.exception.SampleException;
 <span class="w">  </span><span class="nt">describe</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">api</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">v1</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">greet</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">          </span><span class="no">入力されたユーザ名に対して挨拶メッセージを返します。</span>
-<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">          </span><span class="no">ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスを返し、それ以外はエラーレスポンスを返します。</span>
+<span class="w">        </span><span class="nt">login</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。</span>
+<span class="w">        </span><span class="nt">me</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">ユーザ情報を取得します。</span>
 </code></pre></div>
 <h2 id="_2">動作確認</h2>
 <p>アプリ起動後、<a href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a> で swagger ドキュメントを確認できます。</p>
