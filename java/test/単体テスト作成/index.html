@@ -6634,6 +6634,10 @@
 <td>password</td>
 <td>VARCHAR(32)</td>
 </tr>
+<tr>
+<td>age</td>
+<td>INT</td>
+</tr>
 </tbody>
 </table>
 <h3 id="controller">controller テスト作成</h3>
@@ -6641,6 +6645,7 @@
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="p">;</span>
 
@@ -6657,9 +6662,13 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * AuthControllerImplのテストクラスです。</span>
@@ -6694,13 +6703,41 @@
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// API呼び出し</span>
 <span class="w">            </span><span class="n">MvcResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/api/v1/login&quot;</span><span class="p">)</span>
-<span class="w">                    </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span><span class="w"> </span><span class="c1">// getメソッドの場合はqueryParamを利用</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
 <span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
 <span class="w">                    </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
 <span class="w">                    </span><span class="p">.</span><span class="na">andReturn</span><span class="p">();</span>
 <span class="w">            </span><span class="c1">// 結果のassert</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">())</span>
 <span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span><span class="kc">true</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * meのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_me_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// リクエストの作成</span>
+<span class="w">        </span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// serviceのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()))).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// API呼び出し</span>
+<span class="w">            </span><span class="n">MvcResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/v1/me&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">andReturn</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">())</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)));</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
@@ -6725,6 +6762,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * AuthServiceImplのテストクラスです。</span>
@@ -6751,13 +6790,37 @@
 <span class="w">        </span><span class="n">LoginInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// repositoryのモック化</span>
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
 
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// service呼び出し</span>
 <span class="w">            </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">// 結果のassert</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">isValid</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * meのテスト 正常系</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_me_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// 入力値の作成</span>
+<span class="w">        </span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// repositoryのモック化</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// service呼び出し</span>
+<span class="w">            </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">getName</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
@@ -6774,6 +6837,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span>
 <span class="p">);</span>
 </code></pre></div>
 <ul>
@@ -6782,9 +6846,11 @@
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
 <span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
 <span class="p">);</span>
 </code></pre></div>
 <h4 id="_6">テストケース作成</h4>
@@ -6827,6 +6893,7 @@
 <span class="w">            </span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">getName</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">getPassword</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
@@ -6836,7 +6903,7 @@
 </code></pre></div>
 <h2 id="_7">テスト起動</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># 特定のテストクラスを実行する場合</span>
-./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>UserinfoControllerImplTest
+./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>AuthControllerImplTest
 
 <span class="c1"># 全てのテストクラスを実行する場合</span>
 ./mvnw<span class="w"> </span><span class="nb">test</span>
