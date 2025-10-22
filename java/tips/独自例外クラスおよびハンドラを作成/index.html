@@ -6318,7 +6318,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.ExceptionHandler</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestControllerAdvice</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.exception.SampleException</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -6352,26 +6352,17 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>上記で例外クラスおよびハンドラを実装し、下記のように例外を投げると</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 挨拶メッセージを返します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param name ユーザ名</span>
-<span class="cm">     * @return 挨拶メッセージ</span>
-<span class="cm">     * @throws SampleException サンプルの例外</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SampleException</span><span class="w"> </span><span class="p">{</span>
+<p>上記で例外クラスおよびハンドラを実装し、下記のように例外を投げると例外発生時のレスポンスボディが返ります。</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginInModel</span><span class="w"> </span><span class="n">inModel</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SampleException</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleException</span><span class="p">(</span><span class="s">&quot;ユーザ名が空白です。&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleException</span><span class="p">(</span><span class="s">&quot;ユーザ名がnullです。&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="p">}</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span>
+<span class="w">                </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">()).</span><span class="na">getPassword</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getPassword</span><span class="p">()));</span>
 <span class="w">    </span><span class="p">}</span>
-</code></pre></div>
-<p>以下のように API レスポンスが返却されます:</p>
-<div class="highlight"><pre><span></span><code>$ curl localhost:8080/api/v1/greet
-{&quot;message&quot;:&quot;ユーザ名が空白です。&quot;}
 </code></pre></div>
 
 
