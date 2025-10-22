@@ -42,8 +42,8 @@ spring.profiles.active=swagger
   import org.springframework.boot.SpringApplication;
   import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-  import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-  import io.swagger.v3.oas.annotations.info.Info;
++ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
++ import io.swagger.v3.oas.annotations.info.Info;
 
   @SpringBootApplication
 + @OpenAPIDefinition(info = @Info(title = "Easy App", version = "1.0.0", description = "サンプルのREST APIです。"))
@@ -55,71 +55,70 @@ spring.profiles.active=swagger
   }
 ```
 
-### SampleController.java
+### AuthController.java
 
 下記アノテーションを追記し、各 API のインターフェース仕様を記載します:
 
 ```diff
   package nob.example.easyapp.controller;
 
-  import org.springdoc.core.annotations.ParameterObject;
++ import org.springdoc.core.annotations.ParameterObject;
   import org.springframework.web.bind.annotation.GetMapping;
   import org.springframework.web.bind.annotation.PostMapping;
   import org.springframework.web.bind.annotation.RequestBody;
   import org.springframework.web.bind.annotation.RequestMapping;
   import org.springframework.web.bind.annotation.RestController;
 
-  import io.swagger.v3.oas.annotations.Operation;
-  import io.swagger.v3.oas.annotations.media.Content;
-  import io.swagger.v3.oas.annotations.media.Schema;
-  import io.swagger.v3.oas.annotations.responses.ApiResponse;
-  import io.swagger.v3.oas.annotations.responses.ApiResponses;
-  import io.swagger.v3.oas.annotations.tags.Tag;
-  import nob.example.easyapp.controller.model.GreetRequest;
-  import nob.example.easyapp.controller.model.GreetResponse;
-  import nob.example.easyapp.controller.model.RegistRequest;
-  import nob.example.easyapp.controller.model.RegistResponse;
++ import io.swagger.v3.oas.annotations.Operation;
++ import io.swagger.v3.oas.annotations.media.Content;
++ import io.swagger.v3.oas.annotations.media.Schema;
++ import io.swagger.v3.oas.annotations.responses.ApiResponse;
++ import io.swagger.v3.oas.annotations.responses.ApiResponses;
++ import io.swagger.v3.oas.annotations.tags.Tag;
+  import nob.example.easyapp.controller.model.LoginRequest;
+  import nob.example.easyapp.controller.model.LoginResponse;
+  import nob.example.easyapp.controller.model.MeRequest;
+  import nob.example.easyapp.controller.model.MeResponse;
   import nob.example.easyapp.exception.SampleException;
-  import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;
++ import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;
 
   /**
-   * サンプルコントローラーのインターフェースです。
+   * 認証コントローラーのインターフェースです。
    *
    * @author nob
    */
   @RestController
   @RequestMapping(value = "/api/v1")
-+ @Tag(name = "Sample", description = "サンプルのAPIです。")
-  public interface SampleController {
++ @Tag(name = "Auth", description = "認証APIです。")
+  public interface AuthController {
 
       /**
-       * 挨拶メッセージを返します。
+       * 認証処理を呼び出します。
        *
-       * @param greetRequest 挨拶リクエスト
-       * @return 挨拶メッセージ
+       * @param request 認証リクエスト
+       * @return 認証結果
        */
-      @GetMapping(value = "/greet")
-+     @Operation(summary = "挨拶メッセージ取得", description = "${easyappdoc.describe.api.v1.greet:説明文}")
-+     @ApiResponses(value = {
-+             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
-+     })
--     GreetResponse greeting(GreetRequest greetRequest);
-+     GreetResponse greeting(@ParameterObject GreetRequest greetRequest);
-
-      /**
-       * ユーザ登録処理を行います。
-       *
-       * @param registRequest 登録リクエスト
-       * @return 登録完了メッセージ
-       * @throws SampleException 登録失敗時の例外
-       */
-      @PostMapping(value = "/user")
-+     @Operation(summary = "ユーザ情報登録", description = "${easyappdoc.describe.api.v1.user:説明文}")
+      @PostMapping(value = "/login")
++     @Operation(summary = "認証", description = "${easyappdoc.describe.api.v1.login:説明文}")
 +     @ApiResponses(value = {
 +             @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
 +             @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))
 +     })
-      RegistResponse regist(@RequestBody RegistRequest registRequest) throws SampleException;
+      LoginResponse login(@RequestBody LoginRequest request) throws SampleException;
+
+      /**
+       * ユーザ情報取得処理を呼び出します。
+       *
+       * @param request ユーザ情報取得リクエスト
+       * @return ユーザ情報
+       */
+      @GetMapping(value = "/me")
+      @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
++     @ApiResponses(value = {
++             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
++     })
+-     MeResponse me(MeRequest request);
++     MeResponse me(@ParameterObject MeRequest request);
   }
 ```
 
@@ -127,68 +126,95 @@ spring.profiles.active=swagger
 
 各モデルクラスのスキーマ定義を記載します:
 
-#### GreetRequest.java
+#### LoginRequest.java
 
 ```diff
   package nob.example.easyapp.controller.model;
 
-  import io.swagger.v3.oas.annotations.media.Schema;
++ import io.swagger.v3.oas.annotations.media.Schema;
   import lombok.Value;
 
   /**
-   * 挨拶APIのリクエストモデルです。
+   * 認証向けのリクエストモデルです。
    *
    * @author nob
    */
   @Value
-+ @Schema(description = "挨拶APIのリクエストモデル", type = "object")
-  public class GreetRequest {
++ @Schema(description = "認証向けのリクエストモデル", type = "object")
+  public class LoginRequest {
 
-    /** ユーザ名 */
+      /** ユーザ名 */
++     @Schema(description = "ユーザ名", type = "string", example = "nob")
+      private String name;
+
+      /** パスワード */
++     @Schema(description = "パスワード", type = "string", example = "passwd")
+      private String password;
+  }
+```
+
+#### LoginResponse.java
+
+```diff
+  package nob.example.easyapp.controller.model;
+
++ import io.swagger.v3.oas.annotations.media.Schema;
+  import lombok.Value;
+
+  /**
+   * 認証向けのレスポンスモデルです。
+   *
+   * @author nob
+   */
+  @Value
++ @Schema(description = "認証向けのレスポンスモデル", type = "object")
+  public class LoginResponse {
+
+      /** 認証可否 */
++     @Schema(description = "認証可否", type = "boolean", example = "true")
+      private boolean valid;
+  }
+```
+
+#### MeRequest.java
+
+```diff
+  package nob.example.easyapp.controller.model;
+
++ import io.swagger.v3.oas.annotations.media.Schema;
+  import lombok.Value;
+
+  /**
+   * ユーザ情報取得向けのリクエストモデルです。
+   *
+   * @author nob
+   */
+  @Value
++ @Schema(description = "ユーザ情報取得向けのリクエストモデル", type = "object")
+  public class MeRequest {
+
+      /** ユーザ名 */
 +     @Schema(description = "ユーザ名", type = "string", example = "nob")
       private String name;
   }
 ```
 
-#### GreetResponse.java
+#### MeResponse.java
 
 ```diff
   package nob.example.easyapp.controller.model;
 
-  import io.swagger.v3.oas.annotations.media.Schema;
++ import io.swagger.v3.oas.annotations.media.Schema;
   import lombok.Value;
 
   /**
-   * 挨拶APIのレスポンスモデルです。
+   * ユーザ情報取得向けのレスポンスモデルです。
    *
    * @author nob
    */
   @Value
-+ @Schema(description = "挨拶APIのレスポンスモデル", type = "object")
-  public class GreetResponse {
-
-      /** 挨拶メッセージ */
-+     @Schema(description = "挨拶メッセージ", type = "string", example = "Hello, nob!")
-      private String message;
-  }
-```
-
-#### RegistRequest.java
-
-```diff
-  package nob.example.easyapp.controller.model;
-
-  import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
-
-  /**
-  * 登録APIのリクエストモデルです。
-  *
-  * @author nob
-  */
-  @Value
-+ @Schema(description = "登録APIのリクエストモデル", type = "object")
-  public class RegistRequest {
++ @Schema(description = "ユーザ情報取得向けのレスポンスモデル", type = "object")
+  public class MeResponse {
 
       /** ユーザ名 */
 +     @Schema(description = "ユーザ名", type = "string", example = "nob")
@@ -200,44 +226,21 @@ spring.profiles.active=swagger
   }
 ```
 
-#### RegistResponse.java
-
-```diff
-  package nob.example.easyapp.controller.model;
-
-  import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
-
-  /**
-  * 登録APIのレスポンスモデルです。
-  *
-  * @author nob
-  */
-  @Value
-+ @Schema(description = "登録APIのレスポンスモデル", type = "object")
-  public class RegistResponse {
-
-      /** 登録メッセージ */
-+     @Schema(description = "登録メッセージ", type = "string", example = "登録が完了しました。")
-      private String message;
-  }
-```
-
 ### SampleExceptionHandler.java
 
 例外発生時レスポンスモデルのスキーマ定義を記載します:
 
 ```diff
-package nob.example.easyapp.handler;
+  package nob.example.easyapp.handler;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+  import org.springframework.http.HttpStatus;
+  import org.springframework.http.ResponseEntity;
+  import org.springframework.web.bind.annotation.ExceptionHandler;
+  import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Value;
-import nob.example.easyapp.exception.SampleException;
++ import io.swagger.v3.oas.annotations.media.Schema;
+  import lombok.Value;
+  import nob.example.easyapp.exception.SampleException;
 
   /**
    * サンプル例外のハンドラです。
@@ -248,13 +251,13 @@ import nob.example.easyapp.exception.SampleException;
   public class SampleExceptionHandler {
 
       /**
-       * サンプル例外が投げられた際に呼ばれるメソッドです。
+       * サンプル例外が投げられた際のハンドリングを行います。
        *
        * @param e
        * @return 例外メッセージ
        */
       @SuppressWarnings({ "unchecked", "rawtypes" })
-      @ExceptionHandler(SampleException.class)
+      @ExceptionHandler(SampleException.class) // SampleExceptionが投げられた際に動く
       public ResponseEntity<SampleExceptionResponseBody> handleSampleException(SampleException e) {
 
           return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
@@ -286,10 +289,10 @@ easyappdoc:
   describe:
     api:
       v1:
-        greet: |
-          入力されたユーザ名に対して挨拶メッセージを返します。
-        user: |
-          ユーザ登録処理を行います。登録に成功した場合のみ正常レスポンスを返し、それ以外はエラーレスポンスを返します。
+        login: |
+          認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
+        me: |
+          ユーザ情報を取得します。
 ```
 
 ## 動作確認
