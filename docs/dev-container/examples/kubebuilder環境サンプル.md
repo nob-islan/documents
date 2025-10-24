@@ -2,7 +2,9 @@
 
 Kubernetes のカスタムコントローラーを実装するための kubebuilder を利用するためのサンプルです。
 
-- json
+## 設定
+
+### devcontainer.json
 
 ```json
 {
@@ -37,7 +39,7 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
 }
 ```
 
-- Dockerfile
+### Dockerfile
 
 ```Dockerfile
 FROM mcr.microsoft.com/devcontainers/go:1.23-bullseye
