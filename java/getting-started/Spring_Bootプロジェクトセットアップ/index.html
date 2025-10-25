@@ -7263,7 +7263,10 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_6">起動</h2>
-<p>VSCode の <strong>Run Java</strong> などからアプリを起動します。下記コマンドで API を打鍵できます。</p>
+<p>下記コマンドでアプリを起動します。</p>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>spring-boot:run
+</code></pre></div>
+<p>下記コマンドで API を打鍵できます。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /login</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/api/v1/login
 <span class="c1"># /me</span>
