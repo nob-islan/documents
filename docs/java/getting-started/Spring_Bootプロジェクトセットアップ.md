@@ -558,7 +558,13 @@ public class MeResponse {
 
 ## 起動
 
-VSCode の **Run Java** などからアプリを起動します。下記コマンドで API を打鍵できます。
+下記コマンドでアプリを起動します。
+
+```shell
+./mvnw spring-boot:run
+```
+
+下記コマンドで API を打鍵できます。
 
 ```shell
 # /login
