@@ -32,7 +32,7 @@ go get -u github.com/swaggo/http-swagger
 	  "net/http"
   )
 
-+ // @title Easy App API
++ // @title Easy App
 + // @version 1.0.0
 + // @description サンプルのREST APIです。
 + //
