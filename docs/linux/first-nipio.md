@@ -6,6 +6,10 @@
 
 cf. https://nip.io/
 
+また、亜種として sslip.io というのも存在するそうです。こちらの方が利用者が少ないようで、Let's Encrypt で証明書を発行する際の一週間に一万枚制限に引っかかりにくいそうです。
+
+cf. https://sslip.io/
+
 ## 使用例
 
 ### GitLab Pages のドメインに利用
