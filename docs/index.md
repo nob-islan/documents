@@ -28,7 +28,7 @@
 
 <div class="grid cards" markdown>
 
-- **[Kubernetes クラスター構築手順](./kubernetes/kubernetes/getting-started/Kubernetesクラスター構築手順.md)**
+- **[Kubernetes クラスター構築手順](./kubernetes/getting-started/Kubernetesクラスター構築手順.md)**
   <br> kubeadm を使った Kubernetes クラスター構築手順書です。
 
 </div>
