@@ -6632,17 +6632,27 @@
   <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
   <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">align</span><span class="o">=</span><span class="s">&quot;left&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>ユーザ名<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="p">/&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">align</span><span class="o">=</span><span class="s">&quot;left&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>パスワード<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="p">/&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;handleOnclickButton()&quot;</span><span class="p">&gt;</span>送信<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;name-wrapper&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">class</span><span class="o">=</span><span class="s">&quot;name-textbox&quot;</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+        <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;ユーザ名&quot;</span>
+        <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span>
+      <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;password-wrapper&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span>
+        <span class="na">class</span><span class="o">=</span><span class="s">&quot;password-textbox&quot;</span>
+        <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span>
+        <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;パスワード&quot;</span>
+        <span class="na">id</span><span class="o">=</span><span class="s">&quot;password&quot;</span>
+      <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;submit-button-wrapper&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;submit-button&quot;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;handleOnclickButton()&quot;</span><span class="p">&gt;</span>
+        ログイン
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;static/index.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
@@ -6680,6 +6690,39 @@
 <span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">60</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">60</span><span class="kt">px</span><span class="p">;</span>
 <span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#d6d6d6</span><span class="p">;</span>
 <span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#000333</span><span class="p">;</span>
+<span class="w">  </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">name-wrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">name-textbox</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">password-wrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">password-textbox</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">submit-button-wrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">submit-button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">260</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">orange</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">submit-button</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
