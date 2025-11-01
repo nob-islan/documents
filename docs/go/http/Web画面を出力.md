@@ -163,17 +163,27 @@ type view struct {
   </head>
 
   <body>
-    <table>
-      <tr align="left">
-        <th>ユーザ名</th>
-        <th><input type="text" id="name" /></th>
-      </tr>
-      <tr align="left">
-        <th>パスワード</th>
-        <th><input type="password" id="password" /></th>
-      </tr>
-    </table>
-    <button onclick="handleOnclickButton()">送信</button>
+    <div class="name-wrapper">
+      <input
+        class="name-textbox"
+        type="text"
+        placeholder="ユーザ名"
+        id="name"
+      />
+    </div>
+    <div class="password-wrapper">
+      <input
+        class="password-textbox"
+        type="password"
+        placeholder="パスワード"
+        id="password"
+      />
+    </div>
+    <div class="submit-button-wrapper">
+      <button class="submit-button" onclick="handleOnclickButton()">
+        ログイン
+      </button>
+    </div>
 
     <script src="static/index.js"></script>
   </body>
@@ -213,6 +223,39 @@ body {
   padding: 30px 60px 30px 60px;
   color: #d6d6d6;
   background-color: #000333;
+  text-align: center;
+}
+
+.name-wrapper {
+  padding: 30px 30px 5px 30px;
+}
+
+.name-textbox {
+  width: 250px;
+  height: 35px;
+}
+
+.password-wrapper {
+  padding: 30px 30px 2px 30px;
+}
+
+.password-textbox {
+  width: 250px;
+  height: 35px;
+}
+
+.submit-button-wrapper {
+  padding: 30px 30px 2px 30px;
+}
+
+.submit-button {
+  width: 260px;
+  height: 35px;
+  background-color: orange;
+}
+
+.submit-button:hover {
+  cursor: pointer;
 }
 ```
 
