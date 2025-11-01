@@ -155,31 +155,28 @@ type view struct {
 ```html
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <link rel="icon" href="static/favicon.ico" />
+    <title>First Go web</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="static/style.css" type="text/css" />
-  <link rel="icon" href="static/favicon.ico" />
-  <title>First Go web</title>
-</head>
+  <body>
+    <table>
+      <tr align="left">
+        <th>ユーザ名</th>
+        <th><input type="text" id="name" /></th>
+      </tr>
+      <tr align="left">
+        <th>パスワード</th>
+        <th><input type="password" id="password" /></th>
+      </tr>
+    </table>
+    <button onclick="handleOnclickButton()">送信</button>
 
-<body>
-  <table>
-    <tr align="left">
-      <th>ユーザ名 </th>
-      <th><input type="text" id="name" /></th>
-    </tr>
-    </tr>
-    <tr align="left">
-      <th>パスワード</th>
-      <th><input type="password" id="password"></th>
-    </tr>
-  </table>
-  <button onclick="handleOnclickButton()">送信</button>
-
-  <script src="static/index.js"></script>
-</body>
-
+    <script src="static/index.js"></script>
+  </body>
 </html>
 ```
 
