@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/">
+        <link rel="prev" href="../../multipass/first-multipass/">
       
       
-        <link rel="next" href="../../documentation/godoc%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/">
+        <link rel="next" href="../../nginx/nginx%E3%81%A7%E3%83%AA%E3%83%90%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B/">
       
       
-      <link rel="icon" href="../../../00_config/favicon.png">
+      <link rel="icon" href="../../00_config/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
     
     
       
-        <title>標準ライブラリでデータベースに接続 - Nob docs</title>
+        <title>MySQL の master-slave 構成を構築 - Nob docs</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#mysql-master-slave" class="md-skip">
           Skip to content
         </a>
       
@@ -88,9 +88,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Nob docs" class="md-header__button md-logo" aria-label="Nob docs" data-md-component="logo">
+    <a href="../.." title="Nob docs" class="md-header__button md-logo" aria-label="Nob docs" data-md-component="logo">
       
-  <img src="../../../00_config/favicon.png" alt="logo">
+  <img src="../../00_config/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              標準ライブラリでデータベースに接続
+              MySQL の master-slave 構成を構築
             
           </span>
         </div>
@@ -211,9 +211,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Nob docs" class="md-nav__button md-logo" aria-label="Nob docs" data-md-component="logo">
+    <a href="../.." title="Nob docs" class="md-nav__button md-logo" aria-label="Nob docs" data-md-component="logo">
       
-  <img src="../../../00_config/favicon.png" alt="logo">
+  <img src="../../00_config/favicon.png" alt="logo">
 
     </a>
     Nob docs
@@ -228,7 +228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -288,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../ansible/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -311,7 +311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/Nginx%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../ansible/Nginx%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%92Ansible%E3%81%A7%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -334,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ansible/ansible%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
+      <a href="../../ansible/ansible%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -440,7 +440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../aws/Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../aws/ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -578,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
+      <a href="../../aws/EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
         
   
   
@@ -654,7 +654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../code-server/lets_encrypt%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6SSL%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86/" class="md-nav__link">
+      <a href="../../code-server/lets_encrypt%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6SSL%E9%80%9A%E4%BF%A1%E3%82%92%E8%A1%8C%E3%81%86/" class="md-nav__link">
         
   
   
@@ -677,7 +677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../code-server/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcode-server/" class="md-nav__link">
+      <a href="../../code-server/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcode-server/" class="md-nav__link">
         
   
   
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../coder/template%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../coder/template%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -768,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../coder/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcoder/" class="md-nav__link">
+      <a href="../../coder/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEcoder/" class="md-nav__link">
         
   
   
@@ -874,7 +874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/common/volume%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../dev-container/common/volume%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -897,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/common/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../dev-container/common/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -966,7 +966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/eks%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/eks%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -989,7 +989,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1012,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/java_operator_sdk%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/java_operator_sdk%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1035,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/java%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/java%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1058,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/kind%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/kind%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1081,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/kubebuilder%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/kubebuilder%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1104,7 +1104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/marp%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/marp%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1127,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/mkdocs%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/mkdocs%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1150,7 +1150,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dev-container/examples/react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+      <a href="../../dev-container/examples/react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1226,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/" class="md-nav__link">
+      <a href="../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/" class="md-nav__link">
         
   
   
@@ -1332,7 +1332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1355,7 +1355,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1378,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1401,7 +1401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1424,7 +1424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1447,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1470,7 +1470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1493,7 +1493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1516,7 +1516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/examples/Docker%E3%81%A7react%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../docker/examples/Docker%E3%81%A7react%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1585,7 +1585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
+      <a href="../../docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -1654,7 +1654,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../docker/trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
+      <a href="../../docker/trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -1806,7 +1806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github-action/common/%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../github/github-action/common/%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1875,7 +1875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github-action/examples/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../github/github-action/examples/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -1898,7 +1898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../github/github-action/examples/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../github/github-action/examples/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -1982,7 +1982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab_Runner%E3%81%A7Docker_Hub%E3%81%ABimage%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2005,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%92AWS%E4%B8%8A%E3%81%AERDS%20%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%92AWS%E4%B8%8A%E3%81%AERDS%20%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2028,7 +2028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%92%E5%A4%96%E9%83%A8%E3%81%AEPostgreSQL%E3%81%AB%E6%8E%A5%E7%B6%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2051,7 +2051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/GitLab%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86%E6%9B%B8%EF%BC%88%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%89%88%EF%BC%89/" class="md-nav__link">
+      <a href="../../gitlab/GitLab%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86%E6%9B%B8%EF%BC%88%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%89%88%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -2112,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-pages/GitLab_Pages%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-pages/GitLab_Pages%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2135,7 +2135,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-pages/%E3%82%B8%E3%83%A7%E3%83%96%E3%82%A2%E3%83%BC%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E4%B8%8A%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-pages/%E3%82%B8%E3%83%A7%E3%83%96%E3%82%A2%E3%83%BC%E3%83%86%E3%82%A3%E3%83%95%E3%82%A1%E3%82%AF%E3%83%88%E3%82%92%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E4%B8%8A%E3%81%A7%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -2204,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/Go_CLI%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2227,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/Go%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2250,7 +2250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/Kubernetes%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/Kubernetes%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2273,7 +2273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/MkDocs%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92GItLab_Pages%E3%81%A7%E5%85%AC%E9%96%8B/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/MkDocs%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92GItLab_Pages%E3%81%A7%E5%85%AC%E9%96%8B/" class="md-nav__link">
         
   
   
@@ -2296,7 +2296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2319,7 +2319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../gitlab/gitlab-runner/Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../gitlab/gitlab-runner/Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -2354,20 +2354,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
           <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
@@ -2383,7 +2381,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             Go
@@ -2394,20 +2392,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11_1" >
         
           
           <label class="md-nav__link" for="__nav_11_1" id="__nav_11_1_label" tabindex="0">
@@ -2423,7 +2419,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_11_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11_1">
             <span class="md-nav__icon md-icon"></span>
             Database
@@ -2437,7 +2433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../go/database/Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -2457,32 +2453,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    標準ライブラリでデータベースに接続
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../go/database/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -2493,44 +2467,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      事前準備
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      サンプルコード
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2589,7 +2525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/godoc%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/documentation/godoc%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -2612,7 +2548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/swaggo%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/documentation/swaggo%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -2681,7 +2617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Go_REST_API%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../go/getting-started/Go_REST_API%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -2704,7 +2640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E6%A7%8B%E6%88%90%E4%BE%8B/" class="md-nav__link">
+      <a href="../../go/getting-started/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E6%A7%8B%E6%88%90%E4%BE%8B/" class="md-nav__link">
         
   
   
@@ -2727,7 +2663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/getting-started/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2796,7 +2732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../go/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -2819,7 +2755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/HTTPS%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8BREST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/http/HTTPS%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8BREST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2842,7 +2778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%87%BA%E5%8A%9B/" class="md-nav__link">
+      <a href="../../go/http/Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%87%BA%E5%8A%9B/" class="md-nav__link">
         
   
   
@@ -2865,7 +2801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7http%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../go/http/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7http%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -2934,7 +2870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../go/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -2957,7 +2893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3026,7 +2962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../go/tips/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -3049,7 +2985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B%E5%88%B6%E5%BE%A1/" class="md-nav__link">
+      <a href="../../go/tips/%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B%E5%88%B6%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -3072,7 +3008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
+      <a href="../../go/tips/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
         
   
   
@@ -3095,7 +3031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E7%8B%AC%E8%87%AA%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../go/tips/%E7%8B%AC%E8%87%AA%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3171,7 +3107,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../harbor/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%81%AEpush%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+      <a href="../../harbor/http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%81%AEpush%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
         
   
   
@@ -3277,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/build/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../java/build/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -3300,7 +3236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/build/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/build/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3369,7 +3305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../java/database/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -3392,7 +3328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../java/database/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -3415,7 +3351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../java/database/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -3438,7 +3374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../java/database/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -3507,7 +3443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../java/debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -3530,7 +3466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../java/debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -3599,7 +3535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3622,7 +3558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3691,7 +3627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/getting-started/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/getting-started/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3714,7 +3650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../java/getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -3783,7 +3719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../java/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -3806,7 +3742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
+      <a href="../../java/http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
         
   
   
@@ -3875,7 +3811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../java/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -3898,7 +3834,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3967,7 +3903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../java/tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -3990,7 +3926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../java/tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4013,7 +3949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4036,7 +3972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../java/tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4150,7 +4086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+      <a href="../../kubernetes/argocd/ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
         
   
   
@@ -4173,7 +4109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4196,7 +4132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/Web-based_terminal%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96/" class="md-nav__link">
+      <a href="../../kubernetes/argocd/Web-based_terminal%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96/" class="md-nav__link">
         
   
   
@@ -4265,7 +4201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/extensions/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/extensions/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4334,7 +4270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4357,7 +4293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../kubernetes/getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -4380,7 +4316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4449,7 +4385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4472,7 +4408,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
         
   
   
@@ -4495,7 +4431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%81%A7Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
         
   
   
@@ -4518,7 +4454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4587,7 +4523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kustomize/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
+      <a href="../../kubernetes/kustomize/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4656,7 +4592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/CustomResource%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/resources/CustomResource%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4679,7 +4615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4702,7 +4638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4725,7 +4661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/Secret%E3%81%A7%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/resources/Secret%E3%81%A7%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4748,7 +4684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/kubeconfig%E3%81%A7%E3%81%AERole%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kubernetes/resources/kubeconfig%E3%81%A7%E3%81%AERole%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -4817,7 +4753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/settings/Kubernetes%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../kubernetes/settings/Kubernetes%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -4893,7 +4829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/first-ftp/" class="md-nav__link">
+      <a href="../../linux/first-ftp/" class="md-nav__link">
         
   
   
@@ -4916,7 +4852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/first-nfs/" class="md-nav__link">
+      <a href="../../linux/first-nfs/" class="md-nav__link">
         
   
   
@@ -4939,7 +4875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/first-nipio/" class="md-nav__link">
+      <a href="../../linux/first-nipio/" class="md-nav__link">
         
   
   
@@ -4962,7 +4898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/install-ubuntu-desktop/" class="md-nav__link">
+      <a href="../../linux/install-ubuntu-desktop/" class="md-nav__link">
         
   
   
@@ -4985,7 +4921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/local-name-resolve/" class="md-nav__link">
+      <a href="../../linux/local-name-resolve/" class="md-nav__link">
         
   
   
@@ -5008,7 +4944,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/non-sleep-linux/" class="md-nav__link">
+      <a href="../../linux/non-sleep-linux/" class="md-nav__link">
         
   
   
@@ -5031,7 +4967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linux/stress-tool/" class="md-nav__link">
+      <a href="../../linux/stress-tool/" class="md-nav__link">
         
   
   
@@ -5099,7 +5035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/MinIO%E3%81%A7%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../minio/MinIO%E3%81%A7%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5122,7 +5058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/MinIO%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../minio/MinIO%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5145,7 +5081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/MinIO%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%92%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../minio/MinIO%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%92%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5168,7 +5104,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../minio/Minio_CLI/" class="md-nav__link">
+      <a href="../../minio/Minio_CLI/" class="md-nav__link">
         
   
   
@@ -5236,7 +5172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mkdocs/first-mkdocs/" class="md-nav__link">
+      <a href="../../mkdocs/first-mkdocs/" class="md-nav__link">
         
   
   
@@ -5304,7 +5240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../multipass/first-multipass/" class="md-nav__link">
+      <a href="../../multipass/first-multipass/" class="md-nav__link">
         
   
   
@@ -5331,18 +5267,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" checked>
         
           
           <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
@@ -5358,7 +5296,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_19">
             <span class="md-nav__icon md-icon"></span>
             Mysql
@@ -5369,10 +5307,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../mysql/MySQL%E3%81%AEmaster-slave%E6%A7%8B%E6%88%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    MySQL の master-slave 構成を構築
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -5383,6 +5343,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ディレクトリ構成
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      設定ファイル準備
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定ファイル準備">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-compose.yaml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      volumes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masterinitdbdinitsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      master/initdb.d/init.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mastermycnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      master/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slaveinitdbdinitsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      slave/initdb.d/init.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slavemycnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      slave/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      動作確認
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5440,7 +5507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nginx/nginx%E3%81%A7%E3%83%AA%E3%83%90%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../nginx/nginx%E3%81%A7%E3%83%AA%E3%83%90%E3%83%BC%E3%82%B9%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5463,7 +5530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nginx/nginx%E3%82%B5%E3%83%BC%E3%83%90%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89%E3%80%81%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../nginx/nginx%E3%82%B5%E3%83%BC%E3%83%90%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%89%E3%80%81%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5531,7 +5598,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../oracle/DB%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -5554,7 +5621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../oracle/PDB%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5577,7 +5644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../oracle/%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5600,7 +5667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../oracle/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7OracleDB%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../oracle/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%A7OracleDB%E3%82%92%E8%B5%B7%E5%8B%95%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5668,7 +5735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postfix/local-postfix/" class="md-nav__link">
+      <a href="../../postfix/local-postfix/" class="md-nav__link">
         
   
   
@@ -5736,7 +5803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../postgresql/PostgreSQL%E3%82%B5%E3%83%BC%E3%83%90%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5759,7 +5826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../postgresql/PostgreSQL%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../postgresql/PostgreSQL%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5827,7 +5894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../prometheus/Prometheus%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../prometheus/Prometheus%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5850,7 +5917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../prometheus/Promethues%E5%90%91%E3%81%91%E3%81%ABSpring_Boot_Actuator%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../prometheus/Promethues%E5%90%91%E3%81%91%E3%81%ABSpring_Boot_Actuator%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -5873,7 +5940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../prometheus/Spring_Batch%E3%81%8B%E3%82%89prometheus%E5%90%91%E3%81%91%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../prometheus/Spring_Batch%E3%81%8B%E3%82%89prometheus%E5%90%91%E3%81%91%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5941,7 +6008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/React_Hook_Form%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E9%80%81%E4%BF%A1%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../react/React_Hook_Form%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E9%80%81%E4%BF%A1%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -5964,7 +6031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/React%E3%81%8B%E3%82%89%E5%A4%96%E9%83%A8API%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../react/React%E3%81%8B%E3%82%89%E5%A4%96%E9%83%A8API%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -5987,7 +6054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/React%E3%81%AEenv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../react/React%E3%81%AEenv%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -6010,7 +6077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/React%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%96%B9%E6%B3%95/" class="md-nav__link">
+      <a href="../../react/React%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%96%B9%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -6033,7 +6100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../react/React%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../react/React%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -6101,7 +6168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../squid/first-squid/" class="md-nav__link">
+      <a href="../../squid/first-squid/" class="md-nav__link">
         
   
   
@@ -6169,7 +6236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ssl/first-letsencript/" class="md-nav__link">
+      <a href="../../ssl/first-letsencript/" class="md-nav__link">
         
   
   
@@ -6192,7 +6259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ssl/first-ssl/" class="md-nav__link">
+      <a href="../../ssl/first-ssl/" class="md-nav__link">
         
   
   
@@ -6260,7 +6327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../vscode/%E5%90%84%E7%A8%AE%E8%A8%AD%E5%AE%9A%E6%8E%A7%E3%81%88/" class="md-nav__link">
+      <a href="../../vscode/%E5%90%84%E7%A8%AE%E8%A8%AD%E5%AE%9A%E6%8E%A7%E3%81%88/" class="md-nav__link">
         
   
   
@@ -6328,7 +6395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../zabbix/zabbix-install/" class="md-nav__link">
+      <a href="../../zabbix/zabbix-install/" class="md-nav__link">
         
   
   
@@ -6378,18 +6445,87 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
-      事前準備
+      ディレクトリ構成
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      設定ファイル準備
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定ファイル準備">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      docker-compose.yaml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      volumes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masterinitdbdinitsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      master/initdb.d/init.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mastermycnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      master/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slaveinitdbdinitsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      slave/initdb.d/init.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slavemycnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      slave/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      サンプルコード
+      動作確認
     </span>
   </a>
   
@@ -6411,124 +6547,82 @@
 
 
 
-<h1 id="_1">標準ライブラリでデータベースに接続</h1>
-<p>データベース（今回は MariaDB）に接続します。</p>
-<h2 id="_2">事前準備</h2>
-<p>MariaDB 向けの Go ドライバをインストールします:</p>
-<div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>github.com/go-sql-driver/mysql
+<h1 id="mysql-master-slave">MySQL の master-slave 構成を構築</h1>
+<p>MySQL データベースについて master-slave 方式で冗長構成を構築します。</p>
+<h2 id="_1">ディレクトリ構成</h2>
+<div class="highlight"><pre><span></span><code>.
+├──<span class="w"> </span>docker-compose.yaml
+└──<span class="w"> </span>volumes
+<span class="w">    </span>├──<span class="w"> </span>master
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>initdb.d
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>init.sql
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>my.cnf
+<span class="w">    </span>└──<span class="w"> </span>slave
+<span class="w">        </span>├──<span class="w"> </span>initdb.d
+<span class="w">        </span>│<span class="w">   </span>└──<span class="w"> </span>init.sql
+<span class="w">        </span>└──<span class="w"> </span>my.cnf
 </code></pre></div>
-<p>下記 DDL でデータベースを用意しておきます:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- データベース作成</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
-
-<span class="n">USE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
-
-<span class="c1">-- テーブル作成</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
-<span class="p">);</span>
+<h2 id="_2">設定ファイル準備</h2>
+<h3 id="docker-composeyaml">docker-compose.yaml</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">mysql-master</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-master</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3307:3306</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/master/my.cnf:/etc/mysql/conf.d/my.cnf</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/master/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
+<span class="w">  </span><span class="nt">mysql-slave</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-slave</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3308:3306</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/slave/my.cnf:/etc/mysql/conf.d/my.cnf</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/slave/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
-<h2 id="_3">サンプルコード</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<h3 id="volumes">volumes</h3>
+<h3 id="masterinitdbdinitsql">master/initdb.d/init.sql</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- レプリケーション向けユーザを作成します。</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;replpass&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="mastermycnf">master/my.cnf</h3>
+<div class="highlight"><pre><span></span><code>[mysqld]
+server-id = 1
+log-bin = mysql-bin
+binlog-format = ROW
+gtid-mode = ON
+enforce-gtid-consistency = ON
+</code></pre></div>
+<h3 id="slaveinitdbdinitsql">slave/initdb.d/init.sql</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- レプリカ設定を入れます。</span>
+<span class="n">CHANGE</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="k">SOURCE</span><span class="w"> </span><span class="k">TO</span>
+<span class="w">  </span><span class="n">SOURCE_HOST</span><span class="o">=</span><span class="s1">&#39;mysql-master&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SOURCE_USER</span><span class="o">=</span><span class="s1">&#39;repl&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SOURCE_PASSWORD</span><span class="o">=</span><span class="s1">&#39;replpass&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SOURCE_AUTO_POSITION</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;log&quot;</span>
-
-<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/go-sql-driver/mysql&quot;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// DB接続</span>
-<span class="w">    </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">connectDB</span><span class="p">()</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;DB access failed&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// ユーザ登録実行</span>
-<span class="w">    </span><span class="nx">insert</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">users</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">})</span>
-
-<span class="w">    </span><span class="c1">// 複数ユーザ検索実行</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">findByAge</span><span class="p">(</span><span class="nx">db</span><span class="p">))</span>
-
-<span class="w">    </span><span class="c1">// 単一ユーザ検索実行</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">findById</span><span class="p">(</span><span class="nx">db</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="c1">// データベースに接続します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">connectDB</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// ユーザー名:パスワード@tcp(ホスト:ポート)/データベース名</span>
-<span class="w">    </span><span class="nx">dsn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;root:password@tcp(localhost:3306)/snaildb&quot;</span>
-<span class="w">    </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sql</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;mysql&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">dsn</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// 実際に接続できるかを確認</span>
-<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Ping</span><span class="p">()</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="c1">// ユーザを登録します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">insert</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="nx">users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// クエリ実行</span>
-<span class="w">    </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="s">&quot;INSERT INTO users (name, age) VALUES (?, ?)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// 30歳未満のユーザ（複数）を検索します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">findByAge</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="nx">users</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM users WHERE age &lt; ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="c1">// 30歳未満を抽出</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
-
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">usersList</span><span class="w"> </span><span class="p">[]</span><span class="nx">users</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="kt">int</span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">age</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="nx">u</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">users</span><span class="p">{</span><span class="nx">id</span><span class="p">:</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
-<span class="w">        </span><span class="nx">usersList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">usersList</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">usersList</span>
-<span class="p">}</span>
-
-<span class="c1">// ID=1のユーザ（単一）を検索します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">findById</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">row</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">QueryRow</span><span class="p">(</span><span class="s">&quot;SELECT * FROM users WHERE id = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// ID=1を抽出</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="kt">int</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span>
-<span class="w">    </span><span class="nx">row</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">age</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">users</span><span class="p">{</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// usersテーブル向けのモデルです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">id</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="c1">// ID</span>
-<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 名前</span>
-<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 年齢</span>
-<span class="p">}</span>
+<span class="k">START</span><span class="w"> </span><span class="n">REPLICA</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="slavemycnf">slave/my.cnf</h3>
+<div class="highlight"><pre><span></span><code>[mysqld]
+server-id = 2
+relay-log = relay-bin
+read-only = 1
+gtid-mode = ON
+enforce-gtid-consistency = ON
+</code></pre></div>
+<h2 id="_3">動作確認</h2>
+<p>下記と同様の出力が得られれば正常に master-slave 構成になっています:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mysql-slave<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-ppassword<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW REPLICA STATUS\G&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Replica_.*_Running&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Yes&quot;</span>
+<span class="w">           </span>Replica_IO_Running:<span class="w"> </span>Yes
+<span class="w">          </span>Replica_SQL_Running:<span class="w"> </span>Yes
 </code></pre></div>
 
 
@@ -6593,10 +6687,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>
