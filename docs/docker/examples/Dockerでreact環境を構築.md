@@ -1,4 +1,4 @@
-# Docker で React 実行環境をビルド
+# Docker で React 環境を構築
 
 ## 構築手順
 
