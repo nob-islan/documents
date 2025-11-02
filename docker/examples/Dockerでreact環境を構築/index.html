@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/">
+        <link rel="prev" href="../Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/">
       
       
-        <link rel="next" href="../Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/">
+        <link rel="next" href="../../install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/">
       
       
       <link rel="icon" href="../../../00_config/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Docker で MinIO を構築 - Nob docs</title>
+        <title>Docker で React 環境を構築 - Nob docs</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#docker-minio" class="md-skip">
+        <a href="#docker-react" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker で MinIO を構築
+              Docker で React 環境を構築
             
           </span>
         </div>
@@ -1402,39 +1402,6 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    Docker で MinIO を構築
-    
-  </span>
-  
-
-      </a>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
@@ -1550,20 +1517,104 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7react%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Docker で React 環境を構築
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Docker で React 実行環境をビルド
+    Docker で React 環境を構築
     
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      構築手順
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="構築手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#react" class="md-nav__link">
+    <span class="md-ellipsis">
+      react アプリをビルド
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dockerfile を記載
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      コンテナイメージを実行
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5095,6 +5146,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../minio/MinIO%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MinIO インストール手順
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../minio/MinIO%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%92%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
@@ -6253,6 +6327,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      構築手順
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="構築手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#react" class="md-nav__link">
+    <span class="md-ellipsis">
+      react アプリをビルド
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dockerfile を記載
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      コンテナイメージを実行
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -6267,24 +6391,30 @@
 
 
 
-<h1 id="docker-minio">Docker で MinIO を構築</h1>
-<p>cf. <a href="https://min.io/docs/minio/container/index.html">https://min.io/docs/minio/container/index.html</a></p>
-<p>下記の内容で<code>docker-compose.yaml</code>を作成します：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">minio</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio/minio:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-minio</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">MINIO_ROOT_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
-<span class="w">      </span><span class="nt">MINIO_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">password</span>
-<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">server /data --console-address &quot;:9090&quot;</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9000:9000</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9090:9090</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/data</span>
+<h1 id="docker-react">Docker で React 環境を構築</h1>
+<h2 id="_1">構築手順</h2>
+<h3 id="react">react アプリをビルド</h3>
+<ul>
+<li>ビルドしたいプロジェクトのルートディレクトリでビルドコマンドを実行します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span>build
 </code></pre></div>
-<p><code>http://${IPアドレス}:9090</code>にアクセスするとログイン画面が表示されます。</p>
+<h3 id="dockerfile">Dockerfile を記載</h3>
+<ul>
+<li>下記 Dockerfile で react アプリケーションを実行可能なコンテナイメージを作成します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:20.12.2-buster</span>
+
+<span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>serve
+
+<span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">先に作成したbuildディレクトリ</span><span class="si">}</span><span class="w"> </span>/build/
+
+<span class="k">CMD</span><span class="w"> </span>serve<span class="w"> </span>-s<span class="w"> </span>build
+</code></pre></div>
+<h3 id="_2">コンテナイメージを実行</h3>
+<ul>
+<li><code>docker run</code>コマンド等でコンテナイメージを実行すればアプリケーションが利用できます。</li>
+</ul>
 
 
 
