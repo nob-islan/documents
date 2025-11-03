@@ -65,7 +65,7 @@ services:
 
 ### volumes
 
-### mysql-master/initdb.d/init.sql
+#### mysql-master/initdb.d/init.sql
 
 ```sql
 -- レプリケーション担当ユーザ作成
@@ -92,7 +92,7 @@ CREATE TABLE users(
 );
 ```
 
-### mysql-master/my.cnf
+#### mysql-master/my.cnf
 
 ```cnf
 [mysqld]
@@ -103,7 +103,7 @@ gtid-mode = ON
 enforce-gtid-consistency = ON
 ```
 
-### mysql-slave/initdb.d/init.sql
+#### mysql-slave/initdb.d/init.sql
 
 ```sql
 -- レプリカ設定
@@ -122,7 +122,7 @@ CREATE USER IF NOT EXISTS 'monitor'@'%' IDENTIFIED BY 'monitorpass';
 GRANT USAGE ON *.* TO 'monitor'@'%';
 ```
 
-### mysql-slave/my.cnf
+#### mysql-slave/my.cnf
 
 ```cnf
 [mysqld]
@@ -133,7 +133,7 @@ gtid-mode = ON
 enforce-gtid-consistency = ON
 ```
 
-### proxysql/proxysql.cnf
+#### proxysql/proxysql.cnf
 
 ```cnf
 mysql_variables =
