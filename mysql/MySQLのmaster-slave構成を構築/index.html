@@ -5397,36 +5397,45 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#masterinitdbdinitsql" class="md-nav__link">
+  <a href="#mysql-masterinitdbdinitsql" class="md-nav__link">
     <span class="md-ellipsis">
-      master/initdb.d/init.sql
+      mysql-master/initdb.d/init.sql
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mastermycnf" class="md-nav__link">
+  <a href="#mysql-mastermycnf" class="md-nav__link">
     <span class="md-ellipsis">
-      master/my.cnf
+      mysql-master/my.cnf
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#slaveinitdbdinitsql" class="md-nav__link">
+  <a href="#mysql-slaveinitdbdinitsql" class="md-nav__link">
     <span class="md-ellipsis">
-      slave/initdb.d/init.sql
+      mysql-slave/initdb.d/init.sql
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#slavemycnf" class="md-nav__link">
+  <a href="#mysql-slavemycnf" class="md-nav__link">
     <span class="md-ellipsis">
-      slave/my.cnf
+      mysql-slave/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxysqlproxysqlcnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      proxysql/proxysql.cnf
     </span>
   </a>
   
@@ -6482,36 +6491,45 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#masterinitdbdinitsql" class="md-nav__link">
+  <a href="#mysql-masterinitdbdinitsql" class="md-nav__link">
     <span class="md-ellipsis">
-      master/initdb.d/init.sql
+      mysql-master/initdb.d/init.sql
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mastermycnf" class="md-nav__link">
+  <a href="#mysql-mastermycnf" class="md-nav__link">
     <span class="md-ellipsis">
-      master/my.cnf
+      mysql-master/my.cnf
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#slaveinitdbdinitsql" class="md-nav__link">
+  <a href="#mysql-slaveinitdbdinitsql" class="md-nav__link">
     <span class="md-ellipsis">
-      slave/initdb.d/init.sql
+      mysql-slave/initdb.d/init.sql
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#slavemycnf" class="md-nav__link">
+  <a href="#mysql-slavemycnf" class="md-nav__link">
     <span class="md-ellipsis">
-      slave/my.cnf
+      mysql-slave/my.cnf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proxysqlproxysqlcnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      proxysql/proxysql.cnf
     </span>
   </a>
   
@@ -6553,17 +6571,24 @@
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>docker-compose.yaml
 └──<span class="w"> </span>volumes
-<span class="w">    </span>├──<span class="w"> </span>master
+<span class="w">    </span>├──<span class="w"> </span>mysql-master
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>initdb.d
 <span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>init.sql
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>my.cnf
-<span class="w">    </span>└──<span class="w"> </span>slave
-<span class="w">        </span>├──<span class="w"> </span>initdb.d
-<span class="w">        </span>│<span class="w">   </span>└──<span class="w"> </span>init.sql
-<span class="w">        </span>└──<span class="w"> </span>my.cnf
+<span class="w">    </span>├──<span class="w"> </span>mysql-slave
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>initdb.d
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>init.sql
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>my.cnf
+<span class="w">    </span>└──<span class="w"> </span>proxysql
+<span class="w">        </span>└──<span class="w"> </span>proxysql.cnf
 </code></pre></div>
 <h2 id="_2">設定ファイル準備</h2>
 <h3 id="docker-composeyaml">docker-compose.yaml</h3>
+<ul>
+<li>mysql-master: 書き込み処理および slave がダウンした際の読み取り処理を担当</li>
+<li>mysql-slave: 読み取り専用</li>
+<li>proxysql: 上記 master / slave へのクエリをルーティング（slave がダウンした際は master にフォールバック）</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">mysql-master</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-master</span>
@@ -6571,8 +6596,8 @@
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3307:3306</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/master/my.cnf:/etc/mysql/conf.d/my.cnf</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/master/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/mysql-master/my.cnf:/etc/mysql/conf.d/my.cnf</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/mysql-master/initdb.d:/docker-entrypoint-initdb.d</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 <span class="w">  </span><span class="nt">mysql-slave</span><span class="p">:</span>
@@ -6581,18 +6606,48 @@
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3308:3306</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/slave/my.cnf:/etc/mysql/conf.d/my.cnf</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/slave/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/mysql-slave/my.cnf:/etc/mysql/conf.d/my.cnf</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/mysql-slave/initdb.d:/docker-entrypoint-initdb.d</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
+<span class="w">  </span><span class="nt">proxysql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxysql/proxysql:3.0.2</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxysql</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-master</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql-slave</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3306:3306&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;6032:6032&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/proxysql/proxysql.cnf:/etc/proxysql.cnf</span>
 </code></pre></div>
 <h3 id="volumes">volumes</h3>
-<h3 id="masterinitdbdinitsql">master/initdb.d/init.sql</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- レプリケーション向けユーザを作成します。</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;replpass&#39;</span><span class="p">;</span>
+<h3 id="mysql-masterinitdbdinitsql">mysql-master/initdb.d/init.sql</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- レプリケーション担当ユーザ作成</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;replpass&#39;</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;repl&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+
+<span class="c1">-- アプリケーションからアクセスするユーザ作成</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;appuser&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;appuserpass&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;appuser&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+
+<span class="c1">-- proxysqlからの監視ユーザ作成</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;monitor&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;monitorpass&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;monitor&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+
+<span class="c1">-- 業務テーブル構築</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
+
+<span class="n">USE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
 </code></pre></div>
-<h3 id="mastermycnf">master/my.cnf</h3>
+<h3 id="mysql-mastermycnf">mysql-master/my.cnf</h3>
 <div class="highlight"><pre><span></span><code>[mysqld]
 server-id = 1
 log-bin = mysql-bin
@@ -6600,8 +6655,8 @@ binlog-format = ROW
 gtid-mode = ON
 enforce-gtid-consistency = ON
 </code></pre></div>
-<h3 id="slaveinitdbdinitsql">slave/initdb.d/init.sql</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- レプリカ設定を入れます。</span>
+<h3 id="mysql-slaveinitdbdinitsql">mysql-slave/initdb.d/init.sql</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- レプリカ設定</span>
 <span class="n">CHANGE</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="k">SOURCE</span><span class="w"> </span><span class="k">TO</span>
 <span class="w">  </span><span class="n">SOURCE_HOST</span><span class="o">=</span><span class="s1">&#39;mysql-master&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="n">SOURCE_USER</span><span class="o">=</span><span class="s1">&#39;repl&#39;</span><span class="p">,</span>
@@ -6609,8 +6664,14 @@ enforce-gtid-consistency = ON
 <span class="w">  </span><span class="n">SOURCE_AUTO_POSITION</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 
 <span class="k">START</span><span class="w"> </span><span class="n">REPLICA</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;appuser&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;appuserpass&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;appuser&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="s1">&#39;monitor&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;monitorpass&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;monitor&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="slavemycnf">slave/my.cnf</h3>
+<h3 id="mysql-slavemycnf">mysql-slave/my.cnf</h3>
 <div class="highlight"><pre><span></span><code>[mysqld]
 server-id = 2
 relay-log = relay-bin
@@ -6618,12 +6679,87 @@ read-only = 1
 gtid-mode = ON
 enforce-gtid-consistency = ON
 </code></pre></div>
+<h3 id="proxysqlproxysqlcnf">proxysql/proxysql.cnf</h3>
+<div class="highlight"><pre><span></span><code>mysql_variables =
+{
+    interfaces=&quot;0.0.0.0:3306&quot;
+    server_version=&quot;8.0&quot;
+    monitor_username=&quot;monitor&quot;
+    monitor_password=&quot;monitorpass&quot;
+}
+
+mysql_servers =
+(
+    {
+        address=&quot;mysql-master&quot;
+        port=3306
+        hostgroup_id=10
+        max_connections=200
+    },
+    {
+        address=&quot;mysql-slave&quot;
+        port=3306
+        hostgroup_id=20
+        max_connections=200
+    }
+)
+
+mysql_users =
+(
+    {
+        username=&quot;appuser&quot;
+        password=&quot;appuserpass&quot;
+        default_hostgroup=10
+        transaction_persistent=true
+        active=1
+    }
+)
+
+mysql_query_rules =
+(
+    {
+        rule_id=1
+        active=1
+        match_pattern=&quot;^SELECT&quot;
+        destination_hostgroup=20
+        apply=1
+    },
+    {
+        rule_id=2
+        active=1
+        match_pattern=&quot;.*&quot;
+        destination_hostgroup=10
+        apply=1
+    }
+)
+
+mysql_replication_hostgroups =
+(
+    {
+        writer_hostgroup=10
+        reader_hostgroup=20
+        comment=&quot;master-slave replication setup&quot;
+    }
+)
+</code></pre></div>
 <h2 id="_3">動作確認</h2>
-<p>下記と同様の出力が得られれば正常に master-slave 構成になっています:</p>
+<ul>
+<li>下記と同様の出力が得られれば正常に master-slave 構成になっています:</li>
+</ul>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>mysql-slave<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-ppassword<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW REPLICA STATUS\G&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Replica_.*_Running&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Yes&quot;</span>
 <span class="w">           </span>Replica_IO_Running:<span class="w"> </span>Yes
 <span class="w">          </span>Replica_SQL_Running:<span class="w"> </span>Yes
 </code></pre></div>
+<ul>
+<li>proxysql の設定は管理用データベースにて確認できます:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>proxysql<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>admin<span class="w"> </span>-padmin<span class="w"> </span>-P<span class="w"> </span><span class="m">6032</span>
+</code></pre></div>
+<p>各種設定項目については下記を参照してください:</p>
+<ul>
+<li><a href="https://proxysql.com/documentation/">https://proxysql.com/documentation/</a></li>
+<li><a href="https://hub.docker.com/r/proxysql/proxysql">https://hub.docker.com/r/proxysql/proxysql</a></li>
+</ul>
 
 
 
