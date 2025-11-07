@@ -109,7 +109,7 @@ spec:
 
 ## 使用方法
 
-- `kustomization.yaml`の内容でマニフェストを標準出力します。
+- `kustomization.yaml`の内容でマニフェストを標準出力します:
 
 ```shell
 kustomize build bases/
@@ -120,8 +120,14 @@ kustomize build bases/
 kustomize build bases/ | kubectl apply -f -
 ```
 
-- `kustomization.yaml`の内容でリソースを作成する:
+- `kubectl`コマンドを使って`kustomization.yaml`の内容でリソースを作成します:
 
 ```shell
 kubectl apply -k bases/
+```
+
+- dev 向けの設定でリソースを作成します:
+
+```shell
+kubectl apply -k overlays/dev/
 ```
