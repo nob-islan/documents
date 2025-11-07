@@ -6671,7 +6671,7 @@
 </code></pre></div>
 <h2 id="_4">使用方法</h2>
 <ul>
-<li><code>kustomization.yaml</code>の内容でマニフェストを標準出力します。</li>
+<li><code>kustomization.yaml</code>の内容でマニフェストを標準出力します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>kustomize<span class="w"> </span>build<span class="w"> </span>bases/
 </code></pre></div>
@@ -6679,9 +6679,14 @@
 kustomize<span class="w"> </span>build<span class="w"> </span>bases/<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
 </code></pre></div>
 <ul>
-<li><code>kustomization.yaml</code>の内容でリソースを作成する:</li>
+<li><code>kubectl</code>コマンドを使って<code>kustomization.yaml</code>の内容でリソースを作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-k<span class="w"> </span>bases/
+</code></pre></div>
+<ul>
+<li>dev 向けの設定でリソースを作成します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-k<span class="w"> </span>overlays/dev/
 </code></pre></div>
 
 
