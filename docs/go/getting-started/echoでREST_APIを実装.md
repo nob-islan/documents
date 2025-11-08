@@ -14,32 +14,153 @@ echo を使って簡易的な GET メソッドおよび POST メソッドを実�
 │   └── main.go
 └── internal
     └── handler
+        ├── auth_handler.go
+        ├── auth_handler_test.go
         ├── model
-        │   └── userinfo_model.go
-        ├── router
-        │   ├── base.go
-        │   └── userinfo_router.go
-        ├── userinfo_handler.go
-        └── userinfo_handler_test.go
+        │   └── auth_model.go
+        └── router
+            ├── auth_router.go
+            └── base.go
 ```
 
 ### 実装
 
-#### main.go
+#### internal/handler/
+
+- auth_handler.go
 
 ```go
-package main
+package handler
 
-import "firstecho/internal/handler/router"
+import (
+	"easyapp/internal/handler/model"
+	"easyapp/internal/usecase"
+	"easyapp/internal/usecase/payload"
+	"net/http"
 
-func main() {
+	"github.com/labstack/echo/v4"
+)
 
-	e := router.Routing()
-	e.Logger.Fatal(e.Start(":8080"))
+// 認証のhandlerインターフェースです。
+type AuthHandler interface {
+
+	// 認証処理を呼び出します。
+	Login(c echo.Context) error
+
+	// ユーザ情報取得処理を呼び出します。
+	Me(c echo.Context) error
+}
+
+type authHandler struct {
+	authUsecase usecase.AuthUsecase
+}
+
+func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
+	return &authHandler{authUsecase: authUsecase}
+}
+
+func (h *authHandler) Login(c echo.Context) error {
+
+	// jsonパース エラー発生時はStatus400を返す
+	req, err := model.NewLoginReq(c)
+	if err != nil {
+		return c.JSON(
+			http.StatusBadRequest,
+			echo.NewHTTPError(
+				http.StatusBadRequest,
+				"Bad request",
+			),
+		)
+	}
+
+	// usecase呼び出し
+	out := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+
+	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
+}
+
+func (h *authHandler) Me(c echo.Context) error {
+
+	// クエリパラメータ取得
+	req := model.NewMeReq(c)
+
+	// usecase呼び出し 業務エラー発生時はStatus500を返す
+	out, err := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	if err != nil {
+		return c.JSON(
+			http.StatusInternalServerError,
+			echo.NewHTTPError(
+				http.StatusInternalServerError,
+				"Internal server error",
+			),
+		)
+	}
+
+	return c.JSON(http.StatusOK, model.NewMeRes(out.Name(), out.Age()))
 }
 ```
 
-#### base.go
+#### internal/handler/model/
+
+- auth_model.go
+
+```go
+package model
+
+import (
+	"errors"
+
+	"github.com/labstack/echo/v4"
+)
+
+// 認証向けのリクエストモデルです。
+type LoginReq struct {
+	Name     string `json:"name"`     // ユーザ名
+	Password string `json:"password"` // パスワード
+}
+
+func NewLoginReq(c echo.Context) (LoginReq, error) {
+
+	req := new(LoginReq)
+	if err := c.Bind(req); err != nil {
+		return LoginReq{}, errors.New("不正なリクエストです。")
+	}
+
+	return *req, nil
+}
+
+// 認証向けのレスポンスモデルです。
+type LoginRes struct {
+	Valid bool `json:"valid"` // 認証可否
+}
+
+func NewLoginRes(valid bool) LoginRes {
+	return LoginRes{Valid: valid}
+}
+
+// ユーザ情報取得向けのリクエストモデルです。
+type MeReq struct {
+	Name string `json:"name"` // ユーザ名
+}
+
+func NewMeReq(c echo.Context) MeReq {
+	return MeReq{Name: c.QueryParam("name")}
+}
+
+// ユーザ情報取得向けのレスポンスモデルです。
+type MeRes struct {
+	Name string `json:"name"` // ユーザ名
+	Age  int    `json:"age"`  // 年齢
+}
+
+func NewMeRes(name string, age int) MeRes {
+	return MeRes{Name: name, Age: age}
+}
+```
+
+#### internal/handler/router/
+
+- base.go
 
 ```go
 package router
@@ -64,171 +185,60 @@ func Routing() *echo.Echo {
 }
 ```
 
-#### userinfo_router.go
+- auth_router.go
 
 ```go
 package router
 
 import (
-	"firstecho/internal/handler"
-	"firstecho/internal/usecase"
+	"easyapp/internal/handler"
+	"easyapp/internal/usecase"
 
 	"github.com/labstack/echo/v4"
 )
 
-type userinfoRouter struct{}
+type authRouter struct{}
 
 func NewUserinfoRouter() Router {
-	return &userinfoRouter{}
+	return &authRouter{}
 }
 
-func (r *userinfoRouter) SetRouting(e *echo.Echo) {
+func (a *authRouter) SetRouting(e *echo.Echo) {
 
-	h := handler.NewUserinfoHandler(usecase.NewUserinfoUsecase())
+	h := handler.NewAuthHandler(usecase.NewAuthUsecase())
 
-	e.GET(basePath+"/userinfo", h.Search)
-	e.POST(basePath+"/userinfo", h.Regist)
+	e.POST(basePath+"/login", h.Login)
+	e.GET(basePath+"/me", h.Me)
 }
 ```
 
-#### userinfo_handler.go
+#### cmd/
+
+- main.go
 
 ```go
-package handler
+package main
 
-import (
-	"firstecho/internal/handler/model"
-	"firstecho/internal/usecase"
-	"firstecho/internal/usecase/payload"
-	"net/http"
+import "easyapp/internal/handler/router"
 
-	"github.com/labstack/echo/v4"
-)
+func main() {
 
-type UserinfoHandler interface {
-	Search(c echo.Context) error
-	Regist(c echo.Context) error
-}
-
-type userinfoHandler struct {
-	u usecase.UserinfoUsecase
-}
-
-func NewUserinfoHandler(u usecase.UserinfoUsecase) UserinfoHandler {
-	return &userinfoHandler{u: u}
-}
-
-func (h *userinfoHandler) Search(c echo.Context) error {
-
-	req := model.NewUserSearchReq(c)
-
-    // usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.u.Search(payload.NewUserSearchIn(req.Username))
-	if err != nil {
-		return c.JSON(
-			http.StatusInternalServerError,
-			echo.NewHTTPError(
-				http.StatusInternalServerError,
-				"Internal server error",
-			),
-		)
-	}
-
-	return c.JSON(http.StatusOK, model.NewUserSearchRes(out.Users()))
-}
-
-func (h *userinfoHandler) Regist(c echo.Context) error {
-
-    // jsonパース エラー発生時はStatus400を返す
-	req, err := model.NewUserRegistReq(c)
-	if err != nil {
-		return c.JSON(
-			http.StatusBadRequest,
-			echo.NewHTTPError(
-				http.StatusBadRequest,
-				"Bad request",
-			),
-		)
-	}
-
-    // usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.u.Regist(payload.NewUserRegistIn(req.Username, req.Age))
-	if err != nil {
-		return c.JSON(
-			http.StatusInternalServerError,
-			echo.NewHTTPError(
-				http.StatusInternalServerError,
-				"Internal server error",
-			),
-		)
-	}
-
-	return c.JSON(http.StatusOK, model.NewUserRegistRes(out.Message()))
+	e := router.Routing()
+	e.Logger.Fatal(e.Start(":8080"))
 }
 ```
 
-#### userinfo_model.go
+### テスト作成
 
-```go
-package model
-
-import (
-	"errors"
-	"firstecho/internal/types"
-
-	"github.com/labstack/echo/v4"
-)
-
-type UserSearchReq struct {
-	Username string `json:"username"`
-}
-
-func NewUserSearchReq(c echo.Context) UserSearchReq {
-	return UserSearchReq{Username: c.QueryParam("username")}
-}
-
-type UserSearchRes struct {
-	Users []types.User `json:"users"`
-}
-
-func NewUserSearchRes(users []types.User) UserSearchRes {
-	return UserSearchRes{Users: users}
-}
-
-type UserRegistReq struct {
-	Username string `json:"username"`
-	Age      int    `json:"age"`
-}
-
-func NewUserRegistReq(c echo.Context) (UserRegistReq, error) {
-
-	req := new(UserRegistReq)
-	if err := c.Bind(req); err != nil {
-		return UserRegistReq{}, errors.New("failed to bind request")
-	}
-
-	return *req, nil
-}
-
-type UserRegistRes struct {
-	Message string `json:"message"`
-}
-
-func NewUserRegistRes(message string) UserRegistRes {
-	return UserRegistRes{Message: message}
-}
-```
-
-#### userinfo_handler_test.go
+- auth_handler_test.go
 
 ```go
 package handler
 
 import (
 	"bytes"
+	"easyapp/internal/usecase/payload"
 	"errors"
-	"firstecho/internal/types"
-	"firstecho/internal/usecase/payload"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -239,116 +249,52 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type MockUserinfoUsecase struct {
+type mockAuthUsecase struct {
 	mock.Mock
 }
 
-func (m *MockUserinfoUsecase) Search(in payload.UserSearchIn) (payload.UserSearchOut, error) {
+func (m *mockAuthUsecase) Login(in payload.LoginIn) payload.LoginOut {
 	args := m.Called(in)
-	return args.Get(0).(payload.UserSearchOut), args.Error(1)
+	return args.Get(0).(payload.LoginOut)
 }
 
-func (m *MockUserinfoUsecase) Regist(in payload.UserRegistIn) (payload.UserRegistOut, error) {
+func (m *mockAuthUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 	args := m.Called(in)
-	return args.Get(0).(payload.UserRegistOut), args.Error(1)
+	return args.Get(0).(payload.MeOut), args.Error(1)
 }
 
-func Test_UserinfoHandler_Search(t *testing.T) {
+func Test_AuthHandler_Login(t *testing.T) {
 
 	tests := []struct {
-		name               string
-		requestParam       map[string]string
-		setupMock          func(mock *MockUserinfoUsecase)
-		expectedStatusCode int
-		expectedBody       string
-	}{
-		{
-			name:         "success",
-			requestParam: map[string]string{"username": "testnob"},
-			setupMock: func(mock *MockUserinfoUsecase) {
-				mock.On(
-					"Search",
-					payload.NewUserSearchIn("testnob"),
-				).Return(
-					payload.NewUserSearchOut([]types.User{types.NewUser(1, "testnob", 13)}),
-					nil,
-				)
-			},
-			expectedStatusCode: http.StatusOK,
-			expectedBody:       `{"users":[{"age":13,"id":1,"username":"testnob"}]}`,
-		},
-		{
-			name:         "usecase error",
-			requestParam: map[string]string{"username": "testnob"},
-			setupMock: func(mock *MockUserinfoUsecase) {
-				mock.On(
-					"Search",
-					payload.NewUserSearchIn("testnob"),
-				).Return(payload.NewUserSearchOut(nil), errors.New("test error"))
-			},
-			expectedStatusCode: http.StatusInternalServerError,
-			expectedBody:       `{"message":"Internal server error"}`,
-		},
-	}
-
-	for _, testcase := range tests {
-
-		q := make(url.Values)
-		q.Set("username", testcase.requestParam["username"])
-		req := httptest.NewRequest(http.MethodGet, "/?"+q.Encode(), nil)
-		rec := httptest.NewRecorder()
-		c := echo.New().NewContext(req, rec)
-
-		mockUsecase := new(MockUserinfoUsecase)
-		testcase.setupMock(mockUsecase)
-		h := NewUserinfoHandler(mockUsecase)
-
-		if assert.NoError(t, h.Search(c)) {
-			assert.Equal(t, testcase.expectedStatusCode, rec.Code)
-			assert.JSONEq(t, testcase.expectedBody, rec.Body.String())
-		}
-	}
-}
-
-func Test_UserinfoHandler_Regist(t *testing.T) {
-
-	tests := []struct {
-		name               string
-		requestBody        string
-		setupMock          func(mock *MockUserinfoUsecase)
-		expectedStatusCode int
-		expectedBody       string
+		name               string                      // テストケース名
+		requestBody        string                      // リクエストボディ
+		setupMock          func(mock *mockAuthUsecase) // モック設定
+		expectedStatusCode int                         // 期待されるHTTPステータス
+		expectedBody       string                      // 期待されるレスポンスボディ
 	}{
 		{
 			name:        "success",
-			requestBody: `{"username": "testnob", "age": 13}`,
-			setupMock: func(mock *MockUserinfoUsecase) {
+			requestBody: `{"name": "nob", "password": "passwd"}`,
+			setupMock: func(mock *mockAuthUsecase) {
 				mock.On(
-					"Regist",
-					payload.NewUserRegistIn("testnob", 13),
-				).Return(payload.NewUserRegistOut("Success"), nil)
+					"Login",
+					payload.NewLoginIn(
+						"nob",
+						"passwd",
+					),
+				).Return(
+					payload.NewLoginOut(true),
+				)
 			},
 			expectedStatusCode: http.StatusOK,
-			expectedBody:       `{"message":"Success"}`,
+			expectedBody:       `{"valid": true}`,
 		},
 		{
 			name:               "invalid request",
-			requestBody:        `{"username": "testnob",`,
-			setupMock:          func(mock *MockUserinfoUsecase) {},
+			requestBody:        `{"name": "nob", "password": "passwd"`, // 末尾の"}"なし
+			setupMock:          func(mock *mockAuthUsecase) {},
 			expectedStatusCode: http.StatusBadRequest,
-			expectedBody:       `{"message":"Bad request"}`,
-		},
-		{
-			name:        "usecase error",
-			requestBody: `{"username": "testnob", "age": 13}`,
-			setupMock: func(mock *MockUserinfoUsecase) {
-				mock.On(
-					"Regist",
-					payload.NewUserRegistIn("testnob", 13),
-				).Return(payload.NewUserRegistOut(""), errors.New("test error"))
-			},
-			expectedStatusCode: http.StatusInternalServerError,
-			expectedBody:       `{"message":"Internal server error"}`,
+			expectedBody:       `{"message": "Bad request"}`,
 		},
 	}
 
@@ -356,18 +302,69 @@ func Test_UserinfoHandler_Regist(t *testing.T) {
 
 		req := httptest.NewRequest(
 			http.MethodPost,
-			"/userinfo",
+			"/login",
 			bytes.NewBuffer([]byte(testcase.requestBody)),
 		)
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 		rec := httptest.NewRecorder()
 		c := echo.New().NewContext(req, rec)
 
-		mockUsecase := new(MockUserinfoUsecase)
+		mockUsecase := new(mockAuthUsecase)
 		testcase.setupMock(mockUsecase)
-		h := NewUserinfoHandler(mockUsecase)
+		h := NewAuthHandler(mockUsecase)
 
-		if assert.NoError(t, h.Regist(c)) {
+		if assert.NoError(t, h.Login(c)) {
+			assert.Equal(t, testcase.expectedStatusCode, rec.Code)
+			assert.JSONEq(t, testcase.expectedBody, rec.Body.String())
+		}
+	}
+}
+
+func Test_AuthHandler_Me(t *testing.T) {
+
+	tests := []struct {
+		name               string                      // テストケース名
+		requestParam       map[string]string           // リクエストパラメータ
+		setupMock          func(mock *mockAuthUsecase) // モック設定
+		expectedStatusCode int                         // 期待されるHTTPステータス
+		expectedBody       string                      // 期待されるレスポンスボディ
+	}{
+		{
+			name:         "success",
+			requestParam: map[string]string{"name": "nob"},
+			setupMock: func(mock *mockAuthUsecase) {
+				mock.On("Me", payload.NewMeIn("nob")).Return(payload.NewMeOut("nob", 13), nil)
+			},
+			expectedStatusCode: http.StatusOK,
+			expectedBody:       `{"name": "nob", "age": 13}`,
+		},
+		{
+			name:         "usecase error",
+			requestParam: map[string]string{"name": "nob"},
+			setupMock: func(mock *mockAuthUsecase) {
+				mock.On("Me", payload.NewMeIn("nob")).Return(
+					*new(payload.MeOut),
+					errors.New("不正なユーザ名です。"),
+				)
+			},
+			expectedStatusCode: http.StatusInternalServerError,
+			expectedBody:       `{"message": "Internal server error"}`,
+		},
+	}
+
+	for _, testcase := range tests {
+
+		q := make(url.Values)
+		q.Set("name", testcase.requestParam["name"])
+		req := httptest.NewRequest(http.MethodGet, "/me?"+q.Encode(), nil)
+		rec := httptest.NewRecorder()
+		c := echo.New().NewContext(req, rec)
+
+		mockUsecase := new(mockAuthUsecase)
+		testcase.setupMock(mockUsecase)
+		h := NewAuthHandler(mockUsecase)
+
+		if assert.NoError(t, h.Me(c)) {
 			assert.Equal(t, testcase.expectedStatusCode, rec.Code)
 			assert.JSONEq(t, testcase.expectedBody, rec.Body.String())
 		}
