@@ -9,10 +9,11 @@ cf. https://docs.k3s.io/quick-start
 下記コマンドで `kubectl` コマンドなども含めてインストールされます:
 
 ```shell
-curl -sfL https://get.k3s.io | sh -
+# root以外でもkubectlを実行可能にするオプションを付与
+curl -sfL https://get.k3s.io | sh -s - server --write-kubeconfig-mode=644
 ```
 
-各種設定オプションについては[公式ドキュメント](https://docs.k3s.io/ja/installation/configuration)に記載されています。
+各種設定オプションについては[公式ドキュメント](https://docs.k3s.io/installation/configuration)に記載されています。
 
 ## Tips
 
