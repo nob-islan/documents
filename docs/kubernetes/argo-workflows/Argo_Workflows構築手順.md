@@ -22,6 +22,9 @@ kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/do
 - Argo Workflows の API Server にアクセスできるよう、サービスタイプを変更します:
 
 ```shell
+# ロードバランサがある場合 type: LoadBalancer
+kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer"}}'
+
 # ロードバランサがない場合 type: NodePort
 kubectl patch svc argo-server -n argo -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 2746, "protocol": "TCP", "targetPort": 2746, "nodePort": 32746}]}}'
 ```
