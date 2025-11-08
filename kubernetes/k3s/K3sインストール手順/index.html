@@ -6605,7 +6605,7 @@
 <h1 id="k3s">K3s インストール手順</h1>
 <p>シングルノードで縮小版 Kubernetes を構築できる <a href="https://docs.k3s.io/">K3s</a> の構築手順について記載します。</p>
 <h2 id="_1">手順</h2>
-<p>cf. <a href="https://docs.k3s.io/ja/quick-start">https://docs.k3s.io/ja/quick-start</a></p>
+<p>cf. <a href="https://docs.k3s.io/quick-start">https://docs.k3s.io/quick-start</a></p>
 <p>下記コマンドで <code>kubectl</code> コマンドなども含めてインストールされます:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-
 </code></pre></div>
@@ -6613,6 +6613,7 @@
 <h2 id="tips">Tips</h2>
 <p>k8s や kind などと挙動に差異が出る箇所について記載します。</p>
 <h3 id="kubeconfig">kubeconfig のパス</h3>
+<p>cf. <a href="https://docs.k3s.io/cluster-access">https://docs.k3s.io/cluster-access</a></p>
 <p>kubeconfig の設定が記載されているファイルのパスが他と異なります:</p>
 <div class="highlight"><pre><span></span><code>root@nob-k3s:~# ls -l /etc/rancher/k3s/k3s.yaml
 -rw------- 1 root root 2957 Nov  8 12:09 /etc/rancher/k3s/k3s.yaml
