@@ -102,9 +102,9 @@ spec:
 - curl で疎通確認をとります:
 
 ```
-$ curl localhost:80/sample/greet
+$ curl {kind IP}:80/sample/greet
 Hello, World!
 
-$ curl localhost:80/sample/bye
+$ curl {kind IP}:80/sample/bye
 GoodBye, World!
 ```
