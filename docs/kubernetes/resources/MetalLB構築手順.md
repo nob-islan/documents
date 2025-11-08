@@ -68,7 +68,7 @@ kubectl apply -f ipaddresspool.yaml
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
 metadata:
-  name: example
+  name: first-l2
   namespace: metallb-system
 spec:
   ipAddressPools:
