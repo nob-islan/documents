@@ -13,3 +13,23 @@ curl -sfL https://get.k3s.io | sh -
 ```
 
 各種設定オプションについては[公式ドキュメント](https://docs.k3s.io/ja/installation/configuration)に記載されています。
+
+## Tips
+
+k8s や kind などと挙動に差異が出る箇所について記載します。
+
+### kubeconfig のパス
+
+kubeconfig の設定が記載されているファイルのパスが他と異なります:
+
+```
+root@nob-k3s:~# ls -l /etc/rancher/k3s/k3s.yaml
+-rw------- 1 root root 2957 Nov  8 12:09 /etc/rancher/k3s/k3s.yaml
+```
+
+下記のようなエラーが発生した場合、`export KUBECONFIG=/etc/rancher/k3s/k3s.yaml` すると解決します:
+
+```
+root@nob-k3s:~# argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo-workflows/main/examples/hello-world.yaml
+Error: invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+```
