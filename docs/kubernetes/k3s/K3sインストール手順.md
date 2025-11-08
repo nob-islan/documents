@@ -4,7 +4,7 @@
 
 ## 手順
 
-cf. https://docs.k3s.io/ja/quick-start
+cf. https://docs.k3s.io/quick-start
 
 下記コマンドで `kubectl` コマンドなども含めてインストールされます:
 
@@ -19,6 +19,8 @@ curl -sfL https://get.k3s.io | sh -
 k8s や kind などと挙動に差異が出る箇所について記載します。
 
 ### kubeconfig のパス
+
+cf. https://docs.k3s.io/cluster-access
 
 kubeconfig の設定が記載されているファイルのパスが他と異なります:
 
