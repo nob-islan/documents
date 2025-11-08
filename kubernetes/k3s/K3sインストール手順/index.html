@@ -4516,6 +4516,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tips
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      kubeconfig のパス
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6538,6 +6562,30 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tips
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kubeconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      kubeconfig のパス
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6562,6 +6610,17 @@
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-
 </code></pre></div>
 <p>各種設定オプションについては<a href="https://docs.k3s.io/ja/installation/configuration">公式ドキュメント</a>に記載されています。</p>
+<h2 id="tips">Tips</h2>
+<p>k8s や kind などと挙動に差異が出る箇所について記載します。</p>
+<h3 id="kubeconfig">kubeconfig のパス</h3>
+<p>kubeconfig の設定が記載されているファイルのパスが他と異なります:</p>
+<div class="highlight"><pre><span></span><code>root@nob-k3s:~# ls -l /etc/rancher/k3s/k3s.yaml
+-rw------- 1 root root 2957 Nov  8 12:09 /etc/rancher/k3s/k3s.yaml
+</code></pre></div>
+<p>下記のようなエラーが発生した場合、<code>export KUBECONFIG=/etc/rancher/k3s/k3s.yaml</code> すると解決します:</p>
+<div class="highlight"><pre><span></span><code>root@nob-k3s:~# argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo-workflows/main/examples/hello-world.yaml
+Error: invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
+</code></pre></div>
 
 
 
