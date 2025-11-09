@@ -36,7 +36,7 @@ test:
     - cd ${CONTROLLER}
     - go install gotest.tools/gotestsum@latest
     - make test
-build:
+image:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
