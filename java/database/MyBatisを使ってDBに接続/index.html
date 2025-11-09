@@ -7038,11 +7038,15 @@
 <h3 id="mapper-xml">Mapper xml</h3>
 <p>SQL の実体を記載するファイルです。<code>src/resources</code>配下に、mapper インターフェースと同じパッケージ構成で配置します。例として、mapper インターフェースが<code>src/main/java/nob/example/firstrestapi/mapper</code>に配置されている場合、xml ファイルは<code>src/main/resources/nob/example/firstrestapi/mapper</code>に配置します。</p>
 <ul>
-<li>mapper タグ</li>
+<li>mapper タグ<ul>
 <li><code>namespace</code>: mapper が配置されているパッケージ</li>
-<li>update, insert, select, delete タグ</li>
+</ul>
+</li>
+<li>update, insert, select, delete タグ<ul>
 <li><code>id</code>: インターフェース側のメソッド名</li>
 <li><code>resultType</code>: 戻りの型</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="cp">&lt;!DOCTYPE mapper PUBLIC</span>

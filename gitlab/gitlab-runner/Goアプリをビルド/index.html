@@ -6717,13 +6717,17 @@
 </ul>
 <p>下記ステージで構成します:</p>
 <ul>
-<li>UT 一括実行</li>
+<li>UT 一括実行<ul>
 <li>テスト結果およびカバレッジの達成率についてはパイプラインのジョブ上から確認できます。</li>
 <li>カバレッジの詳細についてはアーティファクトに出力しているのでダウンロードすることで確認できます。</li>
 <li>下記サンプルでは、カバレッジの正確な計測のために<code>handler</code>, <code>usecase</code>, <code>repository</code>パッケージ配下のみテストしています。</li>
+</ul>
+</li>
 <li>モジュールビルド</li>
-<li>コンテナイメージ push</li>
+<li>コンテナイメージ push<ul>
 <li>push 先は harbor を想定しています。</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>

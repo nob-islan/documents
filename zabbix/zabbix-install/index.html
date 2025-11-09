@@ -6827,11 +6827,13 @@
 <h2 id="zabbix_1">Zabbix サーバインストール</h2>
 <h3 id="_1">事前準備</h3>
 <ul>
-<li>mysql インストール</li>
-</ul>
+<li>
+<p>mysql インストール</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>mysql-server-8.0<span class="w"> </span>-f
 </code></pre></div>
+</li>
+</ul>
 <h3 id="zabbix_2">Zabbix サーバインストール</h3>
 <h4 id="_2">参考文献</h4>
 <ul>
@@ -6840,25 +6842,31 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 </ul>
 <h4 id="_3">手順</h4>
 <ul>
-<li>root ユーザに昇格</li>
-</ul>
+<li>
+<p>root ユーザに昇格</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su<span class="w"> </span>-
 </code></pre></div>
-<ul>
-<li>Zabbix reporitory をインストール</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>Zabbix reporitory をインストール</p>
 <div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
 dpkg<span class="w"> </span>-i<span class="w"> </span>zabbix-release_7.0-2+ubuntu24.04_all.deb
 apt<span class="w"> </span>update
 </code></pre></div>
-<ul>
-<li>パッケージをインストール</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>パッケージをインストール</p>
 <div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>zabbix-server-mysql<span class="w"> </span>zabbix-frontend-php<span class="w"> </span>zabbix-apache-conf<span class="w"> </span>zabbix-sql-scripts<span class="w"> </span>zabbix-agent
 </code></pre></div>
-<ul>
-<li>mysql テーブル作成</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>mysql テーブル作成</p>
 <div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>root
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">zabbix</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">collate</span><span class="w"> </span><span class="n">utf8mb4_bin</span><span class="p">;</span>
@@ -6867,30 +6875,40 @@ apt<span class="w"> </span>update
 <span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">log_bin_trust_function_creators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="n">quit</span><span class="p">;</span>
 </code></pre></div>
-<ul>
-<li>初期データ投入</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>初期データ投入</p>
 <div class="highlight"><pre><span></span><code>zcat<span class="w"> </span>/usr/share/zabbix-sql-scripts/mysql/server.sql.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>mysql<span class="w"> </span>--default-character-set<span class="o">=</span>utf8mb4<span class="w"> </span>-uzabbix<span class="w"> </span>-p<span class="w"> </span>zabbix
 </code></pre></div>
-<ul>
-<li><code>log_bin_trust_function_creators</code>の無効化</li>
+</li>
 </ul>
+<ul>
+<li>
+<p><code>log_bin_trust_function_creators</code>の無効化</p>
 <div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-u<span class="w"> </span>root
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>set global log_bin_trust_function_creators = 0;
 quit;
 </code></pre></div>
-<ul>
-<li><code>/etc/zabbix/zabbix_server.conf</code>を編集</li>
+</li>
 </ul>
+<ul>
+<li>
+<p><code>/etc/zabbix/zabbix_server.conf</code>を編集</p>
 <div class="highlight"><pre><span></span><code>DBPassword={password}
 </code></pre></div>
-<ul>
-<li>Zabbix サーバの開始</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>Zabbix サーバの開始</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>zabbix-server<span class="w"> </span>zabbix-agent<span class="w"> </span>apache2
 systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>zabbix-server<span class="w"> </span>zabbix-agent<span class="w"> </span>apache2
 </code></pre></div>
+</li>
+</ul>
 <p><code>http://${IPアドレス}/zabbix</code>にアクセスするとログイン画面が表示されます。初期ユーザ/パスワードは<code>Admin/zabbix</code>です。</p>
 <h2 id="zabbix-agent">Zabbix Agent インストール</h2>
 <h3 id="_4">参考文献</h3>
@@ -6901,39 +6919,51 @@ systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> 
 </ul>
 <h3 id="_5">インストール手順</h3>
 <ul>
-<li>root ユーザに昇格</li>
-</ul>
+<li>
+<p>root ユーザに昇格</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su<span class="w"> </span>-
 </code></pre></div>
-<ul>
-<li>Zabbix repository をインストール</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>Zabbix repository をインストール</p>
 <div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
 dpkg<span class="w"> </span>-i<span class="w"> </span>zabbix-release_7.0-2+ubuntu24.04_all.deb
 apt<span class="w"> </span>update
 </code></pre></div>
-<ul>
-<li>Zabbix Agent インストール</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>Zabbix Agent インストール</p>
 <div class="highlight"><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>zabbix-agent
 </code></pre></div>
-<ul>
-<li><code>/etc/zabbix/zabbix_agentd.conf</code>を編集</li>
+</li>
 </ul>
+<ul>
+<li>
+<p><code>/etc/zabbix/zabbix_agentd.conf</code>を編集</p>
 <div class="highlight"><pre><span></span><code>Server=${ZabbixサーバのIPアドレス}
 ServerActive=${ZabbixサーバのIPアドレス}
 </code></pre></div>
-<ul>
-<li>プロセス開始</li>
+</li>
 </ul>
+<ul>
+<li>
+<p>プロセス開始</p>
 <div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>zabbix-agent
 systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>zabbix-agent
 </code></pre></div>
+</li>
+</ul>
 <h3 id="_6">ホスト登録手順</h3>
 <ul>
-<li><strong>Data collection</strong> &gt; <strong>Hosts</strong> から <strong>Create host</strong> を選択</li>
+<li><strong>Data collection</strong> &gt; <strong>Hosts</strong> から <strong>Create host</strong> を選択<ul>
 <li><strong>Templates</strong> について適当に選択</li>
 <li><strong>Interfaces</strong> については <strong>Agent</strong> を選択し、監視対象の IP アドレスを入力</li>
+</ul>
+</li>
 <li>10 ~ 15 分後に <strong>Availability</strong> が点灯したら監視開始</li>
 </ul>
 

@@ -6690,12 +6690,10 @@
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postfix
 </code></pre></div>
 <ul>
-<li>
-<p>画面に表示された<code>Postfix Configuration</code>の選択肢で<code>Local only</code>を選択します。</p>
-</li>
-<li>
-<p>バージョンを表示し、インストールが成功していることを確認します。</p>
-</li>
+<li>画面に表示された<code>Postfix Configuration</code>の選択肢で<code>Local only</code>を選択します。</li>
+</ul>
+<ul>
+<li>バージョンを表示し、インストールが成功していることを確認します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># バージョン確認</span>
 postconf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>mail_version
@@ -6708,16 +6706,16 @@ postconf<span class="w"> </span><span class="p">|</span><span class="w"> </span>
 <ul>
 <li>
 <p>設定ファイルを編集します:</p>
-</li>
-<li>
-<p><code>/etc/postfix/main.cf</code></p>
 <ul>
+<li><code>/etc/postfix/main.cf</code><ul>
 <li><code>home_mailbox = Maildir/</code>: メールボックスの形式設定</li>
 </ul>
 </li>
-<li>
-<p>Postfix を再起動します。</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li>Postfix を再起動します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>postfix
 </code></pre></div>
@@ -6729,10 +6727,8 @@ postconf<span class="w"> </span><span class="p">|</span><span class="w"> </span>
 <ul>
 <li>
 <p>設定ファイルを編集します:</p>
-</li>
-<li>
-<p><code>/etc/dovecot/dovecot.conf</code></p>
 <ul>
+<li><code>/etc/dovecot/dovecot.conf</code><ul>
 <li><code>protocols = imap pop3</code>: 使用するプロトコル</li>
 <li><code>listen = *</code>: IPv4 のみ使用</li>
 </ul>
@@ -6747,15 +6743,15 @@ postconf<span class="w"> </span><span class="p">|</span><span class="w"> </span>
 <li><code>auth_mechanisms = plain login</code></li>
 </ul>
 </li>
-<li>
-<p><code>/etc/dovecot/conf.d/10-ssl.conf</code></p>
-<ul>
+<li><code>/etc/dovecot/conf.d/10-ssl.conf</code><ul>
 <li><code>ssl = no</code>: SSL 未使用</li>
 </ul>
 </li>
-<li>
-<p>dovecot を再起動します。</p>
+</ul>
 </li>
+</ul>
+<ul>
+<li>dovecot を再起動します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>dovecot
 </code></pre></div>

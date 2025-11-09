@@ -6687,15 +6687,19 @@
 </ul>
 <p>下記ステージで構成します:</p>
 <ul>
-<li>ビルド</li>
+<li>ビルド<ul>
 <li><code>go build</code>でバイナリを作成します。<ul>
 <li>サンプルとして linux 向けの arm64, amd64 対応版をビルドしています。</li>
 </ul>
 </li>
 <li>複数 OS, アーキに対応する場合はそれぞれのバージョンに対してビルドしてください。</li>
-<li>リリース</li>
+</ul>
+</li>
+<li>リリース<ul>
 <li><code>gitlab-cli</code>を使います。</li>
 <li>build ジョブで作成した artifact をダウンロードし、release 時の asset に追加します。</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
