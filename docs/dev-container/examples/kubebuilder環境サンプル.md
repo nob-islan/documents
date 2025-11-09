@@ -42,10 +42,10 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
 ### Dockerfile
 
 ```Dockerfile
-FROM mcr.microsoft.com/devcontainers/go:1.23-bullseye
+FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
 
 # kubebuilderインストール
-RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.5.2/kubebuilder_linux_arm64"
+RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64"
 RUN chmod +x ./kubebuilder
 RUN mv ./kubebuilder /usr/local/bin/kubebuilder
 ```

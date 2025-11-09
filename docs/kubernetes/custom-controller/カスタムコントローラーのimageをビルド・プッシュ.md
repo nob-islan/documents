@@ -46,3 +46,9 @@ kubectl get deployment -n nob-controller-system
 # kubectl apply -f {CRマニフェストファイルパス}
 kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 ```
+
+- 下記コマンドで後片付けができます。
+
+```shell
+make undeploy
+```

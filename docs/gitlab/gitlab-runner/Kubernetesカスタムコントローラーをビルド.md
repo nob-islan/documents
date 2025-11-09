@@ -32,7 +32,7 @@ stages:
 test:
   stage: test
   image:
-    name: golang:1.23
+    name: golang:1.24
   script:
     - . ${CI_PROJECT_DIR}/.env
     - cd ${CONTROLLER}
