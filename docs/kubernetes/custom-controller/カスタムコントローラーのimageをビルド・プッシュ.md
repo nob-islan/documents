@@ -27,8 +27,22 @@ make docker-push
 
 ### image を使ってコントローラー起動
 
-プッシュしたコンテナイメージを使ってローカルでコントローラーを起動できます。
+- プッシュしたコンテナイメージを使ってローカルでコントローラーを起動できます。
 
 ```shell
 make deploy
+```
+
+- コントローラーが動いていることを確認します。
+
+```shell
+# kubectl get deployment -n {goプロジェクト名}-system
+kubectl get deployment -n nob-controller-system
+```
+
+- CR のマニフェストファイルを apply すれば Reconcile が始まります。
+
+```shell
+# kubectl apply -f {CRマニフェストファイルパス}
+kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 ```
