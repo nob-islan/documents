@@ -348,6 +348,92 @@ Reconciler のメンバを追加します:
 	}
 ```
 
+## 単体テスト
+
+単体テストを作成および実行します。
+
+### テストケース記載
+
+#### internal/controller/nob_controller_test.go
+
+- BeforeEach に NobSpec で定めたパラメータを定義します。
+
+```go
+		BeforeEach(func() {
+			By("creating the custom resource for the Kind Nob")
+			err := k8sClient.Get(ctx, typeNamespacedName, nob)
+			if err != nil && errors.IsNotFound(err) {
+				resource := &nobcontrollerv1.Nob{
+					ObjectMeta: metav1.ObjectMeta{
+						Name:      resourceName,
+						Namespace: "default",
+					},
+					Spec: nobcontrollerv1.NobSpec{
+						DeploymentName: "test-deployment",
+						Replicas:       ptr.To[int32](2),
+					},
+				}
+				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
+			}
+		})
+```
+
+- AfterEach に Reconciler の定義および、Expect の内容を記載します。
+
+```go
+		AfterEach(func() {
+			// TODO(user): Cleanup logic after each test, like removing the resource instance.
+			resource := &nobcontrollerv1.Nob{}
+			err := k8sClient.Get(ctx, typeNamespacedName, resource)
+			Expect(err).NotTo(HaveOccurred())
+
+			By("Cleanup the specific resource instance Nob")
+			Expect(k8sClient.Delete(ctx, resource)).To(Succeed())
+		})
+		It("should successfully reconcile the resource", func() {
+			By("Reconciling the created resource")
+			controllerReconciler := &NobReconciler{ // reconcilerにパラメータを追加
+				Client:   k8sClient,
+				Log:      logf.Log,
+				Scheme:   k8sClient.Scheme(),
+				Recorder: &record.FakeRecorder{},
+			}
+
+			_, err := controllerReconciler.Reconcile(ctx, reconcile.Request{
+				NamespacedName: typeNamespacedName,
+			})
+			Expect(err).NotTo(HaveOccurred())
+
+			// assertの期待値となるラベル
+			expectedLabels := map[string]string{
+				"app":        "nginx",
+				"controller": "test-resource",
+			}
+
+			// 結果のassert
+			By("Making sure the deployment created successfully")
+			deployment := &appsv1.Deployment{}
+			err = k8sClient.Get(
+				ctx,
+				client.ObjectKey{
+					Namespace: "default",
+					Name:      "test-deployment",
+				},
+				deployment,
+			)
+			Expect(err).NotTo(HaveOccurred())
+			Expect(deployment.ObjectMeta.Labels).Should(Equal(expectedLabels))
+		})
+```
+
+### テスト実施
+
+下記コマンドでテストを実施します。
+
+```shell
+make test
+```
+
 ## ローカルアプリケーション起動
 
 - yaml マニフェストの生成および CRD の登録を行います:
