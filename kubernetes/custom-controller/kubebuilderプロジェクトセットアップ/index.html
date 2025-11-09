@@ -4386,6 +4386,54 @@
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
+      単体テスト
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="単体テスト">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストケース記載
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="テストケース記載">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internalcontrollernob_controller_testgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      internal/controller/nob_controller_test.go
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      テスト実施
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
       ローカルアプリケーション起動
     </span>
   </a>
@@ -6721,6 +6769,54 @@
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
+      単体テスト
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="単体テスト">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      テストケース記載
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="テストケース記載">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internalcontrollernob_controller_testgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      internal/controller/nob_controller_test.go
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      テスト実施
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
       ローカルアプリケーション起動
     </span>
   </a>
@@ -7066,7 +7162,83 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">        </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-<h2 id="_4">ローカルアプリケーション起動</h2>
+<h2 id="_4">単体テスト</h2>
+<p>単体テストを作成および実行します。</p>
+<h3 id="_5">テストケース記載</h3>
+<h4 id="internalcontrollernob_controller_testgo">internal/controller/nob_controller_test.go</h4>
+<ul>
+<li>BeforeEach に NobSpec で定めたパラメータを定義します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nx">BeforeEach</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">By</span><span class="p">(</span><span class="s">&quot;creating the custom resource for the Kind Nob&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">typeNamespacedName</span><span class="p">,</span><span class="w"> </span><span class="nx">nob</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">IsNotFound</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">resource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">Nob</span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">ObjectMeta</span><span class="p">:</span><span class="w"> </span><span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">Name</span><span class="p">:</span><span class="w">      </span><span class="nx">resourceName</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">Namespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                    </span><span class="nx">Spec</span><span class="p">:</span><span class="w"> </span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">NobSpec</span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">DeploymentName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test-deployment&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">Replicas</span><span class="p">:</span><span class="w">       </span><span class="nx">ptr</span><span class="p">.</span><span class="nx">To</span><span class="p">[</span><span class="kt">int32</span><span class="p">](</span><span class="mi">2</span><span class="p">),</span>
+<span class="w">                    </span><span class="p">},</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">resource</span><span class="p">)).</span><span class="nx">To</span><span class="p">(</span><span class="nx">Succeed</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">})</span>
+</code></pre></div>
+<ul>
+<li>AfterEach に Reconciler の定義および、Expect の内容を記載します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nx">AfterEach</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// TODO(user): Cleanup logic after each test, like removing the resource instance.</span>
+<span class="w">            </span><span class="nx">resource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">Nob</span><span class="p">{}</span>
+<span class="w">            </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">typeNamespacedName</span><span class="p">,</span><span class="w"> </span><span class="nx">resource</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">err</span><span class="p">).</span><span class="nx">NotTo</span><span class="p">(</span><span class="nx">HaveOccurred</span><span class="p">())</span>
+
+<span class="w">            </span><span class="nx">By</span><span class="p">(</span><span class="s">&quot;Cleanup the specific resource instance Nob&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">resource</span><span class="p">)).</span><span class="nx">To</span><span class="p">(</span><span class="nx">Succeed</span><span class="p">())</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="nx">It</span><span class="p">(</span><span class="s">&quot;should successfully reconcile the resource&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">By</span><span class="p">(</span><span class="s">&quot;Reconciling the created resource&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">controllerReconciler</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">NobReconciler</span><span class="p">{</span><span class="w"> </span><span class="c1">// reconcilerにパラメータを追加</span>
+<span class="w">                </span><span class="nx">Client</span><span class="p">:</span><span class="w">   </span><span class="nx">k8sClient</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Log</span><span class="p">:</span><span class="w">      </span><span class="nx">logf</span><span class="p">.</span><span class="nx">Log</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Scheme</span><span class="p">:</span><span class="w">   </span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">(),</span>
+<span class="w">                </span><span class="nx">Recorder</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">record</span><span class="p">.</span><span class="nx">FakeRecorder</span><span class="p">{},</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">controllerReconciler</span><span class="p">.</span><span class="nx">Reconcile</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">reconcile</span><span class="p">.</span><span class="nx">Request</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">NamespacedName</span><span class="p">:</span><span class="w"> </span><span class="nx">typeNamespacedName</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">err</span><span class="p">).</span><span class="nx">NotTo</span><span class="p">(</span><span class="nx">HaveOccurred</span><span class="p">())</span>
+
+<span class="w">            </span><span class="c1">// assertの期待値となるラベル</span>
+<span class="w">            </span><span class="nx">expectedLabels</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;app&quot;</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;nginx&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;controller&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test-resource&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="c1">// 結果のassert</span>
+<span class="w">            </span><span class="nx">By</span><span class="p">(</span><span class="s">&quot;Making sure the deployment created successfully&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">deployment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{}</span>
+<span class="w">            </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">k8sClient</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">ctx</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">client</span><span class="p">.</span><span class="nx">ObjectKey</span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">Namespace</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">Name</span><span class="p">:</span><span class="w">      </span><span class="s">&quot;test-deployment&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nx">deployment</span><span class="p">,</span>
+<span class="w">            </span><span class="p">)</span>
+<span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">err</span><span class="p">).</span><span class="nx">NotTo</span><span class="p">(</span><span class="nx">HaveOccurred</span><span class="p">())</span>
+<span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">.</span><span class="nx">Labels</span><span class="p">).</span><span class="nx">Should</span><span class="p">(</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">expectedLabels</span><span class="p">))</span>
+<span class="w">        </span><span class="p">})</span>
+</code></pre></div>
+<h3 id="_6">テスト実施</h3>
+<p>下記コマンドでテストを実施します。</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<h2 id="_7">ローカルアプリケーション起動</h2>
 <ul>
 <li>yaml マニフェストの生成および CRD の登録を行います:</li>
 </ul>
