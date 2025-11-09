@@ -6715,8 +6715,22 @@
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>docker-push
 </code></pre></div>
 <h3 id="image_1">image を使ってコントローラー起動</h3>
-<p>プッシュしたコンテナイメージを使ってローカルでコントローラーを起動できます。</p>
+<ul>
+<li>プッシュしたコンテナイメージを使ってローカルでコントローラーを起動できます。</li>
+</ul>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>deploy
+</code></pre></div>
+<ul>
+<li>コントローラーが動いていることを確認します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># kubectl get deployment -n {goプロジェクト名}-system</span>
+kubectl<span class="w"> </span>get<span class="w"> </span>deployment<span class="w"> </span>-n<span class="w"> </span>nob-controller-system
+</code></pre></div>
+<ul>
+<li>CR のマニフェストファイルを apply すれば Reconcile が始まります。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># kubectl apply -f {CRマニフェストファイルパス}</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>config/samples/nobcontroller_v1_nob.yaml
 </code></pre></div>
 
 
