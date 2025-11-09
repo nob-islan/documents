@@ -2339,7 +2339,7 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      デプロイ手順
+      リリース手順
     </span>
   </a>
   
@@ -6699,7 +6699,7 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      デプロイ手順
+      リリース手順
     </span>
   </a>
   
@@ -6808,8 +6808,8 @@
 <h3 id="makefile">Makefile</h3>
 <p>環境変数の管理向けに<code>.env</code>ファイルを作成します。プロジェクトのルートディレクトリ直下に配置し、gitlab-ci.yml および Makefile から読み取れるようにします:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">TAG</span><span class="o">=</span>v1.0.0
-<span class="nv">HARBOR_HOST</span><span class="o">=</span>nob-harbor.ddo.jp
-<span class="nv">HARBOR_PROJECT</span><span class="o">=</span>first-kube-operator
+<span class="nv">HARBOR_HOST</span><span class="o">=</span>harbor.nob
+<span class="nv">HARBOR_PROJECT</span><span class="o">=</span>nob
 <span class="nv">CONTROLLER</span><span class="o">=</span>nob-controller
 <span class="nv">IMG</span><span class="o">=</span><span class="si">${</span><span class="nv">HARBOR_HOST</span><span class="si">}</span>:80/<span class="si">${</span><span class="nv">HARBOR_PROJECT</span><span class="si">}</span>/<span class="si">${</span><span class="nv">CONTROLLER</span><span class="si">}</span>:<span class="si">${</span><span class="nv">TAG</span><span class="si">}</span>
 </code></pre></div>
@@ -6822,8 +6822,8 @@
 <span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>deploy
 <span class="w">    </span><span class="k">$(</span>KUSTOMIZE<span class="k">)</span><span class="w"> </span>build<span class="w"> </span>config/default<span class="w"> </span>&gt;<span class="w"> </span>deploy/controller.yaml
 </code></pre></div>
-<h2 id="_2">デプロイ手順</h2>
-<p>任意の feature ブランチにて下記手順を踏むことでデプロイが進みます:</p>
+<h2 id="_2">リリース手順</h2>
+<p>任意の feature ブランチにて下記手順を踏むことでリリースが進みます:</p>
 <ul>
 <li><code>.env</code>を書き換えてバージョンを更新します。</li>
 <li><code>make release</code>コマンドでカスタムコントローラープロジェクトにて各種マニフェストの生成を行います:</li>
@@ -6831,7 +6831,11 @@
 <li>作業ブランチがマージされたタイミングでリリースタグが切られます。</li>
 </ul>
 <h2 id="_3">成果物の利用手順</h2>
-<p>マニフェストを apply してリソースを利用する際は<code>deploy</code>配下のコントローラー向けマニフェストおよび<code>config/samples</code>配下のカスタムリソース向けマニフェストを利用してください。</p>
+<p>マニフェストを apply してリソースを利用する際は下記マニフェストを利用してください:</p>
+<ul>
+<li><code>deploy/config.yaml</code></li>
+<li><code>config/samples/</code>　配下のカスタムリソース向けマニフェスト yaml</li>
+</ul>
 
 
 
