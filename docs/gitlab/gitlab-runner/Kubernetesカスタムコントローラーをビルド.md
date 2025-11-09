@@ -83,8 +83,8 @@ release:
 
 ```shell
 TAG=v1.0.0
-HARBOR_HOST=nob-harbor.ddo.jp
-HARBOR_PROJECT=first-kube-operator
+HARBOR_HOST=harbor.nob
+HARBOR_PROJECT=nob
 CONTROLLER=nob-controller
 IMG=${HARBOR_HOST}:80/${HARBOR_PROJECT}/${CONTROLLER}:${TAG}
 ```
@@ -103,9 +103,9 @@ release: manifests kustomize ## Deploy controller to the K8s cluster specified i
 	$(KUSTOMIZE) build config/default > deploy/controller.yaml
 ```
 
-## デプロイ手順
+## リリース手順
 
-任意の feature ブランチにて下記手順を踏むことでデプロイが進みます:
+任意の feature ブランチにて下記手順を踏むことでリリースが進みます:
 
 - `.env`を書き換えてバージョンを更新します。
 - `make release`コマンドでカスタムコントローラープロジェクトにて各種マニフェストの生成を行います:
@@ -114,4 +114,7 @@ release: manifests kustomize ## Deploy controller to the K8s cluster specified i
 
 ## 成果物の利用手順
 
-マニフェストを apply してリソースを利用する際は`deploy`配下のコントローラー向けマニフェストおよび`config/samples`配下のカスタムリソース向けマニフェストを利用してください。
+マニフェストを apply してリソースを利用する際は下記マニフェストを利用してください:
+
+- `deploy/config.yaml`
+- `config/samples/`　配下のカスタムリソース向けマニフェスト yaml
