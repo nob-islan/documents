@@ -2320,6 +2320,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label=".gitlab-ci.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      テスト
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ビルド
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      リリース
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2328,7 +2361,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       成果物の利用手順
     </span>
@@ -6662,6 +6695,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label=".gitlab-ci.yml">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      テスト
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      ビルド
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      リリース
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -6670,7 +6736,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       成果物の利用手順
     </span>
@@ -6704,13 +6770,17 @@
 <li><a href="https://docs.gitlab.com/ci/yaml/#release">release</a></li>
 </ul>
 <p>下記ステージで構成します:</p>
+<h4 id="_2">テスト</h4>
 <ul>
-<li>テスト</li>
 <li>テスト関数を一括実行し、カバレッジを出力します。</li>
-<li>ビルド</li>
+</ul>
+<h4 id="_3">ビルド</h4>
+<ul>
 <li>タグが切られたタイミングで、kaniko を使ってコントローラーのコンテナイメージをビルドします。</li>
 <li>並行して、コントローラーデプロイ向けのマニフェストファイルを生成し、artifact に含めます。</li>
-<li>リリース</li>
+</ul>
+<h4 id="_4">リリース</h4>
+<ul>
 <li>上記イメージビルドに併せてリリースを作成します。リリース画面からコントローラーのマニフェストがダウンロードできます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
@@ -6773,7 +6843,7 @@
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 </code></pre></div>
-<h2 id="_2">成果物の利用手順</h2>
+<h2 id="_5">成果物の利用手順</h2>
 <p>カスタムリソースを利用する際は下記マニフェストを利用してください:</p>
 <ul>
 <li>コントローラー: release からマニフェスト yaml をダウンロード</li>
