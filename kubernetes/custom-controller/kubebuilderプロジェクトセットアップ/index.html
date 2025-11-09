@@ -12,7 +12,7 @@
         <link rel="prev" href="../../argocd/Web-based_terminal%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96/">
       
       
-        <link rel="next" href="../../extensions/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/">
+        <link rel="next" href="../%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AEimage%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%97%E3%83%83%E3%82%B7%E3%83%A5/">
       
       
       <link rel="icon" href="../../../00_config/favicon.png">
@@ -4449,6 +4449,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AEimage%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%97%E3%83%83%E3%82%B7%E3%83%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    カスタムコントローラーの image をビルド・プッシュ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -6976,7 +6999,6 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
 <span class="w">        </span><span class="nx">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">Nob</span><span class="p">{}).</span>
 <span class="w">        </span><span class="nx">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{}).</span><span class="w"> </span><span class="c1">//  import appsv1 &quot;k8s.io/api/apps/v1&quot;</span>
-<span class="w">        </span><span class="nx">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Service</span><span class="p">{}).</span><span class="w">    </span><span class="c1">//  import corev1 &quot;k8s.io/api/core/v1&quot;</span>
 <span class="w">        </span><span class="nx">Complete</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
