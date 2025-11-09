@@ -6730,10 +6730,10 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="dockerfile">Dockerfile</h3>
-<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.23-bullseye</span>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.24-bullseye</span>
 
 <span class="c"># kubebuilderインストール</span>
-<span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kubebuilder<span class="w"> </span><span class="s2">&quot;https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.5.2/kubebuilder_linux_arm64&quot;</span>
+<span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kubebuilder<span class="w"> </span><span class="s2">&quot;https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64&quot;</span>
 <span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./kubebuilder
 <span class="k">RUN</span><span class="w"> </span>mv<span class="w"> </span>./kubebuilder<span class="w"> </span>/usr/local/bin/kubebuilder
 </code></pre></div>
