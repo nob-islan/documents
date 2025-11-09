@@ -102,4 +102,7 @@ markdown_extensions:
   - pymdownx.superfences
   # Enable hyperlink
   - pymdownx.magiclink
+  # Indent items by two spaces
+  - mdx_truly_sane_lists:
+      nested_indent: 2
 ```
