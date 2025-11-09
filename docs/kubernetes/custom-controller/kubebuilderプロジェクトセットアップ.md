@@ -155,7 +155,6 @@ func (r *NobReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&nobcontrollerv1.Nob{}).
 		Owns(&appsv1.Deployment{}). // 	import appsv1 "k8s.io/api/apps/v1"
-		Owns(&corev1.Service{}).    // 	import corev1 "k8s.io/api/core/v1"
 		Complete(r)
 }
 ```
