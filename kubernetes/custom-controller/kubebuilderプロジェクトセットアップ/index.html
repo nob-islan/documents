@@ -7003,7 +7003,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">    </span><span class="c1">// NobがDeploymentを監視するよう設定</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
 <span class="w">        </span><span class="nx">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">Nob</span><span class="p">{}).</span>
-<span class="w">        </span><span class="nx">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{}).</span><span class="w"> </span><span class="c1">//  import appsv1 &quot;k8s.io/api/apps/v1&quot;</span>
+<span class="w">        </span><span class="nx">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{}).</span><span class="w"> </span><span class="c1">// import appsv1 &quot;k8s.io/api/apps/v1&quot;</span>
 <span class="w">        </span><span class="nx">Complete</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
