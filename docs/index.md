@@ -30,6 +30,8 @@
 
 - **[Kubernetes クラスター構築手順](./kubernetes/getting-started/Kubernetesクラスター構築手順.md)**
   <br> kubeadm を使った Kubernetes クラスター構築手順書です。
+- **[kubebuilder プロジェクトセットアップ](./kubernetes/custom-controller/kubebuilderプロジェクトセットアップ.md)**
+  <br> kubebuilder を使ってカスタムコントローラーを実装するサンプルです。
 
 </div>
 
