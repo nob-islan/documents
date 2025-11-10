@@ -160,7 +160,7 @@ func (r *NobReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	// NobがDeploymentを監視するよう設定
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&nobcontrollerv1.Nob{}).
-		Owns(&appsv1.Deployment{}). // 	import appsv1 "k8s.io/api/apps/v1"
+		Owns(&appsv1.Deployment{}). // import appsv1 "k8s.io/api/apps/v1"
 		Complete(r)
 }
 ```
