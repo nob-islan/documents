@@ -7044,7 +7044,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Info</span><span class="p">(</span><span class="s">&quot;delete deployment resource: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">deployment</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">r</span><span class="p">.</span><span class="nx">Recorder</span><span class="p">.</span><span class="nx">Eventf</span><span class="p">(</span>
 <span class="w">            </span><span class="nx">nob</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">corev1</span><span class="p">.</span><span class="nx">EventTypeNormal</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">corev1</span><span class="p">.</span><span class="nx">EventTypeNormal</span><span class="p">,</span><span class="w"> </span><span class="c1">// import corev1 &quot;k8s.io/api/core/v1&quot;</span>
 <span class="w">            </span><span class="s">&quot;Deleted&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s">&quot;Deleted deployment %q&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">deployment</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
