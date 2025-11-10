@@ -222,6 +222,7 @@ package usecase
 import (
 	"easyapp/internal/domain"
 	"easyapp/internal/usecase/payload"
+	"errors"
 )
 
 // 認証のusecaseインターフェースです。
@@ -231,7 +232,7 @@ type AuthUsecase interface {
 	Login(in payload.LoginIn) payload.LoginOut
 
 	// ユーザ情報を取得します。
-	Me(in payload.MeIn) payload.MeOut
+	Me(in payload.MeIn) (payload.MeOut, error)
 }
 
 type authUsecase struct {
@@ -251,13 +252,13 @@ func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 	return payload.NewLoginOut(users.Password() == in.Password())
 }
 
-func (u *authUsecase) Me(in payload.MeIn) payload.MeOut {
+func (u *authUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 
 	users := u.authRepository.FindByName(in.Name())
 	if users.Name() == "" {
-		return *new(payload.MeOut)
+		return *new(payload.MeOut), errors.New("no such user")
 	}
-	return payload.NewMeOut(users.Name(), users.Age())
+	return payload.NewMeOut(users.Name(), users.Age()), nil
 }
 ```
 
@@ -347,6 +348,7 @@ import (
 	"easyapp/internal/usecase"
 	"easyapp/internal/usecase/payload"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -384,7 +386,12 @@ func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
-	out := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	out, err := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintln(w, err.Error())
+		return
+	}
 
 	res := model.NewMeRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
