@@ -10,7 +10,7 @@
 
 - **[Go 環境サンプル](./dev-container/examples/go環境サンプル.md)**
 - **[Kind サンプル](./dev-container/examples/kindサンプル.md)**
-- **[Kubebuilder 環境サンプル](./dev-container/examples/Kubebuilder環境サンプル.md)**
+<!-- - **[Kubebuilder 環境サンプル](./dev-container/examples/Kubebuilder環境サンプル.md)** -->
 - **[Java 環境サンプル](./dev-container/examples/java環境サンプル.md)**
 
 </div>
