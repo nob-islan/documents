@@ -1,6 +1,6 @@
 # http 通信での push を許可
 
-docker pull 時に`Error response from daemon: Get "-": http: server gave HTTP response to HTTPS client`エラーが発生した場合の対処方法です。
+docker pull / push 時に`Error response from daemon: Get "-": http: server gave HTTP response to HTTPS client`エラーが発生した場合の対処方法です。
 
 ## 手順
 
