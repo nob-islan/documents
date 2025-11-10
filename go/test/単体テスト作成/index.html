@@ -6867,6 +6867,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;bytes&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;errors&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http/httptest&quot;</span>
 <span class="w">    </span><span class="s">&quot;testing&quot;</span>
@@ -6885,9 +6886,9 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockAuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockAuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">in</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// AuthHandler_Loginのテスト</span>
@@ -6959,10 +6960,22 @@
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestParam</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">},</span>
 <span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockAuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;Me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">))</span>
+<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;Me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nx">expectedStatusCode</span><span class="p">:</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">       </span><span class="s">`{&quot;name&quot;: &quot;nob&quot;, &quot;age&quot;: 13}`</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;no such user&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">requestParam</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nobody&quot;</span><span class="p">},</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockAuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;Me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nobody&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">expectedStatusCode</span><span class="p">:</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">       </span><span class="s">`{&quot;message&quot;: &quot;no such user&quot;}`</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -7014,9 +7027,9 @@
 <span class="w">    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Mock</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// AuthUsecase_Loginのテスト</span>
@@ -7082,31 +7095,29 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_AuthUsecase_Me</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                          </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestBody</span><span class="w">  </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="w">                    </span><span class="c1">// リクエストボディ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="w">                   </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">          </span><span class="kt">string</span><span class="w">                          </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestBody</span><span class="w">   </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="w">                    </span><span class="c1">// リクエストボディ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">     </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w">  </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="w">                   </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">expectedError</span><span class="w"> </span><span class="kt">error</span><span class="w">                           </span><span class="c1">// 期待されるエラー</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">))</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">  </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedError</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;repository error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;no such user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
 <span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
-<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
-<span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span>
-<span class="w">                    </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;repository error&quot;</span><span class="p">),</span>
-<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">))</span>
 <span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">  </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedError</span><span class="p">:</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -7120,10 +7131,13 @@
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setupMock</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// usecaseの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewAuthUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Me</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewAuthUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Me</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの検証</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedError</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">})</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -7192,7 +7206,7 @@
 </code></pre></div>
 <h4 id="_7">テストデータ準備</h4>
 <ul>
-<li><code>schema.sql</code></li>
+<li>schema.sql</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 一部 SQLite 特有の記法が必要なため注意 see; https://www.sqlite.org/docs.html</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
@@ -7202,7 +7216,7 @@
 <span class="p">);</span>
 </code></pre></div>
 <ul>
-<li><code>data.sql</code></li>
+<li>data.sql</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span>
@@ -7215,6 +7229,9 @@
 <span class="p">);</span>
 </code></pre></div>
 <h4 id="_8">テストケース作成</h4>
+<ul>
+<li>users_repository_test.go</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -7238,11 +7255,10 @@
 <span class="w">        </span><span class="nx">expectedErrorMessage</span><span class="w"> </span><span class="kt">string</span><span class="w">           </span><span class="c1">// 期待されるエラーメッセージ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">                 </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">queryParam</span><span class="p">:</span><span class="w">           </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w">                </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">         </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">expectedErrorMessage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">queryParam</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w">        </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;query error&quot;</span><span class="p">,</span>
@@ -7250,8 +7266,7 @@
 <span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">db</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="s">&quot;DROP TABLE users&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// クエリエラー時のテスト向けにテーブルを壊す</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">         </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">expectedErrorMessage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;no such table: users&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -7266,13 +7281,10 @@
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// repositoryの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUsersRepository</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUsersRepository</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">queryParam</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの確認</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedErrorMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
-<span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">})</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
