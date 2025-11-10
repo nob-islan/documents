@@ -7277,7 +7277,21 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>run
 </code></pre></div>
 <ul>
-<li>カスタムリソースのマニフェストファイルを apply します（事前に Spec を定義しておいてください）:</li>
+<li>カスタムリソースの spec を宣言します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nobcontroller.example.nob/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nob</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-controller</span>
+<span class="w">    </span><span class="nt">app.kubernetes.io/managed-by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-sample</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deploymentName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-nginx</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</code></pre></div>
+<ul>
+<li>カスタムリソースのマニフェストファイルを apply します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>config/samples/nobcontroller_v1_nob.yaml
 </code></pre></div>
