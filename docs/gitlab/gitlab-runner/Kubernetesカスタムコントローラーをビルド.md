@@ -1,6 +1,6 @@
 # Kubernetes カスタムコントローラーをビルド
 
-GitLab Runner を使って Kubernetes カスタムコントローラーのコンテナイメージをビルドします。カスタムコントローラーは kubebuilder をベースに実装されていることを前提とします。
+GitLab Runner を使って Kubernetes カスタムコントローラーのコンテナイメージをビルドします。カスタムコントローラーは Kubebuilder をベースに実装されていることを前提とします。
 
 ## 設定ファイル
 

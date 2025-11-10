@@ -1,6 +1,6 @@
-# kubebuilder プロジェクトセットアップ
+# Kubebuilder プロジェクトセットアップ
 
-[kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
+[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
 
 ## 環境構築
 
@@ -46,7 +46,7 @@
 ```Dockerfile
 FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
 
-# kubebuilderインストール
+# Kubebuilderインストール
 RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64"
 RUN chmod +x ./kubebuilder
 RUN mv ./kubebuilder /usr/local/bin/kubebuilder
@@ -68,7 +68,7 @@ nodes:
 - Kubernetes クラスタを構築します。
 
 ```shell
-kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml 
+kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml
 ```
 
 - プロジェクトを初期化します。

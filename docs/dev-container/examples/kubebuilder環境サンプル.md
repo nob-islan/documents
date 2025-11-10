@@ -1,6 +1,6 @@
 # Kubebuilder 環境サンプル
 
-Kubernetes のカスタムコントローラーを実装するための kubebuilder を利用するためのサンプルです。
+Kubernetes のカスタムコントローラーを実装するための Kubebuilder を利用するためのサンプルです。
 
 ## 設定
 
@@ -44,7 +44,7 @@ Kubernetes のカスタムコントローラーを実装するための kubebuil
 ```Dockerfile
 FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
 
-# kubebuilderインストール
+# Kubebuilderインストール
 RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64"
 RUN chmod +x ./kubebuilder
 RUN mv ./kubebuilder /usr/local/bin/kubebuilder

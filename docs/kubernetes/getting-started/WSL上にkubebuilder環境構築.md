@@ -1,4 +1,4 @@
-# WSL 上に kubebuilder 環境構築
+# WSL 上に Kubebuilder 環境構築
 
 ## WSL 起動
 
@@ -46,7 +46,7 @@ Docker version 27.5.1, build 9f9e405
 
 ## make インストール
 
-kubebuilder によって自動生成される make スクリプトを動かすためにコマンドをインストールします。
+Kubebuilder によって自動生成される make スクリプトを動かすためにコマンドをインストールします。
 
 - make インストール
 
@@ -140,9 +140,9 @@ $ go version
 go version go1.23.6 linux/amd64
 ```
 
-## kubebuilder インストール
+## Kubebuilder インストール
 
-- kubebuilder ダウンロード、インストール
+- Kubebuilder ダウンロード、インストール
 
 ```shell
 curl -L -o kubebuilder "https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)"
@@ -150,7 +150,7 @@ chmod +x kubebuilder
 sudo mv ./kubebuilder /usr/local/bin/kubebuilder
 ```
 
-- kubebuilder がインストールされていることを確認
+- Kubebuilder がインストールされていることを確認
 
 ```
 $ kubebuilder version

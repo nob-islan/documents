@@ -10,7 +10,7 @@
 
 - **[Go 環境サンプル](./dev-container/examples/go環境サンプル.md)**
 - **[Kind サンプル](./dev-container/examples/kindサンプル.md)**
-- **[Kubebuilder 環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)**
+- **[Kubebuilder 環境サンプル](./dev-container/examples/Kubebuilder環境サンプル.md)**
 - **[Java 環境サンプル](./dev-container/examples/java環境サンプル.md)**
 
 </div>
@@ -30,8 +30,8 @@
 
 - **[Kubernetes クラスター構築手順](./kubernetes/getting-started/Kubernetesクラスター構築手順.md)**
   <br> kubeadm を使った Kubernetes クラスター構築手順書です。
-- **[kubebuilder プロジェクトセットアップ](./kubernetes/custom-controller/kubebuilderプロジェクトセットアップ.md)**
-  <br> kubebuilder を使ってカスタムコントローラーを実装するサンプルです。
+- **[Kubebuilder プロジェクトセットアップ](./kubernetes/custom-controller/Kubebuilderプロジェクトセットアップ.md)**
+  <br> Kubebuilder を使ってカスタムコントローラーを実装するサンプルです。
 
 </div>
 
