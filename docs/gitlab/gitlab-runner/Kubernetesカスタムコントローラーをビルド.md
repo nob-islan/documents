@@ -36,7 +36,7 @@ test:
     - cd ${CONTROLLER}
     - go install gotest.tools/gotestsum@latest
     - make test
-image:
+build_image:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -51,7 +51,7 @@ image:
       --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG"
   rules:
     - if: $CI_COMMIT_TAG
-manifest:
+create_manifest:
   stage: build
   image:
     name: fedora
