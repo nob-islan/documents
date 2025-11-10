@@ -348,7 +348,6 @@ import (
 	"easyapp/internal/usecase"
 	"easyapp/internal/usecase/payload"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -388,8 +387,13 @@ func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.authUsecase.Me(payload.NewMeIn(req.Name))
 	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintln(w, err.Error())
+		json.NewEncoder(w).Encode(struct {
+			Message string `json:"message"`
+		}{
+			Message: err.Error(),
+		})
 		return
 	}
 
