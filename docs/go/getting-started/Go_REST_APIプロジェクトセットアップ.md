@@ -194,12 +194,12 @@ func NewUsersRepository(db *sql.DB) domain.UsersRepository {
 	return &usersRepository{db: db}
 }
 
-func (r *usersRepository) FindByName(selectName string) domain.Users {
+func (r *usersRepository) FindByName(targetName string) domain.Users {
 
 	const sql string = "SELECT * FROM users WHERE name = ?"
 
 	// クエリ実行
-	row := r.db.QueryRow(sql, selectName)
+	row := r.db.QueryRow(sql, targetName)
 
 	var name string
 	var password string
