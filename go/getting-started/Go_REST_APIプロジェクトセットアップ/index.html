@@ -7120,6 +7120,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;errors&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 認証のusecaseインターフェースです。</span>
@@ -7129,7 +7130,7 @@
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span>
 
 <span class="w">    </span><span class="c1">// ユーザ情報を取得します。</span>
-<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span>
+<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">authUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -7149,13 +7150,13 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">())</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="internalusecasepayload">internal/usecase/payload/</h4>
@@ -7239,6 +7240,7 @@
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
 <span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
 
@@ -7276,7 +7278,12 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintln</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">Age</span><span class="p">())</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
