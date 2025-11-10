@@ -78,7 +78,7 @@ release:
     assets:
       links:
         - name: ${CONTROLLER}.yaml
-          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${CONTROLLER}/deploy/${CONTROLLER}.yaml?job=manifest
+          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${CONTROLLER}/deploy/${CONTROLLER}.yaml?job=create_manifest
   rules:
     - if: $CI_COMMIT_TAG
 ```
