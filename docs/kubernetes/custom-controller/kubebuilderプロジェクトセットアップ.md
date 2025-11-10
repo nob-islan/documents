@@ -342,7 +342,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 Reconciler のメンバを追加します:
 
 ```go
-	if err = (&controller.NobReconciler{ // nob_controller.goの定義に合わせて追記
+	if err := (&controller.NobReconciler{ // nob_controller.goの定義に合わせて追記
 		Client:   mgr.GetClient(),
 		Log:      ctrl.Log.WithName("controllers").WithName("Nob"),
 		Scheme:   mgr.GetScheme(),
