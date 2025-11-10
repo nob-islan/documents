@@ -6867,7 +6867,7 @@
 <h2 id="_1">環境構築</h2>
 <p>下記設定で構築した Kubernetes クラスタ環境でのコントローラー開発を前提とします。</p>
 <ul>
-<li>devcontainer.json</li>
+<li>.devcontainer/devcontainer.json</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kubebuilder&quot;</span><span class="p">,</span>
@@ -6901,7 +6901,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>Dockerfile</li>
+<li>.devcontainer/Dockerfile</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.24-bullseye</span>
 
@@ -6911,7 +6911,7 @@
 <span class="k">RUN</span><span class="w"> </span>mv<span class="w"> </span>./kubebuilder<span class="w"> </span>/usr/local/bin/kubebuilder
 </code></pre></div>
 <ul>
-<li>kubebuilder-cluster.yaml</li>
+<li>kind/cluster/kubebuilder-cluster.yaml</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
 <span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
@@ -6921,6 +6921,11 @@
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 </code></pre></div>
 <h2 id="_2">プロジェクト作成</h2>
+<ul>
+<li>Kubernetes クラスタを構築します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>kubebuilder-cluster<span class="w"> </span>--config<span class="w"> </span>kind/cluster/kubebuilder-cluster.yaml<span class="w"> </span>
+</code></pre></div>
 <ul>
 <li>プロジェクトを初期化します。</li>
 </ul>
