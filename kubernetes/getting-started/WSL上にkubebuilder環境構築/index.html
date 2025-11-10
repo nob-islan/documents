@@ -20,7 +20,7 @@
     
     
       
-        <title>WSL 上に kubebuilder 環境構築 - Nob docs</title>
+        <title>WSL 上に Kubebuilder 環境構築 - Nob docs</title>
       
     
     
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              WSL 上に kubebuilder 環境構築
+              WSL 上に Kubebuilder 環境構築
             
           </span>
         </div>
@@ -4232,7 +4232,7 @@
   
   
   <span class="md-ellipsis">
-    kubebuilder プロジェクトセットアップ
+    Kubebuilder プロジェクトセットアップ
     
   </span>
   
@@ -4427,7 +4427,7 @@
   
   
   <span class="md-ellipsis">
-    WSL 上に kubebuilder 環境構築
+    WSL 上に Kubebuilder 環境構築
     
   </span>
   
@@ -4440,7 +4440,7 @@
   
   
   <span class="md-ellipsis">
-    WSL 上に kubebuilder 環境構築
+    WSL 上に Kubebuilder 環境構築
     
   </span>
   
@@ -4519,7 +4519,7 @@
         <li class="md-nav__item">
   <a href="#kubebuilder" class="md-nav__link">
     <span class="md-ellipsis">
-      kubebuilder インストール
+      Kubebuilder インストール
     </span>
   </a>
   
@@ -6705,7 +6705,7 @@
         <li class="md-nav__item">
   <a href="#kubebuilder" class="md-nav__link">
     <span class="md-ellipsis">
-      kubebuilder インストール
+      Kubebuilder インストール
     </span>
   </a>
   
@@ -6745,7 +6745,7 @@
 
 
 
-<h1 id="wsl-kubebuilder">WSL 上に kubebuilder 環境構築</h1>
+<h1 id="wsl-kubebuilder">WSL 上に Kubebuilder 環境構築</h1>
 <h2 id="wsl">WSL 起動</h2>
 <ul>
 <li>Ubuntu インストール・起動</li>
@@ -6782,7 +6782,7 @@ sh<span class="w"> </span>get-docker.sh
 Docker version 27.5.1, build 9f9e405
 </code></pre></div>
 <h2 id="make">make インストール</h2>
-<p>kubebuilder によって自動生成される make スクリプトを動かすためにコマンドをインストールします。</p>
+<p>Kubebuilder によって自動生成される make スクリプトを動かすためにコマンドをインストールします。</p>
 <ul>
 <li>make インストール</li>
 </ul>
@@ -6860,16 +6860,16 @@ The connection to the server localhost:8080 was refused - did you specify the ri
 <div class="highlight"><pre><span></span><code>$ go version
 go version go1.23.6 linux/amd64
 </code></pre></div>
-<h2 id="kubebuilder">kubebuilder インストール</h2>
+<h2 id="kubebuilder">Kubebuilder インストール</h2>
 <ul>
-<li>kubebuilder ダウンロード、インストール</li>
+<li>Kubebuilder ダウンロード、インストール</li>
 </ul>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kubebuilder<span class="w"> </span><span class="s2">&quot;https://go.kubebuilder.io/dl/latest/</span><span class="k">$(</span>go<span class="w"> </span>env<span class="w"> </span>GOOS<span class="k">)</span><span class="s2">/</span><span class="k">$(</span>go<span class="w"> </span>env<span class="w"> </span>GOARCH<span class="k">)</span><span class="s2">&quot;</span>
 chmod<span class="w"> </span>+x<span class="w"> </span>kubebuilder
 sudo<span class="w"> </span>mv<span class="w"> </span>./kubebuilder<span class="w"> </span>/usr/local/bin/kubebuilder
 </code></pre></div>
 <ul>
-<li>kubebuilder がインストールされていることを確認</li>
+<li>Kubebuilder がインストールされていることを確認</li>
 </ul>
 <div class="highlight"><pre><span></span><code>$ kubebuilder version
 Version: main.version{KubeBuilderVersion:&quot;4.5.0&quot;, KubernetesVendor:&quot;1.31.0&quot;, GitCommit:&quot;7153119ca900994b70507edbde59771ac824f2d9&quot;, BuildDate:&quot;2025-01-21T08:46:54Z&quot;, GoOs:&quot;linux&quot;, GoArch:&quot;amd64&quot;}

@@ -20,7 +20,7 @@
     
     
       
-        <title>kubebuilder プロジェクトセットアップ - Nob docs</title>
+        <title>Kubebuilder プロジェクトセットアップ - Nob docs</title>
       
     
     
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              kubebuilder プロジェクトセットアップ
+              Kubebuilder プロジェクトセットアップ
             
           </span>
         </div>
@@ -4243,7 +4243,7 @@
   
   
   <span class="md-ellipsis">
-    kubebuilder プロジェクトセットアップ
+    Kubebuilder プロジェクトセットアップ
     
   </span>
   
@@ -4256,7 +4256,7 @@
   
   
   <span class="md-ellipsis">
-    kubebuilder プロジェクトセットアップ
+    Kubebuilder プロジェクトセットアップ
     
   </span>
   
@@ -4577,7 +4577,7 @@
   
   
   <span class="md-ellipsis">
-    WSL 上に kubebuilder 環境構築
+    WSL 上に Kubebuilder 環境構築
     
   </span>
   
@@ -6817,8 +6817,8 @@
 
 
 
-<h1 id="kubebuilder">kubebuilder プロジェクトセットアップ</h1>
-<p><a href="https://github.com/kubernetes-sigs/kubebuilder">kubebuilder</a> を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
+<h1 id="kubebuilder">Kubebuilder プロジェクトセットアップ</h1>
+<p><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a> を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
 <h2 id="_1">環境構築</h2>
 <p>下記設定で構築した Kubernetes クラスタ環境でのコントローラー開発を前提とします。</p>
 <ul>
@@ -6860,7 +6860,7 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.24-bullseye</span>
 
-<span class="c"># kubebuilderインストール</span>
+<span class="c"># Kubebuilderインストール</span>
 <span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kubebuilder<span class="w"> </span><span class="s2">&quot;https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64&quot;</span>
 <span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./kubebuilder
 <span class="k">RUN</span><span class="w"> </span>mv<span class="w"> </span>./kubebuilder<span class="w"> </span>/usr/local/bin/kubebuilder
@@ -6879,7 +6879,7 @@
 <ul>
 <li>Kubernetes クラスタを構築します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>kubebuilder-cluster<span class="w"> </span>--config<span class="w"> </span>kind/cluster/kubebuilder-cluster.yaml<span class="w"> </span>
+<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>kubebuilder-cluster<span class="w"> </span>--config<span class="w"> </span>kind/cluster/kubebuilder-cluster.yaml
 </code></pre></div>
 <ul>
 <li>プロジェクトを初期化します。</li>
