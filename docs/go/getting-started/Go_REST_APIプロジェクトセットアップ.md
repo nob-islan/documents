@@ -124,7 +124,7 @@ func (u Users) Age() int {
 type UsersRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(name string) (Users, error)
+	FindByName(name string) Users
 }
 ```
 
@@ -194,27 +194,19 @@ func NewUsersRepository(db *sql.DB) domain.UsersRepository {
 	return &usersRepository{db: db}
 }
 
-func (r *usersRepository) FindByName(name string) (domain.Users, error) {
+func (r *usersRepository) FindByName(selectName string) domain.Users {
 
 	const sql string = "SELECT * FROM users WHERE name = ?"
 
 	// クエリ実行
-	rows, err := r.db.Query(sql, name)
-	if err != nil {
-		return *new(domain.Users), err
-	}
-	defer rows.Close()
+	row := r.db.QueryRow(sql, selectName)
 
-	var users domain.Users
-	for rows.Next() {
-		var name string
-		var password string
-		var age int
-		rows.Scan(&name, &password, &age)
-		users = domain.NewUsers(name, password, age)
-	}
+	var name string
+	var password string
+	var age int
+	row.Scan(&name, &password, &age)
 
-	return users, nil
+	return domain.NewUsers(name, password, age)
 }
 ```
 
@@ -252,17 +244,17 @@ func NewAuthUsecase(authRepository domain.UsersRepository) AuthUsecase {
 
 func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
-	user, err := u.authRepository.FindByName(in.Name())
-	if err != nil {
+	users := u.authRepository.FindByName(in.Name())
+	if users.Name() == "" {
 		return payload.NewLoginOut(false)
 	}
-	return payload.NewLoginOut(user.Password() == in.Password())
+	return payload.NewLoginOut(users.Password() == in.Password())
 }
 
 func (u *authUsecase) Me(in payload.MeIn) payload.MeOut {
 
-	users, err := u.authRepository.FindByName(in.Name())
-	if err != nil {
+	users := u.authRepository.FindByName(in.Name())
+	if users.Name() == "" {
 		return *new(payload.MeOut)
 	}
 	return payload.NewMeOut(users.Name(), users.Age())
