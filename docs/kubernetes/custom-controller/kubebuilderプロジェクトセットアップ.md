@@ -202,7 +202,7 @@ func (r *NobReconciler) cleanupOwnedResources(
 		log.Info("delete deployment resource: " + deployment.Name)
 		r.Recorder.Eventf(
 			nob,
-			corev1.EventTypeNormal,
+			corev1.EventTypeNormal, // import corev1 "k8s.io/api/core/v1"
 			"Deleted",
 			"Deleted deployment %q",
 			deployment.Name,
