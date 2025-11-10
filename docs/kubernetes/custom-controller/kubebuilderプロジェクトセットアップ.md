@@ -453,7 +453,22 @@ make install
 make run
 ```
 
-- カスタムリソースのマニフェストファイルを apply します（事前に Spec を定義しておいてください）:
+- カスタムリソースの spec を宣言します。
+
+```yaml
+apiVersion: nobcontroller.example.nob/v1
+kind: Nob
+metadata:
+  labels:
+    app.kubernetes.io/name: nob-controller
+    app.kubernetes.io/managed-by: kustomize
+  name: nob-sample
+spec:
+  deploymentName: nob-nginx
+  replicas: 3
+```
+
+- カスタムリソースのマニフェストファイルを apply します。
 
 ```shell
 kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
