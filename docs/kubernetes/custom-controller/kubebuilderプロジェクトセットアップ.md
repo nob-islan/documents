@@ -6,7 +6,7 @@
 
 下記設定で構築した Kubernetes クラスタ環境でのコントローラー開発を前提とします。
 
-- devcontainer.json
+- .devcontainer/devcontainer.json
 
 ```json
 {
@@ -41,7 +41,7 @@
 }
 ```
 
-- Dockerfile
+- .devcontainer/Dockerfile
 
 ```Dockerfile
 FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
@@ -52,7 +52,7 @@ RUN chmod +x ./kubebuilder
 RUN mv ./kubebuilder /usr/local/bin/kubebuilder
 ```
 
-- kubebuilder-cluster.yaml
+- kind/cluster/kubebuilder-cluster.yaml
 
 ```yaml
 kind: Cluster
@@ -64,6 +64,12 @@ nodes:
 ```
 
 ## プロジェクト作成
+
+- Kubernetes クラスタを構築します。
+
+```shell
+kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml 
+```
 
 - プロジェクトを初期化します。
 
