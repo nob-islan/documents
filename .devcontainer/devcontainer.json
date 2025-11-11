@@ -8,7 +8,10 @@
       "settings": {
         "editor.formatOnSave": true
       },
-      "extensions": ["esbenp.prettier-vscode"]
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "shd101wyy.markdown-preview-enhanced"
+      ]
     }
   }
 }
