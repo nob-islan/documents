@@ -7133,7 +7133,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="cmdmaingo">cmd/main.go</h3>
-<p>Reconciler のメンバを追加します:</p>
+<p>Reconciler のメンバを追加します。</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="nx">controller</span><span class="p">.</span><span class="nx">NobReconciler</span><span class="p">{</span><span class="w"> </span><span class="c1">// nob_controller.goの定義に合わせて追記</span>
 <span class="w">        </span><span class="nx">Client</span><span class="p">:</span><span class="w">   </span><span class="nx">mgr</span><span class="p">.</span><span class="nx">GetClient</span><span class="p">(),</span>
 <span class="w">        </span><span class="nx">Log</span><span class="p">:</span><span class="w">      </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Log</span><span class="p">.</span><span class="nx">WithName</span><span class="p">(</span><span class="s">&quot;controllers&quot;</span><span class="p">).</span><span class="nx">WithName</span><span class="p">(</span><span class="s">&quot;Nob&quot;</span><span class="p">),</span>
@@ -7222,12 +7222,12 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 </code></pre></div>
 <h2 id="_7">ローカルアプリケーション起動</h2>
 <ul>
-<li>yaml マニフェストの生成および CRD の登録を行います:</li>
+<li>yaml マニフェストの生成および CRD の登録を行います。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>install
 </code></pre></div>
 <ul>
-<li>Go プロセスとしてコントローラを動かします:</li>
+<li>Go プロセスとしてコントローラを動かします。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>run
 </code></pre></div>
@@ -7251,7 +7251,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>config/samples/nobcontroller_v1_nob.yaml
 </code></pre></div>
 <ul>
-<li>カスタムリソースが動いていることを確認できます:</li>
+<li>下記コマンドでカスタムリソースが動いていることを確認できます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>$ kubectl get Nob
 NAME         AGE
