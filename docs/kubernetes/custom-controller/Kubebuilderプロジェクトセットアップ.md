@@ -339,7 +339,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 
 ### cmd/main.go
 
-Reconciler のメンバを追加します:
+Reconciler のメンバを追加します。
 
 ```go
 	if err := (&controller.NobReconciler{ // nob_controller.goの定義に合わせて追記
@@ -441,13 +441,13 @@ make test
 
 ## ローカルアプリケーション起動
 
-- yaml マニフェストの生成および CRD の登録を行います:
+- yaml マニフェストの生成および CRD の登録を行います。
 
 ```shell
 make install
 ```
 
-- Go プロセスとしてコントローラを動かします:
+- Go プロセスとしてコントローラを動かします。
 
 ```shell
 make run
@@ -474,7 +474,7 @@ spec:
 kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 ```
 
-- カスタムリソースが動いていることを確認できます:
+- 下記コマンドでカスタムリソースが動いていることを確認できます。
 
 ```
 $ kubectl get Nob
