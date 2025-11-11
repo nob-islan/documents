@@ -18,137 +18,15 @@
 
 ## サンプルコード
 
-下記 2 つのサンプルを記載します:
+擬似的なログイン画面を実装します。
 
-1. API のデータを画面出力
-1. 画面の入力値を使って API 呼び出し
+### 設計
 
-### API のデータを画面出力
-
-#### 設計
-
-下記処理を行います:
-
-- http://localhost:8080 アクセス時に、go 側で Message に値を詰めて画面を表示
-- ボタン押下時に js から go の関数を呼び出し、レスポンスの値で html コンテンツを差し替え
-
-#### 実装
-
-- index.html
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="static/style.css" type="text/css" />
-    <link rel="icon" href="static/favicon.ico" />
-    <title>First Go web</title>
-  </head>
-
-  <body>
-    <h1 id="message">{{ .Message }}</h1>
-    <button onclick="handleOnclickButton()">押してください</button>
-
-    <script src="static/index.js"></script>
-  </body>
-</html>
-```
-
-- index.js
-
-```js
-function handleOnclickButton() {
-  fetch("/message", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById("message").textContent = data.message;
-    })
-    .catch((error) => {
-      console.error("エラーが発生しました:", error);
-    });
-}
-```
-
-- style.css
-
-```css
-body {
-  padding: 30px 60px 30px 60px;
-  color: #d6d6d6;
-  background-color: #000333;
-}
-```
-
-- main.go
-
-```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-	"html/template"
-	"log"
-	"net/http"
-)
-
-func main() {
-
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/", initial)
-	http.HandleFunc("/message", getMessage)
-
-	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-// 初期表示処理を行います。
-func initial(w http.ResponseWriter, r *http.Request) {
-
-	tmpl, err := template.ParseFiles("templates/index.html")
-	if err != nil {
-		http.Error(w, "Template parsing error", http.StatusInternalServerError)
-		return
-	}
-
-	initView := view{Message: "Push button"}
-
-	err = tmpl.Execute(w, initView)
-	if err != nil {
-		http.Error(w, "Template execution error", http.StatusInternalServerError)
-	}
-}
-
-// 画面表示用のメッセージを取得します。
-func getMessage(w http.ResponseWriter, r *http.Request) {
-
-	// メッセージ作成
-	view := view{Message: "Hello, go web!"}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(view)
-}
-
-// 画面表示向けのデータを格納する構造体です。
-type view struct {
-	Message string `json:"message"`
-}
-```
-
-### 画面の入力値を使って API 呼び出し
-
-#### 設計
-
+- ログイン画面表示時に、ボタン名を go から html に渡す
 - ボタン入力時に js から go の関数を呼び出し、API をコール
+- 結果を alert 表示
 
-#### 実装
+### 実装
 
 - index.html
 
@@ -181,7 +59,7 @@ type view struct {
     </div>
     <div class="submit-button-wrapper">
       <button class="submit-button" onclick="handleOnclickButton()">
-        ログイン
+        {{ .ButtonText }}
       </button>
     </div>
 
@@ -298,7 +176,10 @@ func initial(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tmpl.Execute(w, nil)
+	// 画面表示用の構造体を作成
+	initView := struct{ ButtonText string }{ButtonText: "ログイン"}
+
+	err = tmpl.Execute(w, initView)
 	if err != nil {
 		http.Error(w, "Template execution error", http.StatusInternalServerError)
 	}
@@ -315,6 +196,7 @@ func registMessage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := Response{Ret: "Hello, " + req.Name}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -357,13 +239,20 @@ var templates embed.FS // templates埋め込み宣言
 
 func main() {
 
-	staticFiles, err := fs.Sub(static, "static") // 埋め込んだstaticを使うようにする
+	staticFiles, err := fs.Sub(static, "static") // 埋め込んだstaticを使う
 	if err != nil {
 		log.Fatalf("Failed to create sub filesystem: %v", err)
 	}
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 	http.HandleFunc("/", initial)
-	http.HandleFunc("/message", getMessage)
+	http.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			registMessage(w, r)
+		default:
+			http.Error(w, "Forbidden", http.StatusForbidden)
+		}
+	})
 
 	fmt.Println("Server started at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -372,13 +261,14 @@ func main() {
 // 初期表示処理を行います。
 func initial(w http.ResponseWriter, r *http.Request) {
 
-	tmpl, err := template.ParseFS(templates, "templates/index.html") // 埋め込んだtemplatesを使うようにする
+	tmpl, err := template.ParseFS(templates, "templates/index.html") // 埋め込んだtemplatesを使う
 	if err != nil {
 		http.Error(w, "Template parsing error", http.StatusInternalServerError)
 		return
 	}
 
-	initView := view{Message: "Push button"}
+	// 画面表示用の構造体を作成
+	initView := struct{ ButtonText string }{ButtonText: "ログイン"}
 
 	err = tmpl.Execute(w, initView)
 	if err != nil {
@@ -386,19 +276,31 @@ func initial(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// 画面表示用のメッセージを取得します。
-func getMessage(w http.ResponseWriter, r *http.Request) {
+// 入力値を登録します。
+func registMessage(w http.ResponseWriter, r *http.Request) {
 
-	// メッセージ作成
-	view := view{Message: "Hello, go web!"}
+	var req Request
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&req); err != nil {
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
+
+	res := Response{Ret: "Hello, " + req.Name}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(view)
+	json.NewEncoder(w).Encode(res)
 }
 
-// 画面表示向けのデータを格納する構造体です。
-type view struct {
-	Message string `json:"message"`
+// 入力値登録リクエストモデル
+type Request struct {
+	Name     string `json:"name"`     // ユーザ名
+	Password string `json:"password"` // パスワード
+}
+
+// 入力値登録レスポンスモデル
+type Response struct {
+	Ret string `json:"ret"` // 出力メッセージ
 }
 ```
