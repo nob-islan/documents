@@ -8067,7 +8067,7 @@ sequenceDiagram
         Note right of op: 認可エンドポイント
     op --&gt;&gt; end_user: ログイン画面
     end_user -&gt;&gt; op: ユーザ認証
-    op --&gt;+ end_user: 認証レスポンス
+    op -&gt;+ end_user: 認証レスポンス
     end_user -&gt;&gt;- rp: リダイレクト URI へリダイレクト
     rp -&gt;&gt; op: トークンリクエスト
         Note right of op: トークンエンドポイント
