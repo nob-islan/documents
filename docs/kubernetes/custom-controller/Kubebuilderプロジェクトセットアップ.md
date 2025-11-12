@@ -2,80 +2,11 @@
 
 [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
 
-## 環境構築
-
-下記設定で構築した Kubernetes クラスタ環境でのコントローラー開発を前提とします。
-
-- .devcontainer/devcontainer.json
-
-```json
-{
-  "name": "Kubebuilder",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
-    "ghcr.io/mpriscella/features/kind:1": {}
-  },
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "editor.formatOnSave": true,
-        "[go]": {
-          "editor.formatOnSave": true,
-          "editor.rulers": [100]
-        },
-        "[yaml]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
-      },
-      "extensions": [
-        "golang.go",
-        "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "esbenp.prettier-vscode"
-      ]
-    }
-  }
-}
-```
-
-- .devcontainer/Dockerfile
-
-```Dockerfile
-FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
-
-# Kubebuilderインストール
-RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64"
-RUN chmod +x ./kubebuilder
-RUN mv ./kubebuilder /usr/local/bin/kubebuilder
-```
-
-- kind/cluster/kubebuilder-cluster.yaml
-
-```yaml
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-  - role: worker
-  - role: worker
-```
-
 ## プロジェクト作成
-
-- Kubernetes クラスタを構築します。
-
-```shell
-kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml
-```
 
 - プロジェクトを初期化します。
 
 ```shell
-# mkdir {controller名} && cd {controller名}
-mkdir nob-controller && cd nob-controller
 # kubebuilder init --domain {APIのドメイン} --repo {リポジトリパス}
 kubebuilder init --domain example.nob --repo example.nob/nob-controller
 ```
@@ -440,6 +371,23 @@ make test
 ```
 
 ## ローカルアプリケーション起動
+
+- kind/cluster/kubebuilder-cluster.yaml を下記内容で作成します。
+
+```yaml
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  - role: control-plane
+  - role: worker
+  - role: worker
+```
+
+- Kind で Kubernetes クラスタを構築します。
+
+```shell
+kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml
+```
 
 - yaml マニフェストの生成および CRD の登録を行います。
 
