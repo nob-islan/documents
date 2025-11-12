@@ -36,3 +36,8 @@ markdown_extensions:
   - md_in_html
   - mdx_truly_sane_lists:
       nested_indent: 2
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
