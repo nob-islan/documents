@@ -33,7 +33,6 @@ test:
   image:
     name: golang:1.24
   script:
-    - cd ${CONTROLLER}
     - go install gotest.tools/gotestsum@latest
     - make test
 build_image:
@@ -46,8 +45,8 @@ build_image:
     - echo "{\"auths\":{\"${HARBOR_HOST}\":{\"auth\":\"$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
     - >-
       /kaniko/executor
-      --context "${CI_PROJECT_DIR}/${CONTROLLER}"
-      --dockerfile "${CI_PROJECT_DIR}/${CONTROLLER}/Dockerfile"
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG"
   rules:
     - if: $CI_COMMIT_TAG
@@ -57,13 +56,13 @@ create_manifest:
     name: fedora
   script:
     - curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-    - cd ${CONTROLLER}/config/manager && ${CI_PROJECT_DIR}/kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG
-    - cd ${CI_PROJECT_DIR} && mkdir -p ${CONTROLLER}/deploy
-    - ${CI_PROJECT_DIR}/kustomize build ${CONTROLLER}/config/default > ${CONTROLLER}/deploy/${CONTROLLER}.yaml
+    - cd config/manager && ${CI_PROJECT_DIR}/kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG
+    - cd ${CI_PROJECT_DIR} && mkdir deploy
+    - ${CI_PROJECT_DIR}/kustomize build config/default > deploy/${CONTROLLER}.yaml
   artifacts:
     when: always
     paths:
-      - ${CONTROLLER}/deploy/${CONTROLLER}.yaml
+      - deploy/${CONTROLLER}.yaml
   rules:
     - if: $CI_COMMIT_TAG
 release:
@@ -79,7 +78,7 @@ release:
       links:
         - name: ${CONTROLLER}.yaml
           filepath: /${CONTROLLER}.yaml
-          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/${CONTROLLER}/deploy/${CONTROLLER}.yaml?job=create_manifest
+          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/deploy/${CONTROLLER}.yaml?job=create_manifest
   rules:
     - if: $CI_COMMIT_TAG
 ```
