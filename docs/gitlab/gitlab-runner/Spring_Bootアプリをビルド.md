@@ -94,7 +94,7 @@ variables:
   BASE_PACKAGE: nob.example # ベースパッケージ
   MODULE: easyapp # アプリのモジュール名
   ARTIFACT_NAME: ${MODULE}-0.0.1-SNAPSHOT.jar # ビルド成果物のファイル名
-  ARTIFACT_PATH: ${MODULE}/target/${ARTIFACT_NAME} # ビルド成果物のパス
+  ARTIFACT_PATH: target/${ARTIFACT_NAME} # ビルド成果物のパス
 test:
   stage: test
   image: amazoncorretto:21
@@ -106,17 +106,16 @@ test:
     when: always
     reports:
       junit:
-        - ${MODULE}/target/surefire-reports/TEST-*.xml
-        - ${MODULE}/target/failsafe-reports/TEST-*.xml
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
     paths:
-      - ${MODULE}/target/site/jacoco/*
+      - target/site/jacoco/*
   rules:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
   image: amazoncorretto:21
   script:
-    - cd ${MODULE}
     - ./mvnw package
   artifacts:
     paths:
