@@ -43,12 +43,11 @@ stages:
   - push
 variables:
   MODULE: easyapp # アプリのモジュール名
-  ARTIFACT_PATH: ${MODULE}/main # ビルド成果物のパス
+  ARTIFACT_PATH: main # ビルド成果物のパス
 test:
   stage: test
   image: golang:1.24
   script:
-    - cd ${MODULE}
     - go install gotest.tools/gotestsum@latest
     - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository
     - go tool cover -html=coverage.txt -o coverage.html
@@ -57,16 +56,15 @@ test:
   artifacts:
     when: always
     paths:
-      - ${MODULE}/coverage.html
+      - coverage.html
     reports:
-      junit: ${MODULE}/report.xml
+      junit: report.xml
   rules:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
   image: golang:1.24
   script:
-    - cd ${MODULE}
     - go build cmd/main.go
   artifacts:
     paths:
