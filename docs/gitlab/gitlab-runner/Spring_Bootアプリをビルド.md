@@ -7,7 +7,7 @@ GitLab Runner を使って Spring Boot アプリケーションのコンテナ�
 ### Dockerfile
 
 ```Dockerfile
-FROM amazoncorretto:21
+FROM eclipse-temurin:21
 
 # 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
@@ -97,7 +97,7 @@ variables:
   ARTIFACT_PATH: target/${ARTIFACT_NAME} # ビルド成果物のパス
 test:
   stage: test
-  image: amazoncorretto:21
+  image: eclipse-temurin:21
   script:
     - cd ${MODULE}
     - ./mvnw verify -Dtest="${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test" # controller, service, repositoryのみテスト
@@ -114,7 +114,7 @@ test:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
-  image: amazoncorretto:21
+  image: eclipse-temurin:21
   script:
     - ./mvnw package
   artifacts:

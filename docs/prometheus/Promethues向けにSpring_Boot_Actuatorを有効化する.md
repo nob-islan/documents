@@ -75,7 +75,7 @@ scrape_configs:
 services:
   java:
     container_name: easyapp
-    image: amazoncorretto:17
+    image: eclipse-temurin:17
     ports:
       - 8080:8080
     volumes:

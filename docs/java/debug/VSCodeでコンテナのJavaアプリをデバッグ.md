@@ -7,7 +7,7 @@
 - Dockerfile
 
 ```Dockerfile
-FROM amazoncorretto:17
+FROM eclipse-temurin:17
 
 # jarの配置などアプリ起動に必要なあれこれ
 

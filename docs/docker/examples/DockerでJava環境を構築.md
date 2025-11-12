@@ -16,7 +16,7 @@
 - 下記 Dockerfile で Java アプリケーションを実行可能なコンテナイメージを作成します。
 
 ```Dockerfile
-FROM amazoncorretto:17
+FROM eclipse-temurin:17
 
 COPY ${先に作成したjarファイル} /${jarファイル名}
 
