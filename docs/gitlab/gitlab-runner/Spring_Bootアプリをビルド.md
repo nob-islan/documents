@@ -91,7 +91,7 @@ stages:
   - build
   - push
 variables:
-  BASE_PACKAGE: com.example # ベースパッケージ
+  BASE_PACKAGE: nob.example # ベースパッケージ
   MODULE: easyapp # アプリのモジュール名
   ARTIFACT_NAME: ${MODULE}-0.0.1-SNAPSHOT.jar # ビルド成果物のファイル名
   ARTIFACT_PATH: ${MODULE}/target/${ARTIFACT_NAME} # ビルド成果物のパス
