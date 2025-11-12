@@ -8098,12 +8098,11 @@
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push</span>
 <span class="nt">variables</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">MODULE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyapp</span><span class="w"> </span><span class="c1"># アプリのモジュール名</span>
-<span class="w">  </span><span class="nt">ARTIFACT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/main</span><span class="w"> </span><span class="c1"># ビルド成果物のパス</span>
+<span class="w">  </span><span class="nt">ARTIFACT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w"> </span><span class="c1"># ビルド成果物のパス</span>
 <span class="nt">test</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">golang:1.24</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${MODULE}</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go install gotest.tools/gotestsum@latest</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go tool cover -html=coverage.txt -o coverage.html</span>
@@ -8112,16 +8111,15 @@
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 <span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/coverage.html</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage.html</span>
 <span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/report.xml</span>
+<span class="w">      </span><span class="nt">junit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">report.xml</span>
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 <span class="nt">build</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">golang:1.24</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${MODULE}</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">go build cmd/main.go</span>
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
