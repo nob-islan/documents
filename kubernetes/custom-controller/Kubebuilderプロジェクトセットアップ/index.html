@@ -5237,17 +5237,6 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        環境構築
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         プロジェクト作成
       
     </span>
@@ -5256,7 +5245,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         実装
@@ -5306,7 +5295,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         単体テスト
@@ -5318,7 +5307,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         テストケース記載
@@ -5346,7 +5335,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         テスト実施
@@ -5362,7 +5351,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         ローカルアプリケーション起動
@@ -8215,17 +8204,6 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        環境構築
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         プロジェクト作成
       
     </span>
@@ -8234,7 +8212,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         実装
@@ -8284,7 +8262,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         単体テスト
@@ -8296,7 +8274,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         テストケース記載
@@ -8324,7 +8302,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         テスト実施
@@ -8340,7 +8318,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         ローカルアプリケーション起動
@@ -8369,74 +8347,11 @@
 
 <h1 id="kubebuilder">Kubebuilder プロジェクトセットアップ</h1>
 <p><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a> を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
-<h2 id="_1">環境構築</h2>
-<p>下記設定で構築した Kubernetes クラスタ環境でのコントローラー開発を前提とします。</p>
-<ul>
-<li>.devcontainer/devcontainer.json</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kubebuilder&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;dockerfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dockerfile&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;ghcr.io/devcontainers/features/docker-in-docker:2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">    </span><span class="nt">&quot;ghcr.io/devcontainers-extra/features/kubectl-asdf:2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">    </span><span class="nt">&quot;ghcr.io/mpriscella/features/kind:1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;customizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;vscode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;[go]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;[yaml]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="s2">&quot;golang.go&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;ms-kubernetes-tools.vscode-kubernetes-tools&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<ul>
-<li>.devcontainer/Dockerfile</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.24-bullseye</span>
-
-<span class="c"># Kubebuilderインストール</span>
-<span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>kubebuilder<span class="w"> </span><span class="s2">&quot;https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64&quot;</span>
-<span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>./kubebuilder
-<span class="k">RUN</span><span class="w"> </span>mv<span class="w"> </span>./kubebuilder<span class="w"> </span>/usr/local/bin/kubebuilder
-</code></pre></div>
-<ul>
-<li>kind/cluster/kubebuilder-cluster.yaml</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
-<span class="nt">nodes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control-plane</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-</code></pre></div>
-<h2 id="_2">プロジェクト作成</h2>
-<ul>
-<li>Kubernetes クラスタを構築します。</li>
-</ul>
-<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>kubebuilder-cluster<span class="w"> </span>--config<span class="w"> </span>kind/cluster/kubebuilder-cluster.yaml
-</code></pre></div>
+<h2 id="_1">プロジェクト作成</h2>
 <ul>
 <li>プロジェクトを初期化します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># mkdir {controller名} &amp;&amp; cd {controller名}</span>
-mkdir<span class="w"> </span>nob-controller<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>nob-controller
-<span class="c1"># kubebuilder init --domain {APIのドメイン} --repo {リポジトリパス}</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># kubebuilder init --domain {APIのドメイン} --repo {リポジトリパス}</span>
 kubebuilder<span class="w"> </span>init<span class="w"> </span>--domain<span class="w"> </span>example.nob<span class="w"> </span>--repo<span class="w"> </span>example.nob/nob-controller
 </code></pre></div>
 <ul>
@@ -8445,7 +8360,7 @@ kubebuilder<span class="w"> </span>init<span class="w"> </span>--domain<span cla
 <div class="highlight"><pre><span></span><code><span class="c1"># kubebuilder create api --group {APIグループ} --version {バージョン} --kind {リソース種別}</span>
 kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class="w"> </span>--group<span class="w"> </span>nobcontroller<span class="w"> </span>--version<span class="w"> </span>v1<span class="w"> </span>--kind<span class="w"> </span>Nob
 </code></pre></div>
-<h2 id="_3">実装</h2>
+<h2 id="_2">実装</h2>
 <p>Deployment リソースを管理する <code>Nob</code> のコントローラーを実装します。</p>
 <h3 id="apiv1nob_typesgo">api/v1/nob_types.go</h3>
 <p>カスタムリソースの Spec および Status を定義します。変更後は <code>make</code> コマンドを実行して他ファイルの再生成をしてください。</p>
@@ -8694,9 +8609,9 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">        </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
-<h2 id="_4">単体テスト</h2>
+<h2 id="_3">単体テスト</h2>
 <p>単体テストを作成および実行します。</p>
-<h3 id="_5">テストケース記載</h3>
+<h3 id="_4">テストケース記載</h3>
 <h4 id="internalcontrollernob_controller_testgo">internal/controller/nob_controller_test.go</h4>
 <ul>
 <li>BeforeEach に NobSpec で定めたパラメータを定義します。</li>
@@ -8766,11 +8681,26 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">            </span><span class="nx">Expect</span><span class="p">(</span><span class="nx">deployment</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">.</span><span class="nx">Labels</span><span class="p">).</span><span class="nx">Should</span><span class="p">(</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">expectedLabels</span><span class="p">))</span>
 <span class="w">        </span><span class="p">})</span>
 </code></pre></div>
-<h3 id="_6">テスト実施</h3>
+<h3 id="_5">テスト実施</h3>
 <p>下記コマンドでテストを実施します。</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
-<h2 id="_7">ローカルアプリケーション起動</h2>
+<h2 id="_6">ローカルアプリケーション起動</h2>
+<ul>
+<li>kind/cluster/kubebuilder-cluster.yaml を下記内容で作成します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
+<span class="nt">nodes</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control-plane</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
+</code></pre></div>
+<ul>
+<li>Kind で Kubernetes クラスタを構築します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--name<span class="w"> </span>kubebuilder-cluster<span class="w"> </span>--config<span class="w"> </span>kind/cluster/kubebuilder-cluster.yaml
+</code></pre></div>
 <ul>
 <li>yaml マニフェストの生成および CRD の登録を行います。</li>
 </ul>
