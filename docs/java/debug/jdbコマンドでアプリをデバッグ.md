@@ -63,7 +63,7 @@ public class SampleServiceImpl implements SampleService {
 services:
   easyapp:
     container_name: easyapp
-    image: openjdk:17
+    image: amazoncorretto:17
     ports:
       - 8080:8080
       - 8484:8484

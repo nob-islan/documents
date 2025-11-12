@@ -75,7 +75,7 @@ scrape_configs:
 services:
   java:
     container_name: easyapp
-    image: openjdk:17
+    image: amazoncorretto:17
     ports:
       - 8080:8080
     volumes:

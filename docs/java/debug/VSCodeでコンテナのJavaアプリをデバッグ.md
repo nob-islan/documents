@@ -7,7 +7,7 @@
 - Dockerfile
 
 ```Dockerfile
-FROM openjdk:17
+FROM amazoncorretto:17
 
 # jarの配置などアプリ起動に必要なあれこれ
 
