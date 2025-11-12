@@ -63,7 +63,7 @@ public class SampleServiceImpl implements SampleService {
 services:
   easyapp:
     container_name: easyapp
-    image: eclipse-temurin:17
+    image: eclipse-temurin:21
     ports:
       - 8080:8080
       - 8484:8484

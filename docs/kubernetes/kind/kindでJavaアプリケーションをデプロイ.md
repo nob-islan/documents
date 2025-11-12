@@ -68,7 +68,7 @@ kind create cluster --config java-cluster.yaml --name java-cluster
 が記載されています。
 
 ```Dockerfile
-FROM eclipse-temurin:17
+FROM eclipse-temurin:21
 
 RUN mkdir -p /nob/server/jar
 RUN mkdir /nob/server/log
