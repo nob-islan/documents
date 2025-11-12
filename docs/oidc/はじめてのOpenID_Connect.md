@@ -26,7 +26,7 @@ sequenceDiagram
         Note right of op: 認可エンドポイント
     op -->> end_user: ログイン画面
     end_user ->> op: ユーザ認証
-    op -->+ end_user: 認証レスポンス
+    op ->+ end_user: 認証レスポンス
     end_user ->>- rp: リダイレクト URI へリダイレクト
     rp ->> op: トークンリクエスト
         Note right of op: トークンエンドポイント
