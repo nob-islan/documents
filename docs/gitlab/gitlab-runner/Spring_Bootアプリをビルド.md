@@ -99,7 +99,6 @@ test:
   stage: test
   image: eclipse-temurin:21
   script:
-    - cd ${MODULE}
     - ./mvnw verify -Dtest="${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test" # controller, service, repositoryのみテスト
     - ./mvnw test jacoco:report
   artifacts:
