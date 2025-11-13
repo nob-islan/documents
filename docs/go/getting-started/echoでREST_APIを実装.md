@@ -203,7 +203,7 @@ func NewUserinfoRouter() Router {
 	return &authRouter{}
 }
 
-func (a *authRouter) SetRouting(e *echo.Echo) {
+func (r *authRouter) SetRouting(e *echo.Echo) {
 
 	h := handler.NewAuthHandler(usecase.NewAuthUsecase())
 
