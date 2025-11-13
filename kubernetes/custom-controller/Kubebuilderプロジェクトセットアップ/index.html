@@ -8335,7 +8335,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <h2 id="_2">実装</h2>
 <p>Deployment リソースを管理する <code>Nob</code> のコントローラーを実装します。</p>
 <h3 id="apiv1nob_typesgo">api/v1/nob_types.go</h3>
-<p>カスタムリソースの Spec および Status を定義します。変更後は <code>make</code> コマンドを実行して他ファイルの再生成をしてください。</p>
+<p>カスタムリソースの Spec および Status を定義します。変更後は <code>make</code> コマンドを実行して関連するファイルの再生成をしてください。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// NobSpec defines the desired state of Nob</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">NobSpec</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster</span>
@@ -8684,7 +8684,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>run
 </code></pre></div>
 <ul>
-<li>カスタムリソースの spec を宣言します。</li>
+<li>config/samples 配下のカスタムリソースの spec を宣言します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nobcontroller.example.nob/v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nob</span>
