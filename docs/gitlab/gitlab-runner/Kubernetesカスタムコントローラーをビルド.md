@@ -50,7 +50,7 @@ build_image:
       --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG"
   rules:
     - if: $CI_COMMIT_TAG
-create_manifest:
+build_manifest:
   stage: build
   image:
     name: alpine/k8s:1.34.1
@@ -77,7 +77,7 @@ release:
       links:
         - name: ${CONTROLLER}.yaml
           filepath: /${CONTROLLER}.yaml
-          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/deploy/${CONTROLLER}.yaml?job=create_manifest
+          url: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/jobs/artifacts/${CI_COMMIT_TAG}/raw/deploy/${CONTROLLER}.yaml?job=build_manifest
   rules:
     - if: $CI_COMMIT_TAG
 ```
