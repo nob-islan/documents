@@ -24,7 +24,7 @@ Deployment リソースを管理する `Nob` のコントローラーを実装�
 
 ### api/v1/nob_types.go
 
-カスタムリソースの Spec および Status を定義します。変更後は `make` コマンドを実行して他ファイルの再生成をしてください。
+カスタムリソースの Spec および Status を定義します。変更後は `make` コマンドを実行して関連するファイルの再生成をしてください。
 
 ```go
 // NobSpec defines the desired state of Nob
@@ -401,7 +401,7 @@ make install
 make run
 ```
 
-- カスタムリソースの spec を宣言します。
+- config/samples 配下のカスタムリソースの spec を宣言します。
 
 ```yaml
 apiVersion: nobcontroller.example.nob/v1
