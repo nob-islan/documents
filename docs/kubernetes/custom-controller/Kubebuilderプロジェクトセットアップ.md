@@ -82,7 +82,7 @@ type NobReconciler struct {
 // +kubebuilder:rbac:groups="",resources=events,verbs=create;patch
 ```
 
-- SetUpWithManager を定義します。
+- SetUpWithManager を定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。
 
 ```go
 // SetupWithManager sets up the controller with the Manager.
@@ -144,7 +144,7 @@ func (r *NobReconciler) cleanupOwnedResources(
 }
 ```
 
-- Reconcile 関数を実装します。
+- Reconcile 関数を実装します。コントローラー実装の本体をここに記述します。
 
 ```go
 func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
