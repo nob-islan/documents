@@ -8449,16 +8449,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <ul>
 <li>Reconcile 関数を実装します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1">// Reconcile is part of the main kubernetes reconciliation loop which aims to</span>
-<span class="c1">// move the current state of the cluster closer to the desired state.</span>
-<span class="c1">// TODO(user): Modify the Reconcile function to compare the state specified by</span>
-<span class="c1">// the Nob object against the actual cluster state, and then</span>
-<span class="c1">// perform operations to make the cluster state reflect the state specified by</span>
-<span class="c1">// the user.</span>
-<span class="c1">//</span>
-<span class="c1">// For more details, check Reconcile and its Result here:</span>
-<span class="c1">// - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.22.1/pkg/reconcile</span>
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">Reconcile</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">Reconcile</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">log</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Log</span><span class="p">.</span><span class="nx">WithValues</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">)</span>
 
 <span class="w">    </span><span class="c1">// Nob Object取得</span>
