@@ -53,12 +53,11 @@ build_image:
 create_manifest:
   stage: build
   image:
-    name: fedora
+    name: alpine/k8s:1.34.1
   script:
-    - curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
-    - cd config/manager && ${CI_PROJECT_DIR}/kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG
+    - cd ${CI_PROJECT_DIR}/config/manager && kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG
     - cd ${CI_PROJECT_DIR} && mkdir deploy
-    - ${CI_PROJECT_DIR}/kustomize build config/default > deploy/${CONTROLLER}.yaml
+    - kustomize build config/default > deploy/${CONTROLLER}.yaml
   artifacts:
     when: always
     paths:
