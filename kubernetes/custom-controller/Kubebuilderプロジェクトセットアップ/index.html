@@ -8387,7 +8387,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="c1">// +kubebuilder:rbac:groups=&quot;&quot;,resources=events,verbs=create;patch</span>
 </code></pre></div>
 <ul>
-<li>SetUpWithManager を定義します。</li>
+<li>SetUpWithManager を定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// SetupWithManager sets up the controller with the Manager.</span>
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
@@ -8447,7 +8447,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>Reconcile 関数を実装します。</li>
+<li>Reconcile 関数を実装します。コントローラー実装の本体をここに記述します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">Reconcile</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">log</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Log</span><span class="p">.</span><span class="nx">WithValues</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">)</span>
