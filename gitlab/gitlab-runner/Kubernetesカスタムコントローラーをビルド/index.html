@@ -8195,12 +8195,11 @@
 <span class="nt">create_manifest</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fedora</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alpine/k8s:1.34.1</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">curl -s &quot;https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh&quot; | bash</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd config/manager &amp;&amp; ${CI_PROJECT_DIR}/kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${CI_PROJECT_DIR}/config/manager &amp;&amp; kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${CI_PROJECT_DIR} &amp;&amp; mkdir deploy</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${CI_PROJECT_DIR}/kustomize build config/default &gt; deploy/${CONTROLLER}.yaml</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kustomize build config/default &gt; deploy/${CONTROLLER}.yaml</span>
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 <span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
