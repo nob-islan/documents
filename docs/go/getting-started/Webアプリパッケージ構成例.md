@@ -5,6 +5,9 @@ Go で Web アプリケーションを開発する際のプロジェクトのパ
 ```shell
 .
 ├── api                 # APIドキュメント
+├── assets              
+│   ├── static          # js, css, favicon等
+│   └── templates       # html
 ├── cmd                 # エントリポイント
 ├── internal
 │   ├── apperrors       # 独自エラー定義およびそのハンドリング
@@ -25,6 +28,10 @@ Go で Web アプリケーションを開発する際のプロジェクトのパ
 ### api
 
 swagger などの API ドキュメント、およびそれを生成する関数を格納するパッケージです。
+
+### assets
+
+静的コンテンツを格納するパッケージです。本パッケージの直下に `assets.go` を設け、`go:embed` を使ってこれらの静的ファイルを呼び出します。
 
 ### cmd
 
