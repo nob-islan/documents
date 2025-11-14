@@ -3371,6 +3371,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        assets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8228,6 +8239,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        assets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8385,6 +8407,9 @@
 <p>Go で Web アプリケーションを開発する際のプロジェクトのパッケージ構成について一つの指針となるサンプルを記載します。</p>
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>api<span class="w">                 </span><span class="c1"># APIドキュメント</span>
+├──<span class="w"> </span>assets<span class="w">              </span>
+│<span class="w">   </span>├──<span class="w"> </span>static<span class="w">          </span><span class="c1"># js, css, favicon等</span>
+│<span class="w">   </span>└──<span class="w"> </span>templates<span class="w">       </span><span class="c1"># html</span>
 ├──<span class="w"> </span>cmd<span class="w">                 </span><span class="c1"># エントリポイント</span>
 ├──<span class="w"> </span>internal
 │<span class="w">   </span>├──<span class="w"> </span>apperrors<span class="w">       </span><span class="c1"># 独自エラー定義およびそのハンドリング</span>
@@ -8402,6 +8427,8 @@
 <h2 id="_1">パッケージ解説</h2>
 <h3 id="api">api</h3>
 <p>swagger などの API ドキュメント、およびそれを生成する関数を格納するパッケージです。</p>
+<h3 id="assets">assets</h3>
+<p>静的コンテンツを格納するパッケージです。本パッケージの直下に <code>assets.go</code> を設け、<code>go:embed</code> を使ってこれらの静的ファイルを呼び出します。</p>
 <h3 id="cmd">cmd</h3>
 <p>アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に <code>main.go</code> のみが格納されます。</p>
 <h3 id="internalapperrors">internal/apperrors</h3>
