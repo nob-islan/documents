@@ -1,4 +1,4 @@
-# Web 画面を出力
+# Web 画面を実装
 
 `html/template`を使って html コンテンツを返却する Go アプリを作成します。
 
