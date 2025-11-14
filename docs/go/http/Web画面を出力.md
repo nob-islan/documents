@@ -35,6 +35,45 @@
 
 ### 実装
 
+#### 事前準備
+
+Go + html の実装環境は下記設定で構築した開発コンテナによって用意できます:
+
+<details><summary>devcontainer.json</summary>
+
+```json
+{
+  "name": "Go",
+  "image": "mcr.microsoft.com/devcontainers/go:1.24-bullseye",
+  "features": {
+    // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "[go]": {
+          "editor.rulers": [100]
+        },
+        "[html]": {
+          "editor.tabSize": 2,
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      },
+      "extensions": ["golang.go", "esbenp.prettier-vscode"]
+    }
+  }
+}
+```
+
+</details>
+
 #### assets
 
 - templates/index.html
