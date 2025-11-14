@@ -314,93 +314,42 @@ func main() {
 }
 ```
 
+アプリ起動後、http://localhost:8080/login にアクセスするとログイン画面が表示されます。
+
 ## 静的コンテンツをバイナリに含める
 
 上記のコードでは`go build`で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
 
-```go
-package main
+- assets/assets.go を下記で新規作成
 
-import (
-	"embed"
-	"encoding/json"
-	"fmt"
-	"html/template"
-	"io/fs"
-	"log"
-	"net/http"
-)
+```go
+package assets
+
+import "embed"
 
 //go:embed static/*
-var static embed.FS // static埋め込み宣言
+var Static embed.FS // static埋め込み宣言
 
 //go:embed templates/*
-var templates embed.FS // templates埋め込み宣言
+var Templates embed.FS // templates埋め込み宣言
+```
 
-func main() {
+- router/base.go について、埋め込んだ static を使うよう宣言
 
-	staticFiles, err := fs.Sub(static, "static") // 埋め込んだstaticを使う
+```go
+	staticFiles, err := fs.Sub(assets.Static, "static")
 	if err != nil {
 		log.Fatalf("Failed to create sub filesystem: %v", err)
 	}
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
-	http.HandleFunc("/", initial)
-	http.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case http.MethodPost:
-			registMessage(w, r)
-		default:
-			http.Error(w, "Forbidden", http.StatusForbidden)
-		}
-	})
+	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
+```
 
-	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
-}
+- handler/auth_handler.go について、埋め込んだ templates を使うよう宣言
 
-// 初期表示処理を行います。
-func initial(w http.ResponseWriter, r *http.Request) {
-
-	tmpl, err := template.ParseFS(templates, "templates/index.html") // 埋め込んだtemplatesを使う
+```go
+	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")
 	if err != nil {
 		http.Error(w, "Template parsing error", http.StatusInternalServerError)
 		return
 	}
-
-	// 画面表示用の構造体を作成
-	initView := struct{ ButtonText string }{ButtonText: "ログイン"}
-
-	err = tmpl.Execute(w, initView)
-	if err != nil {
-		http.Error(w, "Template execution error", http.StatusInternalServerError)
-	}
-}
-
-// 入力値を登録します。
-func registMessage(w http.ResponseWriter, r *http.Request) {
-
-	var req Request
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&req); err != nil {
-		http.Error(w, "Bad request", http.StatusBadRequest)
-		return
-	}
-
-	res := Response{Ret: "Hello, " + req.Name}
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(res)
-}
-
-// 入力値登録リクエストモデル
-type Request struct {
-	Name     string `json:"name"`     // ユーザ名
-	Password string `json:"password"` // パスワード
-}
-
-// 入力値登録レスポンスモデル
-type Response struct {
-	Ret string `json:"ret"` // 出力メッセージ
-}
 ```
