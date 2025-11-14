@@ -33,9 +33,7 @@
 - ボタン入力時に js から go の関数を呼び出し、API をコール
 - 結果を alert 表示
 
-### 実装
-
-#### 事前準備
+### 環境構築
 
 Go + html の実装環境は下記設定で構築した開発コンテナによって用意できます:
 
@@ -74,7 +72,9 @@ Go + html の実装環境は下記設定で構築した開発コンテナによ�
 
 </details>
 
-#### assets
+### 実装
+
+#### assets/
 
 - templates/index.html
 
@@ -185,7 +185,7 @@ body {
 }
 ```
 
-#### internal/handler
+#### internal/handler/
 
 - auth_handler.go
 
@@ -332,7 +332,7 @@ func (r *authRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### cmd
+#### cmd/
 
 - main.go
 
