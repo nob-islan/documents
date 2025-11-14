@@ -35,7 +35,7 @@
 
 ### 環境構築
 
-Go + html の実装環境は下記設定で構築した開発コンテナによって用意できます:
+Go + html の開発環境は下記設定で構築した開発コンテナによって用意できます:
 
 <details><summary>devcontainer.json</summary>
 
