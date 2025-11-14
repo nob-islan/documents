@@ -6,14 +6,21 @@
 
 ```shell
 .
+├── assets
+│   ├── static
+│   │   ├── index.js
+│   │   └── style.css
+│   └── templates
+│       └── index.html
+├── cmd
+│   └── main.go
 ├── go.mod
-├── main.go
-├── static
-│   ├── favicon.ico
-│   ├── index.js
-│   └── style.css
-└── templates
-    └── index.html
+└── internal
+    └── handler
+        ├── auth_handler.go
+        └── router
+            ├── auth_router.go
+            └── base.go
 ```
 
 ## サンプルコード
@@ -28,7 +35,9 @@
 
 ### 実装
 
-- index.html
+#### assets
+
+- templates/index.html
 
 ```html
 <!DOCTYPE html>
@@ -68,13 +77,13 @@
 </html>
 ```
 
-- index.js
+- static/index.js
 
 ```js
 function handleOnclickButton() {
   const name = document.getElementById("name").value;
   const password = document.getElementById("password").value;
-  fetch("/message", {
+  fetch("/api/v1/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -86,15 +95,15 @@ function handleOnclickButton() {
   })
     .then((response) => response.json())
     .then((data) => {
-      alert(data.ret);
+      alert(data.message);
     })
     .catch((error) => {
-      console.error("エラーが発生しました:", error);
+      console.log(error);
     });
 }
 ```
 
-- style.css
+- static/style.css
 
 ```css
 body {
@@ -137,40 +146,38 @@ body {
 }
 ```
 
-- main.go
+#### internal/handler
+
+- auth_handler.go
 
 ```go
-package main
+package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 )
 
-func main() {
+// 認証機能のhandlerです。
+type AuthHandler interface {
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.HandleFunc("/", initial)
-	http.HandleFunc("/message", func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case http.MethodPost:
-			registMessage(w, r)
-		default:
-			http.Error(w, "Forbidden", http.StatusForbidden)
-		}
-	})
+	// 初期表示処理を行います。
+	InitView(w http.ResponseWriter, r *http.Request)
 
-	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// ログイン処理を行います。
+	Login(w http.ResponseWriter, r *http.Request)
 }
 
-// 初期表示処理を行います。
-func initial(w http.ResponseWriter, r *http.Request) {
+type authHandler struct{}
 
-	tmpl, err := template.ParseFiles("templates/index.html")
+func NewAuthHandler() AuthHandler {
+	return &authHandler{}
+}
+
+func (h *authHandler) InitView(w http.ResponseWriter, r *http.Request) {
+
+	tmpl, err := template.ParseFiles("assets/templates/index.html")
 	if err != nil {
 		http.Error(w, "Template parsing error", http.StatusInternalServerError)
 		return
@@ -185,32 +192,125 @@ func initial(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// 入力値を登録します。
-func registMessage(w http.ResponseWriter, r *http.Request) {
+func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	var req Request
+	var req struct {
+		Name     string `json:"name"`     // ユーザ名
+		Password string `json:"password"` // パスワード
+	}
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
 
-	res := Response{Ret: "Hello, " + req.Name}
+	if req.Name == "" || req.Password == "" {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		json.NewEncoder(w).Encode(struct {
+			Message string `json:"message"` // メッセージ
+		}{
+			Message: "Input your credentials",
+		})
+		return
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(res)
+	json.NewEncoder(w).Encode(struct {
+		Message string `json:"message"` // メッセージ
+	}{
+		Message: "Hello, " + req.Name + "!",
+	})
+}
+```
+
+- router/base.go
+
+```go
+package router
+
+import (
+	"net/http"
+)
+
+// routerのインターフェースです。
+type Router interface {
+
+	// ルーティング情報をセットします。
+	SetRouting(m *http.ServeMux)
 }
 
-// 入力値登録リクエストモデル
-type Request struct {
-	Name     string `json:"name"`     // ユーザ名
-	Password string `json:"password"` // パスワード
+// APIのベースURI
+const basePath string = "/api/v1"
+
+// ルーティングを設定します。
+func Routing() *http.ServeMux {
+
+	// 各handlerに紐づくルーティングを設定
+	m := http.NewServeMux()
+
+	// static配下をルーティング
+	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
+
+	// auth
+	NewAuthRouter().SetRouting(m)
+
+	return m
+}
+```
+
+- router/auth_router.go
+
+```go
+package router
+
+import (
+	"easyapp/internal/handler"
+	"net/http"
+)
+
+type authRouter struct{}
+
+func NewAuthRouter() Router {
+	return &authRouter{}
 }
 
-// 入力値登録レスポンスモデル
-type Response struct {
-	Ret string `json:"ret"` // 出力メッセージ
+func (r *authRouter) SetRouting(m *http.ServeMux) {
+
+	h := handler.NewAuthHandler()
+
+	// カスタムルータ
+	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			h.Login(w, r)
+		default:
+			http.Error(w, "Forbidden", http.StatusForbidden)
+		}
+	})
+	m.HandleFunc("/login", h.InitView)
+}
+```
+
+#### cmd
+
+- main.go
+
+```go
+package main
+
+import (
+	"easyapp/internal/handler/router"
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+
+	fmt.Println("Server started at http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", router.Routing()))
 }
 ```
 
