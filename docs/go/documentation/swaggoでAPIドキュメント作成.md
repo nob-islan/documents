@@ -128,7 +128,7 @@ swagger ページへのルーティングを設定します。
 + // @Tags Auth
 + // @Accept json
 + // @Produce json
-+ // @Param RegistReq body model.LoginReq true "認証向けのリクエストモデル"
++ // @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
 + // @Success 200 {object} model.LoginRes "正常に処理された場合"
 + // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
 + // @Router /login [post]
