@@ -2,9 +2,37 @@
 
 cf. https://echo.labstack.com/docs/templates
 
+## ディレクトリ構成
+
+```shell
+.
+├── assets
+│   ├── static
+│   │   ├── index.js
+│   │   └── style.css
+│   └── templates
+│       └── login.html
+├── cmd
+│   └── main.go
+├── go.mod
+├── go.sum
+└── internal
+    └── handler
+        ├── auth_handler.go
+        └── router
+            ├── auth_router.go
+            └── base.go
+```
+
 ## サンプルコード
 
 擬似的なログイン画面を実装します。
+
+### 設計
+
+- ログイン画面表示時に、ボタン名を go から html に渡す
+- ボタン入力時に js から go の関数を呼び出し、API をコール
+- 結果を alert 表示
 
 ### 環境構築
 
@@ -44,34 +72,6 @@ Go + html の開発環境は下記設定で構築した開発コンテナによ�
 ```
 
 </details>
-
-### ディレクトリ構成
-
-```shell
-.
-├── assets
-│   ├── static
-│   │   ├── index.js
-│   │   └── style.css
-│   └── templates
-│       └── login.html
-├── cmd
-│   └── main.go
-├── go.mod
-├── go.sum
-└── internal
-    └── handler
-        ├── auth_handler.go
-        └── router
-            ├── auth_router.go
-            └── base.go
-```
-
-### 設計
-
-- ログイン画面表示時に、ボタン名を go から html に渡す
-- ボタン入力時に js から go の関数を呼び出し、API をコール
-- 結果を alert 表示
 
 ### 実装
 
