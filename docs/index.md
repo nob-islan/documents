@@ -41,7 +41,7 @@
 
 - **[Go REST API プロジェクトセットアップ](./go/getting-started/Go_REST_APIプロジェクトセットアップ.md)**
   <br> Go の標準ライブラリで REST API を実装するサンプルです。
-- **[echo で REST API を実装](./go/getting-started/echoでREST_APIを実装.md)**
+- **[echo で REST API を実装](./go/echo/echoでREST_APIを実装.md)**
   <br> echo フレームワークで REST API を実装するサンプルです。
 
 </div>
