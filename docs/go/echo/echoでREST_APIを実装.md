@@ -179,7 +179,7 @@ func Routing() *echo.Echo {
 
 	e := echo.New()
 
-	NewUserinfoRouter().SetRouting(e)
+	NewAuthRouter().SetRouting(e)
 
 	return e
 }
@@ -199,7 +199,7 @@ import (
 
 type authRouter struct{}
 
-func NewUserinfoRouter() Router {
+func NewAuthRouter() Router {
 	return &authRouter{}
 }
 
