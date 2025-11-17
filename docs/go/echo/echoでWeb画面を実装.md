@@ -282,11 +282,9 @@ func Routing() *echo.Echo {
 
 	e := echo.New()
 
-	t := &Template{
+	e.Renderer = &Template{
 		templates: template.Must(template.ParseGlob("assets/templates/*.html")),
 	}
-
-	e.Renderer = t
 	e.Static("/static", "assets/static")
 
 	NewAuthRouter().SetRouting(e)
@@ -345,3 +343,29 @@ func main() {
 ```
 
 アプリ起動後、http://localhost:8080/login にアクセスするとログイン画面が表示されます。
+
+## 静的コンテンツをバイナリに含める
+
+上記のコードでは go build で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
+
+- assets/assets.go を下記で新規作成
+
+```go
+package assets
+
+import "embed"
+
+//go:embed static/*
+var Static embed.FS // static埋め込み宣言
+
+//go:embed templates/*
+var Templates embed.FS // templates埋め込み宣言
+```
+
+- router/base.go について、埋め込んだ static, templates を使うよう宣言
+
+```go
+	e.Renderer = &Template{
+		templates: template.Must(template.ParseFS(assets.Templates, "templates/*.html"))}
+	e.StaticFS("/static", echo.MustSubFS(assets.Static, "static"))
+```
