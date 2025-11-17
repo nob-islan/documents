@@ -3447,6 +3447,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静的コンテンツをバイナリに含める
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8327,6 +8338,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静的コンテンツをバイナリに含める
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8611,11 +8633,9 @@
 
 <span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-<span class="w">    </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Template</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Renderer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Template</span><span class="p">{</span>
 <span class="w">        </span><span class="nx">templates</span><span class="p">:</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">ParseGlob</span><span class="p">(</span><span class="s">&quot;assets/templates/*.html&quot;</span><span class="p">)),</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Renderer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">t</span>
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Static</span><span class="p">(</span><span class="s">&quot;/static&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;assets/static&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">NewAuthRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
@@ -8669,6 +8689,28 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>アプリ起動後、<a href="http://localhost:8080/login">http://localhost:8080/login</a> にアクセスするとログイン画面が表示されます。</p>
+<h2 id="_6">静的コンテンツをバイナリに含める</h2>
+<p>上記のコードでは go build で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:</p>
+<ul>
+<li>assets/assets.go を下記で新規作成</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">assets</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;embed&quot;</span>
+
+<span class="c1">//go:embed static/*</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">Static</span><span class="w"> </span><span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span><span class="w"> </span><span class="c1">// static埋め込み宣言</span>
+
+<span class="c1">//go:embed templates/*</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">Templates</span><span class="w"> </span><span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span><span class="w"> </span><span class="c1">// templates埋め込み宣言</span>
+</code></pre></div>
+<ul>
+<li>router/base.go について、埋め込んだ static, templates を使うよう宣言</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Renderer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Template</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">templates</span><span class="p">:</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">ParseFS</span><span class="p">(</span><span class="nx">assets</span><span class="p">.</span><span class="nx">Templates</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates/*.html&quot;</span><span class="p">))}</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">StaticFS</span><span class="p">(</span><span class="s">&quot;/static&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">MustSubFS</span><span class="p">(</span><span class="nx">assets</span><span class="p">.</span><span class="nx">Static</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;static&quot;</span><span class="p">))</span>
+</code></pre></div>
 
 
 
