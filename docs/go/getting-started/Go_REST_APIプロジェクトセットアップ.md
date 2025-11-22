@@ -124,7 +124,7 @@ func (u Users) Age() int {
 type UsersRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(name string) Users
+	FindByName(targetName string) Users
 }
 ```
 
