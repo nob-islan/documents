@@ -236,16 +236,16 @@ type AuthUsecase interface {
 }
 
 type authUsecase struct {
-	authRepository domain.UsersRepository
+	usersRepository domain.UsersRepository
 }
 
-func NewAuthUsecase(authRepository domain.UsersRepository) AuthUsecase {
-	return &authUsecase{authRepository: authRepository}
+func NewAuthUsecase(usersRepository domain.UsersRepository) AuthUsecase {
+	return &authUsecase{usersRepository: usersRepository}
 }
 
 func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
-	users := u.authRepository.FindByName(in.Name())
+	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
 		return payload.NewLoginOut(false)
 	}
@@ -254,7 +254,7 @@ func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
 func (u *authUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 
-	users := u.authRepository.FindByName(in.Name())
+	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
 		return *new(payload.MeOut), errors.New("no such user")
 	}
