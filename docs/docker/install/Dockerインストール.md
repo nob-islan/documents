@@ -5,14 +5,6 @@ docker および docker-compose をインストールします。
 ## 自動化したもの
 
 ```shell
-# vimインストール
-sudo apt -y install vim
-
-# .vimrcファイルの作成
-cat << EOF > ~/.vimrc
-set nocompatible
-EOF
-
 # パッケージインストール
 sudo apt update
 sudo apt -y install ca-certificates curl gnupg lsb-release
