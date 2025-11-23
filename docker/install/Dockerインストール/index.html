@@ -8247,15 +8247,7 @@
 <h1 id="docker">Docker インストール</h1>
 <p>docker および docker-compose をインストールします。</p>
 <h2 id="_1">自動化したもの</h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># vimインストール</span>
-sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>vim
-
-<span class="c1"># .vimrcファイルの作成</span>
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; ~/.vimrc</span>
-<span class="s">set nocompatible</span>
-<span class="s">EOF</span>
-
-<span class="c1"># パッケージインストール</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># パッケージインストール</span>
 sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>ca-certificates<span class="w"> </span>curl<span class="w"> </span>gnupg<span class="w"> </span>lsb-release
 
