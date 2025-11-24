@@ -23,6 +23,20 @@ echo を使って簡易的な GET メソッドおよび POST メソッドを実�
             └── base.go
 ```
 
+### プロジェクト作成
+
+- 下記コマンドで Go モジュールを初期化します。
+
+```shell
+go mod init easyapp
+```
+
+- echo をインストールします。
+
+```shell
+go get github.com/labstack/echo/v4
+```
+
 ### 実装
 
 #### internal/handler/

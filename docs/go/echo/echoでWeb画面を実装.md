@@ -34,44 +34,19 @@ cf. https://echo.labstack.com/docs/templates
 - ボタン入力時に js から go の関数を呼び出し、API をコール
 - 結果を alert 表示
 
-### 環境構築
+### プロジェクト作成
 
-Go + html の開発環境は下記設定で構築した開発コンテナによって用意できます:
+- 下記コマンドで Go モジュールを初期化します。
 
-<details><summary>devcontainer.json</summary>
-
-```json
-{
-  "name": "Go",
-  "image": "mcr.microsoft.com/devcontainers/go:1.24-bullseye",
-  "features": {
-    // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "editor.formatOnSave": true,
-        "[go]": {
-          "editor.rulers": [100]
-        },
-        "[html]": {
-          "editor.tabSize": 2,
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[css]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        }
-      },
-      "extensions": ["golang.go", "esbenp.prettier-vscode"]
-    }
-  }
-}
+```shell
+go mod init easyapp
 ```
 
-</details>
+- echo をインストールします。
+
+```shell
+go get github.com/labstack/echo/v4
+```
 
 ### 実装
 
