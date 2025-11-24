@@ -1,6 +1,6 @@
 # Java Operator SDK サンプル
 
-Java Operator SDK で Kubernetes のカスタムコントローラーを実装するための環境サンプルです。
+[Java Operator SDK](https://javaoperatorsdk.io/) で Kubernetes のカスタムコントローラーを実装するための環境サンプルです:
 
 ```json
 {
