@@ -1179,6 +1179,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../dev-container/examples/go%2Bhtml%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go + html 環境サンプル
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../dev-container/examples/go%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
         
   
@@ -3635,17 +3663,6 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        環境構築
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         実装
       
     </span>
@@ -3698,7 +3715,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         静的コンテンツをバイナリに含める
@@ -8276,17 +8293,6 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        環境構築
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         実装
       
     </span>
@@ -8339,7 +8345,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         静的コンテンツをバイナリに含める
@@ -8394,43 +8400,7 @@
 <li>ボタン入力時に js から go の関数を呼び出し、API をコール</li>
 <li>結果を alert 表示</li>
 </ul>
-<h3 id="_4">環境構築</h3>
-<p>Go + html の開発環境は下記設定で構築した開発コンテナによって用意できます:</p>
-<details><summary>devcontainer.json</summary>
-
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Go&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mcr.microsoft.com/devcontainers/go:1.24-bullseye&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// &quot;ghcr.io/devcontainers/features/docker-in-docker:2&quot;: {}</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;customizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;vscode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;[go]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.rulers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;[html]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.tabSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;[javascript]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;[css]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;golang.go&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;esbenp.prettier-vscode&quot;</span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-
-</details>
-
-<h3 id="_5">実装</h3>
+<h3 id="_4">実装</h3>
 <h4 id="assets">assets/</h4>
 <ul>
 <li>templates/index.html</li>
@@ -8701,7 +8671,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>アプリ起動後、<a href="http://localhost:8080/login">http://localhost:8080/login</a> にアクセスするとログイン画面が表示されます。</p>
-<h2 id="_6">静的コンテンツをバイナリに含める</h2>
+<h2 id="_5">静的コンテンツをバイナリに含める</h2>
 <p>上記のコードでは<code>go build</code>で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:</p>
 <ul>
 <li>assets/assets.go を下記で新規作成</li>
