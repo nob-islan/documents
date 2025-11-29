@@ -110,7 +110,7 @@ import axios from "axios";
  * @returns メッセージ
  */
 export const callApi = async (): Promise<string> => {
-  const response = await axios.get("http://localhost:8080/sample/greet");
+  const response = await axios.get("/api/v1/greet");
   if (response.statusText !== "OK") {
     throw new Error("API request failed");
   }

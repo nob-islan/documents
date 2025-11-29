@@ -10,15 +10,34 @@ npm install react-hook-form
 
 ## 実装
 
+### store.ts
+
+ミドルウェア利用向けに store.ts を下記で作成します。
+
+```ts
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
+import { rootReducer } from "./rootReducer";
+import { thunk } from "redux-thunk";
+
+export const store = createStore(
+  rootReducer,
+  undefined,
+  applyMiddleware(thunk)
+);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+```
+
 ### Login.tsx
 
 `LoginFormData`を定義し、入力された認証向けのデータをセットします。
 
 ```tsx
 import { useForm } from "react-hook-form";
-import { login } from "./loginAction";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../app/store";
+import { login } from "./loginAction";
 
 interface Props {}
 
@@ -26,7 +45,7 @@ interface Props {}
  * 認証フォームの構造体です。
  */
 export type LoginFormData = {
-  username: string;
+  name: string;
   password: string;
 };
 
@@ -53,7 +72,7 @@ const Login: React.FC<Props> = (props) => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <input {...register("username")} />
+          <input {...register("name")} />
         </div>
         <div>
           <input {...register("password")} type="password" />
@@ -74,14 +93,13 @@ export default Login;
 後述の API 呼び出し関数をコールします。
 
 ```ts
-import { AppDispatch } from "../../app/store";
 import { LoginFormData } from "./Login";
 import { callApi } from "./loginApi";
 
 /**
  * APIを呼び出して、取得したメッセージをstateに保持します。
  */
-export const login = (data: LoginFormData) => async (dispatch: AppDispatch) => {
+export const login = (data: LoginFormData) => async () => {
   try {
     const message = await callApi(data);
     alert(message);
@@ -106,14 +124,11 @@ import { LoginFormData } from "./Login";
  */
 export const callApi = async (data: LoginFormData): Promise<string> => {
   const payload = {
-    username: data.username,
+    name: data.name,
     password: data.password,
   };
 
-  const response = await axios.post(
-    "http://localhost:8080/sample/login",
-    payload
-  );
+  const response = await axios.post("/api/v1/login", payload);
 
   if (response.statusText !== "OK") {
     throw new Error("API request failed");
