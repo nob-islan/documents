@@ -7,7 +7,7 @@ GitLab Runner を使って React アプリケーションのコンテナイメ�
 ### Dockerfile
 
 ```Dockerfile
-FROM node:20-bullseye
+FROM node:24-bullseye
 
 # 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
@@ -36,7 +36,7 @@ variables:
   ARTIFACT_PATH: ${MODULE}/build # ビルド成果物のパス
 build:
   stage: build
-  image: node:20-bullseye
+  image: node:24-bullseye
   script:
     - cd ${MODULE}
     - npm install
