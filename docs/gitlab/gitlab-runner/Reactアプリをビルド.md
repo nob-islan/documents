@@ -33,12 +33,11 @@ stages:
   - push
 variables:
   MODULE: easyweb # アプリのモジュール名
-  ARTIFACT_PATH: ${MODULE}/build # ビルド成果物のパス
+  ARTIFACT_PATH: build # ビルド成果物のパス
 build:
   stage: build
   image: node:24-bullseye
   script:
-    - cd ${MODULE}
     - npm install
     - npm run build
   artifacts:
