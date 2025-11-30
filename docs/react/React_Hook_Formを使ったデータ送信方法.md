@@ -104,7 +104,7 @@ export const login = (data: LoginFormData) => async () => {
     const message = await callApi(data);
     alert(message);
   } catch (error) {
-    alert("メッセージ取得に失敗しました。");
+    alert("API呼び出しに失敗しました。");
   }
 };
 ```
@@ -123,16 +123,19 @@ import { LoginFormData } from "./Login";
  * @returns メッセージ
  */
 export const callApi = async (data: LoginFormData): Promise<string> => {
-  const payload = {
-    name: data.name,
-    password: data.password,
-  };
+  try {
+    const payload = {
+      name: data.name,
+      password: data.password,
+    };
 
-  const response = await axios.post("/api/v1/login", payload);
-
-  if (response.statusText !== "OK") {
+    const response = await axios.post("/api/v1/login", payload);
+    return response.data.message;
+  } catch (error: any) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return error.response.data.message;
+    }
     throw new Error("API request failed");
   }
-  return response.data.message;
 };
 ```
