@@ -110,11 +110,15 @@ import axios from "axios";
  * @returns メッセージ
  */
 export const callApi = async (): Promise<string> => {
-  const response = await axios.get("/api/v1/greet");
-  if (response.statusText !== "OK") {
+  try {
+    const response = await axios.post("/api/v1/greet", payload);
+    return response.data.message;
+  } catch (error: any) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return error.response.data.message;
+    }
     throw new Error("API request failed");
   }
-  return response.data.message;
 };
 ```
 
