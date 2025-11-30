@@ -111,7 +111,7 @@ import axios from "axios";
  */
 export const callApi = async (): Promise<string> => {
   try {
-    const response = await axios.post("/api/v1/greet", payload);
+    const response = await axios.get("/api/v1/greet");
     return response.data.message;
   } catch (error: any) {
     if (error.response && error.response.data && error.response.data.message) {
