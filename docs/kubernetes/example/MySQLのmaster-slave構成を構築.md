@@ -259,7 +259,7 @@ spec:
 
 ### proxysql-cm.yaml
 
-master / slave のルーティングを設定します。`mysql-x.mysql-svc` で Pod に直接疎通しています。
+master / slave のルーティングを設定します。`mysql-x.mysql-svc` で Pod に直接疎通します。
 
 ```yaml
 apiVersion: v1
