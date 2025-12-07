@@ -9,6 +9,10 @@ cf. https://github.com/containerd/containerd/blob/main/docs/hosts.md
 - ワーカーノードで下記を実行します:
 
 ```shell
+# config.toml修正
+sudo sed -i 's|config_path = '"'"'/etc/containerd/certs.d:/etc/docker/certs.d'"'"'|config_path = '"'"'/etc/containerd/certs.d'"'"'|g' /etc/containerd/config.toml
+
+# hosts設定ファイル作成
 sudo mkdir -p /etc/containerd/certs.d/{コンテナレジストリのIP}:80
 sudo tee /etc/containerd/certs.d/{コンテナレジストリのIP}:80/hosts.toml << 'EOF'
 server = "http://{コンテナレジストリのIP}:80"
