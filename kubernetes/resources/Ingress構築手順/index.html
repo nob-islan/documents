@@ -8567,11 +8567,6 @@
 <span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080</span>
 </code></pre></div>
-<ul>
-<li>他端末からの疎通を通せるように<code>ingress-nginx</code>を修正します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>ingress-nginx-controller<span class="w"> </span>-n<span class="w"> </span>ingress-nginx<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;: {&quot;externalTrafficPolicy&quot;: &quot;Cluster&quot;}}&#39;</span>
-</code></pre></div>
 <h3 id="_4">動作確認</h3>
 <ul>
 <li>Ingress が待ち受けているポートを確認します:</li>
