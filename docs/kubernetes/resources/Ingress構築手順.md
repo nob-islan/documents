@@ -9,7 +9,7 @@
 
 ## 手順
 
-サンプルとして、`/sample/greet`および`/sample/bye`エンドポイントを用意したアプリをデプロイすることを想定します。
+サンプルとして、`/api/v1/greet`および`/api/v1/bye`エンドポイントを用意したアプリをデプロイすることを想定します。
 
 ### リソース作成
 
@@ -34,7 +34,7 @@ spec:
     - http:
         paths:
           - pathType: Prefix
-            path: /sample
+            path: /api
             backend:
               service:
                 name: sample-service
@@ -90,9 +90,27 @@ kubectl get svc ingress-nginx-controller -n ingress-nginx
 - curl で疎通確認をとります:
 
 ```
-$ curl localhost:31579/sample/greet
+$ curl localhost:31600/api/v1/greet
 Hello, World!
 
-$ curl localhost:31579/sample/bye
+$ curl localhost:31600/api/v1/bye
+GoodBye, World!
+```
+
+- ロードバランサーがデプロイされている場合は、クラスタ外から疎通をとることができます:
+
+```
+$ kubectl get svc ingress-nginx-controller -n ingress-nginx
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
+ingress-nginx-controller   LoadBalancer   10.99.201.197   192.168.151.61   80:31600/TCP,443:31480/TCP   7m39s
+```
+
+```
+% curl 192.168.151.61/api/v1/greet
+Hello, World!
+```
+
+```
+% curl 192.168.151.61/api/v1/bye
 GoodBye, World!
 ```
