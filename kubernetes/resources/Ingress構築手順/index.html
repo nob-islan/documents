@@ -8502,7 +8502,7 @@
 <li><a href="https://kubernetes.github.io/ingress-nginx/deploy/">Ingress Installation Guide</a></li>
 </ul>
 <h2 id="_2">手順</h2>
-<p>サンプルとして、<code>/sample/greet</code>および<code>/sample/bye</code>エンドポイントを用意したアプリをデプロイすることを想定します。</p>
+<p>サンプルとして、<code>/api/v1/greet</code>および<code>/api/v1/bye</code>エンドポイントを用意したアプリをデプロイすることを想定します。</p>
 <h3 id="_3">リソース作成</h3>
 <ul>
 <li>Ingress Controller をインストールします:</li>
@@ -8524,7 +8524,7 @@
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">http</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
 <span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
-<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/sample</span>
+<span class="w">            </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/api</span>
 <span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
 <span class="w">              </span><span class="nt">service</span><span class="p">:</span>
 <span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-service</span>
@@ -8576,10 +8576,23 @@
 <ul>
 <li>curl で疎通確認をとります:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>$ curl localhost:31579/sample/greet
+<div class="highlight"><pre><span></span><code>$ curl localhost:31600/api/v1/greet
 Hello, World!
 
-$ curl localhost:31579/sample/bye
+$ curl localhost:31600/api/v1/bye
+GoodBye, World!
+</code></pre></div>
+<ul>
+<li>ロードバランサーがデプロイされている場合は、クラスタ外から疎通をとることができます:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$ kubectl get svc ingress-nginx-controller -n ingress-nginx
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
+ingress-nginx-controller   LoadBalancer   10.99.201.197   192.168.151.61   80:31600/TCP,443:31480/TCP   7m39s
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>% curl 192.168.151.61/api/v1/greet
+Hello, World!
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>% curl 192.168.151.61/api/v1/bye
 GoodBye, World!
 </code></pre></div>
 
