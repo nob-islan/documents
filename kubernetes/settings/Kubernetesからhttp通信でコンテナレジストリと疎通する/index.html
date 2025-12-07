@@ -8423,7 +8423,11 @@
 <ul>
 <li>ワーカーノードで下記を実行します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/<span class="o">{</span>コンテナレジストリのIP<span class="o">}</span>:80
+<div class="highlight"><pre><span></span><code><span class="c1"># config.toml修正</span>
+sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|config_path = &#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;/etc/containerd/certs.d:/etc/docker/certs.d&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;|config_path = &#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;/etc/containerd/certs.d&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;|g&#39;</span><span class="w"> </span>/etc/containerd/config.toml
+
+<span class="c1"># hosts設定ファイル作成</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/<span class="o">{</span>コンテナレジストリのIP<span class="o">}</span>:80
 sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/certs.d/<span class="o">{</span>コンテナレジストリのIP<span class="o">}</span>:80/hosts.toml<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
 <span class="s">server = &quot;http://{コンテナレジストリのIP}:80&quot;</span>
 
