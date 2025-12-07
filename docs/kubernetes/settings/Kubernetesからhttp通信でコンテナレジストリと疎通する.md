@@ -4,18 +4,19 @@ http 通信でコンテナレジストリと疎通をとり、イメージを pu
 
 ## 手順
 
-- ワーカーノードの`/etc/containerd/config.toml`に下記を追記します:
+cf. https://github.com/containerd/containerd/blob/main/docs/hosts.md
 
-```diff
-       [plugins."io.containerd.grpc.v1.cri".registry.configs]
-+        [plugins."io.containerd.grpc.v1.cri".registry.configs."{コンテナレジストリのIP}:80".tls]
-+          insecure_skip_verify = true
-```
+- ワーカーノードで下記を実行します:
 
-```diff
-       [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-+        [plugins."io.containerd.grpc.v1.cri".registry.mirrors."{コンテナレジストリのIP}:80"]
-+          endpoint = ["http://{コンテナレジストリのIP}:80"]
+```shell
+sudo mkdir -p /etc/containerd/certs.d/{コンテナレジストリのIP}:80
+sudo tee /etc/containerd/certs.d/{コンテナレジストリのIP}:80/hosts.toml << 'EOF'
+server = "http://{コンテナレジストリのIP}:80"
+
+[host."http://{コンテナレジストリのIP}:80"]
+  capabilities = ["pull", "resolve"]
+  skip_verify = true
+EOF
 ```
 
 - containerd を再起動します:
