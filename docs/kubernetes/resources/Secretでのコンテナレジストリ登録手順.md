@@ -2,6 +2,8 @@
 
 secret にコンテナレジストリの認証情報を登録して、プライベートなレジストリから image を pull します。
 
+cf. https://kubernetes.io/docs/concepts/configuration/secret/#docker-config-secrets
+
 ## 手順
 
 - secret を作成します:
