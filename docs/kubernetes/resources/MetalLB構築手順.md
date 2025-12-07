@@ -73,6 +73,8 @@ metadata:
 spec:
   ipAddressPools:
     - first-pool
+  interfaces:
+    - ens4 # ip addr show | grep 192.168.151 等でインターフェースを確認・指定
 ```
 
 ```shell
