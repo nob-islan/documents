@@ -79,12 +79,6 @@ spec:
             - containerPort: 8080
 ```
 
-- 他端末からの疎通を通せるように`ingress-nginx`を修正します:
-
-```shell
-kubectl patch svc ingress-nginx-controller -n ingress-nginx -p '{"spec": {"externalTrafficPolicy": "Cluster"}}'
-```
-
 ### 動作確認
 
 - Ingress が待ち受けているポートを確認します:
