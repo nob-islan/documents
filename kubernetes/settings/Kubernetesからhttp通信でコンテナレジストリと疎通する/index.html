@@ -8419,16 +8419,18 @@
 <h1 id="kubernetes-http">Kubernetes から http 通信でコンテナレジストリと疎通する</h1>
 <p>http 通信でコンテナレジストリと疎通をとり、イメージを pull する方法です。</p>
 <h2 id="_1">手順</h2>
+<p>cf. <a href="https://github.com/containerd/containerd/blob/main/docs/hosts.md">https://github.com/containerd/containerd/blob/main/docs/hosts.md</a></p>
 <ul>
-<li>ワーカーノードの<code>/etc/containerd/config.toml</code>に下記を追記します:</li>
+<li>ワーカーノードで下記を実行します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="w"> </span>      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.configs]
-<span class="gi">+        [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.configs.&quot;{コンテナレジストリのIP}:80&quot;.tls]</span>
-<span class="gi">+          insecure_skip_verify = true</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="w"> </span>      [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors]
-<span class="gi">+        [plugins.&quot;io.containerd.grpc.v1.cri&quot;.registry.mirrors.&quot;{コンテナレジストリのIP}:80&quot;]</span>
-<span class="gi">+          endpoint = [&quot;http://{コンテナレジストリのIP}:80&quot;]</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/<span class="o">{</span>コンテナレジストリのIP<span class="o">}</span>:80
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/certs.d/<span class="o">{</span>コンテナレジストリのIP<span class="o">}</span>:80/hosts.toml<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">server = &quot;http://{コンテナレジストリのIP}:80&quot;</span>
+
+<span class="s">[host.&quot;http://{コンテナレジストリのIP}:80&quot;]</span>
+<span class="s">  capabilities = [&quot;pull&quot;, &quot;resolve&quot;]</span>
+<span class="s">  skip_verify = true</span>
+<span class="s">EOF</span>
 </code></pre></div>
 <ul>
 <li>containerd を再起動します:</li>
