@@ -108,9 +108,7 @@ ingress-nginx-controller   LoadBalancer   10.99.201.197   192.168.151.61   80:31
 ```
 % curl 192.168.151.61/api/v1/greet
 Hello, World!
-```
 
-```
 % curl 192.168.151.61/api/v1/bye
 GoodBye, World!
 ```
