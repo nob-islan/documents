@@ -1,4 +1,4 @@
-# maven プロジェクトを新規作成
+# Maven プロジェクトを新規作成
 
 cf. https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
