@@ -8546,11 +8546,14 @@ defaults
 
 frontend website
   bind :80
+  mode http
   default_backend web_servers
 
 backend web_servers
-  server s1 192.168.151.123:80
-  server s2 192.168.151.124:80
+  mode http
+  balance roundrobin
+  server s1 192.168.151.123:80 check
+  server s2 192.168.151.124:80 check
 </code></pre></div>
 
 
