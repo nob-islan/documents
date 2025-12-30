@@ -19,3 +19,9 @@ configs:
       username: xxxxxx # this is the registry username
       password: xxxxxx # this is the registry password
 ```
+
+- K3s を再起動します:
+
+```shell
+sudo systemctl restart k3s
+```
