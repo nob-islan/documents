@@ -1,19 +1,19 @@
-# ArgoCD 構築手順
+# Argo CD 構築手順
 
-ArgoCD を構築します。
+Argo CD を構築します。
 
 cf. https://argo-cd.readthedocs.io/en/stable/getting_started/
 
 ## 構築手順
 
-- ArgoCD をインストールします:
+- Argo CD をインストールします:
 
 ```shell
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-- ArgoCD の API Server にアクセスできるよう、サービスタイプを変更します:
+- Argo CD の API Server にアクセスできるよう、サービスタイプを変更します:
 
 ```shell
 # ロードバランサがある場合 type: LoadBalancer
@@ -23,7 +23,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"name": "http", "port": 80, "protocol": "TCP", "targetPort": 8080, "nodePort": 30080}]}}'
 ```
 
-- ArgoCD CLI をインストールします:
+- Argo CD CLI をインストールします:
 
 ```shell
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64

@@ -1,4 +1,4 @@
-# ArgoCD への http 通信を許可
+# Argo CD への http 通信を許可
 
 cf. https://argo-cd.readthedocs.io/en/latest/operator-manual/ingress/#ambassador
 
