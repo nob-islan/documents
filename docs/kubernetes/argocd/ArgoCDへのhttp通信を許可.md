@@ -14,5 +14,5 @@ data:
 - `argocd-server` を再起動します:
 
 ```shell
-kubectl rollout restart deployment argocd-server
+kubectl rollout restart deployment -n argocd argocd-server
 ```
