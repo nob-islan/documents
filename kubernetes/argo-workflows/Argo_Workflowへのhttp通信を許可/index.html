@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/">
+        <link rel="prev" href="../Argo_Workflows%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/">
       
       
-        <link rel="next" href="../../debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/">
+        <link rel="next" href="../../argocd/ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>MyBatis を使って DB に接続 - Nob docs</title>
+        <title>Argo Workflow への http 通信を許可 - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mybatis-db" class="md-skip">
+        <a href="#argo-workflow-http" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MyBatis を使って DB に接続
+              Argo Workflow への http 通信を許可
             
           </span>
         </div>
@@ -4129,20 +4129,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
         
           
           <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
@@ -4163,7 +4161,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_14">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4178,20 +4176,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14_1" >
         
           
           <label class="md-nav__link" for="__nav_14_1" id="__nav_14_1_label" tabindex="0">
@@ -4212,7 +4208,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_14_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_14_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_14_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4230,7 +4226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../../java/database/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -4258,7 +4254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../../java/database/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4286,7 +4282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../../java/database/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4311,37 +4307,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MyBatis を使って DB に接続
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../java/database/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -4357,137 +4326,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        設定ファイル
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="設定ファイル">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pomxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pom.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#applicationproperties" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        application.properties
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mybatis-configxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        mybatis-config.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#projectnameapplicationjava" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ProjectNameApplication.java
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        実装
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="実装">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        エンティティ
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mapper" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mapper インターフェース
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mapper-xml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mapper xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -4555,7 +4393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../../java/debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4583,7 +4421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../../java/debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4666,7 +4504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4694,7 +4532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4777,7 +4615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/getting-started/Java_Operator_SDK%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4805,7 +4643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../../java/getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -4888,7 +4726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../../java/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -4916,7 +4754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
+      <a href="../../../java/http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
         
   
   
@@ -4999,7 +4837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../maven/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../../java/maven/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -5027,7 +4865,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../maven/Maven%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E6%96%B0%E8%A6%8F%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/maven/Maven%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E6%96%B0%E8%A6%8F%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5110,7 +4948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../../java/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -5138,7 +4976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5221,7 +5059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/tips/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5249,7 +5087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../../java/tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -5277,7 +5115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../../java/tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -5305,7 +5143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5333,7 +5171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5373,18 +5211,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -5405,7 +5245,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5420,18 +5260,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_1" checked>
         
           
           <label class="md-nav__link" for="__nav_15_1" id="__nav_15_1_label" tabindex="0">
@@ -5452,7 +5294,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5470,7 +5312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argo-workflows/Argo_Workflows%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../Argo_Workflows%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5495,10 +5337,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../kubernetes/argo-workflows/Argo_Workflow%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Argo Workflow への http 通信を許可
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -5514,6 +5383,37 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        手順
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5581,7 +5481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+      <a href="../../argocd/ArgoCD%E3%81%B8%E3%81%AEhttp%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
         
   
   
@@ -5609,7 +5509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../argocd/ArgoCD%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5637,7 +5537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/argocd/Web-based_terminal%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96/" class="md-nav__link">
+      <a href="../../argocd/Web-based_terminal%E3%82%92%E6%9C%89%E5%8A%B9%E5%8C%96/" class="md-nav__link">
         
   
   
@@ -5720,7 +5620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/custom-controller/Kubebuilder%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../custom-controller/Kubebuilder%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -5748,7 +5648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/custom-controller/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AEimage%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%97%E3%83%83%E3%82%B7%E3%83%A5/" class="md-nav__link">
+      <a href="../../custom-controller/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AEimage%E3%82%92%E3%83%93%E3%83%AB%E3%83%89%E3%83%BB%E3%83%97%E3%83%83%E3%82%B7%E3%83%A5/" class="md-nav__link">
         
   
   
@@ -5831,7 +5731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/examples/MySQL%E3%81%AEmaster-slave%E6%A7%8B%E6%88%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../examples/MySQL%E3%81%AEmaster-slave%E6%A7%8B%E6%88%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -5914,7 +5814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/extensions/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../extensions/k9s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -5997,7 +5897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../getting-started/Kubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%BC%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6025,7 +5925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../getting-started/WSL%E4%B8%8A%E3%81%ABkubebuilder%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -6053,7 +5953,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../getting-started/%E5%90%84%E7%A8%AECNI%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6136,7 +6036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/k3s/K3s%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../k3s/K3s%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -6164,7 +6064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/k3s/K3s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../k3s/K3s%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6192,7 +6092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/k3s/%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BF%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%BC%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../k3s/%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BF%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%BC%E3%82%92%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -6275,7 +6175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../kind/kind%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -6303,7 +6203,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
+      <a href="../../kind/kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/" class="md-nav__link">
         
   
   
@@ -6331,7 +6231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../kind/kind%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6414,7 +6314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/kustomize/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
+      <a href="../../kustomize/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -6497,7 +6397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/CustomResource%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../resources/CustomResource%E4%BD%9C%E6%88%90%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6525,7 +6425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../resources/Ingress%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6553,7 +6453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../resources/MetalLB%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6581,7 +6481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/Secret%E3%81%A7%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../resources/Secret%E3%81%A7%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E7%99%BB%E9%8C%B2%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6609,7 +6509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/resources/kubeconfig%E3%81%A7%E3%81%AERole%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86/" class="md-nav__link">
+      <a href="../../resources/kubeconfig%E3%81%A7%E3%81%AERole%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86/" class="md-nav__link">
         
   
   
@@ -6692,7 +6592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/settings/Kubernetes%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../settings/Kubernetes%E3%81%8B%E3%82%89http%E9%80%9A%E4%BF%A1%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%A8%E7%96%8E%E9%80%9A%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -6720,7 +6620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../kubernetes/settings/%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../settings/%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -8714,110 +8614,10 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        設定ファイル
+        手順
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="設定ファイル">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pomxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pom.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#applicationproperties" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        application.properties
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mybatis-configxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        mybatis-config.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#projectnameapplicationjava" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ProjectNameApplication.java
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        実装
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="実装">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        エンティティ
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mapper" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mapper インターフェース
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mapper-xml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mapper xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -8838,294 +8638,40 @@
 
 
 
-<h1 id="mybatis-db">MyBatis を使って DB に接続</h1>
-<p>MyBatis を使って Java アプリから DB に接続する方法、および実装サンプルを記載します。</p>
-<h2 id="_1">設定ファイル</h2>
-<h3 id="pomxml">pom.xml</h3>
-<p>各種依存関係です。アプリ起動時にエラーが起きる場合はバージョンが古い可能性があります。</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mariadb.jdbc<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mariadb-java-client<span class="nt">&lt;/artifactId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mybatis<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.5.16<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mybatis-spring<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.0.3<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-jdbc<span class="nt">&lt;/artifactId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>jakarta.persistence<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>jakarta.persistence-api<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.2.0<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>
-<h3 id="applicationproperties">application.properties</h3>
-<p>DB への接続情報です。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">#MariaDBのドライバ設定</span>
-<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.mariadb.jdbc.Driver</span>
-<span class="c1">#接続用URL</span>
-<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:mariadb://localhost/DBName</span>
-<span class="c1">#ユーザ名</span>
-<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">root</span>
-<span class="c1">#パスワード</span>
-<span class="na">spring.datasource.password</span><span class="o">=</span>
-</code></pre></div>
-<h3 id="mybatis-configxml">mybatis-config.xml</h3>
-<p><code>projectname/src/main/resources</code>配下に下記で作成します。</p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="cp">&lt;!DOCTYPE configuration PUBLIC</span>
-<span class="cp">        &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span>
-<span class="cp">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span>
-
-<span class="nt">&lt;configuration&gt;</span>
-<span class="w">    </span><span class="nt">&lt;settings&gt;</span>
-<span class="w">        </span><span class="nt">&lt;setting</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mapUnderscoreToCamelCase&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/settings&gt;</span>
-<span class="nt">&lt;/configuration&gt;</span>
-</code></pre></div>
-<h3 id="projectnameapplicationjava">ProjectNameApplication.java</h3>
-<p>アプリ起動時に MyBatis の設定を読み込みます。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.projectname</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.sql.DataSource</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.ibatis.session.SqlSessionFactory</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.spring.SqlSessionFactoryBean</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.spring.annotation.MapperScan</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.SpringApplication</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.ClassPathResource</span><span class="p">;</span>
-
-<span class="nd">@SpringBootApplication</span>
-<span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.example.projectname.mapper&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectNameApplication</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">ProjectNameApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// MyBatisの設定</span>
-<span class="w">    </span><span class="nd">@Bean</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SqlSessionFactory</span><span class="w"> </span><span class="nf">sqlSessionFactory</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="w"> </span><span class="n">sessionFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sessionFactory</span><span class="p">.</span><span class="na">setDataSource</span><span class="p">(</span><span class="n">dataSource</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">// コンフィグファイルの読み込み</span>
-<span class="w">        </span><span class="n">sessionFactory</span><span class="p">.</span><span class="na">setConfigLocation</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathResource</span><span class="p">(</span><span class="s">&quot;/mybatis-config.xml&quot;</span><span class="p">));</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sessionFactory</span><span class="p">.</span><span class="na">getObject</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="_2">実装</h2>
-<p>例として、下記の<code>users</code>テーブル向けの実装を記載します。</p>
-<table>
-<thead>
-<tr>
-<th>カラム名</th>
-<th>column_name</th>
-<th>型</th>
-<th>PK</th>
-<th>NULL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ユーザ ID</td>
-<td>user_id</td>
-<td>VARCHAR(11)</td>
-<td>o</td>
-<td>x</td>
-</tr>
-<tr>
-<td>ユーザ名</td>
-<td>user_name</td>
-<td>VARCHAR(20)</td>
-<td></td>
-<td>x</td>
-</tr>
-<tr>
-<td>年齢</td>
-<td>age</td>
-<td>INT</td>
-<td></td>
-<td>x</td>
-</tr>
-<tr>
-<td>備考</td>
-<td>remarks</td>
-<td>TEXT</td>
-<td></td>
-<td>o</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_3">エンティティ</h3>
-<p>デーブル定義と対応させるモデルクラスです。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.entity</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Id</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * usersテーブルのentityクラスです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author nob</span>
-<span class="cm"> */</span>
-<span class="nd">@Data</span>
-<span class="nd">@Entity</span>
-<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザID */</span>
-<span class="w">    </span><span class="nd">@Id</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">columnDefinition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PRIMARY KEY&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** 年齢 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** 備考 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;remarks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">remarks</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="mapper">Mapper インターフェース</h3>
-<p>Mapper のインターフェースです。業務処理側からはこのクラスのメソッドを呼び出します。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.mapper</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.ibatis.annotations.Mapper</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.entity.Users</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.key.UsersDeleteKey</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.key.UsersSelectKey</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * usersテーブルのmapperインターフェースです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author nob</span>
-<span class="cm"> */</span>
-<span class="nd">@Mapper</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersMapper</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報を更新します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param users</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報を登録します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param users</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 検索条件からカラムを抽出します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param usersSelectKey</span>
-<span class="cm">     * @return ユーザのリスト</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByKey</span><span class="p">(</span><span class="n">UsersSelectKey</span><span class="w"> </span><span class="n">usersSelectKey</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報を削除します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param usersDeleteKey</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">UsersDeleteKey</span><span class="w"> </span><span class="n">usersDeleteKey</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="mapper-xml">Mapper xml</h3>
-<p>SQL の実体を記載するファイルです。<code>src/resources</code>配下に、mapper インターフェースと同じパッケージ構成で配置します。例として、mapper インターフェースが<code>src/main/java/nob/example/firstrestapi/mapper</code>に配置されている場合、xml ファイルは<code>src/main/resources/nob/example/firstrestapi/mapper</code>に配置します。</p>
+<h1 id="argo-workflow-http">Argo Workflow への http 通信を許可</h1>
+<p>cf. <a href="https://github.com/argoproj/argo-workflows/discussions/6836">https://github.com/argoproj/argo-workflows/discussions/6836</a></p>
+<h2 id="_1">手順</h2>
 <ul>
-<li>mapper タグ<ul>
-<li><code>namespace</code>: mapper が配置されているパッケージ</li>
+<li>Deployment: <code>argo-server</code> に下記設定を追加します:</li>
 </ul>
-</li>
-<li>update, insert, select, delete タグ<ul>
-<li><code>id</code>: インターフェース側のメソッド名</li>
-<li><code>resultType</code>: 戻りの型</li>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>spec:
+<span class="w"> </span>  template:
+<span class="w"> </span>    spec:
+<span class="w"> </span>      containers:
+<span class="w"> </span>      - args:
+<span class="w"> </span>        - server
+<span class="w"> </span>        - --auth-mode
+<span class="w"> </span>        - server
+<span class="w"> </span>        - --auth-mode
+<span class="w"> </span>        - client
+<span class="gi">+        - --secure=false</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>spec:
+<span class="w"> </span>  template:
+<span class="w"> </span>    spec:
+<span class="w"> </span>      containers:
+<span class="w"> </span>        readinessProbe:
+<span class="w"> </span>          failureThreshold: 3
+<span class="w"> </span>          httpGet:
+<span class="w"> </span>            path: /
+<span class="w"> </span>            port: 2746
+<span class="gd">-            scheme: HTTPS</span>
+<span class="gi">+            scheme: HTTP</span>
+</code></pre></div>
+<ul>
+<li><code>argo-server</code> を再起動します:</li>
 </ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="cp">&lt;!DOCTYPE mapper PUBLIC</span>
-<span class="cp">        &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span>
-<span class="cp">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span>
-
-<span class="nt">&lt;mapper</span><span class="w"> </span><span class="na">namespace=</span><span class="s">&quot;nob.example.firstrestapi.mapper.UsersMapper&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;update</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;update&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span>UPDATE
-<span class="w">            </span>users
-<span class="w">        </span>SET
-<span class="w">            </span>user_name<span class="w"> </span>=<span class="w"> </span>#{userName}
-<span class="w">            </span>,<span class="w"> </span>age<span class="w"> </span>=<span class="w"> </span>#{age}
-<span class="w">            </span>,<span class="w"> </span>remarks<span class="w"> </span>=<span class="w"> </span>#{remarks}
-<span class="w">        </span>WHERE
-<span class="w">            </span>user_id<span class="w"> </span>=<span class="w"> </span>#{userId}
-<span class="w">    </span><span class="nt">&lt;/update&gt;</span>
-
-<span class="w">    </span><span class="nt">&lt;insert</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;insert&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span>INSERT
-<span class="w">            </span>INTO<span class="w"> </span>users<span class="w"> </span>(
-<span class="w">                </span>user_name
-<span class="w">                </span>,<span class="w"> </span>age
-<span class="w">                </span>,<span class="w"> </span>remarks
-<span class="w">            </span>)<span class="w"> </span>VALUES(
-<span class="w">                </span>#{userName}
-<span class="w">                </span>,<span class="w"> </span>#{age}
-<span class="w">                </span>,<span class="w"> </span>#{remarks}
-<span class="w">            </span>)
-<span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
-
-<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;selectByKey&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;nob.example.firstrestapi.repository.entity.Users&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span><span class="nt">&lt;bind</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;userNameLike&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;&#39;%&#39; + userName + &#39;%&#39;&quot;</span><span class="nt">/&gt;</span>
-<span class="w">        </span>SELECT
-<span class="w">            </span>user_id
-<span class="w">            </span>,<span class="w"> </span>user_name
-<span class="w">            </span>,<span class="w"> </span>age
-<span class="w">            </span>,<span class="w"> </span>remarks
-<span class="w">        </span>FROM
-<span class="w">            </span>users
-<span class="w">        </span><span class="nt">&lt;where&gt;</span>
-<span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;userName != &#39;&#39;&quot;</span><span class="nt">&gt;</span>
-<span class="w">                </span>AND<span class="w"> </span>user_name<span class="w"> </span>LIKE<span class="w"> </span>#{userNameLike}
-<span class="w">            </span><span class="nt">&lt;/if&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/where&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/select&gt;</span>
-
-<span class="w">    </span><span class="nt">&lt;delete</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;delete&quot;</span><span class="nt">&gt;</span>
-<span class="w">        </span>DELETE
-<span class="w">        </span>FROM
-<span class="w">            </span>users
-<span class="w">        </span>WHERE
-<span class="w">            </span>user_id<span class="w"> </span>=<span class="w"> </span>#{userId}
-<span class="w">    </span><span class="nt">&lt;/delete&gt;</span>
-<span class="nt">&lt;/mapper&gt;</span>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>rollout<span class="w"> </span>restart<span class="w"> </span>deploy<span class="w"> </span>-n<span class="w"> </span>argo<span class="w"> </span>argo-server
 </code></pre></div>
 
 
