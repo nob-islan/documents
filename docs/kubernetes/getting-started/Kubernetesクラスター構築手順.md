@@ -6,15 +6,6 @@
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/
 
-### マシン
-
-VirtualBox 上で仮想マシンを立てて構築します。ドキュメントに記載されている最低条件ギリギリです。
-
-- メモリ: 2GB
-- CPU: 2 コア
-- HDD: 32GB
-- OS: Ubuntu 20.04.3
-
 ### エラー回避のための設定
 
 swap を無効化します。
