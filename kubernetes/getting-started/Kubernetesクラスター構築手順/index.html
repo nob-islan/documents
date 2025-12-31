@@ -5914,17 +5914,6 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        マシン
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         エラー回避のための設定
       
     </span>
@@ -5938,7 +5927,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         コントロールプレーン構築
@@ -5950,7 +5939,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         コンテナランタイムのインストール
@@ -5989,7 +5978,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         コントロールプレーンの起動
@@ -6016,7 +6005,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         ワーカーノード構築
@@ -6039,7 +6028,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         ノードをクラスターに参加させる
@@ -8771,17 +8760,6 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        マシン
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         エラー回避のための設定
       
     </span>
@@ -8795,7 +8773,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         コントロールプレーン構築
@@ -8807,7 +8785,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         コンテナランタイムのインストール
@@ -8846,7 +8824,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         コントロールプレーンの起動
@@ -8873,7 +8851,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         ワーカーノード構築
@@ -8896,7 +8874,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         ノードをクラスターに参加させる
@@ -8932,22 +8910,14 @@
 <p>公式ドキュメントに従って Kubernetes クラスターを構築します。</p>
 <h2 id="_1">事前準備</h2>
 <p>cf. <a href="https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/">https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/</a></p>
-<h3 id="_2">マシン</h3>
-<p>VirtualBox 上で仮想マシンを立てて構築します。ドキュメントに記載されている最低条件ギリギリです。</p>
-<ul>
-<li>メモリ: 2GB</li>
-<li>CPU: 2 コア</li>
-<li>HDD: 32GB</li>
-<li>OS: Ubuntu 20.04.3</li>
-</ul>
-<h3 id="_3">エラー回避のための設定</h3>
+<h3 id="_2">エラー回避のための設定</h3>
 <p>swap を無効化します。</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>swapoff<span class="w"> </span>-a
 </code></pre></div>
 <p>ただし、上記の方法だとノードを再起動すると swap が再度有効化されてしまいます。永続的に無効化したい場合は<code>/etc/fstab</code>ファイルの swap に関する行をコメントアウトしてリブートします。</p>
-<h2 id="_4">コントロールプレーン構築</h2>
+<h2 id="_3">コントロールプレーン構築</h2>
 <p>cf. <a href="https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/">https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/</a></p>
-<h3 id="_5">コンテナランタイムのインストール</h3>
+<h3 id="_4">コンテナランタイムのインストール</h3>
 <p>cf. <a href="https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime">https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime</a></p>
 <p>必要な設定を追加します。</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/modules-load.d/containerd.conf<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
@@ -9012,7 +8982,7 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>kubelet<span class="w"> </span>kubeadm<span class="w"> </span>kubectl
 sudo<span class="w"> </span>apt-mark<span class="w"> </span>hold<span class="w"> </span>kubelet<span class="w"> </span>kubeadm<span class="w"> </span>kubectl
 </code></pre></div>
-<h3 id="_6">コントロールプレーンの起動</h3>
+<h3 id="_5">コントロールプレーンの起動</h3>
 <p>cf. <a href="https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#コントロールプレーンノードの初期化">https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#コントロールプレーンノードの初期化</a></p>
 <p>コントロールプレーンノードを初期化します。<code>kubeadm join</code>コマンドを控えておいてください。</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>kubeadm<span class="w"> </span>config<span class="w"> </span>images<span class="w"> </span>pull
@@ -9045,11 +9015,11 @@ cf. <a href="https://kubernetes.io/ja/docs/concepts/cluster-administration/addon
 <p>ノードのステータスが<code>Ready</code>になっていれば完了です。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 </code></pre></div>
-<h2 id="_7">ワーカーノード構築</h2>
+<h2 id="_6">ワーカーノード構築</h2>
 <p>cf. <a href="https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes">https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes</a></p>
 <h3 id="kubexxx">kubeXXX インストール</h3>
 <p>コントロールプレーン構築の「コンテナランタイムのインストール」および「kubeadm, kubelet, kubectl のインストール」と同様の手順を踏んでください。</p>
-<h3 id="_8">ノードをクラスターに参加させる</h3>
+<h3 id="_7">ノードをクラスターに参加させる</h3>
 <p>先に控えた<code>kubeadm join</code>コマンドを叩きます。しばらく経ってから<code>kubectl get nodes</code>するとノードの Status が<code>Ready</code>になります。</p>
 
 
