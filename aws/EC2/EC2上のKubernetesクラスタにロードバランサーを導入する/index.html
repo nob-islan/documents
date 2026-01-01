@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/">
+        <link rel="prev" href="../../Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/">
       
       
-        <link rel="next" href="../Docker%E3%81%A7HAProxy%E3%82%92%E6%A7%8B%E7%AF%89/">
+        <link rel="next" href="../../ECR/image%E3%82%92push%E3%81%99%E3%82%8B/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Docker で GitLab サーバを構築 - Nob docs</title>
+        <title>EC2 上の Kubernetes クラスタにロードバランサーを導入する - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#docker-gitlab" class="md-skip">
+        <a href="#ec2-kubernetes" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker で GitLab サーバを構築
+              EC2 上の Kubernetes クラスタにロードバランサーを導入する
             
           </span>
         </div>
@@ -392,18 +392,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -424,7 +426,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -489,7 +491,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../Cloud9/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%ABcloud9%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -522,18 +524,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -554,7 +558,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -569,10 +573,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../aws/EC2/EC2%E4%B8%8A%E3%81%AEKubernetes%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%81%AB%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%BC%E3%82%92%E5%B0%8E%E5%85%A5%E3%81%99%E3%82%8B/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EC2 上の Kubernetes クラスタにロードバランサーを導入する
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -588,6 +619,65 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ノードへの IAM ロールのアタッチ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -655,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
+      <a href="../../ECR/image%E3%82%92push%E3%81%99%E3%82%8B/" class="md-nav__link">
         
   
   
@@ -738,7 +828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../aws/EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
+      <a href="../../EKS/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEEKS%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4/" class="md-nav__link">
         
   
   
@@ -1580,20 +1670,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
@@ -1614,7 +1702,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1629,20 +1717,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" >
         
           
           <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
@@ -1663,7 +1749,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_8_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1678,37 +1764,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Docker で GitLab サーバを構築
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../docker/examples/Docker%E3%81%A7GitLab%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1724,115 +1783,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lets-encrypt-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Let's Encrypt を使って SSL 通信をできるようにする
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        自己証明書を使って SSL 通信をできるようにする
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab-runner コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab-runner コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gitlab-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitLab が 自己証明書で SSL 通信をしている場合
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runner トラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.yml サンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1845,7 +1795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7HAProxy%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7HAProxy%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1873,7 +1823,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1901,7 +1851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1929,7 +1879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1957,7 +1907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7RedMine%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -1985,7 +1935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7harbor%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -2013,7 +1963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7mattermost%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -2041,7 +1991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -2069,7 +2019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7react%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+      <a href="../../../docker/examples/Docker%E3%81%A7react%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
@@ -2152,7 +2102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
+      <a href="../../../docker/install/Docker%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB/" class="md-nav__link">
         
   
   
@@ -2235,7 +2185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
+      <a href="../../../docker/trouble_shooting/JpaRepository%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E8%B5%B7%E5%8B%95%E5%88%B6%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -2263,7 +2213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../trouble_shooting/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AEhttp%E3%81%A7%E3%81%AE%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
+      <a href="../../../docker/trouble_shooting/%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA%E3%81%B8%E3%81%AEhttp%E3%81%A7%E3%81%AE%E9%80%9A%E4%BF%A1%E3%82%92%E8%A8%B1%E5%8F%AF/" class="md-nav__link">
         
   
   
@@ -8772,33 +8722,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gitlab" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        gitlab コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lets-encrypt-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Let's Encrypt を使って SSL 通信をできるようにする
+        事前準備
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#ssl" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        自己証明書を使って SSL 通信をできるようにする
+        手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ノードへの IAM ロールのアタッチ
       
     </span>
   </a>
@@ -8807,56 +8757,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab-runner コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab-runner コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gitlab-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitLab が 自己証明書で SSL 通信をしている場合
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runner トラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.yml サンプル
-      
-    </span>
-  </a>
   
 </li>
       
@@ -8877,119 +8777,180 @@
 
 
 
-<h1 id="docker-gitlab">Docker で GitLab サーバを構築</h1>
-<h2 id="gitlab">gitlab コンテナを構築</h2>
-<p>事前に<code>ip a</code>コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yaml を作成します。</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ce:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;http://${IP_address}:80&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
-</code></pre></div>
-<p><code>docker-compose up -d</code>でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502 であれば根気良く待ってください。しばらく待って<code>http://${IP_address}:80</code>にアクセスすると gitlab の画面が表示されます。<br />
-root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nob-gitlab<span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;Password:&#39;</span><span class="w"> </span>/etc/gitlab/initial_root_password
-</code></pre></div>
-<h3 id="lets-encrypt-ssl">Let's Encrypt を使って SSL 通信をできるようにする</h3>
-<p><code>external_url</code>を HTTPS プロトコルで設定すると Let’s Encrypt で SSL 通信ができるようにしてくれます。cf. <a href="https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration">https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration</a></p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;https://nob-gitlab.ddo.jp&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
-</code></pre></div>
-<h3 id="ssl">自己証明書を使って SSL 通信をできるようにする</h3>
-<p>下記でコンテナを起動すると<code>https://${設定したドメイン}</code>で GitLab にアクセスできます:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;https://gitlab.example.nob&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
-<span class="w">        </span><span class="no">nginx[&#39;redirect_http_to_https&#39;] = true</span>
-<span class="w">        </span><span class="no">letsencrypt[&#39;enable&#39;] = false</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
-<span class="w">      </span><span class="c1"># 証明書をコンテナに配置</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./volumes/ssl:/etc/gitlab/ssl&quot;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>$ ls -l volumes/ssl/
-total 12
--rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.example.nob.crt
--rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.example.nob.csr
--rw------- 1 root root 1704 Apr 27 12:25 gitlab.example.nob.key
-</code></pre></div>
-<h2 id="gitlab-runner">gitlab-runner コンテナを構築</h2>
-<p>gitlab-runner は下記で起動できます:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab-runner</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-runner:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab-runner</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
-</code></pre></div>
-<p><code>docker-compose up -d</code>を実行してコンテナを作成。起動後、GitLab GUI 上の "Create project runner" から作成したコマンドから、対話形式で runner を構築できます。</p>
-<h3 id="gitlab-ssl">GitLab が 自己証明書で SSL 通信をしている場合</h3>
-<p>runner コンテナの中に、GitLab 本体が使っている証明書<code>{ドメイン名}.crt</code>として配置する必要があります。例として、<code>docker-compose.yaml</code>に下記を追加してください:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt&quot;</span>
-</code></pre></div>
-<h2 id="runner">Runner トラブルシュート</h2>
-<p>GitLab にドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の<code>/srv/gitlab/gitlab-runner/config/config.toml</code>に下記を追加します。</p>
-<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
-<div class="highlight"><pre><span></span><code>  [runners.docker]
-  ...
-    extra_hosts = [&quot;${ドメイン名}:${GitLabのIPアドレス}&quot;]
-</code></pre></div>
-<h2 id="gitlab-ciyml">.gitlab-ci.yml サンプル</h2>
-<div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<h1 id="ec2-kubernetes">EC2 上の Kubernetes クラスタにロードバランサーを導入する</h1>
+<p>EC2 上に kubeadm で構築した Kubernetes クラスタ上で LoadBalancer タイプの Service を動かすために <a href="https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/">AWS Load Balancer Controller</a> を導入する手順です。</p>
+<p>cf.</p>
+<ul>
+<li><a href="https://aws.amazon.com/jp/blogs/news/exposing-kubernetes-applications-part-2-aws-load-balancer-controller/">Kubernetes アプリケーションの公開 Part 2: AWS Load Balancer Controller</a></li>
+</ul>
+<h2 id="_1">事前準備</h2>
+<p>下記を用意してください:</p>
+<ul>
+<li>2 つ以上のパブリックサブネットを持つ VPC</li>
+<li>EC2 上に kubeadm で構築した Kubernetes クラスタ</li>
+<li><a href="https://kubernetes.io/ja/docs/tasks/tools/install-kubectl-linux/">kubectl</a>, <a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html">aws</a>, <a href="https://helm.sh/ja/docs/intro/install/">helm</a> がインストールされた端末</li>
+</ul>
+<h2 id="_2">手順</h2>
+<h3 id="iam">ノードへの IAM ロールのアタッチ</h3>
+<p>ワーカーノードがロードバランサーリソースを作成できるよう、ノードに IAM ロールをアタッチします。</p>
+<ul>
+<li>IAM ポリシーを作成します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># IAMポリシー向けjsonをダウンロード</span>
+curl<span class="w"> </span>-o<span class="w"> </span>iam_policy.json<span class="w"> </span>https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.17.0/docs/install/iam_policy.json
 
-<span class="nt">job_build</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Building the project&quot;</span>
+<span class="c1"># IAMポリシーを作成</span>
+aws<span class="w"> </span>iam<span class="w"> </span>create-policy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--policy-name<span class="w"> </span>AWSLoadBalancerControllerIAMPolicy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--policy-document<span class="w"> </span>file://iam_policy.json
+</code></pre></div>
+<ul>
+<li>IAM ロールを作成します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 信頼ポリシーのjson作成</span>
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; trust_policy.json</span>
+<span class="s">{</span>
+<span class="s">    &quot;Version&quot;: &quot;2012-10-17&quot;,</span>
+<span class="s">    &quot;Statement&quot;: [</span>
+<span class="s">        {</span>
+<span class="s">            &quot;Effect&quot;: &quot;Allow&quot;,</span>
+<span class="s">            &quot;Action&quot;: [</span>
+<span class="s">                &quot;sts:AssumeRole&quot;</span>
+<span class="s">            ],</span>
+<span class="s">            &quot;Principal&quot;: {</span>
+<span class="s">                &quot;Service&quot;: [</span>
+<span class="s">                    &quot;ec2.amazonaws.com&quot;</span>
+<span class="s">                ]</span>
+<span class="s">            }</span>
+<span class="s">        }</span>
+<span class="s">    ]</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
 
-<span class="nt">job_test1</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the first test&quot;</span>
+<span class="c1"># ロールの作成</span>
+aws<span class="w"> </span>iam<span class="w"> </span>create-role<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--role-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--assume-role-policy-document<span class="w"> </span>file://trust_policy.json
+</code></pre></div>
+<ul>
+<li>作成したロールにポリシーをアタッチします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>iam<span class="w"> </span>attach-role-policy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--role-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--policy-arn<span class="w"> </span><span class="o">{</span>AWSLoadBalancerControllerIAMPolicyのArn<span class="o">}</span>
+</code></pre></div>
+<ul>
+<li>インスタンスプロファイルを作成します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># インスタンスプロファイルを作成</span>
+aws<span class="w"> </span>iam<span class="w"> </span>create-instance-profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
 
-<span class="nt">job_test2</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the second test&quot;</span>
+<span class="c1"># インスタンスプロファイルにIAMロールをアタッチ</span>
+aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--role-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode
+</code></pre></div>
+<ul>
+<li>ワーカーノードの インスタンス ID を確認します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filters<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>tag-value,Values<span class="o">={</span>ワーカーノードのインスタンス名<span class="o">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s1">&#39;Reservations[*].Instances[*].{Instance:InstanceId}&#39;</span>
+</code></pre></div>
+<ul>
+<li>IAM ロールをワーカーノードにアタッチします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>ec2<span class="w"> </span>associate-iam-instance-profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--instance-id<span class="w"> </span><span class="o">{</span>ワーカーノードのインスタンスID<span class="o">}</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--iam-instance-profile<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
+</code></pre></div>
+<ul>
+<li>ロードバランサーがワーカーノードを認識できるよう、<code>providerID</code> をノード情報として付与します（cf. <a href="https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708">https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708</a>）:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>patch<span class="w"> </span>node<span class="w"> </span>kube-w01<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;providerID&quot;:&quot;aws:///{リージョン}/{ワーカーノードのインスタンスID}&quot;}}&#39;</span>
+</code></pre></div>
+<ul>
+<li><code>eks</code> リポジトリを追加します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>eks<span class="w"> </span>https://aws.github.io/eks-charts
+</code></pre></div>
+<ul>
+<li>AWS Load Balancer Controller をデプロイします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>helm<span class="w"> </span>install<span class="w"> </span>aws-load-balancer-controller<span class="w"> </span>eks/aws-load-balancer-controller<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>--set<span class="w"> </span><span class="nv">clusterName</span><span class="o">=</span>nob-cluster
+</code></pre></div>
+<ul>
+<li>ingress リソースを作成すると、ロードバランサーが自動で作成されます:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-ingress</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">alb.ingress.kubernetes.io/scheme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">internet-facing</span>
+<span class="w">    </span><span class="nt">alb.ingress.kubernetes.io/target-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instance</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">alb</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">http</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/*</span>
+<span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ImplementationSpecific</span>
+<span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-service</span>
+<span class="w">                </span><span class="nt">port</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nginx-ingress.yaml
+</code></pre></div>
+<ul>
+<li>疎通確認用に nginx をデプロイします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apps/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">metadata</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">    </span><span class="nt">spec</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">containers</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:stable</span>
+<span class="w">          </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nginx-deploy.yaml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Service</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx-service</span>
+<span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="w">  </span><span class="nt">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LoadBalancer</span>
+<span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+<span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nginx-svc.yaml
 </code></pre></div>
 
 
