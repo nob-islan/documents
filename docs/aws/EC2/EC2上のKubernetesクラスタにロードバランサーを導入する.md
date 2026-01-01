@@ -86,8 +86,8 @@ aws iam add-role-to-instance-profile \
 
 ```shell
 aws ec2 describe-instances \
-    --filters Name=tag-value,Values={ワーカーノードのインスタンス名} \
-    --query 'Reservations[*].Instances[*].{Instance:InstanceId}'
+    --query 'Reservations[*].Instances[*].{Instance:InstanceId}' \
+    --filters Name=tag-value,Values={ワーカーノードのインスタンス名}
 ```
 
 - IAM ロールをワーカーノードにアタッチします:
