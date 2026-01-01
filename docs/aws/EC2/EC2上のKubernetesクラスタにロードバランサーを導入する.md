@@ -94,8 +94,8 @@ aws ec2 describe-instances \
 
 ```shell
 aws ec2 associate-iam-instance-profile \
-    --instance-id {ワーカーノードのインスタンスID} \
-    --iam-instance-profile Name=AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
+    --iam-instance-profile Name=AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile \
+    --instance-id {ワーカーノードのインスタンスID}
 ```
 
 - ロードバランサーがワーカーノードを認識できるよう、`providerID` をノード情報として付与します（cf. https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708）:
