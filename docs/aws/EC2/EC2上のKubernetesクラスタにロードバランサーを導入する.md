@@ -74,11 +74,11 @@ aws iam attach-role-policy \
 ```shell
 # インスタンスプロファイルを作成
 aws iam create-instance-profile \
-    --instance-profile-name AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
+    --instance-profile-name AWSCustomerRoleForEC2KubeWorkerNode
 
 # インスタンスプロファイルにIAMロールをアタッチ
 aws iam add-role-to-instance-profile \
-    --instance-profile-name AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile \
+    --instance-profile-name AWSCustomerRoleForEC2KubeWorkerNode \
     --role-name AWSCustomerRoleForEC2KubeWorkerNode
 ```
 
@@ -94,7 +94,7 @@ aws ec2 describe-instances \
 
 ```shell
 aws ec2 associate-iam-instance-profile \
-    --iam-instance-profile Name=AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile \
+    --iam-instance-profile Name=AWSCustomerRoleForEC2KubeWorkerNode \
     --instance-id {ワーカーノードのインスタンスID}
 ```
 
