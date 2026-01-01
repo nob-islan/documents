@@ -8862,8 +8862,8 @@ aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profi
 <li>IAM ロールをワーカーノードにアタッチします:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>aws<span class="w"> </span>ec2<span class="w"> </span>associate-iam-instance-profile<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--instance-id<span class="w"> </span><span class="o">{</span>ワーカーノードのインスタンスID<span class="o">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--iam-instance-profile<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
+<span class="w">    </span>--iam-instance-profile<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--instance-id<span class="w"> </span><span class="o">{</span>ワーカーノードのインスタンスID<span class="o">}</span>
 </code></pre></div>
 <ul>
 <li>ロードバランサーがワーカーノードを認識できるよう、<code>providerID</code> をノード情報として付与します（cf. <a href="https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708">https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708</a>）:</li>
