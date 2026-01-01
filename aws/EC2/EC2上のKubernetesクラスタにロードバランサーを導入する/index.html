@@ -8855,8 +8855,8 @@ aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profi
 <li>ワーカーノードの インスタンス ID を確認します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>aws<span class="w"> </span>ec2<span class="w"> </span>describe-instances<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--filters<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>tag-value,Values<span class="o">={</span>ワーカーノードのインスタンス名<span class="o">}</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--query<span class="w"> </span><span class="s1">&#39;Reservations[*].Instances[*].{Instance:InstanceId}&#39;</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s1">&#39;Reservations[*].Instances[*].{Instance:InstanceId}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--filters<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>tag-value,Values<span class="o">={</span>ワーカーノードのインスタンス名<span class="o">}</span>
 </code></pre></div>
 <ul>
 <li>IAM ロールをワーカーノードにアタッチします:</li>
