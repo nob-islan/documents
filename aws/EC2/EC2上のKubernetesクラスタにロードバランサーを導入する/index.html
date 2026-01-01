@@ -8844,11 +8844,11 @@ aws<span class="w"> </span>iam<span class="w"> </span>create-role<span class="w"
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># インスタンスプロファイルを作成</span>
 aws<span class="w"> </span>iam<span class="w"> </span>create-instance-profile<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile
+<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode
 
 <span class="c1"># インスタンスプロファイルにIAMロールをアタッチ</span>
 aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profile<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--instance-profile-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--role-name<span class="w"> </span>AWSCustomerRoleForEC2KubeWorkerNode
 </code></pre></div>
 <ul>
@@ -8862,7 +8862,7 @@ aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profi
 <li>IAM ロールをワーカーノードにアタッチします:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>aws<span class="w"> </span>ec2<span class="w"> </span>associate-iam-instance-profile<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--iam-instance-profile<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>AWSCustomerRoleForEC2KubeWorkerNode-Instance-Profile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--iam-instance-profile<span class="w"> </span><span class="nv">Name</span><span class="o">=</span>AWSCustomerRoleForEC2KubeWorkerNode<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--instance-id<span class="w"> </span><span class="o">{</span>ワーカーノードのインスタンスID<span class="o">}</span>
 </code></pre></div>
 <ul>
