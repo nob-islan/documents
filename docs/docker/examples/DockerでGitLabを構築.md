@@ -1,4 +1,4 @@
-# Docker で GitLab サーバを構築
+# Docker で GitLab を構築
 
 ## gitlab コンテナを構築
 

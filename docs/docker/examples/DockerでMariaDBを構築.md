@@ -1,4 +1,4 @@
-# Docker で MariaDB サーバを構築
+# Docker で MariaDB を構築
 
 ## 使用環境
 
