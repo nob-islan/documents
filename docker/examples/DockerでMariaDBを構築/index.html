@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/">
+        <link rel="prev" href="../Docker%E3%81%A7Java%E7%92%B0%E5%A2%83%E3%82%92%E6%A7%8B%E7%AF%89/">
       
       
-        <link rel="next" href="../Docker%E3%81%A7HAProxy%E3%82%92%E6%A7%8B%E7%AF%89/">
+        <link rel="next" href="../Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>Docker で GitLab サーバを構築 - Nob docs</title>
+        <title>Docker で MariaDB を構築 - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#docker-gitlab" class="md-skip">
+        <a href="#docker-mariadb" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Docker で GitLab サーバを構築
+              Docker で MariaDB を構築
             
           </span>
         </div>
@@ -1678,44 +1678,17 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Docker で GitLab サーバを構築
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Docker%E3%81%A7Garage%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Docker で GitLab サーバを構築
+    Docker で Garage を構築
   
 
     
@@ -1724,115 +1697,34 @@
   
 
       </a>
-      
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
+  
+    <li class="md-nav__item">
+      <a href="../Docker%E3%81%A7GitLab%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
     
   
+    Docker で GitLab を構築
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab コンテナを構築
-      
-    </span>
-  </a>
+
+    
+  </span>
   
-    <nav class="md-nav" aria-label="gitlab コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lets-encrypt-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Let's Encrypt を使って SSL 通信をできるようにする
-      
-    </span>
-  </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        自己証明書を使って SSL 通信をできるようにする
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab-runner コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab-runner コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gitlab-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitLab が 自己証明書で SSL 通信をしている場合
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runner トラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.yml サンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -1898,17 +1790,44 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7MariaDB%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker で MariaDB を構築
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Docker で MariaDB サーバを構築
+    Docker で MariaDB を構築
   
 
     
@@ -1917,6 +1836,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用環境
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定ファイル
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定ファイル">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-composeyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        docker-compose.yaml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_dbsql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_db.sql
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -8854,22 +8854,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gitlab" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        gitlab コンテナを構築
+        使用環境
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="gitlab コンテナを構築">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定ファイル
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定ファイル">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lets-encrypt-ssl" class="md-nav__link">
+  <a href="#docker-composeyaml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Let's Encrypt を使って SSL 通信をできるようにする
+        docker-compose.yaml
       
     </span>
   </a>
@@ -8877,10 +8899,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ssl" class="md-nav__link">
+  <a href="#create_dbsql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        自己証明書を使って SSL 通信をできるようにする
+        create_db.sql
       
     </span>
   </a>
@@ -8889,56 +8911,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gitlab-runner コンテナを構築
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="gitlab-runner コンテナを構築">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gitlab-ssl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitLab が 自己証明書で SSL 通信をしている場合
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runner トラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.yml サンプル
-      
-    </span>
-  </a>
   
 </li>
       
@@ -8959,120 +8931,73 @@
 
 
 
-<h1 id="docker-gitlab">Docker で GitLab サーバを構築</h1>
-<h2 id="gitlab">gitlab コンテナを構築</h2>
-<p>事前に<code>ip a</code>コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yaml を作成します。</p>
+<h1 id="docker-mariadb">Docker で MariaDB を構築</h1>
+<h2 id="_1">使用環境</h2>
+<ul>
+<li>DB: MariaDB</li>
+</ul>
+<h2 id="_2">ディレクトリ構成</h2>
+<div class="highlight"><pre><span></span><code>root
+<span class="w">  </span>├─volumes
+<span class="w">  </span>│<span class="w">   </span>├─csv
+<span class="w">  </span>│<span class="w">   </span>│<span class="w">   </span>└─sample-data.csv
+<span class="w">  </span>│<span class="w">   </span>└─initdb.d
+<span class="w">  </span>│<span class="w">       </span>└─01_create_db.sql
+<span class="w">  </span>└─docker-compose.yaml
+</code></pre></div>
+<p>コンテナ起動時に、<code>initdb.d</code>配下の sql ファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。</p>
+<h2 id="_3">設定ファイル</h2>
+<h3 id="docker-composeyaml">docker-compose.yaml</h3>
+<p>DB サーバおよび GUI で DB を管理できる<code>adminer</code>を起動します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ce:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;http://${IP_address}:80&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
+<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-mariadb</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
-</code></pre></div>
-<p><code>docker-compose up -d</code>でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502 であれば根気良く待ってください。しばらく待って<code>http://${IP_address}:80</code>にアクセスすると gitlab の画面が表示されます。<br />
-root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。</p>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nob-gitlab<span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;Password:&#39;</span><span class="w"> </span>/etc/gitlab/initial_root_password
-</code></pre></div>
-<h3 id="lets-encrypt-ssl">Let's Encrypt を使って SSL 通信をできるようにする</h3>
-<p><code>external_url</code>を HTTPS プロトコルで設定すると Let’s Encrypt で SSL 通信ができるようにしてくれます。cf. <a href="https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration">https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration</a></p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/csv:/csv</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;https://nob-gitlab.ddo.jp&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
+<span class="w">      </span><span class="c1"># - MYSQL_ALLOW_EMPTY_PASSWORD=true # 空パスワードを許容する</span>
+<span class="w">  </span><span class="nt">adminer</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-adminer</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">adminer</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081:8080</span>
 </code></pre></div>
-<h3 id="ssl">自己証明書を使って SSL 通信をできるようにする</h3>
-<p>下記でコンテナを起動すると<code>https://${設定したドメイン}</code>で GitLab にアクセスできます:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">external_url &quot;https://gitlab.example.nob&quot;</span>
-<span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
-<span class="w">        </span><span class="no">nginx[&#39;redirect_http_to_https&#39;] = true</span>
-<span class="w">        </span><span class="no">letsencrypt[&#39;enable&#39;] = false</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;443:443&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/config:/etc/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
-<span class="w">      </span><span class="c1"># 証明書をコンテナに配置</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./volumes/ssl:/etc/gitlab/ssl&quot;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>$ ls -l volumes/ssl/
-total 12
--rw-r--r-- 1 root root 1123 Apr 27 12:25 gitlab.example.nob.crt
--rw-r--r-- 1 root root  956 Apr 27 12:25 gitlab.example.nob.csr
--rw------- 1 root root 1704 Apr 27 12:25 gitlab.example.nob.key
-</code></pre></div>
-<h2 id="gitlab-runner">gitlab-runner コンテナを構築</h2>
-<p>gitlab-runner は下記で起動できます:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">gitlab-runner</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-runner:latest</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-gitlab-runner</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner&quot;</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
-</code></pre></div>
-<p><code>docker-compose up -d</code>を実行してコンテナを作成。起動後、GitLab GUI 上の "Create project runner" から作成したコマンドから、対話形式で runner を構築できます。</p>
-<h3 id="gitlab-ssl">GitLab が 自己証明書で SSL 通信をしている場合</h3>
-<p>runner コンテナの中に、GitLab 本体が使っている証明書<code>{ドメイン名}.crt</code>として配置する必要があります。例として、<code>docker-compose.yaml</code>に下記を追加してください:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt&quot;</span>
-</code></pre></div>
-<h2 id="runner">Runner トラブルシュート</h2>
-<p>GitLab にドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の<code>/srv/gitlab/gitlab-runner/config/config.toml</code>に下記を追加します。</p>
-<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
-<div class="highlight"><pre><span></span><code>  [runners.docker]
-  ...
-    extra_hosts = [&quot;${ドメイン名}:${GitLabのIPアドレス}&quot;]
-</code></pre></div>
-<h2 id="gitlab-ciyml">.gitlab-ci.yml サンプル</h2>
-<div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<h3 id="create_dbsql">create_db.sql</h3>
+<p>テーブル作成、初期データ投入などを行う SQL ファイルです。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- データベース作成</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
 
-<span class="nt">job_build</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Building the project&quot;</span>
+<span class="c1">-- テーブル作成</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">nob_table</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">code_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">);</span>
 
-<span class="nt">job_test1</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the first test&quot;</span>
-
-<span class="nt">job_test2</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the second test&quot;</span>
+<span class="c1">-- 初期データ投入</span>
+<span class="k">LOAD</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="k">LOCAL</span><span class="w"> </span><span class="n">INFILE</span><span class="w"> </span><span class="s1">&#39;/csv/sample-data.csv&#39;</span><span class="w"> </span><span class="c1">-- コンテナ上のCSVファイル</span>
+<span class="w">    </span><span class="k">INTO</span><span class="w"> </span><span class="k">TABLE</span>
+<span class="w">        </span><span class="n">nob_table</span><span class="w"> </span><span class="c1">-- テーブル名</span>
+<span class="w">    </span><span class="n">FIELDS</span>
+<span class="w">        </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="c1">-- フィールドの区切り文字</span>
+<span class="w">        </span><span class="c1">-- ENCLOSED BY &#39;&quot;&#39; -- 各カラムの囲い文字</span>
+<span class="w">    </span><span class="n">LINES</span>
+<span class="w">        </span><span class="n">TERMINATED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="c1">-- ラインの区切り文字</span>
+<span class="w">    </span><span class="k">IGNORE</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">ROWS</span><span class="w"> </span><span class="c1">-- 最初の1行目を無視する</span>
+<span class="w">        </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">code_name</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">);</span><span class="w"> </span><span class="c1">-- DBのどのカラムに相当するかを明記</span>
 </code></pre></div>
+<p>サンプルデータは下記で作成しています。</p>
+<div class="highlight"><pre><span></span><code>id,code_name,age
+1,first-nob,13
+2,second-nob,5
+</code></pre></div>
+<p>コンテナ起動後、コンテナ内から<code>mariadb -u root -p</code>で DB にログインできます。</p>
 
 
 
