@@ -32,7 +32,7 @@ mc alias list
 
 ```shell
 # アクセスキー、シークレットキーは画面から発行できます
-mc alias set {エイリアス名} http://sample.com:9000 {アクセスキー} {シークレットキー}
+mc alias set {エイリアス名} http://example.nob:9000 {アクセスキー} {シークレットキー}
 ```
 
 - バケットのオブジェクト一覧
