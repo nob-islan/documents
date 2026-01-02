@@ -1,4 +1,4 @@
-# MinIO ストレージ暗号化検証
+# MinIO オブジェクトストレージを暗号化する
 
 cf. https://min.io/docs/minio/linux/administration/server-side-encryption/server-side-encryption-sse-kms.html#minio-encryption-sse-kms-quickstart  
 KMS プロバイダとして HashiCorp Vault キーストアを選択します。
