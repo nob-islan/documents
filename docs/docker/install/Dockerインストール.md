@@ -1,111 +1,31 @@
 # Docker インストール
 
-docker および docker-compose をインストールします。
+Docker をインストールします。
 
-## 自動化したもの
+cf. https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 ```shell
-# パッケージインストール
+# Add Docker's official GPG key:
 sudo apt update
-sudo apt -y install ca-certificates curl gnupg lsb-release
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# GPG 鍵の入手
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
-# リポジトリの登録
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Install the Docker packages
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-# Docker Engineインストール
-sudo apt -y update
-sudo apt -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-# ユーザを docker グループに追加
+# Add the currenct user to the docker group
 sudo usermod -aG docker $USER
-
-# 再起動
 sudo reboot
 ```
-
-## 事前準備
-
-### vim のインストール
-
-docker-compse.yaml を編集する際に使います。
-
-vim のインストール
-
-```shell
-sudo apt-get install vim
-```
-
-.vimrc ファイルの作成
-
-```shell
-vi ~/.vimrc
-```
-
-ファイル内に`set nocompatible`と記入します。
-
-## Docker のインストール
-
-cf. https://docs.docker.com/engine/install/ubuntu/
-
-- 必要なパッケージをインストールします:
-
-```shell
-sudo apt-get update
-```
-
-```shell
- sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-```
-
-- GPG 鍵を入手します:
-
-```shell
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-```
-
-- リポジトリを登録します:
-
-```shell
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-- Docker Engine をインストールします:
-
-```shell
-sudo apt-get update
-```
-
-```shell
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-```
-
-- インストールが成功していることを確認します:
-
-```shell
-sudo docker --version
-```
-
-- docker が起動していることを確認します:
-
-```shell
-systemctl status docker
-```
-
-`active(running)`になっていれば OK です。
-
-- ユーザを docker グループに追加します:
-
-```shell
-sudo usermod -aG docker $USER
-```
-
-グループが存在しない場合は`sudo groupadd docker`で作成します。マシンの再起動後、必要であれば`sudo systemctl restart docker`で docker を再起動します。
