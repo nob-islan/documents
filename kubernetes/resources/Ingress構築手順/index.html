@@ -9010,7 +9010,6 @@
 <span class="nt">metadata</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample-service</span>
 <span class="nt">spec</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NodePort</span>
 <span class="w">  </span><span class="nt">selector</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sample</span>
 <span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
@@ -9042,15 +9041,17 @@
 <ul>
 <li>Ingress が待ち受けているポートを確認します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>ingress-nginx-controller<span class="w"> </span>-n<span class="w"> </span>ingress-nginx
+<div class="highlight"><pre><span></span><code>$ kubectl get svc ingress-nginx-controller -n ingress-nginx
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller   LoadBalancer   10.105.79.217   &lt;pending&gt;     80:31522/TCP,443:30602/TCP   4m13s
 </code></pre></div>
 <ul>
 <li>curl で疎通確認をとります:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>$ curl localhost:31600/api/v1/greet
+<div class="highlight"><pre><span></span><code>$ curl localhost:31522/api/v1/greet
 Hello, World!
 
-$ curl localhost:31600/api/v1/bye
+$ curl localhost:31522/api/v1/bye
 GoodBye, World!
 </code></pre></div>
 <ul>
@@ -9058,7 +9059,7 @@ GoodBye, World!
 </ul>
 <div class="highlight"><pre><span></span><code>$ kubectl get svc ingress-nginx-controller -n ingress-nginx
 NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-ingress-nginx-controller   LoadBalancer   10.99.201.197   192.168.151.61   80:31600/TCP,443:31480/TCP   7m39s
+ingress-nginx-controller   LoadBalancer   10.105.79.217   192.168.151.61   80:31522/TCP,443:30602/TCP   8m46s
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>% curl 192.168.151.61/api/v1/greet
 Hello, World!
