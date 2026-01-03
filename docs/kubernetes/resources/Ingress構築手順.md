@@ -50,7 +50,6 @@ apiVersion: v1
 metadata:
   name: sample-service
 spec:
-  type: NodePort
   selector:
     app: sample
   ports:
@@ -83,17 +82,19 @@ spec:
 
 - Ingress が待ち受けているポートを確認します:
 
-```shell
-kubectl get svc ingress-nginx-controller -n ingress-nginx
+```
+$ kubectl get svc ingress-nginx-controller -n ingress-nginx
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller   LoadBalancer   10.105.79.217   <pending>     80:31522/TCP,443:30602/TCP   4m13s
 ```
 
 - curl で疎通確認をとります:
 
 ```
-$ curl localhost:31600/api/v1/greet
+$ curl localhost:31522/api/v1/greet
 Hello, World!
 
-$ curl localhost:31600/api/v1/bye
+$ curl localhost:31522/api/v1/bye
 GoodBye, World!
 ```
 
@@ -102,7 +103,7 @@ GoodBye, World!
 ```
 $ kubectl get svc ingress-nginx-controller -n ingress-nginx
 NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-ingress-nginx-controller   LoadBalancer   10.99.201.197   192.168.151.61   80:31600/TCP,443:31480/TCP   7m39s
+ingress-nginx-controller   LoadBalancer   10.105.79.217   192.168.151.61   80:31522/TCP,443:30602/TCP   8m46s
 ```
 
 ```
