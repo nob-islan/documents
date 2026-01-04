@@ -18,7 +18,7 @@ npx create-react-app easyweb --template typescript
 
 ```shell
 cd easyweb
-npm install redux react-redux redux-thunk react-router-dom axios
+npm install redux react-redux react-router-dom
 ```
 
 ### scss
