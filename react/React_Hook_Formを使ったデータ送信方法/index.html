@@ -8278,10 +8278,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#storets" class="md-nav__link">
+  <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        store.ts
+        app/store.ts
       
     </span>
   </a>
@@ -8289,10 +8289,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#logintsx" class="md-nav__link">
+  <a href="#featuresloginlogintsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Login.tsx
+        features/login/Login.tsx
       
     </span>
   </a>
@@ -8300,10 +8300,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#loginactionts" class="md-nav__link">
+  <a href="#featuresloginloginactionts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        loginAction.ts
+        features/login/loginAction.ts
       
     </span>
   </a>
@@ -8311,10 +8311,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#loginapits" class="md-nav__link">
+  <a href="#featuresloginloginapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        loginApi.ts
+        features/login/loginApi.ts
       
     </span>
   </a>
@@ -8942,10 +8942,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#storets" class="md-nav__link">
+  <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        store.ts
+        app/store.ts
       
     </span>
   </a>
@@ -8953,10 +8953,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#logintsx" class="md-nav__link">
+  <a href="#featuresloginlogintsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Login.tsx
+        features/login/Login.tsx
       
     </span>
   </a>
@@ -8964,10 +8964,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#loginactionts" class="md-nav__link">
+  <a href="#featuresloginloginactionts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        loginAction.ts
+        features/login/loginAction.ts
       
     </span>
   </a>
@@ -8975,10 +8975,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#loginapits" class="md-nav__link">
+  <a href="#featuresloginloginapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        loginApi.ts
+        features/login/loginApi.ts
       
     </span>
   </a>
@@ -9010,10 +9010,10 @@
 <h1 id="react-hook-form">React Hook Form を使ったデータ送信方法</h1>
 <p>React Hook Form を使って、画面上に入力した値を API に送信する方法を記載します。サンプルとして、簡単なログイン画面を実装します。</p>
 <h2 id="_1">ライブラリのインストール</h2>
-<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>react-hook-form
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>react-hook-form<span class="w"> </span>redux-thunk<span class="w"> </span>axios
 </code></pre></div>
 <h2 id="_2">実装</h2>
-<h3 id="storets">store.ts</h3>
+<h3 id="appstorets">app/store.ts</h3>
 <p>ミドルウェア利用向けに store.ts を下記で作成します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">applyMiddleware</span><span class="p">,</span><span class="w"> </span><span class="nx">legacy_createStore</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./rootReducer&quot;</span><span class="p">;</span>
@@ -9028,7 +9028,7 @@
 <span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="logintsx">Login.tsx</h3>
+<h3 id="featuresloginlogintsx">features/login/Login.tsx</h3>
 <p><code>LoginFormData</code>を定義し、入力された認証向けのデータをセットします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-hook-form&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
@@ -9083,7 +9083,7 @@
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Login</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="loginactionts">loginAction.ts</h3>
+<h3 id="featuresloginloginactionts">features/login/loginAction.ts</h3>
 <p>後述の API 呼び出し関数をコールします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginFormData</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Login&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">callApi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./loginApi&quot;</span><span class="p">;</span>
@@ -9100,7 +9100,7 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
-<h3 id="loginapits">loginApi.ts</h3>
+<h3 id="featuresloginloginapits">features/login/loginApi.ts</h3>
 <p>ログイン API を呼び出します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;axios&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginFormData</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Login&quot;</span><span class="p">;</span>
