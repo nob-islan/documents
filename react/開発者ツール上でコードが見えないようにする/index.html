@@ -8822,7 +8822,7 @@
 <h1 id="_1">開発者ツール上でコードが見えないようにする</h1>
 <p>ビルド後に実行した React アプリについて開発者ツール上でコードを読めなくするには、<code>package.json</code> について、下記のように変更します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>  &quot;scripts&quot;: {
-<span class="gd">-    &quot;build&quot;: &quot;GENERATE_SOURCEMAP=false react-scripts build&quot;,</span>
+<span class="gd">-    &quot;build&quot;: &quot;react-scripts build&quot;,</span>
 <span class="gi">+    &quot;build&quot;: &quot;GENERATE_SOURCEMAP=false react-scripts build&quot;,</span>
 <span class="w"> </span>  },
 </code></pre></div>
