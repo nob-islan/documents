@@ -13,6 +13,12 @@ global
   group haproxy
   chroot /var/empty
 
+defaults
+  mode http
+  timeout connect 5s
+  timeout client  30s
+  timeout server  30s
+
 frontend website
   bind :80
 
