@@ -1,0 +1,30 @@
+# HAProxy でパスベースのルーティングを設定する
+
+cf. https://www.haproxy.com/blog/path-based-routing-with-haproxy
+
+`/api` 配下を API サーバに、それ以外を Web サーバにルーティングするサンプルです:
+
+```cfg
+global
+  maxconn 60000
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 notice
+  user  haproxy
+  group haproxy
+  chroot /var/empty
+
+frontend website
+  bind :80
+
+  acl is_api path_beg /api # API側にルーティングするパス
+  acl is_web path_beg /    # Web側にルーティングするパス
+
+  use_backend api if is_api
+  use_backend web if is_web
+
+backend api
+  server a1 {APIサーバのIP}:8080 check
+
+backend web
+  server w1 {WebサーバのIP}:3000 check
+```
