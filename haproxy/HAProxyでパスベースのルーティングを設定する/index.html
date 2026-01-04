@@ -8802,6 +8802,12 @@
 <span class="w">  </span><span class="na">group haproxy</span>
 <span class="w">  </span><span class="na">chroot /var/empty</span>
 
+<span class="na">defaults</span>
+<span class="w">  </span><span class="na">mode http</span>
+<span class="w">  </span><span class="na">timeout connect 5s</span>
+<span class="w">  </span><span class="na">timeout client  30s</span>
+<span class="w">  </span><span class="na">timeout server  30s</span>
+
 <span class="na">frontend website</span>
 <span class="w">  </span><span class="na">bind</span><span class="w"> </span><span class="o">:</span><span class="s">80</span>
 
