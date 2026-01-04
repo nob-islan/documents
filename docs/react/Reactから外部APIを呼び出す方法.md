@@ -2,6 +2,12 @@
 
 axios を使って外部 API を呼び出す方法を記載します。サンプルとして、API から受け取った message を state に保持する実装をします。
 
+## 依存関係追加
+
+```shell
+npm install redux-thunk axios
+```
+
 ## ディレクトリ構成
 
 ```shell
