@@ -8286,7 +8286,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ディレクトリ構成
+        依存関係追加
       
     </span>
   </a>
@@ -8295,6 +8295,17 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         サンプルコード
@@ -8944,7 +8955,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ディレクトリ構成
+        依存関係追加
       
     </span>
   </a>
@@ -8953,6 +8964,17 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         サンプルコード
@@ -9053,7 +9075,10 @@
 
 <h1 id="react-api">React から外部 API を呼び出す方法</h1>
 <p>axios を使って外部 API を呼び出す方法を記載します。サンプルとして、API から受け取った message を state に保持する実装をします。</p>
-<h2 id="_1">ディレクトリ構成</h2>
+<h2 id="_1">依存関係追加</h2>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>redux-thunk<span class="w"> </span>axios
+</code></pre></div>
+<h2 id="_2">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>app
 │<span class="w">   </span>├──<span class="w"> </span>rootReducer.ts
@@ -9067,7 +9092,7 @@
 <span class="w">        </span>├──<span class="w"> </span>messageState.ts
 <span class="w">        </span>└──<span class="w"> </span>Message.tsx
 </code></pre></div>
-<h2 id="_2">サンプルコード</h2>
+<h2 id="_3">サンプルコード</h2>
 <p>API 呼び出しに関係のあるクラスのみ記載します。</p>
 <h3 id="appstorets">app/store.ts</h3>
 <p>thunk ミドルウェアを利用するため、<code>createStore</code>を下記で宣言します。</p>
