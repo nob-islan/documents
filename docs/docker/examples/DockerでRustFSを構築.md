@@ -33,3 +33,5 @@ services:
 ```shell
 docker compose --profile observability up -d
 ```
+
+http://{rustFS サーバの IP}:9001 でログイン画面にアクセスできます。`rustfsadmin / rustfsadmin` でログインできます。
