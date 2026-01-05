@@ -1849,6 +1849,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../Docker%E3%81%A7OpenVSCode_Server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker で OpenVSCode Server を構築
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Docker%E3%81%A7Portainer%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
@@ -1950,7 +1978,7 @@
   <span class="md-ellipsis">
     
   
-    Docker で harbor を構築
+    Docker で Harbor を構築
   
 
     
@@ -1978,35 +2006,7 @@
   <span class="md-ellipsis">
     
   
-    Docker で mattermost を構築
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Docker%E3%81%A7openvscode-server%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Docker で openvscode-server を構築
+    Docker で Mattermost を構築
   
 
     
@@ -8826,12 +8826,12 @@
 <ul>
 <li>マウント用ディレクトリを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="c1"># Create data and logs directories</span>
-<span class="w"> </span>mkdir<span class="w"> </span>volumes<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>volumes
-<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>data<span class="w"> </span>logs
+<div class="highlight"><pre><span></span><code><span class="c1"># Create data and logs directories</span>
+mkdir<span class="w"> </span>volumes<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>volumes
+mkdir<span class="w"> </span>-p<span class="w"> </span>data<span class="w"> </span>logs
 
-<span class="w"> </span><span class="c1"># Change the owner of these directories</span>
-<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="m">10001</span>:10001<span class="w"> </span>data<span class="w"> </span>logs
+<span class="c1"># Change the owner of these directories</span>
+sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="m">10001</span>:10001<span class="w"> </span>data<span class="w"> </span>logs
 </code></pre></div>
 <ul>
 <li>下記で docker-compose を作成します:</li>
