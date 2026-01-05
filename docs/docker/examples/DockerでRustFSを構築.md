@@ -10,7 +10,7 @@ mkdir volumes && cd volumes
 mkdir -p data logs
 
 # Change the owner of these directories
-sudo chown -R 10001:10001 data logs
+sudo chown -R 10001:10001 volumes
 ```
 
 - 下記で docker-compose を作成します:
