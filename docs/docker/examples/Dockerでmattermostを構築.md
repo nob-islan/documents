@@ -1,4 +1,4 @@
-# Docker で mattermost を構築
+# Docker で Mattermost を構築
 
 cf. https://docs.mattermost.com/install/install-docker.html
 

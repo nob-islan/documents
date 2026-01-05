@@ -1,4 +1,4 @@
-# Docker で openvscode-server を構築
+# Docker で OpenVSCode Server を構築
 
 ## 構築
 

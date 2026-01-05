@@ -5,12 +5,12 @@ cf. https://github.com/rustfs/rustfs/blob/main/README.md
 - マウント用ディレクトリを作成します:
 
 ```shell
- # Create data and logs directories
- mkdir volumes && cd volumes
- mkdir -p data logs
+# Create data and logs directories
+mkdir volumes && cd volumes
+mkdir -p data logs
 
- # Change the owner of these directories
- chown -R 10001:10001 data logs
+# Change the owner of these directories
+sudo chown -R 10001:10001 data logs
 ```
 
 - 下記で docker-compose を作成します:
