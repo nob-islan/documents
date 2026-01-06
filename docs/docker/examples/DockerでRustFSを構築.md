@@ -6,8 +6,7 @@ cf. https://github.com/rustfs/rustfs/blob/main/README.md
 
 ```shell
 # Create data and logs directories
-mkdir volumes && cd volumes
-mkdir -p data logs
+mkdir -p volumes/data volumes/logs
 
 # Change the owner of these directories
 sudo chown -R 10001:10001 volumes
