@@ -18,10 +18,10 @@ sudo apt update && sudo apt install vault
 
 cf. https://developer.hashicorp.com/vault/tutorials/get-started/setup
 
-- `/tmp/vault-server.hcl` を作成します:
+- `./vault-server.hcl` を作成します:
 
 ```hcl
-cat > /tmp/vault-server.hcl << EOF
+cat > ./vault-server.hcl << EOF
 api_addr      = "http://{VaultサーバのIP}:8200"
 cluster_addr  = "http://{VaultサーバのIP}:8201"
 cluster_name  = "learn-vault-cluster"
@@ -34,7 +34,7 @@ listener "tcp" {
 }
 
 backend "raft" {
-  path    = "/tmp/vault-data"
+  path    = "./vault-data"
   node_id = "learn-vault-server"
 }
 EOF
@@ -43,13 +43,13 @@ EOF
 - データ保管用ディレクトリを作成します:
 
 ```shell
-mkdir /tmp/vault-data
+mkdir ./vault-data
 ```
 
 - Vault を開始します:
 
 ```shell
-vault server -config=/tmp/vault-server.hcl > /tmp/vault.log 2>&1 &
+vault server -config=./vault-server.hcl > ./vault.log 2>&1 &
 ```
 
 - `vault` コマンドを実行するための環境変数を設定します:
