@@ -19,7 +19,7 @@ cf.
 
 ```shell
 # cf. https://developer.hashicorp.com/vault/docs/commands/policy
-cat << EOF >> /tmp/rustfs-policy.hcl
+cat << EOF >> ./rustfs-policy.hcl
 path "secret/*" {
   capabilities = ["create", "read", "update", "patch", "delete", "list", "recover"]
 }
@@ -29,7 +29,7 @@ path "transits/rustfs-master/" {
 }
 EOF
 
-vault policy write rustfs-policy /tmp/rustfs-policy.hcl
+vault policy write rustfs-policy ./rustfs-policy.hcl
 ```
 
 - RustFS 向けのトークンを作成します。
