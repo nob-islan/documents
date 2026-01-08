@@ -9091,9 +9091,9 @@ sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </
 <h3 id="unseal">Unseal</h3>
 <p>cf. <a href="https://developer.hashicorp.com/vault/tutorials/get-started/setup">https://developer.hashicorp.com/vault/tutorials/get-started/setup</a></p>
 <ul>
-<li><code>/tmp/vault-server.hcl</code> を作成します:</li>
+<li><code>./vault-server.hcl</code> を作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">cat</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="err">/tmp/</span><span class="nv">vault-server.hcl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="dl">EOF</span>
+<div class="highlight"><pre><span></span><code><span class="err">cat</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="p">.</span><span class="err">/</span><span class="nv">vault-server.hcl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="dl">EOF</span>
 <span class="sh">api_addr      = &quot;http://{VaultサーバのIP}:8200&quot;</span>
 <span class="sh">cluster_addr  = &quot;http://{VaultサーバのIP}:8201&quot;</span>
 <span class="sh">cluster_name  = &quot;learn-vault-cluster&quot;</span>
@@ -9106,7 +9106,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </
 <span class="sh">}</span>
 
 <span class="sh">backend &quot;raft&quot; {</span>
-<span class="sh">  path    = &quot;/tmp/vault-data&quot;</span>
+<span class="sh">  path    = &quot;./vault-data&quot;</span>
 <span class="sh">  node_id = &quot;learn-vault-server&quot;</span>
 <span class="sh">}</span>
 <span class="dl">EOF</span>
@@ -9114,12 +9114,12 @@ sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </
 <ul>
 <li>データ保管用ディレクトリを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>/tmp/vault-data
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>./vault-data
 </code></pre></div>
 <ul>
 <li>Vault を開始します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code>vault<span class="w"> </span>server<span class="w"> </span>-config<span class="o">=</span>/tmp/vault-server.hcl<span class="w"> </span>&gt;<span class="w"> </span>/tmp/vault.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
+<div class="highlight"><pre><span></span><code>vault<span class="w"> </span>server<span class="w"> </span>-config<span class="o">=</span>./vault-server.hcl<span class="w"> </span>&gt;<span class="w"> </span>./vault.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span>
 </code></pre></div>
 <ul>
 <li><code>vault</code> コマンドを実行するための環境変数を設定します:</li>
