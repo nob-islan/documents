@@ -19,7 +19,7 @@
 
 <div class="grid cards" markdown>
 
-- **[Docker インストール](./docker/install/Dockerインストール.md)**
+- **[Docker インストール](./docker/Dockerインストール.md)**
   <br> Docker のインストール手順です。スクリプトによって自動化しています。
 
 </div>
