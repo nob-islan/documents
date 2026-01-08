@@ -9128,7 +9128,7 @@
 <li>RustFS 向けのポリシーを作成します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># cf. https://developer.hashicorp.com/vault/docs/commands/policy</span>
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; /tmp/rustfs-policy.hcl</span>
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; ./rustfs-policy.hcl</span>
 <span class="s">path &quot;secret/*&quot; {</span>
 <span class="s">  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;patch&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;recover&quot;]</span>
 <span class="s">}</span>
@@ -9138,7 +9138,7 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; /tmp/rustfs-pol
 <span class="s">}</span>
 <span class="s">EOF</span>
 
-vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>rustfs-policy<span class="w"> </span>/tmp/rustfs-policy.hcl
+vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>rustfs-policy<span class="w"> </span>./rustfs-policy.hcl
 </code></pre></div>
 <ul>
 <li>RustFS 向けのトークンを作成します。</li>
