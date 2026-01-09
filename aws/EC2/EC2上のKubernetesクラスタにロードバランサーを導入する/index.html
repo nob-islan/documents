@@ -669,6 +669,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#aws-load-balancer-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AWS Load Balancer Controller のデプロイ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        動作確認
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9059,6 +9081,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#aws-load-balancer-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AWS Load Balancer Controller のデプロイ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        動作確認
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9174,6 +9218,7 @@ aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profi
 </ul>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>patch<span class="w"> </span>node<span class="w"> </span>kube-w01<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;:{&quot;providerID&quot;:&quot;aws:///{リージョン}/{ワーカーノードのインスタンスID}&quot;}}&#39;</span>
 </code></pre></div>
+<h3 id="aws-load-balancer-controller">AWS Load Balancer Controller のデプロイ</h3>
 <ul>
 <li><code>eks</code> リポジトリを追加します:</li>
 </ul>
@@ -9184,6 +9229,7 @@ aws<span class="w"> </span>iam<span class="w"> </span>add-role-to-instance-profi
 </ul>
 <div class="highlight"><pre><span></span><code>helm<span class="w"> </span>install<span class="w"> </span>aws-load-balancer-controller<span class="w"> </span>eks/aws-load-balancer-controller<span class="w"> </span>-n<span class="w"> </span>kube-system<span class="w"> </span>--set<span class="w"> </span><span class="nv">clusterName</span><span class="o">=</span>nob-cluster
 </code></pre></div>
+<h3 id="_3">動作確認</h3>
 <ul>
 <li>ingress リソースを作成すると、ロードバランサーが自動で作成されます:</li>
 </ul>
