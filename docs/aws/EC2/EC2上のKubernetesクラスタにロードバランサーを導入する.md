@@ -104,6 +104,8 @@ aws ec2 associate-iam-instance-profile \
 kubectl patch node kube-w01 -p '{"spec":{"providerID":"aws:///{リージョン}/{ワーカーノードのインスタンスID}"}}'
 ```
 
+### AWS Load Balancer Controller のデプロイ
+
 - `eks` リポジトリを追加します:
 
 ```shell
@@ -115,6 +117,8 @@ helm repo add eks https://aws.github.io/eks-charts
 ```shell
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=nob-cluster
 ```
+
+### 動作確認
 
 - ingress リソースを作成すると、ロードバランサーが自動で作成されます:
 
