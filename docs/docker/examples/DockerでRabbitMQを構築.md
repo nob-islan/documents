@@ -17,3 +17,4 @@ services:
 
 - amqp プロトコルの疎通は 5672 ポートに対して行います。
 - Web 画面のアクセスは 15672 ポートに対して行います。
+- `rabbitmqctl`, `rabbitmqadmin` コマンドが使えます。
