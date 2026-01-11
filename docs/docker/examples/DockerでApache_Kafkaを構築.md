@@ -1,6 +1,9 @@
 # Docker で Apache Kafka を構築
 
-cf. https://kafka.apache.org/41/getting-started/quickstart/
+cf.
+
+- https://kafka.apache.org/41/getting-started/quickstart/
+- https://hub.docker.com/r/apache/kafka
 
 ```yaml
 services:
