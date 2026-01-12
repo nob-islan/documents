@@ -14,7 +14,7 @@ https://javaoperatorsdk.io/
   "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": 21,
+      "version": "none",
       "installMaven": "true"
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
