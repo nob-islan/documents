@@ -217,7 +217,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 			deploy.Spec.Template.Spec.Containers = containers
 		}
 
-		// nobを親とするようリファレンスを設定
+		// Nobを親とするようリファレンスを設定
 		if err := ctrl.SetControllerReference(&nob, deploy, r.Scheme); err != nil {
 			log.Error(err, "unable to set ownerReference from Nob to Deployment")
 			return err
