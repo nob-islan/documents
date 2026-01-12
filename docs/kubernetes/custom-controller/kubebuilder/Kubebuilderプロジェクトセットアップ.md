@@ -87,7 +87,6 @@ type NobReconciler struct {
 ```go
 // SetupWithManager sets up the controller with the Manager.
 func (r *NobReconciler) SetupWithManager(mgr ctrl.Manager) error {
-
 	// NobがDeploymentを監視するよう設定
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&nobcontrollerv1.Nob{}).
