@@ -9775,7 +9775,6 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// SetupWithManager sets up the controller with the Manager.</span>
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">    </span><span class="c1">// NobがDeploymentを監視するよう設定</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
 <span class="w">        </span><span class="nx">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">nobcontrollerv1</span><span class="p">.</span><span class="nx">Nob</span><span class="p">{}).</span>
