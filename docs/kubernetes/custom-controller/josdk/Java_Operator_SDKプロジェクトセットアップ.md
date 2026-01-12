@@ -411,7 +411,7 @@ public class App {
 
 ### NobReconcilerTest.java
 
-コントローラーのテストを記載します。
+コントローラーのテストを記載します。`mvn clean test` で CRD のマニフェストを自動生成しつつテストを実行します。
 
 ```java
 package nob.example;
@@ -490,7 +490,7 @@ mvn clean install
 - CRD のマニフェストを apply します。
 
 ```shell
-kubectl apply -f nob-controller/target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
+kubectl apply -f target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
 ```
 
 - カスタムリソースのマニフェスト `src/k8s/custom-resource.yml` を下記で作成して apply します。
@@ -506,7 +506,7 @@ spec:
 ```
 
 ```shell
-kubectl apply -f nob-controller/src/k8s/custom-resource.yml
+kubectl apply -f src/k8s/custom-resource.yml
 ```
 
 - Java プロセスとしてコントローラーを起動します。
