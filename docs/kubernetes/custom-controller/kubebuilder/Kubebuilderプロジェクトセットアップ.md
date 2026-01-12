@@ -180,7 +180,6 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 
 	// Deploymentを新規作成または更新
 	if _, err := ctrl.CreateOrUpdate(ctx, r.Client, deploy, func() error {
-
 		// nob.specからReplicasをセット
 		replicas := int32(1)
 		if nob.Spec.Replicas != nil {
