@@ -232,23 +232,23 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 	}
 
 	// Nobが管理するDeploymentを取得
-	var deployment appsv1.Deployment
+	var d appsv1.Deployment
 	var deploymentNamespacedName = client.ObjectKey{
 		Namespace: req.Namespace,
 		Name:      nob.Spec.DeploymentName,
 	}
-	if err := r.Get(ctx, deploymentNamespacedName, &deployment); err != nil {
+	if err := r.Get(ctx, deploymentNamespacedName, &d); err != nil {
 		log.Error(err, "unable to fetch Deployment")
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
 	// NobのStatusが最適化されていれば何もせずreturn
-	if nob.Status.AvailableReplicas == deployment.Status.AvailableReplicas {
+	if nob.Status.AvailableReplicas == d.Status.AvailableReplicas {
 		return ctrl.Result{}, nil
 	}
 
 	// NobのStatusを更新
-	nob.Status.AvailableReplicas = deployment.Status.AvailableReplicas
+	nob.Status.AvailableReplicas = d.Status.AvailableReplicas
 	if err := r.Status().Update(ctx, &nob); err != nil {
 		log.Error(err, "unable to update Nob status")
 		return ctrl.Result{}, err
