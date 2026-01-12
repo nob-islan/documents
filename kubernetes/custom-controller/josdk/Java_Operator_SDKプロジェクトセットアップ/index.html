@@ -10129,7 +10129,7 @@
 </code></pre></div>
 <h2 id="_4">単体テスト</h2>
 <h3 id="nobreconcilertestjava">NobReconcilerTest.java</h3>
-<p>コントローラーのテストを記載します。</p>
+<p>コントローラーのテストを記載します。<code>mvn clean test</code> で CRD のマニフェストを自動生成しつつテストを実行します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
@@ -10203,7 +10203,7 @@
 <ul>
 <li>CRD のマニフェストを apply します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nob-controller/target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
 </code></pre></div>
 <ul>
 <li>カスタムリソースのマニフェスト <code>src/k8s/custom-resource.yml</code> を下記で作成して apply します。</li>
@@ -10216,7 +10216,7 @@
 <span class="w">  </span><span class="nt">deploymentName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-deployment</span>
 <span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>nob-controller/src/k8s/custom-resource.yml
+<div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>src/k8s/custom-resource.yml
 </code></pre></div>
 <ul>
 <li>Java プロセスとしてコントローラーを起動します。</li>
