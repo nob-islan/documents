@@ -501,7 +501,7 @@ kind: Nob
 metadata:
   name: nob-sample
 spec:
-  deploymentName: nob-deployment
+  deploymentName: nob-nginx
   replicas: 3
 ```
 
