@@ -171,7 +171,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 
 	// Deploymentテンプレート作成
 	deploy := &appsv1.Deployment{
-		ObjectMeta: metav1.ObjectMeta{
+		ObjectMeta: metav1.ObjectMeta{ // import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 			Name:      nob.Spec.DeploymentName,
 			Namespace: req.Namespace,
 			Labels:    labels,
@@ -190,7 +190,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 
 		// spec.selectorにlabelsをセット
 		if deploy.Spec.Selector == nil {
-			deploy.Spec.Selector = &metav1.LabelSelector{MatchLabels: labels} // import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+			deploy.Spec.Selector = &metav1.LabelSelector{MatchLabels: labels}
 		}
 
 		// template.objectMetaにlabelsをセット
