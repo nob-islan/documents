@@ -221,8 +221,7 @@ import io.javaoperatorsdk.operator.processing.dependent.kubernetes.CRUDKubernete
 import io.javaoperatorsdk.operator.processing.dependent.kubernetes.KubernetesDependent;
 
 @KubernetesDependent
-public class DeploymentDependentResource
-        extends CRUDKubernetesDependentResource<Deployment, Nob> {
+public class DeploymentDependentResource extends CRUDKubernetesDependentResource<Deployment, Nob> {
 
     @Override
     protected Deployment desired(Nob primary,
@@ -296,8 +295,7 @@ public class NobReconciler implements Reconciler<Nob> {
         // 古いdeploymentを削除
         DeploymentList deploymentList = context.getClient().apps().deployments()
                 .inNamespace(nob.getMetadata().getNamespace())
-                .withLabels(Map.of("app", "nob-nginx", "controller", nob.getMetadata().getName()))
-                .list();
+                .withLabels(Map.of("app", "nob-nginx", "controller", nob.getMetadata().getName())).list();
         for (Deployment d : deploymentList.getItems()) {
             if (!d.getMetadata().getName().equals(nob.getSpec().getDeploymentName())) {
                 context.getClient().apps().deployments().inNamespace(d.getMetadata().getNamespace())
@@ -306,9 +304,8 @@ public class NobReconciler implements Reconciler<Nob> {
         }
 
         // Status更新向けに作成したDeploymentを取得
-        Deployment deployment = context.getClient().apps().deployments()
-                .inNamespace(nob.getMetadata().getNamespace()).withName(nob.getSpec().getDeploymentName())
-                .get();
+        Deployment deployment = context.getClient().apps().deployments().inNamespace(nob.getMetadata().getNamespace())
+                .withName(nob.getSpec().getDeploymentName()).get();
         if (deployment == null) {
             return UpdateControl.noUpdate();
         }
