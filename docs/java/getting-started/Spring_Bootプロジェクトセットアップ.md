@@ -75,13 +75,13 @@ INSERT INTO users (
 #### src/main/resources/application.properties
 
 ```shell
-#MariaDBのドライバ設定
+# MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
-#接続用URL
+# 接続用URL
 spring.datasource.url=jdbc:mariadb://localhost/eadb
-#ユーザ名
+# ユーザ名
 spring.datasource.username=root
-#パスワード
+# パスワード
 spring.datasource.password=password
 ```
 
