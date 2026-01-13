@@ -393,12 +393,6 @@ kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder
 make install
 ```
 
-- Go プロセスとしてコントローラを動かします。
-
-```shell
-make run
-```
-
 - config/samples 配下のカスタムリソースの spec を宣言します。
 
 ```yaml
@@ -414,8 +408,6 @@ spec:
   replicas: 3
 ```
 
-- カスタムリソースのマニフェストファイルを apply します。
-
 ```shell
 kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 ```
@@ -426,4 +418,10 @@ kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 $ kubectl get Nob
 NAME         AGE
 nob-sample   15s
+```
+
+- Go プロセスとしてコントローラを動かします。
+
+```shell
+make run
 ```
