@@ -519,7 +519,7 @@ mvn exec:java -Dexec.mainClass="nob.example.App"
 - コントローラーが正常に動作していれば、nginx の Pod が作成されます。
 
 ```
-$ kubectl get pods
+$ kubectl get pod
 NAME                         READY   STATUS    RESTARTS   AGE
 nob-nginx-57466cd967-2j56f   1/1     Running   0          6s
 nob-nginx-57466cd967-rz2rv   1/1     Running   0          6s
