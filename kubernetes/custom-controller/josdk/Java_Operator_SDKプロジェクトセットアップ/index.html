@@ -10219,16 +10219,16 @@
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>src/k8s/custom-resource.yml
 </code></pre></div>
 <ul>
-<li>Java プロセスとしてコントローラーを起動します。</li>
-</ul>
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>exec:java<span class="w"> </span>-Dexec.mainClass<span class="o">=</span><span class="s2">&quot;nob.example.App&quot;</span>
-</code></pre></div>
-<ul>
 <li>下記コマンドでカスタムリソースが動いていることを確認できます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>$ kubectl get Nob
 NAME         AGE
 nob-sample   17s
+</code></pre></div>
+<ul>
+<li>Java プロセスとしてコントローラーを起動します。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>exec:java<span class="w"> </span>-Dexec.mainClass<span class="o">=</span><span class="s2">&quot;nob.example.App&quot;</span>
 </code></pre></div>
 
 
