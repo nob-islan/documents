@@ -224,18 +224,17 @@ import io.javaoperatorsdk.operator.processing.dependent.kubernetes.KubernetesDep
 public class DeploymentDependentResource extends CRUDKubernetesDependentResource<Deployment, Nob> {
 
     @Override
-    protected Deployment desired(Nob primary,
-            Context<Nob> context) {
+    protected Deployment desired(Nob nob, Context<Nob> context) {
         return new DeploymentBuilder()
                 .withMetadata(new ObjectMetaBuilder()
-                        .withName(primary.getSpec().getDeploymentName())
-                        .withNamespace(primary.getMetadata().getNamespace())
-                        .withLabels(Map.of("app", "nob-nginx", "controller", primary.getMetadata().getName()))
+                        .withName(nob.getSpec().getDeploymentName())
+                        .withNamespace(nob.getMetadata().getNamespace())
+                        .withLabels(Map.of("app", "nob-nginx", "controller", nob.getMetadata().getName()))
                         .withOwnerReferences(new OwnerReferenceBuilder()
-                                .withApiVersion(primary.getApiVersion())
-                                .withKind(primary.getKind())
-                                .withName(primary.getMetadata().getName())
-                                .withUid(primary.getMetadata().getUid())
+                                .withApiVersion(nob.getApiVersion())
+                                .withKind(nob.getKind())
+                                .withName(nob.getMetadata().getName())
+                                .withUid(nob.getMetadata().getUid())
                                 .withController()
                                 .withBlockOwnerDeletion()
                                 .build())
@@ -243,13 +242,13 @@ public class DeploymentDependentResource extends CRUDKubernetesDependentResource
                 .withSpec(new DeploymentSpecBuilder()
                         .withSelector(new LabelSelectorBuilder()
                                 .withMatchLabels(
-                                        Map.of("app", "nob-nginx", "controller", primary.getMetadata().getName()))
+                                        Map.of("app", "nob-nginx", "controller", nob.getMetadata().getName()))
                                 .build())
-                        .withReplicas(primary.getSpec().getReplicas())
+                        .withReplicas(nob.getSpec().getReplicas())
                         .withTemplate(new PodTemplateSpecBuilder()
                                 .withMetadata(new ObjectMetaBuilder()
                                         .withLabels(Map.of("app", "nob-nginx", "controller",
-                                                primary.getMetadata().getName()))
+                                                nob.getMetadata().getName()))
                                         .build())
                                 .withSpec(new PodSpecBuilder()
                                         .withContainers(new ContainerBuilder()
