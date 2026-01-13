@@ -10061,11 +10061,6 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>install
 </code></pre></div>
 <ul>
-<li>Go プロセスとしてコントローラを動かします。</li>
-</ul>
-<div class="highlight"><pre><span></span><code>make<span class="w"> </span>run
-</code></pre></div>
-<ul>
 <li>config/samples 配下のカスタムリソースの spec を宣言します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nobcontroller.example.nob/v1</span>
@@ -10079,9 +10074,6 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">  </span><span class="nt">deploymentName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-nginx</span>
 <span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 </code></pre></div>
-<ul>
-<li>カスタムリソースのマニフェストファイルを apply します。</li>
-</ul>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>config/samples/nobcontroller_v1_nob.yaml
 </code></pre></div>
 <ul>
@@ -10090,6 +10082,11 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>$ kubectl get Nob
 NAME         AGE
 nob-sample   15s
+</code></pre></div>
+<ul>
+<li>Go プロセスとしてコントローラを動かします。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>run
 </code></pre></div>
 
 
