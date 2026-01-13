@@ -291,17 +291,15 @@ import io.javaoperatorsdk.operator.api.reconciler.dependent.Dependent;
 public class NobReconciler implements Reconciler<Nob> {
 
     @Override
-    public UpdateControl<Nob> reconcile(Nob resource,
-            Context<Nob> context)
-            throws Exception {
+    public UpdateControl<Nob> reconcile(Nob nob, Context<Nob> context) throws Exception {
 
         // 古いdeploymentを削除
         DeploymentList deploymentList = context.getClient().apps().deployments()
-                .inNamespace(resource.getMetadata().getNamespace())
-                .withLabels(Map.of("app", "nob-nginx", "controller", resource.getMetadata().getName()))
+                .inNamespace(nob.getMetadata().getNamespace())
+                .withLabels(Map.of("app", "nob-nginx", "controller", nob.getMetadata().getName()))
                 .list();
         for (Deployment d : deploymentList.getItems()) {
-            if (!d.getMetadata().getName().equals(resource.getSpec().getDeploymentName())) {
+            if (!d.getMetadata().getName().equals(nob.getSpec().getDeploymentName())) {
                 context.getClient().apps().deployments().inNamespace(d.getMetadata().getNamespace())
                         .withName(d.getMetadata().getName()).delete();
             }
@@ -309,53 +307,53 @@ public class NobReconciler implements Reconciler<Nob> {
 
         // Status更新向けに作成したDeploymentを取得
         Deployment deployment = context.getClient().apps().deployments()
-                .inNamespace(resource.getMetadata().getNamespace()).withName(resource.getSpec().getDeploymentName())
+                .inNamespace(nob.getMetadata().getNamespace()).withName(nob.getSpec().getDeploymentName())
                 .get();
         if (deployment == null) {
             return UpdateControl.noUpdate();
         }
 
         // Statusがセットされていなければ作成
-        if (resource.getStatus() == null) {
+        if (nob.getStatus() == null) {
             NobStatus n = new NobStatus();
             n.setAvailableReplicas(0);
-            resource.setStatus(n);
+            nob.setStatus(n);
         }
 
         // ステータスが変わらなければ何もせず終了
         if (deployment.getStatus().getAvailableReplicas() == null) {
             return UpdateControl.noUpdate();
         }
-        if (deployment.getStatus().getAvailableReplicas().equals(resource.getStatus().getAvailableReplicas())) {
+        if (deployment.getStatus().getAvailableReplicas().equals(nob.getStatus().getAvailableReplicas())) {
             return UpdateControl.noUpdate();
         }
 
         // Status更新
-        resource.getStatus().setAvailableReplicas(deployment.getStatus().getAvailableReplicas());
+        nob.getStatus().setAvailableReplicas(deployment.getStatus().getAvailableReplicas());
 
         ObjectReference involvedObject = new ObjectReference();
-        involvedObject.setApiVersion(resource.getApiVersion());
-        involvedObject.setKind(resource.getKind());
-        involvedObject.setName(resource.getMetadata().getName());
-        involvedObject.setNamespace(resource.getMetadata().getNamespace());
-        involvedObject.setUid(resource.getMetadata().getUid());
+        involvedObject.setApiVersion(nob.getApiVersion());
+        involvedObject.setKind(nob.getKind());
+        involvedObject.setName(nob.getMetadata().getName());
+        involvedObject.setNamespace(nob.getMetadata().getNamespace());
+        involvedObject.setUid(nob.getMetadata().getUid());
         Event event = new EventBuilder()
                 .withMetadata(new ObjectMetaBuilder()
                         .withGenerateName("nobcustomresource-")
-                        .withNamespace(resource.getMetadata().getNamespace())
+                        .withNamespace(nob.getMetadata().getNamespace())
                         .build())
                 .withType("Normal")
                 .withReason("Updated")
-                .withMessage("Update status.availableReplicas: " + resource.getStatus().getAvailableReplicas())
+                .withMessage("Update status.availableReplicas: " + nob.getStatus().getAvailableReplicas())
                 .withInvolvedObject(involvedObject)
                 .withCount(1)
                 .withSource(new EventSourceBuilder()
-                        .withComponent(resource.getMetadata().getName())
+                        .withComponent(nob.getMetadata().getName())
                         .build())
                 .build();
-        context.getClient().v1().events().inNamespace(resource.getMetadata().getNamespace()).resource(event).create();
+        context.getClient().v1().events().inNamespace(nob.getMetadata().getNamespace()).resource(event).create();
 
-        return UpdateControl.patchStatus(resource);
+        return UpdateControl.patchStatus(nob);
     }
 }
 ```
@@ -467,14 +465,14 @@ public class NobReconcilerTest {
     }
 
     Nob testResource() {
-        Nob resource = new Nob();
-        resource.setMetadata(new ObjectMetaBuilder()
+        Nob nob = new Nob();
+        nob.setMetadata(new ObjectMetaBuilder()
                 .withName("test-resource")
                 .build());
-        resource.setSpec(new NobSpec());
-        resource.getSpec().setDeploymentName(DEPLOYMENT_NAME);
-        resource.getSpec().setReplicas(3);
-        return resource;
+        nob.setSpec(new NobSpec());
+        nob.getSpec().setDeploymentName(DEPLOYMENT_NAME);
+        nob.getSpec().setReplicas(3);
+        return nob;
     }
 }
 ```
