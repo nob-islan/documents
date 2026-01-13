@@ -509,16 +509,16 @@ spec:
 kubectl apply -f src/k8s/custom-resource.yml
 ```
 
-- Java プロセスとしてコントローラーを起動します。
-
-```shell
-mvn exec:java -Dexec.mainClass="nob.example.App"
-```
-
 - 下記コマンドでカスタムリソースが動いていることを確認できます。
 
 ```
 $ kubectl get Nob
 NAME         AGE
 nob-sample   17s
+```
+
+- Java プロセスとしてコントローラーを起動します。
+
+```shell
+mvn exec:java -Dexec.mainClass="nob.example.App"
 ```
