@@ -57,8 +57,8 @@ USE eadb;
 
 CREATE TABLE users (
     name VARCHAR(8) PRIMARY KEY
-    , password VARCHAR(32)
-    , age INT
+    , password VARCHAR(32) NOT NULL
+    , age INT NOT NULL
 );
 
 INSERT INTO users (
