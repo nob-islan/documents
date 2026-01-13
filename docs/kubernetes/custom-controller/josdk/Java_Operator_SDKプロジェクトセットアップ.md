@@ -193,8 +193,7 @@ import io.fabric8.kubernetes.model.annotation.Version;
 
 @Group("nob.example")
 @Version("v1")
-public class Nob extends CustomResource<NobSpec, NobStatus>
-        implements Namespaced {
+public class Nob extends CustomResource<NobSpec, NobStatus> implements Namespaced {
 }
 ```
 
