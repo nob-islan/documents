@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../CORS%E8%A8%AD%E5%AE%9A/">
+        <link rel="prev" href="../Spring_Batch%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/">
       
       
-        <link rel="next" href="../Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%AE%9F%E8%A3%85/">
+        <link rel="next" href="../../test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>HTTPS 通信する REST API を実装 - Nob docs</title>
+        <title>カスタム ItemReader, ItemWriter を作成 - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#https-rest-api" class="md-skip">
+        <a href="#itemreader-itemwriter" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              HTTPS 通信する REST API を実装
+              カスタム ItemReader, ItemWriter を作成
             
           </span>
         </div>
@@ -3271,20 +3271,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
         
           
           <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
@@ -3305,7 +3303,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3370,7 +3368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../database/Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../../go/database/Squirrel%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -3398,7 +3396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../database/gorm%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../../go/database/gorm%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -3426,7 +3424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../database/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../../go/database/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -3509,7 +3507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/godoc%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../go/documentation/godoc%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3537,7 +3535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documentation/swaggo%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../go/documentation/swaggo%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -3620,7 +3618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../echo/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../../go/echo/echo%E3%81%A7REST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -3648,7 +3646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../echo/echo%E3%81%A7Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../../go/echo/echo%E3%81%A7Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -3731,7 +3729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Go_REST_API%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../../go/getting-started/Go_REST_API%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -3759,7 +3757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E6%A7%8B%E6%88%90%E4%BE%8B/" class="md-nav__link">
+      <a href="../../../go/getting-started/Web%E3%82%A2%E3%83%97%E3%83%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E6%A7%8B%E6%88%90%E4%BE%8B/" class="md-nav__link">
         
   
   
@@ -3792,20 +3790,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_5" >
         
           
           <label class="md-nav__link" for="__nav_13_5" id="__nav_13_5_label" tabindex="0">
@@ -3826,7 +3822,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3844,7 +3840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../../go/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -3869,37 +3865,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    HTTPS 通信する REST API を実装
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../go/http/HTTPS%E9%80%9A%E4%BF%A1%E3%81%99%E3%82%8BREST_API%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -3915,37 +3884,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        実装手順
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3958,7 +3896,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../../go/http/Web%E7%94%BB%E9%9D%A2%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -3986,7 +3924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7http%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
+      <a href="../../../go/http/%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%A7http%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%82%92%E5%AE%9F%E8%A3%85/" class="md-nav__link">
         
   
   
@@ -4069,7 +4007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../../go/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -4097,7 +4035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../go/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4180,7 +4118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../../go/tips/%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4208,7 +4146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B%E5%88%B6%E5%BE%A1/" class="md-nav__link">
+      <a href="../../../go/tips/%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B%E5%88%B6%E5%BE%A1/" class="md-nav__link">
         
   
   
@@ -4236,7 +4174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
+      <a href="../../../go/tips/%E4%BB%96%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%82%92import/" class="md-nav__link">
         
   
   
@@ -4264,7 +4202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tips/%E7%8B%AC%E8%87%AA%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../../go/tips/%E7%8B%AC%E8%87%AA%E3%82%A8%E3%83%A9%E3%83%BC%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4442,18 +4380,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -4474,7 +4414,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4539,7 +4479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../database/Java%E3%82%A2%E3%83%97%E3%83%AA%E5%86%85%E3%81%A7SQL%E3%82%92%E7%9B%B4%E6%8E%A5%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -4567,7 +4507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../database/JpaRepository%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4595,7 +4535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+      <a href="../../database/MyBatis_Dynamic_SQL%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
         
   
   
@@ -4623,7 +4563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/database/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
+      <a href="../../database/MyBatis%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6DB%E3%81%AB%E6%8E%A5%E7%B6%9A/" class="md-nav__link">
         
   
   
@@ -4706,7 +4646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../debug/VSCode%E3%81%A7%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%AEJava%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4734,7 +4674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
+      <a href="../../debug/jdb%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%87%E3%83%90%E3%83%83%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4817,7 +4757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../documentation/Spring_Boot_Restdocs%E3%81%A7%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4845,7 +4785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../documentation/springdoc%E3%81%A7API%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -4928,7 +4868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../../getting-started/Spring_Boot%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -5011,7 +4951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../http/CORS%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -5039,7 +4979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
+      <a href="../../http/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%81%8B%E3%82%89web%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%80%81%E4%BF%A1/" class="md-nav__link">
         
   
   
@@ -5122,7 +5062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/maven/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+      <a href="../../maven/Maven%E3%81%A7%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
         
   
   
@@ -5150,7 +5090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/maven/Maven%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E6%96%B0%E8%A6%8F%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../maven/Maven%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E6%96%B0%E8%A6%8F%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5183,18 +5123,20 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15_7" checked>
         
           
           <label class="md-nav__link" for="__nav_15_7" id="__nav_15_7_label" tabindex="0">
@@ -5215,7 +5157,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_15_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_15_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5233,7 +5175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/spring-batch/Spring_Batch%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
+      <a href="../Spring_Batch%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97/" class="md-nav__link">
         
   
   
@@ -5258,10 +5200,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../java/spring-batch/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0ItemReader%2CItemWriter%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    カスタム ItemReader, ItemWriter を作成
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -5277,6 +5246,121 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        サンプルコード
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="サンプルコード">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#itemreader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemReader
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ItemReader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#itemreaderjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemReader.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#itemwriter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemWriter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ItemWriter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterwriterjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IterWriter.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configjava_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5344,7 +5428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
+      <a href="../../test/testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
   
@@ -5372,7 +5456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../test/%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5455,7 +5539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../tips/Spring_Boot%E3%81%A7%E3%83%9E%E3%83%AB%E3%83%81%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5483,7 +5567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
+      <a href="../../tips/aspectj%E3%81%A7%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E5%87%A6%E7%90%86%E3%82%92%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -5511,7 +5595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../tips/%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -5539,7 +5623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../tips/%E7%8B%AC%E8%87%AA%E3%83%90%E3%83%AA%E3%83%87%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%90%91%E3%81%91%E3%82%A2%E3%83%8E%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -5567,7 +5651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../java/tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
+      <a href="../../tips/%E7%8B%AC%E8%87%AA%E4%BE%8B%E5%A4%96%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8A%E3%82%88%E3%81%B3%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%82%92%E4%BD%9C%E6%88%90/" class="md-nav__link">
         
   
   
@@ -9552,10 +9636,94 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        実装手順
+        サンプルコード
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="サンプルコード">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#itemreader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemReader
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ItemReader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#itemreaderjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemReader.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#itemwriter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ItemWriter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ItemWriter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iterwriterjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IterWriter.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configjava_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -9576,74 +9744,75 @@
 
 
 
-<h1 id="https-rest-api">HTTPS 通信する REST API を実装</h1>
-<p>証明書を用意して https 通信を行える REST API を実装します。</p>
-<h2 id="_1">実装手順</h2>
-<ul>
-<li>証明書を用意します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-keyout<span class="w"> </span>key.pem<span class="w"> </span>-out<span class="w"> </span>cert.pem<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-nodes
-</code></pre></div>
-<ul>
-<li>下記の要領でコードを作成します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<h1 id="itemreader-itemwriter">カスタム ItemReader, ItemWriter を作成</h1>
+<p>SQL 発行に限らず、汎用的な処理を実装するための ItemReader, ItemWriter の作成方法を記載します。</p>
+<h2 id="_1">サンプルコード</h2>
+<h3 id="itemreader">ItemReader</h3>
+<h4 id="itemreaderjava">ItemReader.java</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.job.customerregist</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;log&quot;</span>
-<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
-<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.ItemReader</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.NonTransientResourceException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.ParseException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.UnexpectedInputException</span><span class="p">;</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// エンドポイントのルーティング</span>
-<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">getUserInfo</span><span class="p">)</span>
+<span class="cm">/**</span>
+<span class="cm"> * インプット情報を抽出するクラスです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NobItemReader</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ItemReader</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="c1">// サーバーの起動</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Server started at https://localhost:443&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="c1">// main.goまたはビルドしたモジュールから見た相対パスにある鍵ファイルを指定</span>
-<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServeTLS</span><span class="p">(</span><span class="s">&quot;:443&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ssl/cert.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ssl/key.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">))</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="cm">/** データがすでに提供されたかどうかを管理するフラグ */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">dataProvided</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 
-<span class="c1">// ユーザ情報を取得します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">getUserInfo</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">read</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="p">,</span><span class="w"> </span><span class="n">UnexpectedInputException</span><span class="p">,</span><span class="w"> </span><span class="n">ParseException</span><span class="p">,</span><span class="w"> </span><span class="n">NonTransientResourceException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dataProvided</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// 終了を通知してループを防ぐ</span>
+<span class="w">        </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// 戻りのデータ作成</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">userInfos</span><span class="w"> </span><span class="p">[]</span><span class="nx">userInfo</span>
-<span class="w">    </span><span class="nx">userInfos</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span>
-<span class="w">        </span><span class="nx">userInfos</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">userInfo</span><span class="p">{</span>
-<span class="w">            </span><span class="nx">Id</span><span class="p">:</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Age</span><span class="p">:</span><span class="w">  </span><span class="mi">13</span><span class="p">,</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nx">userInfo</span><span class="p">{</span>
-<span class="w">            </span><span class="nx">Id</span><span class="p">:</span><span class="w">   </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob2&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">Age</span><span class="p">:</span><span class="w">  </span><span class="mi">706</span><span class="p">,</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// ここに処理実装</span>
 
-<span class="w">    </span><span class="c1">// レスポンス作成</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">userInfos</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// ユーザ情報</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">userInfo</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Id</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="c1">// ID</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 名前</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 年齢</span>
+<span class="w">        </span><span class="n">dataProvided</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<ul>
-<li><code>go run main.go</code>またはビルドしたモジュールでアプリ起動後、https に向けて curl を実行できます:</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># 自己証明書を使う場合はSSLの検証に引っかかる可能性があるので -k オプションで回避しています。</span>
-<span class="c1"># devcontainerで起動したアプリに対し、ホストOSのブラウザからであれば疎通が取れました。</span>
-curl<span class="w"> </span>-k<span class="w"> </span>https://localhost:443/user
+<h4 id="configjava">Config.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@StepScope</span><span class="w"> </span><span class="c1">// ジョブ実行ごとにインスタンスがリセットされるようにする</span>
+<span class="w">    </span><span class="n">NobItemReader</span><span class="w"> </span><span class="nf">nobItemReader</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NobItemReader</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="itemwriter">ItemWriter</h3>
+<h4 id="iterwriterjava">IterWriter.java</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.job.customerregist</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.Chunk</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.ItemWriter</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * アウトプット情報を出力するクラスです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NobItemWriter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ItemWriter</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="n">Chunk</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">chunk</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// ここに処理実装</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="configjava_1">Config.java</h4>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">NobItemWriter</span><span class="w"> </span><span class="nf">nobItemWriter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NobItemWriter</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 
 
