@@ -121,7 +121,7 @@ spring.datasource.password=password
 
 #### config/BatchConfig.java
 
-バッチ実行に関するコンフィグを定義します。下記では cron による定期実行が可能であることを宣言します。
+バッチ実行に関するコンフィグを定義します。
 
 ```java
 package nob.example.easybatch.config;
