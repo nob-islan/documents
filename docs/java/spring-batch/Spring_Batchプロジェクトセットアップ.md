@@ -83,7 +83,7 @@ INSERT INTO sign_up (
 ), (
     'snail'
     , 'nob02'
-    , 13
+    , 14
 );
 ```
 
@@ -500,6 +500,6 @@ Enter password:
 | id | full_name  | age |
 +----+------------+-----+
 |  1 | snailnob01 |  13 |
-|  2 | snailnob02 |  13 |
+|  2 | snailnob02 |  14 |
 +----+------------+-----+
 ```
