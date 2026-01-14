@@ -10101,6 +10101,85 @@
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="p">);</span>
 
+<span class="c1">-- メタテーブル作成</span>
+<span class="c1">-- https://spring.pleiades.io/spring-batch/reference/schema-appendix.html を参考にMariaDB向けに少し弄っています。</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION_SEQ</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_SEQ</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_JOB_SEQ</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_INSTANCE</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">JOB_INSTANCE_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">JOB_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">JOB_KEY</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">JOB_INSTANCE_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CREATE_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">START_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">END_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">STATUS</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">EXIT_CODE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">    </span><span class="n">EXIT_MESSAGE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">),</span>
+<span class="w">    </span><span class="n">LAST_UPDATED</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_INSTANCE_EXECUTION_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_INSTANCE_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_INSTANCE</span><span class="p">(</span><span class="n">JOB_INSTANCE_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_PARAMS</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">PARAMETER_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">PARAMETER_TYPE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">PARAMETER_VALUE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">IDENTIFYING</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXEC_PARAMS_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">STEP_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">STEP_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CREATE_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">START_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">END_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">STATUS</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">COMMIT_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">READ_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">FILTER_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">WRITE_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">READ_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">WRITE_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">PROCESS_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROLLBACK_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">EXIT_CODE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">EXIT_MESSAGE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">LAST_UPDATED</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXECUTION_STEP_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_CONTEXT</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SHORT_CONTEXT</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SERIALIZED_CONTEXT</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXEC_CTX_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION_CONTEXT</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">STEP_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SHORT_CONTEXT</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">SERIALIZED_CONTEXT</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">STEP_EXEC_CTX_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION</span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">last_name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span>
