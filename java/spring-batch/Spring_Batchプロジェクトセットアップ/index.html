@@ -10101,6 +10101,20 @@
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="p">);</span>
 
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">last_name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob01&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
+<span class="p">),</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob02&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">14</span>
+<span class="p">);</span>
+
 <span class="c1">-- メタテーブル作成</span>
 <span class="c1">-- https://spring.pleiades.io/spring-batch/reference/schema-appendix.html を参考にMariaDB向けに少し弄っています。</span>
 
@@ -10178,20 +10192,6 @@
 <span class="w">    </span><span class="n">SERIALIZED_CONTEXT</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
 <span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">STEP_EXEC_CTX_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
 <span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION</span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">last_name</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
-<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob01&#39;</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
-<span class="p">),</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob02&#39;</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">14</span>
 <span class="p">);</span>
 </code></pre></div>
 <h4 id="srcmainresourcesapplicationproperties">src/main/resources/application.properties</h4>
