@@ -78,7 +78,11 @@ INSERT INTO sign_up (
     , age
 ) VALUES (
     'snail'
-    , 'nob'
+    , 'nob01'
+    , 13
+), (
+    'snail'
+    , 'nob02'
     , 13
 );
 ```
@@ -492,9 +496,10 @@ public class CustomerRegistConfig {
 ```
 $ docker exec -it ebdb mariadb -u root -p ebdb -e "SELECT * FROM customer;"
 Enter password:
-+----+-----------+-----+
-| id | full_name | age |
-+----+-----------+-----+
-|  1 | snailnob  |  13 |
-+----+-----------+-----+
++----+------------+-----+
+| id | full_name  | age |
++----+------------+-----+
+|  1 | snailnob01 |  13 |
+|  2 | snailnob02 |  13 |
++----+------------+-----+
 ```
