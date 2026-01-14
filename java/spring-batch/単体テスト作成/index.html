@@ -5268,6 +5268,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    単体テスト作成
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -5284,6 +5302,86 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作成手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="作成手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テストデータ作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テストケース作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テスト起動
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -9550,6 +9648,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作成手順
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="作成手順">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テストデータ作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テストケース作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テスト起動
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -9566,6 +9733,237 @@
 
 
 <h1 id="_1">単体テスト作成</h1>
+<h2 id="_2">事前準備</h2>
+<p>下記設定を追加します:</p>
+<ul>
+<li>test/resources/application-test.properties</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
+spring.jpa.hibernate.ddl-auto<span class="o">=</span>none
+<span class="c1"># h2db接続設定</span>
+spring.datasource.url<span class="o">=</span>jdbc:h2:mem:testdb<span class="p">;</span><span class="nv">DB_CLOSE_DELAY</span><span class="o">=</span>-1
+spring.datasource.driver-class-name<span class="o">=</span>org.h2.Driver
+spring.datasource.username<span class="o">=</span>sa
+spring.datasource.password<span class="o">=</span>
+spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dialect
+<span class="c1"># 起動時に自動でジョブが実行されるのを無効化</span>
+spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+<ul>
+<li>pom.xml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/com.h2database/h2 --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<ul>
+<li>XxxApplicationTests.java</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// test配下の自動生成済みテストクラスに下記を追記</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_3">作成手順</h2>
+<h3 id="_4">テストデータ作成</h3>
+<p><code>test/resources/sql/customerregist</code> 配下にテストデータ投入向けの SQL を用意します:</p>
+<ul>
+<li>schema.sql</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">full_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">48</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="c1">-- メタテーブル作成</span>
+<span class="c1">-- https://spring.pleiades.io/spring-batch/reference/schema-appendix.html を参考にMariaDB向けに少し弄っています。</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION_SEQ</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_SEQ</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="n">BATCH_JOB_SEQ</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_INSTANCE</span><span class="w">  </span><span class="p">(</span>
+<span class="w">  </span><span class="n">JOB_INSTANCE_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">JOB_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">JOB_KEY</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="w">  </span><span class="p">(</span>
+<span class="w">  </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w">  </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">  </span><span class="n">JOB_INSTANCE_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">CREATE_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">START_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">END_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">STATUS</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">  </span><span class="n">EXIT_CODE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="w">  </span><span class="n">EXIT_MESSAGE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">),</span>
+<span class="w">  </span><span class="n">LAST_UPDATED</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">  </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_INSTANCE_EXECUTION_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_INSTANCE_ID</span><span class="p">)</span>
+<span class="w">  </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_INSTANCE</span><span class="p">(</span><span class="n">JOB_INSTANCE_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_PARAMS</span><span class="w">  </span><span class="p">(</span>
+<span class="w">    </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">PARAMETER_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">PARAMETER_TYPE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">PARAMETER_VALUE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="n">IDENTIFYING</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">    </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXEC_PARAMS_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION</span><span class="w">  </span><span class="p">(</span>
+<span class="w">  </span><span class="n">STEP_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="k">VERSION</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">STEP_NAME</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">CREATE_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">START_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">END_TIME</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">STATUS</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">  </span><span class="n">COMMIT_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">READ_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">FILTER_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">WRITE_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">READ_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">WRITE_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">PROCESS_SKIP_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">ROLLBACK_COUNT</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">EXIT_CODE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">EXIT_MESSAGE</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="p">,</span>
+<span class="w">  </span><span class="n">LAST_UPDATED</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">  </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXECUTION_STEP_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">  </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION_CONTEXT</span><span class="w">  </span><span class="p">(</span>
+<span class="w">  </span><span class="n">JOB_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SHORT_CONTEXT</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SERIALIZED_CONTEXT</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="k">constraint</span><span class="w"> </span><span class="n">JOB_EXEC_CTX_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">  </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_JOB_EXECUTION</span><span class="p">(</span><span class="n">JOB_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION_CONTEXT</span><span class="w">  </span><span class="p">(</span>
+<span class="w">  </span><span class="n">STEP_EXECUTION_ID</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SHORT_CONTEXT</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">  </span><span class="n">SERIALIZED_CONTEXT</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+<span class="w">  </span><span class="k">constraint</span><span class="w"> </span><span class="n">STEP_EXEC_CTX_FK</span><span class="w"> </span><span class="k">foreign</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
+<span class="w">  </span><span class="k">references</span><span class="w"> </span><span class="n">BATCH_STEP_EXECUTION</span><span class="p">(</span><span class="n">STEP_EXECUTION_ID</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>data.sql</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">last_name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">first_name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob01&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
+<span class="p">),</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;snail&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob02&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">14</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="_5">テストケース作成</h3>
+<p><code>sign_up</code> テーブルからデータを取得し、<code>last_name</code>, <code>family_name</code>を結合して <code>customer</code> テーブルに登録するジョブのテストです。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.job</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.BatchStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.job.Job</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.job.JobExecution</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.test.JobOperatorTestUtils</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.test.context.SpringBatchTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.JdbcTemplate</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.RowMapper</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 顧客登録ジョブのテストクラスです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@SpringBatchTest</span>
+<span class="nd">@SpringBootTest</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/sql/customerregist/schema.sql&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/sql/customerregist/data.sql&quot;</span>
+<span class="p">})</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomerRegistTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Job</span><span class="w"> </span><span class="n">customerRegist</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JobOperatorTestUtils</span><span class="w"> </span><span class="n">jobOperatorTestUtils</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// ジョブ実行</span>
+<span class="w">            </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">setJob</span><span class="p">(</span><span class="n">customerRegist</span><span class="p">);</span>
+<span class="w">            </span><span class="n">JobExecution</span><span class="w"> </span><span class="n">jobExecution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">startJob</span><span class="p">();</span>
+
+<span class="w">            </span><span class="c1">// バッチが終了していることを確認</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">BatchStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="n">jobExecution</span><span class="p">.</span><span class="na">getStatus</span><span class="p">());</span>
+
+<span class="w">            </span><span class="c1">// 登録内容の確認</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">customerList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="s">&quot;SELECT id, full_name, age FROM customer&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">RowMapper</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nd">@Override</span>
+<span class="w">                        </span><span class="kd">public</span><span class="w"> </span><span class="n">Customer</span><span class="w"> </span><span class="nf">mapRow</span><span class="p">(</span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Customer</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;full_name&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">));</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">});</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getId</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;snailnob01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getFullName</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getId</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;snailnob02&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getFullName</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_6">テスト起動</h2>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>CustomerRegistTest
+</code></pre></div>
 
 
 
