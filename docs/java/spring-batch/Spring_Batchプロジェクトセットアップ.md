@@ -72,6 +72,20 @@ CREATE TABLE customer (
     , age INT NOT NULL
 );
 
+INSERT INTO sign_up (
+    last_name
+    , first_name
+    , age
+) VALUES (
+    'snail'
+    , 'nob01'
+    , 13
+), (
+    'snail'
+    , 'nob02'
+    , 14
+);
+
 -- メタテーブル作成
 -- https://spring.pleiades.io/spring-batch/reference/schema-appendix.html を参考にMariaDB向けに少し弄っています。
 
@@ -149,20 +163,6 @@ CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
     SERIALIZED_CONTEXT TEXT,
     constraint STEP_EXEC_CTX_FK foreign key (STEP_EXECUTION_ID)
     references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID)
-);
-
-INSERT INTO sign_up (
-    last_name
-    , first_name
-    , age
-) VALUES (
-    'snail'
-    , 'nob01'
-    , 13
-), (
-    'snail'
-    , 'nob02'
-    , 14
 );
 ```
 
