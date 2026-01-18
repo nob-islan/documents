@@ -10224,10 +10224,9 @@
 ├──<span class="w"> </span><span class="nb">test</span>
 │<span class="w">   </span>├──<span class="w"> </span>data
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users
-│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">      </span><span class="c1"># テストデータ</span>
-│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">    </span><span class="c1"># テーブル定義</span>
-│<span class="w">   </span>└──<span class="w"> </span>util
-│<span class="w">       </span>└──<span class="w"> </span>testdb.go<span class="w">         </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
+│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">    </span><span class="c1"># テストデータ</span>
+│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">  </span><span class="c1"># テーブル定義</span>
+│<span class="w">   </span>└──<span class="w"> </span>db.go<span class="w">               </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
 ├──<span class="w"> </span>users_repository.go
 └──<span class="w"> </span>users_repository_test.go
 </code></pre></div>
@@ -10238,9 +10237,9 @@
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/mattn/go-sqlite3
 </code></pre></div>
 <ul>
-<li>testdb.go</li>
+<li>db.go</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">util</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">test</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
@@ -10312,7 +10311,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/repository/test/util&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/repository/test&quot;</span>
 <span class="w">    </span><span class="s">&quot;testing&quot;</span>
 
 <span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/mattn/go-sqlite3&quot;</span>
@@ -10350,7 +10349,7 @@
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">            </span><span class="c1">// テストデータベースおよびrepository初期化</span>
-<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">util</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// 事前セットアップ</span>
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
