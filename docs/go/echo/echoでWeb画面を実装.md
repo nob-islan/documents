@@ -305,6 +305,8 @@ func (r *usersRouter) SetRouting(e *echo.Echo) {
 
 #### cmd/
 
+- main.go
+
 ```go
 package main
 
