@@ -4,7 +4,7 @@
 
 ## ディレクトリ構成
 
-```shell
+```
 .
 ├── assets
 │   ├── static
