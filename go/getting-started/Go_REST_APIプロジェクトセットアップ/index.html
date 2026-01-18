@@ -10071,21 +10071,21 @@
 <h3 id="_4">パッケージ構成</h3>
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>cmd
-│<span class="w">   </span>└──<span class="w"> </span>main.go<span class="w">                      </span><span class="c1"># アプリのエントリポイント</span>
+│<span class="w">   </span>└──<span class="w"> </span>main.go<span class="w">                       </span><span class="c1"># アプリのエントリポイント</span>
 └──<span class="w"> </span>internal
 <span class="w">    </span>├──<span class="w"> </span>domain
-<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>users.go<span class="w">                 </span><span class="c1"># ドメイン定義およびrepositoryのインターフェース</span>
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>users.go<span class="w">                  </span><span class="c1"># ドメイン定義およびrepositoryのインターフェース</span>
 <span class="w">    </span>├──<span class="w"> </span>handler
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>users_handler.go<span class="w">          </span><span class="c1"># APIとしてのインターフェースおよび実装</span>
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>model
 <span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users_model.go<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>router
 <span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>users_router.go<span class="w">       </span><span class="c1"># 業務処理ごとのルーター</span>
-<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>base.go<span class="w">              </span><span class="c1"># エンドポイントのルーター取りまとめ</span>
+<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>base.go<span class="w">               </span><span class="c1"># エンドポイントのルーター取りまとめ</span>
 <span class="w">    </span>├──<span class="w"> </span>infrastructure
-<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>db.go<span class="w">                    </span><span class="c1"># データベース接続設定</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>db.go<span class="w">                     </span><span class="c1"># データベース接続設定</span>
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>repository
-<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>users_repository.go<span class="w">  </span><span class="c1"># データベース操作の実装</span>
+<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>users_repository.go<span class="w">   </span><span class="c1"># データベース操作の実装</span>
 <span class="w">    </span>└──<span class="w"> </span>usecase
 <span class="w">        </span>├──<span class="w"> </span>users_usecase.go<span class="w">          </span><span class="c1"># 業務処理のインターフェースおよび実装</span>
 <span class="w">        </span>└──<span class="w"> </span>payload
