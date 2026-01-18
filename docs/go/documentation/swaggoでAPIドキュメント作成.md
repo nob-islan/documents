@@ -82,14 +82,14 @@ swagger ページへのルーティングを設定します。
 +	  // swagger UI のルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
-	  // auth
-	  NewAuthRouter(db).SetRouting(m)
+	  // users
+	  NewUsersRouter(db).SetRouting(m)
 
 	  return m
   }
 ```
 
-### handler/auth_handler.go
+### handler/users_handler.go
 
 各 API のインターフェース仕様を記載します:
 
@@ -106,7 +106,7 @@ swagger ページへのルーティングを設定します。
   )
 
   // 認証のハンドラインターフェースです。
-  type AuthHandler interface {
+  type UsersHandler interface {
 
 	  // 認証処理を呼び出します。
 	  Login(w http.ResponseWriter, r *http.Request)
@@ -115,28 +115,28 @@ swagger ページへのルーティングを設定します。
 	  Me(w http.ResponseWriter, r *http.Request)
   }
 
-  type authHandler struct {
-	  authUsecase usecase.AuthUsecase
+  type usersHandler struct {
+	  usersUsecase usecase.UsersUsecase
   }
 
-  func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
-	  return &authHandler{authUsecase: authUsecase}
+  func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+	  return &usersHandler{usersUsecase: usersUsecase}
   }
 
 + // @Summary 認証
 + // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
-+ // @Tags Auth
++ // @Tags Users
 + // @Accept json
 + // @Produce json
 + // @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
 + // @Success 200 {object} model.LoginRes "正常に処理された場合"
 + // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
 + // @Router /login [post]
-  func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
+  func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewLoginReq(r)
 
-	  out, err := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	  out, err := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 	  if err != nil {
 		  apperrors.HandleError(w, err)
 		  return
@@ -150,17 +150,17 @@ swagger ページへのルーティングを設定します。
 
 + // @Summary ユーザ情報取得
 + // @Description ユーザ情報を取得します。
-+ // @Tags Auth
++ // @Tags Users
 + // @Accept json
 + // @Produce json
 + // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
 + // @Success 200 {object} model.MeRes "正常に処理された場合"
 + // @Router /me [get]
-  func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
+  func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewMeReq(r)
 
-	  out := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	  out := h.usersUsecase.Me(payload.NewMeIn(req.Name))
 
 	  res := model.NewMeRes(out.Name(), out.Age())
 	  w.Header().Set("Content-Type", "application/json")
@@ -169,7 +169,7 @@ swagger ページへのルーティングを設定します。
   }
 ```
 
-### model/auth_model.go
+### model/users_model.go
 
 各モデルクラスの example 記載します:
 

@@ -14,12 +14,12 @@ echo を使って簡易的な GET メソッドおよび POST メソッドを実�
 │   └── main.go
 └── internal
     └── handler
-        ├── auth_handler.go
-        ├── auth_handler_test.go
+        ├── users_handler.go
+        ├── users_handler_test.go
         ├── model
-        │   └── auth_model.go
+        │   └── users_model.go
         └── router
-            ├── auth_router.go
+            ├── users_router.go
             └── base.go
 ```
 
@@ -41,7 +41,7 @@ go get github.com/labstack/echo/v4
 
 #### internal/handler/
 
-- auth_handler.go
+- users_handler.go
 
 ```go
 package handler
@@ -56,7 +56,7 @@ import (
 )
 
 // 認証のhandlerインターフェースです。
-type AuthHandler interface {
+type UsersHandler interface {
 
 	// 認証処理を呼び出します。
 	Login(c echo.Context) error
@@ -65,15 +65,15 @@ type AuthHandler interface {
 	Me(c echo.Context) error
 }
 
-type authHandler struct {
-	authUsecase usecase.AuthUsecase
+type usersHandler struct {
+	usersUsecase usecase.UsersUsecase
 }
 
-func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
-	return &authHandler{authUsecase: authUsecase}
+func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+	return &usersHandler{usersUsecase: usersUsecase}
 }
 
-func (h *authHandler) Login(c echo.Context) error {
+func (h *usersHandler) Login(c echo.Context) error {
 
 	// jsonパース エラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
@@ -88,18 +88,18 @@ func (h *authHandler) Login(c echo.Context) error {
 	}
 
 	// usecase呼び出し
-	out := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	out := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *authHandler) Me(c echo.Context) error {
+func (h *usersHandler) Me(c echo.Context) error {
 
 	// クエリパラメータ取得
 	req := model.NewMeReq(c)
 
 	// usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	out, err := h.usersUsecase.Me(payload.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusInternalServerError,
@@ -116,7 +116,7 @@ func (h *authHandler) Me(c echo.Context) error {
 
 #### internal/handler/model/
 
-- auth_model.go
+- users_model.go
 
 ```go
 package model
@@ -193,13 +193,13 @@ func Routing() *echo.Echo {
 
 	e := echo.New()
 
-	NewAuthRouter().SetRouting(e)
+	NewUsersRouter().SetRouting(e)
 
 	return e
 }
 ```
 
-- auth_router.go
+- users_router.go
 
 ```go
 package router
@@ -211,15 +211,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type authRouter struct{}
+type usersRouter struct{}
 
-func NewAuthRouter() Router {
-	return &authRouter{}
+func NewUsersRouter() Router {
+	return &usersRouter{}
 }
 
-func (r *authRouter) SetRouting(e *echo.Echo) {
+func (r *usersRouter) SetRouting(e *echo.Echo) {
 
-	h := handler.NewAuthHandler(usecase.NewAuthUsecase())
+	h := handler.NewUsersHandler(usecase.NewUsersUsecase())
 
 	e.POST(basePath+"/login", h.Login)
 	e.GET(basePath+"/me", h.Me)
@@ -244,7 +244,7 @@ func main() {
 
 ### テスト作成
 
-- auth_handler_test.go
+- users_handler_test.go
 
 ```go
 package handler
@@ -263,33 +263,33 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type mockAuthUsecase struct {
+type mockUsersUsecase struct {
 	mock.Mock
 }
 
-func (m *mockAuthUsecase) Login(in payload.LoginIn) payload.LoginOut {
+func (m *mockUsersUsecase) Login(in payload.LoginIn) payload.LoginOut {
 	args := m.Called(in)
 	return args.Get(0).(payload.LoginOut)
 }
 
-func (m *mockAuthUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
+func (m *mockUsersUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 	args := m.Called(in)
 	return args.Get(0).(payload.MeOut), args.Error(1)
 }
 
-func Test_AuthHandler_Login(t *testing.T) {
+func Test_UsersHandler_Login(t *testing.T) {
 
 	tests := []struct {
 		name               string                      // テストケース名
 		requestBody        string                      // リクエストボディ
-		setupMock          func(mock *mockAuthUsecase) // モック設定
+		setupMock          func(mock *mockUsersUsecase) // モック設定
 		expectedStatusCode int                         // 期待されるHTTPステータス
 		expectedBody       string                      // 期待されるレスポンスボディ
 	}{
 		{
 			name:        "success",
 			requestBody: `{"name": "nob", "password": "passwd"}`,
-			setupMock: func(mock *mockAuthUsecase) {
+			setupMock: func(mock *mockUsersUsecase) {
 				mock.On(
 					"Login",
 					payload.NewLoginIn(
@@ -306,7 +306,7 @@ func Test_AuthHandler_Login(t *testing.T) {
 		{
 			name:               "invalid request",
 			requestBody:        `{"name": "nob", "password": "passwd"`, // 末尾の"}"なし
-			setupMock:          func(mock *mockAuthUsecase) {},
+			setupMock:          func(mock *mockUsersUsecase) {},
 			expectedStatusCode: http.StatusBadRequest,
 			expectedBody:       `{"message": "Bad request"}`,
 		},
@@ -323,9 +323,9 @@ func Test_AuthHandler_Login(t *testing.T) {
 		rec := httptest.NewRecorder()
 		c := echo.New().NewContext(req, rec)
 
-		mockUsecase := new(mockAuthUsecase)
+		mockUsecase := new(mockUsersUsecase)
 		testcase.setupMock(mockUsecase)
-		h := NewAuthHandler(mockUsecase)
+		h := NewUsersHandler(mockUsecase)
 
 		if assert.NoError(t, h.Login(c)) {
 			assert.Equal(t, testcase.expectedStatusCode, rec.Code)
@@ -334,19 +334,19 @@ func Test_AuthHandler_Login(t *testing.T) {
 	}
 }
 
-func Test_AuthHandler_Me(t *testing.T) {
+func Test_UsersHandler_Me(t *testing.T) {
 
 	tests := []struct {
 		name               string                      // テストケース名
 		requestParam       map[string]string           // リクエストパラメータ
-		setupMock          func(mock *mockAuthUsecase) // モック設定
+		setupMock          func(mock *mockUsersUsecase) // モック設定
 		expectedStatusCode int                         // 期待されるHTTPステータス
 		expectedBody       string                      // 期待されるレスポンスボディ
 	}{
 		{
 			name:         "success",
 			requestParam: map[string]string{"name": "nob"},
-			setupMock: func(mock *mockAuthUsecase) {
+			setupMock: func(mock *mockUsersUsecase) {
 				mock.On("Me", payload.NewMeIn("nob")).Return(payload.NewMeOut("nob", 13), nil)
 			},
 			expectedStatusCode: http.StatusOK,
@@ -355,7 +355,7 @@ func Test_AuthHandler_Me(t *testing.T) {
 		{
 			name:         "usecase error",
 			requestParam: map[string]string{"name": "nob"},
-			setupMock: func(mock *mockAuthUsecase) {
+			setupMock: func(mock *mockUsersUsecase) {
 				mock.On("Me", payload.NewMeIn("nob")).Return(
 					*new(payload.MeOut),
 					errors.New("不正なユーザ名です。"),
@@ -374,9 +374,9 @@ func Test_AuthHandler_Me(t *testing.T) {
 		rec := httptest.NewRecorder()
 		c := echo.New().NewContext(req, rec)
 
-		mockUsecase := new(mockAuthUsecase)
+		mockUsecase := new(mockUsersUsecase)
 		testcase.setupMock(mockUsecase)
-		h := NewAuthHandler(mockUsecase)
+		h := NewUsersHandler(mockUsecase)
 
 		if assert.NoError(t, h.Me(c)) {
 			assert.Equal(t, testcase.expectedStatusCode, rec.Code)

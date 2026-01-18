@@ -70,20 +70,20 @@ INSERT INTO users (
     ├── domain
     │   └── users.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
-    │   ├── auth_handler.go          # APIとしてのインターフェースおよび実装
+    │   ├── users_handler.go          # APIとしてのインターフェースおよび実装
     │   ├── model
-    │   │   └── auth_model.go        # APIのリクエスト・レスポンス構造体
+    │   │   └── users_model.go        # APIのリクエスト・レスポンス構造体
     │   └── router
-    │       ├── auth_router.go       # 業務処理ごとのルーター
+    │       ├── users_router.go       # 業務処理ごとのルーター
     │       └── base.go              # エンドポイントのルーター取りまとめ
     ├── infrastructure
     │   ├── db.go                    # データベース接続設定
     │   └── repository
     │       └── users_repository.go  # データベース操作の実装
     └── usecase
-        ├── auth_usecase.go          # 業務処理のインターフェースおよび実装
+        ├── users_usecase.go          # 業務処理のインターフェースおよび実装
         └── payload
-            └── auth_payload.go      # 業務処理の入力・出力モデル構造体
+            └── users_payload.go      # 業務処理の入力・出力モデル構造体
 ```
 
 ### パッケージ一覧
@@ -214,7 +214,7 @@ func (r *usersRepository) FindByName(targetName string) domain.Users {
 
 usecase を定義・実装します。アプリの業務はここで処理されます。
 
-- auth_usecase.go
+- users_usecase.go
 
 ```go
 package usecase
@@ -226,7 +226,7 @@ import (
 )
 
 // 認証のusecaseインターフェースです。
-type AuthUsecase interface {
+type UsersUsecase interface {
 
 	// 認証処理を行います。
 	Login(in payload.LoginIn) payload.LoginOut
@@ -235,15 +235,15 @@ type AuthUsecase interface {
 	Me(in payload.MeIn) (payload.MeOut, error)
 }
 
-type authUsecase struct {
+type usersUsecase struct {
 	usersRepository domain.UsersRepository
 }
 
-func NewAuthUsecase(usersRepository domain.UsersRepository) AuthUsecase {
-	return &authUsecase{usersRepository: usersRepository}
+func NewUsersUsecase(usersRepository domain.UsersRepository) UsersUsecase {
+	return &usersUsecase{usersRepository: usersRepository}
 }
 
-func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
+func (u *usersUsecase) Login(in payload.LoginIn) payload.LoginOut {
 
 	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
@@ -252,7 +252,7 @@ func (u *authUsecase) Login(in payload.LoginIn) payload.LoginOut {
 	return payload.NewLoginOut(users.Password() == in.Password())
 }
 
-func (u *authUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
+func (u *usersUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 
 	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
@@ -266,7 +266,7 @@ func (u *authUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 
 usecase 向けの関数の入力・出力モデル構造体を定義します。
 
-- auth_payload.go
+- users_payload.go
 
 ```go
 package payload
@@ -338,7 +338,7 @@ func (o MeOut) Age() int {
 
 handler を定義・実装します。usecase を呼び出し、レスポンスを作成します。
 
-- auth_handler.go
+- users_handler.go
 
 ```go
 package handler
@@ -352,7 +352,7 @@ import (
 )
 
 // 認証のhandlerインターフェースです。
-type AuthHandler interface {
+type UsersHandler interface {
 
 	// 認証処理を呼び出します。
 	Login(w http.ResponseWriter, r *http.Request)
@@ -361,19 +361,19 @@ type AuthHandler interface {
 	Me(w http.ResponseWriter, r *http.Request)
 }
 
-type authHandler struct {
-	authUsecase usecase.AuthUsecase
+type usersHandler struct {
+	usersUsecase usecase.UsersUsecase
 }
 
-func NewAuthHandler(authUsecase usecase.AuthUsecase) AuthHandler {
-	return &authHandler{authUsecase: authUsecase}
+func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+	return &usersHandler{usersUsecase: usersUsecase}
 }
 
-func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
-	out := h.authUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	out := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
@@ -381,11 +381,11 @@ func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
+func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
-	out, err := h.authUsecase.Me(payload.NewMeIn(req.Name))
+	out, err := h.usersUsecase.Me(payload.NewMeIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -408,7 +408,7 @@ func (h *authHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 handler 向けの関数の入力・出力モデル構造体を定義します。
 
-- auth_model.go
+- users_model.go
 
 ```go
 package model
@@ -496,14 +496,14 @@ func Routing() *http.ServeMux {
 	// 各handlerに紐づくルーティングを設定
 	m := http.NewServeMux()
 
-	// auth
-	NewAuthRouter(db).SetRouting(m)
+	// users
+	NewUsersRouter(db).SetRouting(m)
 
 	return m
 }
 ```
 
-- auth_router.go
+- users_router.go
 
 ```go
 package router
@@ -516,17 +516,17 @@ import (
 	"net/http"
 )
 
-type authRouter struct {
+type usersRouter struct {
 	db *sql.DB
 }
 
-func NewAuthRouter(db *sql.DB) Router {
-	return &authRouter{db: db}
+func NewUsersRouter(db *sql.DB) Router {
+	return &usersRouter{db: db}
 }
 
-func (r *authRouter) SetRouting(m *http.ServeMux) {
+func (r *usersRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewAuthHandler(usecase.NewAuthUsecase(repository.NewUsersRepository(r.db)))
+	h := handler.NewUsersHandler(usecase.NewUsersUsecase(repository.NewUsersRepository(r.db)))
 
 	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {

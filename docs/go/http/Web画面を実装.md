@@ -17,9 +17,9 @@
 ├── go.mod
 └── internal
     └── handler
-        ├── auth_handler.go
+        ├── users_handler.go
         └── router
-            ├── auth_router.go
+            ├── users_router.go
             └── base.go
 ```
 
@@ -148,7 +148,7 @@ body {
 
 #### internal/handler/
 
-- auth_handler.go
+- users_handler.go
 
 ```go
 package handler
@@ -160,7 +160,7 @@ import (
 )
 
 // 認証機能のhandlerです。
-type AuthHandler interface {
+type UsersHandler interface {
 
 	// 初期表示処理を行います。
 	InitView(w http.ResponseWriter, r *http.Request)
@@ -169,13 +169,13 @@ type AuthHandler interface {
 	Login(w http.ResponseWriter, r *http.Request)
 }
 
-type authHandler struct{}
+type usersHandler struct{}
 
-func NewAuthHandler() AuthHandler {
-	return &authHandler{}
+func NewUsersHandler() UsersHandler {
+	return &usersHandler{}
 }
 
-func (h *authHandler) InitView(w http.ResponseWriter, r *http.Request) {
+func (h *usersHandler) InitView(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("assets/templates/index.html")
 	if err != nil {
@@ -192,7 +192,7 @@ func (h *authHandler) InitView(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *authHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -253,14 +253,14 @@ func Routing() *http.ServeMux {
 	// static配下をルーティング
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
 
-	// auth
-	NewAuthRouter().SetRouting(m)
+	// users
+	NewUsersRouter().SetRouting(m)
 
 	return m
 }
 ```
 
-- router/auth_router.go
+- router/users_router.go
 
 ```go
 package router
@@ -270,15 +270,15 @@ import (
 	"net/http"
 )
 
-type authRouter struct{}
+type usersRouter struct{}
 
-func NewAuthRouter() Router {
-	return &authRouter{}
+func NewUsersRouter() Router {
+	return &usersRouter{}
 }
 
-func (r *authRouter) SetRouting(m *http.ServeMux) {
+func (r *usersRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewAuthHandler()
+	h := handler.NewUsersHandler()
 
 	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
@@ -344,7 +344,7 @@ var Templates embed.FS // templates埋め込み宣言
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 ```
 
-- handler/auth_handler.go について、埋め込んだ templates を使うよう宣言
+- handler/users_handler.go について、埋め込んだ templates を使うよう宣言
 
 ```go
 	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")

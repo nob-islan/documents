@@ -18,9 +18,9 @@ cf. https://echo.labstack.com/docs/templates
 ├── go.sum
 └── internal
     └── handler
-        ├── auth_handler.go
+        ├── users_handler.go
         └── router
-            ├── auth_router.go
+            ├── users_router.go
             └── base.go
 ```
 
@@ -166,7 +166,7 @@ body {
 
 #### internal/handler/
 
-- auth_handler.go
+- users_handler.go
 
 ```go
 package handler
@@ -178,7 +178,7 @@ import (
 )
 
 // 認証機能のhandlerです。
-type AuthHandler interface {
+type UsersHandler interface {
 
 	// 初期表示処理を行います。
 	InitView(c echo.Context) error
@@ -187,17 +187,17 @@ type AuthHandler interface {
 	Login(c echo.Context) error
 }
 
-type authHandler struct{}
+type usersHandler struct{}
 
-func NewAuthHandler() AuthHandler {
-	return &authHandler{}
+func NewUsersHandler() UsersHandler {
+	return &usersHandler{}
 }
 
-func (h *authHandler) InitView(c echo.Context) error {
+func (h *usersHandler) InitView(c echo.Context) error {
 	return c.Render(http.StatusOK, "login", struct{ ButtonText string }{ButtonText: "ログイン"})
 }
 
-func (h *authHandler) Login(c echo.Context) error {
+func (h *usersHandler) Login(c echo.Context) error {
 
 	req := new(struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -262,7 +262,7 @@ func Routing() *echo.Echo {
 	}
 	e.Static("/static", "assets/static")
 
-	NewAuthRouter().SetRouting(e)
+	NewUsersRouter().SetRouting(e)
 
 	return e
 }
@@ -277,7 +277,7 @@ func (t *Template) Render(w io.Writer, name string, data any, c echo.Context) er
 }
 ```
 
-- router/auth_router.go
+- router/users_router.go
 
 ```go
 package router
@@ -288,15 +288,15 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type authRouter struct{}
+type usersRouter struct{}
 
-func NewAuthRouter() Router {
-	return &authRouter{}
+func NewUsersRouter() Router {
+	return &usersRouter{}
 }
 
-func (r *authRouter) SetRouting(e *echo.Echo) {
+func (r *usersRouter) SetRouting(e *echo.Echo) {
 
-	h := handler.NewAuthHandler()
+	h := handler.NewUsersHandler()
 
 	e.GET("/login", h.InitView)
 	e.POST(basePath+"/login", h.Login)
