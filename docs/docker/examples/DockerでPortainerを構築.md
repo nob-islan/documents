@@ -16,4 +16,4 @@ services:
       - ./volumes/data:/data
 ```
 
-`http://localhost:9000`にアクセスすると admin のパスワード設定画面に遷移します。
+http://localhost:9000 にアクセスすると admin のパスワード設定画面に遷移します。
