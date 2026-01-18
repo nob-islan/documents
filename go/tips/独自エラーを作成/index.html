@@ -4329,10 +4329,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#auth_usecasego" class="md-nav__link">
+  <a href="#users_usecasego" class="md-nav__link">
     <span class="md-ellipsis">
       
-        auth_usecase.go
+        users_usecase.go
       
     </span>
   </a>
@@ -4357,10 +4357,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#auth_handlergo" class="md-nav__link">
+  <a href="#users_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        auth_handler.go
+        users_handler.go
       
     </span>
   </a>
@@ -9769,10 +9769,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#auth_usecasego" class="md-nav__link">
+  <a href="#users_usecasego" class="md-nav__link">
     <span class="md-ellipsis">
       
-        auth_usecase.go
+        users_usecase.go
       
     </span>
   </a>
@@ -9797,10 +9797,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#auth_handlergo" class="md-nav__link">
+  <a href="#users_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        auth_handler.go
+        users_handler.go
       
     </span>
   </a>
@@ -9904,7 +9904,7 @@
 </code></pre></div>
 <h3 id="internalusecase">internal/usecase</h3>
 <p>usecase パッケージにて、下記要領でエラーを handler に返します:</p>
-<h4 id="auth_usecasego">auth_usecase.go</h4>
+<h4 id="users_usecasego">users_usecase.go</h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -9914,23 +9914,23 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証の業務処理インターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">authUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">authRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">usersRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthUsecase</span><span class="p">(</span><span class="nx">authRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authUsecase</span><span class="p">{</span><span class="nx">authRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">authRepository</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersUsecase</span><span class="p">(</span><span class="nx">usersRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersUsecase</span><span class="p">{</span><span class="nx">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">usersRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">authRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// repositoryでエラーが発生したらEasyappErrorを戻す</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
 <span class="w">    </span><span class="p">}</span>
@@ -9939,7 +9939,7 @@
 </code></pre></div>
 <h3 id="internalhandler">internal/handler</h3>
 <p>handler パッケージにて、下記要領でエラーハンドリングを行います:</p>
-<h4 id="auth_handlergo">auth_handler.go</h4>
+<h4 id="users_handlergo">users_handler.go</h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -9952,25 +9952,25 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証のハンドラインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">authHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">authUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">AuthUsecase</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">usersHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthHandler</span><span class="p">(</span><span class="nx">authUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">AuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthHandler</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authHandler</span><span class="p">{</span><span class="nx">authUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">authUsecase</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersHandler</span><span class="p">(</span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersHandler</span><span class="p">{</span><span class="nx">usersUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">authHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// EasyappErrorが返ってきたらハンドリング</span>
 <span class="w">        </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">HandleError</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>

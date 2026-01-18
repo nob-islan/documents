@@ -10076,20 +10076,20 @@
 <span class="w">    </span>├──<span class="w"> </span>domain
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>users.go<span class="w">                 </span><span class="c1"># ドメイン定義およびrepositoryのインターフェース</span>
 <span class="w">    </span>├──<span class="w"> </span>handler
-<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>auth_handler.go<span class="w">          </span><span class="c1"># APIとしてのインターフェースおよび実装</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>users_handler.go<span class="w">          </span><span class="c1"># APIとしてのインターフェースおよび実装</span>
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>model
-<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>auth_model.go<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
+<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users_model.go<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>router
-<span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>auth_router.go<span class="w">       </span><span class="c1"># 業務処理ごとのルーター</span>
+<span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>users_router.go<span class="w">       </span><span class="c1"># 業務処理ごとのルーター</span>
 <span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>base.go<span class="w">              </span><span class="c1"># エンドポイントのルーター取りまとめ</span>
 <span class="w">    </span>├──<span class="w"> </span>infrastructure
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>db.go<span class="w">                    </span><span class="c1"># データベース接続設定</span>
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>repository
 <span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>users_repository.go<span class="w">  </span><span class="c1"># データベース操作の実装</span>
 <span class="w">    </span>└──<span class="w"> </span>usecase
-<span class="w">        </span>├──<span class="w"> </span>auth_usecase.go<span class="w">          </span><span class="c1"># 業務処理のインターフェースおよび実装</span>
+<span class="w">        </span>├──<span class="w"> </span>users_usecase.go<span class="w">          </span><span class="c1"># 業務処理のインターフェースおよび実装</span>
 <span class="w">        </span>└──<span class="w"> </span>payload
-<span class="w">            </span>└──<span class="w"> </span>auth_payload.go<span class="w">      </span><span class="c1"># 業務処理の入力・出力モデル構造体</span>
+<span class="w">            </span>└──<span class="w"> </span>users_payload.go<span class="w">      </span><span class="c1"># 業務処理の入力・出力モデル構造体</span>
 </code></pre></div>
 <h3 id="_5">パッケージ一覧</h3>
 <h4 id="internaldomain">internal/domain/</h4>
@@ -10208,7 +10208,7 @@
 <h4 id="internalusecase">internal/usecase/</h4>
 <p>usecase を定義・実装します。アプリの業務はここで処理されます。</p>
 <ul>
-<li>auth_usecase.go</li>
+<li>users_usecase.go</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
@@ -10219,7 +10219,7 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証のusecaseインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span>
@@ -10228,15 +10228,15 @@
 <span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">authUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">usersRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthUsecase</span><span class="p">(</span><span class="nx">usersRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthUsecase</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authUsecase</span><span class="p">{</span><span class="nx">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">usersRepository</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersUsecase</span><span class="p">(</span><span class="nx">usersRepository</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">UsersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersUsecase</span><span class="p">{</span><span class="nx">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">usersRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
@@ -10245,7 +10245,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">authUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
@@ -10257,7 +10257,7 @@
 <h4 id="internalusecasepayload">internal/usecase/payload/</h4>
 <p>usecase 向けの関数の入力・出力モデル構造体を定義します。</p>
 <ul>
-<li>auth_payload.go</li>
+<li>users_payload.go</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">payload</span>
 
@@ -10326,7 +10326,7 @@
 <h4 id="internalhandler">internal/handler/</h4>
 <p>handler を定義・実装します。usecase を呼び出し、レスポンスを作成します。</p>
 <ul>
-<li>auth_handler.go</li>
+<li>users_handler.go</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -10339,7 +10339,7 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証のhandlerインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">AuthHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
@@ -10348,19 +10348,19 @@
 <span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">authHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">authUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">AuthUsecase</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">usersHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthHandler</span><span class="p">(</span><span class="nx">authUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">AuthUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">AuthHandler</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authHandler</span><span class="p">{</span><span class="nx">authUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">authUsecase</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersHandler</span><span class="p">(</span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersHandler</span><span class="p">{</span><span class="nx">usersUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">authHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 
 <span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Valid</span><span class="p">())</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
@@ -10368,11 +10368,11 @@
 <span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">authHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">authUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">)</span>
@@ -10393,7 +10393,7 @@
 <h4 id="internalhandlermodel">internal/handler/model/</h4>
 <p>handler 向けの関数の入力・出力モデル構造体を定義します。</p>
 <ul>
-<li>auth_model.go</li>
+<li>users_model.go</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">model</span>
 
@@ -10477,14 +10477,14 @@
 <span class="w">    </span><span class="c1">// 各handlerに紐づくルーティングを設定</span>
 <span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewServeMux</span><span class="p">()</span>
 
-<span class="w">    </span><span class="c1">// auth</span>
-<span class="w">    </span><span class="nx">NewAuthRouter</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// users</span>
+<span class="w">    </span><span class="nx">NewUsersRouter</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>auth_router.go</li>
+<li>users_router.go</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10496,17 +10496,17 @@
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">authRouter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">usersRouter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewAuthRouter</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">authRouter</span><span class="p">{</span><span class="nx">db</span><span class="p">:</span><span class="w"> </span><span class="nx">db</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersRouter</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersRouter</span><span class="p">{</span><span class="nx">db</span><span class="p">:</span><span class="w"> </span><span class="nx">db</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">authRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewAuthHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewAuthUsecase</span><span class="p">(</span><span class="nx">repository</span><span class="p">.</span><span class="nx">NewUsersRepository</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">db</span><span class="p">)))</span>
+<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUsersHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewUsersUsecase</span><span class="p">(</span><span class="nx">repository</span><span class="p">.</span><span class="nx">NewUsersRepository</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">db</span><span class="p">)))</span>
 
 <span class="w">    </span><span class="c1">// カスタムルータ</span>
 <span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
