@@ -9814,21 +9814,21 @@
 <p><code>html/template</code>を使って html コンテンツを返却する Go アプリを作成します。</p>
 <h2 id="_1">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span>assets
-│<span class="w">   </span>├──<span class="w"> </span>static
-│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>index.js
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>style.css
-│<span class="w">   </span>└──<span class="w"> </span>templates
-│<span class="w">       </span>└──<span class="w"> </span>index.html
-├──<span class="w"> </span>cmd
-│<span class="w">   </span>└──<span class="w"> </span>main.go
-├──<span class="w"> </span>go.mod
-└──<span class="w"> </span>internal
-<span class="w">    </span>└──<span class="w"> </span>handler
-<span class="w">        </span>├──<span class="w"> </span>users_handler.go
-<span class="w">        </span>└──<span class="w"> </span>router
-<span class="w">            </span>├──<span class="w"> </span>users_router.go
-<span class="w">            </span>└──<span class="w"> </span>base.go
+├── assets
+│   ├── static
+│   │   ├── index.js
+│   │   └── style.css
+│   └── templates
+│       └── index.html
+├── cmd
+│   └── main.go
+├── go.mod
+└── internal
+    └── handler
+        ├── users_handler.go
+        └── router
+            ├── users_router.go
+            └── base.go
 </code></pre></div>
 <h2 id="_2">サンプルコード</h2>
 <p>擬似的なログイン画面を実装します。</p>
