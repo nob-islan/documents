@@ -1,13 +1,13 @@
-# PDB 作成手順
+# PDB作成手順
 
-PDB の作成手順です。
+PDBの作成手順です。
 
 cf.  
 https://xn--w8j8bac3czf5bl7e.com/2018/07/09/pdbの作成方法/
 
 ## 前提
 
-DBA として CDB に接続しておいてください。
+DBAとしてCDBに接続しておいてください。
 
 ```
 SQL> SHOW con_name;
@@ -19,7 +19,7 @@ CDB$ROOT
 
 ## 作成手順
 
-- PDB の元となるシードファイルの位置を確認します。
+- PDBの元となるシードファイルの位置を確認します。
 
 ```sql
 -- PDBシードに接続
@@ -44,7 +44,7 @@ FILE_NAME
 /opt/oracle/oradata/XE/pdbseed/undotbs01.dbf
 ```
 
-- PDB データファイル用のディレクトリ作成
+- PDBデータファイル用のディレクトリ作成
 
 ```sql
 -- CDBに接続
@@ -53,7 +53,7 @@ conn / as sysdba;
 !mkdir /opt/oracle/oradata/XE/${PDBディレクトリ名}
 ```
 
-- PDB 作成
+- PDB作成
 
 ```sql
 CREATE
@@ -64,13 +64,13 @@ CREATE
 ;
 ```
 
-- PDB 起動
+- PDB起動
 
 ```sql
 ALTER pluggable database ${PDB名} open;
 ```
 
-- tnsnames.ora への設定記述
+- tnsnames.oraへの設定記述
 
 下記接続情報を記載します。
 

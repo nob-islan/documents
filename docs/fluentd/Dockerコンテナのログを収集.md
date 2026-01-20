@@ -1,10 +1,10 @@
-# Docker コンテナのログを収集
+# Dockerコンテナのログを収集
 
 cf. https://www.fluentd.org/guides/recipes/docker-logging
 
 ## 設定
 
-### fluentd 設定
+### fluentd設定
 
 - `/etc/fluent/fluentd.conf` を下記で設定します:
 
@@ -20,7 +20,7 @@ cf. https://www.fluentd.org/guides/recipes/docker-logging
 </source>
 ```
 
-- fluentd を再起動します:
+- fluentdを再起動します:
 
 ```shell
 sudo systemctl restart fluentd.service
@@ -28,7 +28,7 @@ sudo systemctl restart fluentd.service
 
 ### アプリ設定
 
-- 下記 docker-compose でコンテナを起動します:
+- 下記docker-composeでコンテナを起動します:
 
 ```yaml
 services:

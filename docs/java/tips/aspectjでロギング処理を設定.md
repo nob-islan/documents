@@ -1,6 +1,6 @@
-# aspectj でロギング処理を設定
+# aspectjでロギング処理を設定
 
-**aspectj** を用いて API 開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
+**aspectj** を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
 
 cf. https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html
 
@@ -29,9 +29,9 @@ cf. https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html
 
 下記実装によって、指定したタイミングでログを出力します:
 
-- `apiStartLog`: API 実行時
-- `apiSuccessLog`: API 正常終了時
-- `apiErrorLog`: API 異常終了時
+- `apiStartLog`: API実行時
+- `apiSuccessLog`: API正常終了時
+- `apiErrorLog`: API異常終了時
 
 いずれも `"within(nob.example.easyapp.controller.*..*)"` を指定しているため、各コントローラー内のメソッド動作時に呼ばれるようになっています。
 

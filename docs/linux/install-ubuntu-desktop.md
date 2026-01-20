@@ -1,6 +1,6 @@
-# Ubuntu デスクトップをインストールする
+# Ubuntuデスクトップをインストールする
 
-Ubuntu のデスクトップ版にリモートデスクトップで接続します。
+Ubuntuのデスクトップ版にリモートデスクトップで接続します。
 
 ## インストール手順
 
@@ -17,4 +17,4 @@ sudo usermod -aG sudo rdp-user
 
 ## 接続方法
 
-Microsoft Remote Desktop などで`{IPアドレス}:3389`にアクセスすると Ubuntu デスクトップが使えるようになります。
+Microsoft Remote Desktopなどで`{IPアドレス}:3389`にアクセスするとUbuntuデスクトップが使えるようになります。

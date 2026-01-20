@@ -1,13 +1,13 @@
-# Spring Batch で Prometheus 向けメトリクスを作成
+# Spring BatchでPrometheus向けメトリクスを作成
 
-Spring Batch フレームワークを使って Prometheus で扱えるメトリクスを作成します。
+Spring Batchフレームワークを使ってPrometheusで扱えるメトリクスを作成します。
 
 ## 構築手順
 
 ### PushGateway
 
-Spring Batch はエンドポイントを持たないため、java で作ったメトリクスを Prometheus がプルできるように別途エンドポイントを用意する必要があります。
-下記`docker-compose.yaml`で PushGateway を起動すると、後述のバッチ処理で作られたメトリクスを取得する用のエンドポイントを提供してくれます:
+Spring Batchはエンドポイントを持たないため、javaで作ったメトリクスをPrometheusがプルできるように別途エンドポイントを用意する必要があります。
+下記`docker-compose.yaml`でPushGatewayを起動すると、後述のバッチ処理で作られたメトリクスを取得する用のエンドポイントを提供してくれます:
 
 ```yaml
 services:
@@ -22,7 +22,7 @@ services:
 
 cf. https://prometheus.github.io/client_java/exporters/pushgateway/
 
-`pom.xml`に PushGateway 向けの依存関係を追加します:
+`pom.xml`にPushGateway向けの依存関係を追加します:
 
 ```xml
 <!-- https://mvnrepository.com/artifact/io.prometheus/prometheus-metrics-core -->
@@ -39,7 +39,7 @@ cf. https://prometheus.github.io/client_java/exporters/pushgateway/
 </dependency>
 ```
 
-`PushGateway`クラスを Bean として宣言するコンフィグクラスを作成します:
+`PushGateway`クラスをBeanとして宣言するコンフィグクラスを作成します:
 
 ```java
 @Configuration
@@ -60,7 +60,7 @@ public class PushGatewayConfig {
 }
 ```
 
-Writer クラスにてメトリクスの作成処理を実装します:
+Writerクラスにてメトリクスの作成処理を実装します:
 
 ```java
 public class SampleMetricsWriter implements ItemWriter<Long> {
@@ -88,5 +88,5 @@ public class SampleMetricsWriter implements ItemWriter<Long> {
 
 ## 動作確認手順
 
-PushGateway を起動した上で Spring Batch を動かすと、上の例であれば`localhost:9091`で PushGateway のページが確認できます。
+PushGatewayを起動した上でSpring Batchを動かすと、上の例であれば`localhost:9091`でPushGatewayのページが確認できます。
 また、`localhost:9091/metrics`にてメトリクスが取得できます。

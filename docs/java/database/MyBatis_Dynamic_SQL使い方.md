@@ -1,12 +1,12 @@
-# MyBatis Dynamic SQL 使い方
+# MyBatis Dynamic SQL使い方
 
-**MyBatis Dynamic SQL**を使って動的に SQL を発行します。
+**MyBatis Dynamic SQL**を使って動的にSQLを発行します。
 
 cf. https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html
 
 ## 前提
 
-下記 DDL で作成されるテーブルにアクセスします:
+下記DDLで作成されるテーブルにアクセスします:
 
 ```sql
 -- テーブル作成
@@ -76,7 +76,7 @@ spring.datasource.password=password
 		</dependency>
 ```
 
-- MyBatis のコンフィグクラスを作成します:
+- MyBatisのコンフィグクラスを作成します:
 
 ```java
 package com.example.easyapp.config;
@@ -140,7 +140,7 @@ public class Users {
 }
 ```
 
-- mapper パッケージに、`sqlSupport`クラスおよび`mapper`クラスを作成します:
+- mapperパッケージに、`sqlSupport`クラスおよび`mapper`クラスを作成します:
 
 ```java
 package com.example.easyapp.mapper;
@@ -228,7 +228,7 @@ public interface UsersMapper {
 }
 ```
 
-- repository クラスを作成します:
+- repositoryクラスを作成します:
 
 ```java
 package com.example.easyapp.repository;
@@ -261,8 +261,8 @@ public class UsersRepository {
     /**
      * ユーザを検索します。
      *
-     * @param condition 検索条件
-     * @return ヒットしたユーザのリスト
+     * @param condition検索条件
+     * @returnヒットしたユーザのリスト
      */
     public List<Users> selectByCondition(UsersSelectCondition condition) {
 
@@ -279,7 +279,7 @@ public class UsersRepository {
     /**
      * ユーザを登録します。
      *
-     * @param users エンティティ
+     * @param usersエンティティ
      * @return
      */
     public void insert(Users users) {
@@ -320,9 +320,9 @@ public class UsersSelectCondition {
 
 ## テスト例
 
-H2DB を使ってテストします。
+H2DBを使ってテストします。
 
-- h2db の依存関係を追記します:
+- h2dbの依存関係を追記します:
 
 ```xml
 		<!-- h2db導入 -->

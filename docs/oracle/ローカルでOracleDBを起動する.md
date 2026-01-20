@@ -1,22 +1,22 @@
-# ローカルで OracleDB を起動する
+# ローカルでOracleDBを起動する
 
-docker 上で Oracle データベースを動かします。
+docker上でOracleデータベースを動かします。
 
 cf. https://zenn.dev/re24_1986/articles/29430f2f8b4b46
 
-## Oracle データベースの image を作成
+## Oracleデータベースのimageを作成
 
-git からソースをクローン
+gitからソースをクローン
 
 ```shell
 git clone https://github.com/oracle/docker-images.git
 ```
 
-Oracle Express Extension をダウンロード
+Oracle Express Extensionをダウンロード
 
 > https://www.oracle.com/jp/database/technologies/xe-downloads.html
 
-ダウンロードした Express Extension を下記ディレクトリに配置
+ダウンロードしたExpress Extensionを下記ディレクトリに配置
 
 ```
 docker-images/OracleDatabase/SingleInstance/dockerfiles/21.3.0

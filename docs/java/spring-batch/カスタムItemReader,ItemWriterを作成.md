@@ -1,6 +1,6 @@
-# カスタム ItemReader, ItemWriter を作成
+# カスタムItemReader, ItemWriterを作成
 
-SQL 発行に限らず、汎用的な処理を実装するための ItemReader, ItemWriter の作成方法を記載します。
+SQL発行に限らず、汎用的な処理を実装するためのItemReader, ItemWriterの作成方法を記載します。
 
 ## サンプルコード
 

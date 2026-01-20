@@ -1,4 +1,4 @@
-# Docker で MariaDB を構築
+# DockerでMariaDBを構築
 
 ## 使用環境
 
@@ -16,13 +16,13 @@ root
   └─docker-compose.yaml
 ```
 
-コンテナ起動時に、`initdb.d`配下の sql ファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。
+コンテナ起動時に、`initdb.d`配下のsqlファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。
 
 ## 設定ファイル
 
 ### docker-compose.yaml
 
-DB サーバおよび GUI で DB を管理できる`adminer`を起動します。
+DBサーバおよびGUIでDBを管理できる`adminer`を起動します。
 
 ```yaml
 services:
@@ -46,7 +46,7 @@ services:
 
 ### create_db.sql
 
-テーブル作成、初期データ投入などを行う SQL ファイルです。
+テーブル作成、初期データ投入などを行うSQLファイルです。
 
 ```sql
 -- データベース作成
@@ -81,4 +81,4 @@ id,code_name,age
 2,second-nob,5
 ```
 
-コンテナ起動後、コンテナ内から`mariadb -u root -p`で DB にログインできます。
+コンテナ起動後、コンテナ内から`mariadb -u root -p`でDBにログインできます。

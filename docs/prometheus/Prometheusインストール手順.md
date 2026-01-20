@@ -1,11 +1,11 @@
-# Prometheus インストール手順
+# Prometheusインストール手順
 
 cf. https://prometheus.io/docs/prometheus/latest/getting_started/
 インストールから動作確認まで行います。
 
 ## 事前準備
 
-タイムゾーンがローカル PC とズレていると画面に警告が出るため、下記設定をしておきます。
+タイムゾーンがローカルPCとズレていると画面に警告が出るため、下記設定をしておきます。
 
 ```
 timedatectl set-timezone Asia/Tokyo
@@ -13,7 +13,7 @@ timedatectl set-timezone Asia/Tokyo
 
 ## インストール
 
-事前に docker をインストールしておいてください。
+事前にdockerをインストールしておいてください。
 
 ## 起動
 
@@ -61,7 +61,7 @@ http://${prometheusサーバのIPアドレス}:9090/metrics
 
 `node exporter`を使うと、他サーバの各メトリクスを監視できます。
 
-監視したいサーバにて、node exporter を起動します。
+監視したいサーバにて、node exporterを起動します。
 
 ```
 docker run -d \
@@ -79,7 +79,7 @@ docker run -d \
 curl http://localhost:9100/metrics
 ```
 
-Prometheus の設定ファイルに下記を追記します。
+Prometheusの設定ファイルに下記を追記します。
 
 ```diff
  scrape_configs:

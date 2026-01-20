@@ -1,22 +1,22 @@
-# GitLab を AWS 上の RDS に接続する
+# GitLabをAWS上のRDSに接続する
 
-AWS の RDS を利用して立ち上げた PostgreSQL に GitLab を接続します。
+AWSのRDSを利用して立ち上げたPostgreSQLにGitLabを接続します。
 
-## PostgreSQL の設定
+## PostgreSQLの設定
 
-事前準備として、AWS コンソールなどを利用して PostgreSQL を立ち上げます。  
+事前準備として、AWSコンソールなどを利用してPostgreSQLを立ち上げます。  
 https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html
 
-GitLab サーバに`psql`をインストールします。
+GitLabサーバに`psql`をインストールします。
 
 ```shell
 sudo apt-get install postgresql-client-common
 sudo apt-get install postgresql-client
 ```
 
-以下、PostgreSQL サーバに設定を入れていきます。  
+以下、PostgreSQLサーバに設定を入れていきます。  
 https://docs.gitlab.com/ee/administration/postgresql/external.html  
-AWS コンソール上に表示される DB のエンドポイントを控えておき、デフォルトで用意されている`postgres`ユーザを使って PostgreSQL に接続します。
+AWSコンソール上に表示されるDBのエンドポイントを控えておき、デフォルトで用意されている`postgres`ユーザを使ってPostgreSQLに接続します。
 
 ```shell
 psql \
@@ -26,7 +26,7 @@ psql \
   --password
 ```
 
-以下のように、PostgreSQL 上の操作で GitLab 用のユーザおよびデータベースを用意します。
+以下のように、PostgreSQL上の操作でGitLab用のユーザおよびデータベースを用意します。
 
 ```sql
 -- ユーザを作成
@@ -46,7 +46,7 @@ CREATE DATABASE gitlabhq_production OWNER gitlab;
 GRANT rds_superuser TO gitlab;
 ```
 
-以降は、以下のコマンドで直接 GitLab 用のデータベースに接続できます。
+以降は、以下のコマンドで直接GitLab用のデータベースに接続できます。
 
 ```shell
 psql \
@@ -57,9 +57,9 @@ psql \
   --password
 ```
 
-## GitLab の設定
+## GitLabの設定
 
-docker で動かすため、`docker-compose.yaml`を以下で作成します。
+dockerで動かすため、`docker-compose.yaml`を以下で作成します。
 
 ```yaml
 version: "3"
@@ -90,7 +90,7 @@ services:
 
 ## 起動
 
-`docker-compose up`で OK。初期パスワードは以下で確認できます。
+`docker-compose up`でOK。初期パスワードは以下で確認できます。
 
 ```shell
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password

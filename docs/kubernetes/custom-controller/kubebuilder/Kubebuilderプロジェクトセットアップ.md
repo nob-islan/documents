@@ -1,4 +1,4 @@
-# Kubebuilder プロジェクトセットアップ
+# Kubebuilderプロジェクトセットアップ
 
 [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
 
@@ -11,7 +11,7 @@
 kubebuilder init --domain example.nob --repo example.nob/nob-controller
 ```
 
-- API オブジェクトおよびコントローラのテンプレートを作成します。
+- APIオブジェクトおよびコントローラのテンプレートを作成します。
 
 ```shell
 # kubebuilder create api --group {APIグループ} --version {バージョン} --kind {リソース種別}
@@ -20,11 +20,11 @@ kubebuilder create api --group nobcontroller --version v1 --kind Nob
 
 ## 実装
 
-Deployment リソースを管理する `Nob` のコントローラーを実装します。
+Deploymentリソースを管理する `Nob` のコントローラーを実装します。
 
 ### api/v1/nob_types.go
 
-カスタムリソースの Spec および Status を定義します。変更後は `make` コマンドを実行して関連するファイルの再生成をしてください。
+カスタムリソースのSpecおよびStatusを定義します。変更後は `make` コマンドを実行して関連するファイルの再生成をしてください。
 
 ```go
 // NobSpec defines the desired state of Nob
@@ -58,9 +58,9 @@ type NobStatus struct {
 
 ### internal/controller/nob_controller.go
 
-Reconcile を行うコントローラー本体を実装します。
+Reconcileを行うコントローラー本体を実装します。
 
-- Reconciler の構造体を定義します。
+- Reconcilerの構造体を定義します。
 
 ```go
 // NobReconciler reconciles a Nob object
@@ -72,7 +72,7 @@ type NobReconciler struct {
 }
 ```
 
-- RBAC Marker を追記します。
+- RBAC Markerを追記します。
 
 ```go
 // +kubebuilder:rbac:groups=nobcontroller.example.nob,resources=nobs,verbs=get;list;watch;create;update;patch;delete
@@ -82,7 +82,7 @@ type NobReconciler struct {
 // +kubebuilder:rbac:groups="",resources=events,verbs=create;patch
 ```
 
-- SetUpWithManager を定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。
+- SetUpWithManagerを定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。
 
 ```go
 // SetupWithManager sets up the controller with the Manager.
@@ -95,7 +95,7 @@ func (r *NobReconciler) SetupWithManager(mgr ctrl.Manager) error {
 }
 ```
 
-- クリーンアップ関数を定義します。Nob リソースへの変更が入るなどして古くなった Deployment を検知して削除します。
+- クリーンアップ関数を定義します。Nobリソースへの変更が入るなどして古くなったDeploymentを検知して削除します。
 
 ```go
 // Nob resourceによって作成され、かつnob.spec配下と名前が一致しないDeploymentを削除します。
@@ -143,7 +143,7 @@ func (r *NobReconciler) cleanupOwnedResources(
 }
 ```
 
-- Reconcile 関数を実装します。コントローラー実装の本体をここに記述します。
+- Reconcile関数を実装します。コントローラー実装の本体をここに記述します。
 
 ```go
 func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
@@ -268,7 +268,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 
 ### cmd/main.go
 
-Reconciler のメンバを追加します。
+Reconcilerのメンバを追加します。
 
 ```go
 	if err := (&controller.NobReconciler{ // nob_controller.goの定義に合わせて追記
@@ -290,7 +290,7 @@ Reconciler のメンバを追加します。
 
 #### internal/controller/nob_controller_test.go
 
-- BeforeEach に NobSpec で定めたパラメータを定義します。
+- BeforeEachにNobSpecで定めたパラメータを定義します。
 
 ```go
 		BeforeEach(func() {
@@ -312,7 +312,7 @@ Reconciler のメンバを追加します。
 		})
 ```
 
-- AfterEach に Reconciler の定義および、Expect の内容を記載します。
+- AfterEachにReconcilerの定義および、Expectの内容を記載します。
 
 ```go
 		AfterEach(func() {
@@ -370,7 +370,7 @@ make test
 
 ## ローカルアプリケーション起動
 
-- kind/cluster/kubebuilder-cluster.yaml を下記内容で作成します。
+- kind/cluster/kubebuilder-cluster.yamlを下記内容で作成します。
 
 ```yaml
 kind: Cluster
@@ -381,19 +381,19 @@ nodes:
   - role: worker
 ```
 
-- Kind で Kubernetes クラスタを構築します。
+- KindでKubernetesクラスタを構築します。
 
 ```shell
 kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder-cluster.yaml
 ```
 
-- yaml マニフェストの生成および CRD の登録を行います。
+- yamlマニフェストの生成およびCRDの登録を行います。
 
 ```shell
 make install
 ```
 
-- config/samples 配下のカスタムリソースの spec を宣言します。
+- config/samples配下のカスタムリソースのspecを宣言します。
 
 ```yaml
 apiVersion: nobcontroller.example.nob/v1
@@ -420,13 +420,13 @@ NAME         AGE
 nob-sample   15s
 ```
 
-- Go プロセスとしてコントローラを動かします。
+- Goプロセスとしてコントローラを動かします。
 
 ```shell
 make run
 ```
 
-- コントローラーが正常に動作していれば、nginx の Pod が作成されます。
+- コントローラーが正常に動作していれば、nginxのPodが作成されます。
 
 ```
 $ kubectl get pod

@@ -1,10 +1,10 @@
-# Docker インストールを Ansible で実行
+# DockerインストールをAnsibleで実行
 
-docker インストールおよび、ユーザの docker グループへの追加自動化します。
+dockerインストールおよび、ユーザのdockerグループへの追加自動化します。
 
 ## 下準備
 
-[ansible インストール](./ansibleインストール.md)を参考にして ansible サーバを構築します。
+[ansibleインストール](./ansibleインストール.md)を参考にしてansibleサーバを構築します。
 
 ## ディレクトリ構成
 

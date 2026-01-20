@@ -1,6 +1,6 @@
-# Kubernetes クラスター構築手順
+# Kubernetesクラスター構築手順
 
-公式ドキュメントに従って Kubernetes クラスターを構築します。
+公式ドキュメントに従ってKubernetesクラスターを構築します。
 
 ## 事前準備
 
@@ -8,13 +8,13 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_pr
 
 ### エラー回避のための設定
 
-swap を無効化します。
+swapを無効化します。
 
 ```shell
 sudo swapoff -a
 ```
 
-ただし、上記の方法だとノードを再起動すると swap が再度有効化されてしまいます。永続的に無効化したい場合は`/etc/fstab`ファイルの swap に関する行をコメントアウトしてリブートします。
+ただし、上記の方法だとノードを再起動するとswapが再度有効化されてしまいます。永続的に無効化したい場合は`/etc/fstab`ファイルのswapに関する行をコメントアウトしてリブートします。
 
 ## コントロールプレーン構築
 
@@ -45,7 +45,7 @@ EOF
 sudo sysctl --system
 ```
 
-#### containerd のインストール
+#### containerdのインストール
 
 cf. https://github.com/containerd/containerd/blob/main/docs/getting-started.md
 
@@ -75,7 +75,7 @@ sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
 ```
 
-config.toml の `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]` について、`SystemdCgroup = true` に書き換えます。
+config.tomlの `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]` について、`SystemdCgroup = true` に書き換えます。
 
 ```shell
 # SystemdCgroup設定書き換え
@@ -84,7 +84,7 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/con
 sudo systemctl restart containerd
 ```
 
-### kubeadm, kubelet, kubectl のインストール
+### kubeadm, kubelet, kubectlのインストール
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#kubeadm-kubelet-kubectlのインストール
 
@@ -123,32 +123,32 @@ sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-### CNI のインストール
+### CNIのインストール
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
-CNI プラグインを適用します。これが無いと`kubectl get node`で確認した際のノードの Status が`NotReady`のまま動きません。各 CNI については下記を参照ください:  
+CNIプラグインを適用します。これが無いと`kubectl get node`で確認した際のノードのStatusが`NotReady`のまま動きません。各CNIについては下記を参照ください:  
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
-flannel のマニフェストをダウンロードします:
+flannelのマニフェストをダウンロードします:
 
 ```shell
 wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
-`net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
+`net-conf.json`内の`Network`を先に設定したpodのcidrに合わせます:
 
 ```shell
 sudo sed -i 's/"Network": "10.244.0.0\/16"/"Network": "10.20.0.0\/16"/' kube-flannel.yml
 ```
 
-flannel のリソースを作成します:
+flannelのリソースを作成します:
 
 ```shell
 kubectl apply -f kube-flannel.yml
 ```
 
-flannel のリソースが作成されることを確認します:
+flannelのリソースが作成されることを確認します:
 
 ```shell
 watch kubectl get pods -n kube-flannel
@@ -164,10 +164,10 @@ kubectl get nodes
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
 
-### kubeXXX インストール
+### kubeXXXインストール
 
-コントロールプレーン構築の「コンテナランタイムのインストール」および「kubeadm, kubelet, kubectl のインストール」と同様の手順を踏んでください。
+コントロールプレーン構築の「コンテナランタイムのインストール」および「kubeadm, kubelet, kubectlのインストール」と同様の手順を踏んでください。
 
 ### ノードをクラスターに参加させる
 
-先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードの Status が`Ready`になります。
+先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードのStatusが`Ready`になります。

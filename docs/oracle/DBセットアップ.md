@@ -1,6 +1,6 @@
-# DB セットアップ Tips
+# DBセットアップTips
 
-スキーマの作成など、セットアップに関わる Tips を書きます。
+スキーマの作成など、セットアップに関わるTipsを書きます。
 
 管理者としてログイン
 
@@ -14,7 +14,7 @@ sqlplus / as sysdba
 SHOW con_name;
 ```
 
-PDB 一覧を確認
+PDB一覧を確認
 
 ```sql
 SHOW pdbs;
@@ -33,7 +33,7 @@ SELECT * FROM all_users;
 SELECT * FROM dba_users;
 ```
 
-DBA 権限の付与
+DBA権限の付与
 
 ```sql
 GRANT dba TO ${ユーザ名}

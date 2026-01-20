@@ -1,12 +1,12 @@
-# Spring Boot Restdocs でドキュメント作成
+# Spring Boot Restdocsでドキュメント作成
 
-Restdocs および asciidocs を使って、単体テストの結果から API 設計書を自動作成します。
+Restdocsおよびasciidocsを使って、単体テストの結果からAPI設計書を自動作成します。
 
 cf. https://spring.pleiades.io/guides/gs/testing-restdocs
 
 ## 各種ファイルサンプル
 
-サンプルとして、簡単な GET メソッドおよび POST メソッドの API 設計書を作成します。
+サンプルとして、簡単なGETメソッドおよびPOSTメソッドのAPI設計書を作成します。
 
 ### 依存関係の追加
 
@@ -49,7 +49,7 @@ cf. https://spring.pleiades.io/guides/gs/testing-restdocs
 			</plugin>
 ```
 
-### API 実装
+### API実装
 
 - コントローラインターフェース
 

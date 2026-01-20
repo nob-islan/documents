@@ -1,6 +1,6 @@
-# Prometheus 向けに Spring Boot Actuator を有効化する
+# Prometheus向けにSpring Boot Actuatorを有効化する
 
-Spring Boot Actuator を有効化し、Prometheus 向けにメトリクスを作成します。
+Spring Boot Actuatorを有効化し、Prometheus向けにメトリクスを作成します。
 
 ## 手順
 
@@ -11,7 +11,7 @@ cf.
 - https://docs.spring.io/spring-boot/reference/actuator/enabling.html
 - https://docs.spring.io/spring-boot/reference/actuator/metrics.html
 
-Spring Boot アプリに依存関係を追加します:
+Spring Bootアプリに依存関係を追加します:
 
 ```xml
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
@@ -53,13 +53,13 @@ management:
       "[http.server.requests]": true
 ```
 
-### Prometheus からの監視
+### Prometheusからの監視
 
 cf.
 
 - https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus
 
-下記内容で prometheus の監視設定を定義します:
+下記内容でprometheusの監視設定を定義します:
 
 ```yaml
 scrape_configs:
@@ -69,7 +69,7 @@ scrape_configs:
       - targets: ["easyapp:8080"] # {java app IP}:{port}
 ```
 
-例として、下記 docker-compose によってアプリを動かし、メトリクスを Prometheus 上で確認することができます:
+例として、下記docker-composeによってアプリを動かし、メトリクスをPrometheus上で確認することができます:
 
 ```yaml
 services:

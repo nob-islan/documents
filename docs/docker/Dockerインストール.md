@@ -1,6 +1,6 @@
-# Docker インストール
+# Dockerインストール
 
-Docker をインストールします。
+Dockerをインストールします。
 
 cf. https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 

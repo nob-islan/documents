@@ -1,6 +1,6 @@
-# MySQL の master-slave 構成を構築
+# MySQLのmaster-slave構成を構築
 
-MySQL を master-slave 構成で起動するマニフェストのサンプルです。
+MySQLをmaster-slave構成で起動するマニフェストのサンプルです。
 
 ## MySQL
 
@@ -8,11 +8,11 @@ MySQL を master-slave 構成で起動するマニフェストのサンプルで
 
 ### mysql-sts.yaml
 
-- StatefulSet で Mysql Pod を 2 台起動し、それぞれに master / slave の状態を持たせます。
-- initContainer で、ボリュームを介してそれぞれのコンテナに設定ファイルを渡します:
-  - mysql-docker-entrypoint-initdb: データーベース初期構築向け SQL
-  - mysql-conf: master / slave の設定を持たせる my.cnf
-- volumeClaimTemplates を使って各 Pod のバックアップを取ります。
+- StatefulSetでMysql Podを2台起動し、それぞれにmaster / slaveの状態を持たせます。
+- initContainerで、ボリュームを介してそれぞれのコンテナに設定ファイルを渡します:
+  - mysql-docker-entrypoint-initdb: データーベース初期構築向けSQL
+  - mysql-conf: master / slaveの設定を持たせるmy.cnf
+- volumeClaimTemplatesを使って各Podのバックアップを取ります。
 
 ```yaml
 apiVersion: apps/v1
@@ -103,7 +103,7 @@ spec:
 
 ### mysql-common-secret.yaml
 
-mysql-[0|1]に共通する Secret です。`kubectl` コマンドの dry-run によってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
+mysql-[0|1]に共通するSecretです。`kubectl` コマンドのdry-runによってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
 
 ```yaml
 apiVersion: v1
@@ -116,7 +116,7 @@ metadata:
 
 ### mysql-setting-cm.yaml
 
-initContainer で動かすスクリプトです。Pod のホスト名によって適切な設定ファイルを MySQL コンテナに渡します。
+initContainerで動かすスクリプトです。Podのホスト名によって適切な設定ファイルをMySQLコンテナに渡します。
 
 ```yaml
 apiVersion: v1
@@ -136,7 +136,7 @@ data:
 
 ### mysql-master-temp.yaml
 
-master 向けの my.cnf および init.sql です。
+master向けのmy.cnfおよびinit.sqlです。
 
 ```yaml
 apiVersion: v1
@@ -170,7 +170,7 @@ data:
 
 ### mysql-slave-temp.yaml
 
-slave 向けの my.cnf および init.sql です。
+slave向けのmy.cnfおよびinit.sqlです。
 
 ```yaml
 apiVersion: v1
@@ -203,7 +203,7 @@ data:
 
 ### mysql-svc.yaml
 
-MySQL 向けのサービスです。アプリケーションとの疎通は後述の ProxySQL を介して行うため、ここでは [Headless Service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)を作成して各 Pod に直接疎通が取れるようにしています。
+MySQL向けのサービスです。アプリケーションとの疎通は後述のProxySQLを介して行うため、ここでは [Headless Service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)を作成して各Podに直接疎通が取れるようにしています。
 
 ```yaml
 apiVersion: v1
@@ -218,7 +218,7 @@ spec:
 
 ## ProxySQL
 
-アプリからデータベースへの疎通を担う ProxySQL のマニフェストです。
+アプリからデータベースへの疎通を担うProxySQLのマニフェストです。
 
 ### proxysql-deploy.yaml
 
@@ -259,7 +259,7 @@ spec:
 
 ### proxysql-cm.yaml
 
-master / slave のルーティングを設定します。`mysql-x.mysql-svc` で Pod に直接疎通します。
+master / slaveのルーティングを設定します。`mysql-x.mysql-svc` でPodに直接疎通します。
 
 ```yaml
 apiVersion: v1

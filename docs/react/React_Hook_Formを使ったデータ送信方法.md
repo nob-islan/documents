@@ -1,6 +1,6 @@
-# React Hook Form を使ったデータ送信方法
+# React Hook Formを使ったデータ送信方法
 
-React Hook Form を使って、画面上に入力した値を API に送信する方法を記載します。サンプルとして、簡単なログイン画面を実装します。
+React Hook Formを使って、画面上に入力した値をAPIに送信する方法を記載します。サンプルとして、簡単なログイン画面を実装します。
 
 ## ライブラリのインストール
 
@@ -12,7 +12,7 @@ npm install react-hook-form redux-thunk axios
 
 ### app/store.ts
 
-ミドルウェア利用向けに store.ts を下記で作成します。
+ミドルウェア利用向けにstore.tsを下記で作成します。
 
 ```ts
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
@@ -62,7 +62,7 @@ const Login: React.FC<Props> = (props) => {
   /**
    *送信ボタン押下時の動作を定義します。
    *
-   * @param data 認証向けデータ
+   * @param data認証向けデータ
    */
   const onSubmit = (data: LoginFormData) => {
     dispatch(login(data));
@@ -90,7 +90,7 @@ export default Login;
 
 ### features/login/loginAction.ts
 
-後述の API 呼び出し関数をコールします。
+後述のAPI呼び出し関数をコールします。
 
 ```ts
 import { LoginFormData } from "./Login";
@@ -111,7 +111,7 @@ export const login = (data: LoginFormData) => async () => {
 
 ### features/login/loginApi.ts
 
-ログイン API を呼び出します。
+ログインAPIを呼び出します。
 
 ```ts
 import axios from "axios";
@@ -120,7 +120,7 @@ import { LoginFormData } from "./Login";
 /**
  * APIコールをして認証処理を行います。
  *
- * @returns メッセージ
+ * @returnsメッセージ
  */
 export const callApi = async (data: LoginFormData): Promise<string> => {
   try {

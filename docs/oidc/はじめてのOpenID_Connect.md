@@ -1,4 +1,4 @@
-# はじめての OpenID Connect
+# はじめてのOpenID Connect
 
 認証・認可プロトコルの [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) についてその業務処理を解説します。
 
@@ -20,18 +20,18 @@ sequenceDiagram
     participant op as OP
 
     autonumber
-    end_user ->> rp: 業務 API 呼び出し
+    end_user ->> rp: 業務API呼び出し
     rp ->+ end_user: 認可エンドポイントへリダイレクト
     end_user ->>-op: 認証リクエスト
         Note right of op: 認可エンドポイント
     op -->> end_user: ログイン画面
     end_user ->> op: ユーザ認証
     op ->+ end_user: 認証レスポンス
-    end_user ->>- rp: リダイレクト URI へリダイレクト
+    end_user ->>- rp: リダイレクトURIへリダイレクト
     rp ->> op: トークンリクエスト
         Note right of op: トークンエンドポイント
     op -->> rp: トークンレスポンス
-    rp ->> rp: ID トークン検証
+    rp ->> rp: IDトークン検証
     rp -->> end_user: ログインセッション
 ```
 

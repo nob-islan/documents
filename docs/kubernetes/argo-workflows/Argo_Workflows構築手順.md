@@ -1,25 +1,25 @@
-# Argo Workflows 構築手順
+# Argo Workflows構築手順
 
-Argo Workflows を構築します。
+Argo Workflowsを構築します。
 
 cf. https://argo-workflows.readthedocs.io/en/latest/quick-start/
 
 ## 構築手順
 
-- Argo Workflows のバージョンを指定します（see also; https://github.com/argoproj/argo-workflows）:
+- Argo Workflowsのバージョンを指定します（see also; https://github.com/argoproj/argo-workflows）:
 
 ```shell
 ARGO_WORKFLOWS_VERSION="v3.7.3"
 ```
 
-- Argo Workflows をインストールします:
+- Argo Workflowsをインストールします:
 
 ```shell
 kubectl create namespace argo
 kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
 ```
 
-- Argo Workflows の API Server にアクセスできるよう、サービスタイプを変更します:
+- Argo WorkflowsのAPI Serverにアクセスできるよう、サービスタイプを変更します:
 
 ```shell
 # ロードバランサがある場合 type: LoadBalancer
@@ -29,7 +29,7 @@ kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer"}}'
 kubectl patch svc argo-server -n argo -p '{"spec": {"type": "NodePort", "ports": [{"name": "web", "port": 2746, "protocol": "TCP", "targetPort": 2746, "nodePort": 32746}]}}'
 ```
 
-- Argo Workflows CLI をインストールします（cf. https://github.com/argoproj/argo-workflows/releases/）:
+- Argo Workflows CLIをインストールします（cf. https://github.com/argoproj/argo-workflows/releases/）:
 
 ```shell
 # Detect OS

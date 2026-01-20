@@ -1,15 +1,15 @@
-# Java アプリから web サーバにファイルを送信
+# Javaアプリからwebサーバにファイルを送信
 
-Java アプリ内でファイルを作成、web サーバ上に格納します。
+Javaアプリ内でファイルを作成、webサーバ上に格納します。
 
 ## 登場人物
 
-- nginx サーバ
-- Java アプリケーション
+- nginxサーバ
+- Javaアプリケーション
 
 ## 構築
 
-### nginx サーバ
+### nginxサーバ
 
 ディレクトリ構成は下記です：
 
@@ -102,7 +102,7 @@ services:
       - "./volume/default.conf:/etc/nginx/conf.d/default.conf"
 ```
 
-### Java アプリケーション
+### Javaアプリケーション
 
 `resources`配下の`application.properties`に下記を記載します：
 
@@ -237,8 +237,8 @@ public class NginxServiceImpl implements NginxService {
 
 ## 起動、動作確認
 
-- `docker compose up`で nginx サーバを起動、
-- Java アプリケーションを起動
+- `docker compose up`でnginxサーバを起動、
+- Javaアプリケーションを起動
 
 してから`curl http://localhost:8080/sample/file`を叩きます。
 

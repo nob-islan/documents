@@ -1,4 +1,4 @@
-# Argo Workflows への http 通信を許可
+# Argo Workflowsへのhttp通信を許可
 
 cf. https://github.com/argoproj/argo-workflows/discussions/6836
 

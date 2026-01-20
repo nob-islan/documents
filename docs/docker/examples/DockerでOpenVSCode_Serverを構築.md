@@ -1,4 +1,4 @@
-# Docker で OpenVSCode Server を構築
+# DockerでOpenVSCode Serverを構築
 
 ## 構築
 
@@ -17,13 +17,13 @@ services:
       - ./volumes:/home/workspace
 ```
 
-`{サーバのアドレス}:3000`にアクセスすると VSCode の画面が表示されます。
+`{サーバのアドレス}:3000`にアクセスするとVSCodeの画面が表示されます。
 
-### https で通信を行う
+### httpsで通信を行う
 
-http 通信だと markdown のプレビューができないなど不都合があるので、自己証明書を発行してリバースプロキシ経由で https 通信をできるようにします。ここでは例としてパッケージ版の nginx サーバを立ててプロキシサーバとします。
+http通信だとmarkdownのプレビューができないなど不都合があるので、自己証明書を発行してリバースプロキシ経由でhttps通信をできるようにします。ここでは例としてパッケージ版のnginxサーバを立ててプロキシサーバとします。
 
-#### nginx インストール
+#### nginxインストール
 
 ```shell
 sudo apt update
@@ -47,7 +47,7 @@ sudo openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.
 sudo openssl x509 -days 3650 -req -signkey /etc/nginx/ssl/server.key -in /etc/nginx/ssl/server.csr -out /etc/nginx/ssl/server.crt
 ```
 
-#### nginx の設定変更
+#### nginxの設定変更
 
 `/etc/nginx/conf.d/ssl.conf`を下記で作成します:
 
@@ -65,7 +65,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # WebSocket のための設定
+        # WebSocketのための設定
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -73,4 +73,4 @@ server {
 }
 ```
 
-nginx の再起動後、http://localhost:443 で VSCode にアクセスでき、markdown のプレビューなどが利用できるようになっています。
+nginxの再起動後、http://localhost:443でVSCodeにアクセスでき、markdownのプレビューなどが利用できるようになっています。

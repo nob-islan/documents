@@ -1,6 +1,6 @@
-# Go CLI をビルド
+# Go CLIをビルド
 
-GitLab Runner を使って Go の CLI アプリをビルドします。
+GitLab Runnerを使ってGoのCLIアプリをビルドします。
 
 ## 設定ファイル
 
@@ -15,11 +15,11 @@ cf.
 
 - ビルド
   - `go build`でバイナリを作成します。
-    - サンプルとして linux 向けの arm64, amd64 対応版をビルドしています。
-  - 複数 OS, アーキに対応する場合はそれぞれのバージョンに対してビルドしてください。
+    - サンプルとしてlinux向けのarm64, amd64対応版をビルドしています。
+  - 複数OS, アーキに対応する場合はそれぞれのバージョンに対してビルドしてください。
 - リリース
   - `gitlab-cli`を使います。
-  - build ジョブで作成した artifact をダウンロードし、release 時の asset に追加します。
+  - buildジョブで作成したartifactをダウンロードし、release時のassetに追加します。
 
 ```yaml
 stages:

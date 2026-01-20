@@ -1,6 +1,6 @@
-# swaggo で API ドキュメント作成
+# swaggoでAPIドキュメント作成
 
-API 設計書の作成方法について説明します。swag によってコメントから swagger を自動生成するようにしています。
+API設計書の作成方法について説明します。swagによってコメントからswaggerを自動生成するようにしています。
 
 cf.
 
@@ -9,7 +9,7 @@ cf.
 
 ## ライブラリインストール
 
-下記コマンドで swag および http-swagger をインストールします:
+下記コマンドでswagおよびhttp-swaggerをインストールします:
 
 ```shell
 go install github.com/swaggo/swag/cmd/swag@latest
@@ -34,7 +34,7 @@ go get -u github.com/swaggo/http-swagger
 
 + // @title Easy App
 + // @version 1.0.0
-+ // @description サンプルのREST APIです。
++ // @descriptionサンプルのREST APIです。
 + //
 + // @BasePath /api/v1
   func main() {
@@ -46,7 +46,7 @@ go get -u github.com/swaggo/http-swagger
 
 ### router/base.go
 
-swagger ページへのルーティングを設定します。
+swaggerページへのルーティングを設定します。
 
 ```diff
   package router
@@ -79,7 +79,7 @@ swagger ページへのルーティングを設定します。
 	  // 各handlerに紐づくルーティングを設定
 	  m := http.NewServeMux()
 
-+	  // swagger UI のルーティング
++	  // swagger UIのルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
 	  // users
@@ -91,7 +91,7 @@ swagger ページへのルーティングを設定します。
 
 ### handler/users_handler.go
 
-各 API のインターフェース仕様を記載します:
+各APIのインターフェース仕様を記載します:
 
 ```diff
   package handler
@@ -171,7 +171,7 @@ swagger ページへのルーティングを設定します。
 
 ### model/users_model.go
 
-各モデルクラスの example 記載します:
+各モデルクラスのexample記載します:
 
 ```diff
   package model
@@ -234,7 +234,7 @@ swagger ページへのルーティングを設定します。
 
 ### apperrors/sample_error.go
 
-例外発生時レスポンスモデルの example を記載します:
+例外発生時レスポンスモデルのexampleを記載します:
 
 ```diff
   package apperrors
@@ -274,7 +274,7 @@ swagger ページへのルーティングを設定します。
 
 ## 動作確認
 
-下記コマンドで swagger ドキュメントを生成します:
+下記コマンドでswaggerドキュメントを生成します:
 
 ```shell
 swag init -o ./api -g cmd/main.go
@@ -286,4 +286,4 @@ swag init -o ./api -g cmd/main.go
 go run cmd/main.go
 ```
 
-アプリ起動後、http://localhost:8080/swagger/index.html で swagger ドキュメントを確認できます。
+アプリ起動後、http://localhost:8080/swagger/index.htmlでswaggerドキュメントを確認できます。

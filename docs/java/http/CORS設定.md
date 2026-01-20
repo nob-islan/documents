@@ -1,6 +1,6 @@
-# CORS 設定
+# CORS設定
 
-React など、別オリジンから API を呼び出す際の設定例です。
+Reactなど、別オリジンからAPIを呼び出す際の設定例です。
 
 ```java
 package com.example.sampleapi.config;

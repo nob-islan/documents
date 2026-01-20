@@ -1,6 +1,6 @@
-# はじめての dnsmasq
+# はじめてのdnsmasq
 
-ローカルネットワーク向けの DNS サーバ **dnsmasq** の構築手順です。
+ローカルネットワーク向けのDNSサーバ **dnsmasq** の構築手順です。
 
 ## 構築手順
 
@@ -10,7 +10,7 @@
 sudo apt install dnsmasq
 ```
 
-- dnsmasq で利用予定の 53 ポートを使っているプロセスを kill
+- dnsmasqで利用予定の53ポートを使っているプロセスをkill
 
 ```shell
 # systemd-resolvedがポートを使っていることが多い

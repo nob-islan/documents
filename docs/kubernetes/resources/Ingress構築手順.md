@@ -1,6 +1,6 @@
-# Ingress 構築手順
+# Ingress構築手順
 
-クラスタ外部からの HTTP/HTTPS 通信を制御する Ingress の構築および動作確認手順です。
+クラスタ外部からのHTTP/HTTPS通信を制御するIngressの構築および動作確認手順です。
 
 ## 参考文献
 
@@ -13,13 +13,13 @@
 
 ### リソース作成
 
-- Ingress Controller をインストールします:
+- Ingress Controllerをインストールします:
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.13.2/deploy/static/provider/cloud/deploy.yaml
 ```
 
-- Ingress リソースを作成します:
+- Ingressリソースを作成します:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -42,7 +42,7 @@ spec:
                   number: 8080
 ```
 
-- Service および Deployment を作成します:
+- ServiceおよびDeploymentを作成します:
 
 ```yaml
 kind: Service
@@ -80,7 +80,7 @@ spec:
 
 ### 動作確認
 
-- Ingress が待ち受けているポートを確認します:
+- Ingressが待ち受けているポートを確認します:
 
 ```
 $ kubectl get svc ingress-nginx-controller -n ingress-nginx
@@ -88,7 +88,7 @@ NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S) 
 ingress-nginx-controller   LoadBalancer   10.105.79.217   <pending>     80:31522/TCP,443:30602/TCP   4m13s
 ```
 
-- curl で疎通確認をとります:
+- curlで疎通確認をとります:
 
 ```
 $ curl localhost:31522/api/v1/greet

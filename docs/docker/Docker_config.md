@@ -1,6 +1,6 @@
 # Docker config
 
-docker config を使ってコンテナ内の設定ファイルを yaml に記載します。
+docker configを使ってコンテナ内の設定ファイルをyamlに記載します。
 
 cf.
 

@@ -1,8 +1,8 @@
-# Docker で Garage を構築
+# DockerでGarageを構築
 
 cf. https://garagehq.deuxfleurs.fr/
 
-- docker-compose.yaml を下記で作成します:
+- docker-compose.yamlを下記で作成します:
 
 ```yaml
 services:
@@ -20,7 +20,7 @@ services:
       - 3903:3903
 ```
 
-- volumes/garage.toml を下記で作成します:
+- volumes/garage.tomlを下記で作成します:
 
 ```toml
 metadata_dir = "/tmp/meta"

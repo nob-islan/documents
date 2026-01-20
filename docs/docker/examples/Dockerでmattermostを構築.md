@@ -1,4 +1,4 @@
-# Docker で Mattermost を構築
+# DockerでMattermostを構築
 
 cf. https://docs.mattermost.com/install/install-docker.html
 
@@ -11,7 +11,7 @@ git clone https://github.com/mattermost/docker
 cd docker
 ```
 
-- env ファイルをコピーします。コピー後、`DOMAIN`の項目を適切な値に修正してください:
+- envファイルをコピーします。コピー後、`DOMAIN`の項目を適切な値に修正してください:
 
 ```shell
 cp env.example .env
@@ -24,7 +24,7 @@ mkdir -p ./volumes/app/mattermost/{config,data,logs,plugins,client/plugins,bleve
 sudo chown -R 2000:2000 ./volumes/app/mattermost
 ```
 
-- （https で通信をする場合のみ）あらかじめ用意しておいた SSL 通信向けの証明書および秘密鍵を配置します:
+- （httpsで通信をする場合のみ）あらかじめ用意しておいたSSL通信向けの証明書および秘密鍵を配置します:
 
 ```shell
 mkdir -p ./volumes/web/cert
@@ -32,14 +32,14 @@ cp /path/to/cert.pem ./volumes/web/cert/cert.pem
 cp /path/to/privkey.pem ./volumes/web/cert/key-no-password.pem
 ```
 
-- nginx 無しで起動します:
+- nginx無しで起動します:
 
 ```shell
 # http://{IPアドレス}:8065にアクセスできるようになればOK
 sudo docker compose -f docker-compose.yaml -f docker-compose.without-nginx.yaml up -d
 ```
 
-- （https で通信をする場合のみ）nginx 込みで起動します:
+- （httpsで通信をする場合のみ）nginx込みで起動します:
 
 ```shell
 # https://{ドメイン名}にアクセスできるようになればOK

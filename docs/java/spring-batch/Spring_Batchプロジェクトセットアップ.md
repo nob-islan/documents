@@ -1,6 +1,6 @@
-# Spring Batch プロジェクトセットアップ
+# Spring Batchプロジェクトセットアップ
 
-Spring Boot で実装するバッチプロジェクトの初期セットアップ方法について記載します。
+Spring Bootで実装するバッチプロジェクトの初期セットアップ方法について記載します。
 
 cf.
 
@@ -25,7 +25,7 @@ curl https://start.spring.io/starter.zip \
   -o easybatch.zip
 ```
 
-- zip を解凍します。
+- zipを解凍します。
 
 ```shell
 unzip easybatch.zip && rm -rf easybatch.zip
@@ -37,7 +37,7 @@ unzip easybatch.zip && rm -rf easybatch.zip
 
 ### 事前準備
 
-データベースを docker で構築し、Java プロジェクト側に接続情報を記載します。
+データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。
 
 #### docker-compose.yaml
 
@@ -490,7 +490,7 @@ public class CustomerRegistWriter {
 
 #### job/customerregist/CustomerRegistConfig.java
 
-各種インスタンスの Bean 登録などジョブのコンフィグを宣言します。
+各種インスタンスのBean登録などジョブのコンフィグを宣言します。
 
 ```java
 package nob.example.easybatch.job.customerregist;

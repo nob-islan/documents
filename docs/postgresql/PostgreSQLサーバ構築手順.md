@@ -1,6 +1,6 @@
-# PostgreSQL サーバ構築手順
+# PostgreSQLサーバ構築手順
 
-PostgreSQL をインストールして、外部サーバから接続する設定を入れます。
+PostgreSQLをインストールして、外部サーバから接続する設定を入れます。
 
 ## スペック
 
@@ -10,7 +10,7 @@ PostgreSQL をインストールして、外部サーバから接続する設定
 
 cf. https://www.postgresql.org/download/linux/ubuntu/
 
-リモートリポジトリの URL を登録
+リモートリポジトリのURLを登録
 
 ```shell
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
@@ -28,7 +28,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 sudo apt-get update
 ```
 
-PostgreSQL インストール
+PostgreSQLインストール
 
 ```shell
 sudo apt-get install postgresql
@@ -40,13 +40,13 @@ sudo apt-get install postgresql
 
 ### データベース作成
 
-postgres ユーザになる
+postgresユーザになる
 
 ```shell
 sudo su - postgres
 ```
 
-postgreSQL に接続
+postgreSQLに接続
 
 ```shell
 psql
@@ -90,13 +90,13 @@ ALTER ROLE nob1 PASSWORD 'password';
 
 ##### postgresql.conf
 
-postgresql.conf の場所を探します。
+postgresql.confの場所を探します。
 
 ```sql
 find / -name postgresql.conf 2> /dev/null
 ```
 
-vim などのエディタでファイルを編集します。
+vimなどのエディタでファイルを編集します。
 
 ```postgresql.conf
 #------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ vim などのエディタでファイルを編集します。
 port = 5432                             # (change requires restart)
 ```
 
-について、リッスンする IP アドレスを変更します。基本的にワイルドカードで OK ですが、特定のインターフェースでのみ DB 接続を許可したい場合は該当インターフェースの IP アドレスを入力してください。
+について、リッスンするIPアドレスを変更します。基本的にワイルドカードでOKですが、特定のインターフェースでのみDB接続を許可したい場合は該当インターフェースのIPアドレスを入力してください。
 
 ```postgresql.conf
 #------------------------------------------------------------------------------
@@ -130,13 +130,13 @@ port = 5432                             # (change requires restart)
 
 ##### pg_hba.conf
 
-pg_hba.conf の場所を探します。
+pg_hba.confの場所を探します。
 
 ```sql
 find / -name pg_hba.conf 2> /dev/null
 ```
 
-vim などのエディタでファイルを編集します。
+vimなどのエディタでファイルを編集します。
 
 ```pg_hba.conf
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
@@ -163,7 +163,7 @@ host    nob_db       nob1             192.168.144.0/24        md5
 
 #### 接続確認
 
-postgreSQL サービスを再起動して変更を適用します。
+postgreSQLサービスを再起動して変更を適用します。
 
 ```sql
 sudo service postgresql restart
@@ -178,7 +178,7 @@ sudo apt-get install postgresql-client-common
 sudo apt-get install postgresql-client
 ```
 
-DB に接続します。
+DBに接続します。
 
 ```sql
 psql -U nob1 -h ${postgreSQLサーバのIPアドレス} -p 5432 -d nob_db

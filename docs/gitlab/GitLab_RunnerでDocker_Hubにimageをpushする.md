@@ -1,10 +1,10 @@
-# GitLab Runner で Docker Hub に image を push する
+# GitLab RunnerでDocker Hubにimageをpushする
 
 ## 共通事前準備
 
 サーバを用意する。いずれもコンテナで動かします。
 
-### GitLab サーバ
+### GitLabサーバ
 
 ```yaml
 version: "3"
@@ -25,7 +25,7 @@ services:
       - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
-### GitLab Runner サーバ
+### GitLab Runnerサーバ
 
 ```yaml
 version: "3"
@@ -39,7 +39,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
-runner を登録します。executor は`docker`を選択してください。
+runnerを登録します。executorは`docker`を選択してください。
 
 ```shell
 docker exec -it nob-gitlab-runner gitlab-runner register
@@ -61,9 +61,9 @@ first-kaniko-project
 
 主に以下の流れで処理が進みます。
 
-- 実行用の image として`kaniko-project/executor:debug`を使う。`latest`とかだとうまくいかないらしい。
-- `DOCKERHUB_TOKEN`を生成して`/kaniko/.docker/config.json`に記載する。これが docker hub に push する際の認証情報となる。
-- push する。
+- 実行用のimageとして`kaniko-project/executor:debug`を使う。`latest`とかだとうまくいかないらしい。
+- `DOCKERHUB_TOKEN`を生成して`/kaniko/.docker/config.json`に記載する。これがdocker hubにpushする際の認証情報となる。
+- pushする。
 
 ```yaml
 stages:
@@ -85,11 +85,11 @@ build:
     - if: $CI_COMMIT_TAG
 ```
 
-`CI_REGISTRY_IMAGE`は GitLab の画面から環境変数として登録するか、`.gitlab-ci.yml`にベタ書きするかしてください。
+`CI_REGISTRY_IMAGE`はGitLabの画面から環境変数として登録するか、`.gitlab-ci.yml`にベタ書きするかしてください。
 
 #### Dockerfile
 
-ただ適当なファイルを touch しただけの ubuntu コンテナです。
+ただ適当なファイルをtouchしただけのubuntuコンテナです。
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -103,9 +103,9 @@ RUN mkdir /nob && cd /nob && touch snail-test
 
 各種環境変数を用意する必要があるので、画面の`Settings -> CI/CD -> Variables`から定義します。
 
-- `DOCKERHUB_USER`: docker hub のユーザ名
-- `DOCKERHUB_PASSWORD`: ログイン用のパスワードか、hub から発行できるアクセストークン
+- `DOCKERHUB_USER`: docker hubのユーザ名
+- `DOCKERHUB_PASSWORD`: ログイン用のパスワードか、hubから発行できるアクセストークン
 
 #### パイプライン実行
 
-`Repository -> Tags`からタグを発行すると、Tag name が image のタグとなります。あとはパイプラインが走るので見守ってください。
+`Repository -> Tags`からタグを発行すると、Tag nameがimageのタグとなります。あとはパイプラインが走るので見守ってください。

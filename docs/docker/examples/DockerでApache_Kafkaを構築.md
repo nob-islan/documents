@@ -1,4 +1,4 @@
-# Docker で Apache Kafka を構築
+# DockerでApache Kafkaを構築
 
 cf.
 

@@ -1,8 +1,8 @@
-# Docker で React 環境を構築
+# DockerでReact環境を構築
 
 ## 構築手順
 
-### react アプリをビルド
+### reactアプリをビルド
 
 - ビルドしたいプロジェクトのルートディレクトリでビルドコマンドを実行します。
 
@@ -10,9 +10,9 @@
 npm run build
 ```
 
-### Dockerfile を記載
+### Dockerfileを記載
 
-- 下記 Dockerfile で react アプリケーションを実行可能なコンテナイメージを作成します。
+- 下記Dockerfileでreactアプリケーションを実行可能なコンテナイメージを作成します。
 
 ```Dockerfile
 FROM node:20.12.2-buster

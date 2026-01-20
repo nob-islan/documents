@@ -1,4 +1,4 @@
-# Nginx インストールを Ansible で実行
+# NginxインストールをAnsibleで実行
 
 お試し程度
 

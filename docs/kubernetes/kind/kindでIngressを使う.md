@@ -1,4 +1,4 @@
-# kind で Ingress を使う
+# kindでIngressを使う
 
 cf. https://kind.sigs.k8s.io/docs/user/ingress
 
@@ -8,7 +8,7 @@ cf. https://kind.sigs.k8s.io/docs/user/ingress
 
 ### クラスタ作成
 
-Ingress 向けにポートを開放したクラスタを構築する必要があるので注意してください:
+Ingress向けにポートを開放したクラスタを構築する必要があるので注意してください:
 
 ```yaml
 kind: Cluster
@@ -26,7 +26,7 @@ nodes:
 
 ### リソース作成
 
-- Ingress nginx を起動:
+- Ingress nginxを起動:
 
 ```shell
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
@@ -41,7 +41,7 @@ kubectl wait --namespace ingress-nginx \
   --timeout=90s
 ```
 
-- Ingress リソース作成
+- Ingressリソース作成
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -99,7 +99,7 @@ spec:
 
 ### 動作確認
 
-- curl で疎通確認をとります:
+- curlで疎通確認をとります:
 
 ```
 $ curl {kind IP}:80/sample/greet

@@ -1,11 +1,11 @@
-# MinIO オブジェクトストレージを暗号化する
+# MinIOオブジェクトストレージを暗号化する
 
 cf. https://min.io/docs/minio/linux/administration/server-side-encryption/server-side-encryption-sse-kms.html#minio-encryption-sse-kms-quickstart  
-KMS プロバイダとして HashiCorp Vault キーストアを選択します。
+KMSプロバイダとしてHashiCorp Vaultキーストアを選択します。
 
 ## 構築手順
 
-### Vault サーバ構築
+### Vaultサーバ構築
 
 #### 初期起動
 
@@ -72,10 +72,10 @@ vault login
 vault secrets enable -version=1 kv
 ```
 
-#### Vault への KES アクセスを設定
+#### VaultへのKESアクセスを設定
 
 ```shell
-# vault ポリシーを作成
+# vaultポリシーを作成
 cat << EOF > ./kes-policy.hcl
 path "kv/*" {
    capabilities = [ "create", "read", "delete", "list" ]
@@ -113,9 +113,9 @@ vault read auth/approle/role/kes-server/role-id
 vault write -f auth/approle/role/kes-server/secret-id
 ```
 
-### KES サーバ構築
+### KESサーバ構築
 
-#### KES インスタンス起動
+#### KESインスタンス起動
 
 ```shell
 # KESインストール; see also https://min.io/docs/kes/tutorials/getting-started/
@@ -135,7 +135,7 @@ kes identity new --key=client.key --cert=client.crt MinIO
 ```
 
 ```shell
-# KES サーバー構成ファイルを作成
+# KESサーバー構成ファイルを作成
 cat << EOF > config.yaml
 admin:
   identity: {identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO'}
@@ -160,7 +160,7 @@ EOF
 kes server --config config.yaml
 ```
 
-#### KES 起動確認
+#### KES起動確認
 
 ```shell
 # KESサーバを指定
@@ -168,7 +168,7 @@ export KES_SERVER=http://127.0.0.1:7373
 ```
 
 ```shell
-# クライアントが KES サーバーと通信するために使用するキーを設定
+# クライアントがKESサーバーと通信するために使用するキーを設定
 export KES_API_KEY={kes identity generated above by 'kes identity new --key=client.key --cert=client.crt MinIO' such as kes:v1:xxxx}
 ```
 
@@ -177,11 +177,11 @@ export KES_API_KEY={kes identity generated above by 'kes identity new --key=clie
 kes status -k
 ```
 
-### MinIO サーバ構築
+### MinIOサーバ構築
 
 cf. https://min.io/docs/kes/tutorials/kes-for-minio/#minio-server-setup
 
-KES サーバにて作成した`public.crt`を MinIO 側に持ってくる必要があるため注意してください。
+KESサーバにて作成した`public.crt`をMinIO側に持ってくる必要があるため注意してください。
 
 ```shell
 # MinIOインストール

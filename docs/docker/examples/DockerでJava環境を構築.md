@@ -1,8 +1,8 @@
-# Docker で Java 環境を構築
+# DockerでJava環境を構築
 
 ## 構築
 
-### java アプリをビルド
+### javaアプリをビルド
 
 - ビルドしたいプロジェクトのルートディレクトリでビルドコマンドを実行します。
 
@@ -11,9 +11,9 @@
 ./mvnw package
 ```
 
-### Dockerfile を記載
+### Dockerfileを記載
 
-- 下記 Dockerfile で Java アプリケーションを実行可能なコンテナイメージを作成します。
+- 下記DockerfileでJavaアプリケーションを実行可能なコンテナイメージを作成します。
 
 ```Dockerfile
 FROM eclipse-temurin:21

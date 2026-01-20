@@ -1,6 +1,6 @@
-# はじめての multipass
+# はじめてのmultipass
 
-multipass を使って仮想マシンを起動します。
+multipassを使って仮想マシンを起動します。
 
 ## コマンド集
 
@@ -58,7 +58,7 @@ multipass find
 multipass launch 20.04 second-ubuntu
 ```
 
-- 仮想マシンのログを tail します。
+- 仮想マシンのログをtailします。
 
 ```shell
 multipass exec first-ubuntu -- tail -f /var/log/cloud-init-output.log

@@ -1,6 +1,6 @@
 # MinIO CLI
 
-## MinIO クライアント
+## MinIOクライアント
 
 cf. https://min.io/docs/minio/linux/reference/minio-mc.html?ref=docs
 

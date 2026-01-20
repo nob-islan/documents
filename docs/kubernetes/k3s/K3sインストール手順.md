@@ -1,6 +1,6 @@
-# K3s インストール手順
+# K3sインストール手順
 
-シングルノードで縮小版 Kubernetes を構築できる [K3s](https://docs.k3s.io/) の構築手順について記載します。
+シングルノードで縮小版Kubernetesを構築できる [K3s](https://docs.k3s.io/) の構築手順について記載します。
 
 ## 手順
 
@@ -17,13 +17,13 @@ curl -sfL https://get.k3s.io | sh -s - server --write-kubeconfig-mode=644
 
 ## Tips
 
-k8s や kind などと挙動に差異が出る箇所について記載します。
+k8sやkindなどと挙動に差異が出る箇所について記載します。
 
-### kubeconfig のパス
+### kubeconfigのパス
 
 cf. https://docs.k3s.io/cluster-access
 
-kubeconfig の設定が記載されているファイルのパスが他と異なります:
+kubeconfigの設定が記載されているファイルのパスが他と異なります:
 
 ```
 root@nob-k3s:~# ls -l /etc/rancher/k3s/k3s.yaml

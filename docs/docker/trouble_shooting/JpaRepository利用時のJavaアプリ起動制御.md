@@ -1,6 +1,6 @@
-# JpaRepository 起動時の Java アプリ制御
+# JpaRepository起動時のJavaアプリ制御
 
-JpaRepository を利用して repository 層を実装した Java アプリについて、docker-compose に Java, DB の設定を単純に記載しただけだと起動がうまくいきませんでした。Java 側から DB に接続しに行くのに DB の起動が間に合わず、接続に失敗して落ちることが原因だったため、下記のように順序制御を入れる必要があります:
+JpaRepositoryを利用してrepository層を実装したJavaアプリについて、docker-composeにJava, DBの設定を単純に記載しただけだと起動がうまくいきませんでした。Java側からDBに接続しに行くのにDBの起動が間に合わず、接続に失敗して落ちることが原因だったため、下記のように順序制御を入れる必要があります:
 
 ```yaml
 services:
@@ -29,5 +29,5 @@ services:
         condition: service_healthy
 ```
 
-- db 側ではヘルスチェックの設定を入れ、`test`で指定したコマンドが成功することを定期的に確認します。
-- app 側では db 側に依存することを宣言しています。
+- db側ではヘルスチェックの設定を入れ、`test`で指定したコマンドが成功することを定期的に確認します。
+- app側ではdb側に依存することを宣言しています。

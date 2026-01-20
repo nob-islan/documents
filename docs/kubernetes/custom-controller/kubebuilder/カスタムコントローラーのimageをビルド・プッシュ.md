@@ -1,12 +1,12 @@
-# カスタムコントローラーの image をビルド・プッシュ
+# カスタムコントローラーのimageをビルド・プッシュ
 
-Kubebuilder で実装したカスタムコントローラーについて、コンテナイメージをビルドおよびプッシュする手順を記載します。
+Kubebuilderで実装したカスタムコントローラーについて、コンテナイメージをビルドおよびプッシュする手順を記載します。
 
 ## 手順
 
 ### ビルド・プッシュ
 
-- yaml マニフェストの生成および CRD の登録を行います。
+- yamlマニフェストの生成およびCRDの登録を行います。
 
 ```shell
 # export IMG={コンテナレジストリ}/{プロジェクト}/{リポジトリ}:{タグ}
@@ -19,13 +19,13 @@ export IMG=harbor.nob/nob/nob-controller:latest
 make docker-build
 ```
 
-- コンテナイメージを push します:
+- コンテナイメージをpushします:
 
 ```shell
 make docker-push
 ```
 
-### image を使ってコントローラー起動
+### imageを使ってコントローラー起動
 
 - プッシュしたコンテナイメージを使ってローカルでコントローラーを起動できます。
 
@@ -40,7 +40,7 @@ make deploy
 kubectl get deployment -n nob-controller-system
 ```
 
-- CR のマニフェストファイルを apply すれば Reconcile が始まります。
+- CRのマニフェストファイルをapplyすればReconcileが始まります。
 
 ```shell
 # kubectl apply -f {CRマニフェストファイルパス}

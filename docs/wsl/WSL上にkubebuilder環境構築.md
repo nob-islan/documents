@@ -1,18 +1,18 @@
-# WSL 上に Kubebuilder 環境構築
+# WSL上にKubebuilder環境構築
 
-## WSL 起動
+## WSL起動
 
-- Ubuntu インストール・起動
+- Ubuntuインストール・起動
 
 ```shell
 wsl --install -d Ubuntu-24.04
 ```
 
-## docker インストール
+## dockerインストール
 
-ローカル k8s 環境: kind を動かすために docker をインストールします。
+ローカルk8s環境: kindを動かすためにdockerをインストールします。
 
-- docker インストール
+- dockerインストール
 
 ```shell
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -25,37 +25,37 @@ sh get-docker.sh
 exit
 ```
 
-- Ubuntu をデフォルトのディストリビューションに指定
+- Ubuntuをデフォルトのディストリビューションに指定
 
 ```shell
 wsl --set-default Ubuntu-24.04
 ```
 
-- Ubuntu ログイン
+- Ubuntuログイン
 
 ```shell
 wsl
 ```
 
-- docker がインストールされていることを確認
+- dockerがインストールされていることを確認
 
 ```
 $ docker -v
 Docker version 27.5.1, build 9f9e405
 ```
 
-## make インストール
+## makeインストール
 
-Kubebuilder によって自動生成される make スクリプトを動かすためにコマンドをインストールします。
+Kubebuilderによって自動生成されるmakeスクリプトを動かすためにコマンドをインストールします。
 
-- make インストール
+- makeインストール
 
 ```shell
 sudo apt update
 sudo apt install make
 ```
 
-- make がインストールされていることを確認
+- makeがインストールされていることを確認
 
 ```
 $ make --version
@@ -67,11 +67,11 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 ```
 
-## kind インストール
+## kindインストール
 
-ローカル k8s 環境を構築するツールです。
+ローカルk8s環境を構築するツールです。
 
-- kind ダウンロード、インストール
+- kindダウンロード、インストール
 
 ```shell
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
@@ -79,16 +79,16 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 ```
 
-- kind がインストールされていることを確認
+- kindがインストールされていることを確認
 
 ```
 $ kind version
 kind v0.14.0 go1.18.2 linux/amd64
 ```
 
-## kubectl インストール
+## kubectlインストール
 
-- kubectl ダウンロード、インストール
+- kubectlダウンロード、インストール
 
 ```shell
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -96,7 +96,7 @@ chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
-- kubectl がインストールされていることを確認
+- kubectlがインストールされていることを確認
 
 ```
 $ kubectl version
@@ -105,9 +105,9 @@ Kustomize Version: v5.5.0
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
 ```
 
-## go インストール
+## goインストール
 
-- go ダウンロード
+- goダウンロード
 
 ```shell
 wget https://go.dev/dl/go1.23.6.linux-amd64.tar.gz
@@ -119,7 +119,7 @@ wget https://go.dev/dl/go1.23.6.linux-amd64.tar.gz
 sudo tar -C /usr/local -xzf go1.23.6.linux-amd64.tar.gz
 ```
 
-- go のパスを通す
+- goのパスを通す
 
 ```shell
 cat << 'EOF' >> ~/.profile
@@ -127,22 +127,22 @@ export PATH=$PATH:/usr/local/go/bin
 EOF
 ```
 
-- .profile 読み込み
+- .profile読み込み
 
 ```shell
 source ~/.profile
 ```
 
-- go がインストールされていることを確認
+- goがインストールされていることを確認
 
 ```
 $ go version
 go version go1.23.6 linux/amd64
 ```
 
-## Kubebuilder インストール
+## Kubebuilderインストール
 
-- Kubebuilder ダウンロード、インストール
+- Kubebuilderダウンロード、インストール
 
 ```shell
 curl -L -o kubebuilder "https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)"
@@ -150,14 +150,14 @@ chmod +x kubebuilder
 sudo mv ./kubebuilder /usr/local/bin/kubebuilder
 ```
 
-- Kubebuilder がインストールされていることを確認
+- Kubebuilderがインストールされていることを確認
 
 ```
 $ kubebuilder version
 Version: main.version{KubeBuilderVersion:"4.5.0", KubernetesVendor:"1.31.0", GitCommit:"7153119ca900994b70507edbde59771ac824f2d9", BuildDate:"2025-01-21T08:46:54Z", GoOs:"linux", GoArch:"amd64"}
 ```
 
-## VSCode への拡張機能導入
+## VSCodeへの拡張機能導入
 
 - 拡張機能インストール
 
@@ -167,7 +167,7 @@ code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension esbenp.prettier-vscode
 ```
 
-## VSCode を開く
+## VSCodeを開く
 
 ```shell
 code .

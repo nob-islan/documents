@@ -1,6 +1,6 @@
-# React アプリをビルド
+# Reactアプリをビルド
 
-GitLab Runner を使って React アプリケーションのコンテナイメージをビルドします。
+GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
 
@@ -23,9 +23,9 @@ CMD ["serve", "-s", "build"]
 下記ステージで構成します:
 
 - モジュールビルド
-- コンテナイメージ push
+- コンテナイメージpush
 
-push 先は harbor を想定しています。
+push先はharborを想定しています。
 
 ```yaml
 stages:

@@ -1,14 +1,14 @@
-# Go REST API プロジェクトセットアップ
+# Go REST APIプロジェクトセットアップ
 
 ## プロジェクト作成
 
-- 下記コマンドで Go モジュールを初期化します。
+- 下記コマンドでGoモジュールを初期化します。
 
 ```shell
 go mod init easyapp
 ```
 
-- mysql 向けのドライバをインストールします。
+- mysql向けのドライバをインストールします。
 
 ```shell
 go get github.com/go-sql-driver/mysql
@@ -16,11 +16,11 @@ go get github.com/go-sql-driver/mysql
 
 ## 実装
 
-サンプルコードを掲載します。ここでは擬似的なログイン API を実装します。
+サンプルコードを掲載します。ここでは擬似的なログインAPIを実装します。
 
 ### 事前準備
 
-データベースを docker で構築します。
+データベースをdockerで構築します。
 
 #### docker-compose.yaml
 
@@ -90,7 +90,7 @@ INSERT INTO users (
 
 #### internal/domain/
 
-業務処理の中心となるドメインおよびそれをデータベースから取得する repository のインターフェースを定義します。
+業務処理の中心となるドメインおよびそれをデータベースから取得するrepositoryのインターフェースを定義します。
 
 - users.go
 
@@ -174,7 +174,7 @@ func ConnectDB() *sql.DB {
 
 #### internal/infrastructure/repository/
 
-データベースを操作する repository を実装します。
+データベースを操作するrepositoryを実装します。
 
 - users_repository.go
 
@@ -212,7 +212,7 @@ func (r *usersRepository) FindByName(targetName string) domain.Users {
 
 #### internal/usecase/
 
-usecase を定義・実装します。アプリの業務はここで処理されます。
+usecaseを定義・実装します。アプリの業務はここで処理されます。
 
 - users_usecase.go
 
@@ -264,7 +264,7 @@ func (u *usersUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 
 #### internal/usecase/payload/
 
-usecase 向けの関数の入力・出力モデル構造体を定義します。
+usecase向けの関数の入力・出力モデル構造体を定義します。
 
 - users_payload.go
 
@@ -336,7 +336,7 @@ func (o MeOut) Age() int {
 
 #### internal/handler/
 
-handler を定義・実装します。usecase を呼び出し、レスポンスを作成します。
+handlerを定義・実装します。usecaseを呼び出し、レスポンスを作成します。
 
 - users_handler.go
 
@@ -406,7 +406,7 @@ func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 #### internal/handler/model/
 
-handler 向けの関数の入力・出力モデル構造体を定義します。
+handler向けの関数の入力・出力モデル構造体を定義します。
 
 - users_model.go
 
@@ -580,7 +580,7 @@ func main() {
 go run cmd/main.go
 ```
 
-下記コマンドで API を打鍵できます。
+下記コマンドでAPIを打鍵できます。
 
 ```shell
 # /login

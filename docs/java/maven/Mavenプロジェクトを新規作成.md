@@ -1,8 +1,8 @@
-# Maven プロジェクトを新規作成
+# Mavenプロジェクトを新規作成
 
 cf. https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
-下記コマンドで maven プロジェクトを新規作成できます。`groupId` および `artifactId` について適宜変更してください。
+下記コマンドでmavenプロジェクトを新規作成できます。`groupId` および `artifactId` について適宜変更してください。
 
 ```shell
 mvn archetype:generate \

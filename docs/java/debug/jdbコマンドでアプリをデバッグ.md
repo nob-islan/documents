@@ -1,4 +1,4 @@
-# jdb コマンドでアプリをデバッグ
+# jdbコマンドでアプリをデバッグ
 
 cf. https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html
 
@@ -56,8 +56,8 @@ public class SampleServiceImpl implements SampleService {
 
 ### docker-compose
 
-- ローカルでビルドした jar ファイルをコンテナから見えるようにしています。
-- ports および entrypoint でデバッグポートを空け、デバッグモードに入れるようにしています。
+- ローカルでビルドしたjarファイルをコンテナから見えるようにしています。
+- portsおよびentrypointでデバッグポートを空け、デバッグモードに入れるようにしています。
 
 ```java
 services:
@@ -72,7 +72,7 @@ services:
     entrypoint: ["sh", "-c", "java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484 -jar /easyapp-0.0.1-SNAPSHOT.jar"]
 ```
 
-## jdb コマンド使い方
+## jdbコマンド使い方
 
 ### 開始
 
@@ -200,7 +200,7 @@ http-nio-8080-exec-2[1] cont
 
 ### クラス・メソッド一覧確認
 
-- `classes` で jar に含まれているクラス一覧を確認できます:
+- `classes` でjarに含まれているクラス一覧を確認できます:
 
 ```
 # echo "classes" | jdb -attach 8484 | grep nob

@@ -1,4 +1,4 @@
-# Docker で RabbitMQ を構築
+# DockerでRabbitMQを構築
 
 cf. https://www.rabbitmq.com/docs/download
 
@@ -18,6 +18,6 @@ services:
       - ./volumes/rabbitmq:/var/lib/rabbitmq
 ```
 
-- amqp プロトコルの疎通は 5672 ポートに対して行います。
-- Web 画面のアクセスは 15672 ポートに対して行います。
-- `rabbitmqctl`, `rabbitmqadmin` コマンドが使えます。
+- amqpプロトコルの疎通は5672ポートに対して行います。
+- Web画面のアクセスは15672ポートに対して行います。
+- `rabbitmqctl`, `rabbitmqadmin`コマンドが使えます。

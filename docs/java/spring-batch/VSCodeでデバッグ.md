@@ -1,8 +1,8 @@
-# VSCode でデバッグ
+# VSCodeでデバッグ
 
 ## 事前準備
 
-- 下記内容で .vscode/launch.json を作成します:
+- 下記内容で .vscode/launch.jsonを作成します:
 
 ```json
 {
@@ -25,4 +25,4 @@
 ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8484"
 ```
 
-- VSCode の「実行とデバッグ」からデバッグしつつアプリを動かせます。
+- VSCodeの「実行とデバッグ」からデバッグしつつアプリを動かせます。

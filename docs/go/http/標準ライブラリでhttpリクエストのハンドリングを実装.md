@@ -1,10 +1,10 @@
-# 標準ライブラリで http リクエストのハンドリングを実装
+# 標準ライブラリでhttpリクエストのハンドリングを実装
 
-Go 言語にて、標準ライブラリを実装します。
+Go言語にて、標準ライブラリを実装します。
 
 ## サンプルコード
 
-### http.HandleFunc を直接使用
+### http.HandleFuncを直接使用
 
 ```go
 package main
@@ -59,7 +59,7 @@ func getUserinfo(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-### ServeMux を使用
+### ServeMuxを使用
 
 ```go
 package main

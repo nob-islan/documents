@@ -1,12 +1,12 @@
-# kind インストール手順
+# kindインストール手順
 
-ローカルでマルチノード k8s 環境を立ち上げるツールである kind をインストールします。
+ローカルでマルチノードk8s環境を立ち上げるツールであるkindをインストールします。
 
 ## スペック
 
 - Ubuntu20.04.1 LTS
-  - メモリ 2GB 以上
-  - 空き容量 20GB 以上
+  - メモリ2GB以上
+  - 空き容量20GB以上
 
 ## インストール手順
 
@@ -19,27 +19,27 @@ cf.
 - https://docs.docker.com/engine/install/
 - https://kubernetes.io/docs/tasks/tools/#kubectl
 
-### kind のインストール
+### kindのインストール
 
-kind のダウンロード
+kindのダウンロード
 
 ```
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
 ```
 
-【M1 Mac 対応】kind のダウンロード
+【M1 Mac対応】kindのダウンロード
 
 ```
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
 ```
 
-kind バイナリを実行可能にする
+kindバイナリを実行可能にする
 
 ```
 chmod +x ./kind
 ```
 
-kind バイナリを PATH に通す
+kindバイナリをPATHに通す
 
 ```
 sudo mv ./kind /usr/local/bin/kind
@@ -72,9 +72,9 @@ kind delete cluster
 kind create cluster --config first-kind.yaml
 ```
 
-## クラスタ設定 yaml サンプル
+## クラスタ設定yamlサンプル
 
-- ワーカーノード 2 台を起動
+- ワーカーノード2台を起動
 
 ```yaml
 kind: Cluster
@@ -87,7 +87,7 @@ nodes:
   - role: worker
 ```
 
-- NodePort 向けのポートを開放
+- NodePort向けのポートを開放
 
 ```yaml
 kind: Cluster

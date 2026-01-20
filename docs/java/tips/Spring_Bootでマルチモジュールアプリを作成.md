@@ -1,4 +1,4 @@
-# Spring Boot でマルチモジュールアプリを作成
+# Spring Bootでマルチモジュールアプリを作成
 
 依存関係を持つ複数のプロジェクトを用いてアプリをビルドする手順です。  
 cf. https://spring.pleiades.io/guides/gs/multi-module/
@@ -20,11 +20,11 @@ multi-module
 
 ## 実装
 
-app および web の実装方法を記載します。
+appおよびwebの実装方法を記載します。
 
 ### app-project
 
-web 側から呼ばれるモジュールです。
+web側から呼ばれるモジュールです。
 
 #### サービスインターフェース
 
@@ -83,7 +83,7 @@ public class SampleAppServiceImpl implements SampleAppService {
 
 #### pom.xml
 
-実行可能 jar をビルドしないようにするため、`<build>`ブロックを丸ごと消します。
+実行可能jarをビルドしないようにするため、`<build>`ブロックを丸ごと消します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -174,7 +174,7 @@ public class WebProjectApplication {
 
 #### サービスインターフェース
 
-エンドポイントを設けて公開 API 実装とします。
+エンドポイントを設けて公開API実装とします。
 
 ```java
 package com.example.webproject.service;
@@ -203,7 +203,7 @@ public interface SampleWebService {
 
 #### サービス実装クラス
 
-`@Autowired`で app 側のサービスを Bean 宣言して呼び出します。
+`@Autowired`でapp側のサービスをBean宣言して呼び出します。
 
 ```java
 package com.example.webproject.service.impl;
@@ -240,7 +240,7 @@ public class SampleWebServiceImpl implements SampleWebService {
 
 #### pom.xml
 
-app-project を依存関係に追加：
+app-projectを依存関係に追加：
 
 ```xml
 <dependency>
@@ -351,9 +351,9 @@ app-project を依存関係に追加：
 </project>
 ```
 
-#### mvn 関連
+#### mvn関連
 
-VSCode の機能で自動生成したものを app-project 等からコピーしてくるのが楽です。
+VSCodeの機能で自動生成したものをapp-project等からコピーしてくるのが楽です。
 
 ```sh
 cp -r mvnw* .mvn ..
@@ -367,4 +367,4 @@ cp -r mvnw* .mvn ..
 ./mvnw package
 ```
 
-`web-project`の jar を起動してエンドポイントにアクセスすると、`app-project`モジュールを呼び出していることが確認できます。
+`web-project`のjarを起動してエンドポイントにアクセスすると、`app-project`モジュールを呼び出していることが確認できます。

@@ -1,8 +1,8 @@
-# GitLab Pages を有効化する
+# GitLab Pagesを有効化する
 
 cf. https://docs.gitlab.com/administration/pages/
 
-GitLab Pages を有効化します。
+GitLab Pagesを有効化します。
 
 ## コンテナ版手順
 
@@ -17,7 +17,7 @@ GitLab Pages を有効化します。
 
 #### dnsmasq
 
-- GitLab 本体は`gitlab.example.nob`, Pages は`pages.example.nob`で名前解決できるようにします:
+- GitLab本体は`gitlab.example.nob`, Pagesは`pages.example.nob`で名前解決できるようにします:
 
 ```conf
 # /etc/dnsmasq-hostsに記載
@@ -37,7 +37,7 @@ sudo systemctl restart dnsmasq
 
 #### GitLab, GitLab Runner
 
-下記で docker-compose を作成します:
+下記でdocker-composeを作成します:
 
 ```yaml
 services:
@@ -68,7 +68,7 @@ services:
 
 ### トラブルシュート
 
-#### Pages にアクセスした際に 502 エラーが発生した場合
+#### Pagesにアクセスした際に502エラーが発生した場合
 
 ```json
 {
@@ -82,8 +82,8 @@ services:
 }
 ```
 
-上記のような、ドメインが名前解決できないエラーが発生した場合は docker-compose で DNS サーバを明示的に指定する必要があります。
-docker-compose の `services.gitlab.dns`を下記要領で追加してください:
+上記のような、ドメインが名前解決できないエラーが発生した場合はdocker-composeでDNSサーバを明示的に指定する必要があります。
+docker-composeの `services.gitlab.dns`を下記要領で追加してください:
 
 ```yaml
 services:
@@ -106,7 +106,7 @@ services:
 
 #### dnsmasq
 
-- GitLab 本体は`gitlab.example.nob`, Pages は`pages.example.nob`で名前解決できるようにします:
+- GitLab本体は`gitlab.example.nob`, Pagesは`pages.example.nob`で名前解決できるようにします:
 
 ```conf
 # /etc/dnsmasq-hostsに記載
@@ -140,4 +140,4 @@ gitlab_pages['external_http'] = ['0.0.0.0:30090']
 sudo gitlab-ctl reconfigure
 ```
 
-上記設定後、ページ作成プロジェクトのパイプラインを回して成果物を作成し、Deploy -> Pages にて表示される URL から静的コンテンツにアクセスできます。
+上記設定後、ページ作成プロジェクトのパイプラインを回して成果物を作成し、Deploy -> Pagesにて表示されるURLから静的コンテンツにアクセスできます。

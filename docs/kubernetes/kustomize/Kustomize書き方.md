@@ -1,4 +1,4 @@
-# Kustomize 書き方
+# Kustomize書き方
 
 cf. https://kustomize.io/
 
@@ -83,7 +83,7 @@ spec:
 
 #### `overlays/dev`
 
-`bases`で記述した設定に対し、差分となる箇所のみ記述します。下記の例では、dev のみレプリカ数が 1 となります。
+`bases`で記述した設定に対し、差分となる箇所のみ記述します。下記の例では、devのみレプリカ数が1となります。
 
 - `kustomization.yaml`
 
@@ -126,7 +126,7 @@ kustomize build bases/ | kubectl apply -f -
 kubectl apply -k bases/
 ```
 
-- dev 向けの設定でリソースを作成します:
+- dev向けの設定でリソースを作成します:
 
 ```shell
 kubectl apply -k overlays/dev/

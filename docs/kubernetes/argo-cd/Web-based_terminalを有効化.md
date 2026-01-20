@@ -1,4 +1,4 @@
-# Web-based terminal を有効化
+# Web-based terminalを有効化
 
 cf. https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/
 
@@ -11,7 +11,7 @@ data:
   exec.enabled: "true"
 ```
 
-- ClusterRole: `argocd-server` に下記設定を追記します（namespaced mode の場合は同名の Role に追記）:
+- ClusterRole: `argocd-server` に下記設定を追記します（namespaced modeの場合は同名のRoleに追記）:
 
 ```yaml
 - apiGroups:

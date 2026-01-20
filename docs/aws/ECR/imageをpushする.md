@@ -1,10 +1,10 @@
-# image を push する
+# imageをpushする
 
 リポジトリ上で確認できる`プッシュコマンドの表示`を見ればいけるはず。
 
 ## 事前準備
 
-- AWS CLI をインストール
+- AWS CLIをインストール
 - `IAM` -> `ユーザー` -> `認証情報`からアクセスキーを発行
 - `aws configure`コマンドで上のアクセスキー、シークレットキーを登録
 
@@ -16,7 +16,7 @@
 aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin ${リポジトリのURL}
 ```
 
-- image のビルド（リポジトリ名 ≒ イメージ名）
+- imageのビルド（リポジトリ名 ≒ イメージ名）
 
 ```shell
 docker build -t ${リポジトリ名} .

@@ -1,19 +1,19 @@
-# はじめての ftp サーバ
+# はじめてのftpサーバ
 
-FTP サーバを構築し、クライアントからテスト向けファイルを転送します。
+FTPサーバを構築し、クライアントからテスト向けファイルを転送します。
 
 ## 構築手順
 
-ftp プロトコルの通信を待ち受けるサーバを構築します。
+ftpプロトコルの通信を待ち受けるサーバを構築します。
 
-- vsftpd インストール
+- vsftpdインストール
 
 ```shell
 sudo apt update
 sudo apt install -y vsftpd
 ```
 
-- ftp 通信用ユーザ作成
+- ftp通信用ユーザ作成
 
 ```shell
 sudo useradd -m ftpuser && sudo passwd ftpuser
@@ -88,7 +88,7 @@ sudo systemctl enable vsftpd
 echo "This is a ftp test file" > testfile.txt
 ```
 
-- ftp ログイン
+- ftpログイン
 
 ```shell
 ftp {ftpサーバのIP}

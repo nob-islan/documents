@@ -1,6 +1,6 @@
-# MyBatis を使って DB に接続
+# MyBatisを使ってDBに接続
 
-MyBatis を使って Java アプリから DB に接続する方法、および実装サンプルを記載します。
+MyBatisを使ってJavaアプリからDBに接続する方法、および実装サンプルを記載します。
 
 ## 設定ファイル
 
@@ -40,7 +40,7 @@ MyBatis を使って Java アプリから DB に接続する方法、および�
 
 ### application.properties
 
-DB への接続情報です。
+DBへの接続情報です。
 
 ```properties
 #MariaDBのドライバ設定
@@ -72,7 +72,7 @@ spring.datasource.password=
 
 ### ProjectNameApplication.java
 
-アプリ起動時に MyBatis の設定を読み込みます。
+アプリ起動時にMyBatisの設定を読み込みます。
 
 ```java
 package com.example.projectname;
@@ -112,12 +112,12 @@ public class ProjectNameApplication {
 
 例として、下記の`users`テーブル向けの実装を記載します。
 
-| カラム名  | column_name | 型          | PK  | NULL |
-| --------- | ----------- | ----------- | --- | ---- |
-| ユーザ ID | user_id     | VARCHAR(11) | o   | x    |
-| ユーザ名  | user_name   | VARCHAR(20) |     | x    |
-| 年齢      | age         | INT         |     | x    |
-| 備考      | remarks     | TEXT        |     | o    |
+| カラム名 | column_name | 型          | PK  | NULL |
+| -------- | ----------- | ----------- | --- | ---- |
+| ユーザID | user_id     | VARCHAR(11) | o   | x    |
+| ユーザ名 | user_name   | VARCHAR(20) |     | x    |
+| 年齢     | age         | INT         |     | x    |
+| 備考     | remarks     | TEXT        |     | o    |
 
 ### エンティティ
 
@@ -161,9 +161,9 @@ public class Users {
 }
 ```
 
-### Mapper インターフェース
+### Mapperインターフェース
 
-Mapper のインターフェースです。業務処理側からはこのクラスのメソッドを呼び出します。
+Mapperのインターフェースです。業務処理側からはこのクラスのメソッドを呼び出します。
 
 ```java
 package nob.example.firstrestapi.mapper;
@@ -217,11 +217,11 @@ public interface UsersMapper {
 
 ### Mapper xml
 
-SQL の実体を記載するファイルです。`src/resources`配下に、mapper インターフェースと同じパッケージ構成で配置します。例として、mapper インターフェースが`src/main/java/nob/example/firstrestapi/mapper`に配置されている場合、xml ファイルは`src/main/resources/nob/example/firstrestapi/mapper`に配置します。
+SQLの実体を記載するファイルです。`src/resources`配下に、mapperインターフェースと同じパッケージ構成で配置します。例として、mapperインターフェースが`src/main/java/nob/example/firstrestapi/mapper`に配置されている場合、xmlファイルは`src/main/resources/nob/example/firstrestapi/mapper`に配置します。
 
-- mapper タグ
-  - `namespace`: mapper が配置されているパッケージ
-- update, insert, select, delete タグ
+- mapperタグ
+  - `namespace`: mapperが配置されているパッケージ
+- update, insert, select, deleteタグ
   - `id`: インターフェース側のメソッド名
   - `resultType`: 戻りの型
 

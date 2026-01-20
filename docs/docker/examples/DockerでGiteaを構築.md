@@ -1,4 +1,4 @@
-# Docker で Gitea を構築
+# DockerでGiteaを構築
 
 cf. https://docs.gitea.com/installation/install-with-docker-rootless
 
@@ -9,7 +9,7 @@ mkdir -p volumes/gitea/{data,config}
 sudo chown 1000:1000 volumes/config/ volumes/data/
 ```
 
-- 下記で docker-compose を作成します:
+- 下記でdocker-composeを作成します:
 
 ```yaml
 services:

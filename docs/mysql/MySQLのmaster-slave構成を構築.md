@@ -1,6 +1,6 @@
-# MySQL の master-slave 構成を構築
+# MySQLのmaster-slave構成を構築
 
-MySQL データベースについて master-slave 方式で冗長構成を構築します。
+MySQLデータベースについてmaster-slave方式で冗長構成を構築します。
 
 ## ディレクトリ構成
 
@@ -24,9 +24,9 @@ MySQL データベースについて master-slave 方式で冗長構成を構築
 
 ### docker-compose.yaml
 
-- mysql-master: 書き込み処理および slave がダウンした際の読み取り処理を担当
+- mysql-master: 書き込み処理およびslaveがダウンした際の読み取り処理を担当
 - mysql-slave: 読み取り専用
-- proxysql: 上記 master / slave へのクエリをルーティング（slave がダウンした際は master にフォールバック）
+- proxysql: 上記master / slaveへのクエリをルーティング（slaveがダウンした際はmasterにフォールバック）
 
 ```yaml
 services:
@@ -201,7 +201,7 @@ mysql_replication_hostgroups =
 
 ## 動作確認
 
-- 下記と同様の出力が得られれば正常に master-slave 構成になっています:
+- 下記と同様の出力が得られれば正常にmaster-slave構成になっています:
 
 ```shell
 $ docker exec -it mysql-slave mysql -u root -ppassword -e "SHOW REPLICA STATUS\G" | grep "Replica_.*_Running" | grep "Yes"
@@ -209,7 +209,7 @@ $ docker exec -it mysql-slave mysql -u root -ppassword -e "SHOW REPLICA STATUS\G
           Replica_SQL_Running: Yes
 ```
 
-- proxysql の設定は管理用データベースにて確認できます:
+- proxysqlの設定は管理用データベースにて確認できます:
 
 ```shell
 docker exec -it proxysql mysql -u admin -padmin -P 6032

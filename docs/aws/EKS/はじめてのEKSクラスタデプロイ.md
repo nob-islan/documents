@@ -1,8 +1,8 @@
-# はじめての EKS クラスタデプロイ
+# はじめてのEKSクラスタデプロイ
 
 cf. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html
 
-`eksctl` コマンドを使って EKS クラスタをデプロイします。
+`eksctl` コマンドを使ってEKSクラスタをデプロイします。
 
 ## セットアップ
 
@@ -21,7 +21,7 @@ sudo apt update
 sudo apt install unzip
 ```
 
-- AWS CLI ダウンロード
+- AWS CLIダウンロード
 
 ```shell
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -45,7 +45,7 @@ sudo ./aws/install
 aws --version
 ```
 
-AWS CLI の使い方については[リファレンス](https://docs.aws.amazon.com/ja_jp/cli/latest/index.html)を参照ください。
+AWS CLIの使い方については[リファレンス](https://docs.aws.amazon.com/ja_jp/cli/latest/index.html)を参照ください。
 
 - 認証情報設定
 

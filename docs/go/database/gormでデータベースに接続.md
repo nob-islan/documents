@@ -1,10 +1,10 @@
-# gorm でデータベースに接続
+# gormでデータベースに接続
 
-ORM ライブラリ [gorm](https://gorm.io/docs/) を使ってデータベースを操作します。
+ORMライブラリ [gorm](https://gorm.io/docs/) を使ってデータベースを操作します。
 
 ## 事前準備
 
-データベースは MySQL を使うこととします。ライブラリをインストールします:
+データベースはMySQLを使うこととします。ライブラリをインストールします:
 
 ```shell
 go get -u gorm.io/gorm
@@ -13,11 +13,11 @@ go get -u gorm.io/driver/mysql
 
 ## 実装例
 
-CRUD 操作の実装例を記載します。
+CRUD操作の実装例を記載します。
 
 ### データベース構築
 
-下記 docker-compose で構築されたデータベースを操作します:
+下記docker-composeで構築されたデータベースを操作します:
 
 #### docker-compose.yaml
 

@@ -1,23 +1,23 @@
-# Keycloak 初期セットアップ
+# Keycloak初期セットアップ
 
 [Keycloak](https://www.keycloak.org/) の初期セットアップを行います。
 
 ## 事前準備
 
-- OpenJDK を用意してください。
+- OpenJDKを用意してください。
 - データベースを別途用意し、ユーザおよび空のデータベースを作成しておいてください。
 
 ## インストール
 
 cf. https://www.keycloak.org/getting-started/getting-started-zip
 
-- Keycloak をダウンロードします:
+- Keycloakをダウンロードします:
 
 ```shell
 wget https://github.com/keycloak/keycloak/releases/download/26.5.0/keycloak-26.5.0.zip
 ```
 
-- zip ファイルを解凍します:
+- zipファイルを解凍します:
 
 ```shell
 unzip keycloak-26.5.0.zip
@@ -83,4 +83,4 @@ bin/kc.sh build
 bin/kc.sh start
 ```
 
-起動後、http://localhost:8080 で admin 画面を開くことができます。
+起動後、http://localhost:8080 でadmin画面を開くことができます。

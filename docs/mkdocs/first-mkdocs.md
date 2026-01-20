@@ -1,8 +1,8 @@
-# はじめての MkDocs
+# はじめてのMkDocs
 
 cf. https://www.mkdocs.org/
 
-markdown で作成したドキュメントを html 形式でビルドする **MkDocs** の構築および実装方法について記載します。
+markdownで作成したドキュメントをhtml形式でビルドする **MkDocs** の構築および実装方法について記載します。
 
 ## Getting started
 
@@ -10,15 +10,15 @@ cf. https://www.mkdocs.org/getting-started/
 
 ### 前提
 
-- Python が必要なのでインストールしておいてください。
+- Pythonが必要なのでインストールしておいてください。
 
-- MkDocs をインストールします:
+- MkDocsをインストールします:
 
 ```shell
 pip install mkdocs
 ```
 
-- MkDocs プロジェクトを作成します:
+- MkDocsプロジェクトを作成します:
 
 ```shell
 mkdocs new nob-project
@@ -48,11 +48,11 @@ pip install mkdocs-material
 
 ## 設定
 
-Web ページのカスタマイズ方法について記載します。
+Webページのカスタマイズ方法について記載します。
 
 ### MkDocs
 
-MkDocs のみで設定できる項目については[公式ドキュメント](https://www.mkdocs.org/user-guide/choosing-your-theme/)を参照ください。
+MkDocsのみで設定できる項目については[公式ドキュメント](https://www.mkdocs.org/user-guide/choosing-your-theme/)を参照ください。
 
 ### Material for MkDocs
 

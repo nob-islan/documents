@@ -1,4 +1,4 @@
-# はじめての nip.io
+# はじめてのnip.io
 
 ## 概要
 
@@ -6,15 +6,15 @@
 
 cf. https://nip.io/
 
-また、亜種として sslip.io というのも存在するそうです。こちらの方が利用者が少ないようで、Let's Encrypt で証明書を発行する際の一週間に一万枚制限に引っかかりにくいそうです。
+また、亜種としてsslip.ioというのも存在するそうです。こちらの方が利用者が少ないようで、Let's Encryptで証明書を発行する際の一週間に一万枚制限に引っかかりにくいそうです。
 
 cf. https://sslip.io/
 
 ## 使用例
 
-### GitLab Pages のドメインに利用
+### GitLab Pagesのドメインに利用
 
-GitLab Pages を簡単にセットアップすることができます:
+GitLab Pagesを簡単にセットアップすることができます:
 
 ```yaml
 services:

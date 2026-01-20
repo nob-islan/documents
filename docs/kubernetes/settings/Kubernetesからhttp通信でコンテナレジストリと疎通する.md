@@ -1,6 +1,6 @@
-# Kubernetes から http 通信でコンテナレジストリと疎通する
+# Kubernetesからhttp通信でコンテナレジストリと疎通する
 
-http 通信でコンテナレジストリと疎通をとり、イメージを pull する方法です。
+http通信でコンテナレジストリと疎通をとり、イメージをpullする方法です。
 
 ## 手順
 
@@ -23,7 +23,7 @@ server = "http://{コンテナレジストリのIP}:80"
 EOF
 ```
 
-- containerd を再起動します:
+- containerdを再起動します:
 
 ```shell
 sudo systemctl restart containerd

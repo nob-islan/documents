@@ -1,6 +1,6 @@
-# Java アプリ内で SQL を直接実行
+# Javaアプリ内でSQLを直接実行
 
-dao などではなく、SQL コマンドをベタ書きして実行します。
+daoなどではなく、SQLコマンドをベタ書きして実行します。
 
 ## 実装
 
@@ -48,7 +48,7 @@ dao などではなく、SQL コマンドをベタ書きして実行します。
 </dependency>
 ```
 
-- データベース作成用の SQL を`test/resources/create_table.sql`として配置します。
+- データベース作成用のSQLを`test/resources/create_table.sql`として配置します。
 
 ```sql
 -- テーブル作成
@@ -84,7 +84,7 @@ MariaDB [snaildb]> SELECT * FROM account;
 +----+------------+---------------------+
 ```
 
-- 下記でサンプルのテストクラスを実装します。テストクラス実行時にテスト用のコンテナデータベースを起動し、そこに向けて SQL コマンドを発行します。
+- 下記でサンプルのテストクラスを実装します。テストクラス実行時にテスト用のコンテナデータベースを起動し、そこに向けてSQLコマンドを発行します。
 
 ```java
 package com.example.sqlinspection.dao;

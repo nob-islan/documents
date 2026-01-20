@@ -1,10 +1,10 @@
-# React コンポーネントのルーティング方法
+# Reactコンポーネントのルーティング方法
 
 `App.tsx`で各種コンポーネントへのルーティングを定義する実装のサンプルコードです。
 
 ## 前提
 
-Component01, Component02 を用意し、それらへのパスをそれぞれ`/first`, `/second`と定義します。
+Component01, Component02を用意し、それらへのパスをそれぞれ`/first`, `/second`と定義します。
 
 ## 実装
 

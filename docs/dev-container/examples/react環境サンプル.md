@@ -1,6 +1,6 @@
-# React 環境サンプル
+# React環境サンプル
 
-React + TypeScript での開発環境のサンプルです:
+React + TypeScriptでの開発環境のサンプルです:
 
 ```json
 {

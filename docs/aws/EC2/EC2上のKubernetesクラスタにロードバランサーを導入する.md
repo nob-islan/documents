@@ -1,26 +1,26 @@
-# EC2 上の Kubernetes クラスタにロードバランサーを導入する
+# EC2上のKubernetesクラスタにロードバランサーを導入する
 
-EC2 上に kubeadm で構築した Kubernetes クラスタ上で LoadBalancer タイプの Service を動かすために [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/) を導入する手順です。
+EC2上にkubeadmで構築したKubernetesクラスタ上でLoadBalancerタイプのServiceを動かすために [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/) を導入する手順です。
 
 cf.
 
-- [Kubernetes アプリケーションの公開 Part 2: AWS Load Balancer Controller](https://aws.amazon.com/jp/blogs/news/exposing-kubernetes-applications-part-2-aws-load-balancer-controller/)
+- [Kubernetesアプリケーションの公開Part 2: AWS Load Balancer Controller](https://aws.amazon.com/jp/blogs/news/exposing-kubernetes-applications-part-2-aws-load-balancer-controller/)
 
 ## 事前準備
 
 下記を用意してください:
 
-- 2 つ以上のパブリックサブネットを持つ VPC
-- EC2 上に kubeadm で構築した Kubernetes クラスタ
+- 2つ以上のパブリックサブネットを持つVPC
+- EC2上にkubeadmで構築したKubernetesクラスタ
 - [kubectl](https://kubernetes.io/ja/docs/tasks/tools/install-kubectl-linux/), [aws](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html), [helm](https://helm.sh/ja/docs/intro/install/) がインストールされた端末
 
 ## 手順
 
-### ノードへの IAM ロールのアタッチ
+### ノードへのIAMロールのアタッチ
 
-ワーカーノードがロードバランサーリソースを作成できるよう、ノードに IAM ロールをアタッチします。
+ワーカーノードがロードバランサーリソースを作成できるよう、ノードにIAMロールをアタッチします。
 
-- IAM ポリシーを作成します:
+- IAMポリシーを作成します:
 
 ```shell
 # IAMポリシー向けjsonをダウンロード
@@ -32,7 +32,7 @@ aws iam create-policy \
     --policy-document file://iam_policy.json
 ```
 
-- IAM ロールを作成します:
+- IAMロールを作成します:
 
 ```shell
 # 信頼ポリシーのjson作成
@@ -82,7 +82,7 @@ aws iam add-role-to-instance-profile \
     --role-name AWSCustomerRoleForEC2KubeWorkerNode
 ```
 
-- ワーカーノードの インスタンス ID を確認します:
+- ワーカーノードの インスタンスIDを確認します:
 
 ```shell
 aws ec2 describe-instances \
@@ -90,7 +90,7 @@ aws ec2 describe-instances \
     --filters Name=tag-value,Values={ワーカーノードのインスタンス名}
 ```
 
-- IAM ロールをワーカーノードにアタッチします:
+- IAMロールをワーカーノードにアタッチします:
 
 ```shell
 aws ec2 associate-iam-instance-profile \
@@ -104,7 +104,7 @@ aws ec2 associate-iam-instance-profile \
 kubectl patch node kube-w01 -p '{"spec":{"providerID":"aws:///{リージョン}/{ワーカーノードのインスタンスID}"}}'
 ```
 
-### AWS Load Balancer Controller のデプロイ
+### AWS Load Balancer Controllerのデプロイ
 
 - `eks` リポジトリを追加します:
 
@@ -112,7 +112,7 @@ kubectl patch node kube-w01 -p '{"spec":{"providerID":"aws:///{リージョン}/
 helm repo add eks https://aws.github.io/eks-charts
 ```
 
-- AWS Load Balancer Controller をデプロイします:
+- AWS Load Balancer Controllerをデプロイします:
 
 ```shell
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=nob-cluster
@@ -120,7 +120,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
 
 ### 動作確認
 
-- ingress リソースを作成すると、ロードバランサーが自動で作成されます:
+- ingressリソースを作成すると、ロードバランサーが自動で作成されます:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -150,7 +150,7 @@ spec:
 kubectl apply -f nginx-ingress.yaml
 ```
 
-- 疎通確認用に nginx をデプロイします:
+- 疎通確認用にnginxをデプロイします:
 
 ```yaml
 apiVersion: apps/v1

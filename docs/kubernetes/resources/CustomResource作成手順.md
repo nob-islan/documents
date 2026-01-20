@@ -1,4 +1,4 @@
-# CustomResource 作成手順
+# CustomResource作成手順
 
 独自リソースを作るためのマニフェストファイルのサンプルです。
 
@@ -6,7 +6,7 @@ cf. https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-r
 
 ## CRD
 
-Custom Resource Definition です。カスタムリソース自体を定義します。
+Custom Resource Definitionです。カスタムリソース自体を定義します。
 
 ```yaml
 apiVersion: apiextensions.k8s.io/v1
@@ -37,7 +37,7 @@ spec:
     kind: Sample # kindに指定する文字列
 ```
 
-`kubectl apply -f {ファイル名}`で CRD を登録した後、`kubectl describe crd {metadata.name}`で詳細を確認できます:
+`kubectl apply -f {ファイル名}`でCRDを登録した後、`kubectl describe crd {metadata.name}`で詳細を確認できます:
 
 ```
 $ kubectl describe crd samples.crds.example.nob

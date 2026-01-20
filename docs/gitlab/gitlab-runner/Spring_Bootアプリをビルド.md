@@ -1,6 +1,6 @@
-# Spring Boot アプリをビルド
+# Spring Bootアプリをビルド
 
-GitLab Runner を使って Spring Boot アプリケーションのコンテナイメージをビルドします。
+GitLab Runnerを使ってSpring Bootアプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
 
@@ -73,17 +73,17 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
 
 cf.
 
-- [UT 結果を Web で確認](https://docs.gitlab.com/ci/testing/unit_test_report_examples/#maven)
+- [UT結果をWebで確認](https://docs.gitlab.com/ci/testing/unit_test_report_examples/#maven)
 - [ジョブのアーティファクト](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
-- [kaniko を使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
+- [kanikoを使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
 
 下記ステージで構成します:
 
-- UT 一括実行
+- UT一括実行
 - モジュールビルド
-- コンテナイメージ push
+- コンテナイメージpush
 
-push 先は harbor を想定しています。
+push先はharborを想定しています。
 
 ```yaml
 stages:

@@ -1,4 +1,4 @@
-# echo で Web 画面を実装
+# echoでWeb画面を実装
 
 cf. https://echo.labstack.com/docs/templates
 
@@ -30,19 +30,19 @@ cf. https://echo.labstack.com/docs/templates
 
 ### 設計
 
-- ログイン画面表示時に、ボタン名を go から html に渡す
-- ボタン入力時に js から go の関数を呼び出し、API をコール
-- 結果を alert 表示
+- ログイン画面表示時に、ボタン名をgoからhtmlに渡す
+- ボタン入力時にjsからgoの関数を呼び出し、APIをコール
+- 結果をalert表示
 
 ### プロジェクト作成
 
-- 下記コマンドで Go モジュールを初期化します。
+- 下記コマンドでGoモジュールを初期化します。
 
 ```shell
 go mod init easyapp
 ```
 
-- echo をインストールします。
+- echoをインストールします。
 
 ```shell
 go get github.com/labstack/echo/v4
@@ -319,13 +319,13 @@ func main() {
 }
 ```
 
-アプリ起動後、http://localhost:8080/login にアクセスするとログイン画面が表示されます。
+アプリ起動後、http://localhost:8080/loginにアクセスするとログイン画面が表示されます。
 
 ## 静的コンテンツをバイナリに含める
 
-上記のコードでは go build で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
+上記のコードではgo buildで作成したバイナリファイルにhtmlなどのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
 
-- assets/assets.go を下記で新規作成
+- assets/assets.goを下記で新規作成
 
 ```go
 package assets
@@ -339,7 +339,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- router/base.go について、埋め込んだ static, templates を使うよう宣言
+- router/base.goについて、埋め込んだstatic, templatesを使うよう宣言
 
 ```go
 	e.Renderer = &Template{

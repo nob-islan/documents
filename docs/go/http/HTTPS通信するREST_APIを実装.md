@@ -1,6 +1,6 @@
-# HTTPS 通信する REST API を実装
+# HTTPS通信するREST APIを実装
 
-証明書を用意して https 通信を行える REST API を実装します。
+証明書を用意してhttps通信を行えるREST APIを実装します。
 
 ## 実装手順
 
@@ -65,7 +65,7 @@ type userInfo struct {
 }
 ```
 
-- `go run main.go`またはビルドしたモジュールでアプリ起動後、https に向けて curl を実行できます:
+- `go run main.go`またはビルドしたモジュールでアプリ起動後、httpsに向けてcurlを実行できます:
 
 ```shell
 # 自己証明書を使う場合はSSLの検証に引っかかる可能性があるので -k オプションで回避しています。

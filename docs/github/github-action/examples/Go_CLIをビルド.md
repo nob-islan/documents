@@ -1,6 +1,6 @@
-# Go CLI をビルド
+# Go CLIをビルド
 
-GitHub Actions を使って Go の CLI アプリをビルドします。
+GitHub Actionsを使ってGoのCLIアプリをビルドします。
 
 ## 設定ファイル
 
@@ -11,7 +11,7 @@ cf.
 - [Upload release asset](https://github.com/actions/upload-release-asset)
 - [Matrix](https://docs.github.com/ja/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations)
 
-また、Settings > Actions > General > Workflow permissions で read and write 権限を与えないと`Resource not accessible by integration`が起きるので注意してください。
+また、Settings > Actions > General > Workflow permissionsでread and write権限を与えないと`Resource not accessible by integration`が起きるので注意してください。
 
 ```yaml
 name: Go

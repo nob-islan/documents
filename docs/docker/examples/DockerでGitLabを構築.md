@@ -1,8 +1,8 @@
-# Docker で GitLab を構築
+# DockerでGitLabを構築
 
-## gitlab コンテナを構築
+## gitlabコンテナを構築
 
-事前に`ip a`コマンドで仮想マシンの IP アドレスを調べておき、docker-compose.yaml を作成します。
+事前に`ip a`コマンドで仮想マシンのIPアドレスを調べておき、docker-compose.yamlを作成します。
 
 ```yaml
 services:
@@ -22,16 +22,16 @@ services:
       - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
-`docker-compose up -d`でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502 であれば根気良く待ってください。しばらく待って`http://${IP_address}:80`にアクセスすると gitlab の画面が表示されます。  
-root ユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
+`docker-compose up -d`でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502であれば根気良く待ってください。しばらく待って`http://${IP_address}:80`にアクセスするとgitlabの画面が表示されます。  
+rootユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
 
 ```shell
 docker exec -it nob-gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
-### Let's Encrypt を使って SSL 通信をできるようにする
+### Let's Encryptを使ってSSL通信をできるようにする
 
-`external_url`を HTTPS プロトコルで設定すると Let’s Encrypt で SSL 通信ができるようにしてくれます。cf. https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration
+`external_url`をHTTPSプロトコルで設定するとLet’s EncryptでSSL通信ができるようにしてくれます。cf. https://docs.gitlab.com/omnibus/settings/ssl/#enable-the-lets-encrypt-integration
 
 ```yaml
 services:
@@ -52,9 +52,9 @@ services:
       - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
-### 自己証明書を使って SSL 通信をできるようにする
+### 自己証明書を使ってSSL通信をできるようにする
 
-下記でコンテナを起動すると`https://${設定したドメイン}`で GitLab にアクセスできます:
+下記でコンテナを起動すると`https://${設定したドメイン}`でGitLabにアクセスできます:
 
 ```yaml
 services:
@@ -87,9 +87,9 @@ total 12
 -rw------- 1 root root 1704 Apr 27 12:25 gitlab.example.nob.key
 ```
 
-## gitlab-runner コンテナを構築
+## gitlab-runnerコンテナを構築
 
-gitlab-runner は下記で起動できます:
+gitlab-runnerは下記で起動できます:
 
 ```yaml
 services:
@@ -101,20 +101,20 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
-`docker-compose up -d`を実行してコンテナを作成。起動後、GitLab GUI 上の "Create project runner" から作成したコマンドから、対話形式で runner を構築できます。
+`docker-compose up -d`を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。
 
-### GitLab が 自己証明書で SSL 通信をしている場合
+### GitLabが 自己証明書でSSL通信をしている場合
 
-runner コンテナの中に、GitLab 本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yaml`に下記を追加してください:
+runnerコンテナの中に、GitLab本体が使っている証明書`{ドメイン名}.crt`として配置する必要があります。例として、`docker-compose.yaml`に下記を追加してください:
 
 ```yaml
 volumes:
   - "./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt"
 ```
 
-## Runner トラブルシュート
+## Runnerトラブルシュート
 
-GitLab にドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runner のコンテナ内の`/srv/gitlab/gitlab-runner/config/config.toml`に下記を追加します。
+GitLabにドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runnerのコンテナ内の`/srv/gitlab/gitlab-runner/config/config.toml`に下記を追加します。
 
 cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
 
@@ -124,7 +124,7 @@ cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
     extra_hosts = ["${ドメイン名}:${GitLabのIPアドレス}"]
 ```
 
-## .gitlab-ci.yml サンプル
+## .gitlab-ci.ymlサンプル
 
 ```yaml
 stages:

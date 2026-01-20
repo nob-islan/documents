@@ -1,6 +1,6 @@
-# kind から http 通信でコンテナレジストリと疎通する
+# kindからhttp通信でコンテナレジストリと疎通する
 
-Pod 起動時などに、リポジトリからコンテナイメージを pull できない場合（下記ログ参照）について、それを回避するための Kind の設定です。
+Pod起動時などに、リポジトリからコンテナイメージをpullできない場合（下記ログ参照）について、それを回避するためのKindの設定です。
 
 ```
 $ kubectl describe pod sample-pod-6cf8d8d57f-6d47z
@@ -12,7 +12,7 @@ $ kubectl describe pod sample-pod-6cf8d8d57f-6d47z
   Warning  Failed     9s (x2 over 38s)   kubelet            Error: ImagePullBackOff
 ```
 
-下記のように、レジストリの IP を指定して検証スキップ設定を追加します:
+下記のように、レジストリのIPを指定して検証スキップ設定を追加します:
 
 ```yaml
 kind: Cluster

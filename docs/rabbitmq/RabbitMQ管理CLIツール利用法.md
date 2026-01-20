@@ -1,6 +1,6 @@
-# RabbitMQ 管理 CLI ツール利用方法
+# RabbitMQ管理CLIツール利用方法
 
-RabbitMQ を管理するコマンドラインツールのリファレンスです。
+RabbitMQを管理するコマンドラインツールのリファレンスです。
 
 ## `rabbitmqctl`
 

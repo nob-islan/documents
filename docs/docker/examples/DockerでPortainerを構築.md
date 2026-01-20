@@ -1,6 +1,6 @@
-# Docker で Portainer を構築
+# DockerでPortainerを構築
 
-## Portainer 起動
+## Portainer起動
 
 下記`docker-compose.yaml`を記述して起動します。
 
@@ -16,4 +16,4 @@ services:
       - ./volumes/data:/data
 ```
 
-http://localhost:9000 にアクセスすると admin のパスワード設定画面に遷移します。
+http://localhost:9000にアクセスするとadminのパスワード設定画面に遷移します。

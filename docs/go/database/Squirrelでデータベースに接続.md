@@ -1,6 +1,6 @@
-# Squirrel でデータベースに接続
+# Squirrelでデータベースに接続
 
-SQL クエリを構築するライブラリ **Squirrel** を使ってデータベースにアクセスします。標準ライブラリより動的で柔軟な SQL 構築が可能です。
+SQLクエリを構築するライブラリ **Squirrel** を使ってデータベースにアクセスします。標準ライブラリより動的で柔軟なSQL構築が可能です。
 
 cf. https://github.com/Masterminds/squirrel
 
@@ -84,7 +84,7 @@ func connectDB() (*sql.DB, error) {
 }
 ```
 
-### サンプル repository
+### サンプルrepository
 
 ```go
 package repository

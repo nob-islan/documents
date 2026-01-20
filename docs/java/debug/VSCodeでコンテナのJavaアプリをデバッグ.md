@@ -1,6 +1,6 @@
-# VSCode でコンテナの Java アプリをデバッグ
+# VSCodeでコンテナのJavaアプリをデバッグ
 
-コンテナで起動している Java アプリケーションを VSCode 上でデバッグする手順です。
+コンテナで起動しているJavaアプリケーションをVSCode上でデバッグする手順です。
 
 ## 設定
 
@@ -14,7 +14,7 @@ FROM eclipse-temurin:21
 CMD java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484 -jar ${jar_file}
 ```
 
-上記`CMD`によって、8484 ポートでデバッグを待ち受けます。
+上記`CMD`によって、8484ポートでデバッグを待ち受けます。
 
 - docker-compose.yaml
 
@@ -29,7 +29,7 @@ services:
       - 8484:8484
 ```
 
-ホスト側の 8484 ポートとコンテナ側の 8484 ポートをフォワーディングします。
+ホスト側の8484ポートとコンテナ側の8484ポートをフォワーディングします。
 
 - launch.json
 
@@ -52,4 +52,4 @@ services:
 
 ## 起動
 
-VSCode 上で F5 キーを押せばデバッグが開始します。
+VSCode上でF5キーを押せばデバッグが開始します。

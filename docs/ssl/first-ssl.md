@@ -1,18 +1,18 @@
-# はじめての SSL 通信
+# はじめてのSSL通信
 
 自己証明書を作ってみます。
 
-- パッケージ版 nginx
-- コンテナ版 nginx
-- ローカル React
-- ビルド React
+- パッケージ版nginx
+- コンテナ版nginx
+- ローカルReact
+- ビルドReact
 - k8s nginx
 
-## パッケージ版 nginx サーバに https でアクセスできるようにする
+## パッケージ版nginxサーバにhttpsでアクセスできるようにする
 
-### nginx インストール
+### nginxインストール
 
-Linux 上に nginx パッケージをインストールして Web サーバを起動します。
+Linux上にnginxパッケージをインストールしてWebサーバを起動します。
 
 ```shell
 # パッケージ更新
@@ -44,7 +44,7 @@ sudo openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.
 sudo openssl x509 -days 3650 -req -signkey /etc/nginx/ssl/server.key -in /etc/nginx/ssl/server.csr -out /etc/nginx/ssl/server.crt
 ```
 
-### nginx の設定ファイルを追加
+### nginxの設定ファイルを追加
 
 `/etc/nginx/conf.d/ssl.conf`を下記で作成します。
 
@@ -63,9 +63,9 @@ server {
 sudo systemctl restart nginx
 ```
 
-nginx 再起動後、`https:{サーバのアドレス}:443`で nginx のページにアクセスできるようになっています。
+nginx再起動後、`https:{サーバのアドレス}:443`でnginxのページにアクセスできるようになっています。
 
-## コンテナ版 nginx サーバに https でアクセスできるようにする
+## コンテナ版nginxサーバにhttpsでアクセスできるようにする
 
 ### 設定ファイル作成
 
@@ -85,7 +85,7 @@ sudo openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.
 sudo openssl x509 -days 3650 -req -signkey /etc/nginx/ssl/server.key -in /etc/nginx/ssl/server.csr -out /etc/nginx/ssl/server.crt
 ```
 
-#### nginx 設定ファイル
+#### nginx設定ファイル
 
 `/etc/nginx/conf.d/default.conf`を下記で作成します:
 
@@ -154,9 +154,9 @@ services:
 
 ### 起動
 
-`docker compose up -d`で起動後、`https://{サーバのIPアドレス}:443`で nginx のページにアクセスできます。
+`docker compose up -d`で起動後、`https://{サーバのIPアドレス}:443`でnginxのページにアクセスできます。
 
-## ローカルの React Web サーバに https でアクセスできるようにする
+## ローカルのReact Webサーバにhttpsでアクセスできるようにする
 
 プロジェクトのルートディレクトリに`.env.local`ファイルを作成します（`.env`以降は多分なんでも良い）:
 
@@ -170,9 +170,9 @@ SSL_KEY_FILE=ssl/server.key
 
 `npm start`で起動すると`https://localhost:3000`にアクセスできます。
 
-## ビルドした React Web サーバに https でアクセスできるようにする
+## ビルドしたReact Webサーバにhttpsでアクセスできるようにする
 
-### .env ファイル作成
+### .envファイル作成
 
 ローカルの時と同様に、ルートディレクトリに下記を配置します:
 
@@ -184,14 +184,14 @@ SSL_KEY_FILE=ssl/server.key
 
 ### 証明書
 
-上記.env ファイルと平仄を合わせる形で、プロジェクトのルートに`ssl`ディレクトリを作成し、各種証明書を配置します:
+上記.envファイルと平仄を合わせる形で、プロジェクトのルートに`ssl`ディレクトリを作成し、各種証明書を配置します:
 
 ```
 $ ls easyweb/ssl/
 server.crt  server.csr  server.key
 ```
 
-### package.json 追記
+### package.json追記
 
 あらかじめ`npm install dotenv-cli`を実行しておき、`build-local`コマンドを下記で追加します:
 
@@ -214,11 +214,11 @@ npm run build-local
 serve -s --ssl-cert ssl/server.crt --ssl-key ssl/server.key  build/
 ```
 
-## Kubernetes クラスタ上の nginx サーバに https でアクセスできるようにする
+## Kubernetesクラスタ上のnginxサーバにhttpsでアクセスできるようにする
 
 ### secret
 
-各種証明書の内容について secret に転記します。
+各種証明書の内容についてsecretに転記します。
 
 ```yaml
 apiVersion: v1
@@ -234,7 +234,7 @@ data:
 
 ### configMap
 
-nginx の default.conf について configMap に記載します。
+nginxのdefault.confについてconfigMapに記載します。
 
 ```yaml
 apiVersion: v1
@@ -293,7 +293,7 @@ data:
 
 ### deployment
 
-volume にて configMap を指定し、先に作成したファイルたちが Pod 内に配置されるようにします。
+volumeにてconfigMapを指定し、先に作成したファイルたちがPod内に配置されるようにします。
 
 ```yaml
 apiVersion: apps/v1
@@ -333,7 +333,7 @@ spec:
 
 ### service
 
-サービスです。443 ポートを開けます。
+サービスです。443ポートを開けます。
 
 ```yaml
 apiVersion: v1

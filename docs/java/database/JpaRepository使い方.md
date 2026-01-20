@@ -1,6 +1,6 @@
-# JpaRepository 使い方
+# JpaRepository使い方
 
-`JpaRepository`を使うことで、インターフェースにメソッドを宣言するだけで SQL を実行する処理を実装できます。本ドキュメントで、JpaRepository の導入方法および実装例を解説します。
+`JpaRepository`を使うことで、インターフェースにメソッドを宣言するだけでSQLを実行する処理を実装できます。本ドキュメントで、JpaRepositoryの導入方法および実装例を解説します。
 
 ## 実装例
 
@@ -92,7 +92,7 @@ public class Users {
 }
 ```
 
-- 下記の要領で repository インターフェースを作成します:
+- 下記の要領でrepositoryインターフェースを作成します:
 
 ```java
 package com.example.easyapp.repository;
@@ -117,8 +117,8 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     /**
      * SELECT * FROM users WHERE address LIKE ?1
      *
-     * address に対して LIKE %address% にあたる挙動をします。
-     * 類似の検索として 前方一致: StartingWith, 後方一致: EndingWith をメソッド名に付与します。
+     * addressに対してLIKE %address% にあたる挙動をします。
+     * 類似の検索として 前方一致: StartingWith, 後方一致: EndingWithをメソッド名に付与します。
      * 前方、後方、部分一致を使い分けたい場合はLikeを使ってください。
      */
     List<Users> findByAddressContaining(String address);
@@ -134,9 +134,9 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 
 ## テスト例
 
-H2DB を使ってテストします。
+H2DBを使ってテストします。
 
-- h2db の依存関係を追記します:
+- h2dbの依存関係を追記します:
 
 ```xml
         <!-- h2db導入 -->

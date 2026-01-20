@@ -1,6 +1,6 @@
-# Go アプリをビルド
+# Goアプリをビルド
 
-GitLab Runner を使って Go アプリケーションのコンテナイメージをビルドします。
+GitLab Runnerを使ってGoアプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
 
@@ -21,20 +21,20 @@ CMD ["/main"]
 
 cf.
 
-- [UT 結果を Web で確認](https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html#go)
+- [UT結果をWebで確認](https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html#go)
 - [コードカバレッジ](https://docs.gitlab.com/ci/testing/code_coverage.html)
 - [ジョブのアーティファクト](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
-- [kaniko を使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
+- [kanikoを使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
 
 下記ステージで構成します:
 
-- UT 一括実行
+- UT一括実行
   - テスト結果およびカバレッジの達成率についてはパイプラインのジョブ上から確認できます。
   - カバレッジの詳細についてはアーティファクトに出力しているのでダウンロードすることで確認できます。
   - 下記サンプルでは、カバレッジの正確な計測のために`handler`, `usecase`, `repository`パッケージ配下のみテストしています。
 - モジュールビルド
-- コンテナイメージ push
-  - push 先は harbor を想定しています。
+- コンテナイメージpush
+  - push先はharborを想定しています。
 
 ```yaml
 stages:

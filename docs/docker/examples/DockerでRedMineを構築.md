@@ -1,6 +1,6 @@
-# Docker で RedMine を構築
+# DockerでRedMineを構築
 
-## RedMine 起動
+## RedMine起動
 
 下記`docker-compose.yaml`を記述して起動します。
 

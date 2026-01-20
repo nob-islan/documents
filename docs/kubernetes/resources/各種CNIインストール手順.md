@@ -1,6 +1,6 @@
-# 各種 CNI インストール手順
+# 各種CNIインストール手順
 
-各種 CNI を使っての Kubernetes クラスタ構築手順を記載します。
+各種CNIを使ってのKubernetesクラスタ構築手順を記載します。
 
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
@@ -10,7 +10,7 @@ cf. https://github.com/flannel-io/flannel#deploying-flannel-manually
 
 ### 手順
 
-- kubelet, kubeadm, kubectl インストール後、コントロールプレーンノードを初期化します:
+- kubelet, kubeadm, kubectlインストール後、コントロールプレーンノードを初期化します:
 
 ```shell
 # sudo kubeadm init \
@@ -21,13 +21,13 @@ sudo kubeadm init \
   --apiserver-advertise-address=192.168.1.1
 ```
 
-- flannel のマニフェストをダウンロードします:
+- flannelのマニフェストをダウンロードします:
 
 ```shell
 wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
-- `net-conf.json`内の`Network`を先に設定した pod の cidr に合わせます:
+- `net-conf.json`内の`Network`を先に設定したpodのcidrに合わせます:
 
 ```yaml
 net-conf.json: |
@@ -40,13 +40,13 @@ net-conf.json: |
   }
 ```
 
-- flannel のリソースを作成します:
+- flannelのリソースを作成します:
 
 ```shell
 kubectl apply -f kube-flannel.yml
 ```
 
-- flannel のリソースが作成されることを確認します:
+- flannelのリソースが作成されることを確認します:
 
 ```shell
 watch kubectl get pods -n kube-flannel
@@ -58,7 +58,7 @@ cf. https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed
 
 ### 手順
 
-- kubelet, kubeadm, kubectl インストール後、コントロールプレーンノードを初期化します:
+- kubelet, kubeadm, kubectlインストール後、コントロールプレーンノードを初期化します:
 
 ```shell
 # sudo kubeadm init \
@@ -69,7 +69,7 @@ sudo kubeadm init \
   --apiserver-advertise-address=192.168.1.1
 ```
 
-- Tigera operator および CRD をインストールします:
+- Tigera operatorおよびCRDをインストールします:
 
 ```shell
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.2/manifests/operator-crds.yaml
@@ -82,7 +82,7 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.2
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.30.2/manifests/custom-resources.yaml -O
 ```
 
-- `custom-resources.yaml`の`spec.calicoNetwork.ipPools.cidr`を先に設定した pod の cidr に合わせます:
+- `custom-resources.yaml`の`spec.calicoNetwork.ipPools.cidr`を先に設定したpodのcidrに合わせます:
 
 ```yml
 Installation
@@ -102,13 +102,13 @@ spec:
       nodeSelector: all()
 ```
 
-- Calico のリソースを作成します:
+- Calicoのリソースを作成します:
 
 ```shell
 kubectl create -f custom-resources.yaml
 ```
 
-- Calico のリソースが作成されることを確認します:
+- Calicoのリソースが作成されることを確認します:
 
 ```shell
 watch kubectl get pods -n calico-system

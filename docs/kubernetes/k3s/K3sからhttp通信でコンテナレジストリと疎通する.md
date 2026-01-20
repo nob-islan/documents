@@ -1,6 +1,6 @@
-# K3s から http 通信でコンテナレジストリと疎通する
+# K3sからhttp通信でコンテナレジストリと疎通する
 
-http 通信でコンテナレジストリと疎通をとり、イメージを pull する方法です。
+http通信でコンテナレジストリと疎通をとり、イメージをpullする方法です。
 
 ## 手順
 
@@ -20,7 +20,7 @@ configs:
       password: xxxxxx # this is the registry password
 ```
 
-- K3s を再起動します:
+- K3sを再起動します:
 
 ```shell
 sudo systemctl restart k3s

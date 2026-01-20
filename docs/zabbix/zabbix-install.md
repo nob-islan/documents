@@ -1,19 +1,19 @@
-# Zabbix インストール手順
+# Zabbixインストール手順
 
-Zabbix サーバの構築方法および、監視対象のサーバへのエージェントの設定方法を記載します。
+Zabbixサーバの構築方法および、監視対象のサーバへのエージェントの設定方法を記載します。
 
-## Zabbix サーバインストール
+## Zabbixサーバインストール
 
 ### 事前準備
 
-- mysql インストール
+- mysqlインストール
 
   ```shell
   sudo apt update
   sudo apt install mysql-server-8.0 -f
   ```
 
-### Zabbix サーバインストール
+### Zabbixサーバインストール
 
 #### 参考文献
 
@@ -22,13 +22,13 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
 
 #### 手順
 
-- root ユーザに昇格
+- rootユーザに昇格
 
   ```shell
   sudo su -
   ```
 
-- Zabbix reporitory をインストール
+- Zabbix reporitoryをインストール
 
   ```shell
   wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
@@ -42,7 +42,7 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
   apt install zabbix-server-mysql zabbix-frontend-php zabbix-apache-conf zabbix-sql-scripts zabbix-agent
   ```
 
-- mysql テーブル作成
+- mysqlテーブル作成
 
   ```shell
   mysql -u root
@@ -79,7 +79,7 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
   DBPassword={password}
   ```
 
-- Zabbix サーバの開始
+- Zabbixサーバの開始
 
   ```shell
   systemctl restart zabbix-server zabbix-agent apache2
@@ -88,7 +88,7 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
 
 `http://${IPアドレス}/zabbix`にアクセスするとログイン画面が表示されます。初期ユーザ/パスワードは`Admin/zabbix`です。
 
-## Zabbix Agent インストール
+## Zabbix Agentインストール
 
 ### 参考文献
 
@@ -98,13 +98,13 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
 
 ### インストール手順
 
-- root ユーザに昇格
+- rootユーザに昇格
 
   ```shell
   sudo su -
   ```
 
-- Zabbix repository をインストール
+- Zabbix repositoryをインストール
 
   ```shell
   wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
@@ -112,7 +112,7 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
   apt update
   ```
 
-- Zabbix Agent インストール
+- Zabbix Agentインストール
 
   ```shell
   apt install zabbix-agent
@@ -136,5 +136,5 @@ Zabbix サーバの構築方法および、監視対象のサーバへのエー�
 
 - **Data collection** > **Hosts** から **Create host** を選択
   - **Templates** について適当に選択
-  - **Interfaces** については **Agent** を選択し、監視対象の IP アドレスを入力
-- 10 ~ 15 分後に **Availability** が点灯したら監視開始
+  - **Interfaces** については **Agent** を選択し、監視対象のIPアドレスを入力
+- 10 ~ 15分後に **Availability** が点灯したら監視開始

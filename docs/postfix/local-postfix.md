@@ -1,10 +1,10 @@
-# ローカル用 Postfix を構築
+# ローカル用Postfixを構築
 
-ローカルで動かせる Postfix サーバを AWS EC2 を用いて立てます。
+ローカルで動かせるPostfixサーバをAWS EC2を用いて立てます。
 
 ## 構築手順
 
-- Postfix をインストールします。
+- Postfixをインストールします。
 
 ```shell
 sudo apt update
@@ -31,13 +31,13 @@ sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.org
   - `/etc/postfix/main.cf`
     - `home_mailbox = Maildir/`: メールボックスの形式設定
 
-- Postfix を再起動します。
+- Postfixを再起動します。
 
 ```shell
 sudo systemctl restart postfix
 ```
 
-- Dovecot をインストールします。
+- Dovecotをインストールします。
 
 ```shell
 sudo apt install dovecot-core dovecot-pop3d dovecot-imapd
@@ -47,7 +47,7 @@ sudo apt install dovecot-core dovecot-pop3d dovecot-imapd
 
   - `/etc/dovecot/dovecot.conf`
     - `protocols = imap pop3`: 使用するプロトコル
-    - `listen = *`: IPv4 のみ使用
+    - `listen = *`: IPv4のみ使用
   - `/etc/dovecot/conf.d/10-mail.conf`
     - `#mail_location = mbox:~/mail:INBOX=/var/mail/%u`: もとあったファイルの場所設定をコメントアウト
     - `mail_location = maildir:~/Maildir`: ファイルの場所を指定
@@ -55,9 +55,9 @@ sudo apt install dovecot-core dovecot-pop3d dovecot-imapd
     - `disable_plaintext_auth = no`: 平文認証を許可
     - `auth_mechanisms = plain login`
   - `/etc/dovecot/conf.d/10-ssl.conf`
-    - `ssl = no`: SSL 未使用
+    - `ssl = no`: SSL未使用
 
-- dovecot を再起動します。
+- dovecotを再起動します。
 
 ```shell
 sudo systemctl restart dovecot

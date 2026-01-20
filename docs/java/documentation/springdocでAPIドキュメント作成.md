@@ -1,6 +1,6 @@
-# springdoc で API ドキュメント作成
+# springdocでAPIドキュメント作成
 
-API 設計書の作成方法について説明します。springdoc-openapi によって swagger を自動生成するようにしています。
+API設計書の作成方法について説明します。springdoc-openapiによってswaggerを自動生成するようにしています。
 
 cf. https://springdoc.org/
 
@@ -34,7 +34,7 @@ spring.profiles.active=swagger
 
 ### EasyappApplication.java
 
-下記アノテーションを追記し、API の概要を記載します:
+下記アノテーションを追記し、APIの概要を記載します:
 
 ```diff
   package nob.example.easyapp;
@@ -57,7 +57,7 @@ spring.profiles.active=swagger
 
 ### AuthController.java
 
-下記アノテーションを追記し、各 API のインターフェース仕様を記載します:
+下記アノテーションを追記し、各APIのインターフェース仕様を記載します:
 
 ```diff
   package nob.example.easyapp.controller;
@@ -279,7 +279,7 @@ spring.profiles.active=swagger
 
 ### resources/application-swagger.yaml
 
-API の description について記載します:
+APIのdescriptionについて記載します:
 
 ```yaml
 ########################
@@ -297,13 +297,13 @@ easyappdoc:
 
 ## 動作確認
 
-アプリ起動後、http://localhost:8080/swagger-ui/index.html で swagger ドキュメントを確認できます。
+アプリ起動後、http://localhost:8080/swagger-ui/index.html でswaggerドキュメントを確認できます。
 
 ## Tips
 
-### Try it out ボタンを無効化したい場合
+### Try it outボタンを無効化したい場合
 
-application.properties に下記を追加すればボタンが非表示になります:
+application.propertiesに下記を追加すればボタンが非表示になります:
 
 ```properties
 springdoc.swagger-ui.supported-submit-methods=[]

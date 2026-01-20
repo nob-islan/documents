@@ -1,22 +1,22 @@
-# MkDocs コンテンツを GItLab Pages で公開
+# MkDocsコンテンツをGItLab Pagesで公開
 
 ## ディレクトリ構成
 
-プロジェクトのルートディレクトリに mkdocs.yml が配置されている前提とします:
+プロジェクトのルートディレクトリにmkdocs.ymlが配置されている前提とします:
 
 ```
 .
-├── docs
-│   └── index.md
+├──docs
+│   └──index.md
 ├── .gitlab-ci.yml
-└── mkdocs.yml
+└──mkdocs.yml
 ```
 
 ## 設定ファイル
 
 ### .gitlab-ci.yml
 
-デフォルトブランチに push した際に runner が実行され、pages が更新されます。
+デフォルトブランチにpushした際にrunnerが実行され、pagesが更新されます。
 
 ```yaml
 stages:

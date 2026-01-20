@@ -1,6 +1,6 @@
-# PostgreSQL バージョンアップ手順
+# PostgreSQLバージョンアップ手順
 
-`pg_upgrade`コマンドを使った PostgreSQL のバージョンアップ手順です。例として 12 -> 13 の手順を記載します。
+`pg_upgrade`コマンドを使ったPostgreSQLのバージョンアップ手順です。例として12 -> 13の手順を記載します。
 
 ## 事前準備
 
@@ -16,7 +16,7 @@ WIP
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 
-GPG 鍵の追加
+GPG鍵の追加
 
 ```shell
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -40,7 +40,7 @@ sudo apt-get install postgresql-13
 systemctl status postgresql@13-main.service
 ```
 
-サービスの状態を確認（`enabled`であれば OK）
+サービスの状態を確認（`enabled`であればOK）
 
 ```shell
 systemctl is-enabled postgresql
@@ -52,7 +52,7 @@ systemctl is-enabled postgresql
 sudo systemctl stop postgresql.service
 ```
 
-postgres ユーザになる
+postgresユーザになる
 
 ```shell
 sudo su - postgres
@@ -82,7 +82,7 @@ exit
 sudo vim /etc/postgresql/13/main/postgresql.conf
 ```
 
-`port = 5433`になっているため、`port = 5432`とすれば OK。また、`listen_addresses`についてもコメントアウトを外し、`localhost` -> `*`に変更
+`port = 5433`になっているため、`port = 5432`とすればOK。また、`listen_addresses`についてもコメントアウトを外し、`localhost` -> `*`に変更
 
 古いバージョンについても同様にポート番号などを変更
 
@@ -104,7 +104,7 @@ sudo vim /etc/postgresql/13/main/pg_hba.conf
 sudo systemctl start postgresql.service
 ```
 
-postgres ユーザに戻り、`psql`などで接続先が新しいバージョンになっていることを確認
+postgresユーザに戻り、`psql`などで接続先が新しいバージョンになっていることを確認
 
 オプティマイザの統計情報を収集
 
@@ -119,7 +119,7 @@ sudo apt-get remove postgresql-12
 sudo rm -rf /etc/postgresql/12/
 ```
 
-postgres ユーザにて`delete_old_cluster.sh`を実行
+postgresユーザにて`delete_old_cluster.sh`を実行
 
 ```shell
 sudo su - postgres

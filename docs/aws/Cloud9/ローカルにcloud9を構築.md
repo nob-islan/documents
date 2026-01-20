@@ -1,26 +1,26 @@
-# ローカルに Cloud9 を構築
+# ローカルにCloud9を構築
 
-aws 開発ツールを利用できる Web IDE: Cloud9 をローカルに構築する方法です。
+aws開発ツールを利用できるWeb IDE: Cloud9をローカルに構築する方法です。
 
 cf. https://github.com/c9/core
 
 ## 構築手順
 
-- node および nvm が入っている必要があります。
+- nodeおよびnvmが入っている必要があります。
 
 ```shell
 node -v
 npm -v
 ```
 
-- python が必要です。なければインストールしてください。
+- pythonが必要です。なければインストールしてください。
 
 ```shell
 sudo apt update
 sudo apt install -y python2
 ```
 
-- cloud9 を github からダウンロードします。
+- cloud9をgithubからダウンロードします。
 
 ```shell
 git clone https://github.com/c9/core.git c9sdk

@@ -1,12 +1,12 @@
-# Let's Encrypt を使って SSL 通信を行う
+# Let's Encryptを使ってSSL通信を行う
 
-Let's Encrypt を使って、取得したドメインに対して SSL 通信を行います。
+Let's Encryptを使って、取得したドメインに対してSSL通信を行います。
 
 cf. https://coder.com/docs/code-server/guide#using-lets-encrypt-with-nginx
 
 ## 設定手順
 
-code-server 起動後、下記の設定を行います:
+code-server起動後、下記の設定を行います:
 
 - 必要パッケージをインストール
 

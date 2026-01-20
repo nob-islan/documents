@@ -1,6 +1,6 @@
-# Spring Boot プロジェクトセットアップ
+# Spring Bootプロジェクトセットアップ
 
-Spring Boot で実装する REST API のプロジェクトの初期セットアップ方法について記載します。
+Spring Bootで実装するREST APIのプロジェクトの初期セットアップ方法について記載します。
 
 ## プロジェクト作成
 
@@ -20,7 +20,7 @@ curl https://start.spring.io/starter.zip \
   -o easyapp.zip
 ```
 
-- zip を解凍します。
+- zipを解凍します。
 
 ```shell
 unzip easyapp.zip && rm -rf easyapp.zip
@@ -28,11 +28,11 @@ unzip easyapp.zip && rm -rf easyapp.zip
 
 ## 実装
 
-サンプルコードを掲載します。ここでは擬似的なログイン API を実装します。
+サンプルコードを掲載します。ここでは擬似的なログインAPIを実装します。
 
 ### 事前準備
 
-データベースを docker で構築し、Java プロジェクト側に接続情報を記載します。
+データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。
 
 #### docker-compose.yaml
 
@@ -119,7 +119,7 @@ spring.datasource.password=password
 
 #### repository/UsersRepository.java
 
-データベースにアクセスする repository インターフェースを定義します。JpaRepository によって実装が自動生成されます。
+データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。
 
 ```java
 package nob.example.easyapp.repository;
@@ -370,7 +370,7 @@ public class MeOutModel {
 
 #### controller/AuthController.java
 
-API のインターフェースを定義します。
+APIのインターフェースを定義します。
 
 ```java
 package nob.example.easyapp.controller;
@@ -564,7 +564,7 @@ public class MeResponse {
 ./mvnw spring-boot:run
 ```
 
-下記コマンドで API を打鍵できます。
+下記コマンドでAPIを打鍵できます。
 
 ```shell
 # /login

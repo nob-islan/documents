@@ -1,10 +1,10 @@
-# MinIO で静的コンテンツをホスティングする
+# MinIOで静的コンテンツをホスティングする
 
 静的ウェブサイトをホスティングして外部公開します。
 
 ## 前提
 
-- MinIO が起動している
+- MinIOが起動している
 - `mc`コマンドが叩ける状態になっている
 - エイリアス`nob`が登録されている
 
@@ -28,6 +28,6 @@ mc anonymous set download nob/first-bucket
 mc cp -r ./public nob/first-bucket
 ```
 
-- 外部公開用 URL にアクセスします:
+- 外部公開用URLにアクセスします:
 
 http://{minio_ip}:{http_port}/first-bucket/public/index.html

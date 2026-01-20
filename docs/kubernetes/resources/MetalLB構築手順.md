@@ -1,12 +1,12 @@
-# MetalLB 構築手順
+# MetalLB構築手順
 
-Kubernetes クラスタに対してロードバランサを提供する **MetalLB** の構築手順です。
+Kubernetesクラスタに対してロードバランサを提供する **MetalLB** の構築手順です。
 
 cf. https://metallb.io/
 
 ## 前提
 
-Kubernetes クラスタ構築時に、CNI の選定に注意してください。少なくとも flannel では動作確認が取れています。
+Kubernetesクラスタ構築時に、CNIの選定に注意してください。少なくともflannelでは動作確認が取れています。
 
 cf. https://metallb.io/#requirements
 
@@ -14,7 +14,7 @@ cf. https://metallb.io/#requirements
 
 cf. https://metallb.io/installation/
 
-- strict ARP mode を有効化します:
+- strict ARP modeを有効化します:
 
 ```shell
 # see what changes would be made, returns nonzero returncode if different
@@ -28,7 +28,7 @@ sed -e "s/strictARP: false/strictARP: true/" | \
 kubectl apply -f - -n kube-system
 ```
 
-- マニフェストを apply します:
+- マニフェストをapplyします:
 
 ```shell
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.15.2/config/manifests/metallb-native.yaml
@@ -44,7 +44,7 @@ kubectl get all -n metallb-system
 
 cf. https://metallb.io/configuration/
 
-- Service に割り当てる IP アドレス範囲を定義する `IPAddressPool` リソースを作成します:
+- Serviceに割り当てるIPアドレス範囲を定義する `IPAddressPool` リソースを作成します:
 
 ```yaml
 apiVersion: metallb.io/v1beta1
@@ -62,7 +62,7 @@ spec:
 kubectl apply -f ipaddresspool.yaml
 ```
 
-- Layer 2 mode で起動するための `L2Advertisement` リソースを作成します:
+- Layer 2 modeで起動するための `L2Advertisement` リソースを作成します:
 
 ```yaml
 apiVersion: metallb.io/v1beta1
@@ -81,7 +81,7 @@ spec:
 kubectl apply -f l2advertisement.yaml
 ```
 
-- 動作確認用の nginx コンテナをデプロイします:
+- 動作確認用のnginxコンテナをデプロイします:
 
 ```yaml
 apiVersion: apps/v1
@@ -129,7 +129,7 @@ spec:
 kubectl apply -f service.yaml
 ```
 
-- 正常に動作していれば、`EXTERNAL-IP`に IP アドレスが振られ、クラスタ外から疎通をとることができます。
+- 正常に動作していれば、`EXTERNAL-IP`にIPアドレスが振られ、クラスタ外から疎通をとることができます。
 
 ```
 $ kubectl get svc first-service

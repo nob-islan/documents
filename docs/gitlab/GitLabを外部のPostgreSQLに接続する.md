@@ -1,22 +1,22 @@
-# GitLab を外部の PostgreSQL に接続する
+# GitLabを外部のPostgreSQLに接続する
 
-PostgreSQL サーバを外部に立てて GitLab の DB として運用します。
+PostgreSQLサーバを外部に立ててGitLabのDBとして運用します。
 
-## PostgreSQL サーバ側の設定
+## PostgreSQLサーバ側の設定
 
-postgres ユーザになる
+postgresユーザになる
 
 ```shell
 sudo su - postgres
 ```
 
-postgreSQL に接続
+postgreSQLに接続
 
 ```shell
 psql
 ```
 
-gitlab ユーザの作成
+gitlabユーザの作成
 
 ```sql
 CREATE USER gitlab with PASSWORD 'gitlab_secret';
@@ -28,7 +28,7 @@ CREATE USER gitlab with PASSWORD 'gitlab_secret';
 SELECT * FROM pg_user;
 ```
 
-gitlabhq_production データベース作成
+gitlabhq_productionデータベース作成
 
 ```sql
 CREATE DATABASE gitlabhq_production OWNER gitlab;
@@ -42,7 +42,7 @@ ALTER ROLE gitlab WITH SUPERUSER;
 
 `SELECT * FROM pg_user;`で`usersuper`が`t`になっていることを確認
 
-pg_hba.conf を vim などでを編集
+pg_hba.confをvimなどでを編集
 
 ```shell
 find / -name pg_hba.conf 2> /dev/null
@@ -60,7 +60,7 @@ host    all             all             192.168.144.0/24           trust
 sudo service postgresql restart
 ```
 
-## GitLab サーバ側の設定
+## GitLabサーバ側の設定
 
 以下の設定を追記します。パッケージ版であれば`gitlab.rb`ファイルを編集してください。コンテナ版であれば`docker-compose.yaml`の`services.gitlab.environment.GITLAB_OMNIBUS_CONFIG`に以下を追記します。
 
@@ -76,4 +76,4 @@ gitlab_rails['db_host'] = '${PostgreSQLのIPアドレス}'
 gitlab_rails['db_port'] = 5432
 ```
 
-あとはいつも通り`docker-compose up -d`で起動すれば OK です。
+あとはいつも通り`docker-compose up -d`で起動すればOKです。

@@ -1,10 +1,10 @@
-# echo で REST API を実装
+# echoでREST APIを実装
 
 cf. https://echo.labstack.com/docs
 
 ## サンプルコード
 
-echo を使って簡易的な GET メソッドおよび POST メソッドを実装します。usecase 配下はフレームワークに依存しないので省略します。
+echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装します。usecase配下はフレームワークに依存しないので省略します。
 
 ### ディレクトリ構成
 
@@ -25,13 +25,13 @@ echo を使って簡易的な GET メソッドおよび POST メソッドを実�
 
 ### プロジェクト作成
 
-- 下記コマンドで Go モジュールを初期化します。
+- 下記コマンドでGoモジュールを初期化します。
 
 ```shell
 go mod init easyapp
 ```
 
-- echo をインストールします。
+- echoをインストールします。
 
 ```shell
 go get github.com/labstack/echo/v4
@@ -242,6 +242,6 @@ func main() {
 }
 ```
 
-### API ドキュメントについて
+### APIドキュメントについて
 
-API ドキュメントの記法については [echo-swagger](https://github.com/swaggo/echo-swagger) を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。
+APIドキュメントの記法については [echo-swagger](https://github.com/swaggo/echo-swagger) を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。

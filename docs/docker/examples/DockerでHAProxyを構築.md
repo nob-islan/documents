@@ -1,8 +1,8 @@
-# Docker で HAProxy を構築
+# DockerでHAProxyを構築
 
 cf. https://www.haproxy.com/documentation/haproxy-configuration-tutorials/
 
-- docker-compose を下記で作成します:
+- docker-composeを下記で作成します:
 
 ```yaml
 services:
@@ -15,7 +15,7 @@ services:
       - ./volumes/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 ```
 
-- haproxy.cfg を下記で作成します（see also; [Configuration file composition](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/configuration-basics/overview/#configuration-file-composition)）:
+- haproxy.cfgを下記で作成します（see also; [Configuration file composition](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/configuration-basics/overview/#configuration-file-composition)）:
 
 ```config
 global

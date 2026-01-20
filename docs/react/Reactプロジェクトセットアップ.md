@@ -1,6 +1,6 @@
-# React プロジェクトセットアップ
+# Reactプロジェクトセットアップ
 
-React および TypeScript を使った Web プロジェクトの初期セットアップ方法について記載します。
+ReactおよびTypeScriptを使ったWebプロジェクトの初期セットアップ方法について記載します。
 
 ## プロジェクト作成
 
@@ -14,7 +14,7 @@ React および TypeScript を使った Web プロジェクトの初期セット
 npx create-react-app easyweb --template typescript
 ```
 
-- redux および他必要なものをインストールします。
+- reduxおよび他必要なものをインストールします。
 
 ```shell
 cd easyweb
@@ -29,9 +29,9 @@ npm install redux react-redux react-router-dom
 npm install sass node-sass
 ```
 
-## Redux 向け実装
+## Redux向け実装
 
-Redux を動かすために必要な改修およびサンプルコードについて記載します。サンプルでは + ボタンと - ボタンによってカウンターを増減させる画面を実装します。
+Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルでは + ボタンと - ボタンによってカウンターを増減させる画面を実装します。
 
 ### ディレクトリ構成
 
@@ -75,7 +75,7 @@ Redux を動かすために必要な改修およびサンプルコードにつ�
 
 #### app/store.ts
 
-各種 reducer を取りまとめた store を作成します。
+各種reducerを取りまとめたstoreを作成します。
 
 ```ts
 import { legacy_createStore as createStore } from "redux";
@@ -89,7 +89,7 @@ export type AppDispatch = typeof store.dispatch;
 
 #### app/rootReducer.ts
 
-reducer を統合します。reducer が増えるたびに`rootReducer`への追記が必要です。
+reducerを統合します。reducerが増えるたびに`rootReducer`への追記が必要です。
 
 ```ts
 import { combineReducers } from "redux";
@@ -139,7 +139,7 @@ export default App;
 
 #### features/counter/Counter.tsx
 
-画面コンテンツおよび action の呼び出しを定義します。
+画面コンテンツおよびactionの呼び出しを定義します。
 
 ```tsx
 import React from "react";
@@ -259,7 +259,7 @@ import { CounterState, initialCounterState } from "./counterState";
  */
 export const counterReducer = (
   state = initialCounterState,
-  action: CounterActionTypes
+  action: CounterActionTypes,
 ): CounterState => {
   switch (action.type) {
     case CounterActionTypeConst.INCREMENT:
@@ -280,7 +280,7 @@ export const counterReducer = (
 
 #### index.module.scss
 
-Web ページ全体の装飾を定義します。
+Webページ全体の装飾を定義します。
 
 ```scss
 body {
@@ -291,7 +291,7 @@ body {
 
 #### app.module.scss
 
-App 配下の装飾を定義します。
+App配下の装飾を定義します。
 
 ```scss
 .body {

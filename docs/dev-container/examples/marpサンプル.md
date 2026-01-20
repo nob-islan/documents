@@ -1,6 +1,6 @@
-# Marp 環境サンプル
+# Marp環境サンプル
 
-VSCode 上で markdown 形式でスライドを作成できる [Marp](https://marp.app/) の環境サンプルです。
+VSCode上でmarkdown形式でスライドを作成できる [Marp](https://marp.app/) の環境サンプルです。
 
 ## 設定
 
@@ -20,7 +20,7 @@ VSCode 上で markdown 形式でスライドを作成できる [Marp](https://ma
 }
 ```
 
-## markdown サンプル
+## markdownサンプル
 
 - `marp: true`と記載することでスライド形式でプレビューできます。
 
@@ -48,16 +48,16 @@ VSCode 上で markdown 形式でスライドを作成できる [Marp](https://ma
 
   # テスト２
 
-  ## テスト 2-1
+  ## テスト2-1
 
   コンテンツのページです。
 
-  ## テスト 2-2
+  ## テスト2-2
 
   章立てができます。
   ```
 
-拡張機能 **Markdown Preview Enhanced** をインストール済みの場合、この拡張機能によって提供されるプレビューではスライドとして表示されないため、下記の設定で VSCode が提供するデフォルトのプレビューボタンを表示させるようにしてください:
+拡張機能 **Markdown Preview Enhanced** をインストール済みの場合、この拡張機能によって提供されるプレビューではスライドとして表示されないため、下記の設定でVSCodeが提供するデフォルトのプレビューボタンを表示させるようにしてください:
 
 ```json
 "markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,

@@ -1,6 +1,6 @@
-# Web 画面を実装
+# Web画面を実装
 
-`html/template`を使って html コンテンツを返却する Go アプリを作成します。
+`html/template`を使ってhtmlコンテンツを返却するGoアプリを作成します。
 
 ## ディレクトリ構成
 
@@ -29,9 +29,9 @@
 
 ### 設計
 
-- ログイン画面表示時に、ボタン名を go から html に渡す
-- ボタン入力時に js から go の関数を呼び出し、API をコール
-- 結果を alert 表示
+- ログイン画面表示時に、ボタン名をgoからhtmlに渡す
+- ボタン入力時にjsからgoの関数を呼び出し、APIをコール
+- 結果をalert表示
 
 ### 実装
 
@@ -318,9 +318,9 @@ func main() {
 
 ## 静的コンテンツをバイナリに含める
 
-上記のコードでは`go build`で作成したバイナリファイルに html などのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
+上記のコードでは`go build`で作成したバイナリファイルにhtmlなどのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
 
-- assets/assets.go を下記で新規作成
+- assets/assets.goを下記で新規作成
 
 ```go
 package assets
@@ -334,7 +334,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- router/base.go について、埋め込んだ static を使うよう宣言
+- router/base.goについて、埋め込んだstaticを使うよう宣言
 
 ```go
 	staticFiles, err := fs.Sub(assets.Static, "static")
@@ -344,7 +344,7 @@ var Templates embed.FS // templates埋め込み宣言
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 ```
 
-- handler/users_handler.go について、埋め込んだ templates を使うよう宣言
+- handler/users_handler.goについて、埋め込んだtemplatesを使うよう宣言
 
 ```go
 	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")

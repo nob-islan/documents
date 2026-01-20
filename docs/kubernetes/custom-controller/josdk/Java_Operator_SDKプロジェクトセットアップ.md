@@ -1,10 +1,10 @@
-# Java Operator SDK プロジェクトセットアップ
+# Java Operator SDKプロジェクトセットアップ
 
 [Java Operator SDK](https://javaoperatorsdk.io/) で実装するカスタムコントローラーのプロジェクトのセットアップ方法について記載します。
 
 ## クラスタ作成
 
-- kind/cluster/josdk-cluster.yaml を下記内容で作成します。
+- kind/cluster/josdk-cluster.yamlを下記内容で作成します。
 
 ```yaml
 kind: Cluster
@@ -15,7 +15,7 @@ nodes:
   - role: worker
 ```
 
-- Kind で Kubernetes クラスタを構築します。
+- KindでKubernetesクラスタを構築します。
 
 ```shell
 kind create cluster --name josdk-cluster --config kind/cluster/josdk-cluster.yaml
@@ -35,7 +35,7 @@ mvn archetype:generate \
     -DartifactId=nob-controller
 ```
 
-- pom.xml を下記で作成します。
+- pom.xmlを下記で作成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -147,7 +147,7 @@ mvn archetype:generate \
 
 ### NobSpec.java
 
-カスタムリソースの Spec を宣言します。
+カスタムリソースのSpecを宣言します。
 
 ```java
 package nob.example;
@@ -165,7 +165,7 @@ public class NobSpec {
 
 ### NobStatus.java
 
-カスタムリソースの Status を宣言します。
+カスタムリソースのStatusを宣言します。
 
 ```java
 package nob.example;
@@ -199,7 +199,7 @@ public class Nob extends CustomResource<NobSpec, NobStatus> implements Namespace
 
 ### DeploymentDependentResource.java
 
-カスタムリソースが管理する Deployment の定義を宣言します。
+カスタムリソースが管理するDeploymentの定義を宣言します。
 
 ```java
 package nob.example;
@@ -379,7 +379,7 @@ public class App {
 
 ### log4j2.xml
 
-ログ出力に関する設定 main/resources/log4j2.xml を下記内容で作成します。
+ログ出力に関する設定main/resources/log4j2.xmlを下記内容で作成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -404,7 +404,7 @@ public class App {
 
 ### NobReconcilerTest.java
 
-コントローラーのテストを記載します。`mvn clean test` で CRD のマニフェストを自動生成しつつテストを実行します。
+コントローラーのテストを記載します。`mvn clean test`でCRDのマニフェストを自動生成しつつテストを実行します。
 
 ```java
 package nob.example;
@@ -474,19 +474,19 @@ public class NobReconcilerTest {
 
 ## ローカルアプリケーション起動
 
-- アプリのビルドおよび CRD マニフェストの作成を行います。
+- アプリのビルドおよびCRDマニフェストの作成を行います。
 
 ```shell
 mvn clean install
 ```
 
-- CRD のマニフェストを apply します。
+- CRDのマニフェストをapplyします。
 
 ```shell
 kubectl apply -f target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
 ```
 
-- カスタムリソースのマニフェスト `src/k8s/custom-resource.yml` を下記で作成して apply します。
+- カスタムリソースのマニフェスト `src/k8s/custom-resource.yml`を下記で作成してapplyします。
 
 ```yaml
 apiVersion: nob.example/v1
@@ -510,13 +510,13 @@ NAME         AGE
 nob-sample   17s
 ```
 
-- Java プロセスとしてコントローラーを起動します。
+- Javaプロセスとしてコントローラーを起動します。
 
 ```shell
 mvn exec:java -Dexec.mainClass="nob.example.App"
 ```
 
-- コントローラーが正常に動作していれば、nginx の Pod が作成されます。
+- コントローラーが正常に動作していれば、nginxのPodが作成されます。
 
 ```
 $ kubectl get pod

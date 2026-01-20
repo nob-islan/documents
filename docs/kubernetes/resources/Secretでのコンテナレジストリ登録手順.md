@@ -1,12 +1,12 @@
-# Secret でのコンテナレジストリ登録手順
+# Secretでのコンテナレジストリ登録手順
 
-secret にコンテナレジストリの認証情報を登録して、プライベートなレジストリから image を pull します。
+secretにコンテナレジストリの認証情報を登録して、プライベートなレジストリからimageをpullします。
 
 cf. https://kubernetes.io/docs/concepts/configuration/secret/#docker-config-secrets
 
 ## 手順
 
-- secret を作成します:
+- secretを作成します:
 
 ```shell
 kubectl create secret docker-registry regcred \
@@ -15,7 +15,7 @@ kubectl create secret docker-registry regcred \
   --docker-password="{docker password}"
 ```
 
-- deployment.yaml に `imagePullSecrets` を追加します:
+- deployment.yamlに `imagePullSecrets` を追加します:
 
 ```diff
 apiVersion: apps/v1

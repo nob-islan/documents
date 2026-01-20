@@ -1,4 +1,4 @@
-# Docker で RustFS を構築
+# DockerでRustFSを構築
 
 cf. https://github.com/rustfs/rustfs/blob/main/README.md
 
@@ -12,7 +12,7 @@ mkdir -p volumes/data volumes/logs
 sudo chown -R 10001:10001 volumes
 ```
 
-- 下記で docker-compose を作成します:
+- 下記でdocker-composeを作成します:
 
 ```yaml
 services:
@@ -33,4 +33,4 @@ services:
 docker compose --profile observability up -d
 ```
 
-http://localhost:9001 でログイン画面にアクセスできます。`rustfsadmin / rustfsadmin` でログインできます。
+http://localhost:9001でログイン画面にアクセスできます。`rustfsadmin / rustfsadmin`でログインできます。

@@ -1,6 +1,6 @@
-# Kind サンプル
+# Kindサンプル
 
-[kind](https://kind.sigs.k8s.io/) で Kubernetes クラスタを構築するための環境のサンプルです:
+[kind](https://kind.sigs.k8s.io/) でKubernetesクラスタを構築するための環境のサンプルです:
 
 ## 設定
 

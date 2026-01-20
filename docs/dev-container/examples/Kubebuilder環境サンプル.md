@@ -1,6 +1,6 @@
-# Kubebuilder 環境サンプル
+# Kubebuilder環境サンプル
 
-[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) で Kubernetes のカスタムコントローラーを実装するための環境サンプルです:
+[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) でKubernetesのカスタムコントローラーを実装するための環境サンプルです:
 
 ## 設定
 

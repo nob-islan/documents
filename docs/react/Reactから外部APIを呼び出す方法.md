@@ -1,6 +1,6 @@
-# React から外部 API を呼び出す方法
+# Reactから外部APIを呼び出す方法
 
-axios を使って外部 API を呼び出す方法を記載します。サンプルとして、API から受け取った message を state に保持する実装をします。
+axiosを使って外部APIを呼び出す方法を記載します。サンプルとして、APIから受け取ったmessageをstateに保持する実装をします。
 
 ## 依存関係追加
 
@@ -27,11 +27,11 @@ npm install redux-thunk axios
 
 ## サンプルコード
 
-API 呼び出しに関係のあるクラスのみ記載します。
+API呼び出しに関係のあるクラスのみ記載します。
 
 ### app/store.ts
 
-thunk ミドルウェアを利用するため、`createStore`を下記で宣言します。
+thunkミドルウェアを利用するため、`createStore`を下記で宣言します。
 
 ```ts
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
@@ -41,7 +41,7 @@ import { thunk } from "redux-thunk";
 export const store = createStore(
   rootReducer,
   undefined,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
 );
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -105,7 +105,7 @@ export const initialMessageState: MessageState = {
 
 ### features/message/messageApi.ts
 
-API 呼び出し処理の実体を担う関数を実装します。
+API呼び出し処理の実体を担う関数を実装します。
 
 ```ts
 import axios from "axios";
@@ -113,7 +113,7 @@ import axios from "axios";
 /**
  * APIコールをしてメッセージを取得します。
  *
- * @returns メッセージ
+ * @returnsメッセージ
  */
 export const callApi = async (): Promise<string> => {
   try {
@@ -130,7 +130,7 @@ export const callApi = async (): Promise<string> => {
 
 ### features/message/messageAction.ts
 
-非同期関数として、API 呼び出し関数を実行してその結果を state に保持する関数を定義します。
+非同期関数として、API呼び出し関数を実行してその結果をstateに保持する関数を定義します。
 
 ```ts
 import { AppDispatch } from "../../app/store";
@@ -150,7 +150,7 @@ export const messageActions = {
   /**
    * 与えられたメッセージを保持します。
    *
-   * @param message メッセージ
+   * @param messageメッセージ
    */
   setMessage: (message: string) => ({
     type: MessageActonTypeConst.SET_MESSAGE,
@@ -190,7 +190,7 @@ import { initialMessageState, MessageState } from "./messageState";
  */
 export const messageReducer = (
   state = initialMessageState,
-  action: MessageActonTypes
+  action: MessageActonTypes,
 ): MessageState => {
   switch (action.type) {
     case MessageActonTypeConst.SET_MESSAGE:

@@ -1,4 +1,4 @@
-# Vault 初期セットアップ
+# Vault初期セットアップ
 
 [HashiCorp Vault](https://developer.hashicorp.com/vault) の初期セットアップをします。
 
@@ -46,7 +46,7 @@ EOF
 mkdir ./vault-data
 ```
 
-- Vault を開始します:
+- Vaultを開始します:
 
 ```shell
 vault server -config=./vault-server.hcl > ./vault.log 2>&1 &
@@ -58,14 +58,14 @@ vault server -config=./vault-server.hcl > ./vault.log 2>&1 &
 export VAULT_ADDR=http://{VaultサーバのIP}:8200
 ```
 
-- Vault を起動します:
+- Vaultを起動します:
 
 ```shell
 # unseal keyが出力されます。Vaultのsealを解除するのに必要です。
 vault operator init -key-shares=1 -key-threshold=1
 ```
 
-- Vault の seal を解除します:
+- Vaultのsealを解除します:
 
 ```shell
 vault operator unseal

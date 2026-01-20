@@ -1,4 +1,4 @@
-# ansible インストール
+# ansibleインストール
 
 構築から簡単な動作確認までを行います。
 
@@ -6,7 +6,7 @@
 
 ### インストール
 
-[公式ドキュメント](https://docs.ansible.com/ansible/2.9_ja/installation_guide/intro_installation.html)を参考に ansible をインストールします。
+[公式ドキュメント](https://docs.ansible.com/ansible/2.9_ja/installation_guide/intro_installation.html)を参考にansibleをインストールします。
 
 ```shell
 sudo apt update
@@ -19,9 +19,9 @@ sudo apt install ansible
 
 #### 接続準備
 
-管理ホスト（ansible のプレイブックなどを管理するホスト）から対象ホスト（プレイブック内の処理が実行されるホスト）に対して、パスフレーズなしで ssh 接続できるようにします。
+管理ホスト（ansibleのプレイブックなどを管理するホスト）から対象ホスト（プレイブック内の処理が実行されるホスト）に対して、パスフレーズなしでssh接続できるようにします。
 
-ssh キーを作成します。
+sshキーを作成します。
 
 ```shell
 ssh-keygen -t rsa -f ~/.ssh/first-key
@@ -48,7 +48,7 @@ ${対象ホストのIPアドレス}
 
 #### 接続確認
 
-ping モジュールを実行します（対象ホストで行う操作のことを`モジュール`というらしい）。
+pingモジュールを実行します（対象ホストで行う操作のことを`モジュール`というらしい）。
 
 ```shell
 ansible ${対象ホストのIPアドレス} -m ping --private-key ~/.ssh/first-key
