@@ -2,6 +2,8 @@
 
 ReactおよびTypeScriptを使ったWebプロジェクトの初期セットアップ方法について記載します。
 
+cf. https://react-redux.js.org/tutorials/quick-start
+
 ## プロジェクト作成
 
 プロジェクトの新規作成方法について記載します。
@@ -18,7 +20,7 @@ npx create-react-app easyweb --template typescript
 
 ```shell
 cd easyweb
-npm install redux react-redux react-router-dom
+npm install @reduxjs/toolkit react-redux react-router-dom
 ```
 
 ### scss
@@ -31,7 +33,7 @@ npm install sass node-sass
 
 ## Redux向け実装
 
-Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルでは + ボタンと - ボタンによってカウンターを増減させる画面を実装します。
+Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。
 
 ### ディレクトリ構成
 
@@ -41,19 +43,16 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 .
 └── src
     ├── app
-    │   ├── rootReducer.ts         # reducerの統合
-    │   └── store.ts               # store作成
-    ├── app.module.scss            # Appの装飾
-    ├── App.tsx                    # アプリケーションコンテンツのroot
+    │   ├── hooks.ts             # storeを操作する関数の定義z
+    │   └── store.ts             # 各コンポーネントの状態を持つ storeの管理
+    ├── app.module.scss          # コンポーネントの装飾
+    ├── App.tsx                  # アプリケーションコンテンツのroot
     ├── features
     │   └── counter
-    │       ├── counterAction.ts   # 各コンポーネントの動作
-    │       ├── counterReducer.ts  # 各コンポーネントの状態変化関数の実装
-    │       ├── counterState.ts    # 各コンポーネントの状態定義
-    │       └── Counter.tsx        # 各コンポーネントの本体定義
-    ├── index.module.scss          # ページ全体の装飾
-    ├── index.tsx                  # アプリケーションのエントリ
-    └──  .prettierrc                # コードフォーマットの定義
+    │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
+    │       └── Counter.tsx      # コンポーネント本体
+    ├── index.module.scss        # 画面全体の装飾
+    └── index.tsx                # アプリケーションのエントリポイント
 ```
 
 ### クラス一覧
@@ -78,29 +77,17 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 各種reducerを取りまとめたstoreを作成します。
 
 ```ts
-import { legacy_createStore as createStore } from "redux";
-import { rootReducer } from "./rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "../features/counter/counterSlice";
 
-export const store = createStore(rootReducer);
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-```
-
-#### app/rootReducer.ts
-
-reducerを統合します。reducerが増えるたびに`rootReducer`への追記が必要です。
-
-```ts
-import { combineReducers } from "redux";
-import { counterReducer } from "../features/counter/counterReducer";
-
-/**
- * reducerを統合します。
- */
-export const rootReducer = combineReducers({
-  counter: counterReducer,
-});
 ```
 
 #### index.tsx
@@ -108,33 +95,20 @@ export const rootReducer = combineReducers({
 `Provider`コンポーネントで`App`コンポーネントをラップします。
 
 ```tsx
-<Provider store={store}>
-  <App />
-</Provider>
-```
+import "./index.module.scss";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import App from "./App";
+import { store } from "./app/store";
 
-#### App.tsx
-
-ルーティングを設定します。
-
-```tsx
-import style from "./app.module.scss";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Counter from "./features/counter/Counter";
-
-function App() {
-  return (
-    <BrowserRouter>
-      <div className={style.body}>
-        <Routes>
-          <Route path="/" element={<Counter />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
-}
-
-export default App;
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement,
+);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+);
 ```
 
 #### features/counter/Counter.tsx
@@ -142,140 +116,78 @@ export default App;
 画面コンテンツおよびactionの呼び出しを定義します。
 
 ```tsx
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../app/store";
-import { counterActions } from "./counterAction";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { decrement, increment } from "./counterSlice";
 
-interface Props {}
+interface CounterProps {
+  title: string;
+}
 
-/**
- * カウンターを表示するコンポーネントです。
- *
- * @param props
- * @returns
- */
-const Counter: React.FC<Props> = (props) => {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const dispatch = useDispatch<AppDispatch>();
-
-  /**
-   * マイナスボタン押下時の動作を定義します。
-   */
-  const handleOnClickDecrementButton = () => {
-    dispatch(counterActions.decrement());
-  };
-
-  /**
-   * プラスボタン押下時の動作を定義します。
-   */
-  const handleOnClickIncrementButton = () => {
-    dispatch(counterActions.increment());
-  };
+export function Counter({ title }: CounterProps) {
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
 
   return (
     <div>
-      <h2>Counter: {count}</h2>
-      <button onClick={handleOnClickDecrementButton}>-</button>
-      <button onClick={handleOnClickIncrementButton}>+</button>
+      <div>
+        <h1>{title}</h1>
+        <button
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
+      </div>
     </div>
   );
-};
-
-export default Counter;
+}
 ```
 
-#### features/counter/counterState.ts
+#### features/counter/counterSlice.ts
 
-画面の状態を管理するための構造体を宣言します。
+画面の状態を管理するためのreducerおよびactionを定義します。
 
 ```ts
-/**
- * カウンターの状態を保持するstateです。
- */
-export interface CounterState {
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import type { RootState } from "../../app/store";
+
+interface CounterState {
   value: number;
 }
 
-/**
- * CounterStateの初期状態です。
- */
-export const initialCounterState: CounterState = {
+const initialState: CounterState = {
   value: 0,
 };
-```
 
-#### features/counter/counterAction.ts
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    incrementByAmount: (state, action: PayloadAction<number>) => {
+      state.value += action.payload;
+    },
+  },
+});
 
-各コンポーネントのアクションを定義します。
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
-```ts
-/**
- * Counterのaction typeを定義します。
- */
-export const CounterActionTypeConst = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT",
-} as const;
+export const selectCount = (state: RootState) => state.counter.value;
 
-/**
- * Counterのactionを定義します。
- */
-export const counterActions = {
-  /**
-   * 値を増加させます。
-   */
-  increment: () => ({
-    type: CounterActionTypeConst.INCREMENT,
-  }),
-
-  /**
-   * 値を減少させます。
-   */
-  decrement: () => ({
-    type: CounterActionTypeConst.DECREMENT,
-  }),
-};
-
-export type CounterActionTypes = ReturnType<
-  (typeof counterActions)[keyof typeof counterActions]
->;
-```
-
-#### features/counter/counterReducer.ts
-
-各コンポーネントの状態変化を返す関数を定義します。
-
-```ts
-import { CounterActionTypeConst, CounterActionTypes } from "./counterAction";
-import { CounterState, initialCounterState } from "./counterState";
-
-/**
- * Counterのstateを更新します。
- *
- * @param state CounterState
- * @param action counterAction
- * @returns CounterState
- */
-export const counterReducer = (
-  state = initialCounterState,
-  action: CounterActionTypes,
-): CounterState => {
-  switch (action.type) {
-    case CounterActionTypeConst.INCREMENT:
-      return {
-        ...state,
-        value: state.value + 1,
-      };
-    case CounterActionTypeConst.DECREMENT:
-      return {
-        ...state,
-        value: state.value - 1,
-      };
-    default:
-      return state;
-  }
-};
+export default counterSlice.reducer;
 ```
 
 #### index.module.scss
@@ -299,10 +211,34 @@ App配下の装飾を定義します。
 }
 ```
 
+#### App.tsx
+
+ルーティングを設定します。
+
+```tsx
+import style from "./app.module.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Counter } from "./features/counter/Counter";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className={style.body}>
+        <Routes>
+          <Route path="/" element={<Counter />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
 ## 起動
 
 ```shell
 npm start
 ```
 
-起動後、http://localhost:3000で画面が確認できます。
+起動後、http://localhost:3000 で画面が確認できます。
