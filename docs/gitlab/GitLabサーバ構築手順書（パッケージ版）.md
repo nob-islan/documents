@@ -22,7 +22,7 @@ GitLabをインストールします
 sudo EXTERNAL_URL="https://gitlab.example.com" apt install gitlab-ee
 ```
 
-DNSの設定をしないのであれば`http://localhost:80`でGitLabにアクセスできます。ただしログイン画面が表示されるまでに時間がかかります。Error: 502が出るようであればしばらく待ってみるとよいです。  
+DNSの設定をしないのであれば http://localhost:80 でGitLabにアクセスできます。ただしログイン画面が表示されるまでに時間がかかります。Error: 502が出るようであればしばらく待ってみるとよいです。  
 root用のログインパスワードは`/etc/gitlab/initial_root_password`に格納されています。24時間経つとファイルが消えるので早めにパスワードを変更する必要があります。
 
 ## GitLab Runnerサーバ手順

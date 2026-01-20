@@ -73,4 +73,4 @@ server {
 }
 ```
 
-nginxの再起動後、http://localhost:443でVSCodeにアクセスでき、markdownのプレビューなどが利用できるようになっています。
+nginxの再起動後、http://localhost:443 でVSCodeにアクセスでき、markdownのプレビューなどが利用できるようになっています。

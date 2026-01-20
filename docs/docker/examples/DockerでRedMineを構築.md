@@ -23,4 +23,4 @@ services:
       MYSQL_DATABASE: redmine
 ```
 
-`http://localhost:8080`にアクセス後、`admin/admin`でログイン可能です。
+http://localhost:8080 にアクセス後、`admin/admin`でログイン可能です。

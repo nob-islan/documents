@@ -33,4 +33,4 @@ services:
 docker compose --profile observability up -d
 ```
 
-http://localhost:9001でログイン画面にアクセスできます。`rustfsadmin / rustfsadmin`でログインできます。
+http://localhost:9001 でログイン画面にアクセスできます。`rustfsadmin / rustfsadmin`でログインできます。

@@ -86,7 +86,7 @@ Zabbixサーバの構築方法および、監視対象のサーバへのエー�
   systemctl enable zabbix-server zabbix-agent apache2
   ```
 
-`http://${IPアドレス}/zabbix`にアクセスするとログイン画面が表示されます。初期ユーザ/パスワードは`Admin/zabbix`です。
+http://localhost/zabbix にアクセスするとログイン画面が表示されます。初期ユーザ/パスワードは`Admin/zabbix`です。
 
 ## Zabbix Agentインストール
 

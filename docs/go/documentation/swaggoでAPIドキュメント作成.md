@@ -286,4 +286,4 @@ swag init -o ./api -g cmd/main.go
 go run cmd/main.go
 ```
 
-アプリ起動後、http://localhost:8080/swagger/index.htmlでswaggerドキュメントを確認できます。
+アプリ起動後、http://localhost:8080/swagger/index.html でswaggerドキュメントを確認できます。
