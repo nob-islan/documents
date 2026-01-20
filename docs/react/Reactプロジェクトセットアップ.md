@@ -237,7 +237,7 @@ function App() {
     <BrowserRouter>
       <div className={style.body}>
         <Routes>
-          <Route path="/" element={<Counter />} />
+          <Route path="/" element={<Counter title="First counter" />} />
         </Routes>
       </div>
     </BrowserRouter>
