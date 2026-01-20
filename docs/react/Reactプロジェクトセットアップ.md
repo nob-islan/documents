@@ -90,6 +90,18 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
+#### app/hooks.ts
+
+storeを操作する関数を定義します。
+
+```ts
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState, AppDispatch } from "./store";
+
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
+```
+
 #### index.tsx
 
 `Provider`コンポーネントで`App`コンポーネントをラップします。
