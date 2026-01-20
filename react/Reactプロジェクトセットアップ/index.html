@@ -8981,6 +8981,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#eslint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        eslint
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9026,6 +9037,17 @@
     <span class="md-ellipsis">
       
         .prettierrc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eslintrcjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .eslintrc.json
       
     </span>
   </a>
@@ -9847,6 +9869,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#eslint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        eslint
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -9892,6 +9925,17 @@
     <span class="md-ellipsis">
       
         .prettierrc
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eslintrcjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .eslintrc.json
       
     </span>
   </a>
@@ -10047,6 +10091,12 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 </ul>
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>sass<span class="w"> </span>node-sass
 </code></pre></div>
+<h3 id="eslint">eslint</h3>
+<ul>
+<li>ESLintによるフォーマットを有効化するため、下記をインストールします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>eslint-plugin-simple-import-sort
+</code></pre></div>
 <h2 id="redux_1">Redux向け実装</h2>
 <p>Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。</p>
 <h3 id="_2">ディレクトリ構成</h3>
@@ -10078,9 +10128,20 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <span class="w">  </span><span class="nt">&quot;semi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="eslintrcjson">.eslintrc.json</h4>
+<p>import文のソートを制御する設定を定義します。</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;plugins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;simple-import-sort&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;simple-import-sort/imports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;simple-import-sort/exports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="appstorets">app/store.ts</h4>
 <p>各種reducerを取りまとめたstoreを作成します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">configureStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+
 <span class="k">import</span><span class="w"> </span><span class="nx">counterReducer</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../features/counter/counterSlice&quot;</span><span class="p">;</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">configureStore</span><span class="p">({</span>
@@ -10095,7 +10156,8 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <h4 id="apphooksts">app/hooks.ts</h4>
 <p>storeを操作する関数を定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RootState</span><span class="p">,</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./store&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./store&quot;</span><span class="p">;</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">AppDispatch</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useSelector</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">RootState</span><span class="o">&gt;</span><span class="p">();</span>
@@ -10103,8 +10165,10 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <h4 id="indextsx">index.tsx</h4>
 <p><code>Provider</code>コンポーネントで<code>App</code>コンポーネントをラップします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;./index.module.scss&quot;</span><span class="p">;</span>
+
 <span class="k">import</span><span class="w"> </span><span class="nx">ReactDOM</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-dom/client&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Provider</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
+
 <span class="k">import</span><span class="w"> </span><span class="nx">App</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./App&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./app/store&quot;</span><span class="p">;</span>
 
@@ -10119,7 +10183,7 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 </code></pre></div>
 <h4 id="featurescountercountertsx">features/counter/Counter.tsx</h4>
 <p>画面コンテンツおよびactionの呼び出しを定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">decrement</span><span class="p">,</span><span class="w"> </span><span class="nx">increment</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterSlice&quot;</span><span class="p">;</span>
 
 <span class="kd">interface</span><span class="w"> </span><span class="nx">CounterProps</span><span class="w"> </span><span class="p">{</span>
@@ -10203,8 +10267,9 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 </code></pre></div>
 <h4 id="apptsx">App.tsx</h4>
 <p>ルーティングを設定します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./app.module.scss&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BrowserRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BrowserRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./app.module.scss&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./features/counter/Counter&quot;</span><span class="p">;</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
