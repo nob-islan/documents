@@ -9044,6 +9044,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#apphooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/hooks.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#indextsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9899,6 +9910,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#apphooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/hooks.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#indextsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10067,6 +10089,14 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 
 <span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
+</code></pre></div>
+<h4 id="apphooksts">app/hooks.ts</h4>
+<p>storeを操作する関数を定義します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RootState</span><span class="p">,</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./store&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">AppDispatch</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useSelector</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">RootState</span><span class="o">&gt;</span><span class="p">();</span>
 </code></pre></div>
 <h4 id="indextsx">index.tsx</h4>
 <p><code>Provider</code>コンポーネントで<code>App</code>コンポーネントをラップします。</p>
