@@ -9692,7 +9692,7 @@
 <p>GitLabをインストールします</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span><span class="nv">EXTERNAL_URL</span><span class="o">=</span><span class="s2">&quot;https://gitlab.example.com&quot;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>gitlab-ee
 </code></pre></div>
-<p>DNSの設定をしないのであれば<code>http://localhost:80</code>でGitLabにアクセスできます。ただしログイン画面が表示されるまでに時間がかかります。Error: 502が出るようであればしばらく待ってみるとよいです。<br />
+<p>DNSの設定をしないのであれば <a href="http://localhost:80">http://localhost:80</a> でGitLabにアクセスできます。ただしログイン画面が表示されるまでに時間がかかります。Error: 502が出るようであればしばらく待ってみるとよいです。<br />
 root用のログインパスワードは<code>/etc/gitlab/initial_root_password</code>に格納されています。24時間経つとファイルが消えるので早めにパスワードを変更する必要があります。</p>
 <h2 id="gitlab-runner">GitLab Runnerサーバ手順</h2>
 <p>cf. <a href="https://docs.gitlab.com/runner/install/linux-repository/">https://docs.gitlab.com/runner/install/linux-repository/</a></p>
