@@ -230,27 +230,6 @@ export const selectCount = (state: RootState) => state.counter.value;
 export default counterSlice.reducer;
 ```
 
-#### index.module.scss
-
-Webページ全体の装飾を定義します。
-
-```scss
-body {
-  background-color: #050027;
-  color: #dddddd;
-}
-```
-
-#### app.module.scss
-
-App配下の装飾を定義します。
-
-```scss
-.body {
-  padding: 60px 60px 60px 60px;
-}
-```
-
 #### App.tsx
 
 ルーティングを設定します。
@@ -274,6 +253,27 @@ function App() {
 }
 
 export default App;
+```
+
+#### index.module.scss
+
+Webページ全体の装飾を定義します。
+
+```scss
+body {
+  background-color: #050027;
+  color: #dddddd;
+}
+```
+
+#### app.module.scss
+
+App配下の装飾を定義します。
+
+```scss
+.body {
+  padding: 60px 60px 60px 60px;
+}
 ```
 
 ## 起動
