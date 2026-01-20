@@ -47,12 +47,14 @@ Reduxを動かすために必要な改修およびサンプルコードについ
     │   └── store.ts             # 各コンポーネントの状態を持つstoreの管理
     ├── app.module.scss          # コンポーネントの装飾
     ├── App.tsx                  # アプリケーションコンテンツのroot
+    ├── .eslintrc.json           # ESLintによるコードフォーマットの設定
     ├── features
     │   └── counter
     │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
     │       └── Counter.tsx      # コンポーネント本体
     ├── index.module.scss        # 画面全体の装飾
-    └── index.tsx                # アプリケーションのエントリポイント
+    ├── index.tsx                # アプリケーションのエントリポイント
+    └── .prettierrc              # Prettierによるコードフォーマットの設定
 ```
 
 ### クラス一覧
