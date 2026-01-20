@@ -33,7 +33,7 @@ npm install sass node-sass
 
 ### eslint
 
-- ESLintによるフォーマットを有効化するため、下記をインストールします:
+- [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)によるフォーマットを有効化するため、下記をインストールします:
 
 ```shell
 npm install eslint-plugin-simple-import-sort
@@ -84,7 +84,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 #### .eslintrc.json
 
-[eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)によるimport文のソートを制御する設定を定義します。
+import文のソートを制御する設定を定義します。
 
 ```json
 {
