@@ -84,7 +84,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 #### .eslintrc.json
 
-import文のソートを制御する設定を定義します。
+[eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)によるimport文のソートを制御する設定を定義します。
 
 ```json
 {
