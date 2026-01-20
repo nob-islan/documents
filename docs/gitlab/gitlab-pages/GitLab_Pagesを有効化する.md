@@ -83,7 +83,7 @@ services:
 ```
 
 上記のような、ドメインが名前解決できないエラーが発生した場合はdocker-composeでDNSサーバを明示的に指定する必要があります。
-docker-composeの `services.gitlab.dns`を下記要領で追加してください:
+docker-composeの`services.gitlab.dns`を下記要領で追加してください:
 
 ```yaml
 services:

@@ -33,7 +33,7 @@ cf. https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html
 - `apiSuccessLog`: API正常終了時
 - `apiErrorLog`: API異常終了時
 
-いずれも `"within(nob.example.easyapp.controller.*..*)"` を指定しているため、各コントローラー内のメソッド動作時に呼ばれるようになっています。
+いずれも`"within(nob.example.easyapp.controller.*..*)"`を指定しているため、各コントローラー内のメソッド動作時に呼ばれるようになっています。
 
 ```java
 package nob.example.easyapp.aspect;

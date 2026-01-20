@@ -2,7 +2,7 @@
 
 cf. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html
 
-`eksctl` コマンドを使ってEKSクラスタをデプロイします。
+`eksctl`コマンドを使ってEKSクラスタをデプロイします。
 
 ## セットアップ
 
@@ -62,7 +62,7 @@ aws configure
 
 cf. https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/install-kubectl.html#linux_amd64_kubectl
 
-- `kubectl` ダウンロード
+- `kubectl`ダウンロード
 
 ```shell
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.33.0/2025-05-01/bin/linux/amd64/kubectl
@@ -96,7 +96,7 @@ kubectl version --client
 
 cf. https://eksctl.io/installation/
 
-- `eksctl` ダウンロード
+- `eksctl`ダウンロード
 
 ```shell
 ARCH=amd64

@@ -84,14 +84,14 @@ jdb -attach 8484
 
 ### ブレークポイント設定
 
-- `stop in {method.name}` でメソッド冒頭にブレークポイントを置きます:
+- `stop in {method.name}`でメソッド冒頭にブレークポイントを置きます:
 
 ```
 > stop in nob.example.easyapp.service.impl.SampleServiceImpl.greet
 Set breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 ```
 
-- `stop at {class.name}:{line}` で特定の行にブレークポイントを置きます:
+- `stop at {class.name}:{line}`で特定の行にブレークポイントを置きます:
 
 ```
 > stop at nob.example.easyapp.service.impl.SampleServiceImpl:23
@@ -100,7 +100,7 @@ Set breakpoint nob.example.easyapp.service.impl.SampleServiceImpl:23
 
 ### ブレークポイント確認・除去
 
-- `clear` でブレークポイント一覧を確認できます:
+- `clear`でブレークポイント一覧を確認できます:
 
 ```
 > clear
@@ -109,7 +109,7 @@ Breakpoints set:
         breakpoint nob.example.easyapp.service.impl.SampleServiceImpl:23
 ```
 
-- `clear {breakpoint}` でブレークポイントを除去できます:
+- `clear {breakpoint}`でブレークポイントを除去できます:
 
 ```
 > clear nob.example.easyapp.service.impl.SampleServiceImpl.greet
@@ -118,7 +118,7 @@ Removed: breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 
 ### ブレーク時の操作
 
-- `locals` で変数一覧を確認できます:
+- `locals`で変数一覧を確認できます:
 
 ```
 Breakpoint hit: "thread=http-nio-8080-exec-3", nob.example.easyapp.service.impl.SampleServiceImpl.greeting(), line=23 bci=16
@@ -130,7 +130,7 @@ Local variables:
 name = "nob"
 ```
 
-- `print` および `dump` で変数の中身を確認できます。前者はプリミティブ型向け、後者はオブジェクト向けです:
+- `print`および`dump`で変数の中身を確認できます。前者はプリミティブ型向け、後者はオブジェクト向けです:
 
 ```
 http-nio-8080-exec-3[1] print sampleInModel
@@ -144,7 +144,7 @@ http-nio-8080-exec-3[1] dump sampleInModel
 }
 ```
 
-- `set` で変数を書き換えることができます。ただし、`final` フィールドについては変更不可能です:
+- `set`で変数を書き換えることができます。ただし、`final`フィールドについては変更不可能です:
 
 ```
 http-nio-8080-exec-7[1] locals
@@ -163,7 +163,7 @@ Local variables:
 name = "snail"
 ```
 
-- `next` および `step` で処理を進めます。下記 (1) にブレークポイントを置いた場合、前者は (2), 後者は (3) に進みます:
+- `next`および`step`で処理を進めます。下記 (1) にブレークポイントを置いた場合、前者は (2), 後者は (3) に進みます:
 
 ```java
     @Override
@@ -191,7 +191,7 @@ name = "snail"
     }
 ```
 
-- `cont` で次のブレークポイントまで処理を進めます:
+- `cont`で次のブレークポイントまで処理を進めます:
 
 ```
 http-nio-8080-exec-2[1] cont
@@ -200,7 +200,7 @@ http-nio-8080-exec-2[1] cont
 
 ### クラス・メソッド一覧確認
 
-- `classes` でjarに含まれているクラス一覧を確認できます:
+- `classes`でjarに含まれているクラス一覧を確認できます:
 
 ```
 # echo "classes" | jdb -attach 8484 | grep nob
@@ -212,7 +212,7 @@ nob.example.easyapp.controller.SampleController
 nob.example.easyapp.EasyappApplication
 ```
 
-- `methods {class.name}}` でクラス内のメソッド一覧を確認できます。
+- `methods {class.name}}`でクラス内のメソッド一覧を確認できます。
 
 ```
 > methods nob.example.easyapp.service.impl.SampleServiceImpl

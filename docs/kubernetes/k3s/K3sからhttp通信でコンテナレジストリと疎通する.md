@@ -6,7 +6,7 @@ http通信でコンテナレジストリと疎通をとり、イメージをpull
 
 cf. https://docs.k3s.io/installation/private-registry#without-tls
 
-- `/etc/rancher/k3s/registries.yaml` を下記内容で作成します:
+- `/etc/rancher/k3s/registries.yaml`を下記内容で作成します:
 
 ```yaml
 mirrors:

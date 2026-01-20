@@ -40,7 +40,7 @@ nob-project
 mkdocs serve
 ```
 
-- 拡張機能である `Material for MkDocs` をインストールします（cf. https://squidfunk.github.io/mkdocs-material/）:
+- 拡張機能である`Material for MkDocs`をインストールします（cf. https://squidfunk.github.io/mkdocs-material/）:
 
 ```shell
 pip install mkdocs-material
@@ -56,12 +56,12 @@ MkDocsのみで設定できる項目については[公式ドキュメント](ht
 
 ### Material for MkDocs
 
-`mkdocs-material` で利用可能な設定については下記ドキュメントを参照ください:
+`mkdocs-material`で利用可能な設定については下記ドキュメントを参照ください:
 
 - [setup](https://squidfunk.github.io/mkdocs-material/setup/)
 - [reference](https://squidfunk.github.io/mkdocs-material/reference/)
 
-最低限、`theme` の設定が必要です:
+最低限、`theme`の設定が必要です:
 
 ```yaml
 theme:

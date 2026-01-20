@@ -4,7 +4,7 @@ cf. https://github.com/argoproj/argo-workflows/discussions/6836
 
 ## 手順
 
-- Deployment: `argo-server` に下記設定を追加します:
+- Deployment: `argo-server`に下記設定を追加します:
 
 ```diff
  spec:
@@ -34,7 +34,7 @@ cf. https://github.com/argoproj/argo-workflows/discussions/6836
 +            scheme: HTTP
 ```
 
-- `argo-server` を再起動します:
+- `argo-server`を再起動します:
 
 ```shell
 kubectl rollout restart deploy -n argo argo-server

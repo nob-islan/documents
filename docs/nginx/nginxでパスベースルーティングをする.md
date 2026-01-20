@@ -1,6 +1,6 @@
 # nginxでパスベースルーティングをする
 
-下記の要領で `/etc/nginx/conf.d/easyapp.conf` を作成するとリクエストをルーティングできます:
+下記の要領で`/etc/nginx/conf.d/easyapp.conf`を作成するとリクエストをルーティングできます:
 
 ```conf
 server {

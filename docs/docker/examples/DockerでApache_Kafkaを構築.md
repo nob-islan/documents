@@ -16,4 +16,4 @@ services:
       - ./volumes/kafka:/var/lib/kafka
 ```
 
-- `/opt/kafka/bin/kafka-topics.sh` がメインのスクリプトです。
+- `/opt/kafka/bin/kafka-topics.sh`がメインのスクリプトです。

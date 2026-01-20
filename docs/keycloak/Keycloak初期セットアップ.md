@@ -23,7 +23,7 @@ wget https://github.com/keycloak/keycloak/releases/download/26.5.0/keycloak-26.5
 unzip keycloak-26.5.0.zip
 ```
 
-- `conf/keycloak.conf` を下記で作成します:
+- `conf/keycloak.conf`を下記で作成します:
 
 ```conf
 # Basic settings for running in production. Change accordingly before deploying the server.

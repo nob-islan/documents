@@ -33,7 +33,7 @@ unzip easybatch.zip && rm -rf easybatch.zip
 
 ## 実装
 
-サンプルコードを掲載します。`sign_up` テーブルの `first_name`, `last_name` を結合して `customer` テーブルに `full_name` を登録するバッチジョブを実装します。
+サンプルコードを掲載します。`sign_up`テーブルの`first_name`, `last_name`を結合して`customer`テーブルに`full_name`を登録するバッチジョブを実装します。
 
 ### 事前準備
 
@@ -225,7 +225,7 @@ public class BatchConfig {
 
 #### entity/SignUp.java
 
-バッチ処理の入力値となる `sign_up` テーブルに対応するエンティティを定義します。
+バッチ処理の入力値となる`sign_up`テーブルに対応するエンティティを定義します。
 
 ```java
 package nob.example.easybatch.entity;
@@ -270,7 +270,7 @@ public class SignUp {
 
 #### entity/Customer.java
 
-バッチ処理の出力となる `customer` テーブルに対応するエンティティを定義します。
+バッチ処理の出力となる`customer`テーブルに対応するエンティティを定義します。
 
 ```java
 package nob.example.easybatch.entity;
@@ -570,7 +570,7 @@ public class CustomerRegistConfig {
 ./mvnw spring-boot:run
 ```
 
-下記コマンドで `customer` テーブルにデータが入っていることを確認できます。
+下記コマンドで`customer`テーブルにデータが入っていることを確認できます。
 
 ```
 $ docker exec -it ebdb mariadb -u root -p ebdb -e "SELECT * FROM customer;"

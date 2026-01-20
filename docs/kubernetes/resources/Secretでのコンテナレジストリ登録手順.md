@@ -15,7 +15,7 @@ kubectl create secret docker-registry regcred \
   --docker-password="{docker password}"
 ```
 
-- deployment.yamlに `imagePullSecrets` を追加します:
+- deployment.yamlに`imagePullSecrets`を追加します:
 
 ```diff
 apiVersion: apps/v1

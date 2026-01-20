@@ -53,7 +53,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
     │       └── Counter.tsx        # 各コンポーネントの本体定義
     ├── index.module.scss          # ページ全体の装飾
     ├── index.tsx                  # アプリケーションのエントリ
-    └── .prettierrc                # コードフォーマットの定義
+    └──  .prettierrc                # コードフォーマットの定義
 ```
 
 ### クラス一覧
@@ -305,4 +305,4 @@ App配下の装飾を定義します。
 npm start
 ```
 
-起動後、http://localhost:3000 で画面が確認できます。
+起動後、http://localhost:3000で画面が確認できます。

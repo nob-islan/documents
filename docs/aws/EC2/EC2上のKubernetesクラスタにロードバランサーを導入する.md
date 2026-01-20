@@ -98,7 +98,7 @@ aws ec2 associate-iam-instance-profile \
     --instance-id {ワーカーノードのインスタンスID}
 ```
 
-- ロードバランサーがワーカーノードを認識できるよう、`providerID` をノード情報として付与します（cf. https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708）:
+- ロードバランサーがワーカーノードを認識できるよう、`providerID`をノード情報として付与します（cf. https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/3708）:
 
 ```shell
 kubectl patch node kube-w01 -p '{"spec":{"providerID":"aws:///{リージョン}/{ワーカーノードのインスタンスID}"}}'
@@ -106,7 +106,7 @@ kubectl patch node kube-w01 -p '{"spec":{"providerID":"aws:///{リージョン}/
 
 ### AWS Load Balancer Controllerのデプロイ
 
-- `eks` リポジトリを追加します:
+- `eks`リポジトリを追加します:
 
 ```shell
 helm repo add eks https://aws.github.io/eks-charts

@@ -44,7 +44,7 @@ kubectl get all -n metallb-system
 
 cf. https://metallb.io/configuration/
 
-- Serviceに割り当てるIPアドレス範囲を定義する `IPAddressPool` リソースを作成します:
+- Serviceに割り当てるIPアドレス範囲を定義する`IPAddressPool`リソースを作成します:
 
 ```yaml
 apiVersion: metallb.io/v1beta1
@@ -62,7 +62,7 @@ spec:
 kubectl apply -f ipaddresspool.yaml
 ```
 
-- Layer 2 modeで起動するための `L2Advertisement` リソースを作成します:
+- Layer 2 modeで起動するための`L2Advertisement`リソースを作成します:
 
 ```yaml
 apiVersion: metallb.io/v1beta1
@@ -74,7 +74,7 @@ spec:
   ipAddressPools:
     - first-pool
   interfaces:
-    - ens4 # ip addr show | grep 192.168.151 等でインターフェースを確認・指定
+    - ens4 # ip addr show | grep 192.168.151等でインターフェースを確認・指定
 ```
 
 ```shell

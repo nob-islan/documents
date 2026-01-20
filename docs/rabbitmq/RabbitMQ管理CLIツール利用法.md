@@ -12,7 +12,7 @@ cf. https://www.rabbitmq.com/docs/management-cli
 
 ### 認証方法
 
-`rabbitmqadmin` は認証情報を記載した上で実行する必要があります。
+`rabbitmqadmin`は認証情報を記載した上で実行する必要があります。
 
 - 設定ファイルを作成します:
 

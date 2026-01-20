@@ -1,6 +1,6 @@
 # EKSクライアントサンプル
 
-`kubectl`, `aws`, `eksctl` コマンドを叩ける環境のサンプルです:
+`kubectl`, `aws`, `eksctl`コマンドを叩ける環境のサンプルです:
 
 ```json
 {

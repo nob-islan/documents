@@ -18,7 +18,7 @@ sudo apt update && sudo apt install vault
 
 cf. https://developer.hashicorp.com/vault/tutorials/get-started/setup
 
-- `./vault-server.hcl` を作成します:
+- `./vault-server.hcl`を作成します:
 
 ```hcl
 cat > ./vault-server.hcl << EOF
@@ -52,7 +52,7 @@ mkdir ./vault-data
 vault server -config=./vault-server.hcl > ./vault.log 2>&1 &
 ```
 
-- `vault` コマンドを実行するための環境変数を設定します:
+- `vault`コマンドを実行するための環境変数を設定します:
 
 ```shell
 export VAULT_ADDR=http://{VaultサーバのIP}:8200

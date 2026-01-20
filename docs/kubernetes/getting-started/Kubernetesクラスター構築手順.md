@@ -75,7 +75,7 @@ sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
 ```
 
-config.tomlの `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]` について、`SystemdCgroup = true` に書き換えます。
+config.tomlの`[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]`について、`SystemdCgroup = true`に書き換えます。
 
 ```shell
 # SystemdCgroup設定書き換え

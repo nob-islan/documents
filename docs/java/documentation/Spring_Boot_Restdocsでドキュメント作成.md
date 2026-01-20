@@ -325,13 +325,13 @@ include::{me}/response-body.adoc[]
 
 ## 設計書生成手順
 
-- 単体テストを実行します。テストに成功すると、`target/snippets` 配下に、`document` 内で定めたパスに各種スニペットが出力されます。
+- 単体テストを実行します。テストに成功すると、`target/snippets`配下に、`document`内で定めたパスに各種スニペットが出力されます。
 
 ```shell
 ./mvnw test
 ```
 
-- パッケージをビルドします。`target/generated-docs` 配下に設計書本体 `index.html` が出力されます。
+- パッケージをビルドします。`target/generated-docs`配下に設計書本体`index.html`が出力されます。
 
 ```shell
 ./mvnw package

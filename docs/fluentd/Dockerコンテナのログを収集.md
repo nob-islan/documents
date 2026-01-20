@@ -6,7 +6,7 @@ cf. https://www.fluentd.org/guides/recipes/docker-logging
 
 ### fluentd設定
 
-- `/etc/fluent/fluentd.conf` を下記で設定します:
+- `/etc/fluent/fluentd.conf`を下記で設定します:
 
 ```conf
 <match *.*>
@@ -44,4 +44,4 @@ services:
         tag: "docker.{{.ID}}"
 ```
 
-アプリ起動後、`/var/log/fluent/fluentd.log` にコンテナのログが出力されます。
+アプリ起動後、`/var/log/fluent/fluentd.log`にコンテナのログが出力されます。

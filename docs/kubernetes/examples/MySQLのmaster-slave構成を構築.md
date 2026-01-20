@@ -103,7 +103,7 @@ spec:
 
 ### mysql-common-secret.yaml
 
-mysql-[0|1]に共通するSecretです。`kubectl` コマンドのdry-runによってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
+mysql-[0|1]に共通するSecretです。`kubectl`コマンドのdry-runによってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
 
 ```yaml
 apiVersion: v1
@@ -259,7 +259,7 @@ spec:
 
 ### proxysql-cm.yaml
 
-master / slaveのルーティングを設定します。`mysql-x.mysql-svc` でPodに直接疎通します。
+master / slaveのルーティングを設定します。`mysql-x.mysql-svc`でPodに直接疎通します。
 
 ```yaml
 apiVersion: v1

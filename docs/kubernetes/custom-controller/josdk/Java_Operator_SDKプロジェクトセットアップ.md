@@ -486,7 +486,7 @@ mvn clean install
 kubectl apply -f target/classes/META-INF/fabric8/nobs.nob.example-v1.yml
 ```
 
-- カスタムリソースのマニフェスト `src/k8s/custom-resource.yml`を下記で作成してapplyします。
+- カスタムリソースのマニフェスト`src/k8s/custom-resource.yml`を下記で作成してapplyします。
 
 ```yaml
 apiVersion: nob.example/v1

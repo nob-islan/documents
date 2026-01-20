@@ -20,11 +20,11 @@ kubebuilder create api --group nobcontroller --version v1 --kind Nob
 
 ## 実装
 
-Deploymentリソースを管理する `Nob` のコントローラーを実装します。
+Deploymentリソースを管理する`Nob`のコントローラーを実装します。
 
 ### api/v1/nob_types.go
 
-カスタムリソースのSpecおよびStatusを定義します。変更後は `make` コマンドを実行して関連するファイルの再生成をしてください。
+カスタムリソースのSpecおよびStatusを定義します。変更後は`make`コマンドを実行して関連するファイルの再生成をしてください。
 
 ```go
 // NobSpec defines the desired state of Nob

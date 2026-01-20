@@ -25,7 +25,7 @@ configs:
       this_is_a_test_file
 ```
 
-`content` 配下の内容でファイルが作成されます:
+`content`配下の内容でファイルが作成されます:
 
 ```
 $ docker exec -it nobuntu cat /nobtest
