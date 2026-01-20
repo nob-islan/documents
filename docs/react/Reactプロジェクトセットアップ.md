@@ -43,8 +43,8 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 .
 └── src
     ├── app
-    │   ├── hooks.ts             # storeを操作する関数の定義z
-    │   └── store.ts             # 各コンポーネントの状態を持つ storeの管理
+    │   ├── hooks.ts             # storeを操作する関数の定義
+    │   └── store.ts             # 各コンポーネントの状態を持つstoreの管理
     ├── app.module.scss          # コンポーネントの装飾
     ├── App.tsx                  # アプリケーションコンテンツのroot
     ├── features
