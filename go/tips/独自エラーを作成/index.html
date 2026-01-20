@@ -9868,7 +9868,7 @@
 <h3 id="internalapperrors">internal/apperrors</h3>
 <p>apperrorsパッケージに下記要領で独自エラーを作成します:</p>
 <h4 id="basego">base.go</h4>
-<p>独自エラーのインターフェースおよびエラーハンドリング向け関数を宣言します。各種独自例外はこのインターフェースを実装する形で作成し、<code>HandleError</code> 関数経由でレスポンスを作成します。</p>
+<p>独自エラーのインターフェースおよびエラーハンドリング向け関数を宣言します。各種独自例外はこのインターフェースを実装する形で作成し、<code>HandleError</code>関数経由でレスポンスを作成します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="s">&quot;net/http&quot;</span>
@@ -9896,7 +9896,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="sample_errorgo">sample_error.go</h4>
-<p>独自エラーの実装です。<code>ReturnError</code> でレスポンスモデルの作成処理を行っています。</p>
+<p>独自エラーの実装です。<code>ReturnError</code>でレスポンスモデルの作成処理を行っています。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>

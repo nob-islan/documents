@@ -10067,12 +10067,12 @@ include::{me}/response-body.adoc[]
 <p><code>:xxx:</code>で適宜変数を定め、<code>include::</code>で生成したスニペットを読み込んでいます。</p>
 <h2 id="_3">設計書生成手順</h2>
 <ul>
-<li>単体テストを実行します。テストに成功すると、<code>target/snippets</code> 配下に、<code>document</code> 内で定めたパスに各種スニペットが出力されます。</li>
+<li>単体テストを実行します。テストに成功すると、<code>target/snippets</code>配下に、<code>document</code>内で定めたパスに各種スニペットが出力されます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <ul>
-<li>パッケージをビルドします。<code>target/generated-docs</code> 配下に設計書本体 <code>index.html</code> が出力されます。</li>
+<li>パッケージをビルドします。<code>target/generated-docs</code>配下に設計書本体<code>index.html</code>が出力されます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>package
 </code></pre></div>

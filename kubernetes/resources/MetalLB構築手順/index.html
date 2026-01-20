@@ -9738,7 +9738,7 @@ kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> <
 <h2 id="_3">設定・動作確認手順</h2>
 <p>cf. <a href="https://metallb.io/configuration/">https://metallb.io/configuration/</a></p>
 <ul>
-<li>Serviceに割り当てるIPアドレス範囲を定義する <code>IPAddressPool</code> リソースを作成します:</li>
+<li>Serviceに割り当てるIPアドレス範囲を定義する<code>IPAddressPool</code>リソースを作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metallb.io/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IPAddressPool</span>
@@ -9753,7 +9753,7 @@ kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> <
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>ipaddresspool.yaml
 </code></pre></div>
 <ul>
-<li>Layer 2 modeで起動するための <code>L2Advertisement</code> リソースを作成します:</li>
+<li>Layer 2 modeで起動するための<code>L2Advertisement</code>リソースを作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metallb.io/v1beta1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">L2Advertisement</span>
@@ -9764,7 +9764,7 @@ kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> <
 <span class="w">  </span><span class="nt">ipAddressPools</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">first-pool</span>
 <span class="w">  </span><span class="nt">interfaces</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ens4</span><span class="w"> </span><span class="c1"># ip addr show | grep 192.168.151 等でインターフェースを確認・指定</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ens4</span><span class="w"> </span><span class="c1"># ip addr show | grep 192.168.151等でインターフェースを確認・指定</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>l2advertisement.yaml
 </code></pre></div>

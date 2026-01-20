@@ -9964,20 +9964,20 @@
 </code></pre></div>
 <h3 id="_4">ブレークポイント設定</h3>
 <ul>
-<li><code>stop in {method.name}</code> でメソッド冒頭にブレークポイントを置きます:</li>
+<li><code>stop in {method.name}</code>でメソッド冒頭にブレークポイントを置きます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>&gt; stop in nob.example.easyapp.service.impl.SampleServiceImpl.greet
 Set breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 </code></pre></div>
 <ul>
-<li><code>stop at {class.name}:{line}</code> で特定の行にブレークポイントを置きます:</li>
+<li><code>stop at {class.name}:{line}</code>で特定の行にブレークポイントを置きます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>&gt; stop at nob.example.easyapp.service.impl.SampleServiceImpl:23
 Set breakpoint nob.example.easyapp.service.impl.SampleServiceImpl:23
 </code></pre></div>
 <h3 id="_5">ブレークポイント確認・除去</h3>
 <ul>
-<li><code>clear</code> でブレークポイント一覧を確認できます:</li>
+<li><code>clear</code>でブレークポイント一覧を確認できます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>&gt; clear
 Breakpoints set:
@@ -9985,14 +9985,14 @@ Breakpoints set:
         breakpoint nob.example.easyapp.service.impl.SampleServiceImpl:23
 </code></pre></div>
 <ul>
-<li><code>clear {breakpoint}</code> でブレークポイントを除去できます:</li>
+<li><code>clear {breakpoint}</code>でブレークポイントを除去できます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>&gt; clear nob.example.easyapp.service.impl.SampleServiceImpl.greet
 Removed: breakpoint nob.example.easyapp.service.impl.SampleServiceImpl.greet
 </code></pre></div>
 <h3 id="_6">ブレーク時の操作</h3>
 <ul>
-<li><code>locals</code> で変数一覧を確認できます:</li>
+<li><code>locals</code>で変数一覧を確認できます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>Breakpoint hit: &quot;thread=http-nio-8080-exec-3&quot;, nob.example.easyapp.service.impl.SampleServiceImpl.greeting(), line=23 bci=16
 
@@ -10003,7 +10003,7 @@ Local variables:
 name = &quot;nob&quot;
 </code></pre></div>
 <ul>
-<li><code>print</code> および <code>dump</code> で変数の中身を確認できます。前者はプリミティブ型向け、後者はオブジェクト向けです:</li>
+<li><code>print</code>および<code>dump</code>で変数の中身を確認できます。前者はプリミティブ型向け、後者はオブジェクト向けです:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>http-nio-8080-exec-3[1] print sampleInModel
  sampleInModel = &quot;SampleInModel(name=nob)&quot;
@@ -10014,7 +10014,7 @@ name = &quot;nob&quot;
 }
 </code></pre></div>
 <ul>
-<li><code>set</code> で変数を書き換えることができます。ただし、<code>final</code> フィールドについては変更不可能です:</li>
+<li><code>set</code>で変数を書き換えることができます。ただし、<code>final</code>フィールドについては変更不可能です:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>http-nio-8080-exec-7[1] locals
 Method arguments:
@@ -10032,7 +10032,7 @@ Local variables:
 name = &quot;snail&quot;
 </code></pre></div>
 <ul>
-<li><code>next</code> および <code>step</code> で処理を進めます。下記 (1) にブレークポイントを置いた場合、前者は (2), 後者は (3) に進みます:</li>
+<li><code>next</code>および<code>step</code>で処理を進めます。下記 (1) にブレークポイントを置いた場合、前者は (2), 後者は (3) に進みます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">greeting</span><span class="p">(</span><span class="n">SampleInModel</span><span class="w"> </span><span class="n">sampleInModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -10059,14 +10059,14 @@ name = &quot;snail&quot;
 <span class="w">    </span><span class="p">}</span>
 </code></pre></div>
 <ul>
-<li><code>cont</code> で次のブレークポイントまで処理を進めます:</li>
+<li><code>cont</code>で次のブレークポイントまで処理を進めます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>http-nio-8080-exec-2[1] cont
 &gt;
 </code></pre></div>
 <h3 id="_7">クラス・メソッド一覧確認</h3>
 <ul>
-<li><code>classes</code> でjarに含まれているクラス一覧を確認できます:</li>
+<li><code>classes</code>でjarに含まれているクラス一覧を確認できます:</li>
 </ul>
 <div class="highlight"><pre><span></span><code># echo &quot;classes&quot; | jdb -attach 8484 | grep nob
 nob.example.easyapp.service.model.SampleInModel
@@ -10077,7 +10077,7 @@ nob.example.easyapp.controller.SampleController
 nob.example.easyapp.EasyappApplication
 </code></pre></div>
 <ul>
-<li><code>methods {class.name}}</code> でクラス内のメソッド一覧を確認できます。</li>
+<li><code>methods {class.name}}</code>でクラス内のメソッド一覧を確認できます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>&gt; methods nob.example.easyapp.service.impl.SampleServiceImpl
 ** methods list **

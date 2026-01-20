@@ -9720,7 +9720,7 @@
 <p>シングルノードで縮小版Kubernetesを構築できる <a href="https://docs.k3s.io/">K3s</a> の構築手順について記載します。</p>
 <h2 id="_1">手順</h2>
 <p>cf. <a href="https://docs.k3s.io/quick-start">https://docs.k3s.io/quick-start</a></p>
-<p>下記コマンドで <code>kubectl</code> コマンドなども含めてインストールされます:</p>
+<p>下記コマンドで<code>kubectl</code>コマンドなども含めてインストールされます:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># root以外でもkubectlを実行可能にするオプションを付与</span>
 curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-s<span class="w"> </span>-<span class="w"> </span>server<span class="w"> </span>--write-kubeconfig-mode<span class="o">=</span><span class="m">644</span>
 </code></pre></div>
@@ -9733,7 +9733,7 @@ curl<span class="w"> </span>-sfL<span class="w"> </span>https://get.k3s.io<span 
 <div class="highlight"><pre><span></span><code>root@nob-k3s:~# ls -l /etc/rancher/k3s/k3s.yaml
 -rw------- 1 root root 2957 Nov  8 12:09 /etc/rancher/k3s/k3s.yaml
 </code></pre></div>
-<p>下記のようなエラーが発生した場合、<code>export KUBECONFIG=/etc/rancher/k3s/k3s.yaml</code> すると解決します:</p>
+<p>下記のようなエラーが発生した場合、<code>export KUBECONFIG=/etc/rancher/k3s/k3s.yaml</code>すると解決します:</p>
 <div class="highlight"><pre><span></span><code>root@nob-k3s:~# argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo-workflows/main/examples/hello-world.yaml
 Error: invalid configuration: no configuration has been provided, try setting KUBERNETES_MASTER environment variable
 </code></pre></div>

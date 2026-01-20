@@ -9912,9 +9912,9 @@ kubebuilder<span class="w"> </span>init<span class="w"> </span>--domain<span cla
 kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class="w"> </span>--group<span class="w"> </span>nobcontroller<span class="w"> </span>--version<span class="w"> </span>v1<span class="w"> </span>--kind<span class="w"> </span>Nob
 </code></pre></div>
 <h2 id="_2">実装</h2>
-<p>Deploymentリソースを管理する <code>Nob</code> のコントローラーを実装します。</p>
+<p>Deploymentリソースを管理する<code>Nob</code>のコントローラーを実装します。</p>
 <h3 id="apiv1nob_typesgo">api/v1/nob_types.go</h3>
-<p>カスタムリソースのSpecおよびStatusを定義します。変更後は <code>make</code> コマンドを実行して関連するファイルの再生成をしてください。</p>
+<p>カスタムリソースのSpecおよびStatusを定義します。変更後は<code>make</code>コマンドを実行して関連するファイルの再生成をしてください。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// NobSpec defines the desired state of Nob</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">NobSpec</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster</span>

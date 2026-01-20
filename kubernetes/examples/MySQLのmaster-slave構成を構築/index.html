@@ -10004,7 +10004,7 @@
 <span class="w">            </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500Mi</span>
 </code></pre></div>
 <h3 id="mysql-common-secretyaml">mysql-common-secret.yaml</h3>
-<p>mysql-[0|1]に共通するSecretです。<code>kubectl</code> コマンドのdry-runによってマニフェストを生成しています（cf. <a href="https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data">Managing Secrets using kubectl</a>）。</p>
+<p>mysql-[0|1]に共通するSecretです。<code>kubectl</code>コマンドのdry-runによってマニフェストを生成しています（cf. <a href="https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data">Managing Secrets using kubectl</a>）。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cGFzc3dvcmQ=</span>
@@ -10135,7 +10135,7 @@
 <span class="w">                </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">proxysql.cnf</span>
 </code></pre></div>
 <h3 id="proxysql-cmyaml">proxysql-cm.yaml</h3>
-<p>master / slaveのルーティングを設定します。<code>mysql-x.mysql-svc</code> でPodに直接疎通します。</p>
+<p>master / slaveのルーティングを設定します。<code>mysql-x.mysql-svc</code>でPodに直接疎通します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConfigMap</span>
 <span class="nt">metadata</span><span class="p">:</span>

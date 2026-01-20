@@ -9664,13 +9664,13 @@
 <p>cf. <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/">https://argo-cd.readthedocs.io/en/stable/operator-manual/web_based_terminal/</a></p>
 <h2 id="_1">手順</h2>
 <ul>
-<li>ConfigMap: <code>argocd-cm</code> に下記設定を追記します:</li>
+<li>ConfigMap: <code>argocd-cm</code>に下記設定を追記します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">data</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">exec.enabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
 </code></pre></div>
 <ul>
-<li>ClusterRole: <code>argocd-server</code> に下記設定を追記します（namespaced modeの場合は同名のRoleに追記）:</li>
+<li>ClusterRole: <code>argocd-server</code>に下記設定を追記します（namespaced modeの場合は同名のRoleに追記）:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">apiGroups</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;&quot;</span>

@@ -10098,7 +10098,7 @@
 <div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>easybatch.zip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>easybatch.zip
 </code></pre></div>
 <h2 id="_2">実装</h2>
-<p>サンプルコードを掲載します。<code>sign_up</code> テーブルの <code>first_name</code>, <code>last_name</code> を結合して <code>customer</code> テーブルに <code>full_name</code> を登録するバッチジョブを実装します。</p>
+<p>サンプルコードを掲載します。<code>sign_up</code>テーブルの<code>first_name</code>, <code>last_name</code>を結合して<code>customer</code>テーブルに<code>full_name</code>を登録するバッチジョブを実装します。</p>
 <h3 id="_3">事前準備</h3>
 <p>データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。</p>
 <h4 id="docker-composeyaml">docker-compose.yaml</h4>
@@ -10268,7 +10268,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="entitysignupjava">entity/SignUp.java</h4>
-<p>バッチ処理の入力値となる <code>sign_up</code> テーブルに対応するエンティティを定義します。</p>
+<p>バッチ処理の入力値となる<code>sign_up</code>テーブルに対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
@@ -10309,7 +10309,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="entitycustomerjava">entity/Customer.java</h4>
-<p>バッチ処理の出力となる <code>customer</code> テーブルに対応するエンティティを定義します。</p>
+<p>バッチ処理の出力となる<code>customer</code>テーブルに対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
@@ -10578,7 +10578,7 @@ spring.datasource.password<span class="o">=</span>password
 <p>下記コマンドでアプリを起動します。</p>
 <div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>spring-boot:run
 </code></pre></div>
-<p>下記コマンドで <code>customer</code> テーブルにデータが入っていることを確認できます。</p>
+<p>下記コマンドで<code>customer</code>テーブルにデータが入っていることを確認できます。</p>
 <div class="highlight"><pre><span></span><code>$ docker exec -it ebdb mariadb -u root -p ebdb -e &quot;SELECT * FROM customer;&quot;
 Enter password:
 +----+------------+-----+

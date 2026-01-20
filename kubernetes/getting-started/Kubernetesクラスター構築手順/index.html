@@ -9985,7 +9985,7 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w
 sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd
 containerd<span class="w"> </span>config<span class="w"> </span>default<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/containerd/config.toml
 </code></pre></div>
-<p>config.tomlの <code>[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]</code> について、<code>SystemdCgroup = true</code> に書き換えます。</p>
+<p>config.tomlの<code>[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]</code>について、<code>SystemdCgroup = true</code>に書き換えます。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># SystemdCgroup設定書き換え</span>
 sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/SystemdCgroup = false/SystemdCgroup = true/g&#39;</span><span class="w"> </span>/etc/containerd/config.toml
 <span class="c1"># containerdの再起動</span>
