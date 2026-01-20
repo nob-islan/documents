@@ -11,6 +11,9 @@ React + TypeScriptでの開発環境のサンプルです:
     "vscode": {
       "settings": {
         "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
         "[typescriptreact]": {
           "editor.tabSize": 2,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -28,7 +31,8 @@ React + TypeScriptでの開発環境のサンプルです:
       },
       "extensions": [
         "jawandarajbir.react-vscode-extension-pack",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
       ]
     }
   }

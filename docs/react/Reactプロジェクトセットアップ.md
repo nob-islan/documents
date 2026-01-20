@@ -31,6 +31,14 @@ npm install @reduxjs/toolkit react-redux react-router-dom
 npm install sass node-sass
 ```
 
+### eslint
+
+- ESLintによるフォーマットを有効化するため、下記をインストールします:
+
+```shell
+npm install eslint-plugin-simple-import-sort
+```
+
 ## Redux向け実装
 
 Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。
@@ -74,12 +82,27 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 }
 ```
 
+#### .eslintrc.json
+
+import文のソートを制御する設定を定義します。
+
+```json
+{
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}
+```
+
 #### app/store.ts
 
 各種reducerを取りまとめたstoreを作成します。
 
 ```ts
 import { configureStore } from "@reduxjs/toolkit";
+
 import counterReducer from "../features/counter/counterSlice";
 
 export const store = configureStore({
@@ -98,7 +121,8 @@ storeを操作する関数を定義します。
 
 ```ts
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
+
+import type { AppDispatch, RootState } from "./store";
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
@@ -110,8 +134,10 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 
 ```tsx
 import "./index.module.scss";
+
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+
 import App from "./App";
 import { store } from "./app/store";
 
@@ -130,7 +156,7 @@ root.render(
 画面コンテンツおよびactionの呼び出しを定義します。
 
 ```tsx
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { decrement, increment } from "./counterSlice";
 
 interface CounterProps {
@@ -230,8 +256,9 @@ App配下の装飾を定義します。
 ルーティングを設定します。
 
 ```tsx
-import style from "./app.module.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import style from "./app.module.scss";
 import { Counter } from "./features/counter/Counter";
 
 function App() {
