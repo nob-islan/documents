@@ -10230,6 +10230,10 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span>
 <span class="p">};</span>
 
+<span class="kd">interface</span><span class="w"> </span><span class="nx">IncrementByAmountPayload</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">counterSlice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;counter&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">initialState</span><span class="p">,</span>
@@ -10240,8 +10244,11 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <span class="w">    </span><span class="nx">decrement</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nx">incrementByAmount</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kt">PayloadAction</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">incrementByAmount</span><span class="o">:</span><span class="w"> </span><span class="p">(</span>
+<span class="w">      </span><span class="nx">state</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kt">PayloadAction</span><span class="o">&lt;</span><span class="nx">IncrementByAmountPayload</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="p">});</span>
