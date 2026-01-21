@@ -119,7 +119,7 @@ func main() {
 // usersテーブル向けのエンティティ構造体です。
 type Users struct {
 	Id   int    `gorm:"primaryKey"` // 管理ID
-	Name string // ユーザ名
-	Age  int    // 年齢
+	Name string                     // ユーザ名
+	Age  int                        // 年齢
 }
 ```
