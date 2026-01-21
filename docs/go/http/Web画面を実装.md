@@ -37,7 +37,7 @@
 
 #### `assets/`
 
-- `templates/index.html``
+- `templates/index.html`
 
 ```html
 <!DOCTYPE html>
@@ -77,7 +77,7 @@
 </html>
 ```
 
-- `static/index.js``
+- `static/index.js`
 
 ```js
 function handleOnclickButton() {

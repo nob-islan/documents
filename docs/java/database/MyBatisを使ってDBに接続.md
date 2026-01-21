@@ -4,7 +4,7 @@ MyBatisを使ってJavaアプリからDBに接続する方法、および実装�
 
 ## 設定ファイル
 
-### `pom.xml``
+### `pom.xml`
 
 各種依存関係です。アプリ起動時にエラーが起きる場合はバージョンが古い可能性があります。
 
@@ -38,7 +38,7 @@ MyBatisを使ってJavaアプリからDBに接続する方法、および実装�
 
 ```
 
-### `application.properties``
+### `application.properties`
 
 DBへの接続情報です。
 
@@ -53,7 +53,7 @@ spring.datasource.username=root
 spring.datasource.password=
 ```
 
-### `mybatis-config.xml``
+### `mybatis-config.xml`
 
 `projectname/src/main/resources`配下に下記で作成します。
 

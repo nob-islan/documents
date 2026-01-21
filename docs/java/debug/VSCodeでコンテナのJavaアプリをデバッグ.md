@@ -4,7 +4,7 @@
 
 ## 設定
 
-- `Dockerfile``
+- `Dockerfile`
 
 ```Dockerfile
 FROM eclipse-temurin:21

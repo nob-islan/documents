@@ -16,17 +16,17 @@ npm install dotenv-cli
 
 ### 設定ファイル
 
-#### `.env.XXX``
+#### `.env.XXX`
 
 ルートディレクトリに、各環境ごとの設定ファイルを用意します:
 
-- `.env.dev``
+- `.env.dev`
 
 ```
 REACT_APP_TEST="dev"
 ```
 
-- `.env.stg``
+- `.env.stg`
 
 ```
 REACT_APP_TEST="stg"
