@@ -9739,15 +9739,15 @@
 
 
 <h1 id="mkdocs">MkDocs環境サンプル</h1>
-<p><a href="https://www.mkdocs.org/">MkDocs</a> によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを<code>postcreate.sh</code>でインストールします:</p>
+<p><a href="https://www.mkdocs.org/">MkDocs</a>によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを<code>postcreate.sh</code>でインストールします:</p>
 <h2 id="_1">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.devcontainer/
-├── devcontainer.json
-└── scripts
-    └── postcreate.sh
+├──<span class="w"> </span>devcontainer.json
+└──<span class="w"> </span>scripts
+<span class="w">    </span>└──<span class="w"> </span>postcreate.sh
 </code></pre></div>
 <h2 id="_2">設定</h2>
-<h3 id="devcontainerjson">devcontainer.json</h3>
+<h3 id="devcontainerjson"><code>devcontainer.json</code></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MkDocs&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mcr.microsoft.com/devcontainers/python:3&quot;</span><span class="p">,</span>
@@ -9763,7 +9763,7 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="postcreatesh">postcreate.sh</h3>
+<h3 id="postcreatesh"><code>postcreate.sh</code></h3>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 pip<span class="w"> </span>install<span class="w"> </span>mkdocs
