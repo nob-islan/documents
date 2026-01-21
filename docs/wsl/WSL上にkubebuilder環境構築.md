@@ -127,7 +127,7 @@ export PATH=$PATH:/usr/local/go/bin
 EOF
 ```
 
-- .profile読み込み
+- `.profile`読み込み
 
 ```shell
 source ~/.profile
