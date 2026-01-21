@@ -6,7 +6,7 @@ cf. https://springdoc.org/
 
 ## 実装
 
-### pom.xml
+### `pom.xml`
 
 下記の依存関係を追加します:
 
@@ -19,7 +19,7 @@ cf. https://springdoc.org/
 		</dependency>
 ```
 
-### application.properties
+### `application.properties`
 
 下記設定を追記します:
 
@@ -32,7 +32,7 @@ springdoc.swagger-ui.path=/swagger-ui.html
 spring.profiles.active=swagger
 ```
 
-### EasyappApplication.java
+### `EasyappApplication.java`
 
 下記アノテーションを追記し、APIの概要を記載します:
 
@@ -55,7 +55,7 @@ spring.profiles.active=swagger
   }
 ```
 
-### AuthController.java
+### `AuthController.java`
 
 下記アノテーションを追記し、各APIのインターフェース仕様を記載します:
 
@@ -122,11 +122,11 @@ spring.profiles.active=swagger
   }
 ```
 
-### model
+### `model`
 
 各モデルクラスのスキーマ定義を記載します:
 
-#### LoginRequest.java
+#### `LoginRequest.java`
 
 ```diff
   package nob.example.easyapp.controller.model;
@@ -153,7 +153,7 @@ spring.profiles.active=swagger
   }
 ```
 
-#### LoginResponse.java
+#### `LoginResponse.java`
 
 ```diff
   package nob.example.easyapp.controller.model;
@@ -176,7 +176,7 @@ spring.profiles.active=swagger
   }
 ```
 
-#### MeRequest.java
+#### `MeRequest.java`
 
 ```diff
   package nob.example.easyapp.controller.model;
@@ -199,7 +199,7 @@ spring.profiles.active=swagger
   }
 ```
 
-#### MeResponse.java
+#### `MeResponse.java`
 
 ```diff
   package nob.example.easyapp.controller.model;
@@ -226,7 +226,7 @@ spring.profiles.active=swagger
   }
 ```
 
-### SampleExceptionHandler.java
+### `SampleExceptionHandler.java`
 
 例外発生時レスポンスモデルのスキーマ定義を記載します:
 
@@ -277,7 +277,7 @@ spring.profiles.active=swagger
   }
 ```
 
-### resources/application-swagger.yaml
+### `resources/application-swagger.yaml`
 
 APIのdescriptionについて記載します:
 
@@ -303,7 +303,7 @@ easyappdoc:
 
 ### Try it outボタンを無効化したい場合
 
-application.propertiesに下記を追加すればボタンが非表示になります:
+`application.properties`に下記を追加すればボタンが非表示になります:
 
 ```properties
 springdoc.swagger-ui.supported-submit-methods=[]

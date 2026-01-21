@@ -1,4 +1,4 @@
-# aspectjでロギング処理を設定
+`# aspectjでロギング処理を設定
 
 **aspectj** を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
 
@@ -25,7 +25,7 @@ cf. https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html
 		</dependency>
 ```
 
-### ApiExecLogAspect.java
+### `ApiExecLogAspect.java`
 
 下記実装によって、指定したタイミングでログを出力します:
 

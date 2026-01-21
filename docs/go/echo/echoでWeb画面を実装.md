@@ -50,9 +50,9 @@ go get github.com/labstack/echo/v4
 
 ### 実装
 
-#### assets/
+#### `assets/`
 
-- templates/index.html
+- `templates/index.html`
 
 ```html
 <!-- define / endで囲む必要があるので注意 -->
@@ -95,7 +95,7 @@ go get github.com/labstack/echo/v4
 {{end}}
 ```
 
-- static/index.js
+- `static/index.js`
 
 ```js
 function handleOnclickButton() {
@@ -121,7 +121,7 @@ function handleOnclickButton() {
 }
 ```
 
-- static/style.css
+- `static/style.css`
 
 ```css
 body {
@@ -164,9 +164,9 @@ body {
 }
 ```
 
-#### internal/handler/
+#### `internal/handler/``
 
-- users_handler.go
+- `users_handler.go`
 
 ```go
 package handler
@@ -234,7 +234,7 @@ func (h *usersHandler) Login(c echo.Context) error {
 }
 ```
 
-- router/base.go
+- `router/base.go`
 
 ```go
 package router
@@ -277,7 +277,7 @@ func (t *Template) Render(w io.Writer, name string, data any, c echo.Context) er
 }
 ```
 
-- router/users_router.go
+- `router/users_router.go`
 
 ```go
 package router
@@ -303,9 +303,9 @@ func (r *usersRouter) SetRouting(e *echo.Echo) {
 }
 ```
 
-#### cmd/
+#### `cmd/`
 
-- main.go
+- `main.go`
 
 ```go
 package main
@@ -325,7 +325,7 @@ func main() {
 
 上記のコードではgo buildで作成したバイナリファイルにhtmlなどのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
 
-- assets/assets.goを下記で新規作成
+- `assets/assets.go`を下記で新規作成
 
 ```go
 package assets

@@ -6,7 +6,7 @@ Spring Bootで実装するREST APIのプロジェクトの初期セットアッ�
 
 cf. https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line
 
-- [Spring initializer](https://start.spring.io/) を使ってプロジェクトを新規作成します。
+- [Spring initializer](https://start.spring.io/)を使ってプロジェクトを新規作成します。
 
 ```shell
 curl https://start.spring.io/starter.zip \
@@ -34,7 +34,7 @@ unzip easyapp.zip && rm -rf easyapp.zip
 
 データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。
 
-#### docker-compose.yaml
+#### `docker-compose.yaml`
 
 ```yaml
 services:
@@ -49,7 +49,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 ```
 
-#### volumes/initdb.d/create-database.sql
+#### `volumes/initdb.d/create-database.sql`
 
 ```sql
 CREATE DATABASE eadb;
@@ -72,7 +72,7 @@ INSERT INTO users (
 );
 ```
 
-#### src/main/resources/application.properties
+#### `src/main/resources/application.properties`
 
 ```shell
 # MariaDBのドライバ設定
@@ -117,7 +117,7 @@ spring.datasource.password=password
 
 ### クラス一覧
 
-#### repository/UsersRepository.java
+#### `repository/UsersRepository.java`
 
 データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。
 
@@ -147,7 +147,7 @@ public interface UsersRepository extends JpaRepository<Users, String> {
 }
 ```
 
-#### repository/entity/Users.java
+#### `repository/entity/Users.java`
 
 データベースのテーブル定義に対応するエンティティを定義します。
 
@@ -189,7 +189,7 @@ public class Users {
 }
 ```
 
-#### service/AuthService.java
+#### `service/AuthService.java`
 
 業務処理を担うクラスのインターフェースを定義します。
 
@@ -229,7 +229,7 @@ public interface AuthService {
 }
 ```
 
-#### service/impl/AuthServiceImpl.java
+#### `service/impl/AuthServiceImpl.java`
 
 サービスを実装します。アプリの業務処理はこのクラスで行います。
 
@@ -278,7 +278,7 @@ public class AuthServiceImpl implements AuthService {
 }
 ```
 
-#### service/model/LoginInModel.java
+#### `service/model/LoginInModel.java`
 
 業務処理を担うクラスの入力モデルを定義します。
 
@@ -303,7 +303,7 @@ public class LoginInModel {
 }
 ```
 
-#### service/model/LoginOutModel.java
+#### `service/model/LoginOutModel.java`
 
 業務処理を担うクラスの出力モデルを定義します。
 
@@ -325,7 +325,7 @@ public class LoginOutModel {
 }
 ```
 
-#### service/model/MeInModel.java
+#### `service/model/MeInModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -345,7 +345,7 @@ public class MeInModel {
 }
 ```
 
-#### service/model/MeOutModel.java
+#### `service/model/MeOutModel.java``
 
 ```java
 package nob.example.easyapp.service.model;
@@ -368,7 +368,7 @@ public class MeOutModel {
 }
 ```
 
-#### controller/AuthController.java
+#### `controller/AuthController.java`
 
 APIのインターフェースを定義します。
 
@@ -415,7 +415,7 @@ public interface AuthController {
 }
 ```
 
-#### controller/impl/AuthControllerImpl.java
+#### `controller/impl/AuthControllerImpl.java``
 
 コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。
 
@@ -466,7 +466,7 @@ public class AuthControllerImpl implements AuthController {
 }
 ```
 
-#### controller/model/LoginRequest.java
+#### `controller/model/LoginRequest.java``
 
 コントローラーのリクエストモデルを定義します。
 
@@ -491,7 +491,7 @@ public class LoginRequest {
 }
 ```
 
-#### controller/model/LoginResponse.java
+#### `controller/model/LoginResponse.java`
 
 コントローラーのレスポンスモデルを定義します。
 
@@ -513,7 +513,7 @@ public class LoginResponse {
 }
 ```
 
-#### controller/model/MeRequest.java
+#### `controller/model/MeRequest.java``
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -533,7 +533,7 @@ public class MeRequest {
 }
 ```
 
-#### controller/model/MeResponse.java
+#### `controller/model/MeResponse.java`
 
 ```java
 package nob.example.easyapp.controller.model;

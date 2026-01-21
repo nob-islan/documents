@@ -25,62 +25,62 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 
 ## パッケージ解説
 
-### api
+### `api`
 
 swaggerなどのAPIドキュメント、およびそれを生成する関数を格納するパッケージです。
 
-### assets
+### `assets`
 
 静的コンテンツを格納するパッケージです。本パッケージの直下に`assets.go`を設け、`go:embed`を使ってこれらの静的ファイルを呼び出します。
 
-### cmd
+### `cmd`
 
 アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に`main.go`のみが格納されます。
 
-### internal/apperrors
+### `internal/apperrors`
 
 アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。
 
-### internal/domain
+### `internal/domain`
 
 業務処理の中心となるドメイン構造体およびそれを取得するrepositoryインターフェースを格納するパッケージです。
 
 値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。
 
-repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体をinternal/infrastructure/entityパッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。
+repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体を`internal/infrastructure/entity`パッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。
 
-### internal/handler
+### `internal/handler`
 
 リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。
 
-### internal/handler/model
+### `internal/handler/model`
 
 APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
 
-### internal/handler/router
+### `internal/handler/router`
 
 httpリクエストのルーティングを行う関数を格納するパッケージです。
 
-### internal/infrastructure
+### `internal/infrastructure`
 
 データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。
 
-### internal/infrastructure/repository
+### `internal/infrastructure/repository`
 
 データベースにアクセスしてSQLを実行する関数を格納するパッケージです。
 
-### internal/logging
+### `internal/logging`
 
 ログレベル別の文言出力など、ログ出力を制御するパッケージです。
 
-### internal/usecase
+### `internal/usecase`
 
 業務処理を行う関数を格納するパッケージです。関数内に直接処理を実装するか、domain内の処理を呼び出す形で業務を実施します。
 
-### internal/usecase/payload
+### `internal/usecase/payload`
 
 業務処理の入力・出力モデルとなる構造体を格納するパッケージです。
 
-### scripts
+### `scripts`
 
 テストカバレッジの作成やAPIドキュメントの自動生成などの開発支援ツールを格納するパッケージです。

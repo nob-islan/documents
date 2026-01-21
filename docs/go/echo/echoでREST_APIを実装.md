@@ -8,7 +8,7 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 
 ### ディレクトリ構成
 
-```
+```shell
 .
 ├── cmd
 │   └── main.go
@@ -39,9 +39,9 @@ go get github.com/labstack/echo/v4
 
 ### 実装
 
-#### internal/handler/
+#### `internal/handler/`
 
-- users_handler.go
+- `users_handler.go`
 
 ```go
 package handler
@@ -114,9 +114,9 @@ func (h *usersHandler) Me(c echo.Context) error {
 }
 ```
 
-#### internal/handler/model/
+#### `internal/handler/model/`
 
-- users_model.go
+- `users_model.go`
 
 ```go
 package model
@@ -172,9 +172,9 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### internal/handler/router/
+#### `internal/handler/router/`
 
-- base.go
+- `base.go`
 
 ```go
 package router
@@ -199,7 +199,7 @@ func Routing() *echo.Echo {
 }
 ```
 
-- users_router.go
+- `users_router.go`
 
 ```go
 package router
@@ -226,9 +226,9 @@ func (r *usersRouter) SetRouting(e *echo.Echo) {
 }
 ```
 
-#### cmd/
+#### `cmd/`f
 
-- main.go
+- `main.go`
 
 ```go
 package main
@@ -244,4 +244,4 @@ func main() {
 
 ### APIドキュメントについて
 
-APIドキュメントの記法については [echo-swagger](https://github.com/swaggo/echo-swagger) を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。
+APIドキュメントの記法については [echo-swagger](https://github.com/swaggo/echo-swagger)を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。

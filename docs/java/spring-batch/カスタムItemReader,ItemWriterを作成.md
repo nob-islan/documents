@@ -6,7 +6,7 @@ SQL発行に限らず、汎用的な処理を実装するためのItemReader, It
 
 ### ItemReader
 
-#### ItemReader.java
+#### `ItemReader.java``
 
 ```java
 package nob.example.easybatch.job.customerregist;
@@ -40,7 +40,7 @@ public class NobItemReader implements ItemReader<Integer> {
 }
 ```
 
-#### Config.java
+#### `Config.java``
 
 ```java
     @Bean
@@ -52,7 +52,7 @@ public class NobItemReader implements ItemReader<Integer> {
 
 ### ItemWriter
 
-#### IterWriter.java
+#### `IterWriter.java``
 
 ```java
 package nob.example.easybatch.job.customerregist;
@@ -76,7 +76,7 @@ public class NobItemWriter implements ItemWriter<Customer> {
 }
 ```
 
-#### Config.java
+#### `Config.java`
 
 ```java
     @Bean

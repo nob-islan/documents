@@ -4,7 +4,7 @@
 
 ## ディレクトリ構成
 
-```
+```shell
 .
 ├── assets
 │   ├── static
@@ -35,9 +35,9 @@
 
 ### 実装
 
-#### assets/
+#### `assets/`
 
-- templates/index.html
+- `templates/index.html``
 
 ```html
 <!DOCTYPE html>
@@ -77,7 +77,7 @@
 </html>
 ```
 
-- static/index.js
+- `static/index.js``
 
 ```js
 function handleOnclickButton() {
@@ -103,7 +103,7 @@ function handleOnclickButton() {
 }
 ```
 
-- static/style.css
+- `static/style.css`
 
 ```css
 body {
@@ -146,9 +146,9 @@ body {
 }
 ```
 
-#### internal/handler/
+#### `internal/handler/`
 
-- users_handler.go
+- `users_handler.go`
 
 ```go
 package handler
@@ -225,7 +225,7 @@ func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-- router/base.go
+- `router/base.go`
 
 ```go
 package router
@@ -260,7 +260,7 @@ func Routing() *http.ServeMux {
 }
 ```
 
-- router/users_router.go
+- `router/users_router.go`
 
 ```go
 package router
@@ -293,9 +293,9 @@ func (r *usersRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### cmd/
+#### `cmd/`
 
-- main.go
+- `main.go`
 
 ```go
 package main
@@ -320,7 +320,7 @@ func main() {
 
 上記のコードでは`go build`で作成したバイナリファイルにhtmlなどのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:
 
-- assets/assets.goを下記で新規作成
+- `assets/assets.go`を下記で新規作成
 
 ```go
 package assets
@@ -334,7 +334,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- router/base.goについて、埋め込んだstaticを使うよう宣言
+- `router/base.go`について、埋め込んだstaticを使うよう宣言
 
 ```go
 	staticFiles, err := fs.Sub(assets.Static, "static")
@@ -344,7 +344,7 @@ var Templates embed.FS // templates埋め込み宣言
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 ```
 
-- handler/users_handler.goについて、埋め込んだtemplatesを使うよう宣言
+- `handler/users_handler.go`について、埋め込んだtemplatesを使うよう宣言
 
 ```go
 	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")

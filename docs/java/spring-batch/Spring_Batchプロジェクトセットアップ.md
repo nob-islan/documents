@@ -11,7 +11,7 @@ cf.
 
 cf. https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line
 
-- [Spring initializer](https://start.spring.io/) を使ってプロジェクトを新規作成します。
+- [Spring initializer](https://start.spring.io/)を使ってプロジェクトを新規作成します。
 
 ```shell
 curl https://start.spring.io/starter.zip \
@@ -39,7 +39,7 @@ unzip easybatch.zip && rm -rf easybatch.zip
 
 データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。
 
-#### docker-compose.yaml
+#### `docker-compose.yaml``
 
 ```yaml
 services:
@@ -54,7 +54,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 ```
 
-#### volumes/initdb.d/create-database.sql
+#### `volumes/initdb.d/create-database.sql``
 
 ```sql
 CREATE DATABASE ebdb;
@@ -166,7 +166,7 @@ CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
 );
 ```
 
-#### src/main/resources/application.properties
+#### `src/main/resources/application.properties``
 
 ```shell
 # MariaDBのドライバ設定
@@ -202,7 +202,7 @@ spring.datasource.password=password
 
 ### クラス一覧
 
-#### config/BatchConfig.java
+#### `config/BatchConfig.java``
 
 バッチ実行に関するコンフィグを定義します。
 
@@ -223,7 +223,7 @@ public class BatchConfig {
 }
 ```
 
-#### entity/SignUp.java
+#### `entity/SignUp.java``
 
 バッチ処理の入力値となる`sign_up`テーブルに対応するエンティティを定義します。
 
@@ -268,7 +268,7 @@ public class SignUp {
 }
 ```
 
-#### entity/Customer.java
+#### `entity/Customer.java`
 
 バッチ処理の出力となる`customer`テーブルに対応するエンティティを定義します。
 
@@ -313,7 +313,7 @@ public class Customer {
 }
 ```
 
-#### job/customerregist/CustomerRegistJobOperator.java
+#### `job/customerregist/CustomerRegistJobOperator.java`
 
 ジョブの実行計画を定義します。
 
@@ -350,7 +350,7 @@ public class CustomerRegistJobOperator {
 }
 ```
 
-#### job/customerregist/CustomerRegistListener.java
+#### `job/customerregist/CustomerRegistListener.java``
 
 ジョブ開始時および終了時に行う処理を実装します。
 
@@ -387,7 +387,7 @@ public class CustomerRegistListener implements JobExecutionListener {
 }
 ```
 
-#### job/customerregist/CustomerRegistReader.java
+#### `job/customerregist/CustomerRegistReader.java``
 
 入力元のテーブルからのデータ抽出処理を実装します。
 
@@ -426,7 +426,7 @@ public class CustomerRegistReader {
 }
 ```
 
-#### job/customerregist/CustomerRegistProcessor.java
+#### `job/customerregist/CustomerRegistProcessor.java``
 
 ビジネスロジックを実装します。
 
@@ -454,7 +454,7 @@ public class CustomerRegistProcessor implements ItemProcessor<SignUp, Customer> 
 }
 ```
 
-#### job/customerregist/CustomerRegistWriter.java
+#### `job/customerregist/CustomerRegistWriter.java`
 
 業務処理による成果物の登録処理を実装します。
 
@@ -488,7 +488,7 @@ public class CustomerRegistWriter {
 }
 ```
 
-#### job/customerregist/CustomerRegistConfig.java
+#### `job/customerregist/CustomerRegistConfig.java`
 
 各種インスタンスのBean登録などジョブのコンフィグを宣言します。
 

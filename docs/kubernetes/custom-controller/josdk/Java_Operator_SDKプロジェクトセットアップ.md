@@ -4,7 +4,7 @@
 
 ## クラスタ作成
 
-- kind/cluster/josdk-cluster.yamlを下記内容で作成します。
+- `kind/cluster/josdk-cluster.yaml`を下記内容で作成します。
 
 ```yaml
 kind: Cluster
@@ -35,7 +35,7 @@ mvn archetype:generate \
     -DartifactId=nob-controller
 ```
 
-- pom.xmlを下記で作成します。
+- `pom.xml`を下記で作成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -145,7 +145,7 @@ mvn archetype:generate \
 
 ## 実装
 
-### NobSpec.java
+### `NobSpec.java`
 
 カスタムリソースのSpecを宣言します。
 
@@ -163,7 +163,7 @@ public class NobSpec {
 }
 ```
 
-### NobStatus.java
+### `NobStatus.java`
 
 カスタムリソースのStatusを宣言します。
 
@@ -179,7 +179,7 @@ public class NobStatus {
 }
 ```
 
-### Nob.java
+### `Nob.java`
 
 カスタムリソースを宣言します。
 
@@ -197,7 +197,7 @@ public class Nob extends CustomResource<NobSpec, NobStatus> implements Namespace
 }
 ```
 
-### DeploymentDependentResource.java
+### `DeploymentDependentResource.java`
 
 カスタムリソースが管理するDeploymentの定義を宣言します。
 
@@ -262,7 +262,7 @@ public class DeploymentDependentResource extends CRUDKubernetesDependentResource
 }
 ```
 
-### NobReconciler.java
+### `NobReconciler.java`
 
 カスタムコントローラーのビジネスロジック本体を実装します。
 
@@ -353,7 +353,7 @@ public class NobReconciler implements Reconciler<Nob> {
 }
 ```
 
-### App.java
+### `App.java`
 
 コントローラーのエントリポイントです。
 
@@ -377,9 +377,9 @@ public class App {
 }
 ```
 
-### log4j2.xml
+### `log4j2.xml`
 
-ログ出力に関する設定main/resources/log4j2.xmlを下記内容で作成します。
+ログ出力に関する設定`main/resources/log4j2.xml`を下記内容で作成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -402,7 +402,7 @@ public class App {
 
 ## 単体テスト
 
-### NobReconcilerTest.java
+### `NobReconcilerTest.java`
 
 コントローラーのテストを記載します。`mvn clean test`でCRDのマニフェストを自動生成しつつテストを実行します。
 

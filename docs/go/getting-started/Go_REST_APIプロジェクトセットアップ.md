@@ -22,7 +22,7 @@ go get github.com/go-sql-driver/mysql
 
 データベースをdockerで構築します。
 
-#### docker-compose.yaml
+#### `docker-compose.yaml`
 
 ```yaml
 services:
@@ -37,7 +37,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 ```
 
-#### volumes/initdb.d/create-database.sql
+#### `volumes/initdb.d/create-database.sql`
 
 ```sql
 CREATE DATABASE eadb;
@@ -88,11 +88,11 @@ INSERT INTO users (
 
 ### パッケージ一覧
 
-#### internal/domain/
+#### `internal/domain/`
 
 業務処理の中心となるドメインおよびそれをデータベースから取得するrepositoryのインターフェースを定義します。
 
-- users.go
+- `users.go`
 
 ```go
 package domain
@@ -128,11 +128,11 @@ type UsersRepository interface {
 }
 ```
 
-#### internal/infrastructure/
+#### `internal/infrastructure/`
 
 データベースへの接続設定を記載します。
 
-- db.go
+- `db.go`
 
 ```go
 package infrastructure
@@ -172,11 +172,11 @@ func ConnectDB() *sql.DB {
 }
 ```
 
-#### internal/infrastructure/repository/
+#### `internal/infrastructure/repository/`
 
 データベースを操作するrepositoryを実装します。
 
-- users_repository.go
+- `users_repository.go`
 
 ```go
 package repository
@@ -210,11 +210,11 @@ func (r *usersRepository) FindByName(targetName string) domain.Users {
 }
 ```
 
-#### internal/usecase/
+#### `internal/usecase/`
 
 usecaseを定義・実装します。アプリの業務はここで処理されます。
 
-- users_usecase.go
+- `users_usecase.go`
 
 ```go
 package usecase
@@ -262,11 +262,11 @@ func (u *usersUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
 }
 ```
 
-#### internal/usecase/payload/
+#### `internal/usecase/payload/`
 
 usecase向けの関数の入力・出力モデル構造体を定義します。
 
-- users_payload.go
+- `users_payload.go`
 
 ```go
 package payload
@@ -334,11 +334,11 @@ func (o MeOut) Age() int {
 }
 ```
 
-#### internal/handler/
+#### `internal/handler/`
 
 handlerを定義・実装します。usecaseを呼び出し、レスポンスを作成します。
 
-- users_handler.go
+- `users_handler.go`
 
 ```go
 package handler
@@ -404,11 +404,11 @@ func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-#### internal/handler/model/
+#### `internal/handler/model/`
 
 handler向けの関数の入力・出力モデル構造体を定義します。
 
-- users_model.go
+- `users_model.go`
 
 ```go
 package model
@@ -463,11 +463,11 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### internal/handler/router/
+#### `internal/handler/router/`
 
 リクエストのルーティングを実装します。
 
-- base.go
+- `base.go`
 
 ```go
 package router
@@ -503,7 +503,7 @@ func Routing() *http.ServeMux {
 }
 ```
 
-- users_router.go
+- `users_router.go`
 
 ```go
 package router
@@ -549,11 +549,11 @@ func (r *usersRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### cmd/
+#### `cmd/`
 
 アプリケーションのエントリポイントです。
 
-- main.go
+- `main.go`
 
 ```go
 package main

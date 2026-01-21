@@ -75,7 +75,7 @@ sudo mkdir -p /etc/containerd
 containerd config default | sudo tee /etc/containerd/config.toml
 ```
 
-config.tomlの`[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]`について、`SystemdCgroup = true`に書き換えます。
+`config.toml`の`[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]`について、`SystemdCgroup = true`に書き換えます。
 
 ```shell
 # SystemdCgroup設定書き換え
@@ -127,7 +127,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network
 
-CNIプラグインを適用します。これが無いと`kubectl get node`で確認した際のノードのStatusが`NotReady`のまま動きません。各CNIについては下記を参照ください:  
+CNIプラグインを適用します。これが無いと`kubectl get node`で確認した際のノードのStatusがNotReadyのまま動きません。各CNIについては下記を参照ください:  
 cf. https://kubernetes.io/ja/docs/concepts/cluster-administration/addons/#networking-and-network-policy
 
 flannelのマニフェストをダウンロードします:
@@ -154,7 +154,7 @@ flannelのリソースが作成されることを確認します:
 watch kubectl get pods -n kube-flannel
 ```
 
-ノードのステータスが`Ready`になっていれば完了です。
+ノードのステータスがReadyになっていれば完了です。
 
 ```shell
 kubectl get nodes
@@ -170,4 +170,4 @@ cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/cre
 
 ### ノードをクラスターに参加させる
 
-先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードのStatusが`Ready`になります。
+先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードのStatusがReadyになります。

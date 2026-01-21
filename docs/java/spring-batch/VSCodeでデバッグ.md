@@ -2,7 +2,7 @@
 
 ## 事前準備
 
-- 下記内容で .vscode/launch.jsonを作成します:
+- 下記内容で`.vscode/launch.json`を作成します:
 
 ```json
 {

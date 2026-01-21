@@ -1,6 +1,6 @@
 # Kubebuilderプロジェクトセットアップ
 
-[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
+[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。
 
 ## プロジェクト作成
 
@@ -22,7 +22,7 @@ kubebuilder create api --group nobcontroller --version v1 --kind Nob
 
 Deploymentリソースを管理する`Nob`のコントローラーを実装します。
 
-### api/v1/nob_types.go
+### `api/v1/nob_types.go`
 
 カスタムリソースのSpecおよびStatusを定義します。変更後は`make`コマンドを実行して関連するファイルの再生成をしてください。
 
@@ -56,7 +56,7 @@ type NobStatus struct {
 }
 ```
 
-### internal/controller/nob_controller.go
+### `internal/controller/nob_controller.go`
 
 Reconcileを行うコントローラー本体を実装します。
 
@@ -82,7 +82,7 @@ type NobReconciler struct {
 // +kubebuilder:rbac:groups="",resources=events,verbs=create;patch
 ```
 
-- SetUpWithManagerを定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。
+- `SetUpWithManager`を定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。
 
 ```go
 // SetupWithManager sets up the controller with the Manager.
@@ -95,7 +95,7 @@ func (r *NobReconciler) SetupWithManager(mgr ctrl.Manager) error {
 }
 ```
 
-- クリーンアップ関数を定義します。Nobリソースへの変更が入るなどして古くなったDeploymentを検知して削除します。
+- クリーンアップ関数を定義します。`Nob`リソースへの変更が入るなどして古くなったDeploymentを検知して削除します。
 
 ```go
 // Nob resourceによって作成され、かつnob.spec配下と名前が一致しないDeploymentを削除します。
@@ -266,7 +266,7 @@ func (r *NobReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.R
 }
 ```
 
-### cmd/main.go
+### `cmd/main.go`
 
 Reconcilerのメンバを追加します。
 
@@ -288,9 +288,9 @@ Reconcilerのメンバを追加します。
 
 ### テストケース記載
 
-#### internal/controller/nob_controller_test.go
+#### `internal/controller/nob_controller_test.go`
 
-- BeforeEachにNobSpecで定めたパラメータを定義します。
+- `BeforeEach`に`NobSpec`で定めたパラメータを定義します。
 
 ```go
 		BeforeEach(func() {
@@ -312,7 +312,7 @@ Reconcilerのメンバを追加します。
 		})
 ```
 
-- AfterEachにReconcilerの定義および、Expectの内容を記載します。
+- `AfterEach`にReconcilerの定義および期待値の内容を記載します。
 
 ```go
 		AfterEach(func() {
@@ -370,7 +370,7 @@ make test
 
 ## ローカルアプリケーション起動
 
-- kind/cluster/kubebuilder-cluster.yamlを下記内容で作成します。
+- `kind/cluster/kubebuilder-cluster.yaml`を下記内容で作成します。
 
 ```yaml
 kind: Cluster
@@ -393,7 +393,7 @@ kind create cluster --name kubebuilder-cluster --config kind/cluster/kubebuilder
 make install
 ```
 
-- config/samples配下のカスタムリソースのspecを宣言します。
+- `config/samples`配下のカスタムリソースのspecを宣言します。
 
 ```yaml
 apiVersion: nobcontroller.example.nob/v1
