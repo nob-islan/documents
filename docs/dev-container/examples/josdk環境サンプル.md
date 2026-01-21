@@ -1,12 +1,12 @@
 # JOSDK環境サンプル
 
-https://javaoperatorsdk.io/
+cf. https://javaoperatorsdk.io/
 
-[Java Operator SDK](https://javaoperatorsdk.io/) でKubernetesのカスタムコントローラーを実装するための環境サンプルです:
+[Java Operator SDK](https://javaoperatorsdk.io/)でKubernetesのカスタムコントローラーを実装するための環境サンプルです:
 
 ## 設定
 
-### devcontainer.json
+### `devcontainer.json`
 
 ```json
 {

@@ -4,7 +4,7 @@
 
 ## 設定
 
-### devcontainer.json
+### `devcontainer.json`
 
 ```json
 {

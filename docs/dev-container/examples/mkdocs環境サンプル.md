@@ -1,10 +1,10 @@
 # MkDocs環境サンプル
 
-[MkDocs](https://www.mkdocs.org/) によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを`postcreate.sh`でインストールします:
+[MkDocs](https://www.mkdocs.org/)によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを`postcreate.sh`でインストールします:
 
 ## ディレクトリ構成
 
-```
+```shell
 .devcontainer/
 ├── devcontainer.json
 └── scripts
@@ -13,7 +13,7 @@
 
 ## 設定
 
-### devcontainer.json
+### `devcontainer.json`
 
 ```json
 {
@@ -32,7 +32,7 @@
 }
 ```
 
-### postcreate.sh
+### `postcreate.sh`
 
 ```shell
 #!/bin/bash

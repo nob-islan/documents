@@ -57,7 +57,7 @@ VSCode上でmarkdown形式でスライドを作成できる [Marp](https://marp.
   章立てができます。
   ```
 
-拡張機能 **Markdown Preview Enhanced** をインストール済みの場合、この拡張機能によって提供されるプレビューではスライドとして表示されないため、下記の設定でVSCodeが提供するデフォルトのプレビューボタンを表示させるようにしてください:
+拡張機能[Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced/#/)をインストール済みの場合、この拡張機能によって提供されるプレビューではスライドとして表示されないため、下記の設定でVSCodeが提供するデフォルトのプレビューボタンを表示させるようにしてください:
 
 ```json
 "markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,

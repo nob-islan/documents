@@ -1,10 +1,10 @@
 # Kubebuilder環境サンプル
 
-[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) でKubernetesのカスタムコントローラーを実装するための環境サンプルです:
+[Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)でKubernetesのカスタムコントローラーを実装するための環境サンプルです:
 
 ## 設定
 
-### devcontainer.json
+### `devcontainer.json`
 
 ```json
 {
@@ -38,7 +38,7 @@
 }
 ```
 
-### Dockerfile
+### `Dockerfile`
 
 ```Dockerfile
 FROM mcr.microsoft.com/devcontainers/go:1.24-bullseye
