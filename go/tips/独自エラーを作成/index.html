@@ -5675,7 +5675,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9865,9 +9865,9 @@
 <h1 id="_1">独自エラーを作成</h1>
 <p>独自のエラー構造体を作成し、業務処理でエラーが発生した際にハンドリングしてjsonレスポンスを返す実装のサンプルです。</p>
 <h2 id="_2">実装例</h2>
-<h3 id="internalapperrors">internal/apperrors</h3>
+<h3 id="internalapperrors"><code>internal/apperrors</code></h3>
 <p>apperrorsパッケージに下記要領で独自エラーを作成します:</p>
-<h4 id="basego">base.go</h4>
+<h4 id="basego"><code>base.go</code></h4>
 <p>独自エラーのインターフェースおよびエラーハンドリング向け関数を宣言します。各種独自例外はこのインターフェースを実装する形で作成し、<code>HandleError</code>関数経由でレスポンスを作成します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
@@ -9895,7 +9895,7 @@
 <span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Internal server error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="sample_errorgo">sample_error.go</h4>
+<h4 id="sample_errorgo"><code>sample_error.go</code></h4>
 <p>独自エラーの実装です。<code>ReturnError</code>でレスポンスモデルの作成処理を行っています。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
@@ -9930,9 +9930,9 @@
 <span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="internalusecase">internal/usecase</h3>
+<h3 id="internalusecase"><code>internal/usecase</code></h3>
 <p>usecaseパッケージにて、下記要領でエラーをhandlerに返します:</p>
-<h4 id="users_usecasego">users_usecase.go</h4>
+<h4 id="users_usecasego"><code>users_usecase.go</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -9965,9 +9965,9 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="internalhandler">internal/handler</h3>
+<h3 id="internalhandler"><code>internal/handler</code></h3>
 <p>handlerパッケージにて、下記要領でエラーハンドリングを行います:</p>
-<h4 id="users_handlergo">users_handler.go</h4>
+<h4 id="users_handlergo"><code>users_handler.go</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>

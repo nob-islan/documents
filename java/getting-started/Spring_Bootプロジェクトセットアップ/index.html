@@ -5134,7 +5134,7 @@
   <a href="#servicemodelmeoutmodeljava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        service/model/MeOutModel.java
+        `service/model/MeOutModel.java``
       
     </span>
   </a>
@@ -5156,7 +5156,7 @@
   <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/impl/AuthControllerImpl.java
+        `controller/impl/AuthControllerImpl.java``
       
     </span>
   </a>
@@ -5167,7 +5167,7 @@
   <a href="#controllermodelloginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/model/LoginRequest.java
+        `controller/model/LoginRequest.java``
       
     </span>
   </a>
@@ -5189,7 +5189,7 @@
   <a href="#controllermodelmerequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/model/MeRequest.java
+        `controller/model/MeRequest.java``
       
     </span>
   </a>
@@ -5834,7 +5834,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -10069,7 +10069,7 @@
   <a href="#servicemodelmeoutmodeljava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        service/model/MeOutModel.java
+        `service/model/MeOutModel.java``
       
     </span>
   </a>
@@ -10091,7 +10091,7 @@
   <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/impl/AuthControllerImpl.java
+        `controller/impl/AuthControllerImpl.java``
       
     </span>
   </a>
@@ -10102,7 +10102,7 @@
   <a href="#controllermodelloginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/model/LoginRequest.java
+        `controller/model/LoginRequest.java``
       
     </span>
   </a>
@@ -10124,7 +10124,7 @@
   <a href="#controllermodelmerequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        controller/model/MeRequest.java
+        `controller/model/MeRequest.java``
       
     </span>
   </a>
@@ -10185,7 +10185,7 @@
 <h2 id="_1">プロジェクト作成</h2>
 <p>cf. <a href="https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line">https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line</a></p>
 <ul>
-<li><a href="https://start.spring.io/">Spring initializer</a> を使ってプロジェクトを新規作成します。</li>
+<li><a href="https://start.spring.io/">Spring initializer</a>を使ってプロジェクトを新規作成します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>https://start.spring.io/starter.zip<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="nv">javaVersion</span><span class="o">=</span><span class="m">21</span><span class="w"> </span><span class="se">\</span>
@@ -10206,7 +10206,7 @@
 <p>サンプルコードを掲載します。ここでは擬似的なログインAPIを実装します。</p>
 <h3 id="_3">事前準備</h3>
 <p>データベースをdockerで構築し、Javaプロジェクト側に接続情報を記載します。</p>
-<h4 id="docker-composeyaml">docker-compose.yaml</h4>
+<h4 id="docker-composeyaml"><code>docker-compose.yaml</code></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">eadb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:latest</span>
@@ -10218,7 +10218,7 @@
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
-<h4 id="volumesinitdbdcreate-databasesql">volumes/initdb.d/create-database.sql</h4>
+<h4 id="volumesinitdbdcreate-databasesql"><code>volumes/initdb.d/create-database.sql</code></h4>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
@@ -10238,7 +10238,7 @@
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
 <span class="p">);</span>
 </code></pre></div>
-<h4 id="srcmainresourcesapplicationproperties">src/main/resources/application.properties</h4>
+<h4 id="srcmainresourcesapplicationproperties"><code>src/main/resources/application.properties</code></h4>
 <div class="highlight"><pre><span></span><code><span class="c1"># MariaDBのドライバ設定</span>
 spring.datasource.driver-class-name<span class="o">=</span>org.mariadb.jdbc.Driver
 <span class="c1"># 接続用URL</span>
@@ -10275,7 +10275,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">        </span>└──<span class="w"> </span>MeOutModel.java
 </code></pre></div>
 <h3 id="_5">クラス一覧</h3>
-<h4 id="repositoryusersrepositoryjava">repository/UsersRepository.java</h4>
+<h4 id="repositoryusersrepositoryjava"><code>repository/UsersRepository.java</code></h4>
 <p>データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
@@ -10301,7 +10301,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="n">Users</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="repositoryentityusersjava">repository/entity/Users.java</h4>
+<h4 id="repositoryentityusersjava"><code>repository/entity/Users.java</code></h4>
 <p>データベースのテーブル定義に対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity</span><span class="p">;</span>
 
@@ -10339,7 +10339,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="serviceauthservicejava">service/AuthService.java</h4>
+<h4 id="serviceauthservicejava"><code>service/AuthService.java</code></h4>
 <p>業務処理を担うクラスのインターフェースを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service</span><span class="p">;</span>
 
@@ -10375,7 +10375,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="n">MeOutModel</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="serviceimplauthserviceimpljava">service/impl/AuthServiceImpl.java</h4>
+<h4 id="serviceimplauthserviceimpljava"><code>service/impl/AuthServiceImpl.java</code></h4>
 <p>サービスを実装します。アプリの業務処理はこのクラスで行います。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl</span><span class="p">;</span>
 
@@ -10420,7 +10420,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="servicemodellogininmodeljava">service/model/LoginInModel.java</h4>
+<h4 id="servicemodellogininmodeljava"><code>service/model/LoginInModel.java</code></h4>
 <p>業務処理を担うクラスの入力モデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
@@ -10441,7 +10441,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="servicemodelloginoutmodeljava">service/model/LoginOutModel.java</h4>
+<h4 id="servicemodelloginoutmodeljava"><code>service/model/LoginOutModel.java</code></h4>
 <p>業務処理を担うクラスの出力モデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
@@ -10459,7 +10459,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="servicemodelmeinmodeljava">service/model/MeInModel.java</h4>
+<h4 id="servicemodelmeinmodeljava"><code>service/model/MeInModel.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
@@ -10476,7 +10476,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="servicemodelmeoutmodeljava">service/model/MeOutModel.java</h4>
+<h4 id="servicemodelmeoutmodeljava">`service/model/MeOutModel.java``</h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
@@ -10496,7 +10496,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllerauthcontrollerjava">controller/AuthController.java</h4>
+<h4 id="controllerauthcontrollerjava"><code>controller/AuthController.java</code></h4>
 <p>APIのインターフェースを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
@@ -10539,7 +10539,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllerimplauthcontrollerimpljava">controller/impl/AuthControllerImpl.java</h4>
+<h4 id="controllerimplauthcontrollerimpljava">`controller/impl/AuthControllerImpl.java``</h4>
 <p>コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span><span class="p">;</span>
 
@@ -10586,7 +10586,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllermodelloginrequestjava">controller/model/LoginRequest.java</h4>
+<h4 id="controllermodelloginrequestjava">`controller/model/LoginRequest.java``</h4>
 <p>コントローラーのリクエストモデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
@@ -10607,7 +10607,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllermodelloginresponsejava">controller/model/LoginResponse.java</h4>
+<h4 id="controllermodelloginresponsejava"><code>controller/model/LoginResponse.java</code></h4>
 <p>コントローラーのレスポンスモデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
@@ -10625,7 +10625,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllermodelmerequestjava">controller/model/MeRequest.java</h4>
+<h4 id="controllermodelmerequestjava">`controller/model/MeRequest.java``</h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
@@ -10642,7 +10642,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="controllermodelmeresponsejava">controller/model/MeResponse.java</h4>
+<h4 id="controllermodelmeresponsejava"><code>controller/model/MeResponse.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>

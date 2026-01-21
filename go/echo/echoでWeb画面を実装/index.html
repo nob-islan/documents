@@ -3781,7 +3781,7 @@
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        internal/handler/
+        `internal/handler/``
       
     </span>
   </a>
@@ -5674,7 +5674,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9804,7 +9804,7 @@
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        internal/handler/
+        `internal/handler/``
       
     </span>
   </a>
@@ -9901,9 +9901,9 @@
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v4
 </code></pre></div>
 <h3 id="_5">実装</h3>
-<h4 id="assets">assets/</h4>
+<h4 id="assets"><code>assets/</code></h4>
 <ul>
-<li>templates/index.html</li>
+<li><code>templates/index.html</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- define / endで囲む必要があるので注意 --&gt;</span>
 {{define &quot;login&quot;}}
@@ -9945,7 +9945,7 @@
 {{end}}
 </code></pre></div>
 <ul>
-<li>static/index.js</li>
+<li><code>static/index.js</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">handleOnclickButton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
@@ -9970,7 +9970,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>static/style.css</li>
+<li><code>static/style.css</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">60</span><span class="kt">px</span><span class="w"> </span><span class="mi">30</span><span class="kt">px</span><span class="w"> </span><span class="mi">60</span><span class="kt">px</span><span class="p">;</span>
@@ -10011,9 +10011,9 @@
 <span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandler">internal/handler/</h4>
+<h4 id="internalhandler">`internal/handler/``</h4>
 <ul>
-<li>users_handler.go</li>
+<li><code>users_handler.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -10080,7 +10080,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>router/base.go</li>
+<li><code>router/base.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10122,7 +10122,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>router/users_router.go</li>
+<li><code>router/users_router.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10146,9 +10146,9 @@
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="cmd">cmd/</h4>
+<h4 id="cmd"><code>cmd/</code></h4>
 <ul>
-<li>main.go</li>
+<li><code>main.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
@@ -10164,7 +10164,7 @@
 <h2 id="_6">静的コンテンツをバイナリに含める</h2>
 <p>上記のコードではgo buildで作成したバイナリファイルにhtmlなどのコンテンツは含まれません。これらもバイナリに含める場合は下記のようにコードを修正します:</p>
 <ul>
-<li>assets/assets.goを下記で新規作成</li>
+<li><code>assets/assets.go</code>を下記で新規作成</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">assets</span>
 

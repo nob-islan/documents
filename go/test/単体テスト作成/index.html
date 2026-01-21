@@ -5707,7 +5707,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9961,9 +9961,9 @@
 </tbody>
 </table>
 <h3 id="handler">handlerテスト作成</h3>
-<p>users_handler.goと同じパッケージにテストファイルを作成します。</p>
+<p><code>users_handler.go</code>と同じパッケージにテストファイルを作成します。</p>
 <ul>
-<li>users_handler_test.go</li>
+<li><code>users_handler_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -10109,9 +10109,9 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="usecase">usecaseテスト作成</h3>
-<p>users_usecase.goと同じパッケージにテストファイルを作成します。</p>
+<p><code>users_usecase.go</code>と同じパッケージにテストファイルを作成します。</p>
 <ul>
-<li>users_usecase_test.go</li>
+<li><code>users_usecase_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
@@ -10260,12 +10260,12 @@
 </code></pre></div>
 <h4 id="_6">一時データベース準備</h4>
 <ul>
-<li>テスト向けの一時的なデータベースを用意するため、<strong>sqlite3</strong> をインストールします。</li>
+<li>テスト向けの一時的なデータベースを用意するため、<a href="https://sqlite.org/">sqlite3</a>をインストールします。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/mattn/go-sqlite3
 </code></pre></div>
 <ul>
-<li>db.go</li>
+<li><code>db.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">test</span>
 
@@ -10308,7 +10308,7 @@
 </code></pre></div>
 <h4 id="_7">テストデータ準備</h4>
 <ul>
-<li>schema.sql</li>
+<li><code>schema.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 一部SQLite特有の記法が必要なため注意see; https://www.sqlite.org/docs.html</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
@@ -10318,7 +10318,7 @@
 <span class="p">);</span>
 </code></pre></div>
 <ul>
-<li>data.sql</li>
+<li><code>data.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span>
@@ -10332,7 +10332,7 @@
 </code></pre></div>
 <h4 id="_8">テストケース作成</h4>
 <ul>
-<li>users_repository_test.go</li>
+<li><code>users_repository_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 

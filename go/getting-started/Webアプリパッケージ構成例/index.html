@@ -5734,7 +5734,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -10002,35 +10002,35 @@
 └──<span class="w"> </span>scripts<span class="w">             </span><span class="c1"># 開発支援ツール</span>
 </code></pre></div>
 <h2 id="_1">パッケージ解説</h2>
-<h3 id="api">api</h3>
+<h3 id="api"><code>api</code></h3>
 <p>swaggerなどのAPIドキュメント、およびそれを生成する関数を格納するパッケージです。</p>
-<h3 id="assets">assets</h3>
+<h3 id="assets"><code>assets</code></h3>
 <p>静的コンテンツを格納するパッケージです。本パッケージの直下に<code>assets.go</code>を設け、<code>go:embed</code>を使ってこれらの静的ファイルを呼び出します。</p>
-<h3 id="cmd">cmd</h3>
+<h3 id="cmd"><code>cmd</code></h3>
 <p>アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に<code>main.go</code>のみが格納されます。</p>
-<h3 id="internalapperrors">internal/apperrors</h3>
+<h3 id="internalapperrors"><code>internal/apperrors</code></h3>
 <p>アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。</p>
-<h3 id="internaldomain">internal/domain</h3>
+<h3 id="internaldomain"><code>internal/domain</code></h3>
 <p>業務処理の中心となるドメイン構造体およびそれを取得するrepositoryインターフェースを格納するパッケージです。</p>
 <p>値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。</p>
-<p>repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体をinternal/infrastructure/entityパッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。</p>
-<h3 id="internalhandler">internal/handler</h3>
+<p>repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体を<code>internal/infrastructure/entity</code>パッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。</p>
+<h3 id="internalhandler"><code>internal/handler</code></h3>
 <p>リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。</p>
-<h3 id="internalhandlermodel">internal/handler/model</h3>
+<h3 id="internalhandlermodel"><code>internal/handler/model</code></h3>
 <p>APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。</p>
-<h3 id="internalhandlerrouter">internal/handler/router</h3>
+<h3 id="internalhandlerrouter"><code>internal/handler/router</code></h3>
 <p>httpリクエストのルーティングを行う関数を格納するパッケージです。</p>
-<h3 id="internalinfrastructure">internal/infrastructure</h3>
+<h3 id="internalinfrastructure"><code>internal/infrastructure</code></h3>
 <p>データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。</p>
-<h3 id="internalinfrastructurerepository">internal/infrastructure/repository</h3>
+<h3 id="internalinfrastructurerepository"><code>internal/infrastructure/repository</code></h3>
 <p>データベースにアクセスしてSQLを実行する関数を格納するパッケージです。</p>
-<h3 id="internallogging">internal/logging</h3>
+<h3 id="internallogging"><code>internal/logging</code></h3>
 <p>ログレベル別の文言出力など、ログ出力を制御するパッケージです。</p>
-<h3 id="internalusecase">internal/usecase</h3>
+<h3 id="internalusecase"><code>internal/usecase</code></h3>
 <p>業務処理を行う関数を格納するパッケージです。関数内に直接処理を実装するか、domain内の処理を呼び出す形で業務を実施します。</p>
-<h3 id="internalusecasepayload">internal/usecase/payload</h3>
+<h3 id="internalusecasepayload"><code>internal/usecase/payload</code></h3>
 <p>業務処理の入力・出力モデルとなる構造体を格納するパッケージです。</p>
-<h3 id="scripts">scripts</h3>
+<h3 id="scripts"><code>scripts</code></h3>
 <p>テストカバレッジの作成やAPIドキュメントの自動生成などの開発支援ツールを格納するパッケージです。</p>
 
 

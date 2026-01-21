@@ -5768,7 +5768,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -10064,7 +10064,7 @@
 <p>サンプルコードを掲載します。ここでは擬似的なログインAPIを実装します。</p>
 <h3 id="_3">事前準備</h3>
 <p>データベースをdockerで構築します。</p>
-<h4 id="docker-composeyaml">docker-compose.yaml</h4>
+<h4 id="docker-composeyaml"><code>docker-compose.yaml</code></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">eadb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:latest</span>
@@ -10076,7 +10076,7 @@
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
-<h4 id="volumesinitdbdcreate-databasesql">volumes/initdb.d/create-database.sql</h4>
+<h4 id="volumesinitdbdcreate-databasesql"><code>volumes/initdb.d/create-database.sql</code></h4>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
@@ -10120,10 +10120,10 @@
 <span class="w">            </span>└──<span class="w"> </span>users_payload.go<span class="w">      </span><span class="c1"># 業務処理の入力・出力モデル構造体</span>
 </code></pre></div>
 <h3 id="_5">パッケージ一覧</h3>
-<h4 id="internaldomain">internal/domain/</h4>
+<h4 id="internaldomain"><code>internal/domain/</code></h4>
 <p>業務処理の中心となるドメインおよびそれをデータベースから取得するrepositoryのインターフェースを定義します。</p>
 <ul>
-<li>users.go</li>
+<li><code>users.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">domain</span>
 
@@ -10157,10 +10157,10 @@
 <span class="w">    </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">targetName</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalinfrastructure">internal/infrastructure/</h4>
+<h4 id="internalinfrastructure"><code>internal/infrastructure/</code></h4>
 <p>データベースへの接続設定を記載します。</p>
 <ul>
-<li>db.go</li>
+<li><code>db.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">infrastructure</span>
 
@@ -10198,10 +10198,10 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">db</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalinfrastructurerepository">internal/infrastructure/repository/</h4>
+<h4 id="internalinfrastructurerepository"><code>internal/infrastructure/repository/</code></h4>
 <p>データベースを操作するrepositoryを実装します。</p>
 <ul>
-<li>users_repository.go</li>
+<li><code>users_repository.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 
@@ -10233,10 +10233,10 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUsers</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalusecase">internal/usecase/</h4>
+<h4 id="internalusecase"><code>internal/usecase/</code></h4>
 <p>usecaseを定義・実装します。アプリの業務はここで処理されます。</p>
 <ul>
-<li>users_usecase.go</li>
+<li><code>users_usecase.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
@@ -10282,10 +10282,10 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalusecasepayload">internal/usecase/payload/</h4>
+<h4 id="internalusecasepayload"><code>internal/usecase/payload/</code></h4>
 <p>usecase向けの関数の入力・出力モデル構造体を定義します。</p>
 <ul>
-<li>users_payload.go</li>
+<li><code>users_payload.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">payload</span>
 
@@ -10351,10 +10351,10 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">age</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandler">internal/handler/</h4>
+<h4 id="internalhandler"><code>internal/handler/</code></h4>
 <p>handlerを定義・実装します。usecaseを呼び出し、レスポンスを作成します。</p>
 <ul>
-<li>users_handler.go</li>
+<li><code>users_handler.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -10418,10 +10418,10 @@
 <span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandlermodel">internal/handler/model/</h4>
+<h4 id="internalhandlermodel"><code>internal/handler/model/</code></h4>
 <p>handler向けの関数の入力・出力モデル構造体を定義します。</p>
 <ul>
-<li>users_model.go</li>
+<li><code>users_model.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">model</span>
 
@@ -10474,10 +10474,10 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeRes</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandlerrouter">internal/handler/router/</h4>
+<h4 id="internalhandlerrouter"><code>internal/handler/router/</code></h4>
 <p>リクエストのルーティングを実装します。</p>
 <ul>
-<li>base.go</li>
+<li><code>base.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10512,7 +10512,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>users_router.go</li>
+<li><code>users_router.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10556,10 +10556,10 @@
 <span class="w">    </span><span class="p">})</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="cmd">cmd/</h4>
+<h4 id="cmd"><code>cmd/</code></h4>
 <p>アプリケーションのエントリポイントです。</p>
 <ul>
-<li>main.go</li>
+<li><code>main.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 

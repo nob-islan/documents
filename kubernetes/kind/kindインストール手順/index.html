@@ -5512,7 +5512,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9802,31 +9802,31 @@
 </ul>
 <h3 id="kind_1">kindのインストール</h3>
 <p>kindのダウンロード</p>
-<div class="highlight"><pre><span></span><code>curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
 </code></pre></div>
 <p>【M1 Mac対応】kindのダウンロード</p>
-<div class="highlight"><pre><span></span><code>curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
 </code></pre></div>
 <p>kindバイナリを実行可能にする</p>
-<div class="highlight"><pre><span></span><code>chmod +x ./kind
+<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>./kind
 </code></pre></div>
 <p>kindバイナリをPATHに通す</p>
-<div class="highlight"><pre><span></span><code>sudo mv ./kind /usr/local/bin/kind
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>mv<span class="w"> </span>./kind<span class="w"> </span>/usr/local/bin/kind
 </code></pre></div>
 <p>インストールされていることを確認</p>
-<div class="highlight"><pre><span></span><code>kind version
+<div class="highlight"><pre><span></span><code>kind<span class="w"> </span>version
 </code></pre></div>
 <h2 id="_4">使い方</h2>
-<div class="highlight"><pre><span></span><code># クラスタ構築
-kind create cluster
+<div class="highlight"><pre><span></span><code><span class="c1"># クラスタ構築</span>
+kind<span class="w"> </span>create<span class="w"> </span>cluster
 </code></pre></div>
 <p>コントロールプレーンオンリーのクラスタが立ち上がります。</p>
-<div class="highlight"><pre><span></span><code># クラスタ削除
-kind delete cluster
+<div class="highlight"><pre><span></span><code><span class="c1"># クラスタ削除</span>
+kind<span class="w"> </span>delete<span class="w"> </span>cluster
 </code></pre></div>
 <p>クラスタが消えます。</p>
-<div class="highlight"><pre><span></span><code># マルチノードクラスタ構築
-kind create cluster --config first-kind.yaml
+<div class="highlight"><pre><span></span><code><span class="c1"># マルチノードクラスタ構築</span>
+kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--config<span class="w"> </span>first-kind.yaml
 </code></pre></div>
 <h2 id="yaml">クラスタ設定yamlサンプル</h2>
 <ul>

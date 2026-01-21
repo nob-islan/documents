@@ -5713,7 +5713,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9944,7 +9944,7 @@
 <h2 id="_2">事前準備</h2>
 <p>下記設定を追記します:</p>
 <ul>
-<li>test/resources/application-test.properties</li>
+<li>`test/resources/application-test.properties``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
 <span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span>
@@ -9956,7 +9956,7 @@
 <span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span>
 </code></pre></div>
 <ul>
-<li>pom.xml</li>
+<li>`pom.xml``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/com.h2database/h2 --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
@@ -9966,7 +9966,7 @@
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
-<li>XxxApplicationTests.java</li>
+<li>`XxxApplicationTests.java``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// test配下の自動生成済みテストクラスに下記を追記</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
@@ -10188,7 +10188,7 @@
 <h4 id="_5">テストデータ準備</h4>
 <p><code>test/resources/repository/users</code>配下にテストデータ投入向けのSQLを用意します:</p>
 <ul>
-<li>schema.sql</li>
+<li>`schema.sql``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
@@ -10197,7 +10197,7 @@
 <span class="p">);</span>
 </code></pre></div>
 <ul>
-<li>data.sql</li>
+<li>`data.sql``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span>
@@ -10269,7 +10269,7 @@
 <h3 id="_9">設定</h3>
 <p>下記設定を追記します:</p>
 <ul>
-<li>pom.xml</li>
+<li><code>pom.xml</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
 <span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>

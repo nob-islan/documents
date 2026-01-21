@@ -5602,7 +5602,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9719,7 +9719,7 @@
 <h1 id="_1">ログ出力制御</h1>
 <p>Go標準の<code>log</code>パッケージにはログレベル別の文言出力機能がないため、ログ出力制御を行うパッケージを作成します。</p>
 <h2 id="_2">実装例</h2>
-<h3 id="internallogging">internal/logging</h3>
+<h3 id="internallogging"><code>internal/logging</code></h3>
 <p>ログレベルごとに関数を定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">logging</span>
 
@@ -9737,7 +9737,7 @@
 <span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;ERROR: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="internalusecase">internal/usecase</h3>
+<h3 id="internalusecase"><code>internal/usecase</code></h3>
 <p>上記関数を呼び出してログ出力します。</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">sampleUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Greeting</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 

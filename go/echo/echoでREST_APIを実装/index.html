@@ -3761,10 +3761,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cmd" class="md-nav__link">
+  <a href="#cmdf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        cmd/
+        cmd/f
       
     </span>
   </a>
@@ -5674,7 +5674,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9812,10 +9812,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cmd" class="md-nav__link">
+  <a href="#cmdf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        cmd/
+        cmd/f
       
     </span>
   </a>
@@ -9866,17 +9866,17 @@
 <p>echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装します。usecase配下はフレームワークに依存しないので省略します。</p>
 <h3 id="_2">ディレクトリ構成</h3>
 <div class="highlight"><pre><span></span><code>.
-├── cmd
-│   └── main.go
-└── internal
-    └── handler
-        ├── users_handler.go
-        ├── users_handler_test.go
-        ├── model
-        │   └── users_model.go
-        └── router
-            ├── users_router.go
-            └── base.go
+├──<span class="w"> </span>cmd
+│<span class="w">   </span>└──<span class="w"> </span>main.go
+└──<span class="w"> </span>internal
+<span class="w">    </span>└──<span class="w"> </span>handler
+<span class="w">        </span>├──<span class="w"> </span>users_handler.go
+<span class="w">        </span>├──<span class="w"> </span>users_handler_test.go
+<span class="w">        </span>├──<span class="w"> </span>model
+<span class="w">        </span>│<span class="w">   </span>└──<span class="w"> </span>users_model.go
+<span class="w">        </span>└──<span class="w"> </span>router
+<span class="w">            </span>├──<span class="w"> </span>users_router.go
+<span class="w">            </span>└──<span class="w"> </span>base.go
 </code></pre></div>
 <h3 id="_3">プロジェクト作成</h3>
 <ul>
@@ -9890,9 +9890,9 @@
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v4
 </code></pre></div>
 <h3 id="_4">実装</h3>
-<h4 id="internalhandler">internal/handler/</h4>
+<h4 id="internalhandler"><code>internal/handler/</code></h4>
 <ul>
-<li>users_handler.go</li>
+<li><code>users_handler.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -9963,9 +9963,9 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">out</span><span class="p">.</span><span class="nx">Age</span><span class="p">()))</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandlermodel">internal/handler/model/</h4>
+<h4 id="internalhandlermodel"><code>internal/handler/model/</code></h4>
 <ul>
-<li>users_model.go</li>
+<li><code>users_model.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">model</span>
 
@@ -10019,9 +10019,9 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeRes</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="nx">age</span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandlerrouter">internal/handler/router/</h4>
+<h4 id="internalhandlerrouter"><code>internal/handler/router/</code></h4>
 <ul>
-<li>base.go</li>
+<li><code>base.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10045,7 +10045,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>users_router.go</li>
+<li><code>users_router.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
@@ -10070,9 +10070,9 @@
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Me</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="cmd">cmd/</h4>
+<h4 id="cmdf"><code>cmd/</code>f</h4>
 <ul>
-<li>main.go</li>
+<li><code>main.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
@@ -10085,7 +10085,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="api">APIドキュメントについて</h3>
-<p>APIドキュメントの記法については <a href="https://github.com/swaggo/echo-swagger">echo-swagger</a> を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。</p>
+<p>APIドキュメントの記法については <a href="https://github.com/swaggo/echo-swagger">echo-swagger</a>を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。</p>
 
 
 

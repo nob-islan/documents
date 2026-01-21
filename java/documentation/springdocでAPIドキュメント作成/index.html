@@ -5746,7 +5746,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -10008,7 +10008,7 @@
 <p>API設計書の作成方法について説明します。springdoc-openapiによってswaggerを自動生成するようにしています。</p>
 <p>cf. <a href="https://springdoc.org/">https://springdoc.org/</a></p>
 <h2 id="_1">実装</h2>
-<h3 id="pomxml">pom.xml</h3>
+<h3 id="pomxml"><code>pom.xml</code></h3>
 <p>下記の依存関係を追加します:</p>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
@@ -10017,7 +10017,7 @@
 <span class="w">            </span><span class="nt">&lt;version&gt;</span>2.8.13<span class="nt">&lt;/version&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<h3 id="applicationproperties">application.properties</h3>
+<h3 id="applicationproperties"><code>application.properties</code></h3>
 <p>下記設定を追記します:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># swagger出力用ymlファイルのエンドポイント</span>
 <span class="na">springdoc.api-docs.path</span><span class="o">=</span><span class="s">/api-docs</span>
@@ -10026,7 +10026,7 @@
 <span class="c1"># application-swagger.ymlを読み込ませる</span>
 <span class="na">spring.profiles.active</span><span class="o">=</span><span class="s">swagger</span>
 </code></pre></div>
-<h3 id="easyappapplicationjava">EasyappApplication.java</h3>
+<h3 id="easyappapplicationjava"><code>EasyappApplication.java</code></h3>
 <p>下記アノテーションを追記し、APIの概要を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp;
 
@@ -10045,7 +10045,7 @@
 <span class="w"> </span>     }
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="authcontrollerjava">AuthController.java</h3>
+<h3 id="authcontrollerjava"><code>AuthController.java</code></h3>
 <p>下記アノテーションを追記し、各APIのインターフェース仕様を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller;
 
@@ -10108,9 +10108,9 @@
 <span class="gi">+     MeResponse me(@ParameterObject MeRequest request);</span>
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="model">model</h3>
+<h3 id="model"><code>model</code></h3>
 <p>各モデルクラスのスキーマ定義を記載します:</p>
-<h4 id="loginrequestjava">LoginRequest.java</h4>
+<h4 id="loginrequestjava"><code>LoginRequest.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
 <span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
@@ -10134,7 +10134,7 @@
 <span class="w"> </span>     private String password;
 <span class="w"> </span> }
 </code></pre></div>
-<h4 id="loginresponsejava">LoginResponse.java</h4>
+<h4 id="loginresponsejava"><code>LoginResponse.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
 <span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
@@ -10154,7 +10154,7 @@
 <span class="w"> </span>     private boolean valid;
 <span class="w"> </span> }
 </code></pre></div>
-<h4 id="merequestjava">MeRequest.java</h4>
+<h4 id="merequestjava"><code>MeRequest.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
 <span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
@@ -10174,7 +10174,7 @@
 <span class="w"> </span>     private String name;
 <span class="w"> </span> }
 </code></pre></div>
-<h4 id="meresponsejava">MeResponse.java</h4>
+<h4 id="meresponsejava"><code>MeResponse.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.controller.model;
 
 <span class="gi">+ import io.swagger.v3.oas.annotations.media.Schema;</span>
@@ -10198,7 +10198,7 @@
 <span class="w"> </span>     private Integer age;
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="sampleexceptionhandlerjava">SampleExceptionHandler.java</h3>
+<h3 id="sampleexceptionhandlerjava"><code>SampleExceptionHandler.java</code></h3>
 <p>例外発生時レスポンスモデルのスキーマ定義を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package nob.example.easyapp.handler;
 
@@ -10245,7 +10245,7 @@
 <span class="w"> </span>     }
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="resourcesapplication-swaggeryaml">resources/application-swagger.yaml</h3>
+<h3 id="resourcesapplication-swaggeryaml"><code>resources/application-swagger.yaml</code></h3>
 <p>APIのdescriptionについて記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">########################</span>
 <span class="c1">### Easy App documents</span>
@@ -10263,7 +10263,7 @@
 <p>アプリ起動後、<a href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a> でswaggerドキュメントを確認できます。</p>
 <h2 id="tips">Tips</h2>
 <h3 id="try-it-out">Try it outボタンを無効化したい場合</h3>
-<p>application.propertiesに下記を追加すればボタンが非表示になります:</p>
+<p><code>application.properties</code>に下記を追加すればボタンが非表示になります:</p>
 <div class="highlight"><pre><span></span><code><span class="na">springdoc.swagger-ui.supported-submit-methods</span><span class="o">=</span><span class="s">[]</span>
 </code></pre></div>
 

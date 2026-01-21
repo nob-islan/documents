@@ -5657,7 +5657,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9839,7 +9839,7 @@
 go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>github.com/swaggo/http-swagger
 </code></pre></div>
 <h2 id="_2">実装</h2>
-<h3 id="cmdmaingo">cmd/main.go</h3>
+<h3 id="cmdmaingo"><code>cmd/main.go</code></h3>
 <p>アプリケーションの概要およびメタ情報を追記します。</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package main
 
@@ -9861,7 +9861,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     log.Fatal(http.ListenAndServe(&quot;:8080&quot;, router.Routing()))
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="routerbasego">router/base.go</h3>
+<h3 id="routerbasego"><code>router/base.go</code></h3>
 <p>swaggerページへのルーティングを設定します。</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package router
 
@@ -9902,7 +9902,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     return m
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="handlerusers_handlergo">handler/users_handler.go</h3>
+<h3 id="handlerusers_handlergo"><code>handler/users_handler.go</code></h3>
 <p>各APIのインターフェース仕様を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package handler
 
@@ -9978,7 +9978,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     json.NewEncoder(w).Encode(res)
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="modelusers_modelgo">model/users_model.go</h3>
+<h3 id="modelusers_modelgo"><code>model/users_model.go</code></h3>
 <p>各モデルクラスのexample記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package model
 
@@ -10037,7 +10037,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     return MeRes{Name: name, Age: age}
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="apperrorssample_errorgo">apperrors/sample_error.go</h3>
+<h3 id="apperrorssample_errorgo"><code>apperrors/sample_error.go</code></h3>
 <p>例外発生時レスポンスモデルのexampleを記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package apperrors
 

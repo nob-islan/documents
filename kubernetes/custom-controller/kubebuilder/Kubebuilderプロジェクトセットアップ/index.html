@@ -5512,7 +5512,7 @@
   <span class="md-ellipsis">
     
   
-    aspectjでロギング処理を設定
+    Aspectjでロギング処理を設定
   
 
     
@@ -9897,7 +9897,7 @@
 
 
 <h1 id="kubebuilder">Kubebuilderプロジェクトセットアップ</h1>
-<p><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a> を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
+<p><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a>を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
 <h2 id="_1">プロジェクト作成</h2>
 <ul>
 <li>プロジェクトを初期化します。</li>
@@ -9913,7 +9913,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 </code></pre></div>
 <h2 id="_2">実装</h2>
 <p>Deploymentリソースを管理する<code>Nob</code>のコントローラーを実装します。</p>
-<h3 id="apiv1nob_typesgo">api/v1/nob_types.go</h3>
+<h3 id="apiv1nob_typesgo"><code>api/v1/nob_types.go</code></h3>
 <p>カスタムリソースのSpecおよびStatusを定義します。変更後は<code>make</code>コマンドを実行して関連するファイルの再生成をしてください。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// NobSpec defines the desired state of Nob</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">NobSpec</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -9943,7 +9943,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">    </span><span class="nx">AvailableReplicas</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="s">`json:&quot;availableReplicas&quot;`</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="internalcontrollernob_controllergo">internal/controller/nob_controller.go</h3>
+<h3 id="internalcontrollernob_controllergo"><code>internal/controller/nob_controller.go</code></h3>
 <p>Reconcileを行うコントローラー本体を実装します。</p>
 <ul>
 <li>Reconcilerの構造体を定義します。</li>
@@ -9966,7 +9966,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="c1">// +kubebuilder:rbac:groups=&quot;&quot;,resources=events,verbs=create;patch</span>
 </code></pre></div>
 <ul>
-<li>SetUpWithManagerを定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。</li>
+<li><code>SetUpWithManager</code>を定義します。カスタムリソースが他のどのリソースを監視するかが設定されます。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// SetupWithManager sets up the controller with the Manager.</span>
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
@@ -9978,7 +9978,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>クリーンアップ関数を定義します。Nobリソースへの変更が入るなどして古くなったDeploymentを検知して削除します。</li>
+<li>クリーンアップ関数を定義します。<code>Nob</code>リソースへの変更が入るなどして古くなったDeploymentを検知して削除します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// Nob resourceによって作成され、かつnob.spec配下と名前が一致しないDeploymentを削除します。</span>
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">NobReconciler</span><span class="p">)</span><span class="w"> </span><span class="nx">cleanupOwnedResources</span><span class="p">(</span>
@@ -10146,7 +10146,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="cmdmaingo">cmd/main.go</h3>
+<h3 id="cmdmaingo"><code>cmd/main.go</code></h3>
 <p>Reconcilerのメンバを追加します。</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="nx">controller</span><span class="p">.</span><span class="nx">NobReconciler</span><span class="p">{</span><span class="w"> </span><span class="c1">// nob_controller.goの定義に合わせて追記</span>
 <span class="w">        </span><span class="nx">Client</span><span class="p">:</span><span class="w">   </span><span class="nx">mgr</span><span class="p">.</span><span class="nx">GetClient</span><span class="p">(),</span>
@@ -10161,9 +10161,9 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <h2 id="_3">単体テスト</h2>
 <p>単体テストを作成および実行します。</p>
 <h3 id="_4">テストケース記載</h3>
-<h4 id="internalcontrollernob_controller_testgo">internal/controller/nob_controller_test.go</h4>
+<h4 id="internalcontrollernob_controller_testgo"><code>internal/controller/nob_controller_test.go</code></h4>
 <ul>
-<li>BeforeEachにNobSpecで定めたパラメータを定義します。</li>
+<li><code>BeforeEach</code>に<code>NobSpec</code>で定めたパラメータを定義します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nx">BeforeEach</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">By</span><span class="p">(</span><span class="s">&quot;creating the custom resource for the Kind Nob&quot;</span><span class="p">)</span>
@@ -10184,7 +10184,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <span class="w">        </span><span class="p">})</span>
 </code></pre></div>
 <ul>
-<li>AfterEachにReconcilerの定義および、Expectの内容を記載します。</li>
+<li><code>AfterEach</code>にReconcilerの定義および期待値の内容を記載します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nx">AfterEach</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// TODO(user): Cleanup logic after each test, like removing the resource instance.</span>
@@ -10236,7 +10236,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 </code></pre></div>
 <h2 id="_6">ローカルアプリケーション起動</h2>
 <ul>
-<li>kind/cluster/kubebuilder-cluster.yamlを下記内容で作成します。</li>
+<li><code>kind/cluster/kubebuilder-cluster.yaml</code>を下記内容で作成します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
 <span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
@@ -10256,7 +10256,7 @@ kubebuilder<span class="w"> </span>create<span class="w"> </span>api<span class=
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>install
 </code></pre></div>
 <ul>
-<li>config/samples配下のカスタムリソースのspecを宣言します。</li>
+<li><code>config/samples</code>配下のカスタムリソースのspecを宣言します。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nobcontroller.example.nob/v1</span>
 <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nob</span>
