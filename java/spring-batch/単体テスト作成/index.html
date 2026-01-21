@@ -9760,7 +9760,7 @@
 <h2 id="_1">事前準備</h2>
 <p>下記設定を追加します:</p>
 <ul>
-<li>`test/resources/application-test.properties``</li>
+<li><code>test/resources/application-test.properties</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
 spring.jpa.hibernate.ddl-auto<span class="o">=</span>none
@@ -9774,7 +9774,7 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 </code></pre></div>
 <ul>
-<li>`pom.xml``</li>
+<li><code>pom.xml</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/com.h2database/h2 --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
@@ -9784,7 +9784,7 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
-<li>`XxxApplicationTests.java``</li>
+<li><code>XxxApplicationTests.java</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// test配下の自動生成済みテストクラスに下記を追記</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
@@ -9793,7 +9793,7 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <h3 id="_3">テストデータ作成</h3>
 <p><code>test/resources/sql/customerregist</code>配下にテストデータ投入向けのSQLを用意します:</p>
 <ul>
-<li>`schema.sql``</li>
+<li><code>schema.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">last_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
@@ -9887,7 +9887,7 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <span class="p">);</span>
 </code></pre></div>
 <ul>
-<li>`data.sql``</li>
+<li><code>data.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">sign_up</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">last_name</span>
