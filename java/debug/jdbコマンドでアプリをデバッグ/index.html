@@ -23,7 +23,7 @@
     
     
       
-        <title>jdbコマンドでアプリをデバッグ - Nob docs</title>
+        <title>Jdbコマンドでアプリをデバッグ - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jdb" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              jdbコマンドでアプリをデバッグ
+              Jdbコマンドでアプリをデバッグ
             
           </span>
         </div>
@@ -4710,8 +4710,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -4720,7 +4718,7 @@
   <span class="md-ellipsis">
     
   
-    jdbコマンドでアプリをデバッグ
+    Jdbコマンドでアプリをデバッグ
   
 
     
@@ -4738,7 +4736,7 @@
   <span class="md-ellipsis">
     
   
-    jdbコマンドでアプリをデバッグ
+    Jdbコマンドでアプリをデバッグ
   
 
     
@@ -4753,8 +4751,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -4804,10 +4800,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
+  <a href="#docker-composeyaml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        docker-compose
+        docker-compose.yaml
       
     </span>
   </a>
@@ -4820,7 +4816,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#jdb_1" class="md-nav__link">
+  <a href="#jdb" class="md-nav__link">
     <span class="md-ellipsis">
       
         jdbコマンド使い方
@@ -9740,8 +9736,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -9790,10 +9784,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
+  <a href="#docker-composeyaml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        docker-compose
+        docker-compose.yaml
       
     </span>
   </a>
@@ -9806,7 +9800,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#jdb_1" class="md-nav__link">
+  <a href="#jdb" class="md-nav__link">
     <span class="md-ellipsis">
       
         jdbコマンド使い方
@@ -9894,13 +9888,15 @@
 
 
 
-<h1 id="jdb">jdbコマンドでアプリをデバッグ</h1>
+  <h1>Jdbコマンドでアプリをデバッグ</h1>
+
+<p>`# jdbコマンドでアプリをデバッグ</p>
 <p>cf. <a href="https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html">https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html</a></p>
 <h2 id="_1">事前準備</h2>
 <p>簡単なアプリを作成してコンテナで動かします。</p>
 <h3 id="_2">アプリ実装</h3>
 <p>デバッグに直接関係のあるクラスのみ記載します。</p>
-<h4 id="sampleserviceimpljava">SampleServiceImpl.java</h4>
+<h4 id="sampleserviceimpljava"><code>SampleServiceImpl.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
@@ -9941,23 +9937,28 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="docker-compose">docker-compose</h3>
+<h3 id="docker-composeyaml"><code>docker-compose.yaml</code></h3>
 <ul>
 <li>ローカルでビルドしたjarファイルをコンテナから見えるようにしています。</li>
 <li>portsおよびentrypointでデバッグポートを空け、デバッグモードに入れるようにしています。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nl">services</span><span class="p">:</span>
-<span class="w">  </span><span class="n">easyapp</span><span class="p">:</span>
-<span class="w">    </span><span class="n">container_name</span><span class="p">:</span><span class="w"> </span><span class="n">easyapp</span>
-<span class="w">    </span><span class="n">image</span><span class="p">:</span><span class="w"> </span><span class="n">eclipse</span><span class="o">-</span><span class="n">temurin</span><span class="p">:</span><span class="mi">21</span>
-<span class="w">    </span><span class="n">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="mi">8080</span><span class="p">:</span><span class="mi">8080</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="mi">8484</span><span class="p">:</span><span class="mi">8484</span>
-<span class="w">    </span><span class="n">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">easyapp</span><span class="o">/</span><span class="n">target</span><span class="o">/</span><span class="n">easyapp</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="p">.</span><span class="na">jar</span><span class="p">:</span><span class="o">/</span><span class="n">easyapp</span><span class="o">-</span><span class="mf">0.0.1</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="p">.</span><span class="na">jar</span>
-<span class="w">    </span><span class="n">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="s">&quot;sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484 -jar /easyapp-0.0.1-SNAPSHOT.jar&quot;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">easyapp</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyapp</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eclipse-temurin:21</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8080:8080</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8484:8484</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./easyapp/target/easyapp-0.0.1-SNAPSHOT.jar:/easyapp-0.0.1-SNAPSHOT.jar</span>
+<span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">[</span>
+<span class="w">        </span><span class="s">&quot;sh&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">        </span><span class="s">&quot;java</span><span class="nv"> </span><span class="s">-Xdebug</span><span class="nv"> </span><span class="s">-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484</span><span class="nv"> </span><span class="s">-jar</span><span class="nv"> </span><span class="s">/easyapp-0.0.1-SNAPSHOT.jar&quot;</span><span class="p p-Indicator">,</span>
+<span class="w">      </span><span class="p p-Indicator">]</span>
 </code></pre></div>
-<h2 id="jdb_1">jdbコマンド使い方</h2>
+<h2 id="jdb">jdbコマンド使い方</h2>
 <h3 id="_3">開始</h3>
 <p>デバッグポートを指定して対話モードに入ります:</p>
 <div class="highlight"><pre><span></span><code>jdb<span class="w"> </span>-attach<span class="w"> </span><span class="m">8484</span>

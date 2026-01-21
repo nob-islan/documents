@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#vscodejava" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -4682,8 +4682,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -4725,8 +4723,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -4780,7 +4776,7 @@
   <span class="md-ellipsis">
     
   
-    jdbコマンドでアプリをデバッグ
+    Jdbコマンドでアプリをデバッグ
   
 
     
@@ -9634,8 +9630,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -9682,11 +9676,13 @@
 
 
 
-<h1 id="vscodejava">VSCodeでコンテナのJavaアプリをデバッグ</h1>
+  <h1>VSCodeでコンテナのJavaアプリをデバッグ</h1>
+
+<p>`# VSCodeでコンテナのJavaアプリをデバッグ</p>
 <p>コンテナで起動しているJavaアプリケーションをVSCode上でデバッグする手順です。</p>
 <h2 id="_1">設定</h2>
 <ul>
-<li>Dockerfile</li>
+<li>`Dockerfile``</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">eclipse-temurin:21</span>
 
@@ -9696,7 +9692,7 @@
 </code></pre></div>
 <p>上記<code>CMD</code>によって、8484ポートでデバッグを待ち受けます。</p>
 <ul>
-<li>docker-compose.yaml</li>
+<li><code>docker-compose.yaml</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.7&quot;</span>
 <span class="nt">services</span><span class="p">:</span>
@@ -9709,7 +9705,7 @@
 </code></pre></div>
 <p>ホスト側の8484ポートとコンテナ側の8484ポートをフォワーディングします。</p>
 <ul>
-<li>launch.json</li>
+<li><code>launch.json</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>

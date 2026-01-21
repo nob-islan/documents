@@ -4668,7 +4668,7 @@
   <a href="#pomxml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pom.xml
+        `pom.xml``
       
     </span>
   </a>
@@ -4679,7 +4679,7 @@
   <a href="#applicationproperties" class="md-nav__link">
     <span class="md-ellipsis">
       
-        application.properties
+        `application.properties``
       
     </span>
   </a>
@@ -4690,7 +4690,7 @@
   <a href="#mybatis-configxml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        mybatis-config.xml
+        `mybatis-config.xml``
       
     </span>
   </a>
@@ -4869,7 +4869,7 @@
   <span class="md-ellipsis">
     
   
-    jdbコマンドでアプリをデバッグ
+    Jdbコマンドでアプリをデバッグ
   
 
     
@@ -9748,7 +9748,7 @@
   <a href="#pomxml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        pom.xml
+        `pom.xml``
       
     </span>
   </a>
@@ -9759,7 +9759,7 @@
   <a href="#applicationproperties" class="md-nav__link">
     <span class="md-ellipsis">
       
-        application.properties
+        `application.properties``
       
     </span>
   </a>
@@ -9770,7 +9770,7 @@
   <a href="#mybatis-configxml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        mybatis-config.xml
+        `mybatis-config.xml``
       
     </span>
   </a>
@@ -9863,7 +9863,7 @@
 <h1 id="mybatisdb">MyBatisを使ってDBに接続</h1>
 <p>MyBatisを使ってJavaアプリからDBに接続する方法、および実装サンプルを記載します。</p>
 <h2 id="_1">設定ファイル</h2>
-<h3 id="pomxml">pom.xml</h3>
+<h3 id="pomxml">`pom.xml``</h3>
 <p>各種依存関係です。アプリ起動時にエラーが起きる場合はバージョンが古い可能性があります。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
 <span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mariadb.jdbc<span class="nt">&lt;/groupId&gt;</span>
@@ -9892,7 +9892,7 @@
 <span class="w">    </span><span class="nt">&lt;version&gt;</span>3.2.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<h3 id="applicationproperties">application.properties</h3>
+<h3 id="applicationproperties">`application.properties``</h3>
 <p>DBへの接続情報です。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">#MariaDBのドライバ設定</span>
 <span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.mariadb.jdbc.Driver</span>
@@ -9903,7 +9903,7 @@
 <span class="c1">#パスワード</span>
 <span class="na">spring.datasource.password</span><span class="o">=</span>
 </code></pre></div>
-<h3 id="mybatis-configxml">mybatis-config.xml</h3>
+<h3 id="mybatis-configxml">`mybatis-config.xml``</h3>
 <p><code>projectname/src/main/resources</code>配下に下記で作成します。</p>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="cp">&lt;!DOCTYPE configuration PUBLIC</span>
@@ -9916,7 +9916,7 @@
 <span class="w">    </span><span class="nt">&lt;/settings&gt;</span>
 <span class="nt">&lt;/configuration&gt;</span>
 </code></pre></div>
-<h3 id="projectnameapplicationjava">ProjectNameApplication.java</h3>
+<h3 id="projectnameapplicationjava"><code>ProjectNameApplication.java</code></h3>
 <p>アプリ起動時にMyBatisの設定を読み込みます。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.projectname</span><span class="p">;</span>
 
