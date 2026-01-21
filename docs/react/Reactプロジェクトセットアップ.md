@@ -69,7 +69,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 各クラスに必要な修正、または新規作成方法について記載します。
 
-#### `.prettierrc``
+#### `.prettierrc`
 
 Prettierによるフォーマットに関する設定を定義します。
 
@@ -82,7 +82,7 @@ Prettierによるフォーマットに関する設定を定義します。
 }
 ```
 
-#### `.eslintrc.json``
+#### `.eslintrc.json`
 
 ESLintによるフォーマットに関する設定を定義します。
 
@@ -151,7 +151,7 @@ root.render(
 );
 ```
 
-#### `features/counter/Counter.tsx``
+#### `features/counter/Counter.tsx`
 
 画面コンテンツおよびactionの呼び出しを定義します。
 
@@ -262,7 +262,7 @@ function App() {
 export default App;
 ```
 
-#### `index.module.scss``
+#### `index.module.scss`
 
 Webページ全体の装飾を定義します。
 
