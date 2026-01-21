@@ -69,7 +69,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 各クラスに必要な修正、または新規作成方法について記載します。
 
-#### .prettierrc
+#### `.prettierrc``
 
 Prettierによるフォーマットに関する設定を定義します。
 
@@ -82,7 +82,7 @@ Prettierによるフォーマットに関する設定を定義します。
 }
 ```
 
-#### .eslintrc.json
+#### `.eslintrc.json``
 
 ESLintによるフォーマットに関する設定を定義します。
 
@@ -96,7 +96,7 @@ ESLintによるフォーマットに関する設定を定義します。
 }
 ```
 
-#### app/store.ts
+#### `app/store.ts`
 
 各種reducerを取りまとめたstoreを作成します。
 
@@ -115,7 +115,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-#### app/hooks.ts
+#### `app/hooks.ts`
 
 storeを操作する関数を定義します。
 
@@ -128,7 +128,7 @@ export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 ```
 
-#### index.tsx
+#### `index.tsx`
 
 `Provider`コンポーネントで`App`コンポーネントをラップします。
 
@@ -151,7 +151,7 @@ root.render(
 );
 ```
 
-#### features/counter/Counter.tsx
+#### `features/counter/Counter.tsx``
 
 画面コンテンツおよびactionの呼び出しを定義します。
 
@@ -190,7 +190,7 @@ export function Counter({ title }: CounterProps) {
 }
 ```
 
-#### features/counter/counterSlice.ts
+#### `features/counter/counterSlice.ts`
 
 画面の状態を管理するためのreducerおよびactionを定義します。
 
@@ -237,7 +237,7 @@ export const selectCount = (state: RootState) => state.counter.value;
 export default counterSlice.reducer;
 ```
 
-#### App.tsx
+#### `App.tsx`
 
 ルーティングを設定します。
 
@@ -262,7 +262,7 @@ function App() {
 export default App;
 ```
 
-#### index.module.scss
+#### `index.module.scss``
 
 Webページ全体の装飾を定義します。
 
@@ -273,7 +273,7 @@ body {
 }
 ```
 
-#### app.module.scss
+#### `app.module.scss`
 
 App配下の装飾を定義します。
 
