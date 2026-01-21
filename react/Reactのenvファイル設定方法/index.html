@@ -8930,7 +8930,7 @@
   <a href="#envxxx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .env.XXX
+        `.env.XXX``
       
     </span>
   </a>
@@ -9736,7 +9736,7 @@
   <a href="#envxxx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .env.XXX
+        `.env.XXX``
       
     </span>
   </a>
@@ -9801,19 +9801,19 @@
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>dotenv-cli
 </code></pre></div>
 <h3 id="_3">設定ファイル</h3>
-<h4 id="envxxx">.env.XXX</h4>
+<h4 id="envxxx">`.env.XXX``</h4>
 <p>ルートディレクトリに、各環境ごとの設定ファイルを用意します:</p>
 <ul>
-<li>.env.dev</li>
+<li>`.env.dev``</li>
 </ul>
 <div class="highlight"><pre><span></span><code>REACT_APP_TEST=&quot;dev&quot;
 </code></pre></div>
 <ul>
-<li>.env.stg</li>
+<li>`.env.stg``</li>
 </ul>
 <div class="highlight"><pre><span></span><code>REACT_APP_TEST=&quot;stg&quot;
 </code></pre></div>
-<h4 id="packagejson">package.json</h4>
+<h4 id="packagejson"><code>package.json</code></h4>
 <p>起動する際のコマンドを記載します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;start-dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dotenv -e .env.dev react-scripts start&quot;</span><span class="p">,</span>
