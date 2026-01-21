@@ -9795,7 +9795,7 @@
 
 
 <h1 id="gorm">gormでデータベースに接続</h1>
-<p>ORMライブラリ <a href="https://gorm.io/docs/">gorm</a> を使ってデータベースを操作します。</p>
+<p>ORMライブラリ<a href="https://gorm.io/docs/">gorm</a>を使ってデータベースを操作します。</p>
 <h2 id="_1">事前準備</h2>
 <p>データベースはMySQLを使うこととします。ライブラリをインストールします:</p>
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>gorm.io/gorm
@@ -9805,7 +9805,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <p>CRUD操作の実装例を記載します。</p>
 <h3 id="_3">データベース構築</h3>
 <p>下記docker-composeで構築されたデータベースを操作します:</p>
-<h4 id="docker-composeyaml">docker-compose.yaml</h4>
+<h4 id="docker-composeyaml"><code>docker-compose.yaml</code></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">eadb</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:latest</span>
@@ -9817,7 +9817,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
-<h4 id="initdbdcreate-databasesql">initdb.d/create-database.sql</h4>
+<h4 id="initdbdcreate-databasesql"><code>initdb.d/create-database.sql</code></h4>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
