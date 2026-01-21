@@ -1,12 +1,10 @@
 `# aspectjでロギング処理を設定
 
-**aspectj** を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
-
-cf. https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html
+[aspectj](https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html)を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
 
 ## 実装
 
-### pom.xml
+### `pom.xml`
 
 下記設定を依存関係を追加します:
 

@@ -1,4 +1,4 @@
-# jdbコマンドでアプリをデバッグ
+`# jdbコマンドでアプリをデバッグ
 
 cf. https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html
 
@@ -10,7 +10,7 @@ cf. https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html
 
 デバッグに直接関係のあるクラスのみ記載します。
 
-#### SampleServiceImpl.java
+#### `SampleServiceImpl.java`
 
 ```java
 package nob.example.easyapp.service.impl;
@@ -54,12 +54,12 @@ public class SampleServiceImpl implements SampleService {
 }
 ```
 
-### docker-compose
+### `docker-compose.yaml`
 
 - ローカルでビルドしたjarファイルをコンテナから見えるようにしています。
 - portsおよびentrypointでデバッグポートを空け、デバッグモードに入れるようにしています。
 
-```java
+```yaml
 services:
   easyapp:
     container_name: easyapp
@@ -69,7 +69,12 @@ services:
       - 8484:8484
     volumes:
       - ./easyapp/target/easyapp-0.0.1-SNAPSHOT.jar:/easyapp-0.0.1-SNAPSHOT.jar
-    entrypoint: ["sh", "-c", "java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484 -jar /easyapp-0.0.1-SNAPSHOT.jar"]
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        "java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484 -jar /easyapp-0.0.1-SNAPSHOT.jar",
+      ]
 ```
 
 ## jdbコマンド使い方

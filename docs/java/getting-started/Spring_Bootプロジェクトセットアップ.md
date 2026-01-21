@@ -345,7 +345,7 @@ public class MeInModel {
 }
 ```
 
-#### `service/model/MeOutModel.java``
+#### `service/model/MeOutModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -415,7 +415,7 @@ public interface AuthController {
 }
 ```
 
-#### `controller/impl/AuthControllerImpl.java``
+#### `controller/impl/AuthControllerImpl.java`
 
 コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。
 
@@ -466,7 +466,7 @@ public class AuthControllerImpl implements AuthController {
 }
 ```
 
-#### `controller/model/LoginRequest.java``
+#### `controller/model/LoginRequest.java`
 
 コントローラーのリクエストモデルを定義します。
 
@@ -513,7 +513,7 @@ public class LoginResponse {
 }
 ```
 
-#### `controller/model/MeRequest.java``
+#### `controller/model/MeRequest.java`
 
 ```java
 package nob.example.easyapp.controller.model;

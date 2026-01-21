@@ -1,8 +1,6 @@
 # MyBatis Dynamic SQL使い方
 
-**MyBatis Dynamic SQL**を使って動的にSQLを発行します。
-
-cf. https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html
+[MyBatis Dynamic SQL](https://mybatis.org/mybatis-dynamic-sql/docs/introduction.html)を使って動的にSQLを発行します。
 
 ## 前提
 
