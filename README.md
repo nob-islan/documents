@@ -4,13 +4,13 @@
 
 ## 成果物
 
-本プロジェクトは [Cloudflare](https://www.cloudflare.com/) と連携しています。成果物は下記で公開されています:
+本プロジェクトは[Cloudflare](https://www.cloudflare.com/)と連携しています。成果物は下記で公開されています:
 
 https://nobislandocuments.pages.dev/
 
 ## 開発方法
 
-開発環境は [.devcontainer](.devcontainer/devcontainer.json) にて提供しています。markdown 形式で作成されたドキュメントについて [MkDocs](https://www.mkdocs.org/) にてレンダリングします。
+開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown 形式で作成されたドキュメントについて[MkDocs](https://www.mkdocs.org/)にてレンダリングします。
 
 ### ドキュメント追加
 

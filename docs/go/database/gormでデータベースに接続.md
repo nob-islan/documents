@@ -1,6 +1,6 @@
 # gormでデータベースに接続
 
-ORMライブラリ [gorm](https://gorm.io/docs/) を使ってデータベースを操作します。
+ORMライブラリ[gorm](https://gorm.io/docs/)を使ってデータベースを操作します。
 
 ## 事前準備
 
@@ -19,7 +19,7 @@ CRUD操作の実装例を記載します。
 
 下記docker-composeで構築されたデータベースを操作します:
 
-#### docker-compose.yaml
+#### `docker-compose.yaml`
 
 ```yaml
 services:
@@ -34,7 +34,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 ```
 
-#### initdb.d/create-database.sql
+#### `initdb.d/create-database.sql`
 
 ```sql
 CREATE DATABASE eadb;

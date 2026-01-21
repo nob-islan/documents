@@ -6,7 +6,7 @@ cf. https://docs.rustfs.com/features/encryption/#object-encryption
 
 ## Vault設定
 
-KMSとして [Hashicorp Vault](https://developer.hashicorp.com/vault) を利用します。
+KMSとして[Hashicorp Vault](https://developer.hashicorp.com/vault)を利用します。
 
 cf.
 
@@ -60,12 +60,12 @@ vault write transit/keys/rustfs-master type=aes256-gcm96
 
 | 項目                   | 設定値               |
 | ---------------------- | -------------------- |
-| Vaultサーバー         | VaultサーバのIP    |
-| Vaultトークン         | 上で作成したトークン |
-| Transitマウントパス   | `transit`            |
-| KVマウントパス        | `secret`             |
+| Vaultサーバー          | VaultサーバのIP      |
+| Vaultトークン          | 上で作成したトークン |
+| Transitマウントパス    | `transit`            |
+| KVマウントパス         | `secret`             |
 | キーパスプレフィックス | `rustfs/kms/keys`    |
-| デフォルトキーID      | `rustfs-master`      |
+| デフォルトキーID       | `rustfs-master`      |
 
 - KMS設定後、キーを作成できます。キー作成後、下記コマンドで確認できます:
 

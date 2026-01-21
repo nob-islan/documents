@@ -1,6 +1,6 @@
 # Keycloak初期セットアップ
 
-[Keycloak](https://www.keycloak.org/) の初期セットアップを行います。
+[Keycloak](https://www.keycloak.org/)の初期セットアップを行います。
 
 ## 事前準備
 

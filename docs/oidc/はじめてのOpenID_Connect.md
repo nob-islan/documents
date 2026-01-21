@@ -1,6 +1,6 @@
 # はじめてのOpenID Connect
 
-認証・認可プロトコルの [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) についてその業務処理を解説します。
+認証・認可プロトコルの[OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html)についてその業務処理を解説します。
 
 ## 登場人物
 

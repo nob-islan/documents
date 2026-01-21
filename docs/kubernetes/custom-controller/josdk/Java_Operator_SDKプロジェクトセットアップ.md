@@ -1,6 +1,6 @@
 # Java Operator SDKプロジェクトセットアップ
 
-[Java Operator SDK](https://javaoperatorsdk.io/) で実装するカスタムコントローラーのプロジェクトのセットアップ方法について記載します。
+[Java Operator SDK](https://javaoperatorsdk.io/)で実装するカスタムコントローラーのプロジェクトのセットアップ方法について記載します。
 
 ## クラスタ作成
 

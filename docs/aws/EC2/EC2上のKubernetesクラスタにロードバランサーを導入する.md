@@ -1,6 +1,6 @@
 # EC2上のKubernetesクラスタにロードバランサーを導入する
 
-EC2上にkubeadmで構築したKubernetesクラスタ上でLoadBalancerタイプのServiceを動かすために [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/) を導入する手順です。
+EC2上にkubeadmで構築したKubernetesクラスタ上でLoadBalancerタイプのServiceを動かすために[AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/)を導入する手順です。
 
 cf.
 
@@ -12,7 +12,7 @@ cf.
 
 - 2つ以上のパブリックサブネットを持つVPC
 - EC2上にkubeadmで構築したKubernetesクラスタ
-- [kubectl](https://kubernetes.io/ja/docs/tasks/tools/install-kubectl-linux/), [aws](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html), [helm](https://helm.sh/ja/docs/intro/install/) がインストールされた端末
+- [kubectl](https://kubernetes.io/ja/docs/tasks/tools/install-kubectl-linux/), [aws](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html), [helm](https://helm.sh/ja/docs/intro/install/)がインストールされた端末
 
 ## 手順
 

@@ -4,7 +4,7 @@ Let's Encriptを使います。
 
 ## ドメイン取得
 
-Let's Encriptで証明書を作成するにはドメインが必要です（IPアドレスのみだと不可）。[Dynamic DO!.jp](https://ddo.jp/contact.php) などから無料でドメインを発行できます。また、ドメイン発行に必要なアドレスは[メルアドぽいぽい](https://m.kuku.lu/ja.php)で無料発行できます。
+Let's Encriptで証明書を作成するにはドメインが必要です（IPアドレスのみだと不可）。[Dynamic DO!.jp](https://ddo.jp/contact.php)などから無料でドメインを発行できます。また、ドメイン発行に必要なアドレスは[メルアドぽいぽい](https://m.kuku.lu/ja.php)で無料発行できます。
 
 ## 証明書作成
 

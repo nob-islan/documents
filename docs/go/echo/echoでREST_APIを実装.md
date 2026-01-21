@@ -244,4 +244,4 @@ func main() {
 
 ### APIドキュメントについて
 
-APIドキュメントの記法については [echo-swagger](https://github.com/swaggo/echo-swagger)を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。
+APIドキュメントの記法については[echo-swagger](https://github.com/swaggo/echo-swagger)を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。

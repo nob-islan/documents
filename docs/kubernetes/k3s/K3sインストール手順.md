@@ -1,6 +1,6 @@
 # K3sインストール手順
 
-シングルノードで縮小版Kubernetesを構築できる [K3s](https://docs.k3s.io/) の構築手順について記載します。
+シングルノードで縮小版Kubernetesを構築できる[K3s](https://docs.k3s.io/)の構築手順について記載します。
 
 ## 手順
 

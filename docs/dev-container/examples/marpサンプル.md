@@ -1,6 +1,6 @@
 # Marp環境サンプル
 
-VSCode上でmarkdown形式でスライドを作成できる [Marp](https://marp.app/) の環境サンプルです。
+VSCode上でmarkdown形式でスライドを作成できる[Marp](https://marp.app/)の環境サンプルです。
 
 ## 設定
 

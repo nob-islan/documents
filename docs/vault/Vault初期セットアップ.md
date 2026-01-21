@@ -1,6 +1,6 @@
 # Vault初期セットアップ
 
-[HashiCorp Vault](https://developer.hashicorp.com/vault) の初期セットアップをします。
+[HashiCorp Vault](https://developer.hashicorp.com/vault)の初期セットアップをします。
 
 ## 手順
 
