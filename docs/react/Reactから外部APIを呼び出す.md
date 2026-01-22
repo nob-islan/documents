@@ -77,7 +77,7 @@ interface MessageApiResponse {
   date: string;
 }
 
-export async function fetchMessageApi(): Promise<MessageApiResponse> {
+export const fetchMessageApi = async (): Promise<MessageApiResponse> => {
   const url = new URL("/api/v1/me", window.location.origin);
 
   url.search = new URLSearchParams({
@@ -95,7 +95,7 @@ export async function fetchMessageApi(): Promise<MessageApiResponse> {
     message: data.message,
     date: data.date,
   };
-}
+};
 ```
 
 ### `features/message/messageThunks.ts`
@@ -144,7 +144,7 @@ stateの値を使って画面のレンダリングを行います。
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchMessage } from "./messageThunks";
 
-export function Message() {
+export const Message = () => {
   const message = useAppSelector((state) => state.message);
   const dispatch = useAppDispatch();
 
@@ -156,5 +156,5 @@ export function Message() {
       </button>
     </div>
   );
-}
+};
 ```

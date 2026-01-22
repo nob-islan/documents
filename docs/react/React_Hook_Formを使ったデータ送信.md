@@ -36,9 +36,9 @@ interface LoginApiResponse {
   valid: boolean;
 }
 
-export async function loginApi(
+export const loginApi = async (
   req: LoginApiRequest,
-): Promise<LoginApiResponse> {
+): Promise<LoginApiResponse> => {
   const url = new URL("/api/v1/login", window.location.origin);
 
   const res = await fetch(url.toString(), {
@@ -52,7 +52,7 @@ export async function loginApi(
   const data = await res.json();
 
   return { valid: data.valid };
-}
+};
 ```
 
 ### `features/auth/authThunks.ts`
@@ -94,7 +94,7 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../app/hooks";
 import { login, LoginForm } from "./authThunks";
 
-export function Auth() {
+export const Auth = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
   const dispatch = useAppDispatch();
 
@@ -113,5 +113,5 @@ export function Auth() {
       </form>
     </div>
   );
-}
+};
 ```

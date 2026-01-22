@@ -163,7 +163,7 @@ interface CounterProps {
   title: string;
 }
 
-export function Counter({ title }: CounterProps) {
+export const Counter = ({ title }: CounterProps) => {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
 
@@ -187,7 +187,7 @@ export function Counter({ title }: CounterProps) {
       </div>
     </div>
   );
-}
+};
 ```
 
 #### `features/counter/counterSlice.ts`
@@ -247,7 +247,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import style from "./app.module.scss";
 import { Counter } from "./features/counter/Counter";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <div className={style.body}>
@@ -257,7 +257,7 @@ function App() {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
 ```
