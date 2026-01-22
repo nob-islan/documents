@@ -75,7 +75,7 @@ func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
 
 func (h *usersHandler) Login(c echo.Context) error {
 
-	// jsonパース エラー発生時はStatus400を返す
+	// jsonパースエラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
 	if err != nil {
 		return c.JSON(
