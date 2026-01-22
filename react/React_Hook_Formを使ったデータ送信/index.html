@@ -23,7 +23,7 @@
     
     
       
-        <title>React Hook Formを使ったデータ送信方法 - Nob docs</title>
+        <title>React Hook Formを使ったデータ送信 - Nob docs</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              React Hook Formを使ったデータ送信方法
+              React Hook Formを使ったデータ送信
             
           </span>
         </div>
@@ -8792,7 +8792,7 @@
   <span class="md-ellipsis">
     
   
-    React Hook Formを使ったデータ送信方法
+    React Hook Formを使ったデータ送信
   
 
     
@@ -8810,7 +8810,7 @@
   <span class="md-ellipsis">
     
   
-    React Hook Formを使ったデータ送信方法
+    React Hook Formを使ったデータ送信
   
 
     
@@ -8850,6 +8850,17 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         実装
       
     </span>
@@ -8859,10 +8870,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appstorets" class="md-nav__link">
+  <a href="#featuresauthauthapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        app/store.ts
+        features/auth/authApi.ts
       
     </span>
   </a>
@@ -8870,10 +8881,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresloginlogintsx" class="md-nav__link">
+  <a href="#featuresauthauththunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/login/Login.tsx
+        features/auth/authThunks.ts
       
     </span>
   </a>
@@ -8881,21 +8892,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresloginloginactionts" class="md-nav__link">
+  <a href="#featuresauthauthtsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/login/loginAction.ts
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#featuresloginloginapits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        features/login/loginApi.ts
+        features/auth/Auth.tsx
       
     </span>
   </a>
@@ -9706,6 +9706,17 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
+        ディレクトリ構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         実装
       
     </span>
@@ -9715,10 +9726,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appstorets" class="md-nav__link">
+  <a href="#featuresauthauthapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        app/store.ts
+        features/auth/authApi.ts
       
     </span>
   </a>
@@ -9726,10 +9737,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresloginlogintsx" class="md-nav__link">
+  <a href="#featuresauthauththunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/login/Login.tsx
+        features/auth/authThunks.ts
       
     </span>
   </a>
@@ -9737,21 +9748,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresloginloginactionts" class="md-nav__link">
+  <a href="#featuresauthauthtsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/login/loginAction.ts
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#featuresloginloginapits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        features/login/loginApi.ts
+        features/auth/Auth.tsx
       
     </span>
   </a>
@@ -9780,125 +9780,102 @@
 
 
 
-<h1 id="react-hook-form">React Hook Formを使ったデータ送信方法</h1>
-<p>React Hook Formを使って、画面上に入力した値をAPIに送信する方法を記載します。サンプルとして、簡単なログイン画面を実装します。</p>
+<h1 id="react-hook-form">React Hook Formを使ったデータ送信</h1>
+<p><a href="https://react-hook-form.com/">React Hook Form</a>を使って、画面上に入力した値をAPIに送信する方法を記載します。サンプルとして、簡単なログイン画面を実装します。</p>
 <h2 id="_1">ライブラリのインストール</h2>
-<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>react-hook-form<span class="w"> </span>redux-thunk<span class="w"> </span>axios
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>react-hook-form
 </code></pre></div>
-<h2 id="_2">実装</h2>
-<h3 id="appstorets">app/store.ts</h3>
-<p>ミドルウェア利用向けにstore.tsを下記で作成します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">applyMiddleware</span><span class="p">,</span><span class="w"> </span><span class="nx">legacy_createStore</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">createStore</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rootReducer</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./rootReducer&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">thunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;redux-thunk&quot;</span><span class="p">;</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createStore</span><span class="p">(</span>
-<span class="w">  </span><span class="nx">rootReducer</span><span class="p">,</span>
-<span class="w">  </span><span class="kc">undefined</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">applyMiddleware</span><span class="p">(</span><span class="nx">thunk</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ReturnType</span><span class="o">&lt;</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">getState</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">;</span>
+<h2 id="_2">ディレクトリ構成</h2>
+<div class="highlight"><pre><span></span><code>.
+└──<span class="w"> </span>src
+<span class="w">    </span>└──<span class="w"> </span>features
+<span class="w">        </span>└──<span class="w"> </span>auth
+<span class="w">            </span>├──<span class="w"> </span>authApi.ts
+<span class="w">            </span>├──<span class="w"> </span>authThunks.ts
+<span class="w">            </span>└──<span class="w"> </span>Auth.tsx
 </code></pre></div>
-<h3 id="featuresloginlogintsx">features/login/Login.tsx</h3>
-<p><code>LoginFormData</code>を定義し、入力された認証向けのデータをセットします。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-hook-form&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">AppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/store&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./loginAction&quot;</span><span class="p">;</span>
-
-<span class="kd">interface</span><span class="w"> </span><span class="nx">Props</span><span class="w"> </span><span class="p">{}</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * 認証フォームの構造体です。</span>
-<span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">LoginFormData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<h2 id="_3">実装</h2>
+<h3 id="featuresauthauthapits"><code>features/auth/authApi.ts</code></h3>
+<p>APIの仕様に合わせたモデル<code>LoginApiRequest</code>および<code>LoginApiResponse</code>を使ってAPIを呼び出します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">LoginApiRequest</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="p">};</span>
+<span class="p">}</span>
 
-<span class="cm">/**</span>
-<span class="cm"> * ログイン画面のコンポーネントです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @param props</span>
-<span class="cm"> * @returns</span>
-<span class="cm"> */</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">Login</span><span class="o">:</span><span class="w"> </span><span class="kt">React.FC</span><span class="p">&lt;</span><span class="nt">Props</span><span class="p">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">register</span><span class="p">,</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useForm</span><span class="p">&lt;</span><span class="nt">LoginFormData</span><span class="p">&gt;();</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">&lt;</span><span class="nt">AppDispatch</span><span class="p">&gt;();</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">LoginApiResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">valid</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   *送信ボタン押下時の動作を定義します。</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param data認証向けデータ</span>
-<span class="cm">   */</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">onSubmit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginFormData</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">login</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
-<span class="w">  </span><span class="p">};</span>
+<span class="k">export</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loginApi</span><span class="p">(</span>
+<span class="w">  </span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginApiRequest</span><span class="p">,</span>
+<span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">LoginApiResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;/api/v1/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="kt">JSON.stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">),</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">valid</span><span class="o">:</span><span class="w"> </span><span class="kt">data.valid</span><span class="w"> </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="featuresauthauththunksts"><code>features/auth/authThunks.ts</code></h3>
+<p>画面仕様に合わせた型<code>LoginForm</code>から<code>LoginApiRequest</code>にデータを詰め替えてAPI呼び出し関数を実行します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">loginApi</span><span class="p">,</span><span class="w"> </span><span class="nx">LoginApiRequest</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authApi&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span><span class="ow">void</span><span class="p">,</span><span class="w"> </span><span class="nx">LoginForm</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">  </span><span class="s2">&quot;auth/login&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">form</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginApiRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">form.name</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">form.password</span><span class="w"> </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">loginApi</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;ログイン成功&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ログイン失敗&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;不明なエラーが発生しました。&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">);</span>
+</code></pre></div>
+<h3 id="featuresauthauthtsx"><code>features/auth/Auth.tsx</code></h3>
+<p>入力された認証向けのデータを<code>LoginForm</code>にセットします。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-hook-form&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="p">,</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">Auth</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">register</span><span class="p">,</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useForm</span><span class="p">&lt;</span><span class="nt">LoginForm</span><span class="p">&gt;();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">(</span><span class="nx">onSubmit</span><span class="p">)}&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">((</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">login</span><span class="p">(</span><span class="nx">form</span><span class="p">)))}&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="p">{</span><span class="na">...register</span><span class="err">(&quot;</span><span class="na">name</span><span class="err">&quot;)</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="p">{</span><span class="na">...register</span><span class="err">(&quot;</span><span class="na">name</span><span class="err">&quot;)</span><span class="p">}</span><span class="w"> </span><span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;user&quot;</span><span class="w"> </span><span class="p">/&gt;</span>
 <span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="p">{</span><span class="na">...register</span><span class="err">(&quot;</span><span class="na">password</span><span class="err">&quot;)</span><span class="p">}</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="p">/&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span><span class="w"> </span><span class="p">{</span><span class="na">...register</span><span class="err">(&quot;</span><span class="na">password</span><span class="err">&quot;)</span><span class="p">}</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;pass&quot;</span><span class="w"> </span><span class="p">/&gt;</span>
 <span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">          </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span><span class="nx">送信</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">          </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span><span class="nx">ログイン</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 <span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">  </span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Login</span><span class="p">;</span>
-</code></pre></div>
-<h3 id="featuresloginloginactionts">features/login/loginAction.ts</h3>
-<p>後述のAPI呼び出し関数をコールします。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginFormData</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Login&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">callApi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./loginApi&quot;</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * APIを呼び出して、取得したメッセージをstateに保持します。</span>
-<span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginFormData</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">callApi</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;API呼び出しに失敗しました。&quot;</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div>
-<h3 id="featuresloginloginapits">features/login/loginApi.ts</h3>
-<p>ログインAPIを呼び出します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;axios&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginFormData</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./Login&quot;</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * APIコールをして認証処理を行います。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @returnsメッセージ</span>
-<span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">callApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginFormData</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">data.name</span><span class="p">,</span>
-<span class="w">      </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">data.password</span><span class="p">,</span>
-<span class="w">    </span><span class="p">};</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/api/v1/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">error</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s2">&quot;API request failed&quot;</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">};</span>
+<span class="p">}</span>
 </code></pre></div>
 
 
