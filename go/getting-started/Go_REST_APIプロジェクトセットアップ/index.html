@@ -3950,10 +3950,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internalusecasepayload" class="md-nav__link">
+  <a href="#internalusecaseparams" class="md-nav__link">
     <span class="md-ellipsis">
       
-        internal/usecase/payload/
+        internal/usecase/params/
       
     </span>
   </a>
@@ -9956,10 +9956,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internalusecasepayload" class="md-nav__link">
+  <a href="#internalusecaseparams" class="md-nav__link">
     <span class="md-ellipsis">
       
-        internal/usecase/payload/
+        internal/usecase/params/
       
     </span>
   </a>
@@ -10116,8 +10116,8 @@
 <span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>users_repository.go<span class="w">   </span><span class="c1"># データベース操作の実装</span>
 <span class="w">    </span>└──<span class="w"> </span>usecase
 <span class="w">        </span>├──<span class="w"> </span>users_usecase.go<span class="w">          </span><span class="c1"># 業務処理のインターフェースおよび実装</span>
-<span class="w">        </span>└──<span class="w"> </span>payload
-<span class="w">            </span>└──<span class="w"> </span>users_payload.go<span class="w">      </span><span class="c1"># 業務処理の入力・出力モデル構造体</span>
+<span class="w">        </span>└──<span class="w"> </span>params
+<span class="w">            </span>└──<span class="w"> </span>users_params.go<span class="w">       </span><span class="c1"># 業務処理の入力・出力モデル構造体</span>
 </code></pre></div>
 <h3 id="_5">パッケージ一覧</h3>
 <h4 id="internaldomain"><code>internal/domain/</code></h4>
@@ -10242,7 +10242,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;errors&quot;</span>
 <span class="p">)</span>
 
@@ -10250,10 +10250,10 @@
 <span class="kd">type</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span>
 
 <span class="w">    </span><span class="c1">// ユーザ情報を取得します。</span>
-<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -10264,30 +10264,30 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersUsecase</span><span class="p">{</span><span class="nx">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">usersRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">())</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Age</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalusecasepayload"><code>internal/usecase/payload/</code></h4>
+<h4 id="internalusecaseparams"><code>internal/usecase/params/</code></h4>
 <p>usecase向けの関数の入力・出力モデル構造体を定義します。</p>
 <ul>
-<li><code>users_payload.go</code></li>
+<li><code>users_params.go</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">payload</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">params</span>
 
 <span class="c1">// 認証向けの入力モデルです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">LoginIn</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -10361,7 +10361,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/handler/model&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
@@ -10388,7 +10388,7 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 
 <span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Valid</span><span class="p">())</span>
 <span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
@@ -10400,7 +10400,7 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Me</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
 <span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">)</span>

@@ -9938,14 +9938,14 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/apperrors&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 認証の業務処理インターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UsersUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -9956,13 +9956,13 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersUsecase</span><span class="p">{</span><span class="nx">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">usersRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="internalhandler"><code>internal/handler</code></h3>
@@ -9974,7 +9974,7 @@
 <span class="w">    </span><span class="s">&quot;easyapp/internal/apperrors&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/handler/model&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/payload&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
@@ -9998,7 +9998,7 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">usersUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// EasyappErrorが返ってきたらハンドリング</span>
 <span class="w">        </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">HandleError</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>

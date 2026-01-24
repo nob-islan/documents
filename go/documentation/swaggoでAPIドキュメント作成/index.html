@@ -9910,7 +9910,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     &quot;easyapp/internal/apperrors&quot;
 <span class="w"> </span>     &quot;easyapp/internal/handler/model&quot;
 <span class="w"> </span>     &quot;easyapp/internal/usecase&quot;
-<span class="w"> </span>     &quot;easyapp/internal/usecase/payload&quot;
+<span class="w"> </span>     &quot;easyapp/internal/usecase/params&quot;
 <span class="w"> </span>     &quot;encoding/json&quot;
 <span class="w"> </span>     &quot;net/http&quot;
 <span class="w"> </span> )
@@ -9946,7 +9946,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="w"> </span>     req := model.NewLoginReq(r)
 
-<span class="w"> </span>     out, err := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+<span class="w"> </span>     out, err := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 <span class="w"> </span>     if err != nil {
 <span class="w"> </span>         apperrors.HandleError(w, err)
 <span class="w"> </span>         return
@@ -9970,7 +9970,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="w"> </span>     req := model.NewMeReq(r)
 
-<span class="w"> </span>     out := h.usersUsecase.Me(payload.NewMeIn(req.Name))
+<span class="w"> </span>     out := h.usersUsecase.Me(params.NewMeIn(req.Name))
 
 <span class="w"> </span>     res := model.NewMeRes(out.Name(), out.Age())
 <span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
