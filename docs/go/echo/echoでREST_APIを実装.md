@@ -49,7 +49,7 @@ package handler
 import (
 	"easyapp/internal/handler/model"
 	"easyapp/internal/usecase"
-	"easyapp/internal/usecase/payload"
+	"easyapp/internal/usecase/params"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -88,7 +88,7 @@ func (h *usersHandler) Login(c echo.Context) error {
 	}
 
 	// usecase呼び出し
-	out := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	out := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
@@ -99,7 +99,7 @@ func (h *usersHandler) Me(c echo.Context) error {
 	req := model.NewMeReq(c)
 
 	// usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.usersUsecase.Me(payload.NewMeIn(req.Name))
+	out, err := h.usersUsecase.Me(params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusInternalServerError,

@@ -100,7 +100,7 @@ swaggerページへのルーティングを設定します。
 	  "easyapp/internal/apperrors"
 	  "easyapp/internal/handler/model"
 	  "easyapp/internal/usecase"
-	  "easyapp/internal/usecase/payload"
+	  "easyapp/internal/usecase/params"
 	  "encoding/json"
 	  "net/http"
   )
@@ -136,7 +136,7 @@ swaggerページへのルーティングを設定します。
 
 	  req := model.NewLoginReq(r)
 
-	  out, err := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	  out, err := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 	  if err != nil {
 		  apperrors.HandleError(w, err)
 		  return
@@ -160,7 +160,7 @@ swaggerページへのルーティングを設定します。
 
 	  req := model.NewMeReq(r)
 
-	  out := h.usersUsecase.Me(payload.NewMeIn(req.Name))
+	  out := h.usersUsecase.Me(params.NewMeIn(req.Name))
 
 	  res := model.NewMeRes(out.Name(), out.Age())
 	  w.Header().Set("Content-Type", "application/json")

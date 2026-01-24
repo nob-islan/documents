@@ -82,8 +82,8 @@ INSERT INTO users (
     │       └── users_repository.go   # データベース操作の実装
     └── usecase
         ├── users_usecase.go          # 業務処理のインターフェースおよび実装
-        └── payload
-            └── users_payload.go      # 業務処理の入力・出力モデル構造体
+        └── params
+            └── users_params.go       # 業務処理の入力・出力モデル構造体
 ```
 
 ### パッケージ一覧
@@ -221,7 +221,7 @@ package usecase
 
 import (
 	"easyapp/internal/domain"
-	"easyapp/internal/usecase/payload"
+	"easyapp/internal/usecase/params"
 	"errors"
 )
 
@@ -229,10 +229,10 @@ import (
 type UsersUsecase interface {
 
 	// 認証処理を行います。
-	Login(in payload.LoginIn) payload.LoginOut
+	Login(in params.LoginIn) params.LoginOut
 
 	// ユーザ情報を取得します。
-	Me(in payload.MeIn) (payload.MeOut, error)
+	Me(in params.MeIn) (params.MeOut, error)
 }
 
 type usersUsecase struct {
@@ -243,33 +243,33 @@ func NewUsersUsecase(usersRepository domain.UsersRepository) UsersUsecase {
 	return &usersUsecase{usersRepository: usersRepository}
 }
 
-func (u *usersUsecase) Login(in payload.LoginIn) payload.LoginOut {
+func (u *usersUsecase) Login(in params.LoginIn) params.LoginOut {
 
 	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
-		return payload.NewLoginOut(false)
+		return params.NewLoginOut(false)
 	}
-	return payload.NewLoginOut(users.Password() == in.Password())
+	return params.NewLoginOut(users.Password() == in.Password())
 }
 
-func (u *usersUsecase) Me(in payload.MeIn) (payload.MeOut, error) {
+func (u *usersUsecase) Me(in params.MeIn) (params.MeOut, error) {
 
 	users := u.usersRepository.FindByName(in.Name())
 	if users.Name() == "" {
-		return *new(payload.MeOut), errors.New("no such user")
+		return *new(params.MeOut), errors.New("no such user")
 	}
-	return payload.NewMeOut(users.Name(), users.Age()), nil
+	return params.NewMeOut(users.Name(), users.Age()), nil
 }
 ```
 
-#### `internal/usecase/payload/`
+#### `internal/usecase/params/`
 
 usecase向けの関数の入力・出力モデル構造体を定義します。
 
-- `users_payload.go`
+- `users_params.go`
 
 ```go
-package payload
+package params
 
 // 認証向けの入力モデルです。
 type LoginIn struct {
@@ -346,7 +346,7 @@ package handler
 import (
 	"easyapp/internal/handler/model"
 	"easyapp/internal/usecase"
-	"easyapp/internal/usecase/payload"
+	"easyapp/internal/usecase/params"
 	"encoding/json"
 	"net/http"
 )
@@ -373,7 +373,7 @@ func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
-	out := h.usersUsecase.Login(payload.NewLoginIn(req.Name, req.Password))
+	out := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
@@ -385,7 +385,7 @@ func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
-	out, err := h.usersUsecase.Me(payload.NewMeIn(req.Name))
+	out, err := h.usersUsecase.Me(params.NewMeIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
