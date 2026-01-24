@@ -226,7 +226,7 @@ func (r *usersRouter) SetRouting(e *echo.Echo) {
 }
 ```
 
-#### `cmd/`f
+#### `cmd/`
 
 - `main.go`
 
