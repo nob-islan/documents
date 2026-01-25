@@ -167,13 +167,13 @@ const meSlice = createSlice({
   extraReducers: (builder) => {
     builder
       /**
-       * API呼び出し時の状態管理
+       * ユーザ取得API呼び出し開始時の状態遷移
        */
       .addCase(fetchMe.pending, (state) => {
         state.loading = true;
       })
       /**
-       * API呼び出し正常終了の状態管理
+       * ユーザ取得API呼び出し正常終了の状態遷移
        */
       .addCase(fetchMe.fulfilled, (state, action) => {
         state.profile = action.payload.name + " (" + action.payload.age + ")";
@@ -181,7 +181,7 @@ const meSlice = createSlice({
         state.loading = false;
       })
       /**
-       * API呼び出し異常終了時の状態管理
+       * ユーザ取得API呼び出し異常終了時の状態遷移
        */
       .addCase(fetchMe.rejected, (state, action) => {
         state.errorMessage = action.payload?.message;
