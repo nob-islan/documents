@@ -28,14 +28,14 @@ APIの呼び出しのみを行います。
 
 ```ts
 /**
- * APIのリクエストモデルです。
+ * ユーザ情報取得APIのリクエストモデルです。
  */
 type MeApiRequest = {
   name: string;
 };
 
 /**
- * APIからの正常レスポンスを格納するモデルです。
+ * ユーザ情報取得APIからの正常レスポンスを格納するモデルです。
  */
 type MeApiSuccess = {
   ok: true;
@@ -44,7 +44,7 @@ type MeApiSuccess = {
 };
 
 /**
- * APIからの異常レスポンスを格納するモデルです。
+ * ユーザ情報取得APIからの異常レスポンスを格納するモデルです。
  */
 type MeApiError = {
   ok: false;
@@ -52,7 +52,7 @@ type MeApiError = {
 };
 
 /**
- * APIのレスポンスモデルです。
+ * ユーザ情報取得APIのレスポンスモデルです。
  */
 type MeApiResponse = MeApiSuccess | MeApiError;
 
@@ -100,7 +100,7 @@ type FetchMeForm = {
 };
 
 /**
- * ユーザ情報取得成功時のレスポンスモデルです。
+ * ユーザ情報取得成功時の状態をactionに渡すモデルです。
  */
 type FetchMeSuccess = {
   name: string;
@@ -108,14 +108,14 @@ type FetchMeSuccess = {
 };
 
 /**
- * ユーザ情報取得失敗時のレスポンスモデルです。
+ * ユーザ情報取得失敗時の状態をactionに渡すモデルです。
  */
 type FetchMeError = {
   message: string;
 };
 
 /**
- * APIを呼び出して取得したユーザ情報をstateに保持します。
+ * ユーザ情報取得APIを呼び出して取得したユーザ情報をstateに保持します。
  */
 export const fetchMe = createAsyncThunk<
   FetchMeSuccess,
