@@ -138,7 +138,7 @@ export const fetchMe = createAsyncThunk<
 
 ### `features/me/meSlice.ts`
 
-API呼び出し時の状態管理を`extraReducers`で行っています。
+API呼び出し時の状態管理を`extraReducers`で行います。
 
 ```ts
 import { createSlice } from "@reduxjs/toolkit";

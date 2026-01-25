@@ -16,6 +16,7 @@ npm install react-hook-form
     └── features
         └── auth
             ├── authApi.ts
+            ├── authSlice.ts
             ├── authThunks.ts
             └── Auth.tsx
 ```
@@ -27,15 +28,41 @@ npm install react-hook-form
 APIの仕様に合わせたモデル`LoginApiRequest`および`LoginApiResponse`を使ってAPIを呼び出します。
 
 ```ts
-export interface LoginApiRequest {
+/**
+ * ログインAPIのリクエストモデルです。
+ */
+type LoginApiRequest = {
   name: string;
   password: string;
-}
+};
 
-interface LoginApiResponse {
+/**
+ * ログインAPIからの正常レスポンスを格納するモデルです。
+ */
+type LoginApiSuccess = {
+  ok: true;
   valid: boolean;
-}
+};
 
+/**
+ * ログインAPIからの以上レスポンスを格納するモデルです。
+ */
+type LoginApiError = {
+  ok: false;
+  message: string;
+};
+
+/**
+ * ログインAPIのレスポンスモデルです。
+ */
+type LoginApiResponse = LoginApiSuccess | LoginApiError;
+
+/**
+ * ログインAPIを呼び出します。
+ *
+ * @param req ログイン情報
+ * @returns 認証可否
+ */
 export const loginApi = async (
   req: LoginApiRequest,
 ): Promise<LoginApiResponse> => {
@@ -51,7 +78,11 @@ export const loginApi = async (
 
   const data = await res.json();
 
-  return { valid: data.valid };
+  if (!res.ok) {
+    return { ok: false, message: data.message };
+  }
+
+  return { ok: true, valid: data.valid };
 };
 ```
 
@@ -62,26 +93,108 @@ export const loginApi = async (
 ```ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { loginApi, LoginApiRequest } from "./authApi";
+import { loginApi } from "./authApi";
 
-export interface LoginForm {
+/**
+ * ログインリクエスト情報を画面から渡すモデルです。
+ */
+export type LoginForm = {
   name: string;
   password: string;
-}
+};
 
-export const login = createAsyncThunk<void, LoginForm>(
-  "auth/login",
-  async (form) => {
-    const req: LoginApiRequest = { name: form.name, password: form.password };
+/**
+ * ログイン成功時の状態をactionに渡すモデルです。
+ */
+type LoginSuccess = {
+  valid: boolean;
+};
 
-    try {
-      const response = await loginApi(req);
-      alert(response.valid ? "ログイン成功" : "ログイン失敗");
-    } catch (e) {
-      alert("不明なエラーが発生しました。");
+/**
+ * ログイン失敗時の状態をactionに渡すモデルです。
+ */
+type LoginError = {
+  message: string;
+};
+
+/**
+ * ログインAPIを呼び出して返ってきた結果をstateに保持します。
+ */
+export const login = createAsyncThunk<
+  LoginSuccess,
+  LoginForm,
+  { rejectValue: LoginError }
+>("auth/login", async (form, { rejectWithValue }) => {
+  try {
+    const res = await loginApi({
+      name: form.name,
+      password: form.password,
+    });
+
+    if (!res.ok) {
+      return rejectWithValue({ message: res.message });
     }
+
+    return { valid: res.valid };
+  } catch (e) {
+    return rejectWithValue({ message: "不明なエラーが発生しました。" });
+  }
+});
+```
+
+### `features/auth/authSlice.tsx`
+
+API呼び出し時の状態管理をextraReducersで行います。
+
+```ts
+import { createSlice } from "@reduxjs/toolkit";
+
+import { login } from "./authThunks";
+
+/**
+ * ログインの状態を保持するstateです。
+ */
+type AuthState = {
+  valid: boolean;
+  message?: string;
+};
+
+const initialState: AuthState = {
+  valid: false,
+  message: undefined,
+};
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      /**
+       * ログインAPI呼び出し開始時の状態遷移
+       */
+      .addCase(login.pending, (state) => {
+        state.valid = false;
+        state.message = "ログイン中...";
+      })
+      /**
+       * ログインAPI呼び出し正常終了時の状態遷移
+       */
+      .addCase(login.fulfilled, (state, action) => {
+        state.valid = action.payload.valid;
+        state.message = action.payload.valid ? "ログイン完了" : "ログイン失敗";
+      })
+      /**
+       * ログインAPI呼び出し異常終了時の状態遷移
+       */
+      .addCase(login.rejected, (state, action) => {
+        state.valid = false;
+        state.message = action.payload?.message;
+      });
   },
-);
+});
+
+export default authSlice.reducer;
 ```
 
 ### `features/auth/Auth.tsx`
@@ -91,11 +204,17 @@ export const login = createAsyncThunk<void, LoginForm>(
 ```tsx
 import { useForm } from "react-hook-form";
 
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { login, LoginForm } from "./authThunks";
 
+/**
+ * ログイン画面のコンポーネントです。
+ *
+ * @returns ログイン画面コンポーネント
+ */
 export const Auth = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
+  const authState = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   return (
@@ -110,6 +229,7 @@ export const Auth = () => {
         <div>
           <button type="submit">ログイン</button>
         </div>
+        {authState.message && <div>{authState.message}</div>}
       </form>
     </div>
   );
