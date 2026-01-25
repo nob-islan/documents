@@ -9934,6 +9934,8 @@
 <li><strong>testify</strong> 関連のモジュールをインストールします。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
+go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify/assert
+go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify/mock
 </code></pre></div>
 <h2 id="_3">作成手順</h2>
 <h3 id="_4">前提</h3>
@@ -10310,7 +10312,7 @@
 <ul>
 <li><code>schema.sql</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 一部SQLite特有の記法が必要なため注意see; https://www.sqlite.org/docs.html</span>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 一部SQLite特有の記法が必要なため注意 see; https://www.sqlite.org/docs.html</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
