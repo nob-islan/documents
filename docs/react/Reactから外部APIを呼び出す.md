@@ -13,75 +13,60 @@ cf.
 .
 └── src
     └── features
-        └── message
-            ├── messageApi.ts     # API呼び出し
-            ├── messageSlice.ts   # 画面の状態管理
-            ├── messageThunks.ts  # フロント側のビジネスロジック
-            └── Message.tsx       # 画面のレンダリング
+        └── me
+            ├── meApi.ts     # API呼び出し
+            ├── meSlice.ts   # 画面の状態管理
+            ├── meThunks.ts  # フロント側のビジネスロジック
+            └── me.tsx       # 画面のレンダリング
 ```
 
 ## サンプルコード
 
-### `features/message/messageSlice.ts`
-
-API呼び出し時の状態管理を`extraReducers`で行っています。
-
-```ts
-import { createSlice } from "@reduxjs/toolkit";
-
-import { fetchMessage } from "./messageThunks";
-
-interface MessageState {
-  text: string;
-  error?: string;
-  loading: boolean;
-}
-
-const initialState: MessageState = {
-  text: "Empty message",
-  loading: false,
-};
-
-const messageSlice = createSlice({
-  name: "message",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchMessage.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchMessage.fulfilled, (state, action) => {
-        state.loading = false;
-        state.text = action.payload.date + ", " + action.payload.message;
-        state.error = undefined;
-      })
-      .addCase(fetchMessage.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload?.error;
-      });
-  },
-});
-
-export default messageSlice.reducer;
-```
-
-### `features/message/messageApi.ts`
+### `features/me/meApi.ts`
 
 APIの呼び出しのみを行います。
 
 ```ts
-interface MessageApiResponse {
-  ok: boolean;
-  message: string;
-  date: string;
-}
+/**
+ * APIのリクエストモデルです。
+ */
+type MeApiRequest = {
+  name: string;
+};
 
-export const fetchMessageApi = async (): Promise<MessageApiResponse> => {
+/**
+ * APIからの正常レスポンスを格納するモデルです。
+ */
+type MeApiSuccess = {
+  ok: true;
+  name: string;
+  age: number;
+};
+
+/**
+ * APIからの異常レスポンスを格納するモデルです。
+ */
+type MeApiError = {
+  ok: false;
+  message: string;
+};
+
+/**
+ * APIのレスポンスモデルです。
+ */
+type MeApiResponse = MeApiSuccess | MeApiError;
+
+/**
+ * ユーザ情報取得APIを呼び出します。
+ *
+ * @param req ユーザ情報検索リクエスト
+ * @returns ユーザ情報
+ */
+export const meApi = async (req: MeApiRequest): Promise<MeApiResponse> => {
   const url = new URL("/api/v1/me", window.location.origin);
 
   url.search = new URLSearchParams({
-    name: "nob",
+    name: req.name,
   }).toString();
 
   const res = await fetch(url.toString(), {
@@ -90,70 +75,150 @@ export const fetchMessageApi = async (): Promise<MessageApiResponse> => {
 
   const data = await res.json();
 
+  if (!res.ok) {
+    return {
+      ok: false,
+      message: data.message,
+    };
+  }
+
   return {
-    ok: res.ok,
-    message: data.message,
-    date: data.date,
+    ok: true,
+    name: data.name,
+    age: data.age,
   };
 };
 ```
 
-### `features/message/messageThunks.ts`
+### `features/me/meThunks.ts`
 
 フロント側で行う業務処理を実装します。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。
 
 ```ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { fetchMessageApi } from "./messageApi";
+import { meApi } from "./meApi";
 
-interface FetchMessageResponse {
+/**
+ * リクエスト情報を画面から渡すモデルです。
+ */
+type FetchMeForm = {
+  name: string;
+};
+
+/**
+ * ユーザ情報取得成功時のレスポンスモデルです。
+ */
+type FetchMeSuccess = {
+  name: string;
+  age: number;
+};
+
+/**
+ * ユーザ情報取得失敗時のレスポンスモデルです。
+ */
+type FetchMeError = {
   message: string;
-  date: string;
-}
+};
 
-interface FetchMessageError {
-  error: string;
-}
-
-export const fetchMessage = createAsyncThunk<
-  FetchMessageResponse,
-  void,
-  { rejectValue: FetchMessageError }
->("message/fetch", async (_, { rejectWithValue }) => {
+/**
+ * APIを呼び出して取得したユーザ情報をstateに保持します。
+ */
+export const fetchMe = createAsyncThunk<
+  FetchMeSuccess,
+  FetchMeForm,
+  { rejectValue: FetchMeError }
+>("me/fetch", async (form, { rejectWithValue }) => {
   try {
-    const response = await fetchMessageApi();
-    if (!response.ok) {
-      return rejectWithValue({ error: response.message });
+    const res = await meApi({ name: form.name });
+
+    if (!res.ok) {
+      return rejectWithValue({ message: res.message });
     }
+
     return {
-      message: response.message,
-      date: response.date,
+      name: res.name,
+      age: res.age,
     };
   } catch (e) {
-    return rejectWithValue({ error: "不明なエラーが発生しました。" });
+    return rejectWithValue({ message: "不明なエラーが発生しました。" });
   }
 });
 ```
 
-### `features/message/Message.tsx`
+### `features/me/meSlice.ts`
+
+API呼び出し時の状態管理を`extraReducers`で行っています。
+
+```ts
+import { createSlice } from "@reduxjs/toolkit";
+
+import { fetchMe } from "./meThunks";
+
+/**
+ * ユーザ情報表示コンポーネントの状態を保持するstateです。
+ */
+type MeState = {
+  profile: string;
+  loading: boolean;
+  errorMessage?: string;
+};
+
+const initialState: MeState = {
+  profile: "",
+  loading: false,
+  errorMessage: undefined,
+};
+
+const meSlice = createSlice({
+  name: "me",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchMe.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchMe.fulfilled, (state, action) => {
+        state.profile = action.payload.name + " (" + action.payload.age + ")";
+        state.errorMessage = "";
+        state.loading = false;
+      })
+      .addCase(fetchMe.rejected, (state, action) => {
+        state.errorMessage = action.payload?.message;
+        state.loading = false;
+      });
+  },
+});
+
+export default meSlice.reducer;
+```
+
+### `features/me/Me.tsx`
 
 stateの値を使って画面のレンダリングを行います。
 
 ```tsx
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchMessage } from "./messageThunks";
+import { fetchMe } from "./meThunks";
 
-export const Message = () => {
-  const message = useAppSelector((state) => state.message);
+/**
+ * ユーザ情報を取得・表示するコンポーネントです。
+ *
+ * @returns ユーザ情報表示コンポーネント
+ */
+export const Me = () => {
+  const meState = useAppSelector((state) => state.me);
   const dispatch = useAppDispatch();
 
   return (
     <div>
-      <h1>{message.error ? message.error : message.text}</h1>
-      <button onClick={() => dispatch(fetchMessage())}>
-        {message.loading ? "Loading..." : "API呼び出し"}
-      </button>
+      {meState.errorMessage ? (
+        <div>{meState.errorMessage}</div>
+      ) : (
+        <div>{meState.profile}</div>
+      )}
+      <button onClick={() => dispatch(fetchMe({ name: "nob" }))}>検索</button>
     </div>
   );
 };
