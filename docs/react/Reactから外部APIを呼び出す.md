@@ -76,17 +76,10 @@ export const meApi = async (req: MeApiRequest): Promise<MeApiResponse> => {
   const data = await res.json();
 
   if (!res.ok) {
-    return {
-      ok: false,
-      message: data.message,
-    };
+    return { ok: false, message: data.message };
   }
 
-  return {
-    ok: true,
-    name: data.name,
-    age: data.age,
-  };
+  return { ok: true, name: data.name, age: data.age };
 };
 ```
 
