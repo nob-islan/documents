@@ -129,10 +129,7 @@ export const fetchMe = createAsyncThunk<
       return rejectWithValue({ message: res.message });
     }
 
-    return {
-      name: res.name,
-      age: res.age,
-    };
+    return { name: res.name, age: res.age };
   } catch (e) {
     return rejectWithValue({ message: "不明なエラーが発生しました。" });
   }
