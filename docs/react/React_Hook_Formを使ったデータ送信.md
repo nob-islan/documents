@@ -221,7 +221,7 @@ export const Auth = () => {
     <div>
       <form onSubmit={handleSubmit((form: LoginForm) => dispatch(login(form)))}>
         <div>
-          <input {...register("name")} placeholder="user" />
+          <input {...register("name")} type="text" placeholder="name" />
         </div>
         <div>
           <input {...register("password")} type="password" placeholder="pass" />
