@@ -9801,14 +9801,14 @@
 <h3 id="featuresmemeapits"><code>features/me/meApi.ts</code></h3>
 <p>APIの呼び出しのみを行います。</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * APIのリクエストモデルです。</span>
+<span class="cm"> * ユーザ情報取得APIのリクエストモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">MeApiRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * APIからの正常レスポンスを格納するモデルです。</span>
+<span class="cm"> * ユーザ情報取得APIからの正常レスポンスを格納するモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">MeApiSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">;</span>
@@ -9817,7 +9817,7 @@
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * APIからの異常レスポンスを格納するモデルです。</span>
+<span class="cm"> * ユーザ情報取得APIからの異常レスポンスを格納するモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">MeApiError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
@@ -9825,7 +9825,7 @@
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * APIのレスポンスモデルです。</span>
+<span class="cm"> * ユーザ情報取得APIのレスポンスモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">MeApiResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">MeApiSuccess</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">MeApiError</span><span class="p">;</span>
 
@@ -9869,7 +9869,7 @@
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * ユーザ情報取得成功時のレスポンスモデルです。</span>
+<span class="cm"> * ユーザ情報取得成功時の状態をactionに渡すモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
@@ -9877,14 +9877,14 @@
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * ユーザ情報取得失敗時のレスポンスモデルです。</span>
+<span class="cm"> * ユーザ情報取得失敗時の状態をactionに渡すモデルです。</span>
 <span class="cm"> */</span>
 <span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * APIを呼び出して取得したユーザ情報をstateに保持します。</span>
+<span class="cm"> * ユーザ情報取得APIを呼び出して取得したユーザ情報をstateに保持します。</span>
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchMe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
 <span class="w">  </span><span class="nx">FetchMeSuccess</span><span class="p">,</span>
