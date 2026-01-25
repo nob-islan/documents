@@ -142,7 +142,7 @@ export const login = createAsyncThunk<
 });
 ```
 
-### `features/auth/authSlice.tsx`
+### `features/auth/authSlice.ts`
 
 API呼び出し時の状態管理をextraReducersで行います。
 
