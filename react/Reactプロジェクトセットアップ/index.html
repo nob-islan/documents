@@ -10186,10 +10186,19 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">decrement</span><span class="p">,</span><span class="w"> </span><span class="nx">increment</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterSlice&quot;</span><span class="p">;</span>
 
+<span class="cm">/**</span>
+<span class="cm"> * カウンター画面のPropsを定義するモデルです。</span>
+<span class="cm"> */</span>
 <span class="kd">interface</span><span class="w"> </span><span class="nx">CounterProps</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="cm">/**</span>
+<span class="cm"> * カウンター画面を提供するコンポーネントです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param カウンター画面のProps</span>
+<span class="cm"> * @returns カウンター画面コンポーネント</span>
+<span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="w"> </span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="nx">CounterProps</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">counter</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
@@ -10220,19 +10229,23 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <p>画面の状態を管理するためのreducerおよびactionを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">,</span><span class="w"> </span><span class="nx">PayloadAction</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">RootState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/store&quot;</span><span class="p">;</span>
-
-<span class="kd">interface</span><span class="w"> </span><span class="nx">CounterState</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/**</span>
+<span class="cm"> * カウンター画面の状態を管理するstateです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">CounterState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">};</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">initialState</span><span class="o">:</span><span class="w"> </span><span class="kt">CounterState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">0</span><span class="p">,</span>
 <span class="p">};</span>
 
-<span class="kd">interface</span><span class="w"> </span><span class="nx">IncrementByAmountPayload</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/**</span>
+<span class="cm"> * incrementByAmountによって変化する状態を定義するモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">IncrementByAmountPayload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">};</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">counterSlice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;counter&quot;</span><span class="p">,</span>
@@ -10254,8 +10267,6 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <span class="p">});</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">increment</span><span class="p">,</span><span class="w"> </span><span class="nx">decrement</span><span class="p">,</span><span class="w"> </span><span class="nx">incrementByAmount</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">counterSlice</span><span class="p">.</span><span class="nx">actions</span><span class="p">;</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">selectCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">RootState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">counter</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">counterSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
 </code></pre></div>
