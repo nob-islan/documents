@@ -9849,17 +9849,10 @@
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
-<span class="w">      </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">data.message</span><span class="p">,</span>
-<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">data.message</span><span class="w"> </span><span class="p">};</span>
 <span class="w">  </span><span class="p">}</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">data.name</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">data.age</span><span class="p">,</span>
-<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">data.name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">data.age</span><span class="w"> </span><span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
 <h3 id="featuresmemethunksts"><code>features/me/meThunks.ts</code></h3>
