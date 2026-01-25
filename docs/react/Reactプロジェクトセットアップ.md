@@ -159,10 +159,19 @@ root.render(
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { decrement, increment } from "./counterSlice";
 
+/**
+ * カウンター画面のPropsを定義するモデルです。
+ */
 interface CounterProps {
   title: string;
 }
 
+/**
+ * カウンター画面を提供するコンポーネントです。
+ *
+ * @param カウンター画面のProps
+ * @returns カウンター画面コンポーネント
+ */
 export const Counter = ({ title }: CounterProps) => {
   const count = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
@@ -197,19 +206,23 @@ export const Counter = ({ title }: CounterProps) => {
 ```ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { RootState } from "../../app/store";
-
-interface CounterState {
+/**
+ * カウンター画面の状態を管理するstateです。
+ */
+type CounterState = {
   value: number;
-}
+};
 
 const initialState: CounterState = {
   value: 0,
 };
 
-interface IncrementByAmountPayload {
+/**
+ * incrementByAmountによって変化する状態を定義するモデルです。
+ */
+type IncrementByAmountPayload = {
   value: number;
-}
+};
 
 export const counterSlice = createSlice({
   name: "counter",
@@ -231,8 +244,6 @@ export const counterSlice = createSlice({
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-
-export const selectCount = (state: RootState) => state.counter.value;
 
 export default counterSlice.reducer;
 ```
