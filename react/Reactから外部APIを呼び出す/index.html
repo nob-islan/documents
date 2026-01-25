@@ -8887,10 +8887,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessageslicets" class="md-nav__link">
+  <a href="#featuresmemeapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageSlice.ts
+        features/me/meApi.ts
       
     </span>
   </a>
@@ -8898,10 +8898,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessageapits" class="md-nav__link">
+  <a href="#featuresmemethunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageApi.ts
+        features/me/meThunks.ts
       
     </span>
   </a>
@@ -8909,10 +8909,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessagethunksts" class="md-nav__link">
+  <a href="#featuresmemeslicets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageThunks.ts
+        features/me/meSlice.ts
       
     </span>
   </a>
@@ -8920,10 +8920,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessagetsx" class="md-nav__link">
+  <a href="#featuresmemetsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/Message.tsx
+        features/me/Me.tsx
       
     </span>
   </a>
@@ -9715,10 +9715,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessageslicets" class="md-nav__link">
+  <a href="#featuresmemeapits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageSlice.ts
+        features/me/meApi.ts
       
     </span>
   </a>
@@ -9726,10 +9726,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessageapits" class="md-nav__link">
+  <a href="#featuresmemethunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageApi.ts
+        features/me/meThunks.ts
       
     </span>
   </a>
@@ -9737,10 +9737,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessagethunksts" class="md-nav__link">
+  <a href="#featuresmemeslicets" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/messageThunks.ts
+        features/me/meSlice.ts
       
     </span>
   </a>
@@ -9748,10 +9748,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#featuresmessagemessagetsx" class="md-nav__link">
+  <a href="#featuresmemetsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        features/message/Message.tsx
+        features/me/Me.tsx
       
     </span>
   </a>
@@ -9791,66 +9791,55 @@
 <div class="highlight"><pre><span></span><code>.
 └──<span class="w"> </span>src
 <span class="w">    </span>└──<span class="w"> </span>features
-<span class="w">        </span>└──<span class="w"> </span>message
-<span class="w">            </span>├──<span class="w"> </span>messageApi.ts<span class="w">     </span><span class="c1"># API呼び出し</span>
-<span class="w">            </span>├──<span class="w"> </span>messageSlice.ts<span class="w">   </span><span class="c1"># 画面の状態管理</span>
-<span class="w">            </span>├──<span class="w"> </span>messageThunks.ts<span class="w">  </span><span class="c1"># フロント側のビジネスロジック</span>
-<span class="w">            </span>└──<span class="w"> </span>Message.tsx<span class="w">       </span><span class="c1"># 画面のレンダリング</span>
+<span class="w">        </span>└──<span class="w"> </span>me
+<span class="w">            </span>├──<span class="w"> </span>meApi.ts<span class="w">     </span><span class="c1"># API呼び出し</span>
+<span class="w">            </span>├──<span class="w"> </span>meSlice.ts<span class="w">   </span><span class="c1"># 画面の状態管理</span>
+<span class="w">            </span>├──<span class="w"> </span>meThunks.ts<span class="w">  </span><span class="c1"># フロント側のビジネスロジック</span>
+<span class="w">            </span>└──<span class="w"> </span>me.tsx<span class="w">       </span><span class="c1"># 画面のレンダリング</span>
 </code></pre></div>
 <h2 id="_2">サンプルコード</h2>
-<h3 id="featuresmessagemessageslicets"><code>features/message/messageSlice.ts</code></h3>
-<p>API呼び出し時の状態管理を<code>extraReducers</code>で行っています。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMessage</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./messageThunks&quot;</span><span class="p">;</span>
-
-<span class="kd">interface</span><span class="w"> </span><span class="nx">MessageState</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">error?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">const</span><span class="w"> </span><span class="nx">initialState</span><span class="o">:</span><span class="w"> </span><span class="kt">MessageState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Empty message&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<h3 id="featuresmemeapits"><code>features/me/meApi.ts</code></h3>
+<p>APIの呼び出しのみを行います。</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * APIのリクエストモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">MeApiRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">messageSlice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;message&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">initialState</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">reducers</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">  </span><span class="nx">extraReducers</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">builder</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">builder</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMessage</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
-<span class="w">      </span><span class="p">})</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMessage</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">date</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">undefined</span><span class="p">;</span>
-<span class="w">      </span><span class="p">})</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMessage</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="o">?</span><span class="p">.</span><span class="nx">error</span><span class="p">;</span>
-<span class="w">      </span><span class="p">});</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="p">});</span>
+<span class="cm">/**</span>
+<span class="cm"> * APIからの正常レスポンスを格納するモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">MeApiSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">messageSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
-</code></pre></div>
-<h3 id="featuresmessagemessageapits"><code>features/message/messageApi.ts</code></h3>
-<p>APIの呼び出しのみを行います。</p>
-<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">MessageApiResponse</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="cm">/**</span>
+<span class="cm"> * APIからの異常レスポンスを格納するモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">MeApiError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">};</span>
 
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchMessageApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">MessageApiResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/**</span>
+<span class="cm"> * APIのレスポンスモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">MeApiResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">MeApiSuccess</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">MeApiError</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得APIを呼び出します。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param req ユーザ情報検索リクエスト</span>
+<span class="cm"> * @returns ユーザ情報</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">meApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">MeApiRequest</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">MeApiResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;/api/v1/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">);</span>
 
 <span class="w">  </span><span class="nx">url</span><span class="p">.</span><span class="nx">search</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;nob&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">req.name</span><span class="p">,</span>
 <span class="w">  </span><span class="p">}).</span><span class="nx">toString</span><span class="p">();</span>
 
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span><span class="w"> </span><span class="p">{</span>
@@ -9859,62 +9848,138 @@
 
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">data.message</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">res.ok</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">data.message</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">date</span><span class="o">:</span><span class="w"> </span><span class="kt">data.date</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">data.name</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">data.age</span><span class="p">,</span>
 <span class="w">  </span><span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
-<h3 id="featuresmessagemessagethunksts"><code>features/message/messageThunks.ts</code></h3>
+<h3 id="featuresmemethunksts"><code>features/me/meThunks.ts</code></h3>
 <p>フロント側で行う業務処理を実装します。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMessageApi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./messageApi&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">meApi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meApi&quot;</span><span class="p">;</span>
 
-<span class="kd">interface</span><span class="w"> </span><span class="nx">FetchMessageResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/**</span>
+<span class="cm"> * リクエスト情報を画面から渡すモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeForm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得成功時のレスポンスモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得失敗時のレスポンスモデルです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="w">  </span><span class="nx">date</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="p">};</span>
 
-<span class="kd">interface</span><span class="w"> </span><span class="nx">FetchMessageError</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
-<span class="w">  </span><span class="nx">FetchMessageResponse</span><span class="p">,</span>
-<span class="w">  </span><span class="ow">void</span><span class="p">,</span>
-<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectValue</span><span class="o">:</span><span class="w"> </span><span class="kt">FetchMessageError</span><span class="w"> </span><span class="p">}</span>
-<span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;message/fetch&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/**</span>
+<span class="cm"> * APIを呼び出して取得したユーザ情報をstateに保持します。</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchMe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
+<span class="w">  </span><span class="nx">FetchMeSuccess</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">FetchMeForm</span><span class="p">,</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectValue</span><span class="o">:</span><span class="w"> </span><span class="kt">FetchMeError</span><span class="w"> </span><span class="p">}</span>
+<span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;me/fetch&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetchMessageApi</span><span class="p">();</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">response.message</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">meApi</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">form.name</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">res</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">res.message</span><span class="w"> </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">response.message</span><span class="p">,</span>
-<span class="w">      </span><span class="nx">date</span><span class="o">:</span><span class="w"> </span><span class="kt">response.date</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">res.name</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">res.age</span><span class="p">,</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="p">({</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;不明なエラーが発生しました。&quot;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="p">({</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;不明なエラーが発生しました。&quot;</span><span class="w"> </span><span class="p">});</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="featuresmessagemessagetsx"><code>features/message/Message.tsx</code></h3>
+<h3 id="featuresmemeslicets"><code>features/me/meSlice.ts</code></h3>
+<p>API呼び出し時の状態管理を<code>extraReducers</code>で行っています。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMe</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meThunks&quot;</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報表示コンポーネントの状態を保持するstateです。</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">MeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">profile</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">errorMessage?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">initialState</span><span class="o">:</span><span class="w"> </span><span class="kt">MeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">profile</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">errorMessage</span><span class="o">:</span><span class="w"> </span><span class="kt">undefined</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">meSlice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;me&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">initialState</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">reducers</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">  </span><span class="nx">extraReducers</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">builder</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">builder</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMe</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMe</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">profile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMe</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="o">?</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">      </span><span class="p">});</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">});</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">meSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="featuresmemetsx"><code>features/me/Me.tsx</code></h3>
 <p>stateの値を使って画面のレンダリングを行います。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMessage</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./messageThunks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMe</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meThunks&quot;</span><span class="p">;</span>
 
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報を取得・表示するコンポーネントです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @returns ユーザ情報表示コンポーネント</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">meState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">me</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;{</span><span class="nx">message</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">message.error</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">message.text</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMessage</span><span class="p">())}&gt;</span>
-<span class="w">        </span><span class="p">{</span><span class="nx">message</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;Loading...&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;API呼び出し&quot;</span><span class="p">}</span>
-<span class="w">      </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">)}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMe</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;nob&quot;</span><span class="w"> </span><span class="p">}))}&gt;</span><span class="nx">検索</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
