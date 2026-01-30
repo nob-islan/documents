@@ -11,7 +11,7 @@ cf. https://javaoperatorsdk.io/
 ```json
 {
   "name": "Java Operator SDK",
-  "image": "mcr.microsoft.com/devcontainers/java:1-21-bullseye",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
       "version": "none",
