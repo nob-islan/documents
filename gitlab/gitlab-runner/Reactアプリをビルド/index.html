@@ -9830,7 +9830,7 @@
 <p>GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。</p>
 <h2 id="_1">設定ファイル</h2>
 <h3 id="dockerfile">Dockerfile</h3>
-<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:24-bullseye</span>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:24-bookworm</span>
 
 <span class="c"># 後述のci.yamlから渡される環境変数</span>
 <span class="k">ARG</span><span class="w"> </span>ARTIFACT_PATH
@@ -9855,7 +9855,7 @@
 <span class="w">  </span><span class="nt">ARTIFACT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/build</span><span class="w"> </span><span class="c1"># ビルド成果物のパス</span>
 <span class="nt">build</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:24-bullseye</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:24-bookworm</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${MODULE}</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install</span>
