@@ -20,7 +20,6 @@ npm install
 - reduxおよび他必要なものをインストールします。
 
 ```shell
-cd easyweb
 npm install @reduxjs/toolkit react-redux react-router-dom
 ```
 
