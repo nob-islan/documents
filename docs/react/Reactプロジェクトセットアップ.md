@@ -26,7 +26,7 @@ npm install @reduxjs/toolkit react-redux react-router-dom
 - `XXX.module.scss`を使えるようにするため、下記をインストールします。
 
 ```shell
-npm install sass node-sass
+npm install sass
 ```
 
 - [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)によるフォーマットを有効化するため、下記をインストールします:
