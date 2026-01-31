@@ -13,6 +13,8 @@ cf. https://react-redux.js.org/tutorials/quick-start
 ```shell
 # cf. https://vite.dev/guide/?utm_source=chatgpt.com#scaffolding-your-first-vite-project
 npm create vite@latest easyweb -- --template react-ts
+cd easyweb
+npm install
 ```
 
 - reduxおよび他必要なものをインストールします。
