@@ -43,20 +43,21 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 ```shell
 .
-├── eslint.config.js             # ESLintによるコードフォーマットの設定
-├── .prettierrc                  # Prettierによるコードフォーマットの設定
+├── eslint.config.js                 # ESLintによるコードフォーマットの設定
+├── .prettierrc                      # Prettierによるコードフォーマットの設定
 └── src
     ├── app
-    │   ├── hooks.ts             # storeを操作する関数の定義
-    │   └── store.ts             # 各コンポーネントの状態を持つstoreの管理
-    ├── app.module.scss          # コンポーネントの装飾
-    ├── App.tsx                  # アプリケーションコンテンツのroot
+    │   ├── hooks.ts                 # storeを操作する関数の定義
+    │   └── store.ts                 # 各コンポーネントの状態を持つstoreの管理
+    ├── app.module.scss              # コンポーネント共通の装飾
+    ├── App.tsx                      # アプリケーションコンテンツのroot
     ├── features
     │   └── counter
-    │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
-    │       └── Counter.tsx      # コンポーネント本体
-    ├── index.scss               # 画面全体の装飾
-    └── main.tsx                 # アプリケーションのエントリポイント
+    │       ├── counter.module.scss  # コンポーネント個別の装飾
+    │       ├── counterSlice.ts      # コンポーネントの状態およびアクションの定義
+    │       └── Counter.tsx          # コンポーネント本体
+    ├── index.scss                   # 画面全体の装飾
+    └── main.tsx                     # アプリケーションのエントリポイント
 ```
 
 ### クラス一覧
@@ -175,6 +176,7 @@ root.render(
 
 ```tsx
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import style from "./counter.module.scss";
 import { decrement, increment } from "./counterSlice";
 
 /**
@@ -195,24 +197,26 @@ export const Counter = ({ title }: CounterProps) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
-      <div>
-        <h1>{title}</h1>
+    <>
+      <h1>{title}</h1>
+      <div className={style.countWrapper}>
         <button
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
+          className={style.countButton}
         >
           Increment
         </button>
-        <span>{count}</span>
+        <span className={style.count}>{count}</span>
         <button
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
+          className={style.countButton}
         >
           Decrement
         </button>
       </div>
-    </div>
+    </>
   );
 };
 ```
@@ -266,6 +270,38 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 export default counterSlice.reducer;
 ```
 
+#### `features/counter/counter.module.scss`
+
+各コンポーネント個別の装飾を定義します。
+
+```scss
+$fontSize: 18px;
+
+.countWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .countButton {
+    border-radius: 20px;
+    width: 150px;
+    height: 40px;
+    font-style: normal;
+    font-size: $fontSize;
+    background-color: #ff9900;
+  }
+
+  .countButton:hover {
+    cursor: pointer;
+    background-color: #fa6f00;
+  }
+
+  .count {
+    font-size: $fontSize;
+  }
+}
+```
+
 #### `App.tsx`
 
 ルーティングを設定します。
@@ -304,7 +340,7 @@ body {
 
 #### `app.module.scss`
 
-App配下の装飾を定義します。
+全てのコンポーネント共通の装飾を定義します。
 
 ```scss
 .body {
