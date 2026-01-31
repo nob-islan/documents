@@ -2,6 +2,8 @@
 
 環境によって切り替えのできるシステム設定値の作り方について記載します。
 
+cf. https://ja.vite.dev/guide/env-and-mode
+
 ## 設定方法
 
 各種ファイルの記載方法です。
@@ -16,20 +18,20 @@ npm install dotenv-cli
 
 ### 設定ファイル
 
-#### `.env.XXX`
+#### `.env.xxx`
 
 ルートディレクトリに、各環境ごとの設定ファイルを用意します:
 
 - `.env.dev`
 
 ```
-REACT_APP_TEST="dev"
+VITE_APP_TEST="dev"
 ```
 
 - `.env.stg`
 
 ```
-REACT_APP_TEST="stg"
+VITE_APP_TEST="stg"
 ```
 
 #### `package.json`
@@ -38,8 +40,8 @@ REACT_APP_TEST="stg"
 
 ```json
 "scripts": {
-  "start-dev": "dotenv -e .env.dev react-scripts start",
-  "start-stg": "dotenv -e .env.stg react-scripts start",
+  "start-dev": "dotenv -e .env.dev vite -- --host",
+  "start-stg": "dotenv -e .env.stg vite -- --host",
 },
 ```
 
@@ -50,13 +52,11 @@ REACT_APP_TEST="stg"
 `process.env`で環境変数を参照します:
 
 ```tsx
-const Home = () => {
+export const Home = () => {
   return (
-    <div>
-      <p>Test: {process.env.REACT_APP_TEST}</p>
-    </div>
+    <>
+      <p>env: {import.meta.env.VITE_APP_TEST}</p>
+    </>
   );
 };
-
-export default Home;
 ```
