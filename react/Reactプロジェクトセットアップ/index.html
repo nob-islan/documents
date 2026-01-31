@@ -9181,6 +9181,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featurescountercountermodulescss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/counter/counter.module.scss
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#apptsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10002,6 +10013,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featurescountercountermodulescss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/counter/counter.module.scss
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#apptsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10104,20 +10126,21 @@ npm<span class="w"> </span>install
 <p>Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。</p>
 <h3 id="_2">ディレクトリ構成</h3>
 <div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span>eslint.config.js<span class="w">             </span><span class="c1"># ESLintによるコードフォーマットの設定</span>
-├──<span class="w"> </span>.prettierrc<span class="w">                  </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
+├──<span class="w"> </span>eslint.config.js<span class="w">                 </span><span class="c1"># ESLintによるコードフォーマットの設定</span>
+├──<span class="w"> </span>.prettierrc<span class="w">                      </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
 └──<span class="w"> </span>src
 <span class="w">    </span>├──<span class="w"> </span>app
-<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>hooks.ts<span class="w">             </span><span class="c1"># storeを操作する関数の定義</span>
-<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>store.ts<span class="w">             </span><span class="c1"># 各コンポーネントの状態を持つstoreの管理</span>
-<span class="w">    </span>├──<span class="w"> </span>app.module.scss<span class="w">          </span><span class="c1"># コンポーネントの装飾</span>
-<span class="w">    </span>├──<span class="w"> </span>App.tsx<span class="w">                  </span><span class="c1"># アプリケーションコンテンツのroot</span>
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>hooks.ts<span class="w">                 </span><span class="c1"># storeを操作する関数の定義</span>
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>store.ts<span class="w">                 </span><span class="c1"># 各コンポーネントの状態を持つstoreの管理</span>
+<span class="w">    </span>├──<span class="w"> </span>app.module.scss<span class="w">              </span><span class="c1"># コンポーネント共通の装飾</span>
+<span class="w">    </span>├──<span class="w"> </span>App.tsx<span class="w">                      </span><span class="c1"># アプリケーションコンテンツのroot</span>
 <span class="w">    </span>├──<span class="w"> </span>features
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>counter
-<span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>counterSlice.ts<span class="w">  </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
-<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>Counter.tsx<span class="w">      </span><span class="c1"># コンポーネント本体</span>
-<span class="w">    </span>├──<span class="w"> </span>index.scss<span class="w">               </span><span class="c1"># 画面全体の装飾</span>
-<span class="w">    </span>└──<span class="w"> </span>main.tsx<span class="w">                 </span><span class="c1"># アプリケーションのエントリポイント</span>
+<span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>counter.module.scss<span class="w">  </span><span class="c1"># コンポーネント個別の装飾</span>
+<span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>counterSlice.ts<span class="w">      </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
+<span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>Counter.tsx<span class="w">          </span><span class="c1"># コンポーネント本体</span>
+<span class="w">    </span>├──<span class="w"> </span>index.scss<span class="w">                   </span><span class="c1"># 画面全体の装飾</span>
+<span class="w">    </span>└──<span class="w"> </span>main.tsx<span class="w">                     </span><span class="c1"># アプリケーションのエントリポイント</span>
 </code></pre></div>
 <h3 id="_3">クラス一覧</h3>
 <p>各クラスに必要な修正、または新規作成方法について記載します。</p>
@@ -10210,6 +10233,7 @@ npm<span class="w"> </span>install
 <h4 id="featurescountercountertsx"><code>features/counter/Counter.tsx</code></h4>
 <p>画面コンテンツおよびactionの呼び出しを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counter.module.scss&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">decrement</span><span class="p">,</span><span class="w"> </span><span class="nx">increment</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./counterSlice&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -10230,24 +10254,26 @@ npm<span class="w"> </span>install
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;{</span><span class="nx">title</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;{</span><span class="nx">title</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">countWrapper</span><span class="p">}&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span>
 <span class="w">          </span><span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Increment value&quot;</span>
 <span class="w">          </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">increment</span><span class="p">())}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">countButton</span><span class="p">}</span>
 <span class="w">        </span><span class="p">&gt;</span>
 <span class="w">          </span><span class="nx">Increment</span>
 <span class="w">        </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;{</span><span class="nx">count</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">count</span><span class="p">}&gt;{</span><span class="nx">count</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span>
 <span class="w">          </span><span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Decrement value&quot;</span>
 <span class="w">          </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">decrement</span><span class="p">())}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">countButton</span><span class="p">}</span>
 <span class="w">        </span><span class="p">&gt;</span>
 <span class="w">          </span><span class="nx">Decrement</span>
 <span class="w">        </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
 </code></pre></div>
@@ -10296,6 +10322,34 @@ npm<span class="w"> </span>install
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">counterSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
 </code></pre></div>
+<h4 id="featurescountercountermodulescss"><code>features/counter/counter.module.scss</code></h4>
+<p>各コンポーネント個別の装飾を定義します。</p>
+<div class="highlight"><pre><span></span><code><span class="nv">$fontSize</span><span class="o">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="nc">.countWrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">display</span><span class="nd">:</span><span class="w"> </span><span class="nt">flex</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">align-items</span><span class="nd">:</span><span class="w"> </span><span class="nt">center</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">gap</span><span class="nd">:</span><span class="w"> </span><span class="nt">10px</span><span class="o">;</span>
+
+<span class="w">  </span><span class="nc">.countButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">border-radius</span><span class="nd">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">width</span><span class="nd">:</span><span class="w"> </span><span class="nt">150px</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">height</span><span class="nd">:</span><span class="w"> </span><span class="nt">40px</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">font-style</span><span class="nd">:</span><span class="w"> </span><span class="nt">normal</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">font-size</span><span class="nd">:</span><span class="w"> </span><span class="err">$</span><span class="nt">fontSize</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">background-color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#ff9900</span><span class="o">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nc">.countButton</span><span class="nd">:hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">cursor</span><span class="nd">:</span><span class="w"> </span><span class="nt">pointer</span><span class="o">;</span>
+<span class="w">    </span><span class="nt">background-color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#fa6f00</span><span class="o">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nc">.count</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">font-size</span><span class="nd">:</span><span class="w"> </span><span class="err">$</span><span class="nt">fontSize</span><span class="o">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="apptsx"><code>App.tsx</code></h4>
 <p>ルーティングを設定します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BrowserRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="p">,</span><span class="w"> </span><span class="nx">Routes</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
@@ -10325,7 +10379,7 @@ npm<span class="w"> </span>install
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="appmodulescss"><code>app.module.scss</code></h4>
-<p>App配下の装飾を定義します。</p>
+<p>全てのコンポーネント共通の装飾を定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="nc">.body</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nt">padding</span><span class="nd">:</span><span class="w"> </span><span class="nt">60px</span><span class="w"> </span><span class="nt">60px</span><span class="w"> </span><span class="nt">60px</span><span class="w"> </span><span class="nt">60px</span><span class="o">;</span>
 <span class="p">}</span>
