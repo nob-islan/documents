@@ -41,8 +41,6 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 ### ディレクトリ構成
 
-自動生成されるもののうち、手を入れる必要がないものについては除外しています。
-
 ```shell
 .
 └── src
@@ -51,7 +49,6 @@ Reduxを動かすために必要な改修およびサンプルコードについ
     │   └── store.ts             # 各コンポーネントの状態を持つstoreの管理
     ├── app.module.scss          # コンポーネントの装飾
     ├── App.tsx                  # アプリケーションコンテンツのroot
-    ├── .eslintrc.json           # ESLintによるコードフォーマットの設定
     ├── features
     │   └── counter
     │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
@@ -64,19 +61,6 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 ### クラス一覧
 
 各クラスに必要な修正、または新規作成方法について記載します。
-
-#### `.prettierrc`
-
-Prettierによるフォーマットに関する設定を定義します。
-
-```json
-{
-  "tabWidth": 2,
-  "useTabs": false,
-  "trailingComma": "none",
-  "semi": true
-}
-```
 
 #### `eslint.config.js`
 
@@ -114,6 +98,19 @@ export default defineConfig([
     ],
   },
 ]);
+```
+
+#### `.prettierrc`
+
+Prettierによるフォーマットに関する設定を定義します。
+
+```json
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "none",
+  "semi": true
+}
 ```
 
 #### `app/store.ts`
@@ -320,4 +317,9 @@ App配下の装飾を定義します。
 npm run dev -- --host
 ```
 
-起動後、http://localhost:3000 で画面が確認できます。
+起動後、http://localhost:5173 で画面が確認できます。
+
+TODO
+
+- ディレクトリ構成
+- 起動後URL
