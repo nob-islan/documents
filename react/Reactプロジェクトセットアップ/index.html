@@ -10104,6 +10104,8 @@ npm<span class="w"> </span>install
 <p>Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。</p>
 <h3 id="_2">ディレクトリ構成</h3>
 <div class="highlight"><pre><span></span><code>.
+├──<span class="w"> </span>eslint.config.js<span class="w">             </span><span class="c1"># ESLintによるコードフォーマットの設定</span>
+├──<span class="w"> </span>.prettierrc<span class="w">                  </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
 └──<span class="w"> </span>src
 <span class="w">    </span>├──<span class="w"> </span>app
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>hooks.ts<span class="w">             </span><span class="c1"># storeを操作する関数の定義</span>
@@ -10115,8 +10117,7 @@ npm<span class="w"> </span>install
 <span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>counterSlice.ts<span class="w">  </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
 <span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>Counter.tsx<span class="w">      </span><span class="c1"># コンポーネント本体</span>
 <span class="w">    </span>├──<span class="w"> </span>index.scss<span class="w">               </span><span class="c1"># 画面全体の装飾</span>
-<span class="w">    </span>├──<span class="w"> </span>main.tsx<span class="w">                 </span><span class="c1"># アプリケーションのエントリポイント</span>
-<span class="w">    </span>└──<span class="w"> </span>.prettierrc<span class="w">              </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
+<span class="w">    </span>└──<span class="w"> </span>main.tsx<span class="w">                 </span><span class="c1"># アプリケーションのエントリポイント</span>
 </code></pre></div>
 <h3 id="_3">クラス一覧</h3>
 <p>各クラスに必要な修正、または新規作成方法について記載します。</p>
