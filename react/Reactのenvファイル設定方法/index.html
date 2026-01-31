@@ -9040,7 +9040,7 @@
   <a href="#envxxx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .env.XXX
+        .env.xxx
       
     </span>
   </a>
@@ -9818,7 +9818,7 @@
   <a href="#envxxx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .env.XXX
+        .env.xxx
       
     </span>
   </a>
@@ -9876,6 +9876,7 @@
 
 <h1 id="reactenv">Reactのenvファイル設定方法</h1>
 <p>環境によって切り替えのできるシステム設定値の作り方について記載します。</p>
+<p>cf. <a href="https://ja.vite.dev/guide/env-and-mode">https://ja.vite.dev/guide/env-and-mode</a></p>
 <h2 id="_1">設定方法</h2>
 <p>各種ファイルの記載方法です。</p>
 <h3 id="_2">依存パッケージ</h3>
@@ -9883,37 +9884,35 @@
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>dotenv-cli
 </code></pre></div>
 <h3 id="_3">設定ファイル</h3>
-<h4 id="envxxx"><code>.env.XXX</code></h4>
+<h4 id="envxxx"><code>.env.xxx</code></h4>
 <p>ルートディレクトリに、各環境ごとの設定ファイルを用意します:</p>
 <ul>
 <li><code>.env.dev</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code>REACT_APP_TEST=&quot;dev&quot;
+<div class="highlight"><pre><span></span><code>VITE_APP_TEST=&quot;dev&quot;
 </code></pre></div>
 <ul>
 <li><code>.env.stg</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code>REACT_APP_TEST=&quot;stg&quot;
+<div class="highlight"><pre><span></span><code>VITE_APP_TEST=&quot;stg&quot;
 </code></pre></div>
 <h4 id="packagejson"><code>package.json</code></h4>
 <p>起動する際のコマンドを記載します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;start-dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dotenv -e .env.dev react-scripts start&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;start-stg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dotenv -e .env.stg react-scripts start&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;start-dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dotenv -e .env.dev vite -- --host&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;start-stg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dotenv -e .env.stg vite -- --host&quot;</span><span class="p">,</span>
 <span class="p">},</span>
 </code></pre></div>
 <p>例として、開発環境向けの環境変数を参照する際は<code>npm run start-dev</code>でアプリを起動します。</p>
 <h3 id="_4">設定値を参照するクラス</h3>
 <p><code>process.env</code>で環境変数を参照します:</p>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">Home</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Home</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">Test</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">REACT_APP_TEST</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="nx">env</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">VITE_APP_TEST</span><span class="p">}&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
-
-<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">Home</span><span class="p">;</span>
 </code></pre></div>
 
 
