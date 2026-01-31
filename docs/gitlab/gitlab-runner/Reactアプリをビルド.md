@@ -13,9 +13,9 @@ FROM node:24-bookworm
 ARG ARTIFACT_PATH
 
 RUN npm install -g serve
-COPY ${ARTIFACT_PATH} /build
+COPY ${ARTIFACT_PATH} /dist
 
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist"]
 ```
 
 ### .gitlab-ci.yml
@@ -33,7 +33,7 @@ stages:
   - push
 variables:
   MODULE: easyweb # アプリのモジュール名
-  ARTIFACT_PATH: ${MODULE}/build # ビルド成果物のパス
+  ARTIFACT_PATH: ${MODULE}/dist # ビルド成果物のパス
 build:
   stage: build
   image: node:24-bookworm
