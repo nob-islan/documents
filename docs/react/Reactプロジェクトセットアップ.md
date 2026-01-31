@@ -23,7 +23,7 @@ npm install
 npm install @reduxjs/toolkit react-redux react-router-dom
 ```
 
-- `XXX.module.scss`を使えるようにするため、下記をインストールします。
+- `xxx.module.scss`を使えるようにするため、下記をインストールします。
 
 ```shell
 npm install sass
