@@ -318,8 +318,3 @@ npm run dev -- --host
 ```
 
 起動後、http://localhost:5173 で画面が確認できます。
-
-TODO
-
-- ディレクトリ構成
-- 起動後URL
