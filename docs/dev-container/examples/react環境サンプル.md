@@ -14,12 +14,7 @@ React + TypeScriptでの開発環境のサンプルです:
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
         },
-        "eslint.validate": [
-          "typescript",
-          "typescriptreact",
-          "javascript",
-          "javascriptreact"
-        ],
+        "eslint.validate": ["typescriptreact", "typescript", "javascript"],
         "[typescriptreact]": {
           "editor.tabSize": 2,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
