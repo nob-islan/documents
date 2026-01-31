@@ -43,8 +43,8 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 
 ```shell
 .
-├── eslint.config.js
-├── .prettierrc
+├── eslint.config.js             # ESLintによるコードフォーマットの設定
+├── .prettierrc                  # Prettierによるコードフォーマットの設定
 └── src
     ├── app
     │   ├── hooks.ts             # storeを操作する関数の定義
