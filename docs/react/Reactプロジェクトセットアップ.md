@@ -57,7 +57,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
     │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
     │       └── Counter.tsx      # コンポーネント本体
     ├── index.module.scss        # 画面全体の装飾
-    ├── index.tsx                # アプリケーションのエントリポイント
+    ├── main.tsx                 # アプリケーションのエントリポイント
     └── .prettierrc              # Prettierによるコードフォーマットの設定
 ```
 
@@ -78,18 +78,42 @@ Prettierによるフォーマットに関する設定を定義します。
 }
 ```
 
-#### `.eslintrc.json`
+#### `eslint.config.js`
 
 ESLintによるフォーマットに関する設定を定義します。
 
-```json
-{
-  "plugins": ["simple-import-sort"],
-  "rules": {
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error"
-  }
-}
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import { defineConfig, globalIgnores } from "eslint/config";
+
+export default defineConfig([
+  globalIgnores(["dist"]),
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+    },
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+  },
+]);
 ```
 
 #### `app/store.ts`
@@ -124,7 +148,7 @@ export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 export const useAppSelector = useSelector.withTypes<RootState>();
 ```
 
-#### `index.tsx`
+#### `main.tsx`
 
 `Provider`コンポーネントで`App`コンポーネントをラップします。
 
@@ -200,7 +224,7 @@ export const Counter = ({ title }: CounterProps) => {
 画面の状態を管理するためのreducerおよびactionを定義します。
 
 ```ts
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 /**
  * カウンター画面の状態を管理するstateです。

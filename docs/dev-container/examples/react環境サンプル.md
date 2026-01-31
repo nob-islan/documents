@@ -4,7 +4,7 @@ React + TypeScriptでの開発環境のサンプルです:
 
 ```json
 {
-  "name": "React",
+  "name": "React Test",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
   "features": {},
   "customizations": {
@@ -14,11 +14,21 @@ React + TypeScriptでの開発環境のサンプルです:
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
         },
+        "eslint.validate": [
+          "typescript",
+          "typescriptreact",
+          "javascript",
+          "javascriptreact"
+        ],
         "[typescriptreact]": {
           "editor.tabSize": 2,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[typescript]": {
+          "editor.tabSize": 2,
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
           "editor.tabSize": 2,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
