@@ -9115,10 +9115,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eslintrcjson" class="md-nav__link">
+  <a href="#eslintconfigjs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .eslintrc.json
+        eslint.config.js
       
     </span>
   </a>
@@ -9148,10 +9148,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#indextsx" class="md-nav__link">
+  <a href="#maintsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        index.tsx
+        main.tsx
       
     </span>
   </a>
@@ -9964,10 +9964,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#eslintrcjson" class="md-nav__link">
+  <a href="#eslintconfigjs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        .eslintrc.json
+        eslint.config.js
       
     </span>
   </a>
@@ -9997,10 +9997,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#indextsx" class="md-nav__link">
+  <a href="#maintsx" class="md-nav__link">
     <span class="md-ellipsis">
       
-        index.tsx
+        main.tsx
       
     </span>
   </a>
@@ -10145,7 +10145,7 @@ npm<span class="w"> </span>install
 <span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>counterSlice.ts<span class="w">  </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
 <span class="w">    </span>│<span class="w">       </span>└──<span class="w"> </span>Counter.tsx<span class="w">      </span><span class="c1"># コンポーネント本体</span>
 <span class="w">    </span>├──<span class="w"> </span>index.module.scss<span class="w">        </span><span class="c1"># 画面全体の装飾</span>
-<span class="w">    </span>├──<span class="w"> </span>index.tsx<span class="w">                </span><span class="c1"># アプリケーションのエントリポイント</span>
+<span class="w">    </span>├──<span class="w"> </span>main.tsx<span class="w">                 </span><span class="c1"># アプリケーションのエントリポイント</span>
 <span class="w">    </span>└──<span class="w"> </span>.prettierrc<span class="w">              </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
 </code></pre></div>
 <h3 id="_3">クラス一覧</h3>
@@ -10159,15 +10159,39 @@ npm<span class="w"> </span>install
 <span class="w">  </span><span class="nt">&quot;semi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="eslintrcjson"><code>.eslintrc.json</code></h4>
+<h4 id="eslintconfigjs"><code>eslint.config.js</code></h4>
 <p>ESLintによるフォーマットに関する設定を定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;plugins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;simple-import-sort&quot;</span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;simple-import-sort/imports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;simple-import-sort/exports&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">js</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@eslint/js&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">globals</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;globals&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">reactHooks</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;eslint-plugin-react-hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">reactRefresh</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;eslint-plugin-react-refresh&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">tseslint</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;typescript-eslint&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">simpleImportSort</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;eslint-plugin-simple-import-sort&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">,</span><span class="w"> </span><span class="nx">globalIgnores</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;eslint/config&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">([</span>
+<span class="w">  </span><span class="nx">globalIgnores</span><span class="p">([</span><span class="s2">&quot;dist&quot;</span><span class="p">]),</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;**/*.{ts,tsx}&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nx">languageOptions</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">ecmaVersion</span><span class="o">:</span><span class="w"> </span><span class="mf">2020</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">globals</span><span class="o">:</span><span class="w"> </span><span class="nx">globals</span><span class="p">.</span><span class="nx">browser</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;simple-import-sort&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">simpleImportSort</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">rules</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;simple-import-sort/imports&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;simple-import-sort/exports&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="k">extends</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="nx">js</span><span class="p">.</span><span class="nx">configs</span><span class="p">.</span><span class="nx">recommended</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">tseslint</span><span class="p">.</span><span class="nx">configs</span><span class="p">.</span><span class="nx">recommended</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">reactHooks</span><span class="p">.</span><span class="nx">configs</span><span class="p">.</span><span class="nx">flat</span><span class="p">.</span><span class="nx">recommended</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">reactRefresh</span><span class="p">.</span><span class="nx">configs</span><span class="p">.</span><span class="nx">vite</span><span class="p">,</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">]);</span>
 </code></pre></div>
 <h4 id="appstorets"><code>app/store.ts</code></h4>
 <p>各種reducerを取りまとめたstoreを作成します。</p>
@@ -10193,7 +10217,7 @@ npm<span class="w"> </span>install
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">AppDispatch</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useSelector</span><span class="p">.</span><span class="nx">withTypes</span><span class="o">&lt;</span><span class="nx">RootState</span><span class="o">&gt;</span><span class="p">();</span>
 </code></pre></div>
-<h4 id="indextsx"><code>index.tsx</code></h4>
+<h4 id="maintsx"><code>main.tsx</code></h4>
 <p><code>Provider</code>コンポーネントで<code>App</code>コンポーネントをラップします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;./index.module.scss&quot;</span><span class="p">;</span>
 
@@ -10258,7 +10282,7 @@ npm<span class="w"> </span>install
 </code></pre></div>
 <h4 id="featurescountercounterslicets"><code>features/counter/counterSlice.ts</code></h4>
 <p>画面の状態を管理するためのreducerおよびactionを定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">,</span><span class="w"> </span><span class="nx">PayloadAction</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">PayloadAction</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * カウンター画面の状態を管理するstateです。</span>
