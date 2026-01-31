@@ -136,7 +136,7 @@ export const login = createAsyncThunk<
     }
 
     return { valid: res.valid };
-  } catch (e) {
+  } catch {
     return rejectWithValue({ message: "不明なエラーが発生しました。" });
   }
 });
@@ -205,7 +205,7 @@ export default authSlice.reducer;
 import { useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { login, LoginForm } from "./authThunks";
+import { login, type LoginForm } from "./authThunks";
 
 /**
  * ログイン画面のコンポーネントです。
