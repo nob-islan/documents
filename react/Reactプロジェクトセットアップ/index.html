@@ -9066,49 +9066,10 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="プロジェクト作成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#redux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        redux
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scss" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        scss
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#eslint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        eslint
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
-  <a href="#redux_1" class="md-nav__link">
+  <a href="#redux" class="md-nav__link">
     <span class="md-ellipsis">
       
         Redux向け実装
@@ -9954,49 +9915,10 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="プロジェクト作成">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#redux" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        redux
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scss" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        scss
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#eslint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        eslint
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
-  <a href="#redux_1" class="md-nav__link">
+  <a href="#redux" class="md-nav__link">
     <span class="md-ellipsis">
       
         Redux向け実装
@@ -10183,11 +10105,11 @@
 <p>cf. <a href="https://react-redux.js.org/tutorials/quick-start">https://react-redux.js.org/tutorials/quick-start</a></p>
 <h2 id="_1">プロジェクト作成</h2>
 <p>プロジェクトの新規作成方法について記載します。</p>
-<h3 id="redux">redux</h3>
 <ul>
-<li>プロジェクトを新規作成します。</li>
+<li><a href="https://vite.dev/">Vite</a>を使ってプロジェクトを新規作成します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code>npx<span class="w"> </span>create-react-app<span class="w"> </span>easyweb<span class="w"> </span>--template<span class="w"> </span>typescript
+<div class="highlight"><pre><span></span><code><span class="c1"># cf. https://vite.dev/guide/?utm_source=chatgpt.com#scaffolding-your-first-vite-project</span>
+npm<span class="w"> </span>create<span class="w"> </span>vite@latest<span class="w"> </span>easyweb<span class="w"> </span>--<span class="w"> </span>--template<span class="w"> </span>react-ts
 </code></pre></div>
 <ul>
 <li>reduxおよび他必要なものをインストールします。</li>
@@ -10195,19 +10117,17 @@
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>easyweb
 npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span class="w"> </span>react-redux<span class="w"> </span>react-router-dom
 </code></pre></div>
-<h3 id="scss">scss</h3>
 <ul>
 <li><code>XXX.module.scss</code>を使えるようにするため、下記をインストールします。</li>
 </ul>
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>sass<span class="w"> </span>node-sass
 </code></pre></div>
-<h3 id="eslint">eslint</h3>
 <ul>
 <li><a href="https://github.com/lydell/eslint-plugin-simple-import-sort">eslint-plugin-simple-import-sort</a>によるフォーマットを有効化するため、下記をインストールします:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>eslint-plugin-simple-import-sort
 </code></pre></div>
-<h2 id="redux_1">Redux向け実装</h2>
+<h2 id="redux">Redux向け実装</h2>
 <p>Reduxを動かすために必要な改修およびサンプルコードについて記載します。サンプルではカウンターを増減させる画面を実装します。</p>
 <h3 id="_2">ディレクトリ構成</h3>
 <p>自動生成されるもののうち、手を入れる必要がないものについては除外しています。</p>
@@ -10415,7 +10335,7 @@ npm<span class="w"> </span>install<span class="w"> </span>@reduxjs/toolkit<span 
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_4">起動</h2>
-<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>start
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span>dev<span class="w"> </span>--<span class="w"> </span>--host
 </code></pre></div>
 <p>起動後、<a href="http://localhost:3000">http://localhost:3000</a> で画面が確認できます。</p>
 
