@@ -53,7 +53,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
     │   └── counter
     │       ├── counterSlice.ts  # コンポーネントの状態およびアクションの定義
     │       └── Counter.tsx      # コンポーネント本体
-    ├── index.module.scss        # 画面全体の装飾
+    ├── index.scss               # 画面全体の装飾
     ├── main.tsx                 # アプリケーションのエントリポイント
     └── .prettierrc              # Prettierによるコードフォーマットの設定
 ```
@@ -150,7 +150,7 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 `Provider`コンポーネントで`App`コンポーネントをラップします。
 
 ```tsx
-import "./index.module.scss";
+import "./index.scss";
 
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -290,7 +290,7 @@ const App = () => {
 export default App;
 ```
 
-#### `index.module.scss`
+#### `index.scss`
 
 Webページ全体の装飾を定義します。
 
