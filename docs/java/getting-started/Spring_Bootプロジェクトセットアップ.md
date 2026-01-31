@@ -272,7 +272,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public MeOutModel me(MeInModel inModel) {
 
-        Users users = usersRepository.findByName("nob");
+        Users users = usersRepository.findByName(inModel.getName());
         return new MeOutModel(users.getName(), users.getAge());
     }
 }
