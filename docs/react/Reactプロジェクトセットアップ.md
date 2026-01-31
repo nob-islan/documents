@@ -8,12 +8,11 @@ cf. https://react-redux.js.org/tutorials/quick-start
 
 プロジェクトの新規作成方法について記載します。
 
-### redux
-
-- プロジェクトを新規作成します。
+- [Vite](https://vite.dev/)を使ってプロジェクトを新規作成します。
 
 ```shell
-npx create-react-app easyweb --template typescript
+# cf. https://vite.dev/guide/?utm_source=chatgpt.com#scaffolding-your-first-vite-project
+npm create vite@latest easyweb -- --template react-ts
 ```
 
 - reduxおよび他必要なものをインストールします。
@@ -23,15 +22,11 @@ cd easyweb
 npm install @reduxjs/toolkit react-redux react-router-dom
 ```
 
-### scss
-
 - `XXX.module.scss`を使えるようにするため、下記をインストールします。
 
 ```shell
 npm install sass node-sass
 ```
-
-### eslint
 
 - [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort)によるフォーマットを有効化するため、下記をインストールします:
 
@@ -297,7 +292,7 @@ App配下の装飾を定義します。
 ## 起動
 
 ```shell
-npm start
+npm run dev -- --host
 ```
 
 起動後、http://localhost:3000 で画面が確認できます。
