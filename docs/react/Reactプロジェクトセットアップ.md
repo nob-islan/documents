@@ -182,9 +182,9 @@ import { decrement, increment } from "./counterSlice";
 /**
  * カウンター画面のPropsを定義するモデルです。
  */
-interface CounterProps {
+type CounterProps = {
   title: string;
-}
+};
 
 /**
  * カウンター画面を提供するコンポーネントです。
