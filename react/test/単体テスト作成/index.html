@@ -9084,10 +9084,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todo_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODO カバレッジ出力
+        カバレッジ出力
       
     </span>
   </a>
@@ -9975,10 +9975,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#todo_1" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TODO カバレッジ出力
+        カバレッジ出力
       
     </span>
   </a>
@@ -10044,7 +10044,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@testing-library/jest-dom/vitest&quot;</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li><code>vite.config.js</code>を下記内容で更新します:</li>
+<li><code>vite.config.ts</code>を下記内容で更新します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">svelte</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@sveltejs/vite-plugin-svelte&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">svelteTesting</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@testing-library/svelte/vite&quot;</span><span class="p">;</span>
@@ -10202,7 +10202,36 @@
 </ul>
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span><span class="nb">test</span><span class="w"> </span>src/features/<span class="o">{</span>component<span class="o">}</span>
 </code></pre></div>
-<h2 id="todo_1">TODO カバレッジ出力</h2>
+<h2 id="_4">カバレッジ出力</h2>
+<p>cf. <a href="https://vitest.dev/guide/coverage.html">https://vitest.dev/guide/coverage.html</a></p>
+<ul>
+<li>パッケージをインストールします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>i<span class="w"> </span>-D<span class="w"> </span>@vitest/coverage-v8
+</code></pre></div>
+<ul>
+<li><code>vite.config.ts</code>に<code>test.config</code>を追加します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">coverage</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">provider</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;v8&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">include</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src/features&quot;</span><span class="p">],</span><span class="w"> </span><span class="c1">// features配下のみカバレッジ集計</span>
+<span class="w">      </span><span class="nx">exclude</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src/features/**/*Api*.ts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/features/**/*module.scss&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1">// xxxApi.tsはモック化するのでカバレッジ対象外、scssも対象外</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>package.json</code>にカバレッジ出力スクリプトを追加します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vitest run --coverage&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>下記コマンドを実行すると<code>coverage</code>ディレクトリ配下にカバレッジレポートが出力されます:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span>coverage
+</code></pre></div>
 
 
 
