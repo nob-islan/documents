@@ -221,10 +221,20 @@ export const Auth = () => {
     <div>
       <form onSubmit={handleSubmit((form: LoginForm) => dispatch(login(form)))}>
         <div>
-          <input {...register("name")} type="text" placeholder="name" />
+          <input
+            aria-label="name"
+            {...register("name")}
+            type="text"
+            placeholder="name"
+          />
         </div>
         <div>
-          <input {...register("password")} type="password" placeholder="pass" />
+          <input
+            aria-label="password"
+            {...register("password")}
+            type="password"
+            placeholder="password"
+          />
         </div>
         <div>
           <button type="submit">ログイン</button>
