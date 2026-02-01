@@ -59,7 +59,7 @@
 
 <div class="grid cards" markdown>
 
-- **[Reactプロジェクトセットアップ](./react/Reactプロジェクトセットアップ.md)**
+- **[Reactプロジェクトセットアップ](./react/getting-started/Reactプロジェクトセットアップ.md)**
   <br> React・Redux・TypeScriptでUIを実装するサンプルです。
 
 </div>
