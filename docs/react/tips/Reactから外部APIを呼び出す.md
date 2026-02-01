@@ -30,14 +30,14 @@ APIの呼び出しのみを行います。
 /**
  * ユーザ情報取得APIのリクエストモデルです。
  */
-type MeApiRequest = {
+type MeRequest = {
   name: string;
 };
 
 /**
  * ユーザ情報取得APIからの正常レスポンスを格納するモデルです。
  */
-type MeApiSuccess = {
+type MeSuccess = {
   ok: true;
   name: string;
   age: number;
@@ -46,7 +46,7 @@ type MeApiSuccess = {
 /**
  * ユーザ情報取得APIからの異常レスポンスを格納するモデルです。
  */
-type MeApiError = {
+type MeError = {
   ok: false;
   message: string;
 };
@@ -54,7 +54,7 @@ type MeApiError = {
 /**
  * ユーザ情報取得APIのレスポンスモデルです。
  */
-type MeApiResponse = MeApiSuccess | MeApiError;
+type MeResponse = MeSuccess | MeError;
 
 /**
  * ユーザ情報取得APIを呼び出します。
@@ -62,7 +62,7 @@ type MeApiResponse = MeApiSuccess | MeApiError;
  * @param req ユーザ情報検索リクエスト
  * @returns ユーザ情報
  */
-export const meApi = async (req: MeApiRequest): Promise<MeApiResponse> => {
+export const me = async (req: MeRequest): Promise<MeResponse> => {
   const url = new URL("/api/v1/me", window.location.origin);
 
   url.search = new URLSearchParams({
@@ -90,7 +90,7 @@ export const meApi = async (req: MeApiRequest): Promise<MeApiResponse> => {
 ```ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { meApi } from "./meApi";
+import { me } from "./meApi";
 
 /**
  * リクエスト情報を画面から渡すモデルです。
@@ -117,13 +117,13 @@ type FetchMeError = {
 /**
  * ユーザ情報取得APIを呼び出して取得したユーザ情報をstateに保持します。
  */
-export const fetchMe = createAsyncThunk<
+export const fetchMeThunk = createAsyncThunk<
   FetchMeSuccess,
   FetchMeForm,
   { rejectValue: FetchMeError }
 >("me/fetch", async (form, { rejectWithValue }) => {
   try {
-    const res = await meApi({ name: form.name });
+    const res = await me({ name: form.name });
 
     if (!res.ok) {
       return rejectWithValue({ message: res.message });
@@ -143,7 +143,7 @@ API呼び出し時の状態管理を`extraReducers`で行います。
 ```ts
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMe } from "./meThunks";
+import { fetchMeThunk } from "./meThunks";
 
 /**
  * ユーザ情報表示コンポーネントの状態を保持するstateです。
@@ -169,13 +169,13 @@ const meSlice = createSlice({
       /**
        * ユーザ取得API呼び出し開始時の状態遷移
        */
-      .addCase(fetchMe.pending, (state) => {
+      .addCase(fetchMeThunk.pending, (state) => {
         state.loading = true;
       })
       /**
        * ユーザ取得API呼び出し正常終了の状態遷移
        */
-      .addCase(fetchMe.fulfilled, (state, action) => {
+      .addCase(fetchMeThunk.fulfilled, (state, action) => {
         state.profile = action.payload.name + " (" + action.payload.age + ")";
         state.errorMessage = "";
         state.loading = false;
@@ -183,7 +183,7 @@ const meSlice = createSlice({
       /**
        * ユーザ取得API呼び出し異常終了時の状態遷移
        */
-      .addCase(fetchMe.rejected, (state, action) => {
+      .addCase(fetchMeThunk.rejected, (state, action) => {
         state.errorMessage = action.payload?.message;
         state.loading = false;
       });
@@ -199,7 +199,7 @@ stateの値を使って画面のレンダリングを行います。
 
 ```tsx
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchMe } from "./meThunks";
+import { fetchMeThunk } from "./meThunks";
 
 /**
  * ユーザ情報を取得・表示するコンポーネントです。
@@ -217,7 +217,9 @@ export const Me = () => {
       ) : (
         <div>{meState.profile}</div>
       )}
-      <button onClick={() => dispatch(fetchMe({ name: "nob" }))}>検索</button>
+      <button onClick={() => dispatch(fetchMeThunk({ name: "nob" }))}>
+        検索
+      </button>
     </div>
   );
 };

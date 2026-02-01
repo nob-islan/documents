@@ -31,7 +31,7 @@ APIの仕様に合わせたモデル`LoginApiRequest`および`LoginApiResponse`
 /**
  * ログインAPIのリクエストモデルです。
  */
-type LoginApiRequest = {
+type LoginRequest = {
   name: string;
   password: string;
 };
@@ -39,7 +39,7 @@ type LoginApiRequest = {
 /**
  * ログインAPIからの正常レスポンスを格納するモデルです。
  */
-type LoginApiSuccess = {
+type LoginSuccess = {
   ok: true;
   valid: boolean;
 };
@@ -47,7 +47,7 @@ type LoginApiSuccess = {
 /**
  * ログインAPIからの以上レスポンスを格納するモデルです。
  */
-type LoginApiError = {
+type LoginError = {
   ok: false;
   message: string;
 };
@@ -55,7 +55,7 @@ type LoginApiError = {
 /**
  * ログインAPIのレスポンスモデルです。
  */
-type LoginApiResponse = LoginApiSuccess | LoginApiError;
+type LoginResponse = LoginSuccess | LoginError;
 
 /**
  * ログインAPIを呼び出します。
@@ -63,9 +63,7 @@ type LoginApiResponse = LoginApiSuccess | LoginApiError;
  * @param req ログイン情報
  * @returns 認証可否
  */
-export const loginApi = async (
-  req: LoginApiRequest,
-): Promise<LoginApiResponse> => {
+export const login = async (req: LoginRequest): Promise<LoginResponse> => {
   const url = new URL("/api/v1/login", window.location.origin);
 
   const res = await fetch(url.toString(), {
@@ -93,7 +91,7 @@ export const loginApi = async (
 ```ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { loginApi } from "./authApi";
+import { login } from "./authApi";
 
 /**
  * ログインリクエスト情報を画面から渡すモデルです。
@@ -120,13 +118,13 @@ type LoginError = {
 /**
  * ログインAPIを呼び出して返ってきた結果をstateに保持します。
  */
-export const login = createAsyncThunk<
+export const loginThunk = createAsyncThunk<
   LoginSuccess,
   LoginForm,
   { rejectValue: LoginError }
 >("auth/login", async (form, { rejectWithValue }) => {
   try {
-    const res = await loginApi({
+    const res = await login({
       name: form.name,
       password: form.password,
     });
@@ -149,7 +147,7 @@ API呼び出し時の状態管理をextraReducersで行います。
 ```ts
 import { createSlice } from "@reduxjs/toolkit";
 
-import { login } from "./authThunks";
+import { loginThunk } from "./authThunks";
 
 /**
  * ログインの状態を保持するstateです。
@@ -173,21 +171,21 @@ const authSlice = createSlice({
       /**
        * ログインAPI呼び出し開始時の状態遷移
        */
-      .addCase(login.pending, (state) => {
+      .addCase(loginThunk.pending, (state) => {
         state.valid = false;
         state.message = "ログイン中...";
       })
       /**
        * ログインAPI呼び出し正常終了時の状態遷移
        */
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(loginThunk.fulfilled, (state, action) => {
         state.valid = action.payload.valid;
         state.message = action.payload.valid ? "ログイン完了" : "ログイン失敗";
       })
       /**
        * ログインAPI呼び出し異常終了時の状態遷移
        */
-      .addCase(login.rejected, (state, action) => {
+      .addCase(loginThunk.rejected, (state, action) => {
         state.valid = false;
         state.message = action.payload?.message;
       });
@@ -205,7 +203,7 @@ export default authSlice.reducer;
 import { useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { login, type LoginForm } from "./authThunks";
+import { type LoginForm, loginThunk } from "./authThunks";
 
 /**
  * ログイン画面のコンポーネントです。
@@ -219,7 +217,9 @@ export const Auth = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit((form: LoginForm) => dispatch(login(form)))}>
+      <form
+        onSubmit={handleSubmit((form: LoginForm) => dispatch(loginThunk(form)))}
+      >
         <div>
           <input
             aria-label="name"
