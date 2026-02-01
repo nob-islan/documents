@@ -4,7 +4,7 @@ React + TypeScriptでの開発環境のサンプルです:
 
 ```json
 {
-  "name": "React Test",
+  "name": "React",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
   "features": {},
   "customizations": {
