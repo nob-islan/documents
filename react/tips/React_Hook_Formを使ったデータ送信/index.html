@@ -10045,7 +10045,7 @@
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * ログインAPIのリクエストモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">LoginApiRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">LoginRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
@@ -10053,7 +10053,7 @@
 <span class="cm">/**</span>
 <span class="cm"> * ログインAPIからの正常レスポンスを格納するモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">LoginApiSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">LoginSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">valid</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
 <span class="p">};</span>
@@ -10061,7 +10061,7 @@
 <span class="cm">/**</span>
 <span class="cm"> * ログインAPIからの以上レスポンスを格納するモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">LoginApiError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">LoginError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
@@ -10069,7 +10069,7 @@
 <span class="cm">/**</span>
 <span class="cm"> * ログインAPIのレスポンスモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">LoginApiResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LoginApiSuccess</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">LoginApiError</span><span class="p">;</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">LoginResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">LoginSuccess</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">LoginError</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログインAPIを呼び出します。</span>
@@ -10077,9 +10077,7 @@
 <span class="cm"> * @param req ログイン情報</span>
 <span class="cm"> * @returns 認証可否</span>
 <span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">loginApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginApiRequest</span><span class="p">,</span>
-<span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">LoginApiResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">req</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginRequest</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">LoginResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;/api/v1/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">);</span>
 
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">toString</span><span class="p">(),</span><span class="w"> </span><span class="p">{</span>
@@ -10103,7 +10101,7 @@
 <p>画面仕様に合わせた型<code>LoginForm</code>から<code>LoginApiRequest</code>にデータを詰め替えてAPI呼び出し関数を実行します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">loginApi</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authApi&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authApi&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログインリクエスト情報を画面から渡すモデルです。</span>
@@ -10130,13 +10128,13 @@
 <span class="cm">/**</span>
 <span class="cm"> * ログインAPIを呼び出して返ってきた結果をstateに保持します。</span>
 <span class="cm"> */</span>
-<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">loginThunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
 <span class="w">  </span><span class="nx">LoginSuccess</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">LoginForm</span><span class="p">,</span>
 <span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectValue</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginError</span><span class="w"> </span><span class="p">}</span>
 <span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;auth/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">loginApi</span><span class="p">({</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">login</span><span class="p">({</span>
 <span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">form.name</span><span class="p">,</span>
 <span class="w">      </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">form.password</span><span class="p">,</span>
 <span class="w">    </span><span class="p">});</span>
@@ -10155,7 +10153,7 @@
 <p>API呼び出し時の状態管理をextraReducersで行います。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">loginThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログインの状態を保持するstateです。</span>
@@ -10179,21 +10177,21 @@
 <span class="w">      </span><span class="cm">/**</span>
 <span class="cm">       * ログインAPI呼び出し開始時の状態遷移</span>
 <span class="cm">       */</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">.</span><span class="nx">pending</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ログイン中...&quot;</span><span class="p">;</span>
 <span class="w">      </span><span class="p">})</span>
 <span class="w">      </span><span class="cm">/**</span>
 <span class="cm">       * ログインAPI呼び出し正常終了時の状態遷移</span>
 <span class="cm">       */</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">.</span><span class="nx">fulfilled</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">valid</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">.</span><span class="nx">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;ログイン完了&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ログイン失敗&quot;</span><span class="p">;</span>
 <span class="w">      </span><span class="p">})</span>
 <span class="w">      </span><span class="cm">/**</span>
 <span class="cm">       * ログインAPI呼び出し異常終了時の状態遷移</span>
 <span class="cm">       */</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">login</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="o">?</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
 <span class="w">      </span><span class="p">});</span>
@@ -10207,7 +10205,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-hook-form&quot;</span><span class="p">;</span>
 
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">LoginForm</span><span class="p">,</span><span class="w"> </span><span class="nx">loginThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログイン画面のコンポーネントです。</span>
@@ -10221,7 +10219,9 @@
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span><span class="w"> </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">((</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">login</span><span class="p">(</span><span class="nx">form</span><span class="p">)))}&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span>
+<span class="w">        </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">((</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">(</span><span class="nx">form</span><span class="p">)))}</span>
+<span class="w">      </span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span>
 <span class="w">            </span><span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;name&quot;</span>
