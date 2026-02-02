@@ -203,6 +203,7 @@ export default authSlice.reducer;
 import { useForm } from "react-hook-form";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import style from "./auth.module.scss";
 import { type LoginForm, loginThunk } from "./authThunks";
 
 /**
@@ -216,16 +217,17 @@ export const Auth = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <>
+    <div className={style.container}>
       <form
         onSubmit={handleSubmit((form: LoginForm) => dispatch(loginThunk(form)))}
       >
-        <div>
+        <div className={style.inputWrapper}>
           <input
             aria-label="name"
             {...register("name")}
             type="text"
             placeholder="name"
+            className={style.input}
           />
         </div>
         <div>
@@ -234,14 +236,56 @@ export const Auth = () => {
             {...register("password")}
             type="password"
             placeholder="password"
+            className={style.input}
           />
         </div>
-        <div>
-          <button type="submit">ログイン</button>
+        <div className={style.loginButtonWrapper}>
+          <button type="submit" className={style.loginButton}>
+            ログイン
+          </button>
         </div>
         {authState.message && <div>{authState.message}</div>}
       </form>
-    </>
+    </div>
   );
 };
+```
+
+### `features/auth/auth.module.scss`
+
+```scss
+$fontSize: 18px;
+$borderRadius: 10px;
+
+.container {
+  text-align: center;
+
+  .inputWrapper {
+    padding: 20px;
+  }
+
+  .input {
+    border-radius: $borderRadius;
+    width: 300px;
+    height: 35px;
+    font-size: $fontSize;
+  }
+
+  .loginButtonWrapper {
+    padding: 20px;
+  }
+
+  .loginButton {
+    border-radius: $borderRadius;
+    width: 120px;
+    height: 40px;
+    font-size: $fontSize;
+    background-color: #ff9900;
+  }
+
+  .loginButton:hover {
+    cursor: pointer;
+    background-color: #fa6f00;
+  }
+}
 ```
