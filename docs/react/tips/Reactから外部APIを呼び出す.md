@@ -211,7 +211,7 @@ export const Me = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
+    <>
       {meState.errorMessage ? (
         <div>{meState.errorMessage}</div>
       ) : (
@@ -220,7 +220,7 @@ export const Me = () => {
       <button onClick={() => dispatch(fetchMeThunk({ name: "nob" }))}>
         検索
       </button>
-    </div>
+    </>
   );
 };
 ```
