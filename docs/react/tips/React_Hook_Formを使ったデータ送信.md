@@ -230,7 +230,7 @@ export const Auth = () => {
             className={style.input}
           />
         </div>
-        <div>
+        <div className={style.inputWrapper}>
           <input
             aria-label="password"
             {...register("password")}
@@ -261,31 +261,31 @@ $borderRadius: 10px;
   text-align: center;
 
   .inputWrapper {
-    padding: 20px;
-  }
+    padding: 10px;
 
-  .input {
-    border-radius: $borderRadius;
-    width: 300px;
-    height: 35px;
-    font-size: $fontSize;
+    .input {
+      border-radius: $borderRadius;
+      width: 300px;
+      height: 35px;
+      font-size: $fontSize;
+    }
   }
 
   .loginButtonWrapper {
     padding: 20px;
-  }
 
-  .loginButton {
-    border-radius: $borderRadius;
-    width: 120px;
-    height: 40px;
-    font-size: $fontSize;
-    background-color: #ff9900;
-  }
+    .loginButton {
+      border-radius: $borderRadius;
+      width: 120px;
+      height: 40px;
+      font-size: $fontSize;
+      background-color: #ff9900;
+    }
 
-  .loginButton:hover {
-    cursor: pointer;
-    background-color: #fa6f00;
+    .loginButton:hover {
+      cursor: pointer;
+      background-color: #fa6f00;
+    }
   }
 }
 ```
