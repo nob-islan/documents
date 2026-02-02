@@ -216,7 +216,7 @@ export const Auth = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
+    <>
       <form
         onSubmit={handleSubmit((form: LoginForm) => dispatch(loginThunk(form)))}
       >
@@ -241,7 +241,7 @@ export const Auth = () => {
         </div>
         {authState.message && <div>{authState.message}</div>}
       </form>
-    </div>
+    </>
   );
 };
 ```
