@@ -286,7 +286,6 @@ $fontSize: 18px;
     border-radius: 20px;
     width: 150px;
     height: 40px;
-    font-style: normal;
     font-size: $fontSize;
     background-color: #ff9900;
   }
