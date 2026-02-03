@@ -9961,7 +9961,7 @@
 <h1 id="spring-boot">Spring Bootアプリをビルド</h1>
 <p>GitLab Runnerを使ってSpring Bootアプリケーションのコンテナイメージをビルドします。</p>
 <h2 id="_1">設定ファイル</h2>
-<h3 id="dockerfile">Dockerfile</h3>
+<h3 id="dockerfile"><code>Dockerfile</code></h3>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">eclipse-temurin:21</span>
 
 <span class="c"># 後述のci.yamlから渡される環境変数</span>
@@ -9975,7 +9975,7 @@
 
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;java -jar /${artifact_name}&quot;</span><span class="p">]</span>
 </code></pre></div>
-<h3 id="pomxml">pom.xml</h3>
+<h3 id="pomxml"><code>pom.xml</code></h3>
 <p>カバレッジレポートを出力するために依存関係を追加する必要があります:</p>
 <div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
 <span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
@@ -10017,7 +10017,7 @@
 <span class="w">    </span><span class="nt">&lt;/reporting&gt;</span>
 <span class="nt">&lt;/project&gt;</span>
 </code></pre></div>
-<h3 id="gitlab-ciyml">.gitlab-ci.yml</h3>
+<h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
 <p>cf.</p>
 <ul>
 <li><a href="https://docs.gitlab.com/ci/testing/unit_test_report_examples/#maven">UT結果をWebで確認</a></li>

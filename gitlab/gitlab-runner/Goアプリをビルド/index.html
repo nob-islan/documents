@@ -9939,7 +9939,7 @@
 <h1 id="go">Goアプリをビルド</h1>
 <p>GitLab Runnerを使ってGoアプリケーションのコンテナイメージをビルドします。</p>
 <h2 id="_1">設定ファイル</h2>
-<h3 id="dockerfile">Dockerfile</h3>
+<h3 id="dockerfile"><code>Dockerfile</code></h3>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">golang:1.24</span>
 
 <span class="c"># 後述のci.yamlから渡される環境変数</span>
@@ -9949,7 +9949,7 @@
 
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;/main&quot;</span><span class="p">]</span>
 </code></pre></div>
-<h3 id="gitlab-ciyml">.gitlab-ci.yml</h3>
+<h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
 <p>cf.</p>
 <ul>
 <li><a href="https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html#go">UT結果をWebで確認</a></li>

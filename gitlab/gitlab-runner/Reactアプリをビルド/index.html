@@ -9939,7 +9939,7 @@
 <h1 id="react">Reactアプリをビルド</h1>
 <p>GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。</p>
 <h2 id="_1">設定ファイル</h2>
-<h3 id="dockerfile">Dockerfile</h3>
+<h3 id="dockerfile"><code>Dockerfile</code></h3>
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">node:24-bookworm</span>
 
 <span class="c"># 後述のci.yamlから渡される環境変数</span>
@@ -9950,7 +9950,7 @@
 
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dist&quot;</span><span class="p">]</span>
 </code></pre></div>
-<h3 id="gitlab-ciyml">.gitlab-ci.yml</h3>
+<h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
 <p>下記ステージで構成します:</p>
 <ul>
 <li>モジュールビルド</li>
