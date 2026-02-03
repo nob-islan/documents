@@ -9937,7 +9937,6 @@
 
 
 <h1 id="react">Reactアプリをビルド</h1>
-<p>This is a test message</p>
 <p>GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。</p>
 <h2 id="_1">設定ファイル</h2>
 <h3 id="dockerfile"><code>Dockerfile</code></h3>
@@ -9952,18 +9951,47 @@
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;serve&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dist&quot;</span><span class="p">]</span>
 </code></pre></div>
 <h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
+<p>cf.</p>
+<ul>
+<li><a href="https://vitest.dev/guide/reporters.html#junit-reporter">Vitest JUnit Reporter</a></li>
+<li><a href="https://docs.gitlab.com/ci/testing/unit_test_report_examples/">Unit test report examples</a></li>
+</ul>
 <p>下記ステージで構成します:</p>
 <ul>
-<li>モジュールビルド</li>
-<li>コンテナイメージpush</li>
+<li>UT一括実行<ul>
+<li>テスト結果およびカバレッジの達成率についてはパイプラインのジョブ上から確認できます。</li>
+<li>カバレッジの詳細についてはアーティファクトに出力しているのでダウンロードすることで確認できます。</li>
 </ul>
-<p>push先はharborを想定しています。</p>
+</li>
+<li>モジュールビルド</li>
+<li>コンテナイメージpush<ul>
+<li>push先はharborを想定しています。</li>
+</ul>
+</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push</span>
 <span class="nt">variables</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">MODULE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">easyweb</span><span class="w"> </span><span class="c1"># アプリのモジュール名</span>
 <span class="w">  </span><span class="nt">ARTIFACT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/dist</span><span class="w"> </span><span class="c1"># ビルド成果物のパス</span>
+<span class="nt">test</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:24-bookworm</span>
+<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${MODULE}</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npx vitest --reporter=junit --outputFile=junit.xml --coverage</span>
+<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/coverage</span>
+<span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">junit</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${MODULE}/junit.xml</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 <span class="nt">build</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:24-bookworm</span>
