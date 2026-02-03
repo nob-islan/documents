@@ -1,7 +1,5 @@
 # Reactアプリをビルド
 
-This is a test message
-
 GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
@@ -22,20 +20,44 @@ CMD ["serve", "-s", "dist"]
 
 ### `.gitlab-ci.yml`
 
+cf.
+
+- [Vitest JUnit Reporter](https://vitest.dev/guide/reporters.html#junit-reporter)
+- [Unit test report examples](https://docs.gitlab.com/ci/testing/unit_test_report_examples/)
+
 下記ステージで構成します:
 
+- UT一括実行
+  - テスト結果およびカバレッジの達成率についてはパイプラインのジョブ上から確認できます。
+  - カバレッジの詳細についてはアーティファクトに出力しているのでダウンロードすることで確認できます。
 - モジュールビルド
 - コンテナイメージpush
-
-push先はharborを想定しています。
+  - push先はharborを想定しています。
 
 ```yaml
 stages:
+  - test
   - build
   - push
 variables:
   MODULE: easyweb # アプリのモジュール名
   ARTIFACT_PATH: ${MODULE}/dist # ビルド成果物のパス
+test:
+  image: node:24-bookworm
+  stage: test
+  script:
+    - cd ${MODULE}
+    - npm install
+    - npx vitest --reporter=junit --outputFile=junit.xml --coverage
+  artifacts:
+    when: always
+    paths:
+      - ${MODULE}/coverage
+    reports:
+      junit:
+        - ${MODULE}/junit.xml
+  rules:
+    - if: $CI_COMMIT_TAG
 build:
   stage: build
   image: node:24-bookworm
