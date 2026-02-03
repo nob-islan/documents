@@ -1,5 +1,7 @@
 # Reactアプリをビルド
 
+This is a test message
+
 GitLab Runnerを使ってReactアプリケーションのコンテナイメージをビルドします。
 
 ## 設定ファイル
