@@ -4,7 +4,7 @@ GitLab Runnerを使ってSpring Bootアプリケーションのコンテナイ�
 
 ## 設定ファイル
 
-### Dockerfile
+### `Dockerfile`
 
 ```Dockerfile
 FROM eclipse-temurin:21
@@ -21,7 +21,7 @@ COPY ${ARTIFACT_PATH} /${ARTIFACT_NAME}
 CMD ["sh", "-c", "java -jar /${artifact_name}"]
 ```
 
-### pom.xml
+### `pom.xml`
 
 カバレッジレポートを出力するために依存関係を追加する必要があります:
 
@@ -69,7 +69,7 @@ CMD ["sh", "-c", "java -jar /${artifact_name}"]
 </project>
 ```
 
-### .gitlab-ci.yml
+### `.gitlab-ci.yml`
 
 cf.
 

@@ -4,7 +4,7 @@ GitLab Runnerを使ってGoアプリケーションのコンテナイメージ�
 
 ## 設定ファイル
 
-### Dockerfile
+### `Dockerfile`
 
 ```Dockerfile
 FROM golang:1.24
@@ -17,7 +17,7 @@ COPY ${ARTIFACT_PATH} /main
 CMD ["/main"]
 ```
 
-### .gitlab-ci.yml
+### `.gitlab-ci.yml`
 
 cf.
 

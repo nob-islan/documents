@@ -4,7 +4,7 @@ GitLab Runnerを使ってReactアプリケーションのコンテナイメー�
 
 ## 設定ファイル
 
-### Dockerfile
+### `Dockerfile`
 
 ```Dockerfile
 FROM node:24-bookworm
@@ -18,7 +18,7 @@ COPY ${ARTIFACT_PATH} /dist
 CMD ["serve", "-s", "dist"]
 ```
 
-### .gitlab-ci.yml
+### `.gitlab-ci.yml`
 
 下記ステージで構成します:
 

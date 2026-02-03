@@ -14,7 +14,7 @@
 
 ## 設定ファイル
 
-### .gitlab-ci.yml
+### `.gitlab-ci.yml`
 
 デフォルトブランチにpushした際にrunnerが実行され、pagesが更新されます。
 
