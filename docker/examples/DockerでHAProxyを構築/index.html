@@ -9816,7 +9816,7 @@
 <h1 id="dockerhaproxy">DockerでHAProxyを構築</h1>
 <p>cf. <a href="https://www.haproxy.com/documentation/haproxy-configuration-tutorials/">https://www.haproxy.com/documentation/haproxy-configuration-tutorials/</a></p>
 <ul>
-<li>docker-composeを下記で作成します:</li>
+<li><code>docker-compose.yaml</code>を下記で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">haproxy</span><span class="p">:</span>
@@ -9828,7 +9828,7 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg</span>
 </code></pre></div>
 <ul>
-<li>haproxy.cfgを下記で作成します（see also; <a href="https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/configuration-basics/overview/#configuration-file-composition">Configuration file composition</a>）:</li>
+<li><code>haproxy.cfg</code>を下記で作成します（see also; <a href="https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/configuration-basics/overview/#configuration-file-composition">Configuration file composition</a>）:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>global
   maxconn 60000

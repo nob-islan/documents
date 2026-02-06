@@ -2167,7 +2167,7 @@
   <a href="#docker-composeyaml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        docker-compose.yaml
+        `docker-compose.yaml``
       
     </span>
   </a>
@@ -9940,7 +9940,7 @@
   <a href="#docker-composeyaml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        docker-compose.yaml
+        `docker-compose.yaml``
       
     </span>
   </a>
@@ -9996,7 +9996,7 @@
 </code></pre></div>
 <p>コンテナ起動時に、<code>initdb.d</code>配下のsqlファイルおよびシェルスクリプトが自動実行されます。ファイルの名前順に実行されるので、プレフィックスで順番を制御するのが良いです。</p>
 <h2 id="_3">設定ファイル</h2>
-<h3 id="docker-composeyaml">docker-compose.yaml</h3>
+<h3 id="docker-composeyaml">`docker-compose.yaml``</h3>
 <p>DBサーバおよびGUIでDBを管理できる<code>adminer</code>を起動します。</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">db</span><span class="p">:</span>
@@ -10016,7 +10016,7 @@
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8081:8080</span>
 </code></pre></div>
-<h3 id="create_dbsql">create_db.sql</h3>
+<h3 id="create_dbsql"><code>create_db.sql</code></h3>
 <p>テーブル作成、初期データ投入などを行うSQLファイルです。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- データベース作成</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>

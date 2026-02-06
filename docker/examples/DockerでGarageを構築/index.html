@@ -9816,7 +9816,7 @@
 <h1 id="dockergarage">DockerでGarageを構築</h1>
 <p>cf. <a href="https://garagehq.deuxfleurs.fr/">https://garagehq.deuxfleurs.fr/</a></p>
 <ul>
-<li>docker-compose.yamlを下記で作成します:</li>
+<li><code>docker-compose.yaml</code>を下記で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">garage</span><span class="p">:</span>
@@ -9833,7 +9833,7 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3903:3903</span>
 </code></pre></div>
 <ul>
-<li>volumes/garage.tomlを下記で作成します:</li>
+<li><code>volumes/garage.toml</code>を下記で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="n">metadata_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/tmp/meta&quot;</span>
 <span class="n">data_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/tmp/data&quot;</span>

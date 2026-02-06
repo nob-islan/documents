@@ -73,11 +73,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#dockerrustfs" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -2215,8 +2210,6 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-      
-        
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
@@ -9795,8 +9788,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -9813,7 +9804,9 @@
 
 
 
-<h1 id="dockerrustfs">DockerでRustFSを構築</h1>
+  <h1>DockerでRustFSを構築</h1>
+
+<p>`# DockerでRustFSを構築</p>
 <p>cf. <a href="https://github.com/rustfs/rustfs/blob/main/README.md">https://github.com/rustfs/rustfs/blob/main/README.md</a></p>
 <ul>
 <li>マウント用ディレクトリを作成します:</li>
@@ -9825,7 +9818,7 @@ mkdir<span class="w"> </span>-p<span class="w"> </span>volumes/data<span class="
 sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span><span class="m">10001</span>:10001<span class="w"> </span>volumes
 </code></pre></div>
 <ul>
-<li>下記でdocker-composeを作成します:</li>
+<li>下記で<code>docker-compose.yaml</code>を作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">rustfs</span><span class="p">:</span>
