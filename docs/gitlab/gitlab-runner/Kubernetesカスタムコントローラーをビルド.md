@@ -31,7 +31,7 @@ variables:
 test:
   stage: test
   image:
-    name: golang:1.24
+    name: golang:1.25
   script:
     - go install gotest.tools/gotestsum@latest
     - make test
