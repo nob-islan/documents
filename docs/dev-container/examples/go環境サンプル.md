@@ -5,7 +5,7 @@ Goでの開発環境のサンプルです:
 ```json
 {
   "name": "Go",
-  "image": "mcr.microsoft.com/devcontainers/go:1.24-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/go:1.25-bookworm",
   "features": {
     // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
