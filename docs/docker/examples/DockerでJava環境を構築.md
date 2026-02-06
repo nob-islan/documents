@@ -11,9 +11,9 @@
 ./mvnw package
 ```
 
-### Dockerfileを記載
+### `Dockerfile`を記載
 
-- 下記DockerfileでJavaアプリケーションを実行可能なコンテナイメージを作成します。
+- 下記`Dockerfile`でJavaアプリケーションを実行可能なコンテナイメージを作成します。
 
 ```Dockerfile
 FROM eclipse-temurin:21

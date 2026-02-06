@@ -20,7 +20,7 @@ root
 
 ## 設定ファイル
 
-### docker-compose.yaml
+### `docker-compose.yaml``
 
 DBサーバおよびGUIでDBを管理できる`adminer`を起動します。
 
@@ -44,7 +44,7 @@ services:
       - 8081:8080
 ```
 
-### create_db.sql
+### `create_db.sql`
 
 テーブル作成、初期データ投入などを行うSQLファイルです。
 

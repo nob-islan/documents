@@ -2,7 +2,7 @@
 
 ## gitlabコンテナを構築
 
-事前に`ip a`コマンドで仮想マシンのIPアドレスを調べておき、docker-compose.yamlを作成します。
+事前に`ip a`コマンドで仮想マシンのIPアドレスを調べておき、`docker-compose.yaml`を作成します。
 
 ```yaml
 services:

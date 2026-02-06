@@ -1,6 +1,6 @@
 # JpaRepository起動時のJavaアプリ制御
 
-JpaRepositoryを利用してrepository層を実装したJavaアプリについて、docker-composeにJava, DBの設定を単純に記載しただけだと起動がうまくいきませんでした。Java側からDBに接続しに行くのにDBの起動が間に合わず、接続に失敗して落ちることが原因だったため、下記のように順序制御を入れる必要があります:
+JpaRepositoryを利用してrepository層を実装したJavaアプリについて、`docker-compose.yaml`にJava, DBの設定を単純に記載しただけだと起動がうまくいきませんでした。Java側からDBに接続しに行くのにDBの起動が間に合わず、接続に失敗して落ちることが原因だったため、下記のように順序制御を入れる必要があります:
 
 ```yaml
 services:

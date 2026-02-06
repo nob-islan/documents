@@ -1,4 +1,4 @@
-# DockerでRustFSを構築
+`# DockerでRustFSを構築
 
 cf. https://github.com/rustfs/rustfs/blob/main/README.md
 
@@ -12,7 +12,7 @@ mkdir -p volumes/data volumes/logs
 sudo chown -R 10001:10001 volumes
 ```
 
-- 下記でdocker-composeを作成します:
+- 下記で`docker-compose.yaml`を作成します:
 
 ```yaml
 services:

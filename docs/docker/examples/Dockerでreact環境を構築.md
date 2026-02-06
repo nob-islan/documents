@@ -10,9 +10,9 @@
 npm run build
 ```
 
-### Dockerfileを記載
+### `Dockerfile`を記載
 
-- 下記Dockerfileでreactアプリケーションを実行可能なコンテナイメージを作成します。
+- 下記`Dockerfile`でreactアプリケーションを実行可能なコンテナイメージを作成します。
 
 ```Dockerfile
 FROM node:20.12.2-buster

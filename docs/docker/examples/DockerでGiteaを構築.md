@@ -9,7 +9,7 @@ mkdir -p volumes/gitea/{data,config}
 sudo chown 1000:1000 volumes/config/ volumes/data/
 ```
 
-- 下記でdocker-composeを作成します:
+- 下記で`docker-compose.yaml`を作成します:
 
 ```yaml
 services:
