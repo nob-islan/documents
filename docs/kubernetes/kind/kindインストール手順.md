@@ -2,6 +2,8 @@
 
 ローカルでマルチノードk8s環境を立ち上げるツールであるkindをインストールします。
 
+cf. https://kind.sigs.k8s.io/docs/user/quick-start/
+
 ## スペック
 
 - Ubuntu20.04.1 LTS
