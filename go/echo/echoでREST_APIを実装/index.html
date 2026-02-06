@@ -3859,7 +3859,23 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        起動
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3867,11 +3883,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -10047,7 +10058,23 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        起動
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10055,11 +10082,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -10107,7 +10129,7 @@
 <ul>
 <li>echoをインストールします。</li>
 </ul>
-<div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v4
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v5
 </code></pre></div>
 <h3 id="_4">実装</h3>
 <h4 id="internalhandler"><code>internal/handler/</code></h4>
@@ -10122,17 +10144,17 @@
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 認証のhandlerインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
 
 <span class="w">    </span><span class="c1">// ユーザ情報取得処理を呼び出します。</span>
-<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="nx">Me</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -10143,7 +10165,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersHandler</span><span class="p">{</span><span class="nx">usersUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// jsonパースエラー発生時はStatus400を返す</span>
 <span class="w">    </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
@@ -10163,7 +10185,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginRes</span><span class="p">(</span><span class="nx">out</span><span class="p">.</span><span class="nx">Valid</span><span class="p">()))</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">usersHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// クエリパラメータ取得</span>
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
@@ -10192,7 +10214,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;errors&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 認証向けのリクエストモデルです。</span>
@@ -10201,7 +10223,7 @@
 <span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;password&quot;`</span><span class="w"> </span><span class="c1">// パスワード</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">LoginReq</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">LoginReq</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">LoginReq</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Bind</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
@@ -10225,7 +10247,7 @@
 <span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span><span class="w"> </span><span class="c1">// ユーザ名</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="nx">MeReq</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewMeReq</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="nx">MeReq</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MeReq</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">QueryParam</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)}</span>
 <span class="p">}</span>
 
@@ -10246,7 +10268,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
@@ -10273,7 +10295,7 @@
 <span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
@@ -10301,10 +10323,22 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Routing</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;failed to start server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="api">APIドキュメントについて</h3>
+<h2 id="_5">起動</h2>
+<p>下記コマンドでアプリを起動します。</p>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>run<span class="w"> </span>cmd/main.go
+</code></pre></div>
+<p>下記コマンドでAPIを打鍵できます。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /login</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39;</span><span class="w"> </span>localhost:8080/api/v1/login
+<span class="c1"># /me</span>
+curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>localhost:8080/api/v1/me?name<span class="o">=</span>nob
+</code></pre></div>
+<h2 id="api">APIドキュメントについて</h2>
 <p>APIドキュメントの記法については<a href="https://github.com/swaggo/echo-swagger">echo-swagger</a>を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。</p>
 
 
