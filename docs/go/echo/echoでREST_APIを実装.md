@@ -34,7 +34,7 @@ go mod init easyapp
 - echoをインストールします。
 
 ```shell
-go get github.com/labstack/echo/v4
+go get github.com/labstack/echo/v5
 ```
 
 ### 実装
@@ -52,17 +52,17 @@ import (
 	"easyapp/internal/usecase/params"
 	"net/http"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 // 認証のhandlerインターフェースです。
 type UsersHandler interface {
 
 	// 認証処理を呼び出します。
-	Login(c echo.Context) error
+	Login(c *echo.Context) error
 
 	// ユーザ情報取得処理を呼び出します。
-	Me(c echo.Context) error
+	Me(c *echo.Context) error
 }
 
 type usersHandler struct {
@@ -73,7 +73,7 @@ func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
 	return &usersHandler{usersUsecase: usersUsecase}
 }
 
-func (h *usersHandler) Login(c echo.Context) error {
+func (h *usersHandler) Login(c *echo.Context) error {
 
 	// jsonパースエラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
@@ -93,7 +93,7 @@ func (h *usersHandler) Login(c echo.Context) error {
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *usersHandler) Me(c echo.Context) error {
+func (h *usersHandler) Me(c *echo.Context) error {
 
 	// クエリパラメータ取得
 	req := model.NewMeReq(c)
@@ -124,7 +124,7 @@ package model
 import (
 	"errors"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 // 認証向けのリクエストモデルです。
@@ -133,7 +133,7 @@ type LoginReq struct {
 	Password string `json:"password"` // パスワード
 }
 
-func NewLoginReq(c echo.Context) (LoginReq, error) {
+func NewLoginReq(c *echo.Context) (LoginReq, error) {
 
 	req := new(LoginReq)
 	if err := c.Bind(req); err != nil {
@@ -157,7 +157,7 @@ type MeReq struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewMeReq(c echo.Context) MeReq {
+func NewMeReq(c *echo.Context) MeReq {
 	return MeReq{Name: c.QueryParam("name")}
 }
 
@@ -180,7 +180,7 @@ func NewMeRes(name string, age int) MeRes {
 package router
 
 import (
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type Router interface {
@@ -208,7 +208,7 @@ import (
 	"easyapp/internal/handler"
 	"easyapp/internal/usecase"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type usersRouter struct{}
@@ -238,10 +238,29 @@ import "easyapp/internal/handler/router"
 func main() {
 
 	e := router.Routing()
-	e.Logger.Fatal(e.Start(":8080"))
+	if err := e.Start(":8080"); err != nil {
+		e.Logger.Error("failed to start server", "error", err)
+	}
 }
 ```
 
-### APIドキュメントについて
+## 起動
+
+下記コマンドでアプリを起動します。
+
+```shell
+go run cmd/main.go
+```
+
+下記コマンドでAPIを打鍵できます。
+
+```shell
+# /login
+curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
+# /me
+curl -X GET localhost:8080/api/v1/me?name=nob
+```
+
+## APIドキュメントについて
 
 APIドキュメントの記法については[echo-swagger](https://github.com/swaggo/echo-swagger)を参照ください。ほとんど標準ライブラリ利用時のそれと変わりません。
