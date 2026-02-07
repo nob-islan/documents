@@ -138,7 +138,7 @@ server {
 }
 ```
 
-#### docker-compose.yaml
+#### `docker-compose.yaml`
 
 ```yaml
 services:
@@ -172,7 +172,7 @@ SSL_KEY_FILE=ssl/server.key
 
 ## ビルドしたReact Webサーバにhttpsでアクセスできるようにする
 
-### .envファイル作成
+### `.env`ファイル作成
 
 ローカルの時と同様に、ルートディレクトリに下記を配置します:
 
@@ -184,7 +184,7 @@ SSL_KEY_FILE=ssl/server.key
 
 ### 証明書
 
-上記.envファイルと平仄を合わせる形で、プロジェクトのルートに`ssl`ディレクトリを作成し、各種証明書を配置します:
+上記`.env`ファイルと平仄を合わせる形で、プロジェクトのルートに`ssl`ディレクトリを作成し、各種証明書を配置します:
 
 ```
 $ ls easyweb/ssl/
@@ -234,7 +234,7 @@ data:
 
 ### configMap
 
-nginxのdefault.confについてconfigMapに記載します。
+nginxの`default.conf`についてconfigMapに記載します。
 
 ```yaml
 apiVersion: v1

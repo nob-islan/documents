@@ -18,7 +18,7 @@ sudo su -
 - `acme.sh`をインストールします:
 
 ```shell
-curl https://get.acme.sh | sh -s email=my@example.com
+curl https://get.acme.sh | sh -s email={mail address}
 ```
 
 - エイリアスを設定します（任意）:
