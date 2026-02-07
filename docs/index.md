@@ -12,7 +12,7 @@
 - **[Kindサンプル](./dev-container/examples/kindサンプル.md)**
 - **[Java環境サンプル](./dev-container/examples/java環境サンプル.md)**
 - **[React環境サンプル](./dev-container/examples/react環境サンプル.md)**
-- **[Kubebuilder環境サンプル](./dev-container/examples/Kubebuilder環境サンプル.md)**
+- **[Kubebuilder環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)**
 </div>
 
 ### Docker
