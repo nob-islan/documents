@@ -1,6 +1,6 @@
 # ローカルネットワークで名前解決してもらう
 
-ローカルネットワークにおけるDNSサービスである **avahi-daemon** をインストールし、他端末から`ssh nob@my-server.local`のような`.local`付きのホスト名でsshできるようにします。
+ローカルネットワークにおけるDNSサービスである[Avahi](https://wiki.archlinux.jp/index.php/Avahi)をインストールし、他端末から`ssh nob@my-server.local`のような`.local`付きのホスト名でsshできるようにします。
 
 ```shell
 sudo apt update
