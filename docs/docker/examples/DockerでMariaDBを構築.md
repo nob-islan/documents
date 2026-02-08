@@ -20,7 +20,7 @@ root
 
 ## 設定ファイル
 
-### `docker-compose.yaml``
+### `docker-compose.yaml`
 
 DBサーバおよびGUIでDBを管理できる`adminer`を起動します。
 
