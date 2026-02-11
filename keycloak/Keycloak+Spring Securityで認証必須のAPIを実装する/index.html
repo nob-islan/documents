@@ -10242,7 +10242,6 @@
 <ul>
 <li>Realmを作成します（例: easyapp）。</li>
 <li>Clientを作成します:<ul>
-<li>Valid Redirect URIsを <code>http://localhost:8081/*</code> のように指定します。</li>
 <li>Client authenticationをONにします。</li>
 <li>Direct access grantsにチェックを入れます:<ul>
 <li>Direct access grantsは本番では非推奨なので注意してください。</li>
@@ -10251,9 +10250,8 @@
 <li>保存後、CredentinalsタブにおいてClient Secretが取得できます。</li>
 </ul>
 </li>
-<li>Roleを作成します。</li>
 <li>Userを作成し、パスワードの設定を行います:<ul>
-<li>ユーザ作成後、<a href="http://localhost:8080/realms/easyapp/account">http://localhost:8080/realms/easyapp/account</a> にログインしてパスワードの更新をしてください。</li>
+<li>ユーザ作成後、<a href="http://localhost:8080/realms/easyapp/account">http://localhost:8080/realms/easyapp/account</a> でユーザ管理ができます。</li>
 </ul>
 </li>
 </ul>
@@ -10293,7 +10291,7 @@
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
-<li><code>SecurityConfig</code>を下記で作成します:</li>
+<li><code>SecurityConfig.java</code>を下記で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.config</span><span class="p">;</span>
 

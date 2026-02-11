@@ -10219,15 +10219,16 @@
 <ul>
 <li>Realmを作成します（例: easyapp）。</li>
 <li>Clientを作成します:<ul>
+<li>Client authenticationをONにします。</li>
+<li>Authentication flowはStandard flowとします。</li>
 <li>Root URLを<code>http://localhost:8081</code>とします。</li>
 <li>Valid Redirect URIsを<code>http://localhost:8081/login/oauth2/code/*</code>とします。</li>
 <li>Web originsを<code>http://localhost:8081</code>とします。</li>
-<li>Authentication flowはStandard flowとします。</li>
 <li>保存後、CredentinalsタブにおいてClient Secretが取得できます。</li>
 </ul>
 </li>
 <li>Userを作成し、パスワードの設定を行います:<ul>
-<li>ユーザ作成後、<a href="http://localhost:8080/realms/easyapp/account">http://localhost:8080/realms/easyapp/account</a> にログインしてパスワードの更新をしてください。</li>
+<li>ユーザ作成後、<a href="http://localhost:8080/realms/easyapp/account">http://localhost:8080/realms/easyapp/account</a> でユーザ管理ができます。</li>
 </ul>
 </li>
 </ul>
@@ -10253,7 +10254,7 @@
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
-<li><code>SecurityConfig</code>を下記で作成します:</li>
+<li><code>SecurityConfig.java</code>を下記で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.config</span><span class="p">;</span>
 
@@ -10267,7 +10268,7 @@
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Bean</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">filterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">filterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">http</span>
 <span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">((</span><span class="n">authorize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
@@ -10314,7 +10315,7 @@
 <div class="highlight"><pre><span></span><code>server.port<span class="o">=</span><span class="m">8081</span>
 
 spring.security.oauth2.client.registration.keycloak.client-id<span class="o">=</span>easyapp
-spring.security.oauth2.client.registration.keycloak.client-secret<span class="o">={</span>Client<span class="w"> </span>Secret<span class="o">}</span>
+spring.security.oauth2.client.registration.keycloak.client-secret<span class="o">=</span>TODO_ADD_CLIENT_SECRET
 spring.security.oauth2.client.registration.keycloak.scope<span class="o">=</span>openid
 spring.security.oauth2.client.registration.keycloak.authorization-grant-type<span class="o">=</span>authorization_code
 spring.security.oauth2.client.registration.keycloak.redirect-uri<span class="o">={</span>baseUrl<span class="o">}</span>/login/oauth2/code/<span class="o">{</span>registrationId<span class="o">}</span>
