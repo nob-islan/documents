@@ -8,13 +8,14 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
 
 - Realmを作成します（例: easyapp）。
 - Clientを作成します:
+  - Client authenticationをONにします。
+  - Authentication flowはStandard flowとします。
   - Root URLを`http://localhost:8081`とします。
   - Valid Redirect URIsを`http://localhost:8081/login/oauth2/code/*`とします。
   - Web originsを`http://localhost:8081`とします。
-  - Authentication flowはStandard flowとします。
   - 保存後、CredentinalsタブにおいてClient Secretが取得できます。
 - Userを作成し、パスワードの設定を行います:
-  - ユーザ作成後、http://localhost:8080/realms/easyapp/account にログインしてパスワードの更新をしてください。
+  - ユーザ作成後、http://localhost:8080/realms/easyapp/account でユーザ管理ができます。
 
 ## 業務アプリ（Spring Boot）
 
@@ -41,7 +42,7 @@ cf. https://docs.spring.io/spring-security/reference/servlet/oauth2/?utm_source=
         </dependency>
 ```
 
-- `SecurityConfig`を下記で作成します:
+- `SecurityConfig.java`を下記で作成します:
 
 ```java
 package nob.example.easyapp.config;
@@ -56,7 +57,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
@@ -105,7 +106,7 @@ public class SampleController {
 server.port=8081
 
 spring.security.oauth2.client.registration.keycloak.client-id=easyapp
-spring.security.oauth2.client.registration.keycloak.client-secret={Client Secret}
+spring.security.oauth2.client.registration.keycloak.client-secret=TODO_ADD_CLIENT_SECRET
 spring.security.oauth2.client.registration.keycloak.scope=openid
 spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
 spring.security.oauth2.client.registration.keycloak.redirect-uri={baseUrl}/login/oauth2/code/{registrationId}

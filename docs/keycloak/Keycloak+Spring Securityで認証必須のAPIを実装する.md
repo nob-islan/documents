@@ -10,14 +10,12 @@ cf. https://www.keycloak.org/docs/25.0.6/securing_apps/index.html
 
 - Realmを作成します（例: easyapp）。
 - Clientを作成します:
-  - Valid Redirect URIsを `http://localhost:8081/*` のように指定します。
   - Client authenticationをONにします。
   - Direct access grantsにチェックを入れます:
     - Direct access grantsは本番では非推奨なので注意してください。
   - 保存後、CredentinalsタブにおいてClient Secretが取得できます。
-- Roleを作成します。
 - Userを作成し、パスワードの設定を行います:
-  - ユーザ作成後、http://localhost:8080/realms/easyapp/account にログインしてパスワードの更新をしてください。
+  - ユーザ作成後、http://localhost:8080/realms/easyapp/account でユーザ管理ができます。
 
 ### 使用方法
 
@@ -61,7 +59,7 @@ cf.
 		</dependency>
 ```
 
-- `SecurityConfig`を下記で作成します:
+- `SecurityConfig.java`を下記で作成します:
 
 ```java
 package nob.example.easyapp.config;
