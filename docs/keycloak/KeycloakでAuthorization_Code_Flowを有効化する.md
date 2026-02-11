@@ -10,7 +10,6 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
 - Clientを作成します:
   - Client authenticationをONにします。
   - Authentication flowはStandard flowとします。
-  - Root URLを`http://localhost:8081`とします。
   - Valid Redirect URIsを`http://localhost:8081/login/oauth2/code/*`とします。
   - Web originsを`http://localhost:8081`とします。
   - 保存後、CredentinalsタブにおいてClient Secretが取得できます。
