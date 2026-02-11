@@ -1,7 +1,5 @@
 # DockerでPortainerを構築
 
-## Portainer起動
-
 下記`docker-compose.yaml`を記述して起動します。
 
 ```yaml
