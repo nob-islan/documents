@@ -18,7 +18,7 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
 
 ## 業務アプリ（Spring Boot）
 
-cf. https://docs.spring.io/spring-security/reference/servlet/oauth2/?utm_source=chatgpt.com#oauth2-client-log-users-in
+cf. https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in
 
 ### 実装
 
