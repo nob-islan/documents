@@ -70,20 +70,24 @@ INSERT INTO users (
     ├── domain
     │   └── users.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
-    │   ├── users_handler.go         # APIとしてのインターフェースおよび実装
     │   ├── model
     │   │   └── users_model.go       # APIのリクエスト・レスポンス構造体
-    │   └── router
-    │       ├── users_router.go      # 業務処理ごとのルーター
-    │       └── base.go              # エンドポイントのルーター取りまとめ
+    │   ├── router
+    │   │   ├── base.go              # エンドポイントのルーター統括
+    │   │   └── users_router.go      # 業務処理ごとのルーター
+    │   └── users_handler.go         # APIとしてのインターフェースおよび実装
     ├── infrastructure
     │   ├── db.go                    # データベース接続設定
+    │   ├── persistence
+    │   │   ├── table
+    │   │   │   └── users_row.go     # テーブル定義に対応した構造体
+    │   │   └── users_sql.go         # ドメイン取得のためのSQL定義
     │   └── repository
-    │       └── users_repository.go  # データベース操作の実装
+    │       └── users_repository.go  # データベース操作の統括
     └── usecase
-        ├── users_usecase.go         # 業務処理のインターフェースおよび実装
-        └── params
-            └── users_params.go      # 業務処理の入力・出力モデル構造体
+        ├── params
+        │   └── users_params.go      # 業務処理の入力・出力モデル構造体
+        └── users_usecase.go         # 業務処理のインターフェースおよび実装
 ```
 
 ### パッケージ一覧
@@ -97,7 +101,7 @@ INSERT INTO users (
 ```go
 package domain
 
-// usersテーブル向けエンティティです。
+// ユーザ情報ドメインです。
 type Users struct {
 	name     string // ユーザ名
 	password string // パスワード
@@ -120,7 +124,7 @@ func (u Users) Age() int {
 	return u.age
 }
 
-// usersテーブル向けrepositoryのインターフェースです。
+// ユーザ情報ドメイン向けrepositoryのインターフェースです。
 type UsersRepository interface {
 
 	// ユーザ情報を取得します。
@@ -172,9 +176,70 @@ func ConnectDB() *sql.DB {
 }
 ```
 
+#### `internal/infrastructure/persistence/`
+
+データベースを操作するためのクエリ発行処理を実装します。
+
+- `users_sql.go`
+
+```go
+package persistence
+
+import (
+	"database/sql"
+	"easyapp/internal/infrastructure/persistence/table"
+)
+
+type UsersSql interface {
+
+	// ユーザ情報取得SQLを発行します。
+	FindByName(targetName string) table.Users
+}
+
+type usersSql struct {
+	db *sql.DB
+}
+
+func NewUsersSql(db *sql.DB) UsersSql {
+	return &usersSql{db: db}
+}
+
+func (s *usersSql) FindByName(targetName string) table.Users {
+
+	const sql string = "SELECT * FROM users WHERE name = ?"
+
+	// クエリ実行
+	row := s.db.QueryRow(sql, targetName)
+
+	var name string
+	var password string
+	var age int
+	row.Scan(&name, &password, &age)
+
+	return table.Users{Name: name, Password: password, Age: age}
+}
+```
+
+#### `internal/infrastructure/persistence/table`
+
+データベースのテーブル定義に対応する構造体を宣言します。
+
+- `users_row.go`
+
+```go
+package table
+
+// usersテーブルのrow定義です。
+type Users struct {
+	Name     string // ユーザ名
+	Password string // パスワード
+	Age      int    // 年齢
+}
+```
+
 #### `internal/infrastructure/repository/`
 
-データベースを操作するrepositoryを実装します。
+persistenceを呼び出してドメイン・テーブル間のデータをやり取りします。
 
 - `users_repository.go`
 
@@ -182,31 +247,23 @@ func ConnectDB() *sql.DB {
 package repository
 
 import (
-	"database/sql"
 	"easyapp/internal/domain"
+	"easyapp/internal/infrastructure/persistence"
 )
 
 type usersRepository struct {
-	db *sql.DB
+	usersSql persistence.UsersSql
 }
 
-func NewUsersRepository(db *sql.DB) domain.UsersRepository {
-	return &usersRepository{db: db}
+func NewUsersRepository(usersSql persistence.UsersSql) domain.UsersRepository {
+	return &usersRepository{usersSql: usersSql}
 }
 
 func (r *usersRepository) FindByName(targetName string) domain.Users {
 
-	const sql string = "SELECT * FROM users WHERE name = ?"
+	u := r.usersSql.FindByName(targetName)
 
-	// クエリ実行
-	row := r.db.QueryRow(sql, targetName)
-
-	var name string
-	var password string
-	var age int
-	row.Scan(&name, &password, &age)
-
-	return domain.NewUsers(name, password, age)
+	return domain.NewUsers(u.Name, u.Password, u.Age)
 }
 ```
 
@@ -511,6 +568,7 @@ package router
 import (
 	"database/sql"
 	"easyapp/internal/handler"
+	"easyapp/internal/infrastructure/persistence"
 	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/usecase"
 	"net/http"
@@ -526,7 +584,15 @@ func NewUsersRouter(db *sql.DB) Router {
 
 func (r *usersRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewUsersHandler(usecase.NewUsersUsecase(repository.NewUsersRepository(r.db)))
+	h := handler.NewUsersHandler(
+		usecase.NewUsersUsecase(
+			repository.NewUsersRepository(
+				persistence.NewUsersSql(
+					r.db,
+				),
+			),
+		),
+	)
 
 	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
