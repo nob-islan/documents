@@ -4,23 +4,25 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 
 ```shell
 .
-├── api                 # APIドキュメント
+├── api                  # APIドキュメント
 ├── assets
-│   ├── static          # js, css, favicon等
-│   └── templates       # html
-├── cmd                 # エントリポイント
+│   ├── static           # js, css, favicon等
+│   └── templates        # html
+├── cmd                  # エントリポイント
 ├── internal
-│   ├── apperrors       # 独自エラー定義およびそのハンドリング
-│   ├── domain          # ドメイン構造体
-│   ├── handler         # APIリクエストをハンドリング、業務処理呼び出し
-│   │   ├── model       # APIのリクエスト・レスポンス構造体
-│   │   └── router      # httpリクエストのルーティング
-│   ├── infrastructure  # データベースなど外部接続設定
-│   │   └── repository  # データベースへのアクセス
-│   ├── logging         # ログ出力制御
-│   └── usecase         # 業務処理
-│       └── params      # 業務処理の入力・出力モデル
-└── scripts             # 開発支援ツール
+│   ├── apperrors        # 独自エラー定義およびそのハンドリング
+│   ├── domain           # ドメイン構造体
+│   ├── handler          # APIリクエストをハンドリング、業務処理呼び出し
+│   │   ├── model        # APIのリクエスト・レスポンス構造体
+│   │   └── router       # httpリクエストのルーティング
+│   ├── infrastructure   # データベースなど外部接続設定
+│   │   ├── persistence  # データベースへのアクセス
+│   │   │   └── table    # テーブル定義に対応した構造体
+│   │   └── repository   # ドメイン操作
+│   ├── logging          # ログ出力制御
+│   └── usecase          # 業務処理
+│       └── params       # 業務処理の入力・出力モデル
+└── scripts              # 開発支援ツール
 ```
 
 ## パッケージ解説
@@ -47,8 +49,6 @@ swaggerなどのAPIドキュメント、およびそれを生成する関数を�
 
 値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。
 
-repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体を`internal/infrastructure/entity`パッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。
-
 ### `internal/handler`
 
 リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。
@@ -65,9 +65,17 @@ httpリクエストのルーティングを行う関数を格納するパッケ�
 
 データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。
 
+### `internal/infrastructure/persistence`
+
+データベースにアクセスしてSQLを実行する関数を格納するパッケージです。各domain単位でファイルを作成し、SQL群とdomainとが1:1に対応するようにしてください。
+
+### `internal/infrastructure/persistence/table`
+
+データベースの各テーブル定義に対応した構造体を格納するパッケージです。
+
 ### `internal/infrastructure/repository`
 
-データベースにアクセスしてSQLを実行する関数を格納するパッケージです。
+persistence配下の処理を呼び出し、domainおよびデータベース間でデータを操作する関数を格納するパッケージです。
 
 ### `internal/logging`
 

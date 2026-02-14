@@ -81,7 +81,7 @@ INSERT INTO users (
     │   ├── persistence
     │   │   ├── table
     │   │   │   └── users_row.go     # テーブル定義に対応した構造体
-    │   │   └── users_sql.go         # ドメイン取得のためのSQL定義
+    │   │   └── users_sql.go         # ドメイン操作のためのSQL定義
     │   └── repository
     │       └── users_repository.go  # データベース操作の統括
     └── usecase
