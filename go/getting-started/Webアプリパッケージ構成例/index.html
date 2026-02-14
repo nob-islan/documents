@@ -4182,6 +4182,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalinfrastructurepersistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/infrastructure/persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalinfrastructurepersistencetable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/infrastructure/persistence/table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalinfrastructurerepository" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10429,6 +10451,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalinfrastructurepersistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/infrastructure/persistence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internalinfrastructurepersistencetable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/infrastructure/persistence/table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalinfrastructurerepository" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10508,23 +10552,25 @@
 <h1 id="web">Webアプリパッケージ構成例</h1>
 <p>GoでWebアプリケーションを開発する際のプロジェクトのパッケージ構成について一つの指針となるサンプルを記載します。</p>
 <div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span>api<span class="w">                 </span><span class="c1"># APIドキュメント</span>
+├──<span class="w"> </span>api<span class="w">                  </span><span class="c1"># APIドキュメント</span>
 ├──<span class="w"> </span>assets
-│<span class="w">   </span>├──<span class="w"> </span>static<span class="w">          </span><span class="c1"># js, css, favicon等</span>
-│<span class="w">   </span>└──<span class="w"> </span>templates<span class="w">       </span><span class="c1"># html</span>
-├──<span class="w"> </span>cmd<span class="w">                 </span><span class="c1"># エントリポイント</span>
+│<span class="w">   </span>├──<span class="w"> </span>static<span class="w">           </span><span class="c1"># js, css, favicon等</span>
+│<span class="w">   </span>└──<span class="w"> </span>templates<span class="w">        </span><span class="c1"># html</span>
+├──<span class="w"> </span>cmd<span class="w">                  </span><span class="c1"># エントリポイント</span>
 ├──<span class="w"> </span>internal
-│<span class="w">   </span>├──<span class="w"> </span>apperrors<span class="w">       </span><span class="c1"># 独自エラー定義およびそのハンドリング</span>
-│<span class="w">   </span>├──<span class="w"> </span>domain<span class="w">          </span><span class="c1"># ドメイン構造体</span>
-│<span class="w">   </span>├──<span class="w"> </span>handler<span class="w">         </span><span class="c1"># APIリクエストをハンドリング、業務処理呼び出し</span>
-│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>model<span class="w">       </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>router<span class="w">      </span><span class="c1"># httpリクエストのルーティング</span>
-│<span class="w">   </span>├──<span class="w"> </span>infrastructure<span class="w">  </span><span class="c1"># データベースなど外部接続設定</span>
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>repository<span class="w">  </span><span class="c1"># データベースへのアクセス</span>
-│<span class="w">   </span>├──<span class="w"> </span>logging<span class="w">         </span><span class="c1"># ログ出力制御</span>
-│<span class="w">   </span>└──<span class="w"> </span>usecase<span class="w">         </span><span class="c1"># 業務処理</span>
-│<span class="w">       </span>└──<span class="w"> </span>params<span class="w">      </span><span class="c1"># 業務処理の入力・出力モデル</span>
-└──<span class="w"> </span>scripts<span class="w">             </span><span class="c1"># 開発支援ツール</span>
+│<span class="w">   </span>├──<span class="w"> </span>apperrors<span class="w">        </span><span class="c1"># 独自エラー定義およびそのハンドリング</span>
+│<span class="w">   </span>├──<span class="w"> </span>domain<span class="w">           </span><span class="c1"># ドメイン構造体</span>
+│<span class="w">   </span>├──<span class="w"> </span>handler<span class="w">          </span><span class="c1"># APIリクエストをハンドリング、業務処理呼び出し</span>
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>model<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>router<span class="w">       </span><span class="c1"># httpリクエストのルーティング</span>
+│<span class="w">   </span>├──<span class="w"> </span>infrastructure<span class="w">   </span><span class="c1"># データベースなど外部接続設定</span>
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>persistence<span class="w">  </span><span class="c1"># データベースへのアクセス</span>
+│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>table<span class="w">    </span><span class="c1"># テーブル定義に対応した構造体</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>repository<span class="w">   </span><span class="c1"># ドメイン操作</span>
+│<span class="w">   </span>├──<span class="w"> </span>logging<span class="w">          </span><span class="c1"># ログ出力制御</span>
+│<span class="w">   </span>└──<span class="w"> </span>usecase<span class="w">          </span><span class="c1"># 業務処理</span>
+│<span class="w">       </span>└──<span class="w"> </span>params<span class="w">       </span><span class="c1"># 業務処理の入力・出力モデル</span>
+└──<span class="w"> </span>scripts<span class="w">              </span><span class="c1"># 開発支援ツール</span>
 </code></pre></div>
 <h2 id="_1">パッケージ解説</h2>
 <h3 id="api"><code>api</code></h3>
@@ -10538,7 +10584,6 @@
 <h3 id="internaldomain"><code>internal/domain</code></h3>
 <p>業務処理の中心となるドメイン構造体およびそれを取得するrepositoryインターフェースを格納するパッケージです。</p>
 <p>値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。</p>
-<p>repositoryの戻り値について、ドメイン構造体とテーブル定義とが1:1対応している場合はdomainを戻し、そうでない場合はテーブル定義に対応する構造体を<code>internal/infrastructure/entity</code>パッケージを新設してその中で定義し、usecase内でentityからdomainへの変換を行ってください。</p>
 <h3 id="internalhandler"><code>internal/handler</code></h3>
 <p>リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。</p>
 <h3 id="internalhandlermodel"><code>internal/handler/model</code></h3>
@@ -10547,8 +10592,12 @@
 <p>httpリクエストのルーティングを行う関数を格納するパッケージです。</p>
 <h3 id="internalinfrastructure"><code>internal/infrastructure</code></h3>
 <p>データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。</p>
+<h3 id="internalinfrastructurepersistence"><code>internal/infrastructure/persistence</code></h3>
+<p>データベースにアクセスしてSQLを実行する関数を格納するパッケージです。各domain単位でファイルを作成し、SQL群とdomainとが1:1に対応するようにしてください。</p>
+<h3 id="internalinfrastructurepersistencetable"><code>internal/infrastructure/persistence/table</code></h3>
+<p>データベースの各テーブル定義に対応した構造体を格納するパッケージです。</p>
 <h3 id="internalinfrastructurerepository"><code>internal/infrastructure/repository</code></h3>
-<p>データベースにアクセスしてSQLを実行する関数を格納するパッケージです。</p>
+<p>persistence配下の処理を呼び出し、domainおよびデータベース間でデータを操作する関数を格納するパッケージです。</p>
 <h3 id="internallogging"><code>internal/logging</code></h3>
 <p>ログレベル別の文言出力など、ログ出力を制御するパッケージです。</p>
 <h3 id="internalusecase"><code>internal/usecase</code></h3>
