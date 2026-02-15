@@ -10354,7 +10354,7 @@
 <ul>
 <li>テーブル定義に対応するエンティティクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 
@@ -10382,7 +10382,7 @@
 <ul>
 <li>mapperパッケージに、<code>sqlSupport</code>クラスおよび<code>mapper</code>クラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.JDBCType</span><span class="p">;</span>
 
@@ -10416,7 +10416,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -10429,7 +10429,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.dynamic.sql.select.render.SelectStatementProvider</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.dynamic.sql.util.SqlProviderAdapter</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのmapperクラスです。</span>
@@ -10478,10 +10478,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.query.UsersSelectQuery</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper.UsersMapper</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper.UsersDynamicSqlSupport</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.model.condition.UsersSelectCondition</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのrepositoryクラスです。</span>
@@ -10500,7 +10500,7 @@
 <span class="cm">     * @param condition検索条件</span>
 <span class="cm">     * @returnヒットしたユーザのリスト</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">UsersSelectCondition</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">UsersSelectQuery</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">SelectStatementProvider</span><span class="w"> </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SqlBuilder</span><span class="p">.</span><span class="na">select</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">users</span><span class="p">.</span><span class="na">allColumns</span><span class="p">())</span>
 <span class="w">                </span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">users</span><span class="p">)</span>
@@ -10533,8 +10533,8 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>UsersSelectCondition</code>については下記モデルクラスを作成しています:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.model.condition</span><span class="p">;</span>
+<p><code>UsersSelectQuery</code>については下記モデルクラスを作成しています:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.query</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 
@@ -10544,7 +10544,7 @@
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersSelectCondition</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersSelectQuery</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** ユーザ名 */</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>

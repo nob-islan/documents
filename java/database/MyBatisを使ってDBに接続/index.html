@@ -10520,7 +10520,7 @@
 </table>
 <h3 id="_3">エンティティ</h3>
 <p>デーブル定義と対応させるモデルクラスです。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
@@ -10564,7 +10564,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.ibatis.annotations.Mapper</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.key.UsersDeleteKey</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.firstrestapi.repository.key.UsersSelectKey</span><span class="p">;</span>
 
@@ -10649,7 +10649,7 @@
 <span class="w">            </span>)
 <span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;selectByKey&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;nob.example.firstrestapi.repository.entity.Users&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;selectByKey&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;nob.example.firstrestapi.domain.entity.Users&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;bind</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;userNameLike&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;&#39;%&#39; + userName + &#39;%&#39;&quot;</span><span class="nt">/&gt;</span>
 <span class="w">        </span>SELECT
 <span class="w">            </span>user_id
