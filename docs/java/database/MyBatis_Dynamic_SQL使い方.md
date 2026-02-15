@@ -112,7 +112,7 @@ public class MyBatisConfig {
 - テーブル定義に対応するエンティティクラスを作成します:
 
 ```java
-package com.example.easyapp.entity;
+package com.example.easyapp.domain.entity;
 
 import lombok.Value;
 
@@ -141,7 +141,7 @@ public class Users {
 - mapperパッケージに、`sqlSupport`クラスおよび`mapper`クラスを作成します:
 
 ```java
-package com.example.easyapp.mapper;
+package com.example.easyapp.domain.mapper;
 
 import java.sql.JDBCType;
 
@@ -177,7 +177,7 @@ public class UsersDynamicSqlSupport {
 ```
 
 ```java
-package com.example.easyapp.mapper;
+package com.example.easyapp.domain.mapper;
 
 import java.util.List;
 
@@ -190,7 +190,7 @@ import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 
-import com.example.easyapp.entity.Users;
+import com.example.easyapp.domain.entity.Users;
 
 /**
  * usersテーブルのmapperクラスです。
@@ -240,10 +240,10 @@ import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.easyapp.entity.Users;
+import com.example.easyapp.domain.entity.Users;
+import com.example.easyapp.domain.query.UsersSelectQuery;
 import com.example.easyapp.mapper.UsersMapper;
 import com.example.easyapp.mapper.UsersDynamicSqlSupport;
-import com.example.easyapp.model.condition.UsersSelectCondition;
 
 /**
  * usersテーブルのrepositoryクラスです。
@@ -262,7 +262,7 @@ public class UsersRepository {
      * @param condition検索条件
      * @returnヒットしたユーザのリスト
      */
-    public List<Users> selectByCondition(UsersSelectCondition condition) {
+    public List<Users> selectByCondition(UsersSelectQuery condition) {
 
         SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
                 .from(UsersDynamicSqlSupport.users)
@@ -296,10 +296,10 @@ public class UsersRepository {
 }
 ```
 
-`UsersSelectCondition`については下記モデルクラスを作成しています:
+`UsersSelectQuery`については下記モデルクラスを作成しています:
 
 ```java
-package com.example.easyapp.model.condition;
+package com.example.easyapp.domain.query;
 
 import lombok.Value;
 
@@ -309,7 +309,7 @@ import lombok.Value;
  * @author nob
  */
 @Value
-public class UsersSelectCondition {
+public class UsersSelectQuery {
 
     /** ユーザ名 */
     private String userName;

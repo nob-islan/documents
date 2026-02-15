@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS users(
 - テーブル定義に対応するエンティティを用意します:
 
 ```java
-package com.example.easyapp.repository.entity;
+package com.example.easyapp.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -100,7 +100,7 @@ package com.example.easyapp.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.easyapp.repository.entity.Users;
+import com.example.easyapp.domain.entity.Users;
 import java.util.List;
 
 /**
@@ -176,7 +176,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import com.example.easyapp.model.entity.Users;
+import com.example.easyapp.domain.entity.Users;
 
 /**
  * SampleRepositoryのテストクラスです。

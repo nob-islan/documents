@@ -124,7 +124,7 @@ public class ProjectNameApplication {
 デーブル定義と対応させるモデルクラスです。
 
 ```java
-package nob.example.firstrestapi.repository.entity;
+package nob.example.firstrestapi.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -172,7 +172,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import nob.example.firstrestapi.repository.entity.Users;
+import nob.example.firstrestapi.domain.entity.Users;
 import nob.example.firstrestapi.repository.key.UsersDeleteKey;
 import nob.example.firstrestapi.repository.key.UsersSelectKey;
 
@@ -256,7 +256,7 @@ SQLの実体を記載するファイルです。`src/resources`配下に、mappe
             )
     </insert>
 
-    <select id="selectByKey" resultType="nob.example.firstrestapi.repository.entity.Users">
+    <select id="selectByKey" resultType="nob.example.firstrestapi.domain.entity.Users">
         <bind name="userNameLike" value="'%' + userName + '%'"/>
         SELECT
             user_id
