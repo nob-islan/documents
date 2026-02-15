@@ -3728,10 +3728,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#initdbdcreate-databasesql" class="md-nav__link">
+  <a href="#volumesinitdbdcreate-databasesql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        initdb.d/create-database.sql
+        volumes/initdb.d/create-database.sql
       
     </span>
   </a>
@@ -10271,10 +10271,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#initdbdcreate-databasesql" class="md-nav__link">
+  <a href="#volumesinitdbdcreate-databasesql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        initdb.d/create-database.sql
+        volumes/initdb.d/create-database.sql
       
     </span>
   </a>
@@ -10342,7 +10342,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
 </code></pre></div>
-<h4 id="initdbdcreate-databasesql"><code>initdb.d/create-database.sql</code></h4>
+<h4 id="volumesinitdbdcreate-databasesql"><code>volumes/initdb.d/create-database.sql</code></h4>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
@@ -10383,47 +10383,53 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w">    </span><span class="nx">dsn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;%s:%s@tcp(%s)/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">,</span><span class="w"> </span><span class="nx">dbName</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">dsn</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{})</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
 
-<span class="w">    </span><span class="c1">// Select</span>
+<span class="w">    </span><span class="c1">// Select cf. https://gorm.io/docs/query.html</span>
 <span class="w">    </span><span class="nx">users</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Where</span><span class="p">(</span><span class="s">&quot;name = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">First</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// Update</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Where</span><span class="p">(</span><span class="s">&quot;name = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">Update</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">706</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Update cf. https://gorm.io/docs/update.html</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Where</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;name = ?&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+<span class="w">    </span><span class="p">).</span><span class="nx">Updates</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">ctx</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Users</span><span class="p">{</span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">706</span><span class="p">},</span>
+<span class="w">    </span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Insert</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Create</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Users</span><span class="p">{</span><span class="nx">Id</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">});</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Insert cf. https://gorm.io/docs/create.html</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Create</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Users</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">});</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// Select all</span>
+<span class="w">    </span><span class="c1">// Select all cf. https://gorm.io/docs/query.html#Selecting-Specific-Fields</span>
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">usersList</span><span class="w"> </span><span class="p">[]</span><span class="nx">Users</span>
 <span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Find</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">usersList</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">Error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Error</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Error</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">usersList</span><span class="p">)</span>
 
-<span class="w">    </span><span class="c1">// Delete</span>
+<span class="w">    </span><span class="c1">// Delete cf. https://gorm.io/docs/delete.html</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">G</span><span class="p">[</span><span class="nx">Users</span><span class="p">](</span><span class="nx">db</span><span class="p">).</span><span class="nx">Where</span><span class="p">(</span><span class="s">&quot;name = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob2&quot;</span><span class="p">).</span><span class="nx">Delete</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// usersテーブル向けのエンティティ構造体です。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">Users</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">Id</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`gorm:&quot;primaryKey&quot;`</span><span class="w"> </span><span class="c1">// 管理ID</span>
-<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w">                     </span><span class="c1">// ユーザ名</span>
-<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">                        </span><span class="c1">// 年齢</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 年齢</span>
 <span class="p">}</span>
 </code></pre></div>
 
