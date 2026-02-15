@@ -36,7 +36,7 @@ jobs:
         run: |
           cd ${module}
           go install gotest.tools/gotestsum@latest
-          gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository
+          gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository ./internal/infrastructure/persistence
           go tool cover -html=coverage.txt -o coverage.html
           go tool cover -func=coverage.txt
       - name: Upload Go test results
