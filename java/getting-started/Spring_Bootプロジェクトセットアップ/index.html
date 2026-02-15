@@ -5375,6 +5375,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        controller/impl/AuthControllerImpl.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#controllermodelloginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10602,6 +10613,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        controller/impl/AuthControllerImpl.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#controllermodelloginrequestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10754,8 +10776,10 @@ spring.datasource.password<span class="o">=</span>password
 <h3 id="_4">ディレクトリ構成</h3>
 <p>作成が必要なもののみ記載しています。</p>
 <div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span>controller<span class="w">                       </span><span class="c1"># APIとしてのインターフェース</span>
+├──<span class="w"> </span>controller<span class="w">                       </span><span class="c1"># APIとしての外部契約</span>
 │<span class="w">   </span>├──<span class="w"> </span>AuthController.java
+│<span class="w">   </span>├──<span class="w"> </span>impl<span class="w">                         </span><span class="c1"># APIとしての実装</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>AuthControllerImpl.java
 │<span class="w">   </span>└──<span class="w"> </span>model<span class="w">                        </span><span class="c1"># APIのリクエスト・レスポンスモデル</span>
 │<span class="w">       </span>├──<span class="w"> </span>LoginRequest.java
 │<span class="w">       </span>├──<span class="w"> </span>LoginResponse.java
@@ -11008,7 +11032,47 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * 認証コントローラーのインターフェースです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証処理を呼び出します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param request 認証リクエスト</span>
+<span class="cm">     * @return 認証結果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param request ユーザ情報取得リクエスト</span>
+<span class="cm">     * @return ユーザ情報</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="controllerimplauthcontrollerimpljava"><code>controller/impl/AuthControllerImpl.java</code></h4>
+<p>APIを実装します。ここでは業務処理は行わず、ビジネスロジックの呼び出しのみ行います。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.AuthController</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
@@ -11019,42 +11083,29 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * 認証コントローラーのインターフェースです。</span>
+<span class="cm"> * AuthControllerの実装クラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AuthController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@NonNull</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthController</span><span class="p">(</span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthControllerImpl</span><span class="p">(</span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">authService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 認証処理を呼び出します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param request 認証リクエスト</span>
-<span class="cm">     * @return 認証結果</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span>
 <span class="w">                </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getPassword</span><span class="p">())).</span><span class="na">isValid</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param request ユーザ情報取得リクエスト</span>
-<span class="cm">     * @return ユーザ情報</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">meOutModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()));</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
