@@ -34,7 +34,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 ```
 
-#### `initdb.d/create-database.sql`
+#### `volumes/initdb.d/create-database.sql`
 
 ```sql
 CREATE DATABASE eadb;
@@ -80,46 +80,52 @@ func main() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, domain, dbName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	ctx := context.Background()
 
-	// Select
+	// Select cf. https://gorm.io/docs/query.html
 	users, err := gorm.G[Users](db).Where("name = ?", "nob").First(ctx)
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 	fmt.Println(users)
 
-	// Update
-	if _, err = gorm.G[Users](db).Where("name = ?", "nob").Update(ctx, "age", 706); err != nil {
-		fmt.Println(err)
+	// Update cf. https://gorm.io/docs/update.html
+	if _, err = gorm.G[Users](db).Where(
+		"name = ?",
+		users.Name,
+	).Updates(
+		ctx,
+		Users{Age: 706},
+	); err != nil {
+		panic(err)
 	}
 
-	// Insert
-	if err = gorm.G[Users](db).Create(ctx, &Users{Id: 0, Name: "nob2", Age: 13}); err != nil {
-		fmt.Println(err)
+	// Insert cf. https://gorm.io/docs/create.html
+	if err = gorm.G[Users](db).Create(ctx, &Users{Name: "nob2", Age: 13}); err != nil {
+		panic(err)
 	}
 
-	// Select all
+	// Select all cf. https://gorm.io/docs/query.html#Selecting-Specific-Fields
 	var usersList []Users
 	result := db.Find(&usersList)
 	if result.Error != nil {
-		fmt.Println(result.Error)
+		panic(result.Error)
 	}
 	fmt.Println(usersList)
 
-	// Delete
+	// Delete cf. https://gorm.io/docs/delete.html
 	if _, err = gorm.G[Users](db).Where("name = ?", "nob2").Delete(ctx); err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 }
 
 // usersテーブル向けのエンティティ構造体です。
 type Users struct {
 	Id   int    `gorm:"primaryKey"` // 管理ID
-	Name string                     // ユーザ名
-	Age  int                        // 年齢
+	Name string // ユーザ名
+	Age  int    // 年齢
 }
 ```
