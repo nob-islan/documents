@@ -10598,6 +10598,7 @@
 <p>データベースの各テーブル定義に対応した構造体を格納するパッケージです。</p>
 <h3 id="internalinfrastructurerepository"><code>internal/infrastructure/repository</code></h3>
 <p>persistence配下の処理を呼び出し、domainおよびデータベース間でデータを操作する関数を格納するパッケージです。</p>
+<p>domainとテーブル定義とが1:1に対応している場合はpersistenceパッケージを省略し、repositoryの実装でSQLを発行してください。</p>
 <h3 id="internallogging"><code>internal/logging</code></h3>
 <p>ログレベル別の文言出力など、ログ出力を制御するパッケージです。</p>
 <h3 id="internalusecase"><code>internal/usecase</code></h3>
