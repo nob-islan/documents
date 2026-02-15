@@ -5276,10 +5276,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
+  <a href="#domainentityusersjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepository.java
+        domain/entity/Users.java
       
     </span>
   </a>
@@ -5287,10 +5287,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryentityusersjava" class="md-nav__link">
+  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/entity/Users.java
+        repository/UsersRepository.java
       
     </span>
   </a>
@@ -5368,17 +5368,6 @@
     <span class="md-ellipsis">
       
         controller/AuthController.java
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        controller/impl/AuthControllerImpl.java
       
     </span>
   </a>
@@ -10514,10 +10503,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
+  <a href="#domainentityusersjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepository.java
+        domain/entity/Users.java
       
     </span>
   </a>
@@ -10525,10 +10514,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryentityusersjava" class="md-nav__link">
+  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/entity/Users.java
+        repository/UsersRepository.java
       
     </span>
   </a>
@@ -10606,17 +10595,6 @@
     <span class="md-ellipsis">
       
         controller/AuthController.java
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#controllerimplauthcontrollerimpljava" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        controller/impl/AuthControllerImpl.java
       
     </span>
   </a>
@@ -10778,16 +10756,15 @@ spring.datasource.password<span class="o">=</span>password
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>controller<span class="w">                       </span><span class="c1"># APIとしてのインターフェース</span>
 │<span class="w">   </span>├──<span class="w"> </span>AuthController.java
-│<span class="w">   </span>├──<span class="w"> </span>impl<span class="w">                         </span><span class="c1"># APIの実装</span>
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>AuthControllerImpl.java
 │<span class="w">   </span>└──<span class="w"> </span>model<span class="w">                        </span><span class="c1"># APIのリクエスト・レスポンスモデル</span>
 │<span class="w">       </span>├──<span class="w"> </span>LoginRequest.java
 │<span class="w">       </span>├──<span class="w"> </span>LoginResponse.java
 │<span class="w">       </span>├──<span class="w"> </span>MeRequest.java
 │<span class="w">       </span>└──<span class="w"> </span>MeResponse.java
+├──<span class="w"> </span>domain
+│<span class="w">   </span>└──<span class="w"> </span>entity<span class="w">                       </span><span class="c1"># データベースのテーブル定義に対応するエンティティ</span>
+│<span class="w">       </span>└──<span class="w"> </span>Users.java
 ├──<span class="w"> </span>repository<span class="w">                       </span><span class="c1"># データベース操作のインターフェース</span>
-│<span class="w">   </span>├──<span class="w"> </span>entity<span class="w">                       </span><span class="c1"># データベースのテーブル定義に対応するエンティティ</span>
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>Users.java
 │<span class="w">   </span>└──<span class="w"> </span>UsersRepository.java
 └──<span class="w"> </span>service<span class="w">                          </span><span class="c1"># 業務処理のインターフェース</span>
 <span class="w">    </span>├──<span class="w"> </span>AuthService.java
@@ -10800,35 +10777,9 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">        </span>└──<span class="w"> </span>MeOutModel.java
 </code></pre></div>
 <h3 id="_5">クラス一覧</h3>
-<h4 id="repositoryusersrepositoryjava"><code>repository/UsersRepository.java</code></h4>
-<p>データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * usersテーブル向けrepositoryのインターフェースです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author nob</span>
-<span class="cm"> */</span>
-<span class="nd">@Repository</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報を取得します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param name 検索キーのユーザ名</span>
-<span class="cm">     * @return ユーザ情報</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="n">Users</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-<h4 id="repositoryentityusersjava"><code>repository/entity/Users.java</code></h4>
+<h4 id="domainentityusersjava"><code>domain/entity/Users.java</code></h4>
 <p>データベースのテーブル定義に対応するエンティティを定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
@@ -10862,6 +10813,32 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="cm">/** 年齢 */</span>
 <span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="repositoryusersrepositoryjava"><code>repository/UsersRepository.java</code></h4>
+<p>データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * usersテーブル向けrepositoryのインターフェースです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@Repository</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報を取得します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param name 検索キーのユーザ名</span>
+<span class="cm">     * @return ユーザ情報</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="n">Users</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="serviceauthservicejava"><code>service/AuthService.java</code></h4>
@@ -10907,8 +10884,8 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
@@ -11022,7 +10999,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="controllerauthcontrollerjava"><code>controller/AuthController.java</code></h4>
-<p>APIのインターフェースを定義します。</p>
+<p>APIとしての外部契約を定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
@@ -11031,47 +11008,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * 認証コントローラーのインターフェースです。</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author nob</span>
-<span class="cm"> */</span>
-<span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * 認証処理を呼び出します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param request 認証リクエスト</span>
-<span class="cm">     * @return 認証結果</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param request ユーザ情報取得リクエスト</span>
-<span class="cm">     * @return ユーザ情報</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
-<h4 id="controllerimplauthcontrollerimpljava"><code>controller/impl/AuthControllerImpl.java</code></h4>
-<p>コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.AuthController</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
@@ -11082,29 +11019,42 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * AuthControllerの実装クラスです。</span>
+<span class="cm"> * 認証コントローラーのインターフェースです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AuthController</span><span class="w"> </span><span class="p">{</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@NonNull</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthControllerImpl</span><span class="p">(</span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthController</span><span class="p">(</span><span class="n">AuthService</span><span class="w"> </span><span class="n">authService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">authService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証処理を呼び出します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param request 認証リクエスト</span>
+<span class="cm">     * @return 認証結果</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span>
 <span class="w">                </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getPassword</span><span class="p">())).</span><span class="na">isValid</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param request ユーザ情報取得リクエスト</span>
+<span class="cm">     * @return ユーザ情報</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">meOutModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()));</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
