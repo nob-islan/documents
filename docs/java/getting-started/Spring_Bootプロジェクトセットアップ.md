@@ -93,16 +93,15 @@ spring.datasource.password=password
 .
 ├── controller                       # APIとしてのインターフェース
 │   ├── AuthController.java
-│   ├── impl                         # APIの実装
-│   │   └── AuthControllerImpl.java
 │   └── model                        # APIのリクエスト・レスポンスモデル
 │       ├── LoginRequest.java
 │       ├── LoginResponse.java
 │       ├── MeRequest.java
 │       └── MeResponse.java
+├── domain
+│   └── entity                       # データベースのテーブル定義に対応するエンティティ
+│       └── Users.java
 ├── repository                       # データベース操作のインターフェース
-│   ├── entity                       # データベースのテーブル定義に対応するエンティティ
-│   │   └── Users.java
 │   └── UsersRepository.java
 └── service                          # 業務処理のインターフェース
     ├── AuthService.java
@@ -117,42 +116,12 @@ spring.datasource.password=password
 
 ### クラス一覧
 
-#### `repository/UsersRepository.java`
-
-データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。
-
-```java
-package nob.example.easyapp.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import nob.example.easyapp.repository.entity.Users;
-
-/**
- * usersテーブル向けrepositoryのインターフェースです。
- *
- * @author nob
- */
-@Repository
-public interface UsersRepository extends JpaRepository<Users, String> {
-
-    /**
-     * ユーザ情報を取得します。
-     *
-     * @param name 検索キーのユーザ名
-     * @return ユーザ情報
-     */
-    Users findByName(String name);
-}
-```
-
-#### `repository/entity/Users.java`
+#### `domain/entity/Users.java`
 
 データベースのテーブル定義に対応するエンティティを定義します。
 
 ```java
-package nob.example.easyapp.repository.entity;
+package nob.example.easyapp.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -186,6 +155,36 @@ public class Users {
     /** 年齢 */
     @Column(name = "age", nullable = false)
     private Integer age;
+}
+```
+
+#### `repository/UsersRepository.java`
+
+データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。
+
+```java
+package nob.example.easyapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import nob.example.easyapp.domain.entity.Users;
+
+/**
+ * usersテーブル向けrepositoryのインターフェースです。
+ *
+ * @author nob
+ */
+@Repository
+public interface UsersRepository extends JpaRepository<Users, String> {
+
+    /**
+     * ユーザ情報を取得します。
+     *
+     * @param name 検索キーのユーザ名
+     * @return ユーザ情報
+     */
+    Users findByName(String name);
 }
 ```
 
@@ -239,8 +238,8 @@ package nob.example.easyapp.service.impl;
 import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
+import nob.example.easyapp.domain.entity.Users;
 import nob.example.easyapp.repository.UsersRepository;
-import nob.example.easyapp.repository.entity.Users;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
@@ -370,7 +369,7 @@ public class MeOutModel {
 
 #### `controller/AuthController.java`
 
-APIのインターフェースを定義します。
+APIとしての外部契約を定義します。
 
 ```java
 package nob.example.easyapp.controller;
@@ -381,51 +380,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
-
-/**
- * 認証コントローラーのインターフェースです。
- *
- * @author nob
- */
-@RestController
-@RequestMapping(value = "/api/v1")
-public interface AuthController {
-
-    /**
-     * 認証処理を呼び出します。
-     *
-     * @param request 認証リクエスト
-     * @return 認証結果
-     */
-    @PostMapping(value = "/login")
-    LoginResponse login(@RequestBody LoginRequest request);
-
-    /**
-     * ユーザ情報取得処理を呼び出します。
-     *
-     * @param request ユーザ情報取得リクエスト
-     * @return ユーザ情報
-     */
-    @GetMapping(value = "/me")
-    MeResponse me(MeRequest request);
-}
-```
-
-#### `controller/impl/AuthControllerImpl.java`
-
-コントローラーを実装します。ここでは業務処理を実装せず、サービスを呼び出すことに専念します。
-
-```java
-package nob.example.easyapp.controller.impl;
-
-import org.springframework.web.bind.annotation.RestController;
-
 import lombok.NonNull;
-import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
 import nob.example.easyapp.controller.model.MeRequest;
@@ -436,29 +391,42 @@ import nob.example.easyapp.service.model.MeInModel;
 import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * AuthControllerの実装クラスです。
+ * 認証コントローラーのインターフェースです。
  *
  * @author nob
  */
 @RestController
-public class AuthControllerImpl implements AuthController {
+@RequestMapping(value = "/api/v1")
+public class AuthController {
 
     @NonNull
     private AuthService authService;
 
-    public AuthControllerImpl(AuthService authService) {
+    public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
-    @Override
-    public LoginResponse login(LoginRequest request) {
+    /**
+     * 認証処理を呼び出します。
+     *
+     * @param request 認証リクエスト
+     * @return 認証結果
+     */
+    @PostMapping(value = "/login")
+    LoginResponse login(@RequestBody LoginRequest request) {
 
         return new LoginResponse(
                 authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
     }
 
-    @Override
-    public MeResponse me(MeRequest request) {
+    /**
+     * ユーザ情報取得処理を呼び出します。
+     *
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
+     */
+    @GetMapping(value = "/me")
+    MeResponse me(MeRequest request) {
 
         MeOutModel meOutModel = authService.me(new MeInModel(request.getName()));
         return new MeResponse(meOutModel.getName(), meOutModel.getAge());
