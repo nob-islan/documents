@@ -10522,6 +10522,9 @@
 </tbody>
 </table>
 <h3 id="controller">controllerテスト作成</h3>
+<ul>
+<li><code>AuthControllerTest.java</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
@@ -10533,13 +10536,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.mockito.Mockito</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.bean.override.mockito.MockitoBean</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MvcResult</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
@@ -10550,14 +10551,15 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tools.jackson.databind.ObjectMapper</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * AuthControllerImplのテストクラスです。</span>
+<span class="cm"> * AuthControllerのテストクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@WebMvcTest</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerImplTest</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthControllerTest</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
@@ -10627,6 +10629,9 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="service">serviceテスト作成</h3>
+<ul>
+<li><code>AuthServiceImplTest.java</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
@@ -10639,8 +10644,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.bean.override.mockito.MockitoBean</span><span class="p">;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
@@ -10735,6 +10740,9 @@
 <span class="p">);</span>
 </code></pre></div>
 <h4 id="_6">テストケース作成</h4>
+<ul>
+<li><code>UsersRepositoryTest.java</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
@@ -10742,11 +10750,11 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * UsersRepositoryのテストクラスです。</span>
@@ -10784,7 +10792,7 @@
 </code></pre></div>
 <h2 id="_7">テスト起動</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># 特定のテストクラスを実行する場合</span>
-./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>AuthControllerImplTest
+./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Dtest<span class="o">=</span>AuthControllerTest
 
 <span class="c1"># 全てのテストクラスを実行する場合</span>
 ./mvnw<span class="w"> </span><span class="nb">test</span>
