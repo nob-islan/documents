@@ -10243,7 +10243,7 @@
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">          </span><span class="no">cd ${module}</span>
 <span class="w">          </span><span class="no">go install gotest.tools/gotestsum@latest</span>
-<span class="w">          </span><span class="no">gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository</span>
+<span class="w">          </span><span class="no">gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository ./internal/infrastructure/persistence</span>
 <span class="w">          </span><span class="no">go tool cover -html=coverage.txt -o coverage.html</span>
 <span class="w">          </span><span class="no">go tool cover -func=coverage.txt</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload Go test results</span>
