@@ -68,6 +68,8 @@ INSERT INTO users (
 │   └── main.go                      # アプリのエントリポイント
 └── internal
     ├── domain
+    │   ├── query
+    │   │   └── users_query.go       # ドメイン取得時のクエリ構造体
     │   └── users.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
     │   ├── model
@@ -101,6 +103,8 @@ INSERT INTO users (
 ```go
 package domain
 
+import "easyapp/internal/domain/query"
+
 // ユーザ情報ドメインです。
 type Users struct {
 	name     string // ユーザ名
@@ -128,7 +132,30 @@ func (u Users) Age() int {
 type UsersRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(targetName string) Users
+	FindByName(q query.FindByNameQuery) Users
+}
+```
+
+#### `internal/domain/query`
+
+ドメイン取得時の検索条件を定める構造体を定義します。
+
+- `users_query.go`
+
+```go
+package query
+
+// ユーザ情報取得時のクエリです。
+type FindByNameQuery struct {
+	name string // 名前
+}
+
+func NewFindByNameQuery(name string) FindByNameQuery {
+	return FindByNameQuery{name: name}
+}
+
+func (q FindByNameQuery) Name() string {
+	return q.name
 }
 ```
 
@@ -248,6 +275,7 @@ package repository
 
 import (
 	"easyapp/internal/domain"
+	"easyapp/internal/domain/query"
 	"easyapp/internal/infrastructure/persistence"
 )
 
@@ -259,9 +287,9 @@ func NewUsersRepository(usersSql persistence.UsersSql) domain.UsersRepository {
 	return &usersRepository{usersSql: usersSql}
 }
 
-func (r *usersRepository) FindByName(targetName string) domain.Users {
+func (r *usersRepository) FindByName(q query.FindByNameQuery) domain.Users {
 
-	u := r.usersSql.FindByName(targetName)
+	u := r.usersSql.FindByName(q.Name())
 
 	return domain.NewUsers(u.Name, u.Password, u.Age)
 }
@@ -278,6 +306,7 @@ package usecase
 
 import (
 	"easyapp/internal/domain"
+	"easyapp/internal/domain/query"
 	"easyapp/internal/usecase/params"
 	"errors"
 )
@@ -302,7 +331,7 @@ func NewUsersUsecase(usersRepository domain.UsersRepository) UsersUsecase {
 
 func (u *usersUsecase) Login(in params.LoginIn) params.LoginOut {
 
-	users := u.usersRepository.FindByName(in.Name())
+	users := u.usersRepository.FindByName(query.NewFindByNameQuery(in.Name()))
 	if users.Name() == "" {
 		return params.NewLoginOut(false)
 	}
@@ -311,7 +340,7 @@ func (u *usersUsecase) Login(in params.LoginIn) params.LoginOut {
 
 func (u *usersUsecase) Me(in params.MeIn) (params.MeOut, error) {
 
-	users := u.usersRepository.FindByName(in.Name())
+	users := u.usersRepository.FindByName(query.NewFindByNameQuery(in.Name()))
 	if users.Name() == "" {
 		return *new(params.MeOut), errors.New("no such user")
 	}
