@@ -82,7 +82,7 @@ aws iam add-role-to-instance-profile \
     --role-name AWSCustomerRoleForEC2KubeWorkerNode
 ```
 
-- ワーカーノードの インスタンスIDを確認します:
+- ワーカーノードのインスタンスIDを確認します:
 
 ```shell
 aws ec2 describe-instances \
@@ -90,7 +90,7 @@ aws ec2 describe-instances \
     --filters Name=tag-value,Values={ワーカーノードのインスタンス名}
 ```
 
-- IAMロールをワーカーノードにアタッチします:
+- インスタンスプロファイルをワーカーノードにアタッチします:
 
 ```shell
 aws ec2 associate-iam-instance-profile \
