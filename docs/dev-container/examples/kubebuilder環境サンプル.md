@@ -26,6 +26,9 @@
         },
         "[yaml]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "vs-kubernetes": {
+          "disable-linters": ["resource-limits"]
         }
       },
       "extensions": [
