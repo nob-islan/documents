@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../00_config/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -10317,9 +10317,14 @@
 <div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">PDBS</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li><code>nobpdb</code>をOPEN</li>
+<li><code>nobpdb</code>をOPENします:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="n">PLUGGABLE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">nobpdb</span><span class="w"> </span><span class="k">OPEN</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>状態を保存し、コンテナ再起動後に自動でOPENするようにします:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="n">PLUGGABLE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">nobpdb</span><span class="w"> </span><span class="n">SAVE</span><span class="w"> </span><span class="k">STATE</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="_3">スキーマ作成</h2>
 <h3 id="_4">リファレンス</h3>
