@@ -2,6 +2,8 @@
 
 Oracleドライバを使ってOracleDBに接続する設定です。
 
+cf. https://medium.com/oracledevs/spring-data-jdbc-with-the-oracle-database-23c-for-java-developers-getting-started-guide-1c4640fc8d27
+
 ## 設定
 
 - `pom.xml`
