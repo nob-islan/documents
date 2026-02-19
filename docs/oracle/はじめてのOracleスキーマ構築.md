@@ -33,10 +33,16 @@ FILE_NAME_CONVERT = ('/opt/oracle/oradata/XE/pdbseed/', '/opt/oracle/oradata/XE/
 SHOW PDBS;
 ```
 
-- `nobpdb`をOPEN
+- `nobpdb`をOPENします:
 
 ```sql
 ALTER PLUGGABLE DATABASE nobpdb OPEN;
+```
+
+- 状態を保存し、コンテナ再起動後に自動でOPENするようにします:
+
+```sql
+ALTER PLUGGABLE DATABASE nobpdb SAVE STATE;
 ```
 
 ## スキーマ作成
