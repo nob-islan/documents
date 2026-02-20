@@ -11,7 +11,7 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
   - Client authenticationをONにします。
   - Authentication flowはStandard flowとします。
   - Valid Redirect URIsを`http://localhost:8081/login/oauth2/code/*`とします。
-  - Valid post logout redirect URIsを`http://localhost:8081/api/v1/top`とします。
+  - Valid post logout redirect URIsを`http://localhost:8081/top`とします。
   - Web originsを`http://localhost:8081`とします。
   - 保存後、CredentinalsタブにおいてClient Secretが取得できます。
 - Userを作成し、パスワードの設定を行います:
@@ -74,7 +74,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/api/v1/top").permitAll()
+                        .requestMatchers("/top").permitAll()
                         .anyRequest().authenticated())
                 .oauth2Login(Customizer.withDefaults()) // Authorization Code Flow / OAuth2 Login を有効化
                 .logout((logout) -> logout
@@ -90,7 +90,7 @@ public class SecurityConfig {
 
         // Sets the location that the End-User's User Agent will be redirected to
         // after the logout has been performed at the Provider
-        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/api/v1/top");
+        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/top");
 
         return oidcLogoutSuccessHandler;
     }
@@ -105,7 +105,6 @@ package nob.example.easyapp.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -114,7 +113,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author nob
  */
 @RestController
-@RequestMapping(value = "/api/v1")
 public class SampleController {
 
     /**
@@ -154,5 +152,5 @@ spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080
 
 ## API打鍵
 
-- ブラウザ上で http://localhost:8081/api/v1/me にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。
-- http://localhost:8081/api/v1/revoke にアクセスするとログアウト処理が走り、`/api/v1/top`に遷移します。
+- ブラウザ上で http://localhost:8081/me にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。
+- http://localhost:8081/api/v1/revoke にアクセスするとログアウト処理が走り、`/top`に遷移します。
