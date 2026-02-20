@@ -133,7 +133,7 @@ public class SampleController {
      * @return ログアウトメッセージ
      */
     @GetMapping("/top")
-    String logout() {
+    String top() {
         return "Logout success";
     }
 }
