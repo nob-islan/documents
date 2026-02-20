@@ -5,7 +5,7 @@
 ## 事前準備
 
 - OpenJDKを用意してください。
-- データベースを別途用意し、ユーザおよび空のデータベースを作成しておいてください。
+- データベースを別途用意し、ユーザおよび空のデータベース`kdb`を作成しておいてください。
 
 ## インストール
 
@@ -40,7 +40,7 @@ db-username=root
 db-password=password
 
 # The full database JDBC URL. If not provided, a default URL is set based on the selected database vendor.
-db-url=jdbc:mariadb://localhost/keycloak
+db-url=jdbc:mariadb://localhost/kdb
 
 # Observability
 
