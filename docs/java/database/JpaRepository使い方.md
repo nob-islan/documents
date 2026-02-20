@@ -6,13 +6,13 @@
 
 - `application.properties`に接続情報を記載します:
 
-```properties
+```shell
 spring.application.name=easyapp
 
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
-spring.datasource.url=jdbc:mariadb://localhost/snaildb
+spring.datasource.url=jdbc:mariadb://localhost/eadb
 #ユーザ名
 spring.datasource.username=root
 #パスワード
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS users(
 - テーブル定義に対応するエンティティを用意します:
 
 ```java
-package com.example.easyapp.domain.entity;
+package nob.example.easyapp.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -95,12 +95,12 @@ public class Users {
 - 下記の要領でrepositoryインターフェースを作成します:
 
 ```java
-package com.example.easyapp.repository;
+package nob.example.easyapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.entity.Users;
 import java.util.List;
 
 /**
@@ -145,11 +145,17 @@ H2DBを使ってテストします。
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+		<!-- Jpa Test導入 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-data-jpa-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
 ```
 
 - `src/test/resources/application-test.properties`を下記内容で作成します:
 
-```properties
+```shell
 # エンティティクラスからスキーマを自動生成しない
 spring.jpa.hibernate.ddl-auto=none
 # h2db接続設定
@@ -163,7 +169,7 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 - 下記要領でテストクラスを作成します:
 
 ```java
-package com.example.easyapp.repository;
+package nob.example.easyapp.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -172,40 +178,50 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import com.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.entity.Users;
 
 /**
- * SampleRepositoryのテストクラスです。
+ * UsersRepositoryのテストクラスです。
  *
  * @author nob
  */
 @DataJpaTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/samplerepository/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/samplerepository/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/usersrepository/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/usersrepository/data.sql" // データ投入SQLのパス
 })
-public class SampleRepositoryTest {
+public class UsersRepositoryTest {
 
     @Autowired
-    private SampleRepository sampleRepository;
+    private UsersRepository usersRepository;
 
     /**
      * テスト
      */
     @Test
-    void test() {
+    void test_findByUserId() {
 
-        // テストケース
+        try {
+            List<Users> u = usersRepository.findByUserId(1);
+            assertEquals(1, u.size());
+            assertEquals(1, u.get(0).getUserId());
+            assertEquals("test_nob", u.get(0).getUserName());
+            assertEquals(13, u.get(0).getAge());
+            assertEquals("test address01", u.get(0).getAddress());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
 ```
 
-- `src/test/resources/schema.sql`および`src/test/resources/data.sql`は下記要領で作成します:
+- `src/test/resources/usersrepository/schema.sql`および`src/test/resources/usersrepository/data.sql`は下記要領で作成します:
 
 ```sql
 -- schema.sql
@@ -222,7 +238,7 @@ CREATE TABLE users(
 INSERT INTO users(
     user_name
     , age
-    , remarks
+    , address
 ) VALUES (
     'test_nob'
     , 13
