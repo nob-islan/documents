@@ -10333,7 +10333,7 @@
 <li>Client authenticationをONにします。</li>
 <li>Authentication flowはStandard flowとします。</li>
 <li>Valid Redirect URIsを<code>http://localhost:8081/login/oauth2/code/*</code>とします。</li>
-<li>Valid post logout redirect URIsを<code>http://localhost:8081/api/v1/top</code>とします。</li>
+<li>Valid post logout redirect URIsを<code>http://localhost:8081/top</code>とします。</li>
 <li>Web originsを<code>http://localhost:8081</code>とします。</li>
 <li>保存後、CredentinalsタブにおいてClient Secretが取得できます。</li>
 </ul>
@@ -10397,7 +10397,7 @@
 
 <span class="w">        </span><span class="n">http</span>
 <span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">((</span><span class="n">authorize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
-<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/api/v1/top&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/top&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
 <span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">())</span>
 <span class="w">                </span><span class="p">.</span><span class="na">oauth2Login</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">())</span><span class="w"> </span><span class="c1">// Authorization Code Flow / OAuth2 Login を有効化</span>
 <span class="w">                </span><span class="p">.</span><span class="na">logout</span><span class="p">((</span><span class="n">logout</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">logout</span>
@@ -10413,7 +10413,7 @@
 
 <span class="w">        </span><span class="c1">// Sets the location that the End-User&#39;s User Agent will be redirected to</span>
 <span class="w">        </span><span class="c1">// after the logout has been performed at the Provider</span>
-<span class="w">        </span><span class="n">oidcLogoutSuccessHandler</span><span class="p">.</span><span class="na">setPostLogoutRedirectUri</span><span class="p">(</span><span class="s">&quot;{baseUrl}/api/v1/top&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oidcLogoutSuccessHandler</span><span class="p">.</span><span class="na">setPostLogoutRedirectUri</span><span class="p">(</span><span class="s">&quot;{baseUrl}/top&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">oidcLogoutSuccessHandler</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
@@ -10427,7 +10427,6 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.core.annotation.AuthenticationPrincipal</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.oauth2.core.user.OAuth2User</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -10436,7 +10435,6 @@
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
-<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
@@ -10474,8 +10472,8 @@ spring.security.oauth2.client.provider.keycloak.issuer-uri<span class="o">=</spa
 </code></pre></div>
 <h2 id="api">API打鍵</h2>
 <ul>
-<li>ブラウザ上で <a href="http://localhost:8081/api/v1/me">http://localhost:8081/api/v1/me</a> にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。</li>
-<li><a href="http://localhost:8081/api/v1/revoke">http://localhost:8081/api/v1/revoke</a> にアクセスするとログアウト処理が走り、<code>/api/v1/top</code>に遷移します。</li>
+<li>ブラウザ上で <a href="http://localhost:8081/me">http://localhost:8081/me</a> にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。</li>
+<li><a href="http://localhost:8081/api/v1/revoke">http://localhost:8081/api/v1/revoke</a> にアクセスするとログアウト処理が走り、<code>/top</code>に遷移します。</li>
 </ul>
 
 
