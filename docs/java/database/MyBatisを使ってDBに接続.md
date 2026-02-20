@@ -37,7 +37,7 @@ DBへの接続情報です。
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
-spring.datasource.url=jdbc:mariadb://localhost/DBName
+spring.datasource.url=jdbc:mariadb://localhost/eadb
 #ユーザ名
 spring.datasource.username=root
 #パスワード
@@ -73,7 +73,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "nob.example.easyapp.mapper")
+@MapperScan(basePackages = "nob.example.easyapp.domain.mapper")
 public class EasyappApplication {
 
     public static void main(String[] args) {
