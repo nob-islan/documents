@@ -11,6 +11,7 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
   - Client authenticationをONにします。
   - Authentication flowはStandard flowとします。
   - Valid Redirect URIsを`http://localhost:8081/login/oauth2/code/*`とします。
+  - Valid post logout redirect URIsを`http://localhost:8081/api/v1/top`とします。
   - Web originsを`http://localhost:8081`とします。
   - 保存後、CredentinalsタブにおいてClient Secretが取得できます。
 - Userを作成し、パスワードの設定を行います:
@@ -18,7 +19,10 @@ cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managi
 
 ## 業務アプリ（Spring Boot）
 
-cf. https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in
+cf.
+
+- https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in
+- https://docs.spring.io/spring-security/reference/servlet/oauth2/login/logout.html
 
 ### 実装
 
@@ -46,25 +50,49 @@ cf. https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-clien
 ```java
 package nob.example.easyapp.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/api/v1/top").permitAll()
                         .anyRequest().authenticated())
-                .oauth2Login(Customizer.withDefaults()); // Authorization Code Flow / OAuth2 Login を有効化
+                .oauth2Login(Customizer.withDefaults()) // Authorization Code Flow / OAuth2 Login を有効化
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(
+                                new RegexRequestMatcher("/api/v1/revoke", "GET")) // logout APIを有効化
+                        .logoutSuccessHandler(oidcLogoutSuccessHandler()));
         return http.build();
+    }
+
+    private LogoutSuccessHandler oidcLogoutSuccessHandler() {
+        OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler = new OidcClientInitiatedLogoutSuccessHandler(
+                this.clientRegistrationRepository);
+
+        // Sets the location that the End-User's User Agent will be redirected to
+        // after the logout has been performed at the Provider
+        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/api/v1/top");
+
+        return oidcLogoutSuccessHandler;
     }
 }
 ```
@@ -95,8 +123,18 @@ public class SampleController {
      * @return 挨拶メッセージ
      */
     @GetMapping("/me")
-    public String me(@AuthenticationPrincipal OAuth2User user) {
+    String me(@AuthenticationPrincipal OAuth2User user) {
         return "Hello " + user.getAttribute("preferred_username");
+    }
+
+    /**
+     * ログアウト時にリダイレクトされるAPIです。
+     *
+     * @return ログアウトメッセージ
+     */
+    @GetMapping("/top")
+    String logout() {
+        return "Logout success";
     }
 }
 ```
@@ -116,4 +154,5 @@ spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080
 
 ## API打鍵
 
-ブラウザ上で http://localhost:8081/api/v1/me にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。
+- ブラウザ上で http://localhost:8081/api/v1/me にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。
+- http://localhost:8081/api/v1/revoke にアクセスするとログアウト処理が走り、`/api/v1/top`に遷移します。
