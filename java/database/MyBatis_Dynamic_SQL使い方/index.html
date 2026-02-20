@@ -10288,18 +10288,18 @@
 <span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">user_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span><span class="w"> </span><span class="nb">TEXT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">TEXT</span>
 <span class="p">);</span>
 
 <span class="c1">-- テストデータ</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">user_name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span>
 <span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;This is a test data&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;This is a test address&#39;</span>
 <span class="p">);</span>
 </code></pre></div>
 <h2 id="_2">事前準備</h2>
@@ -10307,13 +10307,13 @@
 <li><code>application.properties</code>に接続情報を記載します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">#MariaDBのドライバ設定</span>
-<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.mariadb.jdbc.Driver</span>
+spring.datasource.driver-class-name<span class="o">=</span>org.mariadb.jdbc.Driver
 <span class="c1">#接続用URL</span>
-<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:mariadb://localhost/snaildb</span>
+spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/eadb
 <span class="c1">#ユーザ名</span>
-<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">root</span>
+spring.datasource.username<span class="o">=</span>root
 <span class="c1">#パスワード</span>
-<span class="na">spring.datasource.password</span><span class="o">=</span><span class="s">password</span>
+spring.datasource.password<span class="o">=</span>password
 </code></pre></div>
 <ul>
 <li>依存関係を<code>pom.xml</code>に記載します:</li>
@@ -10324,23 +10324,20 @@
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>mybatis-dynamic-sql<span class="nt">&lt;/artifactId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;version&gt;</span>1.5.2<span class="nt">&lt;/version&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
-
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>mybatis<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.5.16<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.5.19<span class="nt">&lt;/version&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>mybatis-spring<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>4.0.0<span class="nt">&lt;/version&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
-
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-jdbc<span class="nt">&lt;/artifactId&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
-
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.mariadb.jdbc<span class="nt">&lt;/groupId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>mariadb-java-client<span class="nt">&lt;/artifactId&gt;</span>
@@ -10349,7 +10346,7 @@
 <ul>
 <li>MyBatisのコンフィグクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.config</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.config</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">javax.sql.DataSource</span><span class="p">;</span>
 
@@ -10365,10 +10362,9 @@
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Configuration</span>
-<span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;com.example.easyapp.mapper&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// mapperパッケージ配下をスキャン</span>
+<span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nob.example.easyapp.domain.mapper&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// mapperパッケージ配下をスキャン</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBatisConfig</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="c1">// MyBatisの設定</span>
 <span class="w">    </span><span class="nd">@Bean</span>
 <span class="w">    </span><span class="n">SqlSessionFactory</span><span class="w"> </span><span class="nf">sqlSessionFactory</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="w"> </span><span class="n">sessionFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="p">();</span>
@@ -10382,7 +10378,7 @@
 <ul>
 <li>テーブル定義に対応するエンティティクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 
@@ -10404,13 +10400,13 @@
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** 備考 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">remarks</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
 <li>mapperパッケージに、<code>sqlSupport</code>クラスおよび<code>mapper</code>クラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.JDBCType</span><span class="p">;</span>
 
@@ -10429,14 +10425,14 @@
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">userId</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">userName</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">remarks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">remarks</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">address</span><span class="p">;</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SqlTable</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">INTEGER</span><span class="p">);</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;user_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">VARCHAR</span><span class="p">);</span>
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">VARCHAR</span><span class="p">);</span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">remarks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;remarks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">VARCHAR</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">VARCHAR</span><span class="p">);</span>
 
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="nf">Users</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">);</span>
@@ -10444,7 +10440,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.mapper</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.mapper</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -10457,7 +10453,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.dynamic.sql.select.render.SelectStatementProvider</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.mybatis.dynamic.sql.util.SqlProviderAdapter</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのmapperクラスです。</span>
@@ -10478,7 +10474,7 @@
 <span class="w">            </span><span class="nd">@Result</span><span class="p">(</span><span class="n">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;userId&quot;</span><span class="p">),</span>
 <span class="w">            </span><span class="nd">@Result</span><span class="p">(</span><span class="n">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;userName&quot;</span><span class="p">),</span>
 <span class="w">            </span><span class="nd">@Result</span><span class="p">(</span><span class="n">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nd">@Result</span><span class="p">(</span><span class="n">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;remarks&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;remarks&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="nd">@Result</span><span class="p">(</span><span class="n">column</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;address&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;address&quot;</span><span class="p">),</span>
 <span class="w">    </span><span class="p">})</span>
 <span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">SelectStatementProvider</span><span class="w"> </span><span class="n">selectStatement</span><span class="p">);</span>
 
@@ -10495,7 +10491,7 @@
 <ul>
 <li>repositoryクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.repository</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -10506,10 +10502,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.query.UsersSelectQuery</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper.UsersMapper</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.mapper.UsersDynamicSqlSupport</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.query.UsersSelectQuery</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.mapper.UsersMapper</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.mapper.UsersDynamicSqlSupport</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのrepositoryクラスです。</span>
@@ -10525,8 +10521,8 @@
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザを検索します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param condition検索条件</span>
-<span class="cm">     * @returnヒットしたユーザのリスト</span>
+<span class="cm">     * @param condition</span>
+<span class="cm">     * @return 検索結果</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">UsersSelectQuery</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
@@ -10543,8 +10539,7 @@
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザを登録します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param usersエンティティ</span>
-<span class="cm">     * @return</span>
+<span class="cm">     * @param users</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
@@ -10553,7 +10548,7 @@
 <span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">userId</span><span class="p">).</span><span class="na">toProperty</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">)</span>
 <span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">userName</span><span class="p">).</span><span class="na">toProperty</span><span class="p">(</span><span class="s">&quot;userName&quot;</span><span class="p">)</span>
 <span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">age</span><span class="p">).</span><span class="na">toProperty</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">)</span>
-<span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">remarks</span><span class="p">).</span><span class="na">toProperty</span><span class="p">(</span><span class="s">&quot;remarks&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">address</span><span class="p">).</span><span class="na">toProperty</span><span class="p">(</span><span class="s">&quot;address&quot;</span><span class="p">)</span>
 <span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
 <span class="w">                </span><span class="p">.</span><span class="na">render</span><span class="p">(</span><span class="n">RenderingStrategies</span><span class="p">.</span><span class="na">MYBATIS3</span><span class="p">);</span>
 
@@ -10562,7 +10557,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <p><code>UsersSelectQuery</code>については下記モデルクラスを作成しています:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.query</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.query</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 
@@ -10573,6 +10568,9 @@
 <span class="cm"> */</span>
 <span class="nd">@Value</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersSelectQuery</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/** ユーザID */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** ユーザ名 */</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
@@ -10589,29 +10587,44 @@
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- Jpa Test導入 --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-data-jpa-test<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
 <li><code>src/test/resources/application-test.properties</code>を下記内容で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
-<span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span>
+spring.jpa.hibernate.ddl-auto<span class="o">=</span>none
 <span class="c1"># h2db接続設定</span>
-<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1</span>
-<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span>
-<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">sa</span>
-<span class="na">spring.datasource.password</span><span class="o">=</span>
-<span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span>
+spring.datasource.url<span class="o">=</span>jdbc:h2:mem:testdb<span class="p">;</span><span class="nv">DB_CLOSE_DELAY</span><span class="o">=</span>-1
+spring.datasource.driver-class-name<span class="o">=</span>org.h2.Driver
+spring.datasource.username<span class="o">=</span>sa
+spring.datasource.password<span class="o">=</span>
+spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dialect
 </code></pre></div>
 <ul>
 <li>下記要領でテストクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.repository</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.annotation.DirtiesContext</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.query.UsersSelectQuery</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * UsersRepositoryのテストクラスです。</span>
@@ -10621,8 +10634,8 @@
 <span class="nd">@SpringBootTest</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// application-test.properties読み込み</span>
 <span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/testdata/users/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/testdata/users/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/testdata/usersrepository/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/testdata/usersrepository/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
 <span class="p">})</span>
 <span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">AFTER_EACH_TEST_METHOD</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryTest</span><span class="w"> </span><span class="p">{</span>
@@ -10634,14 +10647,24 @@
 <span class="cm">     * テスト</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// テストケース</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">selectByCondition</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UsersSelectQuery</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob&quot;</span><span class="p">));</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserId</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test_nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserName</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test address01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li><code>src/test/resources/testdata/users/schema.sql</code>および<code>src/test/resources/testdata/users/data.sql</code>は下記要領で作成します:</li>
+<li><code>src/test/resources/testdata/usersrepository/schema.sql</code>および<code>src/test/resources/testdata/usersrepository/data.sql</code>は下記要領で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- schema.sql</span>
 <span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">;</span>
@@ -10650,18 +10673,18 @@
 <span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">user_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span><span class="w"> </span><span class="nb">TEXT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">TEXT</span>
 <span class="p">);</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1">-- data.sql</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">user_name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span>
 <span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;nob&#39;</span>
+<span class="w">    </span><span class="s1">&#39;test_nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;This is a test data&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;test address01&#39;</span>
 <span class="p">);</span>
 </code></pre></div>
 
