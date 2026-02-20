@@ -10464,7 +10464,7 @@
 <div class="highlight"><pre><span></span><code><span class="c1">#MariaDBのドライバ設定</span>
 spring.datasource.driver-class-name<span class="o">=</span>org.mariadb.jdbc.Driver
 <span class="c1">#接続用URL</span>
-spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/DBName
+spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/eadb
 <span class="c1">#ユーザ名</span>
 spring.datasource.username<span class="o">=</span>root
 <span class="c1">#パスワード</span>
@@ -10492,7 +10492,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="p">;</span>
 
 <span class="nd">@SpringBootApplication</span>
-<span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nob.example.easyapp.mapper&quot;</span><span class="p">)</span>
+<span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;nob.example.easyapp.domain.mapper&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EasyappApplication</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

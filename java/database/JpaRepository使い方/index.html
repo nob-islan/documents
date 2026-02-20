@@ -10420,8 +10420,8 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="nd">@DataJpaTest</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// application-test.properties読み込み</span>
 <span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/usersrepository/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/usersrepository/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/testdata/usersrepository/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/testdata/usersrepository/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
 <span class="p">})</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryTest</span><span class="w"> </span><span class="p">{</span>
 
@@ -10449,7 +10449,7 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li><code>src/test/resources/usersrepository/schema.sql</code>および<code>src/test/resources/usersrepository/data.sql</code>は下記要領で作成します:</li>
+<li><code>src/test/resources/testdata/usersrepository/schema.sql</code>および<code>src/test/resources/testdata/usersrepository/data.sql</code>は下記要領で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- schema.sql</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
