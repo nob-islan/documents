@@ -10333,6 +10333,7 @@
 <li>Client authenticationをONにします。</li>
 <li>Authentication flowはStandard flowとします。</li>
 <li>Valid Redirect URIsを<code>http://localhost:8081/login/oauth2/code/*</code>とします。</li>
+<li>Valid post logout redirect URIsを<code>http://localhost:8081/api/v1/top</code>とします。</li>
 <li>Web originsを<code>http://localhost:8081</code>とします。</li>
 <li>保存後、CredentinalsタブにおいてClient Secretが取得できます。</li>
 </ul>
@@ -10343,7 +10344,11 @@
 </li>
 </ul>
 <h2 id="spring-boot">業務アプリ（Spring Boot）</h2>
-<p>cf. <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in">https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in</a></p>
+<p>cf.</p>
+<ul>
+<li><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in">https://docs.spring.io/spring-security/reference/servlet/oauth2#oauth2-client-log-users-in</a></li>
+<li><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/login/logout.html">https://docs.spring.io/spring-security/reference/servlet/oauth2/login/logout.html</a></li>
+</ul>
 <h3 id="_2">実装</h3>
 <ul>
 <li><code>pom.xml</code>に下記を追加します:</li>
@@ -10368,25 +10373,49 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.config</span><span class="p">;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.Customizer</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.configuration.EnableWebSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.oauth2.client.registration.ClientRegistrationRepository</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.SecurityFilterChain</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.authentication.logout.LogoutSuccessHandler</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.util.matcher.RegexRequestMatcher</span><span class="p">;</span>
 
 <span class="nd">@Configuration</span>
 <span class="nd">@EnableWebSecurity</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ClientRegistrationRepository</span><span class="w"> </span><span class="n">clientRegistrationRepository</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@Bean</span>
 <span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">filterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">http</span>
 <span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">((</span><span class="n">authorize</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/api/v1/top&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
 <span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">())</span>
-<span class="w">                </span><span class="p">.</span><span class="na">oauth2Login</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">());</span><span class="w"> </span><span class="c1">// Authorization Code Flow / OAuth2 Login を有効化</span>
+<span class="w">                </span><span class="p">.</span><span class="na">oauth2Login</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">())</span><span class="w"> </span><span class="c1">// Authorization Code Flow / OAuth2 Login を有効化</span>
+<span class="w">                </span><span class="p">.</span><span class="na">logout</span><span class="p">((</span><span class="n">logout</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">logout</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">logoutRequestMatcher</span><span class="p">(</span>
+<span class="w">                                </span><span class="k">new</span><span class="w"> </span><span class="n">RegexRequestMatcher</span><span class="p">(</span><span class="s">&quot;/api/v1/revoke&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GET&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// logout APIを有効化</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">logoutSuccessHandler</span><span class="p">(</span><span class="n">oidcLogoutSuccessHandler</span><span class="p">()));</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">http</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">LogoutSuccessHandler</span><span class="w"> </span><span class="nf">oidcLogoutSuccessHandler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">OidcClientInitiatedLogoutSuccessHandler</span><span class="w"> </span><span class="n">oidcLogoutSuccessHandler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OidcClientInitiatedLogoutSuccessHandler</span><span class="p">(</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">clientRegistrationRepository</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Sets the location that the End-User&#39;s User Agent will be redirected to</span>
+<span class="w">        </span><span class="c1">// after the logout has been performed at the Provider</span>
+<span class="w">        </span><span class="n">oidcLogoutSuccessHandler</span><span class="p">.</span><span class="na">setPostLogoutRedirectUri</span><span class="p">(</span><span class="s">&quot;{baseUrl}/api/v1/top&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">oidcLogoutSuccessHandler</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -10416,8 +10445,18 @@
 <span class="cm">     * @return 挨拶メッセージ</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="nd">@AuthenticationPrincipal</span><span class="w"> </span><span class="n">OAuth2User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="nd">@AuthenticationPrincipal</span><span class="w"> </span><span class="n">OAuth2User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;preferred_username&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ログアウト時にリダイレクトされるAPIです。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return ログアウトメッセージ</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/top&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">logout</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Logout success&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -10434,7 +10473,10 @@ spring.security.oauth2.client.registration.keycloak.redirect-uri<span class="o">
 spring.security.oauth2.client.provider.keycloak.issuer-uri<span class="o">=</span>http://localhost:8080/realms/easyapp
 </code></pre></div>
 <h2 id="api">API打鍵</h2>
-<p>ブラウザ上で <a href="http://localhost:8081/api/v1/me">http://localhost:8081/api/v1/me</a> にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。</p>
+<ul>
+<li>ブラウザ上で <a href="http://localhost:8081/api/v1/me">http://localhost:8081/api/v1/me</a> にアクセスすると（未認証であれば）Keycloakの画面にリダイレクトし、認証後に業務アプリのコンテンツを取得できます。</li>
+<li><a href="http://localhost:8081/api/v1/revoke">http://localhost:8081/api/v1/revoke</a> にアクセスするとログアウト処理が走り、<code>/api/v1/top</code>に遷移します。</li>
+</ul>
 
 
 
