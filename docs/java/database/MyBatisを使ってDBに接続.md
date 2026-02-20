@@ -9,40 +9,31 @@ MyBatisを使ってJavaアプリからDBに接続する方法、および実装�
 各種依存関係です。アプリ起動時にエラーが起きる場合はバージョンが古い可能性があります。
 
 ```xml
-<dependency>
-    <groupId>org.mariadb.jdbc</groupId>
-    <artifactId>mariadb-java-client</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>org.mybatis</groupId>
-    <artifactId>mybatis</artifactId>
-    <version>3.5.16</version>
-</dependency>
-<dependency>
-    <groupId>org.mybatis</groupId>
-    <artifactId>mybatis-spring</artifactId>
-    <version>3.0.3</version>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-jdbc</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>jakarta.persistence</groupId>
-    <artifactId>jakarta.persistence-api</artifactId>
-    <version>3.2.0</version>
-</dependency>
-
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.19</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+		</dependency>
 ```
 
 ### `application.properties`
 
 DBへの接続情報です。
 
-```properties
+```shell
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
@@ -50,12 +41,12 @@ spring.datasource.url=jdbc:mariadb://localhost/DBName
 #ユーザ名
 spring.datasource.username=root
 #パスワード
-spring.datasource.password=
+spring.datasource.password=password
 ```
 
 ### `mybatis-config.xml`
 
-`projectname/src/main/resources`配下に下記で作成します。
+`src/main/resources`配下に下記で作成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -70,41 +61,58 @@ spring.datasource.password=
 </configuration>
 ```
 
-### `ProjectNameApplication.java`
+### `EasyappApplication.java`
 
 アプリ起動時にMyBatisの設定を読み込みます。
 
 ```java
-package com.example.projectname;
+package nob.example.easyapp;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan(basePackages = "nob.example.easyapp.mapper")
+public class EasyappApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EasyappApplication.class, args);
+    }
+
+}
+```
+
+### `MyBatisConfig.java`
+
+```java
+package nob.example.easyapp.config;
 
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-@SpringBootApplication
-@MapperScan(basePackages = "com.example.projectname.mapper")
-public class ProjectNameApplication {
+/**
+ * MyBatisの設定向けのコンフィグクラスです。
+ *
+ * @author nob
+ */
+@Configuration
+public class MyBatisConfig {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProjectNameApplication.class, args);
-	}
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+        // コンフィグファイルの読み込み
+        sessionFactory.setConfigLocation(new ClassPathResource("/mybatis-config.xml"));
 
-	// MyBatisの設定
-	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource);
-		// コンフィグファイルの読み込み
-		sessionFactory.setConfigLocation(new ClassPathResource("/mybatis-config.xml"));
-
-		return sessionFactory.getObject();
-	}
+        return sessionFactory.getObject();
+    }
 }
 ```
 
@@ -117,47 +125,54 @@ public class ProjectNameApplication {
 | ユーザID | user_id     | VARCHAR(11) | o   | x    |
 | ユーザ名 | user_name   | VARCHAR(20) |     | x    |
 | 年齢     | age         | INT         |     | x    |
-| 備考     | remarks     | TEXT        |     | o    |
+| 住所     | address     | TEXT        |     | o    |
 
 ### エンティティ
 
 デーブル定義と対応させるモデルクラスです。
 
 ```java
-package nob.example.firstrestapi.domain.entity;
+package nob.example.easyapp.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * usersテーブルのentityクラスです。
  *
  * @author nob
  */
-@Data
-@Entity
 @Table(name = "users")
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 
     /** ユーザID */
     @Id
-    @Column(name = "user_id", columnDefinition = "PRIMARY KEY", length = 11, nullable = false)
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
     /** ユーザ名 */
     @Column(name = "user_name", length = 20, nullable = false)
     private String userName;
 
     /** 年齢 */
-    @Column(name = "age", length = 11, nullable = false)
+    @Column(name = "age", nullable = false)
     private Integer age;
 
-    /** 備考 */
-    @Column(name = "remarks", nullable = true)
-    private String remarks;
+    /** 住所 */
+    @Column(name = "address", nullable = true)
+    private String address;
 }
 ```
 
@@ -166,15 +181,13 @@ public class Users {
 Mapperのインターフェースです。業務処理側からはこのクラスのメソッドを呼び出します。
 
 ```java
-package nob.example.firstrestapi.mapper;
+package nob.example.easyapp.domain.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import nob.example.firstrestapi.domain.entity.Users;
-import nob.example.firstrestapi.repository.key.UsersDeleteKey;
-import nob.example.firstrestapi.repository.key.UsersSelectKey;
+import nob.example.easyapp.domain.entity.Users;
 
 /**
  * usersテーブルのmapperインターフェースです。
@@ -201,23 +214,23 @@ public interface UsersMapper {
     /**
      * 検索条件からカラムを抽出します。
      *
-     * @param usersSelectKey
+     * @param userId
      * @return ユーザのリスト
      */
-    List<Users> selectByKey(UsersSelectKey usersSelectKey);
+    List<Users> selectByKey(Integer userId);
 
     /**
      * ユーザ情報を削除します。
      *
-     * @param usersDeleteKey
+     * @param userId
      */
-    void delete(UsersDeleteKey usersDeleteKey);
+    void delete(Integer userId);
 }
 ```
 
 ### Mapper xml
 
-SQLの実体を記載するファイルです。`src/resources`配下に、mapperインターフェースと同じパッケージ構成で配置します。例として、mapperインターフェースが`src/main/java/nob/example/firstrestapi/mapper`に配置されている場合、xmlファイルは`src/main/resources/nob/example/firstrestapi/mapper`に配置します。
+SQLの実体を記載するファイルです。`src/resources`配下に、mapperインターフェースと同じパッケージ構成で配置します。例として、mapperインターフェースが`src/main/java/nob/example/easyapp/domain/mapper`に配置されている場合、xmlファイルは`src/main/resources/nob/example/easyapp/domain/mapper`に配置します。
 
 - mapperタグ
   - `namespace`: mapperが配置されているパッケージ
@@ -231,14 +244,14 @@ SQLの実体を記載するファイルです。`src/resources`配下に、mappe
         "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="nob.example.firstrestapi.mapper.UsersMapper">
+<mapper namespace="nob.example.easyapp.domain.mapper.UsersMapper">
     <update id="update">
         UPDATE
             users
         SET
             user_name = #{userName}
             , age = #{age}
-            , remarks = #{remarks}
+            , address = #{address}
         WHERE
             user_id = #{userId}
     </update>
@@ -248,21 +261,21 @@ SQLの実体を記載するファイルです。`src/resources`配下に、mappe
             INTO users (
                 user_name
                 , age
-                , remarks
+                , address
             ) VALUES(
                 #{userName}
                 , #{age}
-                , #{remarks}
+                , #{address}
             )
     </insert>
 
-    <select id="selectByKey" resultType="nob.example.firstrestapi.domain.entity.Users">
+    <select id="selectByKey" resultType="nob.example.easyapp.domain.entity.Users">
         <bind name="userNameLike" value="'%' + userName + '%'"/>
         SELECT
             user_id
             , user_name
             , age
-            , remarks
+            , address
         FROM
             users
         <where>

@@ -64,6 +64,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * usersテーブルのentityクラスです。
+ *
+ * @author nob
  */
 @Table(name = "users")
 @Entity
@@ -105,6 +107,8 @@ import java.util.List;
 
 /**
  * usersテーブル向けのrepositoryインターフェースです。
+ *
+ * @author nob
  */
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
