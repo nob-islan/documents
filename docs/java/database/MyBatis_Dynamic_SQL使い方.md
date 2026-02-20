@@ -12,18 +12,18 @@ CREATE TABLE users(
     user_id int PRIMARY KEY AUTO_INCREMENT
     , user_name VARCHAR(20) NOT NULL
     , age int NOT NULL
-    , remarks TEXT
+    , address TEXT
 );
 
 -- テストデータ
 INSERT INTO users(
     user_name
     , age
-    , remarks
+    , address
 ) VALUES (
     'nob'
     , 13
-    , 'This is a test data'
+    , 'This is a test address'
 );
 ```
 
@@ -31,11 +31,11 @@ INSERT INTO users(
 
 - `application.properties`に接続情報を記載します:
 
-```properties
+```shell
 #MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 #接続用URL
-spring.datasource.url=jdbc:mariadb://localhost/snaildb
+spring.datasource.url=jdbc:mariadb://localhost/eadb
 #ユーザ名
 spring.datasource.username=root
 #パスワード
@@ -51,23 +51,20 @@ spring.datasource.password=password
 			<artifactId>mybatis-dynamic-sql</artifactId>
 			<version>1.5.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.5.16</version>
+			<version>3.5.19</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>3.0.3</version>
+			<version>4.0.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
@@ -77,7 +74,7 @@ spring.datasource.password=password
 - MyBatisのコンフィグクラスを作成します:
 
 ```java
-package com.example.easyapp.config;
+package nob.example.easyapp.config;
 
 import javax.sql.DataSource;
 
@@ -93,10 +90,9 @@ import org.springframework.context.annotation.Configuration;
  * @author nob
  */
 @Configuration
-@MapperScan(basePackages = "com.example.easyapp.mapper") // mapperパッケージ配下をスキャン
+@MapperScan(basePackages = "nob.example.easyapp.domain.mapper") // mapperパッケージ配下をスキャン
 public class MyBatisConfig {
 
-    // MyBatisの設定
     @Bean
     SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -112,7 +108,7 @@ public class MyBatisConfig {
 - テーブル定義に対応するエンティティクラスを作成します:
 
 ```java
-package com.example.easyapp.domain.entity;
+package nob.example.easyapp.domain.entity;
 
 import lombok.Value;
 
@@ -134,14 +130,14 @@ public class Users {
     private Integer age;
 
     /** 備考 */
-    private String remarks;
+    private String address;
 }
 ```
 
 - mapperパッケージに、`sqlSupport`クラスおよび`mapper`クラスを作成します:
 
 ```java
-package com.example.easyapp.domain.mapper;
+package nob.example.easyapp.domain.mapper;
 
 import java.sql.JDBCType;
 
@@ -160,14 +156,14 @@ public class UsersDynamicSqlSupport {
     public static final SqlColumn<Integer> userId = users.userId;
     public static final SqlColumn<String> userName = users.userName;
     public static final SqlColumn<String> age = users.age;
-    public static final SqlColumn<String> remarks = users.remarks;
+    public static final SqlColumn<String> address = users.address;
 
     public static final class Users extends SqlTable {
 
         public final SqlColumn<Integer> userId = column("user_id", JDBCType.INTEGER);
         public final SqlColumn<String> userName = column("user_name", JDBCType.VARCHAR);
         public final SqlColumn<String> age = column("age", JDBCType.VARCHAR);
-        public final SqlColumn<String> remarks = column("remarks", JDBCType.VARCHAR);
+        public final SqlColumn<String> address = column("address", JDBCType.VARCHAR);
 
         public Users() {
             super("users");
@@ -177,7 +173,7 @@ public class UsersDynamicSqlSupport {
 ```
 
 ```java
-package com.example.easyapp.domain.mapper;
+package nob.example.easyapp.domain.mapper;
 
 import java.util.List;
 
@@ -190,7 +186,7 @@ import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
 import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 
-import com.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.entity.Users;
 
 /**
  * usersテーブルのmapperクラスです。
@@ -211,7 +207,7 @@ public interface UsersMapper {
             @Result(column = "user_id", property = "userId"),
             @Result(column = "user_name", property = "userName"),
             @Result(column = "age", property = "age"),
-            @Result(column = "remarks", property = "remarks"),
+            @Result(column = "address", property = "address"),
     })
     List<Users> select(SelectStatementProvider selectStatement);
 
@@ -229,7 +225,7 @@ public interface UsersMapper {
 - repositoryクラスを作成します:
 
 ```java
-package com.example.easyapp.repository;
+package nob.example.easyapp.repository;
 
 import java.util.List;
 
@@ -240,10 +236,10 @@ import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.easyapp.domain.entity.Users;
-import com.example.easyapp.domain.query.UsersSelectQuery;
-import com.example.easyapp.mapper.UsersMapper;
-import com.example.easyapp.mapper.UsersDynamicSqlSupport;
+import nob.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.query.UsersSelectQuery;
+import nob.example.easyapp.domain.mapper.UsersMapper;
+import nob.example.easyapp.domain.mapper.UsersDynamicSqlSupport;
 
 /**
  * usersテーブルのrepositoryクラスです。
@@ -259,8 +255,8 @@ public class UsersRepository {
     /**
      * ユーザを検索します。
      *
-     * @param condition検索条件
-     * @returnヒットしたユーザのリスト
+     * @param condition
+     * @return 検索結果
      */
     public List<Users> selectByCondition(UsersSelectQuery condition) {
 
@@ -277,8 +273,7 @@ public class UsersRepository {
     /**
      * ユーザを登録します。
      *
-     * @param usersエンティティ
-     * @return
+     * @param users
      */
     public void insert(Users users) {
 
@@ -287,7 +282,7 @@ public class UsersRepository {
                 .map(UsersDynamicSqlSupport.userId).toProperty("userId")
                 .map(UsersDynamicSqlSupport.userName).toProperty("userName")
                 .map(UsersDynamicSqlSupport.age).toProperty("age")
-                .map(UsersDynamicSqlSupport.remarks).toProperty("remarks")
+                .map(UsersDynamicSqlSupport.address).toProperty("address")
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
 
@@ -299,7 +294,7 @@ public class UsersRepository {
 `UsersSelectQuery`については下記モデルクラスを作成しています:
 
 ```java
-package com.example.easyapp.domain.query;
+package nob.example.easyapp.domain.query;
 
 import lombok.Value;
 
@@ -310,6 +305,9 @@ import lombok.Value;
  */
 @Value
 public class UsersSelectQuery {
+
+    /** ユーザID */
+    private Integer userId;
 
     /** ユーザ名 */
     private String userName;
@@ -329,11 +327,17 @@ H2DBを使ってテストします。
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <!-- Jpa Test導入 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-data-jpa-test</artifactId>
+            <scope>compile</scope>
+        </dependency>
 ```
 
 - `src/test/resources/application-test.properties`を下記内容で作成します:
 
-```properties
+```shell
 # エンティティクラスからスキーマを自動生成しない
 spring.jpa.hibernate.ddl-auto=none
 # h2db接続設定
@@ -347,13 +351,22 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 - 下記要領でテストクラスを作成します:
 
 ```java
-package com.example.easyapp.repository;
+package nob.example.easyapp.repository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+
+import nob.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.query.UsersSelectQuery;
 
 /**
  * UsersRepositoryのテストクラスです。
@@ -363,8 +376,8 @@ import org.springframework.test.context.TestPropertySource;
 @SpringBootTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/testdata/users/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/testdata/users/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/testdata/usersrepository/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/testdata/usersrepository/data.sql" // データ投入SQLのパス
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UsersRepositoryTest {
@@ -376,14 +389,24 @@ public class UsersRepositoryTest {
      * テスト
      */
     @Test
-    void test() {
+    void test_findByUserId() {
 
-        // テストケース
+        try {
+            List<Users> u = usersRepository.selectByCondition(new UsersSelectQuery(1, "test_nob"));
+            assertEquals(1, u.size());
+            assertEquals(1, u.get(0).getUserId());
+            assertEquals("test_nob", u.get(0).getUserName());
+            assertEquals(13, u.get(0).getAge());
+            assertEquals("test address01", u.get(0).getAddress());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
 ```
 
-- `src/test/resources/testdata/users/schema.sql`および`src/test/resources/testdata/users/data.sql`は下記要領で作成します:
+- `src/test/resources/testdata/usersrepository/schema.sql`および`src/test/resources/testdata/usersrepository/data.sql`は下記要領で作成します:
 
 ```sql
 -- schema.sql
@@ -393,7 +416,7 @@ CREATE TABLE IF NOT EXISTS users(
     user_id int PRIMARY KEY AUTO_INCREMENT
     , user_name VARCHAR(20) NOT NULL
     , age int NOT NULL
-    , remarks TEXT
+    , address TEXT
 );
 ```
 
@@ -402,10 +425,10 @@ CREATE TABLE IF NOT EXISTS users(
 INSERT INTO users(
     user_name
     , age
-    , remarks
+    , address
 ) VALUES (
-    'nob'
+    'test_nob'
     , 13
-    , 'This is a test data'
+    , 'test address01'
 );
 ```

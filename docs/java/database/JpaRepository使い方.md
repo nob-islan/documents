@@ -229,10 +229,12 @@ public class UsersRepositoryTest {
 
 ```sql
 -- schema.sql
-CREATE TABLE users(
-    user_id INT PRIMARY KEY AUTO_INCREMENT
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users(
+    user_id int PRIMARY KEY AUTO_INCREMENT
     , user_name VARCHAR(20) NOT NULL
-    , age INT NOT NULL
+    , age int NOT NULL
     , address TEXT
 );
 ```
