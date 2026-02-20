@@ -10241,16 +10241,16 @@
 <ul>
 <li><code>application.properties</code>に接続情報を記載します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="na">spring.application.name</span><span class="o">=</span><span class="s">easyapp</span>
+<div class="highlight"><pre><span></span><code>spring.application.name<span class="o">=</span>easyapp
 
 <span class="c1">#MariaDBのドライバ設定</span>
-<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.mariadb.jdbc.Driver</span>
+spring.datasource.driver-class-name<span class="o">=</span>org.mariadb.jdbc.Driver
 <span class="c1">#接続用URL</span>
-<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:mariadb://localhost/snaildb</span>
+spring.datasource.url<span class="o">=</span>jdbc:mariadb://localhost/eadb
 <span class="c1">#ユーザ名</span>
-<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">root</span>
+spring.datasource.username<span class="o">=</span>root
 <span class="c1">#パスワード</span>
-<span class="na">spring.datasource.password</span><span class="o">=</span><span class="s">password</span>
+spring.datasource.password<span class="o">=</span>password
 </code></pre></div>
 <ul>
 <li><code>pom.xml</code>に下記依存関係を追記します:</li>
@@ -10280,7 +10280,7 @@
 <ul>
 <li>テーブル定義に対応するエンティティを用意します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
@@ -10324,12 +10324,12 @@
 <ul>
 <li>下記の要領でrepositoryインターフェースを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.repository</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -10371,23 +10371,29 @@
 <span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
 <span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- Jpa Test導入 --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-data-jpa-test<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <ul>
 <li><code>src/test/resources/application-test.properties</code>を下記内容で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># エンティティクラスからスキーマを自動生成しない</span>
-<span class="na">spring.jpa.hibernate.ddl-auto</span><span class="o">=</span><span class="s">none</span>
+spring.jpa.hibernate.ddl-auto<span class="o">=</span>none
 <span class="c1"># h2db接続設定</span>
-<span class="na">spring.datasource.url</span><span class="o">=</span><span class="s">jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1</span>
-<span class="na">spring.datasource.driver-class-name</span><span class="o">=</span><span class="s">org.h2.Driver</span>
-<span class="na">spring.datasource.username</span><span class="o">=</span><span class="s">sa</span>
-<span class="na">spring.datasource.password</span><span class="o">=</span>
-<span class="na">spring.jpa.database-platform</span><span class="o">=</span><span class="s">org.hibernate.dialect.H2Dialect</span>
+spring.datasource.url<span class="o">=</span>jdbc:h2:mem:testdb<span class="p">;</span><span class="nv">DB_CLOSE_DELAY</span><span class="o">=</span>-1
+spring.datasource.driver-class-name<span class="o">=</span>org.h2.Driver
+spring.datasource.username<span class="o">=</span>sa
+spring.datasource.password<span class="o">=</span>
+spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dialect
 </code></pre></div>
 <ul>
 <li>下記要領でテストクラスを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.easyapp.repository</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
@@ -10396,40 +10402,50 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * SampleRepositoryのテストクラスです。</span>
+<span class="cm"> * UsersRepositoryのテストクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@DataJpaTest</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// application-test.properties読み込み</span>
 <span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/samplerepository/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/samplerepository/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/usersrepository/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/usersrepository/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
 <span class="p">})</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleRepositoryTest</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryTest</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Autowired</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SampleRepository</span><span class="w"> </span><span class="n">sampleRepository</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * テスト</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// テストケース</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByUserId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserId</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test_nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserName</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test address01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAddress</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li><code>src/test/resources/schema.sql</code>および<code>src/test/resources/data.sql</code>は下記要領で作成します:</li>
+<li><code>src/test/resources/usersrepository/schema.sql</code>および<code>src/test/resources/usersrepository/data.sql</code>は下記要領で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- schema.sql</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
@@ -10443,7 +10459,7 @@
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">user_name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span>
 <span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;test_nob&#39;</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
