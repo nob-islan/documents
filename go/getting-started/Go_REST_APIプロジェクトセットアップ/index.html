@@ -4167,17 +4167,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internaldomainquery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        internal/domain/query
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#internalinfrastructure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10509,17 +10498,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internaldomainquery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        internal/domain/query
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#internalinfrastructure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10721,8 +10699,6 @@
 │<span class="w">   </span>└──<span class="w"> </span>main.go<span class="w">                      </span><span class="c1"># アプリのエントリポイント</span>
 └──<span class="w"> </span>internal
 <span class="w">    </span>├──<span class="w"> </span>domain
-<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>query
-<span class="w">    </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users_query.go<span class="w">       </span><span class="c1"># ドメイン取得時のクエリ構造体</span>
 <span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>users.go<span class="w">                 </span><span class="c1"># ドメイン定義およびrepositoryのインターフェース</span>
 <span class="w">    </span>├──<span class="w"> </span>handler
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>model
@@ -10752,8 +10728,6 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">domain</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="s">&quot;easyapp/internal/domain/query&quot;</span>
-
 <span class="c1">// ユーザ情報ドメインです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">Users</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
@@ -10781,15 +10755,8 @@
 <span class="kd">type</span><span class="w"> </span><span class="nx">UsersRepository</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// ユーザ情報を取得します。</span>
-<span class="w">    </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="nx">query</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span>
+<span class="w">    </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="nx">FindByNameQuery</span><span class="p">)</span><span class="w"> </span><span class="nx">Users</span>
 <span class="p">}</span>
-</code></pre></div>
-<h4 id="internaldomainquery"><code>internal/domain/query</code></h4>
-<p>ドメイン取得時の検索条件を定める構造体を定義します。</p>
-<ul>
-<li><code>users_query.go</code></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">query</span>
 
 <span class="c1">// ユーザ情報取得時のクエリです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">FindByNameQuery</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -10909,7 +10876,6 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/domain/query&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence&quot;</span>
 <span class="p">)</span>
 
@@ -10921,7 +10887,7 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersRepository</span><span class="p">{</span><span class="nx">usersSql</span><span class="p">:</span><span class="w"> </span><span class="nx">usersSql</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="nx">query</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">u</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">usersSql</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
 
@@ -10937,7 +10903,6 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/domain/query&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;errors&quot;</span>
 <span class="p">)</span>
@@ -10962,7 +10927,7 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()))</span>
+<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
@@ -10971,7 +10936,7 @@
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">usersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()))</span>
+<span class="w">    </span><span class="nx">users</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">usersRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()))</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">users</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>

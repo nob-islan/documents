@@ -4166,17 +4166,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internaldomainquery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        internal/domain/query
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10446,17 +10435,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internaldomainquery" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        internal/domain/query
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10610,7 +10588,6 @@
 ├──<span class="w"> </span>internal
 │<span class="w">   </span>├──<span class="w"> </span>apperrors<span class="w">        </span><span class="c1"># 独自エラー定義およびそのハンドリング</span>
 │<span class="w">   </span>├──<span class="w"> </span>domain<span class="w">           </span><span class="c1"># ドメイン構造体</span>
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>query<span class="w">        </span><span class="c1"># ドメイン取得時のクエリ構造体</span>
 │<span class="w">   </span>├──<span class="w"> </span>handler<span class="w">          </span><span class="c1"># APIリクエストをハンドリング、業務処理呼び出し</span>
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>model<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>router<span class="w">       </span><span class="c1"># httpリクエストのルーティング</span>
@@ -10635,8 +10612,6 @@
 <h3 id="internaldomain"><code>internal/domain</code></h3>
 <p>業務処理の中心となるドメイン構造体およびそれを操作するrepositoryインターフェースを格納するパッケージです。</p>
 <p>値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。</p>
-<h3 id="internaldomainquery"><code>internal/domain/query</code></h3>
-<p>ドメインを取得する際の検索条件を定める構造体を格納するパッケージです。</p>
 <h3 id="internalhandler"><code>internal/handler</code></h3>
 <p>リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。</p>
 <h3 id="internalhandlermodel"><code>internal/handler/model</code></h3>
