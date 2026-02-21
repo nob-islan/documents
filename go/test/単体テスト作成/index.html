@@ -10993,10 +10993,10 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <li><code>schema.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 一部SQLite特有の記法が必要なため注意 see; https://www.sqlite.org/docs.html</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INTEGER</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span>
 <span class="p">);</span>
 </code></pre></div>
 <ul>
