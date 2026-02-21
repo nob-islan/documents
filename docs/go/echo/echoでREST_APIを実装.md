@@ -56,7 +56,7 @@ import (
 )
 
 // 認証のhandlerインターフェースです。
-type UsersHandler interface {
+type UserHandler interface {
 
 	// 認証処理を呼び出します。
 	Login(c *echo.Context) error
@@ -66,10 +66,10 @@ type UsersHandler interface {
 }
 
 type usersHandler struct {
-	usersUsecase usecase.UsersUsecase
+	usersUsecase usecase.UserUsecase
 }
 
-func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
 	return &usersHandler{usersUsecase: usersUsecase}
 }
 
@@ -193,7 +193,7 @@ func Routing() *echo.Echo {
 
 	e := echo.New()
 
-	NewUsersRouter().SetRouting(e)
+	NewUserRouter().SetRouting(e)
 
 	return e
 }
@@ -213,13 +213,13 @@ import (
 
 type usersRouter struct{}
 
-func NewUsersRouter() Router {
+func NewUserRouter() Router {
 	return &usersRouter{}
 }
 
 func (r *usersRouter) SetRouting(e *echo.Echo) {
 
-	h := handler.NewUsersHandler(usecase.NewUsersUsecase())
+	h := handler.NewUserHandler(usecase.NewUserUsecase())
 
 	e.POST(basePath+"/login", h.Login)
 	e.GET(basePath+"/me", h.Me)

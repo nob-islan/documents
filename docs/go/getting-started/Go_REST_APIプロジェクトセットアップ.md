@@ -102,33 +102,33 @@ INSERT INTO users (
 package domain
 
 // ユーザ情報ドメインです。
-type Users struct {
+type User struct {
 	name     string // ユーザ名
 	password string // パスワード
 	age      int    // 年齢
 }
 
-func NewUsers(name string, password string, age int) Users {
-	return Users{name: name, password: password, age: age}
+func NewUser(name string, password string, age int) User {
+	return User{name: name, password: password, age: age}
 }
 
-func (u Users) Name() string {
+func (u User) Name() string {
 	return u.name
 }
 
-func (u Users) Password() string {
+func (u User) Password() string {
 	return u.password
 }
 
-func (u Users) Age() int {
+func (u User) Age() int {
 	return u.age
 }
 
 // ユーザ情報ドメイン向けrepositoryのインターフェースです。
-type UsersRepository interface {
+type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(q FindByNameQuery) Users
+	FindByName(q FindByNameQuery) User
 }
 
 // ユーザ情報取得時のクエリです。
@@ -268,15 +268,15 @@ type usersRepository struct {
 	usersSql persistence.UsersSql
 }
 
-func NewUsersRepository(usersSql persistence.UsersSql) domain.UsersRepository {
+func NewUserRepository(usersSql persistence.UsersSql) domain.UserRepository {
 	return &usersRepository{usersSql: usersSql}
 }
 
-func (r *usersRepository) FindByName(q domain.FindByNameQuery) domain.Users {
+func (r *usersRepository) FindByName(q domain.FindByNameQuery) domain.User {
 
 	u := r.usersSql.FindByName(q.Name())
 
-	return domain.NewUsers(u.Name, u.Password, u.Age)
+	return domain.NewUser(u.Name, u.Password, u.Age)
 }
 ```
 
@@ -296,7 +296,7 @@ import (
 )
 
 // 認証のusecaseインターフェースです。
-type UsersUsecase interface {
+type UserUsecase interface {
 
 	// 認証処理を行います。
 	Login(in params.LoginIn) params.LoginOut
@@ -306,10 +306,10 @@ type UsersUsecase interface {
 }
 
 type usersUsecase struct {
-	usersRepository domain.UsersRepository
+	usersRepository domain.UserRepository
 }
 
-func NewUsersUsecase(usersRepository domain.UsersRepository) UsersUsecase {
+func NewUserUsecase(usersRepository domain.UserRepository) UserUsecase {
 	return &usersUsecase{usersRepository: usersRepository}
 }
 
@@ -422,7 +422,7 @@ import (
 )
 
 // 認証のhandlerインターフェースです。
-type UsersHandler interface {
+type UserHandler interface {
 
 	// 認証処理を呼び出します。
 	Login(w http.ResponseWriter, r *http.Request)
@@ -432,10 +432,10 @@ type UsersHandler interface {
 }
 
 type usersHandler struct {
-	usersUsecase usecase.UsersUsecase
+	usersUsecase usecase.UserUsecase
 }
 
-func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
 	return &usersHandler{usersUsecase: usersUsecase}
 }
 
@@ -567,7 +567,7 @@ func Routing() *http.ServeMux {
 	m := http.NewServeMux()
 
 	// users
-	NewUsersRouter(db).SetRouting(m)
+	NewUserRouter(db).SetRouting(m)
 
 	return m
 }
@@ -591,15 +591,15 @@ type usersRouter struct {
 	db *sql.DB
 }
 
-func NewUsersRouter(db *sql.DB) Router {
+func NewUserRouter(db *sql.DB) Router {
 	return &usersRouter{db: db}
 }
 
 func (r *usersRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewUsersHandler(
-		usecase.NewUsersUsecase(
-			repository.NewUsersRepository(
+	h := handler.NewUserHandler(
+		usecase.NewUserUsecase(
+			repository.NewUserRepository(
 				persistence.NewUsersSql(
 					r.db,
 				),

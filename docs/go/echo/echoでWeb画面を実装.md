@@ -178,7 +178,7 @@ import (
 )
 
 // 認証機能のhandlerです。
-type UsersHandler interface {
+type UserHandler interface {
 
 	// 初期表示処理を行います。
 	InitView(c echo.Context) error
@@ -189,7 +189,7 @@ type UsersHandler interface {
 
 type usersHandler struct{}
 
-func NewUsersHandler() UsersHandler {
+func NewUserHandler() UserHandler {
 	return &usersHandler{}
 }
 
@@ -262,7 +262,7 @@ func Routing() *echo.Echo {
 	}
 	e.Static("/static", "assets/static")
 
-	NewUsersRouter().SetRouting(e)
+	NewUserRouter().SetRouting(e)
 
 	return e
 }
@@ -290,13 +290,13 @@ import (
 
 type usersRouter struct{}
 
-func NewUsersRouter() Router {
+func NewUserRouter() Router {
 	return &usersRouter{}
 }
 
 func (r *usersRouter) SetRouting(e *echo.Echo) {
 
-	h := handler.NewUsersHandler()
+	h := handler.NewUserHandler()
 
 	e.GET("/login", h.InitView)
 	e.POST(basePath+"/login", h.Login)

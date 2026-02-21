@@ -83,7 +83,7 @@ swaggerページへのルーティングを設定します。
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
 	  // users
-	  NewUsersRouter(db).SetRouting(m)
+	  NewUserRouter(db).SetRouting(m)
 
 	  return m
   }
@@ -106,7 +106,7 @@ swaggerページへのルーティングを設定します。
   )
 
   // 認証のハンドラインターフェースです。
-  type UsersHandler interface {
+  type UserHandler interface {
 
 	  // 認証処理を呼び出します。
 	  Login(w http.ResponseWriter, r *http.Request)
@@ -116,16 +116,16 @@ swaggerページへのルーティングを設定します。
   }
 
   type usersHandler struct {
-	  usersUsecase usecase.UsersUsecase
+	  usersUsecase usecase.UserUsecase
   }
 
-  func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+  func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
 	  return &usersHandler{usersUsecase: usersUsecase}
   }
 
 + // @Summary 認証
 + // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
-+ // @Tags Users
++ // @Tags User
 + // @Accept json
 + // @Produce json
 + // @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
@@ -150,7 +150,7 @@ swaggerページへのルーティングを設定します。
 
 + // @Summary ユーザ情報取得
 + // @Description ユーザ情報を取得します。
-+ // @Tags Users
++ // @Tags User
 + // @Accept json
 + // @Produce json
 + // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"

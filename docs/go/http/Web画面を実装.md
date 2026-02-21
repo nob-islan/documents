@@ -160,7 +160,7 @@ import (
 )
 
 // 認証機能のhandlerです。
-type UsersHandler interface {
+type UserHandler interface {
 
 	// 初期表示処理を行います。
 	InitView(w http.ResponseWriter, r *http.Request)
@@ -171,7 +171,7 @@ type UsersHandler interface {
 
 type usersHandler struct{}
 
-func NewUsersHandler() UsersHandler {
+func NewUserHandler() UserHandler {
 	return &usersHandler{}
 }
 
@@ -254,7 +254,7 @@ func Routing() *http.ServeMux {
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
 
 	// users
-	NewUsersRouter().SetRouting(m)
+	NewUserRouter().SetRouting(m)
 
 	return m
 }
@@ -272,13 +272,13 @@ import (
 
 type usersRouter struct{}
 
-func NewUsersRouter() Router {
+func NewUserRouter() Router {
 	return &usersRouter{}
 }
 
 func (r *usersRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewUsersHandler()
+	h := handler.NewUserHandler()
 
 	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
