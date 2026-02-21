@@ -10568,7 +10568,7 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証機能のhandlerです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 初期表示処理を行います。</span>
 <span class="w">    </span><span class="nx">InitView</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span>
@@ -10579,7 +10579,7 @@
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersHandler</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersHandler</span><span class="p">()</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserHandler</span><span class="p">()</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersHandler</span><span class="p">{}</span>
 <span class="p">}</span>
 
@@ -10661,7 +10661,7 @@
 <span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Handle</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StripPrefix</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">FileServer</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">Dir</span><span class="p">(</span><span class="s">&quot;assets/static&quot;</span><span class="p">))))</span>
 
 <span class="w">    </span><span class="c1">// users</span>
-<span class="w">    </span><span class="nx">NewUsersRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">NewUserRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span>
 <span class="p">}</span>
@@ -10678,13 +10678,13 @@
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersRouter</span><span class="p">{}</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUsersHandler</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">()</span>
 
 <span class="w">    </span><span class="c1">// カスタムルータ</span>
 <span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>

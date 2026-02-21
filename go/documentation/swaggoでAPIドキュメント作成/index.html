@@ -10478,7 +10478,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+     m.Handle(&quot;/swagger/&quot;, httpSwagger.WrapHandler)</span>
 
 <span class="w"> </span>     // users
-<span class="w"> </span>     NewUsersRouter(db).SetRouting(m)
+<span class="w"> </span>     NewUserRouter(db).SetRouting(m)
 
 <span class="w"> </span>     return m
 <span class="w"> </span> }
@@ -10497,7 +10497,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span> )
 
 <span class="w"> </span> // 認証のハンドラインターフェースです。
-<span class="w"> </span> type UsersHandler interface {
+<span class="w"> </span> type UserHandler interface {
 
 <span class="w"> </span>     // 認証処理を呼び出します。
 <span class="w"> </span>     Login(w http.ResponseWriter, r *http.Request)
@@ -10507,16 +10507,16 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span> }
 
 <span class="w"> </span> type usersHandler struct {
-<span class="w"> </span>     usersUsecase usecase.UsersUsecase
+<span class="w"> </span>     usersUsecase usecase.UserUsecase
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+<span class="w"> </span> func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
 <span class="w"> </span>     return &amp;usersHandler{usersUsecase: usersUsecase}
 <span class="w"> </span> }
 
 <span class="gi">+ // @Summary 認証</span>
 <span class="gi">+ // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。</span>
-<span class="gi">+ // @Tags Users</span>
+<span class="gi">+ // @Tags User</span>
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param LoginReq body model.LoginReq true &quot;認証向けのリクエストモデル&quot;</span>
@@ -10541,7 +10541,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="gi">+ // @Summary ユーザ情報取得</span>
 <span class="gi">+ // @Description ユーザ情報を取得します。</span>
-<span class="gi">+ // @Tags Users</span>
+<span class="gi">+ // @Tags User</span>
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param MeReq query model.MeReq false &quot;ユーザ情報取得向けのリクエストモデル&quot;</span>

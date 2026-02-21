@@ -10509,7 +10509,7 @@
 <span class="p">)</span>
 
 <span class="c1">// 認証のhandlerインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
 <span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
@@ -10519,10 +10519,10 @@
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersHandler</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span>
+<span class="w">    </span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UserUsecase</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersHandler</span><span class="p">(</span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UsersUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">UsersHandler</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserHandler</span><span class="p">(</span><span class="nx">usersUsecase</span><span class="w"> </span><span class="nx">usecase</span><span class="p">.</span><span class="nx">UserUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersHandler</span><span class="p">{</span><span class="nx">usersUsecase</span><span class="p">:</span><span class="w"> </span><span class="nx">usersUsecase</span><span class="p">}</span>
 <span class="p">}</span>
 
@@ -10642,7 +10642,7 @@
 
 <span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-<span class="w">    </span><span class="nx">NewUsersRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">NewUserRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span>
 <span class="p">}</span>
@@ -10661,13 +10661,13 @@
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">usersRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUsersRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">usersRouter</span><span class="p">{}</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">usersRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUsersHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewUsersUsecase</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewUserUsecase</span><span class="p">())</span>
 
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Me</span><span class="p">)</span>
