@@ -18,9 +18,9 @@ cf. https://echo.labstack.com/docs/templates
 ├── go.sum
 └── internal
     └── handler
-        ├── users_handler.go
+        ├── user_handler.go
         └── router
-            ├── users_router.go
+            ├── user_router.go
             └── base.go
 ```
 
@@ -166,7 +166,7 @@ body {
 
 #### `internal/handler/``
 
-- `users_handler.go`
+- `user_handler.go`
 
 ```go
 package handler
@@ -187,17 +187,17 @@ type UserHandler interface {
 	Login(c echo.Context) error
 }
 
-type usersHandler struct{}
+type userHandler struct{}
 
 func NewUserHandler() UserHandler {
-	return &usersHandler{}
+	return &userHandler{}
 }
 
-func (h *usersHandler) InitView(c echo.Context) error {
+func (h *userHandler) InitView(c echo.Context) error {
 	return c.Render(http.StatusOK, "login", struct{ ButtonText string }{ButtonText: "ログイン"})
 }
 
-func (h *usersHandler) Login(c echo.Context) error {
+func (h *userHandler) Login(c echo.Context) error {
 
 	req := new(struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -277,7 +277,7 @@ func (t *Template) Render(w io.Writer, name string, data any, c echo.Context) er
 }
 ```
 
-- `router/users_router.go`
+- `router/user_router.go`
 
 ```go
 package router
@@ -288,13 +288,13 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type usersRouter struct{}
+type userRouter struct{}
 
 func NewUserRouter() Router {
-	return &usersRouter{}
+	return &userRouter{}
 }
 
-func (r *usersRouter) SetRouting(e *echo.Echo) {
+func (r *userRouter) SetRouting(e *echo.Echo) {
 
 	h := handler.NewUserHandler()
 

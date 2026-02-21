@@ -14,12 +14,12 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 │   └── main.go
 └── internal
     └── handler
-        ├── users_handler.go
-        ├── users_handler_test.go
+        ├── user_handler.go
+        ├── user_handler_test.go
         ├── model
-        │   └── users_model.go
+        │   └── user_model.go
         └── router
-            ├── users_router.go
+            ├── user_router.go
             └── base.go
 ```
 
@@ -41,7 +41,7 @@ go get github.com/labstack/echo/v5
 
 #### `internal/handler/`
 
-- `users_handler.go`
+- `user_handler.go`
 
 ```go
 package handler
@@ -65,15 +65,15 @@ type UserHandler interface {
 	Me(c *echo.Context) error
 }
 
-type usersHandler struct {
-	usersUsecase usecase.UserUsecase
+type userHandler struct {
+	userUsecase usecase.UserUsecase
 }
 
-func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
-	return &usersHandler{usersUsecase: usersUsecase}
+func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
+	return &userHandler{userUsecase: userUsecase}
 }
 
-func (h *usersHandler) Login(c *echo.Context) error {
+func (h *userHandler) Login(c *echo.Context) error {
 
 	// jsonパースエラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
@@ -88,18 +88,18 @@ func (h *usersHandler) Login(c *echo.Context) error {
 	}
 
 	// usecase呼び出し
-	out := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *usersHandler) Me(c *echo.Context) error {
+func (h *userHandler) Me(c *echo.Context) error {
 
 	// クエリパラメータ取得
 	req := model.NewMeReq(c)
 
 	// usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.usersUsecase.Me(params.NewMeIn(req.Name))
+	out, err := h.userUsecase.Me(params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusInternalServerError,
@@ -116,7 +116,7 @@ func (h *usersHandler) Me(c *echo.Context) error {
 
 #### `internal/handler/model/`
 
-- `users_model.go`
+- `user_model.go`
 
 ```go
 package model
@@ -199,7 +199,7 @@ func Routing() *echo.Echo {
 }
 ```
 
-- `users_router.go`
+- `user_router.go`
 
 ```go
 package router
@@ -211,13 +211,13 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-type usersRouter struct{}
+type userRouter struct{}
 
 func NewUserRouter() Router {
-	return &usersRouter{}
+	return &userRouter{}
 }
 
-func (r *usersRouter) SetRouting(e *echo.Echo) {
+func (r *userRouter) SetRouting(e *echo.Echo) {
 
 	h := handler.NewUserHandler(usecase.NewUserUsecase())
 

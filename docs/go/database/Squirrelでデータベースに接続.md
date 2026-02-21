@@ -97,7 +97,7 @@ import (
 )
 
 // usersテーブルのエンティティ構造体です。
-type User struct {
+type Users struct {
 	UserId   string // 管理ID
 	Username string // ユーザ名
 	Age      string // 年齢
@@ -106,8 +106,8 @@ type User struct {
 
 // サンプルrepositoryのインターフェースです。
 type SampleRepository interface {
-	FindByUsername(username string) []User
-	Insert(u User)
+	FindByUsername(username string) []Users
+	Insert(u Users)
 }
 
 // サンプルrepositoryの構造体です。
@@ -121,7 +121,7 @@ func NewSampleRepository(db *sql.DB) SampleRepository {
 }
 
 // ユーザ名をキーとしてデータベースからユーザ情報を検索します。
-func (r *sampleRepository) FindByUsername(username string) []User {
+func (r *sampleRepository) FindByUsername(username string) []Users {
 
 	// クエリ作成
 	builder := sq.Select("*").From("users")
@@ -141,7 +141,7 @@ func (r *sampleRepository) FindByUsername(username string) []User {
 	defer rows.Close()
 
 	// 検索結果をマッピング
-	var usersList []User
+	var usersList []Users
 	for rows.Next() {
 		var userId, username, age, remarks string
 		if err := rows.Scan(&userId, &username, &age, &remarks); err != nil {
@@ -149,7 +149,7 @@ func (r *sampleRepository) FindByUsername(username string) []User {
 		}
 		usersList = append(
 			usersList,
-			User{
+			Users{
 				UserId:   userId,
 				Username: username,
 				Age:      age,
@@ -162,7 +162,7 @@ func (r *sampleRepository) FindByUsername(username string) []User {
 }
 
 // ユーザ情報を登録します。
-func (r *sampleRepository) Insert(u User) {
+func (r *sampleRepository) Insert(u Users) {
 
 	// クエリ作成
 	builder := sq.

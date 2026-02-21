@@ -68,14 +68,14 @@ INSERT INTO users (
 │   └── main.go                      # アプリのエントリポイント
 └── internal
     ├── domain
-    │   └── users.go                 # ドメイン定義およびrepositoryのインターフェース
+    │   └── user.go                  # ドメイン定義およびrepositoryのインターフェース
     ├── handler
     │   ├── model
-    │   │   └── users_model.go       # APIのリクエスト・レスポンス構造体
+    │   │   └── user_model.go        # APIのリクエスト・レスポンス構造体
     │   ├── router
     │   │   ├── base.go              # エンドポイントのルーター統括
-    │   │   └── users_router.go      # 業務処理ごとのルーター
-    │   └── users_handler.go         # APIとしてのインターフェースおよび実装
+    │   │   └── user_router.go       # 業務処理ごとのルーター
+    │   └── user_handler.go          # APIとしてのインターフェースおよび実装
     ├── infrastructure
     │   ├── db.go                    # データベース接続設定
     │   ├── persistence
@@ -83,11 +83,11 @@ INSERT INTO users (
     │   │   │   └── users_row.go     # テーブル定義に対応した構造体
     │   │   └── users_sql.go         # ドメイン操作のためのSQL定義
     │   └── repository
-    │       └── users_repository.go  # データベース操作の統括
+    │       └── user_repository.go  # データベース操作の統括
     └── usecase
         ├── params
-        │   └── users_params.go      # 業務処理の入力・出力モデル構造体
-        └── users_usecase.go         # 業務処理のインターフェースおよび実装
+        │   └── user_params.go      # 業務処理の入力・出力モデル構造体
+        └── user_usecase.go         # 業務処理のインターフェースおよび実装
 ```
 
 ### パッケージ一覧
@@ -96,7 +96,7 @@ INSERT INTO users (
 
 業務処理の中心となるドメインおよびそれをデータベースから取得するrepositoryのインターフェースを定義します。
 
-- `users.go`
+- `user.go`
 
 ```go
 package domain
@@ -254,7 +254,7 @@ type Users struct {
 
 persistenceを呼び出してドメイン・テーブル間のデータをやり取りします。
 
-- `users_repository.go`
+- `user_repository.go`
 
 ```go
 package repository
@@ -264,15 +264,15 @@ import (
 	"easyapp/internal/infrastructure/persistence"
 )
 
-type usersRepository struct {
+type userRepository struct {
 	usersSql persistence.UsersSql
 }
 
 func NewUserRepository(usersSql persistence.UsersSql) domain.UserRepository {
-	return &usersRepository{usersSql: usersSql}
+	return &userRepository{usersSql: usersSql}
 }
 
-func (r *usersRepository) FindByName(q domain.FindByNameQuery) domain.User {
+func (r *userRepository) FindByName(q domain.FindByNameQuery) domain.User {
 
 	u := r.usersSql.FindByName(q.Name())
 
@@ -284,7 +284,7 @@ func (r *usersRepository) FindByName(q domain.FindByNameQuery) domain.User {
 
 usecaseを定義・実装します。アプリの業務はここで処理されます。
 
-- `users_usecase.go`
+- `user_usecase.go`
 
 ```go
 package usecase
@@ -305,30 +305,30 @@ type UserUsecase interface {
 	Me(in params.MeIn) (params.MeOut, error)
 }
 
-type usersUsecase struct {
-	usersRepository domain.UserRepository
+type userUsecase struct {
+	userRepository domain.UserRepository
 }
 
-func NewUserUsecase(usersRepository domain.UserRepository) UserUsecase {
-	return &usersUsecase{usersRepository: usersRepository}
+func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
+	return &userUsecase{userRepository: userRepository}
 }
 
-func (u *usersUsecase) Login(in params.LoginIn) params.LoginOut {
+func (u *userUsecase) Login(in params.LoginIn) params.LoginOut {
 
-	users := u.usersRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
-	if users.Name() == "" {
+	user := u.userRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
+	if user.Name() == "" {
 		return params.NewLoginOut(false)
 	}
-	return params.NewLoginOut(users.Password() == in.Password())
+	return params.NewLoginOut(user.Password() == in.Password())
 }
 
-func (u *usersUsecase) Me(in params.MeIn) (params.MeOut, error) {
+func (u *userUsecase) Me(in params.MeIn) (params.MeOut, error) {
 
-	users := u.usersRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
-	if users.Name() == "" {
+	user := u.userRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
+	if user.Name() == "" {
 		return *new(params.MeOut), errors.New("no such user")
 	}
-	return params.NewMeOut(users.Name(), users.Age()), nil
+	return params.NewMeOut(user.Name(), user.Age()), nil
 }
 ```
 
@@ -336,7 +336,7 @@ func (u *usersUsecase) Me(in params.MeIn) (params.MeOut, error) {
 
 usecase向けの関数の入力・出力モデル構造体を定義します。
 
-- `users_params.go`
+- `user_params.go`
 
 ```go
 package params
@@ -408,7 +408,7 @@ func (o MeOut) Age() int {
 
 handlerを定義・実装します。usecaseを呼び出し、レスポンスを作成します。
 
-- `users_handler.go`
+- `user_handler.go`
 
 ```go
 package handler
@@ -431,19 +431,19 @@ type UserHandler interface {
 	Me(w http.ResponseWriter, r *http.Request)
 }
 
-type usersHandler struct {
-	usersUsecase usecase.UserUsecase
+type userHandler struct {
+	userUsecase usecase.UserUsecase
 }
 
-func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
-	return &usersHandler{usersUsecase: usersUsecase}
+func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
+	return &userHandler{userUsecase: userUsecase}
 }
 
-func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
-	out := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
@@ -451,11 +451,11 @@ func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
+func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
-	out, err := h.usersUsecase.Me(params.NewMeIn(req.Name))
+	out, err := h.userUsecase.Me(params.NewMeIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -478,7 +478,7 @@ func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 handler向けの関数の入力・出力モデル構造体を定義します。
 
-- `users_model.go`
+- `user_model.go`
 
 ```go
 package model
@@ -566,14 +566,14 @@ func Routing() *http.ServeMux {
 	// 各handlerに紐づくルーティングを設定
 	m := http.NewServeMux()
 
-	// users
+	// user
 	NewUserRouter(db).SetRouting(m)
 
 	return m
 }
 ```
 
-- `users_router.go`
+- `user_router.go`
 
 ```go
 package router
@@ -587,15 +587,15 @@ import (
 	"net/http"
 )
 
-type usersRouter struct {
+type userRouter struct {
 	db *sql.DB
 }
 
 func NewUserRouter(db *sql.DB) Router {
-	return &usersRouter{db: db}
+	return &userRouter{db: db}
 }
 
-func (r *usersRouter) SetRouting(m *http.ServeMux) {
+func (r *userRouter) SetRouting(m *http.ServeMux) {
 
 	h := handler.NewUserHandler(
 		usecase.NewUserUsecase(

@@ -17,9 +17,9 @@
 ├── go.mod
 └── internal
     └── handler
-        ├── users_handler.go
+        ├── user_handler.go
         └── router
-            ├── users_router.go
+            ├── user_router.go
             └── base.go
 ```
 
@@ -148,7 +148,7 @@ body {
 
 #### `internal/handler/`
 
-- `users_handler.go`
+- `user_handler.go`
 
 ```go
 package handler
@@ -169,13 +169,13 @@ type UserHandler interface {
 	Login(w http.ResponseWriter, r *http.Request)
 }
 
-type usersHandler struct{}
+type userHandler struct{}
 
 func NewUserHandler() UserHandler {
-	return &usersHandler{}
+	return &userHandler{}
 }
 
-func (h *usersHandler) InitView(w http.ResponseWriter, r *http.Request) {
+func (h *userHandler) InitView(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("assets/templates/index.html")
 	if err != nil {
@@ -192,7 +192,7 @@ func (h *usersHandler) InitView(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -253,14 +253,14 @@ func Routing() *http.ServeMux {
 	// static配下をルーティング
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
 
-	// users
+	// user
 	NewUserRouter().SetRouting(m)
 
 	return m
 }
 ```
 
-- `router/users_router.go`
+- `router/user_router.go`
 
 ```go
 package router
@@ -270,13 +270,13 @@ import (
 	"net/http"
 )
 
-type usersRouter struct{}
+type userRouter struct{}
 
 func NewUserRouter() Router {
-	return &usersRouter{}
+	return &userRouter{}
 }
 
-func (r *usersRouter) SetRouting(m *http.ServeMux) {
+func (r *userRouter) SetRouting(m *http.ServeMux) {
 
 	h := handler.NewUserHandler()
 
@@ -344,7 +344,7 @@ var Templates embed.FS // templates埋め込み宣言
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 ```
 
-- `handler/users_handler.go`について、埋め込んだtemplatesを使うよう宣言
+- `handler/user_handler.go`について、埋め込んだtemplatesを使うよう宣言
 
 ```go
 	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")

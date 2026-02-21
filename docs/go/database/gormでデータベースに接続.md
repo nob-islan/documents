@@ -86,30 +86,30 @@ func main() {
 	ctx := context.Background()
 
 	// Select cf. https://gorm.io/docs/query.html
-	users, err := gorm.G[User](db).Where("name = ?", "nob").First(ctx)
+	users, err := gorm.G[Users](db).Where("name = ?", "nob").First(ctx)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println(users)
 
 	// Update cf. https://gorm.io/docs/update.html
-	if _, err = gorm.G[User](db).Where(
+	if _, err = gorm.G[Users](db).Where(
 		"name = ?",
 		users.Name,
 	).Updates(
 		ctx,
-		User{Age: 706},
+		Users{Age: 706},
 	); err != nil {
 		panic(err)
 	}
 
 	// Insert cf. https://gorm.io/docs/create.html
-	if err = gorm.G[User](db).Create(ctx, &User{Name: "nob2", Age: 13}); err != nil {
+	if err = gorm.G[Users](db).Create(ctx, &Users{Name: "nob2", Age: 13}); err != nil {
 		panic(err)
 	}
 
 	// Select all cf. https://gorm.io/docs/query.html#Selecting-Specific-Fields
-	var usersList []User
+	var usersList []Users
 	result := db.Find(&usersList)
 	if result.Error != nil {
 		panic(result.Error)
@@ -117,13 +117,13 @@ func main() {
 	fmt.Println(usersList)
 
 	// Delete cf. https://gorm.io/docs/delete.html
-	if _, err = gorm.G[User](db).Where("name = ?", "nob2").Delete(ctx); err != nil {
+	if _, err = gorm.G[Users](db).Where("name = ?", "nob2").Delete(ctx); err != nil {
 		panic(err)
 	}
 }
 
 // usersテーブル向けのエンティティ構造体です。
-type User struct {
+type Users struct {
 	Id   int    `gorm:"primaryKey"` // 管理ID
 	Name string // ユーザ名
 	Age  int    // 年齢

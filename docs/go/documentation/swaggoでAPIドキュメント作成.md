@@ -82,14 +82,14 @@ swaggerページへのルーティングを設定します。
 +	  // swagger UIのルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
 
-	  // users
+	  // user
 	  NewUserRouter(db).SetRouting(m)
 
 	  return m
   }
 ```
 
-### `handler/users_handler.go`
+### `handler/user_handler.go`
 
 各APIのインターフェース仕様を記載します:
 
@@ -115,12 +115,12 @@ swaggerページへのルーティングを設定します。
 	  Me(w http.ResponseWriter, r *http.Request)
   }
 
-  type usersHandler struct {
-	  usersUsecase usecase.UserUsecase
+  type userHandler struct {
+	  userUsecase usecase.UserUsecase
   }
 
-  func NewUserHandler(usersUsecase usecase.UserUsecase) UserHandler {
-	  return &usersHandler{usersUsecase: usersUsecase}
+  func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
+	  return &userHandler{userUsecase: userUsecase}
   }
 
 + // @Summary 認証
@@ -132,11 +132,11 @@ swaggerページへのルーティングを設定します。
 + // @Success 200 {object} model.LoginRes "正常に処理された場合"
 + // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
 + // @Router /login [post]
-  func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
+  func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewLoginReq(r)
 
-	  out, err := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	  out, err := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 	  if err != nil {
 		  apperrors.HandleError(w, err)
 		  return
@@ -156,11 +156,11 @@ swaggerページへのルーティングを設定します。
 + // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
 + // @Success 200 {object} model.MeRes "正常に処理された場合"
 + // @Router /me [get]
-  func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
+  func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewMeReq(r)
 
-	  out := h.usersUsecase.Me(params.NewMeIn(req.Name))
+	  out := h.userUsecase.Me(params.NewMeIn(req.Name))
 
 	  res := model.NewMeRes(out.Name(), out.Age())
 	  w.Header().Set("Content-Type", "application/json")
@@ -169,7 +169,7 @@ swaggerページへのルーティングを設定します。
   }
 ```
 
-### `model/users_model.go`
+### `model/user_model.go`
 
 各モデルクラスのexample記載します:
 
