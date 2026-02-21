@@ -10566,9 +10566,9 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 </tbody>
 </table>
 <h3 id="handler">handlerテスト作成</h3>
-<p><code>users_handler.go</code>と同じパッケージにテストファイルを作成します。</p>
+<p><code>user_handler.go</code>と同じパッケージにテストファイルを作成します。</p>
 <ul>
-<li><code>users_handler_test.go</code></li>
+<li><code>user_handler_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">handler</span>
 
@@ -10714,9 +10714,9 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="usecase">usecaseテスト作成</h3>
-<p><code>users_usecase.go</code>と同じパッケージにテストファイルを作成します。</p>
+<p><code>user_usecase.go</code>と同じパッケージにテストファイルを作成します。</p>
 <ul>
-<li><code>users_usecase_test.go</code></li>
+<li><code>user_usecase_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
@@ -10858,9 +10858,9 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="repository">repositoryテスト作成</h3>
-<p><code>users_repository.go</code>と同じパッケージにテストファイルを作成します。</p>
+<p><code>user_repository.go</code>と同じパッケージにテストファイルを作成します。</p>
 <ul>
-<li><code>users_repository_test.go</code></li>
+<li><code>user_repository_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 
@@ -10933,12 +10933,12 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span><span class="nb">test</span>
 │<span class="w">   </span>├──<span class="w"> </span>data
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>user
 │<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">    </span><span class="c1"># テストデータ</span>
 │<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">  </span><span class="c1"># テーブル定義</span>
 │<span class="w">   </span>└──<span class="w"> </span>db.go<span class="w">               </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
-├──<span class="w"> </span>users_sql.go
-└──<span class="w"> </span>users_sql_test.go
+├──<span class="w"> </span>user_sql.go
+└──<span class="w"> </span>user_sql_test.go
 </code></pre></div>
 <h4 id="_6">一時データベース準備</h4>
 <ul>
@@ -10993,7 +10993,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <li><code>schema.sql</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 一部SQLite特有の記法が必要なため注意 see; https://www.sqlite.org/docs.html</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INTEGER</span>
@@ -11002,7 +11002,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <ul>
 <li><code>data.sql</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">name</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
@@ -11014,7 +11014,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 </code></pre></div>
 <h4 id="_8">テストケース作成</h4>
 <ul>
-<li><code>users_sql_test.go</code></li>
+<li><code>user_sql_test.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">persistence</span>
 
@@ -11048,7 +11048,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;query error&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">queryParam</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">db</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="s">&quot;DROP TABLE users&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// クエリエラー時のテスト向けにテーブルを壊す</span>
+<span class="w">                </span><span class="nx">db</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="s">&quot;DROP TABLE user&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// クエリエラー時のテスト向けにテーブルを壊す</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">User</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
@@ -11059,7 +11059,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">            </span><span class="c1">// テストデータベースに接続</span>
-<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// 事前セットアップ</span>
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>

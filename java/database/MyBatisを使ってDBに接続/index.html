@@ -10560,7 +10560,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_2">実装</h2>
-<p>例として、下記の<code>users</code>テーブル向けの実装を記載します。</p>
+<p>例として、下記の<code>user</code>テーブル向けの実装を記載します。</p>
 <table>
 <thead>
 <tr>
@@ -10617,11 +10617,11 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * usersテーブルのentityクラスです。</span>
+<span class="cm"> * userテーブルのentityクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">)</span>
 <span class="nd">@Entity</span>
 <span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
@@ -10658,7 +10658,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * usersテーブルのmapperインターフェースです。</span>
+<span class="cm"> * userテーブルのmapperインターフェースです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
@@ -10668,16 +10668,16 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を更新します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param users</span>
+<span class="cm">     * @param user</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を登録します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param users</span>
+<span class="cm">     * @param user</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * 検索条件からカラムを抽出します。</span>
@@ -10716,7 +10716,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="nt">&lt;mapper</span><span class="w"> </span><span class="na">namespace=</span><span class="s">&quot;nob.example.easyapp.domain.mapper.UserMapper&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;update</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;update&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span>UPDATE
-<span class="w">            </span>users
+<span class="w">            </span>user
 <span class="w">        </span>SET
 <span class="w">            </span>user_name<span class="w"> </span>=<span class="w"> </span>#{userName}
 <span class="w">            </span>,<span class="w"> </span>age<span class="w"> </span>=<span class="w"> </span>#{age}
@@ -10727,7 +10727,7 @@ spring.datasource.password<span class="o">=</span>password
 
 <span class="w">    </span><span class="nt">&lt;insert</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;insert&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span>INSERT
-<span class="w">            </span>INTO<span class="w"> </span>users<span class="w"> </span>(
+<span class="w">            </span>INTO<span class="w"> </span>user<span class="w"> </span>(
 <span class="w">                </span>user_name
 <span class="w">                </span>,<span class="w"> </span>age
 <span class="w">                </span>,<span class="w"> </span>address
@@ -10746,7 +10746,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">            </span>,<span class="w"> </span>age
 <span class="w">            </span>,<span class="w"> </span>address
 <span class="w">        </span>FROM
-<span class="w">            </span>users
+<span class="w">            </span>user
 <span class="w">        </span><span class="nt">&lt;where&gt;</span>
 <span class="w">            </span><span class="nt">&lt;if</span><span class="w"> </span><span class="na">test=</span><span class="s">&quot;userName != &#39;&#39;&quot;</span><span class="nt">&gt;</span>
 <span class="w">                </span>AND<span class="w"> </span>user_name<span class="w"> </span>LIKE<span class="w"> </span>#{userNameLike}
@@ -10757,7 +10757,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="nt">&lt;delete</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;delete&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span>DELETE
 <span class="w">        </span>FROM
-<span class="w">            </span>users
+<span class="w">            </span>user
 <span class="w">        </span>WHERE
 <span class="w">            </span>user_id<span class="w"> </span>=<span class="w"> </span>#{userId}
 <span class="w">    </span><span class="nt">&lt;/delete&gt;</span>

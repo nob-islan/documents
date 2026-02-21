@@ -10636,8 +10636,8 @@
 <span class="w">    </span><span class="no">-- 業務テーブル作成</span>
 <span class="w">    </span><span class="no">CREATE DATABASE eadb;</span>
 <span class="w">    </span><span class="no">USE eadb;</span>
-<span class="w">    </span><span class="no">CREATE TABLE users (name VARCHAR(8) PRIMARY KEY, password VARCHAR(32));</span>
-<span class="w">    </span><span class="no">INSERT INTO users (name, password) VALUES (&#39;nob&#39;, &#39;passwd&#39;);</span>
+<span class="w">    </span><span class="no">CREATE TABLE user (name VARCHAR(8) PRIMARY KEY, password VARCHAR(32));</span>
+<span class="w">    </span><span class="no">INSERT INTO user (name, password) VALUES (&#39;nob&#39;, &#39;passwd&#39;);</span>
 </code></pre></div>
 <h3 id="mysql-slave-tempyaml">mysql-slave-temp.yaml</h3>
 <p>slave向けのmy.cnfおよびinit.sqlです。</p>

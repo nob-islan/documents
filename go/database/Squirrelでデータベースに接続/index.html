@@ -10386,7 +10386,7 @@
 <span class="n">USE</span><span class="w"> </span><span class="n">snaildb</span><span class="p">;</span>
 
 <span class="c1">-- テーブル作成</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">user</span><span class="p">(</span>
 <span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
@@ -10394,7 +10394,7 @@
 <span class="p">);</span>
 
 <span class="c1">-- テストデータ1</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">user</span><span class="p">(</span>
 <span class="w">    </span><span class="n">username</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span>
@@ -10405,7 +10405,7 @@
 <span class="p">);</span>
 
 <span class="c1">-- テストデータ2</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="k">user</span><span class="p">(</span>
 <span class="w">    </span><span class="n">username</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">remarks</span>
@@ -10457,7 +10457,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/go-sql-driver/my
 <span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/go-sql-driver/mysql&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// usersテーブルのエンティティ構造体です。</span>
+<span class="c1">// userテーブルのエンティティ構造体です。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">UserId</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 管理ID</span>
 <span class="w">    </span><span class="nx">Username</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// ユーザ名</span>
@@ -10485,7 +10485,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/go-sql-driver/my
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">sampleRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByUsername</span><span class="p">(</span><span class="nx">username</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// クエリ作成</span>
-<span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sq</span><span class="p">.</span><span class="nx">Select</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sq</span><span class="p">.</span><span class="nx">Select</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">).</span><span class="nx">From</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">username</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">builder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span><span class="nx">Where</span><span class="p">(</span><span class="nx">sq</span><span class="p">.</span><span class="nx">Eq</span><span class="p">{</span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">})</span>
 <span class="w">    </span><span class="p">}</span>
@@ -10502,14 +10502,14 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/go-sql-driver/my
 <span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
 <span class="w">    </span><span class="c1">// 検索結果をマッピング</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">usersList</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">userList</span><span class="w"> </span><span class="p">[]</span><span class="nx">User</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">userId</span><span class="p">,</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="nx">remarks</span><span class="w"> </span><span class="kt">string</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">userId</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">username</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">remarks</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">        </span><span class="nx">usersList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span>
-<span class="w">            </span><span class="nx">usersList</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">userList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">userList</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">User</span><span class="p">{</span>
 <span class="w">                </span><span class="nx">UserId</span><span class="p">:</span><span class="w">   </span><span class="nx">userId</span><span class="p">,</span>
 <span class="w">                </span><span class="nx">Username</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span>
@@ -10519,7 +10519,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/go-sql-driver/my
 <span class="w">        </span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">usersList</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">userList</span>
 <span class="p">}</span>
 
 <span class="c1">// ユーザ情報を登録します。</span>
@@ -10527,7 +10527,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/go-sql-driver/my
 
 <span class="w">    </span><span class="c1">// クエリ作成</span>
 <span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sq</span><span class="p">.</span>
-<span class="w">        </span><span class="nx">Insert</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">).</span>
+<span class="w">        </span><span class="nx">Insert</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">).</span>
 <span class="w">        </span><span class="nx">Columns</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;remarks&quot;</span><span class="p">).</span>
 <span class="w">        </span><span class="nx">Values</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">Username</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">Age</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">Remarks</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">query</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span><span class="nx">ToSql</span><span class="p">()</span>
