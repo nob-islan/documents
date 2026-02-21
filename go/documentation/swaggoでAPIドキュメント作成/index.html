@@ -3894,10 +3894,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handleruser_handlergo" class="md-nav__link">
+  <a href="#handlerusers_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        handler/user_handler.go
+        handler/users_handler.go
       
     </span>
   </a>
@@ -3905,10 +3905,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modeluser_modelgo" class="md-nav__link">
+  <a href="#modelusers_modelgo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        model/user_model.go
+        model/users_model.go
       
     </span>
   </a>
@@ -10342,10 +10342,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#handleruser_handlergo" class="md-nav__link">
+  <a href="#handlerusers_handlergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        handler/user_handler.go
+        handler/users_handler.go
       
     </span>
   </a>
@@ -10353,10 +10353,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modeluser_modelgo" class="md-nav__link">
+  <a href="#modelusers_modelgo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        model/user_model.go
+        model/users_model.go
       
     </span>
   </a>
@@ -10477,13 +10477,13 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+     // swagger UIのルーティング</span>
 <span class="gi">+     m.Handle(&quot;/swagger/&quot;, httpSwagger.WrapHandler)</span>
 
-<span class="w"> </span>     // user
-<span class="w"> </span>     NewUserRouter(db).SetRouting(m)
+<span class="w"> </span>     // users
+<span class="w"> </span>     NewUsersRouter(db).SetRouting(m)
 
 <span class="w"> </span>     return m
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="handleruser_handlergo"><code>handler/user_handler.go</code></h3>
+<h3 id="handlerusers_handlergo"><code>handler/users_handler.go</code></h3>
 <p>各APIのインターフェース仕様を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package handler
 
@@ -10497,7 +10497,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span> )
 
 <span class="w"> </span> // 認証のハンドラインターフェースです。
-<span class="w"> </span> type UserHandler interface {
+<span class="w"> </span> type UsersHandler interface {
 
 <span class="w"> </span>     // 認証処理を呼び出します。
 <span class="w"> </span>     Login(w http.ResponseWriter, r *http.Request)
@@ -10506,28 +10506,28 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     Me(w http.ResponseWriter, r *http.Request)
 <span class="w"> </span> }
 
-<span class="w"> </span> type userHandler struct {
-<span class="w"> </span>     userUsecase usecase.UserUsecase
+<span class="w"> </span> type usersHandler struct {
+<span class="w"> </span>     usersUsecase usecase.UsersUsecase
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
-<span class="w"> </span>     return &amp;userHandler{userUsecase: userUsecase}
+<span class="w"> </span> func NewUsersHandler(usersUsecase usecase.UsersUsecase) UsersHandler {
+<span class="w"> </span>     return &amp;usersHandler{usersUsecase: usersUsecase}
 <span class="w"> </span> }
 
 <span class="gi">+ // @Summary 認証</span>
 <span class="gi">+ // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。</span>
-<span class="gi">+ // @Tags User</span>
+<span class="gi">+ // @Tags Users</span>
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param LoginReq body model.LoginReq true &quot;認証向けのリクエストモデル&quot;</span>
 <span class="gi">+ // @Success 200 {object} model.LoginRes &quot;正常に処理された場合&quot;</span>
 <span class="gi">+ // @Failure 422 {object} apperrors.sampleErrorRes &quot;エラーが発生した場合&quot;</span>
 <span class="gi">+ // @Router /login [post]</span>
-<span class="w"> </span> func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
+<span class="w"> </span> func (h *usersHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 <span class="w"> </span>     req := model.NewLoginReq(r)
 
-<span class="w"> </span>     out, err := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+<span class="w"> </span>     out, err := h.usersUsecase.Login(params.NewLoginIn(req.Name, req.Password))
 <span class="w"> </span>     if err != nil {
 <span class="w"> </span>         apperrors.HandleError(w, err)
 <span class="w"> </span>         return
@@ -10541,17 +10541,17 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 
 <span class="gi">+ // @Summary ユーザ情報取得</span>
 <span class="gi">+ // @Description ユーザ情報を取得します。</span>
-<span class="gi">+ // @Tags User</span>
+<span class="gi">+ // @Tags Users</span>
 <span class="gi">+ // @Accept json</span>
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param MeReq query model.MeReq false &quot;ユーザ情報取得向けのリクエストモデル&quot;</span>
 <span class="gi">+ // @Success 200 {object} model.MeRes &quot;正常に処理された場合&quot;</span>
 <span class="gi">+ // @Router /me [get]</span>
-<span class="w"> </span> func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
+<span class="w"> </span> func (h *usersHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 <span class="w"> </span>     req := model.NewMeReq(r)
 
-<span class="w"> </span>     out := h.userUsecase.Me(params.NewMeIn(req.Name))
+<span class="w"> </span>     out := h.usersUsecase.Me(params.NewMeIn(req.Name))
 
 <span class="w"> </span>     res := model.NewMeRes(out.Name(), out.Age())
 <span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
@@ -10559,7 +10559,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     json.NewEncoder(w).Encode(res)
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="modeluser_modelgo"><code>model/user_model.go</code></h3>
+<h3 id="modelusers_modelgo"><code>model/users_model.go</code></h3>
 <p>各モデルクラスのexample記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package model
 
