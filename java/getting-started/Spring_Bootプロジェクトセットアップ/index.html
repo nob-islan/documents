@@ -5332,10 +5332,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#domainentityusersjava" class="md-nav__link">
+  <a href="#domainentityuserjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        domain/entity/Users.java
+        domain/entity/User.java
       
     </span>
   </a>
@@ -5343,10 +5343,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
+  <a href="#repositoryuserrepositoryjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepository.java
+        repository/UserRepository.java
       
     </span>
   </a>
@@ -10570,10 +10570,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#domainentityusersjava" class="md-nav__link">
+  <a href="#domainentityuserjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        domain/entity/Users.java
+        domain/entity/User.java
       
     </span>
   </a>
@@ -10581,10 +10581,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryjava" class="md-nav__link">
+  <a href="#repositoryuserrepositoryjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepository.java
+        repository/UserRepository.java
       
     </span>
   </a>
@@ -10843,9 +10843,9 @@ spring.datasource.password<span class="o">=</span>password
 │<span class="w">       </span>└──<span class="w"> </span>MeResponse.java
 ├──<span class="w"> </span>domain
 │<span class="w">   </span>└──<span class="w"> </span>entity<span class="w">                       </span><span class="c1"># データベースのテーブル定義に対応するエンティティ</span>
-│<span class="w">       </span>└──<span class="w"> </span>Users.java
+│<span class="w">       </span>└──<span class="w"> </span>User.java
 ├──<span class="w"> </span>repository<span class="w">                       </span><span class="c1"># データベース操作のインターフェース</span>
-│<span class="w">   </span>└──<span class="w"> </span>UsersRepository.java
+│<span class="w">   </span>└──<span class="w"> </span>UserRepository.java
 └──<span class="w"> </span>service<span class="w">                          </span><span class="c1"># 業務処理のインターフェース</span>
 <span class="w">    </span>├──<span class="w"> </span>AuthService.java
 <span class="w">    </span>├──<span class="w"> </span>impl<span class="w">                         </span><span class="c1"># 業務処理の実装</span>
@@ -10857,7 +10857,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">        </span>└──<span class="w"> </span>MeOutModel.java
 </code></pre></div>
 <h3 id="_5">クラス一覧</h3>
-<h4 id="domainentityusersjava"><code>domain/entity/Users.java</code></h4>
+<h4 id="domainentityuserjava"><code>domain/entity/User.java</code></h4>
 <p>データベースのテーブル定義に対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
 
@@ -10879,7 +10879,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** ユーザ名 */</span>
 <span class="w">    </span><span class="nd">@Id</span>
@@ -10895,14 +10895,14 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="repositoryusersrepositoryjava"><code>repository/UsersRepository.java</code></h4>
+<h4 id="repositoryuserrepositoryjava"><code>repository/UserRepository.java</code></h4>
 <p>データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブル向けrepositoryのインターフェースです。</span>
@@ -10910,7 +10910,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Repository</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を取得します。</span>
@@ -10918,7 +10918,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm">     * @param name 検索キーのユーザ名</span>
 <span class="cm">     * @return ユーザ情報</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">Users</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="serviceauthservicejava"><code>service/AuthService.java</code></h4>
@@ -10964,8 +10964,8 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UserRepository</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
@@ -10981,9 +10981,9 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuthServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@NonNull</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthServiceImpl</span><span class="p">(</span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AuthServiceImpl</span><span class="p">(</span><span class="n">UserRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">usersRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -10997,7 +10997,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeOutModel</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>

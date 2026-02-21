@@ -10330,7 +10330,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** ユーザID */</span>
 <span class="w">    </span><span class="nd">@Id</span>
@@ -10359,7 +10359,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -10368,12 +10368,12 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Repository</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * SELECT * FROM users WHERE user_id = ?1</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserId</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserId</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * SELECT * FROM users WHERE address LIKE ?1</span>
@@ -10382,14 +10382,14 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm">     * 類似の検索として 前方一致: StartingWith, 後方一致: EndingWithをメソッド名に付与します。</span>
 <span class="cm">     * 前方、後方、部分一致を使い分けたい場合はLikeを使ってください。</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByAddressContaining</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByAddressContaining</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * SELECT * FROM users WHERE user_name LIKE ?1 AND address LIKE ?2</span>
 <span class="cm">     *</span>
 <span class="cm">     * 例えばaddressを空文字とすることでuser_nameのみをキーとして検索することができます。</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserNameContainingAndAddressContaining</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserNameContainingAndAddressContaining</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_2">テスト例</h2>
@@ -10438,10 +10438,10 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * UsersRepositoryのテストクラスです。</span>
+<span class="cm"> * UserRepositoryのテストクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
@@ -10451,10 +10451,10 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/resource/users/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
 <span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/resource/users/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
 <span class="p">})</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryTest</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserRepositoryTest</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Autowired</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * テスト</span>
@@ -10463,7 +10463,7 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByUserId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByUserId</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
 <span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserId</span><span class="p">());</span>
 <span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test_nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserName</span><span class="p">());</span>

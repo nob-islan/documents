@@ -10626,7 +10626,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="nd">@Getter</span>
 <span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** ユーザID */</span>
 <span class="w">    </span><span class="nd">@Id</span>
@@ -10655,7 +10655,7 @@ spring.datasource.password<span class="o">=</span>password
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.ibatis.annotations.Mapper</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.User</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのmapperインターフェースです。</span>
@@ -10663,21 +10663,21 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Mapper</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersMapper</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserMapper</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を更新します。</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param users</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を登録します。</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param users</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">insert</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">users</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * 検索条件からカラムを抽出します。</span>
@@ -10685,7 +10685,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm">     * @param userId</span>
 <span class="cm">     * @return ユーザのリスト</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByKey</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByKey</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を削除します。</span>
@@ -10713,7 +10713,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cp">        &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span>
 <span class="cp">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span>
 
-<span class="nt">&lt;mapper</span><span class="w"> </span><span class="na">namespace=</span><span class="s">&quot;nob.example.easyapp.domain.mapper.UsersMapper&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;mapper</span><span class="w"> </span><span class="na">namespace=</span><span class="s">&quot;nob.example.easyapp.domain.mapper.UserMapper&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;update</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;update&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span>UPDATE
 <span class="w">            </span>users
@@ -10738,7 +10738,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">            </span>)
 <span class="w">    </span><span class="nt">&lt;/insert&gt;</span>
 
-<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;selectByKey&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;nob.example.easyapp.domain.entity.Users&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;select</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;selectByKey&quot;</span><span class="w"> </span><span class="na">resultType=</span><span class="s">&quot;nob.example.easyapp.domain.entity.User&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;bind</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;userNameLike&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;&#39;%&#39; + userName + &#39;%&#39;&quot;</span><span class="nt">/&gt;</span>
 <span class="w">        </span>SELECT
 <span class="w">            </span>user_id
