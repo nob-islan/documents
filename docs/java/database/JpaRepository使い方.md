@@ -196,8 +196,8 @@ import nob.example.easyapp.domain.entity.Users;
 @DataJpaTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/testdata/usersrepository/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/testdata/usersrepository/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/resource/users/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/resource/users/data.sql" // データ投入SQLのパス
 })
 public class UsersRepositoryTest {
 
@@ -225,7 +225,7 @@ public class UsersRepositoryTest {
 }
 ```
 
-- `src/test/resources/testdata/usersrepository/schema.sql`および`src/test/resources/testdata/usersrepository/data.sql`は下記要領で作成します:
+- `src/test/resources/resource/users/schema.sql`および`src/test/resources/resource/users/data.sql`は下記要領で作成します:
 
 ```sql
 -- schema.sql
