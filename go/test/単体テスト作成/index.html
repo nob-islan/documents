@@ -11154,6 +11154,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 
 <span class="w">            </span><span class="c1">// テストデータベースに接続</span>
 <span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
 <span class="w">            </span><span class="c1">// 事前セットアップ</span>
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
