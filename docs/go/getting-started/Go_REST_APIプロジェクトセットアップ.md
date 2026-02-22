@@ -101,6 +101,8 @@ INSERT INTO users (
 ```go
 package domain
 
+import "context"
+
 // ユーザ情報ドメインです。
 type User struct {
 	name     string // ユーザ名
@@ -128,7 +130,7 @@ func (u User) Age() int {
 type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(q FindByNameQuery) User
+	FindByName(ctx context.Context, q FindByNameQuery) User
 }
 
 // ユーザ情報取得時のクエリです。
@@ -199,6 +201,7 @@ func ConnectDB() *sql.DB {
 package persistence
 
 import (
+	"context"
 	"database/sql"
 	"easyapp/internal/infrastructure/persistence/table"
 )
@@ -206,7 +209,7 @@ import (
 type UsersSql interface {
 
 	// ユーザ情報取得SQLを発行します。
-	FindByName(targetName string) table.Users
+	FindByName(ctx context.Context, targetName string) table.Users
 }
 
 type usersSql struct {
@@ -217,12 +220,12 @@ func NewUsersSql(db *sql.DB) UsersSql {
 	return &usersSql{db: db}
 }
 
-func (s *usersSql) FindByName(targetName string) table.Users {
+func (s *usersSql) FindByName(ctx context.Context, targetName string) table.Users {
 
 	const sql string = "SELECT * FROM users WHERE name = ?"
 
 	// クエリ実行
-	row := s.db.QueryRow(sql, targetName)
+	row := s.db.QueryRowContext(ctx, sql, targetName)
 
 	var name string
 	var password string
@@ -260,6 +263,7 @@ persistenceを呼び出してドメイン・テーブル間のデータをやり
 package repository
 
 import (
+	"context"
 	"easyapp/internal/domain"
 	"easyapp/internal/infrastructure/persistence"
 )
@@ -272,9 +276,9 @@ func NewUserRepository(usersSql persistence.UsersSql) domain.UserRepository {
 	return &userRepository{usersSql: usersSql}
 }
 
-func (r *userRepository) FindByName(q domain.FindByNameQuery) domain.User {
+func (r *userRepository) FindByName(ctx context.Context, q domain.FindByNameQuery) domain.User {
 
-	u := r.usersSql.FindByName(q.Name())
+	u := r.usersSql.FindByName(ctx, q.Name())
 
 	return domain.NewUser(u.Name, u.Password, u.Age)
 }
@@ -290,6 +294,7 @@ usecaseを定義・実装します。アプリの業務はここで処理され�
 package usecase
 
 import (
+	"context"
 	"easyapp/internal/domain"
 	"easyapp/internal/usecase/params"
 	"errors"
@@ -299,10 +304,10 @@ import (
 type UserUsecase interface {
 
 	// 認証処理を行います。
-	Login(in params.LoginIn) params.LoginOut
+	Login(ctx context.Context, in params.LoginIn) params.LoginOut
 
 	// ユーザ情報を取得します。
-	Me(in params.MeIn) (params.MeOut, error)
+	Me(ctx context.Context, in params.MeIn) (params.MeOut, error)
 }
 
 type userUsecase struct {
@@ -313,18 +318,18 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 	return &userUsecase{userRepository: userRepository}
 }
 
-func (u *userUsecase) Login(in params.LoginIn) params.LoginOut {
+func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.LoginOut {
 
-	user := u.userRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
+	user := u.userRepository.FindByName(ctx, domain.NewFindByNameQuery(in.Name()))
 	if user.Name() == "" {
 		return params.NewLoginOut(false)
 	}
 	return params.NewLoginOut(user.Password() == in.Password())
 }
 
-func (u *userUsecase) Me(in params.MeIn) (params.MeOut, error) {
+func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, error) {
 
-	user := u.userRepository.FindByName(domain.NewFindByNameQuery(in.Name()))
+	user := u.userRepository.FindByName(ctx, domain.NewFindByNameQuery(in.Name()))
 	if user.Name() == "" {
 		return *new(params.MeOut), errors.New("no such user")
 	}
@@ -443,7 +448,7 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
-	out := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 
 	res := model.NewLoginRes(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
@@ -455,7 +460,7 @@ func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
-	out, err := h.userUsecase.Me(params.NewMeIn(req.Name))
+	out, err := h.userUsecase.Me(r.Context(), params.NewMeIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
