@@ -70,15 +70,7 @@ import (
 
 func main() {
 
-	// データベース接続
-	const (
-		user     string = "root"
-		password string = "password"
-		domain   string = "localhost:3306"
-		dbName   string = "eadb"
-	)
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, domain, dbName)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := connectDB()
 	if err != nil {
 		panic(err)
 	}
@@ -120,6 +112,25 @@ func main() {
 	if _, err = gorm.G[Users](db).Where("name = ?", "nob2").Delete(ctx); err != nil {
 		panic(err)
 	}
+}
+
+// データベースに接続します。
+func connectDB() (*gorm.DB, error) {
+
+	// データベース接続
+	const (
+		user     string = "root"
+		password string = "password"
+		domain   string = "localhost:3306"
+		dbName   string = "eadb"
+	)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, domain, dbName)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+
+	return db, err
 }
 
 // usersテーブル向けのエンティティ構造体です。
