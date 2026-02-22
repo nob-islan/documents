@@ -10630,6 +10630,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;bytes&quot;</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;errors&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
@@ -10645,13 +10646,13 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Mock</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">in</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">in</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Me</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -10659,22 +10660,20 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserHandler_Login</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestBody</span><span class="w">        </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// リクエストボディ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                          </span><span class="c1">// 期待されるHTTPステータス</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestBody</span><span class="w">        </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// リクエストボディ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                      </span><span class="c1">// 期待されるHTTPステータス</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="s">`{&quot;name&quot;: &quot;nob&quot;, &quot;password&quot;: &quot;passwd&quot;}`</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;Login&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span>
-<span class="w">                        </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">),</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
@@ -10714,17 +10713,24 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserHandler_Me</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestParam</span><span class="w">       </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">            </span><span class="c1">// リクエストパラメータ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                          </span><span class="c1">// 期待されるHTTPステータス</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestParam</span><span class="w">       </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">        </span><span class="c1">// リクエストパラメータ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                      </span><span class="c1">// 期待されるHTTPステータス</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestParam</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">},</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;Me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Me&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
+<span class="w">                    </span><span class="kc">nil</span><span class="p">,</span>
+<span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nx">expectedStatusCode</span><span class="p">:</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">       </span><span class="s">`{&quot;name&quot;: &quot;nob&quot;, &quot;age&quot;: 13}`</span><span class="p">,</span>
@@ -10732,8 +10738,12 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;no such user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestParam</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nobody&quot;</span><span class="p">},</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;Me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nobody&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Me&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nobody&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span>
 <span class="w">                    </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
@@ -10777,6 +10787,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="w">    </span><span class="s">&quot;errors&quot;</span>
@@ -10791,8 +10802,11 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Mock</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">q</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">q</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">q</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">q</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -10800,18 +10814,21 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserUsecase_Login</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                          </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestBody</span><span class="w">  </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="w">                  </span><span class="c1">// リクエストボディ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w">                 </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestBody</span><span class="w">  </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="w">              </span><span class="c1">// リクエストボディ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="w">             </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;valid user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
-<span class="w">                    </span><span class="kc">nil</span><span class="p">,</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
@@ -10819,24 +10836,30 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;invalid user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;invalid_password&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
-<span class="w">                    </span><span class="kc">nil</span><span class="p">,</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;repository error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;no such user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
-<span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">),</span>
-<span class="w">                    </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;repository error&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">{},</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
@@ -10850,7 +10873,10 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setupMock</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// usecaseの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Login</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Login</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
+<span class="w">                </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">,</span>
+<span class="w">            </span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの検証</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
@@ -10862,17 +10888,21 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserUsecase_Me</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">          </span><span class="kt">string</span><span class="w">                          </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestBody</span><span class="w">   </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="w">                     </span><span class="c1">// リクエストボディ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">     </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w">  </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="w">                    </span><span class="c1">// 期待されるレスポンスボディ</span>
-<span class="w">        </span><span class="nx">expectedError</span><span class="w"> </span><span class="kt">error</span><span class="w">                           </span><span class="c1">// 期待されるエラー</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">          </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestBody</span><span class="w">   </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeIn</span><span class="w">                 </span><span class="c1">// リクエストボディ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">     </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w">  </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="w">                </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">expectedError</span><span class="w"> </span><span class="kt">error</span><span class="w">                       </span><span class="c1">// 期待されるエラー</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
@@ -10882,12 +10912,16 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;no such user&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">requestBody</span><span class="p">:</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="nx">Return</span><span class="p">(</span>
-<span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">  </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w">  </span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">{},</span>
 <span class="w">            </span><span class="nx">expectedError</span><span class="p">:</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;no such user&quot;</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
@@ -10902,13 +10936,15 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setupMock</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// usecaseの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Me</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserUsecase</span><span class="p">(</span><span class="nx">mockRepository</span><span class="p">).</span><span class="nx">Me</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span>
+<span class="w">                </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">requestBody</span><span class="p">,</span>
+<span class="w">            </span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの検証</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedError</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
-<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedError</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+
 <span class="w">        </span><span class="p">})</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -10921,6 +10957,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/table&quot;</span>
 <span class="w">    </span><span class="s">&quot;testing&quot;</span>
@@ -10934,8 +10971,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Mock</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -10943,21 +10980,21 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserRepository_FindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">query</span><span class="w">        </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="w">   </span><span class="c1">// クエリパラメータ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w">              </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                 </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">query</span><span class="w">        </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="w"> </span><span class="c1">// クエリパラメータ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w">  </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w">            </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">query</span><span class="p">:</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">mock</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
-<span class="w">                    </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">{</span>
-<span class="w">                        </span><span class="nx">Name</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span>
-<span class="w">                        </span><span class="nx">Age</span><span class="p">:</span><span class="w">      </span><span class="mi">13</span><span class="p">,</span>
-<span class="w">                    </span><span class="p">},</span>
+<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
+<span class="w">                    </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">},</span>
 <span class="w">                    </span><span class="kc">nil</span><span class="p">,</span>
 <span class="w">                </span><span class="p">)</span>
 <span class="w">            </span><span class="p">},</span>
@@ -10975,7 +11012,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setupMock</span><span class="p">(</span><span class="nx">mockSql</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// repositoryの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserRepository</span><span class="p">(</span><span class="nx">mockSql</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserRepository</span><span class="p">(</span><span class="nx">mockSql</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの検証</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
@@ -11075,6 +11112,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">persistence</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/table&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/test&quot;</span>
@@ -11121,7 +11159,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// sqlの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUsersSql</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUsersSql</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">queryParam</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// レスポンスの確認</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
