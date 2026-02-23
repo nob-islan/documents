@@ -155,37 +155,6 @@ func (u *userUsecase) RegistUser(
 
 ## テスト
 
-- `test/db.go`
-
-```go
-package infrastructure
-
-import (
-	"fmt"
-
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
-)
-
-func ConnectDB() (*gorm.DB, error) {
-
-	// データベース接続
-	const (
-		user     string = "root"
-		password string = "password"
-		domain   string = "localhost:3306"
-		dbName   string = "eadb"
-	)
-	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, domain, dbName)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
-
-	return db, err
-}
-```
-
 - `users_sql_test.go`
 
 ```go
