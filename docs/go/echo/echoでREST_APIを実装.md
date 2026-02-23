@@ -88,7 +88,7 @@ func (h *userHandler) Login(c *echo.Context) error {
 	}
 
 	// usecase呼び出し
-	out := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(c.Request().Context(), params.NewLoginIn(req.Name, req.Password))
 
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
@@ -99,7 +99,7 @@ func (h *userHandler) Me(c *echo.Context) error {
 	req := model.NewMeReq(c)
 
 	// usecase呼び出し 業務エラー発生時はStatus500を返す
-	out, err := h.userUsecase.Me(params.NewMeIn(req.Name))
+	out, err := h.userUsecase.Me(c.Request().Context(), params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusInternalServerError,
