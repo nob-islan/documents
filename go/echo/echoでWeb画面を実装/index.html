@@ -4087,7 +4087,7 @@
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        `internal/handler/``
+        internal/handler/
       
     </span>
   </a>
@@ -10497,7 +10497,7 @@
   <a href="#internalhandler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        `internal/handler/``
+        internal/handler/
       
     </span>
   </a>
@@ -10591,7 +10591,7 @@
 <ul>
 <li>echoをインストールします。</li>
 </ul>
-<div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v4
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>get<span class="w"> </span>github.com/labstack/echo/v5
 </code></pre></div>
 <h3 id="_5">実装</h3>
 <h4 id="assets"><code>assets/</code></h4>
@@ -10704,7 +10704,7 @@
 <span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="internalhandler">`internal/handler/``</h4>
+<h4 id="internalhandler"><code>internal/handler/</code></h4>
 <ul>
 <li><code>user_handler.go</code></li>
 </ul>
@@ -10713,17 +10713,17 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 認証機能のhandlerです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 初期表示処理を行います。</span>
-<span class="w">    </span><span class="nx">InitView</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="nx">InitView</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
 
 <span class="w">    </span><span class="c1">// ログイン処理を行います。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">userHandler</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
@@ -10732,11 +10732,11 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userHandler</span><span class="p">{}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">userHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">InitView</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">userHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">InitView</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Render</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span><span class="w"> </span><span class="nx">ButtonText</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}{</span><span class="nx">ButtonText</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ログイン&quot;</span><span class="p">})</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">userHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">h</span><span class="w"> </span><span class="o">*</span><span class="nx">userHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span><span class="w">     </span><span class="c1">// ユーザ名</span>
@@ -10781,7 +10781,7 @@
 <span class="w">    </span><span class="s">&quot;html/template&quot;</span>
 <span class="w">    </span><span class="s">&quot;io&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
@@ -10810,7 +10810,7 @@
 <span class="w">    </span><span class="nx">templates</span><span class="w"> </span><span class="o">*</span><span class="nx">template</span><span class="p">.</span><span class="nx">Template</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Template</span><span class="p">)</span><span class="w"> </span><span class="nx">Render</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Template</span><span class="p">)</span><span class="w"> </span><span class="nx">Render</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">w</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">templates</span><span class="p">.</span><span class="nx">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -10822,7 +10822,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
 
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v4&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
@@ -10850,7 +10850,9 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Routing</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;failed to start server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>アプリ起動後、<a href="http://localhost:8080/login">http://localhost:8080/login</a> にアクセスするとログイン画面が表示されます。</p>
