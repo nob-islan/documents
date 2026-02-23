@@ -96,7 +96,7 @@ func (s *usersSql) Save(ctx context.Context, u table.Users) error {
 		db = tx
 	}
 
-	if err := db.WithContext(ctx).Create(&u).Error; err != nil {
+	if err := gorm.G[table.Users](db).Create(ctx, &u); err != nil {
 		return err
 	}
 
