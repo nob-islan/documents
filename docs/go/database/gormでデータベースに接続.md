@@ -140,3 +140,61 @@ type Users struct {
 	Age  int    // 年齢
 }
 ```
+
+## テスト
+
+ライブラリをインストールします:
+
+```shell
+go get gorm.io/driver/sqlite
+```
+
+テスト向けデータベースへの接続設定を下記で作成します:
+
+```go
+package test
+
+import (
+	"os"
+	"testing"
+
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+)
+
+// テスト用データベースに接続します。
+func ConnectTestDB(t *testing.T, table string) *gorm.DB {
+
+	dbfile := "gorm.db"
+
+	// 各テストケースでテーブルを共有するように設定
+	db, err := gorm.Open(sqlite.Open(dbfile), &gorm.Config{})
+	if err != nil {
+		t.Fatalf("failed to open in-memory db: %v", err)
+	}
+
+	// schema.sqlを読み込み・実行
+	schema, err := os.ReadFile("test/data/" + table + "/schema.sql")
+	if err != nil {
+		t.Fatalf("failed to read schema: %v", err)
+	}
+	db.Exec(string(schema))
+
+	// data.sqlを読み込み・実行
+	data, err := os.ReadFile("test/data/" + table + "/data.sql")
+	if err != nil {
+		t.Fatalf("failed to read data: %v", err)
+	}
+	db.Exec(string(data))
+
+	// テスト終了時にデータベース削除
+	t.Cleanup(func() {
+		os.Remove(dbfile)
+		os.Remove(dbfile + "-journal")
+	})
+
+	return db
+}
+```
+
+テスト関数については、標準ライブラリ利用時の`*sql.DB`を`*gorm.DB`に差し替えることで作成可能です。
