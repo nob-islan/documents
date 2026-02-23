@@ -4,7 +4,7 @@ cf. https://gorm.io/docs/transactions.html
 
 ## 実装
 
-- infrastructure/tx_manager.goを新規作成します:
+- `infrastructure/tx_manager.go`を新規作成します:
 
 ```go
 package infrastructure
