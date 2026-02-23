@@ -45,7 +45,7 @@ go mod init easyapp
 - echoをインストールします。
 
 ```shell
-go get github.com/labstack/echo/v4
+go get github.com/labstack/echo/v5
 ```
 
 ### 実装
@@ -164,7 +164,7 @@ body {
 }
 ```
 
-#### `internal/handler/``
+#### `internal/handler/`
 
 - `user_handler.go`
 
@@ -174,17 +174,17 @@ package handler
 import (
 	"net/http"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 // 認証機能のhandlerです。
 type UserHandler interface {
 
 	// 初期表示処理を行います。
-	InitView(c echo.Context) error
+	InitView(c *echo.Context) error
 
 	// ログイン処理を行います。
-	Login(c echo.Context) error
+	Login(c *echo.Context) error
 }
 
 type userHandler struct{}
@@ -193,11 +193,11 @@ func NewUserHandler() UserHandler {
 	return &userHandler{}
 }
 
-func (h *userHandler) InitView(c echo.Context) error {
+func (h *userHandler) InitView(c *echo.Context) error {
 	return c.Render(http.StatusOK, "login", struct{ ButtonText string }{ButtonText: "ログイン"})
 }
 
-func (h *userHandler) Login(c echo.Context) error {
+func (h *userHandler) Login(c *echo.Context) error {
 
 	req := new(struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -243,7 +243,7 @@ import (
 	"html/template"
 	"io"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type Router interface {
@@ -272,7 +272,7 @@ type Template struct {
 	templates *template.Template
 }
 
-func (t *Template) Render(w io.Writer, name string, data any, c echo.Context) error {
+func (t *Template) Render(c *echo.Context, w io.Writer, name string, data any) error {
 	return t.templates.ExecuteTemplate(w, name, data)
 }
 ```
@@ -285,7 +285,7 @@ package router
 import (
 	"easyapp/internal/handler"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type userRouter struct{}
@@ -315,7 +315,9 @@ import "easyapp/internal/handler/router"
 func main() {
 
 	e := router.Routing()
-	e.Logger.Fatal(e.Start(":8080"))
+	if err := e.Start(":8080"); err != nil {
+		e.Logger.Error("failed to start server", "error", err)
+	}
 }
 ```
 
