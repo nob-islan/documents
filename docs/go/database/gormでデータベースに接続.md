@@ -146,7 +146,7 @@ type Users struct {
 ライブラリをインストールします:
 
 ```shell
-go get gorm.io/driver/sqlite
+go get -u gorm.io/driver/sqlite
 ```
 
 テスト向けデータベースへの接続設定を下記で作成します:
