@@ -10429,11 +10429,11 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserHandler_Login</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">requestBody</span><span class="w">        </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// リクエストボディ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">mock</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                         </span><span class="c1">// 期待されるHTTPステータス</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">requestBody</span><span class="w">        </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// リクエストボディ</span>
+<span class="w">        </span><span class="nx">setupMock</span><span class="w">          </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="c1">// モック設定</span>
+<span class="w">        </span><span class="nx">expectedStatusCode</span><span class="w"> </span><span class="kt">int</span><span class="w">                      </span><span class="c1">// 期待されるHTTPステータス</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w">       </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
@@ -10499,6 +10499,7 @@
 <span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;Me&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeOut</span><span class="p">(</span>
@@ -10517,6 +10518,7 @@
 <span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserUsecase</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;Me&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewMeIn</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span>
