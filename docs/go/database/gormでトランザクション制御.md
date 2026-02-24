@@ -177,7 +177,6 @@ func Test_UsersSql_Save(t *testing.T) {
 
 	tests := []struct {
 		name          string            // テストケース名
-		ctx           context.Context   // コンテキスト
 		withTx        bool              // トランザクション有無
 		users         table.Users       // 入力値
 		setup         func(db *gorm.DB) // 事前セットアップ関数
@@ -185,7 +184,6 @@ func Test_UsersSql_Save(t *testing.T) {
 	}{
 		{
 			name:          "success without tx",
-			ctx:           context.Background(),
 			withTx:        false,
 			users:         table.Users{Name: "nob", Password: "passwd", Age: 13},
 			setup:         func(db *gorm.DB) {},
@@ -193,7 +191,6 @@ func Test_UsersSql_Save(t *testing.T) {
 		},
 		{
 			name:          "success with tx",
-			ctx:           context.Background(),
 			withTx:        true,
 			users:         table.Users{Name: "nob", Password: "passwd", Age: 13},
 			setup:         func(db *gorm.DB) {},
@@ -201,7 +198,6 @@ func Test_UsersSql_Save(t *testing.T) {
 		},
 		{
 			name:   "failed to query",
-			ctx:    context.Background(),
 			withTx: false,
 			users:  table.Users{Name: "nob", Password: "passwd", Age: 13},
 			setup: func(db *gorm.DB) {
@@ -221,14 +217,16 @@ func Test_UsersSql_Save(t *testing.T) {
 			// 事前セットアップ
 			testcase.setup(db)
 
+			ctx := context.Background()
+
 			// トランザクション開始
 			if testcase.withTx {
 				tx := db.Begin()
-				testcase.ctx = infrastructure.SetTx(context.Background(), tx)
+				ctx = infrastructure.SetTx(context.Background(), tx)
 			}
 
 			// sqlの実行
-			result := NewUsersSql(db).Save(testcase.ctx, testcase.users)
+			result := NewUsersSql(db).Save(ctx, testcase.users)
 
 			// レスポンスの確認
 			if result != nil {
