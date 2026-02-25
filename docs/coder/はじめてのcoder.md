@@ -9,5 +9,3 @@ cf. https://coder.com/docs
 cf. https://coder.com/docs/install/cli
 
 あらかじめDockerを入れておけば、ビルトインのテンプレートを使ってすぐにワークスペースを作成できます。
-
-TODO ローカルの仮想マシンで起動するとめちゃくちゃ重いので原因調査
