@@ -34,92 +34,90 @@ spring.profiles.active=swagger
 
 ### `EasyappApplication.java`
 
-下記アノテーションを追記し、APIの概要を記載します:
+APIの概要を記載します:
 
-```diff
-  package nob.example.easyapp;
+```java
+package nob.example.easyapp;
 
-  import org.springframework.boot.SpringApplication;
-  import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-+ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-+ import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 
-  @SpringBootApplication
-+ @OpenAPIDefinition(info = @Info(title = "Easy App", version = "1.0.0", description = "サンプルのREST APIです。"))
-  public class EasyappApplication {
+@SpringBootApplication
+@OpenAPIDefinition(info = @Info(title = "Easy App", version = "1.0.0", description = "サンプルのREST APIです。"))
+public class EasyappApplication {
 
-      public static void main(String[] args) {
-          SpringApplication.run(EasyappApplication.class, args);
-      }
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(EasyappApplication.class, args);
+    }
+}
 ```
 
 ### `AuthController.java`
 
-下記アノテーションを追記し、各APIのインターフェース仕様を記載します:
+各APIのインターフェース仕様を記載します:
 
-```diff
-  package nob.example.easyapp.controller;
+```java
+package nob.example.easyapp.controller;
 
-+ import org.springdoc.core.annotations.ParameterObject;
-  import org.springframework.web.bind.annotation.GetMapping;
-  import org.springframework.web.bind.annotation.PostMapping;
-  import org.springframework.web.bind.annotation.RequestBody;
-  import org.springframework.web.bind.annotation.RequestMapping;
-  import org.springframework.web.bind.annotation.RestController;
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-+ import io.swagger.v3.oas.annotations.Operation;
-+ import io.swagger.v3.oas.annotations.media.Content;
-+ import io.swagger.v3.oas.annotations.media.Schema;
-+ import io.swagger.v3.oas.annotations.responses.ApiResponse;
-+ import io.swagger.v3.oas.annotations.responses.ApiResponses;
-+ import io.swagger.v3.oas.annotations.tags.Tag;
-  import nob.example.easyapp.controller.model.LoginRequest;
-  import nob.example.easyapp.controller.model.LoginResponse;
-  import nob.example.easyapp.controller.model.MeRequest;
-  import nob.example.easyapp.controller.model.MeResponse;
-  import nob.example.easyapp.exception.SampleException;
-+ import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponseBody;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import nob.example.easyapp.controller.model.LoginRequest;
+import nob.example.easyapp.controller.model.LoginResponse;
+import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.MeResponse;
+import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponse;
 
-  /**
-   * 認証コントローラーのインターフェースです。
-   *
-   * @author nob
-   */
-  @RestController
-  @RequestMapping(value = "/api/v1")
-+ @Tag(name = "Auth", description = "認証APIです。")
-  public interface AuthController {
+/**
+ * 認証コントローラーのインターフェースです。
+ *
+ * @author nob
+ */
+@RestController
+@RequestMapping(value = "/api/v1")
+@Tag(name = "Auth", description = "認証APIです。")
+public interface AuthController {
 
-      /**
-       * 認証処理を呼び出します。
-       *
-       * @param request 認証リクエスト
-       * @return 認証結果
-       */
-      @PostMapping(value = "/login")
-+     @Operation(summary = "認証", description = "${easyappdoc.describe.api.v1.login:説明文}")
-+     @ApiResponses(value = {
-+             @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
-+             @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponseBody.class)))
-+     })
-      LoginResponse login(@RequestBody LoginRequest request) throws SampleException;
+    /**
+     * 認証処理を呼び出します。
+     *
+     * @param request 認証リクエスト
+     * @return 認証結果
+     */
+    @PostMapping(value = "/login")
+    @Operation(summary = "認証", description = "${easyappdoc.describe.api.v1.login:説明文}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
+            @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponse.class)))
+    })
+    LoginResponse login(@RequestBody LoginRequest request);
 
-      /**
-       * ユーザ情報取得処理を呼び出します。
-       *
-       * @param request ユーザ情報取得リクエスト
-       * @return ユーザ情報
-       */
-      @GetMapping(value = "/me")
-+     @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
-+     @ApiResponses(value = {
-+             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
-+     })
--     MeResponse me(MeRequest request);
-+     MeResponse me(@ParameterObject MeRequest request);
-  }
+    /**
+     * ユーザ情報取得処理を呼び出します。
+     *
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
+     */
+    @GetMapping(value = "/me")
+    @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "正常に処理された場合")
+    })
+    MeResponse me(@ParameterObject MeRequest request); // GETリクエストのパラメータを表示するために@ParameterObjectを追加
+}
 ```
 
 ### `model`
@@ -128,153 +126,134 @@ spring.profiles.active=swagger
 
 #### `LoginRequest.java`
 
-```diff
-  package nob.example.easyapp.controller.model;
+```java
+package nob.example.easyapp.controller.model;
 
-+ import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-  /**
-   * 認証向けのリクエストモデルです。
-   *
-   * @author nob
-   */
-  @Value
-+ @Schema(description = "認証向けのリクエストモデル", type = "object")
-  public class LoginRequest {
-
-      /** ユーザ名 */
-+     @Schema(description = "ユーザ名", type = "string", example = "nob")
-      private String name;
-
-      /** パスワード */
-+     @Schema(description = "パスワード", type = "string", example = "passwd")
-      private String password;
-  }
+/**
+ * 認証向けのリクエストモデルです。
+ *
+ * @param name     ユーザ名
+ * @param password パスワード
+ *
+ * @author nob
+ */
+@Schema(description = "認証向けのリクエストモデル", type = "object")
+public record LoginRequest(
+        @Schema(description = "ユーザ名", type = "string", example = "nob") String name,
+        @Schema(description = "パスワード", type = "string", example = "passwd") String password) {
+}
 ```
 
 #### `LoginResponse.java`
 
-```diff
-  package nob.example.easyapp.controller.model;
+```java
+package nob.example.easyapp.controller.model;
 
-+ import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-  /**
-   * 認証向けのレスポンスモデルです。
-   *
-   * @author nob
-   */
-  @Value
-+ @Schema(description = "認証向けのレスポンスモデル", type = "object")
-  public class LoginResponse {
-
-      /** 認証可否 */
-+     @Schema(description = "認証可否", type = "boolean", example = "true")
-      private boolean valid;
-  }
+/**
+ * 認証向けのレスポンスモデルです。
+ *
+ * @param valid 認証可否
+ *
+ * @author nob
+ */
+@Schema(description = "認証向けのレスポンスモデル", type = "object")
+public record LoginResponse(
+        @Schema(description = "認証可否", type = "boolean", example = "true") Boolean valid) {
+}
 ```
 
 #### `MeRequest.java`
 
-```diff
-  package nob.example.easyapp.controller.model;
+```java
+package nob.example.easyapp.controller.model;
 
-+ import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-  /**
-   * ユーザ情報取得向けのリクエストモデルです。
-   *
-   * @author nob
-   */
-  @Value
-+ @Schema(description = "ユーザ情報取得向けのリクエストモデル", type = "object")
-  public class MeRequest {
-
-      /** ユーザ名 */
-+     @Schema(description = "ユーザ名", type = "string", example = "nob")
-      private String name;
-  }
+/**
+ * ユーザ情報取得向けのリクエストモデルです。
+ *
+ * @param name ユーザ名
+ *
+ * @author nob
+ */
+@Schema(description = "ユーザ情報取得向けのリクエストモデル", type = "object")
+public record MeRequest(
+        @Schema(description = "ユーザ名", type = "string", example = "nob") String name) {
+}
 ```
 
 #### `MeResponse.java`
 
-```diff
-  package nob.example.easyapp.controller.model;
+```java
+package nob.example.easyapp.controller.model;
 
-+ import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-  /**
-   * ユーザ情報取得向けのレスポンスモデルです。
-   *
-   * @author nob
-   */
-  @Value
-+ @Schema(description = "ユーザ情報取得向けのレスポンスモデル", type = "object")
-  public class MeResponse {
-
-      /** ユーザ名 */
-+     @Schema(description = "ユーザ名", type = "string", example = "nob")
-      private String name;
-
-      /** 年齢 */
-+     @Schema(description = "年齢", type = "integer", example = "13")
-      private Integer age;
-  }
+/**
+ * ユーザ情報取得向けのレスポンスモデルです。
+ *
+ * @param name ユーザ名
+ * @param age  年齢
+ *
+ * @author nob
+ */
+@Schema(description = "ユーザ情報取得向けのレスポンスモデル", type = "object")
+public record MeResponse(
+        @Schema(description = "ユーザ名", type = "string", example = "nob") String name,
+        @Schema(description = "年齢", type = "integer", example = "13") Integer age) {
+}
 ```
 
 ### `SampleExceptionHandler.java`
 
 例外発生時レスポンスモデルのスキーマ定義を記載します:
 
-```diff
-  package nob.example.easyapp.handler;
+```java
+package nob.example.easyapp.handler;
 
-  import org.springframework.http.HttpStatus;
-  import org.springframework.http.ResponseEntity;
-  import org.springframework.web.bind.annotation.ExceptionHandler;
-  import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-+ import io.swagger.v3.oas.annotations.media.Schema;
-  import lombok.Value;
-  import nob.example.easyapp.exception.SampleException;
+import io.swagger.v3.oas.annotations.media.Schema;
+import nob.example.easyapp.exception.SampleException;
 
-  /**
-   * サンプル例外のハンドラです。
-   *
-   * @author nob
-   */
-  @RestControllerAdvice
-  public class SampleExceptionHandler {
+/**
+ * サンプル例外のハンドラです。
+ *
+ * @author nob
+ */
+@RestControllerAdvice
+public class SampleExceptionHandler {
 
-      /**
-       * サンプル例外が投げられた際のハンドリングを行います。
-       *
-       * @param e
-       * @return 例外メッセージ
-       */
-      @SuppressWarnings({ "unchecked", "rawtypes" })
-      @ExceptionHandler(SampleException.class) // SampleExceptionが投げられた際に動く
-      public ResponseEntity<SampleExceptionResponseBody> handleSampleException(SampleException e) {
+    /**
+     * サンプル例外が投げられた際のハンドリングを行います。
+     *
+     * @param e
+     * @return 例外メッセージ
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @ExceptionHandler(SampleException.class) // SampleExceptionが投げられた際に動く
+    public ResponseEntity<SampleExceptionResponse> handleSampleException(SampleException e) {
 
-          return new ResponseEntity(new SampleExceptionResponseBody(e.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
-      }
+        return new ResponseEntity(new SampleExceptionResponse(e.getMessage()), HttpStatus.UNPROCESSABLE_CONTENT);
+    }
 
-      /**
-       * サンプル例外発生時のレスポンスボディです。
-       */
-      @Value
-+     @Schema(description = "サンプルエラーのレスポンス", type = "object")
-      public class SampleExceptionResponseBody {
-
-          /** エラーメッセージ */
-+         @Schema(description = "エラーメッセージ", type = "string", example = "業務エラーが発生しました。")
-          private String message;
-      }
-  }
+    /**
+     * サンプル例外発生時のレスポンスボディです。
+     *
+     * @param message エラーメッセージ
+     */
+    @Schema(description = "サンプルエラーのレスポンス", type = "object")
+    public record SampleExceptionResponse(
+            @Schema(description = "エラーメッセージ", type = "string", example = "業務エラーが発生しました。") String message) {
+    }
+}
 ```
 
 ### `resources/application-swagger.yaml`
