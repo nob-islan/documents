@@ -29,3 +29,9 @@ ollama pull llama3
 ```shell
 ollama run llama3
 ```
+
+## Claude Codeを使う
+
+# Claude CodeをOllama経由で使う
+
+cf. https://docs.ollama.com/integrations/claude-code
