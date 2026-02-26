@@ -267,13 +267,13 @@ public class AuthServiceImpl implements AuthService {
     public LoginOutModel login(LoginInModel inModel) {
 
         return new LoginOutModel(
-                usersRepository.findByName(inModel.getName()).getPassword().equals(inModel.getPassword()));
+                usersRepository.findByName(inModel.name()).getPassword().equals(inModel.password()));
     }
 
     @Override
     public MeOutModel me(MeInModel inModel) {
 
-        Users users = usersRepository.findByName(inModel.getName());
+        Users users = usersRepository.findByName(inModel.name());
         return new MeOutModel(users.getName(), users.getAge());
     }
 }
@@ -286,21 +286,15 @@ public class AuthServiceImpl implements AuthService {
 ```java
 package nob.example.easyapp.service.model;
 
-import lombok.Value;
-
 /**
  * 認証向けの入力モデルです。
  *
+ * @param name     ユーザ名
+ * @param password パスワード
+ *
  * @author nob
  */
-@Value
-public class LoginInModel {
-
-    /** ユーザ名 */
-    private String name;
-
-    /** パスワード */
-    private String password;
+public record LoginInModel(String name, String password) {
 }
 ```
 
@@ -311,18 +305,14 @@ public class LoginInModel {
 ```java
 package nob.example.easyapp.service.model;
 
-import lombok.Value;
-
 /**
  * 認証向けの出力モデルです。
  *
+ * @param valid 認証可否
+ *
  * @author nob
  */
-@Value
-public class LoginOutModel {
-
-    /** 認証可否 */
-    private boolean valid;
+public record LoginOutModel(Boolean valid) {
 }
 ```
 
@@ -331,18 +321,14 @@ public class LoginOutModel {
 ```java
 package nob.example.easyapp.service.model;
 
-import lombok.Value;
-
 /**
  * ユーザ情報取得向けの入力モデルです。
  *
+ * @param name ユーザ名
+ *
  * @author nob
  */
-@Value
-public class MeInModel {
-
-    /** ユーザ名 */
-    private String name;
+public record MeInModel(String name) {
 }
 ```
 
@@ -351,21 +337,15 @@ public class MeInModel {
 ```java
 package nob.example.easyapp.service.model;
 
-import lombok.Value;
-
 /**
  * ユーザ情報取得向けの出力モデルです。
  *
+ * @param name ユーザ名
+ * @param age  年齢
+ *
  * @author nob
  */
-@Value
-public class MeOutModel {
-
-    /** ユーザ名 */
-    private String name;
-
-    /** 年齢 */
-    private Integer age;
+public record MeOutModel(String name, Integer age) {
 }
 ```
 
@@ -455,14 +435,14 @@ public class AuthControllerImpl implements AuthController {
     public LoginResponse login(LoginRequest request) {
 
         return new LoginResponse(
-                authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
+                authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
 
     @Override
     public MeResponse me(MeRequest request) {
 
-        MeOutModel meOutModel = authService.me(new MeInModel(request.getName()));
-        return new MeResponse(meOutModel.getName(), meOutModel.getAge());
+        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
+        return new MeResponse(meOutModel.name(), meOutModel.age());
     }
 }
 ```
@@ -474,21 +454,15 @@ public class AuthControllerImpl implements AuthController {
 ```java
 package nob.example.easyapp.controller.model;
 
-import lombok.Value;
-
 /**
  * 認証向けのリクエストモデルです。
  *
+ * @param name     ユーザ名
+ * @param password パスワード
+ *
  * @author nob
  */
-@Value
-public class LoginRequest {
-
-    /** ユーザ名 */
-    private String name;
-
-    /** パスワード */
-    private String password;
+public record LoginRequest(String name, String password) {
 }
 ```
 
@@ -499,18 +473,14 @@ public class LoginRequest {
 ```java
 package nob.example.easyapp.controller.model;
 
-import lombok.Value;
-
 /**
  * 認証向けのレスポンスモデルです。
  *
+ * @param valid 認証可否
+ *
  * @author nob
  */
-@Value
-public class LoginResponse {
-
-    /** 認証可否 */
-    private boolean valid;
+public record LoginResponse(Boolean valid) {
 }
 ```
 
@@ -519,18 +489,14 @@ public class LoginResponse {
 ```java
 package nob.example.easyapp.controller.model;
 
-import lombok.Value;
-
 /**
  * ユーザ情報取得向けのリクエストモデルです。
  *
+ * @param name ユーザ名
+ *
  * @author nob
  */
-@Value
-public class MeRequest {
-
-    /** ユーザ名 */
-    private String name;
+public record MeRequest(String name) {
 }
 ```
 
@@ -539,21 +505,15 @@ public class MeRequest {
 ```java
 package nob.example.easyapp.controller.model;
 
-import lombok.Value;
-
 /**
  * ユーザ情報取得向けのレスポンスモデルです。
  *
+ * @param name ユーザ名
+ * @param age  年齢
+ *
  * @author nob
  */
-@Value
-public class MeResponse {
-
-    /** ユーザ名 */
-    private String name;
-
-    /** 年齢 */
-    private Integer age;
+public record MeResponse(String name, Integer age) {
 }
 ```
 
