@@ -266,8 +266,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginOutModel login(LoginInModel inModel) {
 
-        return new LoginOutModel(
-                usersRepository.findByName(inModel.name()).getPassword().equals(inModel.password()));
+        return new LoginOutModel(usersRepository.findByName(inModel.name()).getPassword().equals(inModel.password()));
     }
 
     @Override
@@ -434,8 +433,7 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        return new LoginResponse(
-                authService.login(new LoginInModel(request.name(), request.password())).valid());
+        return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
 
     @Override
