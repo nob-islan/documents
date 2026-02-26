@@ -11185,13 +11185,13 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginInModel</span><span class="w"> </span><span class="n">inModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span>
-<span class="w">                </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">()).</span><span class="na">getPassword</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getPassword</span><span class="p">()));</span>
+<span class="w">                </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">()).</span><span class="na">getPassword</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">password</span><span class="p">()));</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeOutModel</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Users</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">());</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -11200,76 +11200,56 @@ spring.datasource.password<span class="o">=</span>password
 <p>業務処理を担うクラスの入力モデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * 認証向けの入力モデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name     ユーザ名</span>
+<span class="cm"> * @param password パスワード</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginInModel</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** パスワード */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LoginInModel</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="servicemodelloginoutmodeljava"><code>service/model/LoginOutModel.java</code></h4>
 <p>業務処理を担うクラスの出力モデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * 認証向けの出力モデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param valid 認証可否</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginOutModel</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** 認証可否 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LoginOutModel</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="servicemodelmeinmodeljava"><code>service/model/MeInModel.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得向けの入力モデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name ユーザ名</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MeInModel</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MeInModel</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="servicemodelmeoutmodeljava"><code>service/model/MeOutModel.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得向けの出力モデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name ユーザ名</span>
+<span class="cm"> * @param age  年齢</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MeOutModel</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** 年齢 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MeOutModel</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="controllerauthcontrollerjava"><code>controller/AuthController.java</code></h4>
@@ -11351,14 +11331,14 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LoginResponse</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span>
-<span class="w">                </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getPassword</span><span class="p">())).</span><span class="na">isValid</span><span class="p">());</span>
+<span class="w">                </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="p">(),</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">password</span><span class="p">())).</span><span class="na">valid</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeResponse</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">meOutModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getName</span><span class="p">()));</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">meOutModel</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">meOutModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="p">()));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="n">meOutModel</span><span class="p">.</span><span class="na">name</span><span class="p">(),</span><span class="w"> </span><span class="n">meOutModel</span><span class="p">.</span><span class="na">age</span><span class="p">());</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -11366,76 +11346,56 @@ spring.datasource.password<span class="o">=</span>password
 <p>コントローラーのリクエストモデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * 認証向けのリクエストモデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name     ユーザ名</span>
+<span class="cm"> * @param password パスワード</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginRequest</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** パスワード */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LoginRequest</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="controllermodelloginresponsejava"><code>controller/model/LoginResponse.java</code></h4>
 <p>コントローラーのレスポンスモデルを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * 認証向けのレスポンスモデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param valid 認証可否</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginResponse</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** 認証可否 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LoginResponse</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">valid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="controllermodelmerequestjava"><code>controller/model/MeRequest.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得向けのリクエストモデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name ユーザ名</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MeRequest</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MeRequest</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="controllermodelmeresponsejava"><code>controller/model/MeResponse.java</code></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
-
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得向けのレスポンスモデルです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @param name ユーザ名</span>
+<span class="cm"> * @param age  年齢</span>
+<span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MeResponse</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
-
-<span class="w">    </span><span class="cm">/** 年齢 */</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MeResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_6">起動</h2>
