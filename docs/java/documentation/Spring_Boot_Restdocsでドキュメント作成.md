@@ -13,11 +13,17 @@ cf. https://spring.pleiades.io/guides/gs/testing-restdocs
 `pom.xml`に下記を追加します:
 
 ```xml
-		<!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-restdocs -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-restdocs</artifactId>
+			<scope>compile</scope>
 		</dependency>
 ```
 
@@ -132,15 +138,14 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        return new LoginResponse(
-                authService.login(new LoginInModel(request.getName(), request.getPassword())).isValid());
+        return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
 
     @Override
     public MeResponse me(MeRequest request) {
 
-        MeOutModel meOutModel = authService.me(new MeInModel(request.getName()));
-        return new MeResponse(meOutModel.getName(), meOutModel.getAge());
+        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
+        return new MeResponse(meOutModel.name(), meOutModel.age());
     }
 }
 ```
@@ -166,8 +171,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.restdocs.test.autoconfigure.AutoConfigureRestDocs;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -194,11 +199,10 @@ public class AuthControllerImplTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @MockitoBean
     private AuthService authService;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * loginのテスト 正常系
@@ -210,7 +214,7 @@ public class AuthControllerImplTest {
         LoginRequest request = new LoginRequest("nob", "passwd");
 
         // serviceのモック化
-        Mockito.when(authService.login(new LoginInModel(request.getName(), request.getPassword())))
+        Mockito.when(authService.login(new LoginInModel(request.name(), request.password())))
                 .thenReturn(new LoginOutModel(true));
 
         try {
@@ -242,7 +246,7 @@ public class AuthControllerImplTest {
         MeRequest request = new MeRequest("nob");
 
         // serviceのモック化
-        Mockito.when(authService.me(new MeInModel(request.getName()))).thenReturn(new MeOutModel("nob", 13));
+        Mockito.when(authService.me(new MeInModel(request.name()))).thenReturn(new MeOutModel("nob", 13));
 
         try {
             mockMvc.perform(get("/api/v1/me")
