@@ -261,9 +261,9 @@ public class SampleExceptionHandler {
 APIのdescriptionについて記載します:
 
 ```yaml
-########################
-### Easy App documents
-########################
+#====================
+# Easy App documents
+#====================
 easyappdoc:
   describe:
     api:
