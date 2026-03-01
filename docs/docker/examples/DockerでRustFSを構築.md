@@ -1,4 +1,4 @@
-`# DockerでRustFSを構築
+# DockerでRustFSを構築
 
 cf. https://github.com/rustfs/rustfs/blob/main/README.md
 
