@@ -15,6 +15,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 - Ollamaを開始します:
 
 ```shell
+# 外部からのアクセスを許可する際はOLLAMA_HOSTなどの環境変数を設定してください。
 ollama serve > ollama.log 2>&1 &
 ```
 
