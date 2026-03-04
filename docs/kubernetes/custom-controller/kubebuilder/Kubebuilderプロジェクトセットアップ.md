@@ -415,7 +415,7 @@ kubectl apply -f config/samples/nobcontroller_v1_nob.yaml
 - 下記コマンドでカスタムリソースが動いていることを確認できます。
 
 ```
-$ kubectl get Nob
+$ kubectl get nob
 NAME         AGE
 nob-sample   15s
 ```
