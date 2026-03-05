@@ -10675,7 +10675,7 @@
 <p><a href="https://github.com/kubernetes-sigs/kubebuilder">Kubebuilder</a>を使って実装するカスタムコントローラープロジェクトのセットアップ方法について記載します。</p>
 <h2 id="_1">プロジェクト作成</h2>
 <ul>
-<li>プロジェクトを初期化します。</li>
+<li>プロジェクトを初期化します（<code>.devcontainer</code>配下に<code>post-install.sh</code>が生成されますが不要なので削除してください）。</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># kubebuilder init --domain {APIのドメイン} --repo {リポジトリパス}</span>
 kubebuilder<span class="w"> </span>init<span class="w"> </span>--domain<span class="w"> </span>example.nob<span class="w"> </span>--repo<span class="w"> </span>example.nob/nob-controller
