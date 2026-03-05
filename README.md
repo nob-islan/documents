@@ -10,15 +10,15 @@ https://nobislandocuments.pages.dev/
 
 ## 開発方法
 
-開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown 形式で作成されたドキュメントについて[MkDocs](https://www.mkdocs.org/)にてレンダリングします。
+開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown形式で作成されたドキュメントについて[MkDocs](https://www.mkdocs.org/)にてレンダリングします。
 
 ### ドキュメント追加
 
-`docs`配下に md 形式でドキュメントを作成してください。
+`docs`配下にmd形式でドキュメントを作成してください。
 
 ### 動作確認
 
-- mkdocs を起動します:
+- mkdocsを起動します:
 
 ```shell
 mkdocs serve
@@ -28,5 +28,5 @@ mkdocs serve
 
 ## デプロイ方法
 
-- main ブランチに push されると github action が実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pages ブランチに push されます。
-- gh-pages ブランチに変更が入ると Netlify 上の nob-islan-document プロジェクトでビルドが走り、ドキュメントが更新されます。
+- mainブランチに push されるとgithub actionが実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pagesブランチにpushされます。
+- gh-pagesブランチに変更が入ると Cloudflare上のnobislandocumentプロジェクトでビルドが走り、ドキュメントが更新されます。
