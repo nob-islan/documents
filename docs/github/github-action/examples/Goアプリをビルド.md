@@ -15,6 +15,18 @@ cf.
 - モジュールビルド
 - コンテナイメージのビルド、レジストリへのpush
 
+### `Dockerfile`
+
+```Dockerfile
+FROM golang:1.25
+
+COPY ./main /main
+
+CMD ["/main"]
+```
+
+### `.github/workflows/build.yaml`
+
 ```yaml
 name: Go
 on:
@@ -59,7 +71,6 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          registry: ${{ secrets.DOCKER_REGISTORY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push Docker images
@@ -68,5 +79,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_REGISTORY }}/${{ secrets.DOCKER_PROJECT }}/${{ env.module }}:${{ github.ref_name }}
+          tags: ${{ secrets.DOCKER_REPOSITORY }}/${{ env.module }}:${{ github.ref_name }}
 ```
