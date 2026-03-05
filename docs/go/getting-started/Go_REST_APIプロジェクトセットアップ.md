@@ -65,23 +65,23 @@ INSERT INTO users (
 ```shell
 .
 ├── cmd
-│   └── main.go                      # アプリのエントリポイント
+│   └── main.go                     # アプリのエントリポイント
 └── internal
     ├── domain
-    │   └── user.go                  # ドメイン定義およびrepositoryのインターフェース
+    │   └── user.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
     │   ├── model
-    │   │   └── user_model.go        # APIのリクエスト・レスポンス構造体
+    │   │   └── user_model.go       # APIのリクエスト・レスポンス構造体
     │   ├── router
-    │   │   ├── base.go              # エンドポイントのルーター統括
-    │   │   └── user_router.go       # 業務処理ごとのルーター
-    │   └── user_handler.go          # APIとしてのインターフェースおよび実装
+    │   │   ├── base.go             # エンドポイントのルーター統括
+    │   │   └── user_router.go      # 業務処理ごとのルーター
+    │   └── user_handler.go         # APIとしてのインターフェースおよび実装
     ├── infrastructure
-    │   ├── db.go                    # データベース接続設定
+    │   ├── db.go                   # データベース接続設定
     │   ├── persistence
     │   │   ├── table
-    │   │   │   └── users_row.go     # テーブル定義に対応した構造体
-    │   │   └── users_sql.go         # ドメイン操作のためのSQL定義
+    │   │   │   └── users_row.go    # テーブル定義に対応した構造体
+    │   │   └── users_sql.go        # ドメイン操作のためのSQL定義
     │   └── repository
     │       └── user_repository.go  # データベース操作の統括
     └── usecase
