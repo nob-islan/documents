@@ -12,7 +12,7 @@
         <link rel="prev" href="../kind%E3%81%A7Ingress%E3%82%92%E4%BD%BF%E3%81%86/">
       
       
-        <link rel="next" href="../../kustomize/Kustomize%E6%9B%B8%E3%81%8D%E6%96%B9/">
+        <link rel="next" href="../kind%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">
       
       
         
@@ -7377,21 +7377,38 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        クラスタ設定yamlサンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kind%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    kindクラスタ設定ファイルサンプル
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -10557,17 +10574,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#yaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        クラスタ設定yamlサンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -10631,34 +10637,6 @@ kind<span class="w"> </span>delete<span class="w"> </span>cluster
 <p>クラスタが消えます。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># マルチノードクラスタ構築</span>
 kind<span class="w"> </span>create<span class="w"> </span>cluster<span class="w"> </span>--config<span class="w"> </span>first-kind.yaml
-</code></pre></div>
-<h2 id="yaml">クラスタ設定yamlサンプル</h2>
-<ul>
-<li>ワーカーノード2台を起動</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
-<span class="nt">nodes</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># コントロールプレーン1台</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control-plane</span>
-<span class="w">  </span><span class="c1"># ワーカーノード2台</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-</code></pre></div>
-<ul>
-<li>NodePort向けのポートを開放</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cluster</span>
-<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kind.x-k8s.io/v1alpha4</span>
-<span class="nt">nodes</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">control-plane</span>
-<span class="w">    </span><span class="nt">extraPortMappings</span><span class="p">:</span>
-<span class="w">      </span><span class="c1"># ServiceのNodePortに30080を指定するとホストマシンの30070へのアクセスがワーカーノードの30080に転送される</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30080</span>
-<span class="w">        </span><span class="nt">hostPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30070</span>
-<span class="w">        </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TCP</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 </code></pre></div>
 
 
