@@ -3049,17 +3049,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#fixme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FIXME
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -10431,17 +10420,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#fixme" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FIXME
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -10467,7 +10445,7 @@
 <li><a href="https://docs.github.com/ja/actions/tutorials/build-and-test-code/go">Go build and test</a></li>
 <li><a href="https://docs.github.com/ja/actions/tutorials/publish-packages/publish-docker-images">Publish docker image</a></li>
 </ul>
-<p>タグが切られた際に下記を実行します:</p>
+<p>リリースタグが切られた際に下記を実行します:</p>
 <ul>
 <li>指定したパッケージ配下のテスト実行</li>
 <li>モジュールビルド</li>
@@ -10491,7 +10469,6 @@
 <span class="w">          </span><span class="nt">go-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.25&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test with the Go CLI</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">          </span><span class="no">cd ${module}</span>
 <span class="w">          </span><span class="no">go install gotest.tools/gotestsum@latest</span>
 <span class="w">          </span><span class="no">gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository ./internal/infrastructure/persistence</span>
 <span class="w">          </span><span class="no">go tool cover -html=coverage.txt -o coverage.html</span>
@@ -10500,7 +10477,7 @@
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Go-test-coverage</span>
-<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.module }}/coverage.html</span>
+<span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage.html</span>
 <span class="w">  </span><span class="nt">build</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
@@ -10513,27 +10490,21 @@
 <span class="w">          </span><span class="nt">go-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.25&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build</span>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">          </span><span class="no">cd ${module}</span>
 <span class="w">          </span><span class="no">go build cmd/main.go</span>
-<span class="w">          </span><span class="no">mv ./main ../</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Log in to Docker Hub</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.HARBOR_REGISTORY }}</span>
-<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.HARBOR_USERNAME }}</span>
-<span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.HARBOR_PASSWORD }}</span>
+<span class="w">          </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_REGISTORY }}</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_USERNAME }}</span>
+<span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_PASSWORD }}</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and push Docker images</span>
 <span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push</span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671</span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span>
 <span class="w">          </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
 <span class="w">          </span><span class="nt">push</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">          </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.HARBOR_REGISTORY }}/${{ secrets.HARBOR_PROJECT }}/${{ env.module }}:${{ github.ref_name }}</span>
+<span class="w">          </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.DOCKER_REGISTORY }}/${{ secrets.DOCKER_PROJECT }}/${{ env.module }}:${{ github.ref_name }}</span>
 </code></pre></div>
-<h2 id="fixme">FIXME</h2>
-<ul>
-<li>プライベートレジストリへの疎通ができていません。ジョブがharborが乗っているローカルネットワークとは異なるそれ上で動いているようで、curlからして通らない状態です。</li>
-</ul>
 
 
 
