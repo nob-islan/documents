@@ -4,7 +4,7 @@
 
 ## プロジェクト作成
 
-- プロジェクトを初期化します。
+- プロジェクトを初期化します（`.devcontainer`配下に`post-install.sh`が生成されますが不要なので削除してください）。
 
 ```shell
 # kubebuilder init --domain {APIのドメイン} --repo {リポジトリパス}
