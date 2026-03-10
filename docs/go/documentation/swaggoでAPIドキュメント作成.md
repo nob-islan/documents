@@ -34,7 +34,7 @@ go get -u github.com/swaggo/http-swagger
 
 + // @title Easy App
 + // @version 1.0.0
-+ // @descriptionサンプルのREST APIです。
++ // @description サンプルのREST APIです。
 + //
 + // @BasePath /api/v1
   func main() {
