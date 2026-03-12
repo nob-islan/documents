@@ -129,7 +129,7 @@ public class Users {
     /** 年齢 */
     private Integer age;
 
-    /** 備考 */
+    /** 住所 */
     private String address;
 }
 ```
@@ -237,7 +237,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import nob.example.easyapp.domain.entity.Users;
-import nob.example.easyapp.domain.query.UsersSelectQuery;
 import nob.example.easyapp.domain.mapper.UsersMapper;
 import nob.example.easyapp.domain.mapper.UsersDynamicSqlSupport;
 
@@ -258,12 +257,12 @@ public class UsersRepository {
      * @param condition
      * @return 検索結果
      */
-    public List<Users> selectByCondition(UsersSelectQuery condition) {
+    public List<Users> selectByCondition(Integer userId, String userName) {
 
         SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
                 .from(UsersDynamicSqlSupport.users)
-                .where(UsersDynamicSqlSupport.users.userName, SqlBuilder.isEqualToWhenPresent(condition.getUserName()))
-                .and(UsersDynamicSqlSupport.users.userId, SqlBuilder.isEqualToWhenPresent(condition.getUserId()))
+                .where(UsersDynamicSqlSupport.users.userName, SqlBuilder.isEqualToWhenPresent(userName))
+                .and(UsersDynamicSqlSupport.users.userId, SqlBuilder.isEqualToWhenPresent(userId))
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
 
@@ -288,29 +287,6 @@ public class UsersRepository {
 
         usersMapper.insert(insertStatement);
     }
-}
-```
-
-`UsersSelectQuery`については下記モデルクラスを作成しています:
-
-```java
-package nob.example.easyapp.domain.query;
-
-import lombok.Value;
-
-/**
- * usersテーブル検索時の条件を格納するモデルです。
- *
- * @author nob
- */
-@Value
-public class UsersSelectQuery {
-
-    /** ユーザID */
-    private Integer userId;
-
-    /** ユーザ名 */
-    private String userName;
 }
 ```
 
@@ -366,7 +342,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import nob.example.easyapp.domain.entity.Users;
-import nob.example.easyapp.domain.query.UsersSelectQuery;
 
 /**
  * UsersRepositoryのテストクラスです。
@@ -376,8 +351,8 @@ import nob.example.easyapp.domain.query.UsersSelectQuery;
 @SpringBootTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/resource/users/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/resource/users/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/users/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/users/data.sql" // データ投入SQLのパス
 })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UsersRepositoryTest {
@@ -392,7 +367,7 @@ public class UsersRepositoryTest {
     void test_findByUserId() {
 
         try {
-            List<Users> u = usersRepository.selectByCondition(new UsersSelectQuery(1, "test_nob"));
+            List<Users> u = usersRepository.selectByCondition(1, "test_nob");
             assertEquals(1, u.size());
             assertEquals(1, u.get(0).getUserId());
             assertEquals("test_nob", u.get(0).getUserName());
@@ -406,7 +381,7 @@ public class UsersRepositoryTest {
 }
 ```
 
-- `src/test/resources/resource/users/schema.sql`および`src/test/resources/resource/users/data.sql`は下記要領で作成します:
+- `src/test/resources/users/schema.sql`および`src/test/resources/users/data.sql`は下記要領で作成します:
 
 ```sql
 -- schema.sql
