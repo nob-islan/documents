@@ -306,7 +306,7 @@ public class EasyappApplication {
     @Bean
     CommandLineRunner run(UsersRepository repository) {
         return args -> {
-            repository.insert(new Users("nobbb", "passwd", 13)); // データ登録
+            repository.insert(new Users("nob", "passwd", 13)); // データ登録
             System.out.println(repository.selectAll()); // データ検索
         };
     }
