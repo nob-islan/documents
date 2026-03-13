@@ -211,7 +211,7 @@ import nob.example.easyapp.domain.entity.Users;
 public interface UsersRepository {
 
     /**
-     * ユーザ情報を全権取得します。
+     * ユーザ情報を全件取得します。
      *
      * @return ユーザ情報リスト
      */
