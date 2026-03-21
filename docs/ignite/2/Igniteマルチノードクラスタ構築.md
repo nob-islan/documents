@@ -26,8 +26,8 @@ cf. https://ignite.apache.org/docs/ignite2/latest/clustering/tcp-ip-discovery
                             <list>
                                 <!-- クラスタに参加するノードのIP一覧 -->
                                 <value>192.168.151.6</value>
-                                <value>192.168.151.24</value>
-                                <value>192.168.151.31</value>
+                                <value>192.168.151.7</value>
+                                <value>192.168.151.8</value>
                             </list>
                         </property>
                     </bean>
