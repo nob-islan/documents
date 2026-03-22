@@ -10790,106 +10790,84 @@
 <h2 id="_1">テーマ設定</h2>
 <h3 id="_2">背景色をネイビーにしたやつ</h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="c1">// for VSCode theme customize</span>
 <span class="w">  </span><span class="nt">&quot;workbench.colorCustomizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;activityBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;badge.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;button.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b3c5d&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;debugExceptionWidget.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;debugExceptionWidget.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ab395b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;debugToolBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;diffEditor.insertedTextBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#31958a55&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;diffEditor.removedTextBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#892f4688&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;dropdown.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#181f2f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.findMatchHighlightBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#eeeeee44&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editor.lineHighlightBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#082050&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorCursor.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ddbb88&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorGroup.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b2b4a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorGroup.dropBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#25375daa&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorGroupHeader.tabsBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorHoverWidget.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c38&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorHoverWidget.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#004c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorIndentGuide.activeBackground1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#204972&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorIndentGuide.background1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#002952&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorLineNumber.activeForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#80a2c2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorLineNumber.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#406385&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorLink.activeForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorMarkerNavigation.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#060621&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorMarkerNavigationError.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ab395b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorMarkerNavigationWarning.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5b7e7a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorWhitespace.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#103050&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;editorWidget.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#262641&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;extensionButton.prominentBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5f8b3b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;extensionButton.prominentHoverBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5f8b3bbb&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;focusBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#596f99&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;input.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#181f2f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputOption.activeBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#1d4a87&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.errorBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#a22d44&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.errorBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ab395b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.infoBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.infoBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#384078&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.warningBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5b7e7a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;inputValidation.warningBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5b7e7a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;list.activeSelectionBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#08286b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;list.dropBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#041d52&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;list.highlightForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;list.hoverBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#79797933&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;list.inactiveSelectionBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#79797944&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;notificationCenterHeader.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;notificationCenterHeader.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;notifications.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;notifications.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#79797933&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;notifications.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;panel.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;panel.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b2b4a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekView.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b2b4a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekViewEditor.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10192c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekViewEditor.matchHighlightBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#eeeeee33&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekViewResult.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#060621&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekViewResult.matchHighlightBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#eeeeee44&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;peekViewTitle.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10192c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pickerGroup.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#596f99&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pickerGroup.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#596f99&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ports.iconRunningProcessForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#80a2c2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;progressBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;quickInputList.focusBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#08286b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;scrollbar.shadow&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#515e91aa&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;scrollbarSlider.activeBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#3b3f5188&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;scrollbarSlider.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#79797944&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;scrollbarSlider.hoverBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#3b3f5188&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;sideBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;sideBarSectionHeader.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10192c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBar.debuggingBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10192c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBar.noFolderBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#10192c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBarItem.prominentBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBarItem.prominentHoverBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5dd&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;statusBarItem.remoteBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0063a5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.activeBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b2b4a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.hoverBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.inactiveBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.lastPinnedBorder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#2b3c5d&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tab.unfocusedActiveBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#000c18&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBlack&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#111111&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBlue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#bbdaff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightBlack&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#333333&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightBlue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#80baff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightCyan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#78ffff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightGreen&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#b8f171&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightMagenta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#d778ff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightRed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ff7882&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightWhite&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiBrightYellow&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffe580&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiCyan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#99ffff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiGreen&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#d1f1a9&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiMagenta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ebbbff&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiRed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ff9da4&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiWhite&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;terminal.ansiYellow&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ffeead&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;titleBar.activeBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#051325&quot;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">&quot;editor.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0A192F&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#E6EDF3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editorCursor.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#9623de&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.lineHighlightBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0F223A&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editorLineNumber.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#3F5A78&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.selectionBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#1B2A41&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.inactiveSelectionBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#142033&quot;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nt">&quot;activityBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#081426&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;activityBar.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#ce7fff&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sideBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0C1A2B&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sideBar.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#A8B3C2&quot;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nt">&quot;statusBar.background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#9623de&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;statusBar.foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#cccccc&quot;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nt">&quot;tab.activeBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0A192F&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tab.inactiveBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#0C1A2B&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tab.activeForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#FFFFFF&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tab.inactiveForeground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#6B7785&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="nt">&quot;editor.tokenColorCustomizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;textMateRules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;comment&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#5C6F82&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;fontStyle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;italic&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;keyword&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;storage&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#9623de&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#00FFC6&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;constant.numeric&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#FFD166&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;entity.name.function&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#66D9FF&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;variable&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#E6EDF3&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;support.type&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#A78BFA&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;invalid&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;foreground&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#FFFFFF&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#FF4D4D&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;workbench.colorTheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Visual Studio Dark&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
