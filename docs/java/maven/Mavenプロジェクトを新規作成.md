@@ -13,3 +13,9 @@ mvn archetype:generate \
     -DgroupId=nob.example \
     -DartifactId=easyapp
 ```
+
+下記コマンドでアプリケーションを起動できます。
+
+```shell
+mvn exec:java -Dexec.mainClass="nob.example.App"
+```
