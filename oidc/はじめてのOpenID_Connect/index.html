@@ -9077,7 +9077,7 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. ログイン画面返却
+        4. ログイン画面
       
     </span>
   </a>
@@ -10902,7 +10902,7 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. ログイン画面返却
+        4. ログイン画面
       
     </span>
   </a>
@@ -11093,7 +11093,7 @@ sequenceDiagram
 <li><code>code_challenge</code>および<code>code_challenge_method</code>はPKCE向けのパラメータで、認可コードの盗聴を防ぎます。RPは<code>code_verifier</code>をランダム文字列として生成・保持し、ハッシュ化することで<code>code_challenge</code>を作成します。OP側は<code>code_challenge</code>と認可コードとを紐づけて保持します。トークンリクエスト時にRPは<code>code_verifier</code>を送信します。OP側でその値をハッシュ化し、保持している<code>code_challenge</code>と一致することを確認します。</li>
 <li><code>nonce</code>IDトークンの再利用を防ぐためのパラメータです。RPはランダム文字列として<code>nonce</code>を生成・保持して認証リクエストを行います。OP側はIDトークンのclaimにこの値を含めて返却します。RP側は受け取ったIDトークンに対し、その<code>nonce</code>と保持している<code>nonce</code>とを検証することで攻撃者によって挿入された認可コードでないことを確認します。</li>
 </ul>
-<h3 id="4">4. ログイン画面返却</h3>
+<h3 id="4">4. ログイン画面</h3>
 <p>ID/Passなどを入力するログイン画面を返却します。</p>
 <h3 id="5">5. ユーザ認証</h3>
 <p>上記画面から認証情報を送信します。</p>
