@@ -12,7 +12,8 @@ cf.
 
 ```sql
 CREATE TABLE IF NOT EXISTS Users (
-    name varchar PRIMARY KEY
+    id bigint PRIMARY KEY
+    , name varchar
     , password varchar
     , age int
 );
@@ -108,6 +109,9 @@ import lombok.Value;
 @Value
 public class Users {
 
+    /** 管理ID */
+    private Long id;
+
     /** ユーザ名 */
     private String name;
 
@@ -138,6 +142,7 @@ public class UsersDynamicSqlSupport {
 
     public static final Users users = new Users();
 
+    public static final SqlColumn<Long> id = users.id;
     public static final SqlColumn<String> name = users.name;
     public static final SqlColumn<String> password = users.password;
     public static final SqlColumn<Integer> age = users.age;
@@ -148,6 +153,7 @@ public class UsersDynamicSqlSupport {
             super("Users"); // Ignite上のテーブル名
         }
 
+        public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
         public final SqlColumn<String> name = column("name", JDBCType.VARCHAR);
         public final SqlColumn<String> password = column("password", JDBCType.VARCHAR);
         public final SqlColumn<Integer> age = column("age", JDBCType.INTEGER);
@@ -279,6 +285,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
         InsertStatementProvider<Users> insertStatement = SqlBuilder.insert(users)
                 .into(UsersDynamicSqlSupport.users)
+                .map(UsersDynamicSqlSupport.id).toProperty("id")
                 .map(UsersDynamicSqlSupport.name).toProperty("name")
                 .map(UsersDynamicSqlSupport.password).toProperty("password")
                 .map(UsersDynamicSqlSupport.age).toProperty("age")
@@ -313,7 +320,7 @@ public class EasyappApplication {
     @Bean
     CommandLineRunner run(UsersRepository repository) {
         return args -> {
-            repository.insert(new Users("nob", "passwd", 13)); // データ登録
+            repository.insert(new Users(1L, "nob", "passwd", 13)); // データ登録
             System.out.println(repository.selectAll()); // データ検索
         };
     }
