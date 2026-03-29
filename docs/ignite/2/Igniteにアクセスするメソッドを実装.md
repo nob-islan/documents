@@ -39,9 +39,16 @@ CREATE TABLE IF NOT EXISTS Users (
             <artifactId>mybatis-spring</artifactId>
             <version>4.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+		<!-- Source: https://mvnrepository.com/artifact/org.apache.ignite/ignite-core -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<groupId>org.apache.ignite</groupId>
+			<artifactId>ignite-core</artifactId>
+			<version>2.17.0</version>
+			<scope>compile</scope>
 		</dependency>
 ```
 
