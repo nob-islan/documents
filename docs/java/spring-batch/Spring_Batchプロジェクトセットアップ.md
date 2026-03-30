@@ -187,9 +187,10 @@ spring.datasource.password=password
 .
 ├── config
 │   └── BatchConfig.java                    # Batchに関するコンフィグを定義
-├── entity                                  # データベースのテーブル定義に対応するエンティティ
-│   ├── Customer.java
-│   └── SignUp.java
+├── domain                                  # データベースのテーブル定義に対応するエンティティ
+│   └── entity
+│       ├── Customer.java
+│       └── SignUp.java
 └── job                                     # 各種ジョブ定義
     └── customerregist
         ├── CustomerRegistConfig.java       # ジョブ処理に用いる各種Beanの生成
@@ -223,7 +224,7 @@ public class BatchConfig {
 }
 ```
 
-#### `entity/SignUp.java`
+#### `domain/entity/SignUp.java`
 
 バッチ処理の入力値となる`sign_up`テーブルに対応するエンティティを定義します。
 
@@ -274,7 +275,7 @@ public class SignUp {
 }
 ```
 
-#### `entity/Customer.java`
+#### `domain/entity/Customer.java`
 
 バッチ処理の出力となる`customer`テーブルに対応するエンティティを定義します。
 
