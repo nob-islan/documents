@@ -11321,7 +11321,7 @@ spring.datasource.password<span class="o">=</span>password
 </code></pre></div>
 <h4 id="entitysignupjava"><code>entity/SignUp.java</code></h4>
 <p>バッチ処理の入力値となる<code>sign_up</code>テーブルに対応するエンティティを定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
@@ -11329,7 +11329,10 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.GenerationType</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Id</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Setter</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * sign_upテーブルのエンティティクラスです。</span>
@@ -11338,7 +11341,10 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> */</span>
 <span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sign_up&quot;</span><span class="p">)</span>
 <span class="nd">@Entity</span>
-<span class="nd">@Data</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
+<span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SignUp</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** 管理ID */</span>
@@ -11362,7 +11368,7 @@ spring.datasource.password<span class="o">=</span>password
 </code></pre></div>
 <h4 id="entitycustomerjava"><code>entity/Customer.java</code></h4>
 <p>バッチ処理の出力となる<code>customer</code>テーブルに対応するエンティティを定義します。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
@@ -11372,6 +11378,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Setter</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -11383,6 +11390,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="nd">@Entity</span>
 <span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
+<span class="nd">@NoArgsConstructor</span>
 <span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Customer</span><span class="w"> </span><span class="p">{</span>
 
@@ -11477,7 +11485,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.database.builder.JdbcCursorItemReaderBuilder</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.BeanPropertyRowMapper</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.SignUp</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.SignUp</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * インプット情報を抽出するクラスです。</span>
@@ -11508,8 +11516,8 @@ spring.datasource.password<span class="o">=</span>password
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.ItemProcessor</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.SignUp</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.Customer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.SignUp</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * 顧客登録ジョブのビジネスロジックを実装するクラスです。</span>
@@ -11535,7 +11543,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.database.JdbcBatchItemWriter</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.infrastructure.item.database.builder.JdbcBatchItemWriterBuilder</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.Customer</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * アウトプット情報を出力するクラスです。</span>
@@ -11573,8 +11581,8 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.SignUp</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.Customer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.SignUp</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * 顧客登録ジョブのコンフィグクラスです。</span>
