@@ -228,7 +228,7 @@ public class BatchConfig {
 バッチ処理の入力値となる`sign_up`テーブルに対応するエンティティを定義します。
 
 ```java
-package nob.example.easybatch.entity;
+package nob.example.easybatch.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -236,7 +236,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * sign_upテーブルのエンティティクラスです。
@@ -245,7 +248,10 @@ import lombok.Data;
  */
 @Table(name = "sign_up")
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignUp {
 
     /** 管理ID */
@@ -273,7 +279,7 @@ public class SignUp {
 バッチ処理の出力となる`customer`テーブルに対応するエンティティを定義します。
 
 ```java
-package nob.example.easybatch.entity;
+package nob.example.easybatch.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -283,6 +289,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -294,6 +301,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
 
@@ -400,7 +408,7 @@ import org.springframework.batch.infrastructure.item.database.JdbcCursorItemRead
 import org.springframework.batch.infrastructure.item.database.builder.JdbcCursorItemReaderBuilder;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
-import nob.example.easybatch.entity.SignUp;
+import nob.example.easybatch.domain.entity.SignUp;
 
 /**
  * インプット情報を抽出するクラスです。
@@ -435,8 +443,8 @@ package nob.example.easybatch.job.customerregist;
 
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
-import nob.example.easybatch.entity.Customer;
-import nob.example.easybatch.entity.SignUp;
+import nob.example.easybatch.domain.entity.Customer;
+import nob.example.easybatch.domain.entity.SignUp;
 
 /**
  * 顧客登録ジョブのビジネスロジックを実装するクラスです。
@@ -466,7 +474,7 @@ import javax.sql.DataSource;
 import org.springframework.batch.infrastructure.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.infrastructure.item.database.builder.JdbcBatchItemWriterBuilder;
 
-import nob.example.easybatch.entity.Customer;
+import nob.example.easybatch.domain.entity.Customer;
 
 /**
  * アウトプット情報を出力するクラスです。
@@ -508,8 +516,8 @@ import org.springframework.batch.infrastructure.item.database.JdbcCursorItemRead
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import nob.example.easybatch.entity.Customer;
-import nob.example.easybatch.entity.SignUp;
+import nob.example.easybatch.domain.entity.Customer;
+import nob.example.easybatch.domain.entity.SignUp;
 
 /**
  * 顧客登録ジョブのコンフィグクラスです。
