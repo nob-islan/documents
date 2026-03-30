@@ -43,7 +43,7 @@ unzip easybatch.zip && rm -rf easybatch.zip
 
 ```yaml
 services:
-  eadb:
+  ebdb:
     image: mariadb:latest
     container_name: ebdb
     ports:
