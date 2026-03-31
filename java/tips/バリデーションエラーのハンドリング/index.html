@@ -11053,19 +11053,28 @@ loginRequest.name.NotBlank<span class="w"> </span><span class="o">=</span><span 
 <span class="cm">     * バリデーションによる例外が投げられた際に呼ばれるメソッドです。</span>
 <span class="cm">     *</span>
 <span class="cm">     * @param e</span>
-<span class="cm">     * @return</span>
+<span class="cm">     * @return エラーメッセージ格納レスポンスボディ</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">MethodArgumentNotValidException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">validatorExceptionHandle</span><span class="p">(</span><span class="n">MethodArgumentNotValidException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">MethodArgumentNotValidExceptionResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">validatorExceptionHandle</span><span class="p">(</span>
+<span class="w">            </span><span class="n">MethodArgumentNotValidException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// エラーメッセージをリストに詰め込む</span>
-<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">errorList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messageList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getAllErrors</span><span class="p">().</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">errorList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getAllErrors</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">getDefaultMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="n">messageList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getAllErrors</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="na">getDefaultMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">status</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">BAD_REQUEST</span><span class="p">)</span>
-<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">errorList</span><span class="p">);</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MethodArgumentNotValidExceptionResponseBody</span><span class="p">(</span><span class="n">messageList</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * バリデーションエラー発生時のレスポンスボディです。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param messageList エラーメッセージのリスト</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MethodArgumentNotValidExceptionResponseBody</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messageList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -11091,6 +11100,7 @@ loginRequest.name.NotBlank<span class="w"> </span><span class="o">=</span><span 
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl.AuthControllerImpl</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.handler.MethodArgumentNotValidExceptionHandler</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
@@ -11135,7 +11145,9 @@ loginRequest.name.NotBlank<span class="w"> </span><span class="o">=</span><span 
 <span class="w">                    </span><span class="p">.</span><span class="na">andReturn</span><span class="p">();</span>
 <span class="w">            </span><span class="c1">// 結果のassert</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">())</span>
-<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;ユーザ名を入力してください。&quot;</span><span class="p">)));</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span>
+<span class="w">                            </span><span class="k">new</span><span class="w"> </span><span class="n">MethodArgumentNotValidExceptionHandler</span><span class="p">.</span><span class="na">MethodArgumentNotValidExceptionResponseBody</span><span class="p">(</span>
+<span class="w">                                    </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;ユーザ名を入力してください。&quot;</span><span class="p">))));</span>
 <span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">            </span><span class="n">fail</span><span class="p">();</span>
@@ -11145,7 +11157,7 @@ loginRequest.name.NotBlank<span class="w"> </span><span class="o">=</span><span 
 </code></pre></div>
 <h2 id="api">API動確</h2>
 <div class="highlight"><pre><span></span><code>$ curl -X POST -H &#39;Content-Type: application/json&#39; -d &#39;{&quot;name&quot;: &quot;&quot;, &quot;password&quot;: &quot;passwd&quot;}&#39; localhost:8080/api/v1/login
-[&quot;ユーザ名を入力してください。&quot;]
+{&quot;errorList&quot;:[&quot;ユーザ名を入力してください。&quot;]}
 </code></pre></div>
 
 
