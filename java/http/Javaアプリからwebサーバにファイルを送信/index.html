@@ -10931,7 +10931,7 @@ nginx.base.url<span class="o">=</span>sample/file
 <span class="p">}</span>
 </code></pre></div>
 <p>サービスのインターフェースを下記で作成します：</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.javanginx.service</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.javanginx.controller</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
@@ -10943,7 +10943,7 @@ nginx.base.url<span class="o">=</span>sample/file
 <span class="cm"> */</span>
 <span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/sample&quot;</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NginxService</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NginxController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ファイルをアップロードします。</span>
@@ -10955,7 +10955,7 @@ nginx.base.url<span class="o">=</span>sample/file
 <span class="p">}</span>
 </code></pre></div>
 <p>サービスの実装クラスを下記で作成します：</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.javanginx.service.impl</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.javanginx.controller.impl</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.OutputStream</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintStream</span><span class="p">;</span>
@@ -10963,17 +10963,17 @@ nginx.base.url<span class="o">=</span>sample/file
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URL</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">com.example.javanginx.config.AppConfig</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.javanginx.service.NginxService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.example.javanginx.controller.NginxController</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * nginxにファイルをアップロードするサンプル実装クラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> */</span>
-<span class="nd">@Service</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NginxServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">NginxService</span><span class="w"> </span><span class="p">{</span>
+<span class="nd">@RestController</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NginxControllerImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">NginxController</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Autowired</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AppConfig</span><span class="w"> </span><span class="n">appConfig</span><span class="p">;</span>
