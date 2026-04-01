@@ -1,4 +1,4 @@
-`# jdbコマンドでアプリをデバッグ
+# jdbコマンドでアプリをデバッグ
 
 cf. https://docs.oracle.com/javase/jp/6/technotes/tools/windows/jdb.html
 
