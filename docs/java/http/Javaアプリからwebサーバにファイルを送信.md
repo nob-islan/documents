@@ -142,7 +142,7 @@ public class AppConfig {
 サービスのインターフェースを下記で作成します：
 
 ```java
-package com.example.javanginx.service;
+package com.example.javanginx.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -154,7 +154,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sample")
-public interface NginxService {
+public interface NginxController {
 
     /**
      * ファイルをアップロードします。
@@ -169,7 +169,7 @@ public interface NginxService {
 サービスの実装クラスを下記で作成します：
 
 ```java
-package com.example.javanginx.service.impl;
+package com.example.javanginx.controller.impl;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -177,17 +177,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.javanginx.config.AppConfig;
-import com.example.javanginx.service.NginxService;
+import com.example.javanginx.controller.NginxController;
 
 /**
  * nginxにファイルをアップロードするサンプル実装クラスです。
  *
  */
-@Service
-public class NginxServiceImpl implements NginxService {
+@RestController
+public class NginxControllerImpl implements NginxController {
 
     @Autowired
     private AppConfig appConfig;
