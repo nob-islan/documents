@@ -31,16 +31,16 @@ web側から呼ばれるモジュールです。
 ドキュメントとしてわかりやすいようにエンドポイントは設けませんが、こちらにも`@RequestMapping`などのアノテーションによってエンドポイントを付与できます。
 
 ```java
-package com.example.appproject.service;
+package com.example.appproject.controller;
 
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * サンプルのappインターフェースです。
  *
  */
-@Service
-public interface SampleAppService {
+@RestController
+public interface SampleAppController {
 
     /**
      * サンプルのappメソッドです。
@@ -56,18 +56,18 @@ public interface SampleAppService {
 固定メッセージを返却するだけの実装です。
 
 ```java
-package com.example.appproject.service.impl;
+package com.example.appproject.controller.impl;
 
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.appproject.service.SampleAppService;
+import com.example.appproject.controller.SampleAppController;
 
 /**
  * サンプルappサービスの実装クラスです。
  *
  */
-@Service
-public class SampleAppServiceImpl implements SampleAppService {
+@RestController
+public class SampleAppControllerImpl implements SampleAppController {
 
     /**
      * {@inheritDoc}
@@ -177,7 +177,7 @@ public class WebProjectApplication {
 エンドポイントを設けて公開API実装とします。
 
 ```java
-package com.example.webproject.service;
+package com.example.webproject.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -189,7 +189,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/web")
-public interface SampleWebService {
+public interface SampleWebController {
 
     /**
      * サンプルのwebメソッドです。
@@ -206,24 +206,24 @@ public interface SampleWebService {
 `@Autowired`でapp側のサービスをBean宣言して呼び出します。
 
 ```java
-package com.example.webproject.service.impl;
+package com.example.webproject.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.appproject.service.SampleAppService;
-import com.example.webproject.service.SampleWebService;
+import com.example.appproject.controller.SampleAppController;
+import com.example.webproject.controller.SampleWebController;
 
 /**
  * サンプルwebサービスの実装クラスです。
  *
  */
-@Service
-public class SampleWebServiceImpl implements SampleWebService {
+@RestController
+public class SampleWebControllerImpl implements SampleWebController {
 
-    // app serviceをBean宣言
+    // app controllerをBean宣言
     @Autowired
-    private SampleAppService sampleAppService;
+    private SampleAppController sampleAppController;
 
     /**
      * {@inheritDoc}
@@ -232,8 +232,8 @@ public class SampleWebServiceImpl implements SampleWebService {
     @Override
     public String greeting() {
 
-        // app service呼び出し
-        return sampleAppService.greeting();
+        // app controller呼び出し
+        return sampleAppController.greeting();
     }
 }
 ```
