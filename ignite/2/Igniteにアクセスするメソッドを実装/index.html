@@ -11004,7 +11004,7 @@
 <ul>
 <li>下記SQLでIgnite上にテーブルを作成します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">Users</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span>
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">varchar</span>
@@ -11126,7 +11126,7 @@ spring.datasource.driver-class-name<span class="o">=</span>org.apache.ignite.Ign
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SqlTable</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="kd">protected</span><span class="w"> </span><span class="nf">Users</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;Users&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Ignite上のテーブル名</span>
+<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;users&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Ignite上のテーブル名</span>
 <span class="w">        </span><span class="p">}</span>
 
 <span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlColumn</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">column</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">JDBCType</span><span class="p">.</span><span class="na">BIGINT</span><span class="p">);</span>
