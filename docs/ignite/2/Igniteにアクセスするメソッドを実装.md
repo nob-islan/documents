@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS users (
 接続先のURLおよびドライバを指定します。
 
 ```shell
-spring.datasource.url=jdbc:ignite:thin://192.168.151.10
+spring.datasource.url=jdbc:ignite:thin://localhost
 spring.datasource.driver-class-name=org.apache.ignite.IgniteJdbcThinDriver
 ```
 
