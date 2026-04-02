@@ -11324,12 +11324,6 @@ spring.datasource.password<span class="o">=</span>password
 <p>バッチ処理の入力値となる<code>sign_up</code>テーブルに対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.GeneratedValue</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.GenerationType</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Id</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
@@ -11340,8 +11334,6 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sign_up&quot;</span><span class="p">)</span>
-<span class="nd">@Entity</span>
 <span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@NoArgsConstructor</span>
@@ -11349,21 +11341,15 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SignUp</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** 管理ID */</span>
-<span class="w">    </span><span class="nd">@Id</span>
-<span class="w">    </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">columnDefinition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PRIMARY KEY&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** 姓 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;last_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** 名 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;first_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** 年齢 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -11371,12 +11357,6 @@ spring.datasource.password<span class="o">=</span>password
 <p>バッチ処理の出力となる<code>customer</code>テーブルに対応するエンティティを定義します。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.GeneratedValue</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.GenerationType</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Id</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NoArgsConstructor</span><span class="p">;</span>
@@ -11387,8 +11367,6 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;customer&quot;</span><span class="p">)</span>
-<span class="nd">@Entity</span>
 <span class="nd">@Getter</span>
 <span class="nd">@Setter</span>
 <span class="nd">@NoArgsConstructor</span>
@@ -11396,17 +11374,12 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Customer</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** 管理ID */</span>
-<span class="w">    </span><span class="nd">@Id</span>
-<span class="w">    </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">columnDefinition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PRIMARY KEY&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** フルネーム */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;full_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">fullName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="cm">/** 年齢 */</span>
-<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
