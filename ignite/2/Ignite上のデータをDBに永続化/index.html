@@ -5038,6 +5038,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pomxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pom.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#configmariadbconfigjava" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10775,6 +10786,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pomxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pom.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#configmariadbconfigjava" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10855,6 +10877,14 @@
 <span class="p">}</span>
 </code></pre></div>
 <h2 id="_2">実装</h2>
+<h3 id="pomxml"><code>pom.xml</code></h3>
+<p>MariaDBの依存関係を追加します:</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.mariadb.jdbc<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>mariadb-java-client<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
 <h3 id="configmariadbconfigjava"><code>config/MariaDbConfig.java</code></h3>
 <p>データベースへの接続情報を記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.config</span><span class="p">;</span>
