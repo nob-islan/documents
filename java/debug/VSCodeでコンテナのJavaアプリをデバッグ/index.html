@@ -10736,7 +10736,7 @@
 <ul>
 <li><code>Dockerfile</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">eclipse-temurin:21</span>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">eclipse-temurin:25</span>
 
 <span class="c"># jarの配置などアプリ起動に必要なあれこれ</span>
 
@@ -10746,8 +10746,7 @@
 <ul>
 <li><code>docker-compose.yaml</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.7&quot;</span>
-<span class="nt">services</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">java</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug-test</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-java-app</span>
