@@ -44,6 +44,18 @@ public class Users {
 
 ## 実装
 
+### `pom.xml`
+
+MariaDBの依存関係を追加します:
+
+```xml
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+```
+
 ### `config/MariaDbConfig.java`
 
 データベースへの接続情報を記載します:
