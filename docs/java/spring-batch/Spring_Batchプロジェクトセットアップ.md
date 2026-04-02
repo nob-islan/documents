@@ -231,12 +231,6 @@ public class BatchConfig {
 ```java
 package nob.example.easybatch.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -247,8 +241,6 @@ import lombok.Setter;
  *
  * @author nob
  */
-@Table(name = "sign_up")
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -256,21 +248,15 @@ import lombok.Setter;
 public class SignUp {
 
     /** 管理ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "PRIMARY KEY", length = 11, nullable = false)
     private Integer id;
 
     /** 姓 */
-    @Column(name = "last_name", length = 24, nullable = false)
     private String lastName;
 
     /** 名 */
-    @Column(name = "first_name", length = 24, nullable = false)
     private String firstName;
 
     /** 年齢 */
-    @Column(name = "age", length = 11, nullable = false)
     private Integer age;
 }
 ```
@@ -282,12 +268,6 @@ public class SignUp {
 ```java
 package nob.example.easybatch.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -298,8 +278,6 @@ import lombok.Setter;
  *
  * @author nob
  */
-@Table(name = "customer")
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -307,17 +285,12 @@ import lombok.Setter;
 public class Customer {
 
     /** 管理ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "PRIMARY KEY", length = 11, nullable = false)
     private Integer id;
 
     /** フルネーム */
-    @Column(name = "full_name", length = 48, nullable = false)
     private String fullName;
 
     /** 年齢 */
-    @Column(name = "age", length = 11, nullable = false)
     private Integer age;
 }
 ```
