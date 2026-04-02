@@ -28,7 +28,7 @@ kind create cluster --name josdk-cluster --config kind/cluster/josdk-cluster.yam
 ```shell
 mvn archetype:generate \
     -DarchetypeArtifactId=maven-archetype-quickstart \
-    -DjavaCompilerVersion=21 \
+    -DjavaCompilerVersion=25 \
     -DarchetypeVersion=1.5 \
     -DinteractiveMode=false \
     -DgroupId=nob.example \
@@ -49,7 +49,7 @@ mvn archetype:generate \
 
     <name>nob-controller</name>
     <properties>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${maven.compiler.release}</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.release}</maven.compiler.target>
