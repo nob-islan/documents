@@ -7,7 +7,7 @@
 - `Dockerfile`
 
 ```Dockerfile
-FROM eclipse-temurin:21
+FROM eclipse-temurin:25
 
 # jarの配置などアプリ起動に必要なあれこれ
 
@@ -19,7 +19,6 @@ CMD java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8484
 - `docker-compose.yaml`
 
 ```yaml
-version: "3.7"
 services:
   java:
     container_name: debug-test

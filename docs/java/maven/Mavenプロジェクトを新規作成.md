@@ -7,7 +7,7 @@ cf. https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 ```shell
 mvn archetype:generate \
     -DarchetypeArtifactId=maven-archetype-quickstart \
-    -DjavaCompilerVersion=21 \
+    -DjavaCompilerVersion=25 \
     -DarchetypeVersion=1.5 \
     -DinteractiveMode=false \
     -DgroupId=nob.example \

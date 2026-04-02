@@ -10,7 +10,7 @@ cf. https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line
 
 ```shell
 curl https://start.spring.io/starter.zip \
-  -d javaVersion=21 \
+  -d javaVersion=25 \
   -d dependencies=web,lombok,data-jpa,mariadb \
   -d type=maven-project \
   -d language=java \

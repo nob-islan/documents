@@ -7,7 +7,7 @@ GitLab Runnerを使ってSpring Bootアプリケーションのコンテナイ�
 ### `Dockerfile`
 
 ```Dockerfile
-FROM eclipse-temurin:21
+FROM eclipse-temurin:25
 
 # 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
@@ -97,7 +97,7 @@ variables:
   ARTIFACT_PATH: target/${ARTIFACT_NAME} # ビルド成果物のパス
 test:
   stage: test
-  image: eclipse-temurin:21
+  image: eclipse-temurin:25
   script:
     - ./mvnw verify -Dtest="${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test" # controller, service, repositoryのみテスト
     - ./mvnw test jacoco:report
@@ -113,7 +113,7 @@ test:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
-  image: eclipse-temurin:21
+  image: eclipse-temurin:25
   script:
     - ./mvnw package
   artifacts:

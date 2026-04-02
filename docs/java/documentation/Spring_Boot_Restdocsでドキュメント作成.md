@@ -177,8 +177,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.MeRequest;
 import nob.example.easyapp.service.AuthService;
@@ -186,13 +184,14 @@ import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
 import nob.example.easyapp.service.model.MeInModel;
 import nob.example.easyapp.service.model.MeOutModel;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * AuthControllerImplのテストクラスです。
  *
  * @author nob
  */
-@WebMvcTest
+@WebMvcTest(AuthControllerImpl.class)
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class AuthControllerImplTest {
 
