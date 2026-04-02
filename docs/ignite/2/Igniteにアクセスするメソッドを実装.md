@@ -11,7 +11,7 @@ cf.
 - 下記SQLでIgnite上にテーブルを作成します:
 
 ```sql
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS users (
     id bigint PRIMARY KEY
     , name varchar
     , password varchar
@@ -150,7 +150,7 @@ public class UsersDynamicSqlSupport {
     public static final class Users extends SqlTable {
 
         protected Users() {
-            super("Users"); // Ignite上のテーブル名
+            super("users"); // Ignite上のテーブル名
         }
 
         public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
