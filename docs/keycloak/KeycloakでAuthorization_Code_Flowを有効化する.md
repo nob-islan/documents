@@ -63,6 +63,11 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
+/**
+ * 認証向けのコンフィグクラスです。
+ * 
+ * @author nob
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -220,7 +225,7 @@ public class MePage {
 
 ```html
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>easyapp</title>
   </head>
@@ -248,7 +253,7 @@ const handleOnclickMeButton = () => {
 
 ```html
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>easyapp</title>
   </head>
