@@ -259,7 +259,8 @@ const handleOnclickMeButton = () => {
   </head>
   <body>
     <div id="me">
-      <!-- ユーザ情報 -->
+      <div id="name"><!-- ユーザ名 --></div>
+      <div id="age"><!-- 年齢 --></div>
     </div>
     <button onclick="handleOnclickLogoutButton()">ログアウト</button>
   </body>
@@ -286,13 +287,10 @@ fetch("/api/v1/me", {
     return res.json();
   })
   .then((data) => {
-    const me = document.getElementById("me");
-    const name = document.createElement("div");
+    const name = document.getElementById("name");
     name.textContent = data.name;
-    me.appendChild(name);
-    const age = document.createElement("div");
+    const age = document.getElementById("age");
     age.textContent = data.age;
-    me.appendChild(age);
   })
   .catch((error) => {
     console.log(error);
