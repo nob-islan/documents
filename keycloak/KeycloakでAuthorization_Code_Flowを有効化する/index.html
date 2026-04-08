@@ -11191,6 +11191,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.authentication.logout.LogoutSuccessHandler</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.util.matcher.RegexRequestMatcher</span><span class="p">;</span>
 
+<span class="cm">/**</span>
+<span class="cm"> * 認証向けのコンフィグクラスです。</span>
+<span class="cm"> * </span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
 <span class="nd">@Configuration</span>
 <span class="nd">@EnableWebSecurity</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
@@ -11333,7 +11338,7 @@
 </code></pre></div>
 <h4 id="templatestophtml"><code>templates/top.html</code></h4>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>easyapp<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -11355,7 +11360,7 @@
 </code></pre></div>
 <h4 id="templatesmehtml"><code>templates/me.html</code></h4>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>easyapp<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
