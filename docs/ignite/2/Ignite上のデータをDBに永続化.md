@@ -65,7 +65,7 @@ public class Users {
 
 #### 依存モジュールの準備
 
-先に作成したエンティティ提供モジュールおよび[mysql-connector-j](https://dev.mysql.com/downloads/connector/j/)について、`libs/nob/`配下に配置し、下記環境変数でこれらのモジュールをIgniteが認識できるようにします:
+先に作成したエンティティ提供モジュールおよび[mysql-connector-j](https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/)について、`libs/nob/`配下に配置し、下記環境変数でこれらのモジュールをIgniteが認識できるようにします:
 
 ```shell
 export USER_LIBS=${IGNITE_HOME}/libs/nob
