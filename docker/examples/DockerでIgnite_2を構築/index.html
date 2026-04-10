@@ -10793,7 +10793,14 @@
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apacheignite/ignite:2.17.0</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10800:10800</span>
+<span class="w">    </span><span class="c1"># volumes:</span>
+<span class="w">    </span><span class="c1">#   - ./volumes/libs:/opt/ignite/apache-ignite/libs/nob</span>
+<span class="w">    </span><span class="c1">#   - ./volumes/config:/opt/ignite/apache-ignite/config/nob</span>
+<span class="w">    </span><span class="c1"># environment:</span>
+<span class="w">    </span><span class="c1">#   - USER_LIBS=/opt/ignite/apache-ignite/libs/nob</span>
+<span class="w">    </span><span class="c1">#   - CONFIG_URI=/opt/ignite/apache-ignite/config/nob/nob-config.xml</span>
 </code></pre></div>
+<p>libs配下に配置するモジュールはJava11でないと動かないので注意してください。</p>
 
 
 
