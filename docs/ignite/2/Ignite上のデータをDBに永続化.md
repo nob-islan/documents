@@ -1,31 +1,48 @@
 # Ignite上のデータをDBに永続化
 
+Ignite上にキャッシュされたデータをDB上に永続化するための設定です。
+
 cf. https://ignite.apache.org/docs/ignite2/latest/persistence/external-storage
 
-## 前提
+## 事前準備
 
-下記SQLおよびエンティティによってキャッシュ上にテーブルが定義されているとします:
+下記SQLによって構築されるデータベースに向けてデータを永続化することを想定します:
 
 ```sql
+CREATE DATABASE eadb;
+USE eadb;
+
 CREATE TABLE IF NOT EXISTS users (
     id bigint PRIMARY KEY
-    , name varchar
-    , password varchar
+    , name varchar(8)
+    , password varchar(32)
     , age int
 );
 ```
 
-```java
-package nob.example.easyapp.domain.entity;
+## 設定
 
-import lombok.Value;
+### エンティティ提供モジュール
+
+エンティティを提供するモジュールはIgniteおよび業務アプリケーションの両方から参照されるため、独立したモジュールとして用意します。下記要領でエンティティクラスを実装します:
+
+```java
+package nob.example.domain.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * usersテーブルのエンティティクラスです。
+ * usersテーブル向けのエンティティクラスです。
  *
  * @author nob
  */
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 
     /** 管理ID */
@@ -42,116 +59,197 @@ public class Users {
 }
 ```
 
-## 実装
+実装後、`mvn clean install`コマンドでjarファイルを用意してください。
 
-### `pom.xml`
+### Ignite
 
-MariaDBの依存関係を追加します:
+#### 依存モジュールの準備
+
+先に作成したエンティティ提供モジュールおよび[mysql-connector-j](https://dev.mysql.com/downloads/connector/j/)について、`libs/nob/`配下に配置し、下記環境変数でこれらのモジュールをIgniteが認識できるようにします:
+
+```shell
+export USER_LIBS=${IGNITE_HOME}/libs/nob
+```
+
+#### 設定ファイル作成
+
+キャッシュの永続化について記載した下記設定ファイルについて、`config/nob-config.xml`として配置します:
 
 ```xml
-		<dependency>
-			<groupId>org.mariadb.jdbc</groupId>
-			<artifactId>mariadb-java-client</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans              http://www.springframework.org/schema/beans/spring-beans.xsd              http://www.springframework.org/schema/util              http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- データベース接続先設定 -->
+    <bean class="com.mysql.cj.jdbc.MysqlDataSource" id="mysqlDataSource">
+        <property name="URL" value="jdbc:mysql://localhost:3306/eadb"/>
+        <property name="user" value="root"/>
+        <property name="password" value="password"/>
+    </bean>
+    <bean class="org.apache.ignite.configuration.IgniteConfiguration">
+        <property name="cacheConfiguration">
+            <list>
+                <bean class="org.apache.ignite.configuration.CacheConfiguration">
+                    <property name="name" value="UsersCache"/>
+                    <property name="cacheMode" value="PARTITIONED"/>
+                    <property name="atomicityMode" value="ATOMIC"/>
+                    <property name="cacheStoreFactory">
+                        <bean class="org.apache.ignite.cache.store.jdbc.CacheJdbcPojoStoreFactory">
+                            <property name="dataSourceBean" value="mysqlDataSource"/>
+                            <property name="dialect">
+                                <bean class="org.apache.ignite.cache.store.jdbc.dialect.MySQLDialect"/>
+                            </property>
+                            <property name="types">
+                                <list>
+                                    <!-- usersテーブル向けキャッシュ設定 -->
+                                    <bean class="org.apache.ignite.cache.store.jdbc.JdbcType">
+                                        <property name="cacheName" value="UsersCache"/>
+                                        <property name="keyType" value="java.lang.Long"/>
+                                        <property name="valueType" value="nob.example.domain.entity.Users"/>
+                                        <property name="databaseTable" value="users"/>
+                                        <property name="keyFields">
+                                            <list>
+                                                <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                    <constructor-arg>
+                                                        <util:constant static-field="java.sql.Types.BIGINT"/>
+                                                    </constructor-arg>
+                                                    <constructor-arg value="id"/>
+                                                    <constructor-arg value="java.lang.Long"/>
+                                                    <constructor-arg value="id"/>
+                                                </bean>
+                                            </list>
+                                        </property>
+                                        <property name="valueFields">
+                                            <list>
+                                                <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                    <constructor-arg>
+                                                        <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                    </constructor-arg>
+                                                    <constructor-arg value="name"/>
+                                                    <constructor-arg value="java.lang.String"/>
+                                                    <constructor-arg value="name"/>
+                                                </bean>
+                                                <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                    <constructor-arg>
+                                                        <util:constant static-field="java.sql.Types.VARCHAR"/>
+                                                    </constructor-arg>
+                                                    <constructor-arg value="password"/>
+                                                    <constructor-arg value="java.lang.String"/>
+                                                    <constructor-arg value="password"/>
+                                                </bean>
+                                                <bean class="org.apache.ignite.cache.store.jdbc.JdbcTypeField">
+                                                    <constructor-arg>
+                                                        <util:constant static-field="java.sql.Types.INTEGER"/>
+                                                    </constructor-arg>
+                                                    <constructor-arg value="age"/>
+                                                    <constructor-arg value="java.lang.Integer"/>
+                                                    <constructor-arg value="age"/>
+                                                </bean>
+                                            </list>
+                                        </property>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="readThrough" value="true"/>
+                    <property name="writeThrough" value="true"/>
+                    <!-- Ignite上でSQLクエリを有効化する -->
+                    <property name="queryEntities">
+                        <list>
+                            <bean class="org.apache.ignite.cache.QueryEntity">
+                                <property name="keyType" value="java.lang.Long"/>
+                                <property name="valueType" value="nob.example.domain.entity.Users"/>
+                                <property name="keyFieldName" value="id"/>
+                                <property name="keyFields">
+                                    <list>
+                                        <value>id</value>
+                                    </list>
+                                </property>
+                                <property name="fields">
+                                    <map>
+                                        <entry key="id" value="java.lang.Long"/>
+                                        <entry key="name" value="java.lang.String"/>
+                                        <entry key="password" value="java.lang.String"/>
+                                        <entry key="age" value="java.lang.Integer"/>
+                                    </map>
+                                </property>
+                            </bean>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>
 ```
 
-### `config/MariaDbConfig.java`
+#### 起動
 
-データベースへの接続情報を記載します:
+下記コマンドでIgniteを起動します:
+
+```shell
+./bin/ignite.sh config/nob-config.xml
+```
+
+### 業務アプリケーションモジュール
+
+#### 依存関係追加
+
+下記を`pom.xml`に追加します:
+
+```xml
+        <!-- Source: https://mvnrepository.com/artifact/org.apache.ignite/ignite-core -->
+        <dependency>
+            <groupId>org.apache.ignite</groupId>
+            <artifactId>ignite-core</artifactId>
+            <version>2.17.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>nob.example</groupId>
+            <artifactId>sharedapp</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+```
+
+#### データ登録処理実装
 
 ```java
-package nob.example.easyapp.config;
+package nob.example;
 
-import javax.sql.DataSource;
+import org.apache.ignite.Ignite;
+import org.apache.ignite.IgniteCache;
+import org.apache.ignite.Ignition;
+import org.apache.ignite.configuration.IgniteConfiguration;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import nob.example.domain.entity.Users;
 
-/**
- * MariaDB関連のコンフィグクラスです。
- *
- * @author nob
- */
-@Configuration
-public class MariaDbConfig {
+public class App {
+    public static void main(String[] args) {
 
-    @Bean
-    DataSource mariaDbDataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.mariadb.jdbc.Driver");
-        ds.setUrl("jdbc:mariadb://localhost:3306/eadb");
-        ds.setUsername("root");
-        ds.setPassword("password");
-        return ds;
+        IgniteConfiguration cfg = new IgniteConfiguration();
+        cfg.setClientMode(true);
+
+        try (Ignite ignite = Ignition.start(cfg)) {
+
+            IgniteCache<Long, Users> cache = ignite.cache("UsersCache");
+
+            Users users = new Users(1L, "nob", "passwd", 13);
+            cache.put(users.getId(), users);
+        }
     }
 }
 ```
 
-### `ignite/UsersCacheConfig.java`
+### 動作確認
 
-キャッシュの永続化に関する設定を定義します:
+```sql
+-- キャッシュ上のデータ確認
+SELECT * FROM "UsersCache"."USERS";
+```
 
-```java
-package nob.example.easyapp.ignite;
-
-import java.sql.Types;
-
-import javax.sql.DataSource;
-
-import org.apache.ignite.cache.store.jdbc.CacheJdbcPojoStoreFactory;
-import org.apache.ignite.cache.store.jdbc.JdbcType;
-import org.apache.ignite.cache.store.jdbc.JdbcTypeField;
-import org.apache.ignite.cache.store.jdbc.dialect.MySQLDialect;
-import org.apache.ignite.configuration.CacheConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-/**
- * usersテーブル向けのキャッシュコンフィグクラスです。
- *
- * @author nob
- */
-@Configuration
-public class UsersCacheConfig {
-
-    @Autowired
-    private DataSource mariaDbDataSource;
-
-    @Bean
-    CacheConfiguration<Long, Object> usersCache() {
-
-        CacheConfiguration<Long, Object> cfg = new CacheConfiguration<>("users");
-
-        CacheJdbcPojoStoreFactory<Long, Object> factory = new CacheJdbcPojoStoreFactory<>();
-        factory.setDataSourceFactory(() -> mariaDbDataSource);
-        factory.setDialect(new MySQLDialect());
-
-        JdbcType jdbcType = new JdbcType();
-        jdbcType.setKeyType(Long.class);
-        jdbcType.setValueType(Object.class);
-        jdbcType.setCacheName("users");
-        jdbcType.setDatabaseTable("users");
-        jdbcType.setKeyFields(new JdbcTypeField[] {
-                new JdbcTypeField(Types.BIGINT, "id", Long.class, "id")
-        });
-        jdbcType.setValueFields(new JdbcTypeField[] {
-                new JdbcTypeField(Types.VARCHAR, "name", String.class, "name"),
-                new JdbcTypeField(Types.VARCHAR, "password", String.class, "password"),
-                new JdbcTypeField(Types.INTEGER, "age", Integer.class, "age")
-        });
-
-        factory.setTypes(jdbcType);
-
-        cfg.setCacheStoreFactory(factory);
-        cfg.setReadThrough(true);
-        cfg.setWriteThrough(true);
-        cfg.setWriteBehindEnabled(true);
-        cfg.setWriteBehindFlushFrequency(3000);
-
-        return cfg;
-    }
-}
+```sql
+-- DB上のデータ確認
+SELECT * FROM users;
 ```
