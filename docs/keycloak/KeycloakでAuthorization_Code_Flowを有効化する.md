@@ -65,7 +65,7 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 /**
  * 認証向けのコンフィグクラスです。
- * 
+ *
  * @author nob
  */
 @Configuration
@@ -183,10 +183,10 @@ public record MeResponse(String name, Integer age) {
 }
 ```
 
-#### `page/MePage.java`
+#### `web/MePage.java`
 
 ```java
-package nob.example.easyapp.page;
+package nob.example.easyapp.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
