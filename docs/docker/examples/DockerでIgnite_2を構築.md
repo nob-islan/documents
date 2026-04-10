@@ -17,4 +17,4 @@ services:
     #   - CONFIG_URI=/opt/ignite/apache-ignite/config/nob/nob-config.xml
 ```
 
-libs配下に配置するモジュールはJava11でないと動かないので注意してください。
+`libs`配下に配置するモジュールはJava11でないと動かないので注意してください。
