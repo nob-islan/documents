@@ -81,7 +81,7 @@ export USER_LIBS=${IGNITE_HOME}/libs/nob
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans              http://www.springframework.org/schema/beans/spring-beans.xsd              http://www.springframework.org/schema/util              http://www.springframework.org/schema/util/spring-util.xsd">
     <!-- データベース接続先設定 -->
     <bean class="com.mysql.cj.jdbc.MysqlDataSource" id="mysqlDataSource">
-        <property name="URL" value="jdbc:mysql://localhost:3306/eadb"/>
+        <property name="URL" value="jdbc:mysql://eadb:3306/eadb"/>
         <property name="user" value="root"/>
         <property name="password" value="password"/>
     </bean>
@@ -151,8 +151,11 @@ export USER_LIBS=${IGNITE_HOME}/libs/nob
                             </property>
                         </bean>
                     </property>
+                    <!-- see; https://www.javadoc.io/doc/org.apache.ignite/ignite-core/2.17.0/org/apache/ignite/configuration/CacheConfiguration.html -->
                     <property name="readThrough" value="true"/>
                     <property name="writeThrough" value="true"/>
+                    <property name="writeBehindEnabled" value="true"/>
+                    <property name="writeBehindFlushFrequency" value="5000"/>
                     <!-- Ignite上でSQLクエリを有効化する -->
                     <property name="queryEntities">
                         <list>
