@@ -6148,6 +6148,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#templatesmessagehtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        templates/message.html
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11076,6 +11087,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#templatesmessagehtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        templates/message.html
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -11161,6 +11183,7 @@
 <h4 id="pomxml"><code>pom.xml</code></h4>
 <p><code>&lt;build&gt;</code>内をコメントアウトします。</p>
 <h4 id="controllerusercontrollerjava"><code>controller/UserController.java</code></h4>
+<p>固定メッセージを返すAPIを実装します:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
@@ -11213,6 +11236,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="webuserpagejava"><code>web/UserPage.java</code></h4>
+<p>easyappのAPIを呼び出し、htmlコンテンツを返すクラスです。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyweb.web</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Controller</span><span class="p">;</span>
@@ -11250,9 +11274,22 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h4 id="templatesmessagehtml"><code>templates/message.html</code></h4>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns:th</span><span class="o">=</span><span class="s">&quot;http://www.thymeleaf.org&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Easy project<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${message}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
 <h3 id="easyproject">easyproject</h3>
 <p>app, webを統括します。mvn関連のファイルを下記コマンドでプロジェクトのルートディレクトリ直下にコピーしてください:</p>
-<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>mvnw*<span class="w"> </span>.mvn<span class="w"> </span>..
+<div class="highlight"><pre><span></span><code>mv<span class="w"> </span>mvnw*<span class="w"> </span>.mvn<span class="w"> </span>..
 </code></pre></div>
 <h4 id="pomxml_2"><code>pom.xml</code></h4>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
@@ -11272,9 +11309,8 @@
 <span class="nt">&lt;/project&gt;</span>
 </code></pre></div>
 <h2 id="_3">起動</h2>
-<p>プロジェクトのルートディレクトリで下記を実行することでアプリが起動します:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># appを参照するeasywebを起動</span>
-./mvnw<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./mvnw<span class="w"> </span>spring-boot:run<span class="w"> </span>-pl<span class="w"> </span>easyweb
+<p>プロジェクトのルートディレクトリで下記を実行することでアプリが起動します。easyappを参照するeasywebを起動します:</p>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./mvnw<span class="w"> </span>spring-boot:run<span class="w"> </span>-pl<span class="w"> </span>easyweb
 </code></pre></div>
 
 
