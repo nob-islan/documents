@@ -50,7 +50,7 @@
 
 <div class="grid cards" markdown>
 
-- **[Spring Bootプロジェクトセットアップ](./java/getting-started/Spring_Bootプロジェクトセットアップ.md)**
+- **[Spring Bootプロジェクトセットアップ](./java/spring-boot/Spring_Bootプロジェクトセットアップ.md)**
   <br> Spring BootでREST APIを実装するサンプルです。
 
 </div>
