@@ -29,6 +29,8 @@ web側から呼ばれるAPIを実装します。
 
 #### `controller/UserController.java`
 
+固定メッセージを返すAPIを実装します:
+
 ```java
 package nob.example.easyapp.controller;
 
@@ -94,6 +96,8 @@ public class EasywebApplication {
 
 #### `web/UserPage.java`
 
+easyappのAPIを呼び出し、htmlコンテンツを返すクラスです。
+
 ```java
 package nob.example.easyweb.web;
 
@@ -133,12 +137,28 @@ public class UserPage {
 }
 ```
 
+#### `templates/message.html`
+
+```html
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Easy project</title>
+  </head>
+
+  <body>
+    <div th:text="${message}"></div>
+  </body>
+</html>
+```
+
 ### easyproject
 
 app, webを統括します。mvn関連のファイルを下記コマンドでプロジェクトのルートディレクトリ直下にコピーしてください:
 
 ```shell
-cp mvnw* .mvn ..
+mv mvnw* .mvn ..
 ```
 
 #### `pom.xml`
@@ -163,9 +183,8 @@ cp mvnw* .mvn ..
 
 ## 起動
 
-プロジェクトのルートディレクトリで下記を実行することでアプリが起動します:
+プロジェクトのルートディレクトリで下記を実行することでアプリが起動します。easyappを参照するeasywebを起動します:
 
 ```shell
-# appを参照するeasywebを起動
 ./mvnw install && ./mvnw spring-boot:run -pl easyweb
 ```
