@@ -163,6 +163,8 @@ cp mvnw* .mvn ..
 
 ## 起動
 
+プロジェクトのルートディレクトリで下記を実行することでアプリが起動します:
+
 ```shell
 # appを参照するeasywebを起動
 ./mvnw install && ./mvnw spring-boot:run -pl easyweb
