@@ -13,6 +13,8 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 ├── cmd
 │   └── main.go
 └── internal
+    ├── app
+    │   └── server.go
     └── handler
         ├── user_handler.go
         ├── user_handler_test.go
@@ -188,15 +190,6 @@ type Router interface {
 }
 
 const basePath string = "/api/v1"
-
-func Routing() *echo.Echo {
-
-	e := echo.New()
-
-	NewUserRouter().SetRouting(e)
-
-	return e
-}
 ```
 
 - `user_router.go`
@@ -206,23 +199,47 @@ package router
 
 import (
 	"easyapp/internal/handler"
+
+	"github.com/labstack/echo/v5"
+)
+
+type userRouter struct {
+	userHandler handler.UserHandler
+}
+
+func NewUserRouter(userHandler handler.UserHandler) Router {
+	return &userRouter{userHandler: userHandler}
+}
+
+func (r *userRouter) SetRouting(e *echo.Echo) {
+
+	e.POST(basePath+"/login", r.userHandler.Login)
+	e.GET(basePath+"/me", r.userHandler.Me)
+}
+```
+
+#### `internal/app/`
+
+- `server.go`
+
+```go
+package app
+
+import (
+	"easyapp/internal/handler"
+	"easyapp/internal/handler/router"
 	"easyapp/internal/usecase"
 
 	"github.com/labstack/echo/v5"
 )
 
-type userRouter struct{}
+func NewServer() *echo.Echo {
 
-func NewUserRouter() Router {
-	return &userRouter{}
-}
+	e := echo.New()
 
-func (r *userRouter) SetRouting(e *echo.Echo) {
+	router.NewUserRouter(handler.NewUserHandler(usecase.NewUserUsecase())).SetRouting(e)
 
-	h := handler.NewUserHandler(usecase.NewUserUsecase())
-
-	e.POST(basePath+"/login", h.Login)
-	e.GET(basePath+"/me", h.Me)
+	return e
 }
 ```
 
@@ -233,11 +250,13 @@ func (r *userRouter) SetRouting(e *echo.Echo) {
 ```go
 package main
 
-import "easyapp/internal/handler/router"
+import (
+	"easyapp/internal/app"
+)
 
 func main() {
 
-	e := router.Routing()
+	e := app.NewServer()
 	if err := e.Start(":8080"); err != nil {
 		e.Logger.Error("failed to start server", "error", err)
 	}
