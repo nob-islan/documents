@@ -4284,6 +4284,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/app
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalapperrors" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11052,6 +11063,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/app
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#internalapperrors" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11225,6 +11247,7 @@
 │<span class="w">   </span>└──<span class="w"> </span>templates<span class="w">        </span><span class="c1"># html</span>
 ├──<span class="w"> </span>cmd<span class="w">                  </span><span class="c1"># エントリポイント</span>
 ├──<span class="w"> </span>internal
+│<span class="w">   </span>├──<span class="w"> </span>app<span class="w">              </span><span class="c1"># 依存性の注入およびルーティング</span>
 │<span class="w">   </span>├──<span class="w"> </span>apperrors<span class="w">        </span><span class="c1"># 独自エラー定義およびそのハンドリング</span>
 │<span class="w">   </span>├──<span class="w"> </span>domain<span class="w">           </span><span class="c1"># ドメイン構造体</span>
 │<span class="w">   </span>├──<span class="w"> </span>handler<span class="w">          </span><span class="c1"># APIリクエストをハンドリング、業務処理呼び出し</span>
@@ -11246,6 +11269,8 @@
 <p>静的コンテンツを格納するパッケージです。本パッケージの直下に<code>assets.go</code>を設け、<code>go:embed</code>を使ってこれらの静的ファイルを呼び出します。</p>
 <h3 id="cmd"><code>cmd</code></h3>
 <p>アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に<code>main.go</code>のみが格納されます。</p>
+<h3 id="internalapp"><code>internal/app</code></h3>
+<p>依存性の注入およびルーティングの設定を行い、各APIの実装を行うパッケージです。</p>
 <h3 id="internalapperrors"><code>internal/apperrors</code></h3>
 <p>アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。</p>
 <h3 id="internaldomain"><code>internal/domain</code></h3>
