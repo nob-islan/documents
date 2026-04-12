@@ -68,7 +68,7 @@ INSERT INTO users (
 │   └── main.go                     # アプリのエントリポイント
 └── internal
     ├── app
-    │   └── server.go               # 依存性の注入およびルーティング決定
+    │   └── server.go               # 依存性の注入およびルーティング設定
     ├── domain
     │   └── user.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
