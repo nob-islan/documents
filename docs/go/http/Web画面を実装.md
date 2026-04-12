@@ -16,6 +16,8 @@
 │   └── main.go
 ├── go.mod
 └── internal
+    ├── app
+    │   └── server.go
     └── handler
         ├── user_handler.go
         └── router
@@ -243,21 +245,6 @@ type Router interface {
 
 // APIのベースURI
 const basePath string = "/api/v1"
-
-// ルーティングを設定します。
-func Routing() *http.ServeMux {
-
-	// 各handlerに紐づくルーティングを設定
-	m := http.NewServeMux()
-
-	// static配下をルーティング
-	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
-
-	// user
-	NewUserRouter().SetRouting(m)
-
-	return m
-}
 ```
 
 - `router/user_router.go`
@@ -270,26 +257,55 @@ import (
 	"net/http"
 )
 
-type userRouter struct{}
-
-func NewUserRouter() Router {
-	return &userRouter{}
+type userRouter struct {
+	userHandler handler.UserHandler
 }
 
-func (r *userRouter) SetRouting(m *http.ServeMux) {
+func NewUserRouter(userHandler handler.UserHandler) Router {
+	return &userRouter{userHandler: userHandler}
+}
 
-	h := handler.NewUserHandler()
+func (router *userRouter) SetRouting(m *http.ServeMux) {
 
 	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
-			h.Login(w, r)
+			router.userHandler.Login(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	})
-	m.HandleFunc("/login", h.InitView)
+	m.HandleFunc("/login", router.userHandler.InitView)
+}
+```
+
+#### `app/`
+
+- `server.go`
+
+```go
+package app
+
+import (
+	"easyapp/internal/handler"
+	"easyapp/internal/handler/router"
+	"net/http"
+)
+
+// 依存性の注入を行い、アプリケーションの構築を行います。
+func NewServer() http.Handler {
+
+	// 各handlerに紐づくルーティングを設定
+	m := http.NewServeMux()
+
+	// static配下をルーティング
+	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
+
+	// user
+	router.NewUserRouter(handler.NewUserHandler()).SetRouting(m)
+
+	return m
 }
 ```
 
@@ -301,7 +317,7 @@ func (r *userRouter) SetRouting(m *http.ServeMux) {
 package main
 
 import (
-	"easyapp/internal/handler/router"
+	"easyapp/internal/app"
 	"fmt"
 	"log"
 	"net/http"
@@ -310,7 +326,7 @@ import (
 func main() {
 
 	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", router.Routing()))
+	log.Fatal(http.ListenAndServe(":8080", app.NewServer()))
 }
 ```
 
@@ -334,7 +350,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- `router/base.go`について、埋め込んだstaticを使うよう宣言
+- `app/server.go`について、埋め込んだstaticを使うよう宣言
 
 ```go
 	staticFiles, err := fs.Sub(assets.Static, "static")
