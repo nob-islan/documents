@@ -4151,6 +4151,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11015,6 +11026,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#internalapp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        internal/app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11083,6 +11105,8 @@
 ├──<span class="w"> </span>cmd
 │<span class="w">   </span>└──<span class="w"> </span>main.go
 └──<span class="w"> </span>internal
+<span class="w">    </span>├──<span class="w"> </span>app
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>server.go
 <span class="w">    </span>└──<span class="w"> </span>handler
 <span class="w">        </span>├──<span class="w"> </span>user_handler.go
 <span class="w">        </span>├──<span class="w"> </span>user_handler_test.go
@@ -11248,15 +11272,6 @@
 <span class="p">}</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">basePath</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">Routing</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
-
-<span class="w">    </span><span class="nx">NewUserRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span>
-<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li><code>user_router.go</code></li>
@@ -11265,23 +11280,45 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{</span><span class="nx">userHandler</span><span class="p">:</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">Me</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="internalapp"><code>internal/app/</code></h4>
+<ul>
+<li><code>server.go</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">app</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase&quot;</span>
 
 <span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewServer</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="w"> </span><span class="p">{</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewUserUsecase</span><span class="p">())).</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">(</span><span class="nx">usecase</span><span class="p">.</span><span class="nx">NewUserUsecase</span><span class="p">())</span>
-
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Me</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="cmd"><code>cmd/</code></h4>
@@ -11290,11 +11327,13 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/app&quot;</span>
+<span class="p">)</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Routing</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">()</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;failed to start server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
