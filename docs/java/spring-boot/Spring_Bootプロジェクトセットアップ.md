@@ -167,6 +167,8 @@ public class Users {
 ```java
 package nob.example.easyapp.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -186,7 +188,7 @@ public interface UsersRepository extends JpaRepository<Users, String> {
      * @param name 検索キーのユーザ名
      * @return ユーザ情報
      */
-    Users findByName(String name);
+    Optional<Users> findByName(String name);
 }
 ```
 
@@ -237,6 +239,8 @@ public interface AuthService {
 ```java
 package nob.example.easyapp.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
@@ -266,14 +270,22 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public LoginOutModel login(LoginInModel inModel) {
 
-        return new LoginOutModel(usersRepository.findByName(inModel.name()).getPassword().equals(inModel.password()));
+        Optional<Users> optUsers = usersRepository.findByName(inModel.name());
+        if (optUsers.isEmpty()) {
+            return new LoginOutModel(false);
+        }
+
+        return new LoginOutModel(optUsers.get().getPassword().equals(inModel.password()));
     }
 
     @Override
     public MeOutModel me(MeInModel inModel) {
 
-        Users users = usersRepository.findByName(inModel.name());
-        return new MeOutModel(users.getName(), users.getAge());
+        Optional<Users> optUsers = usersRepository.findByName(inModel.name());
+        if (optUsers.isPresent()) {
+            return new MeOutModel(optUsers.get().getName(), optUsers.get().getAge());
+        }
+        return new MeOutModel("Unknown user", 0);
     }
 }
 ```
