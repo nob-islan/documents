@@ -10817,7 +10817,7 @@
 <li>下記の要領でルーティング設定を行います:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1">// 各エンドポイントのルーティング設定を行います。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Routing</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Routing</span><span class="p">()</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 各ハンドラに紐づくルーティングを設定</span>
 <span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewServeMux</span><span class="p">()</span>
