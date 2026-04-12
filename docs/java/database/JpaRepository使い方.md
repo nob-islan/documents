@@ -2,6 +2,8 @@
 
 `JpaRepository`を使うことで、インターフェースにメソッドを宣言するだけでSQLを実行する処理を実装できます。本ドキュメントで、JpaRepositoryの導入方法および実装例を解説します。
 
+cf. https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
 ## 実装例
 
 - `application.properties`に接続情報を記載します:
@@ -33,8 +35,6 @@ spring.datasource.password=password
             <artifactId>mariadb-java-client</artifactId>
         </dependency>
 ```
-
-see also; https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
 - 下記で構築されるテーブルを想定して実装を進めます:
 
