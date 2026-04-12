@@ -4446,6 +4446,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -10982,6 +10993,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11044,6 +11066,8 @@
 │<span class="w">   </span>└──<span class="w"> </span>main.go
 ├──<span class="w"> </span>go.mod
 └──<span class="w"> </span>internal
+<span class="w">    </span>├──<span class="w"> </span>app
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>server.go
 <span class="w">    </span>└──<span class="w"> </span>handler
 <span class="w">        </span>├──<span class="w"> </span>user_handler.go
 <span class="w">        </span>└──<span class="w"> </span>router
@@ -11261,21 +11285,6 @@
 
 <span class="c1">// APIのベースURI</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">basePath</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span>
-
-<span class="c1">// ルーティングを設定します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Routing</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// 各handlerに紐づくルーティングを設定</span>
-<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewServeMux</span><span class="p">()</span>
-
-<span class="w">    </span><span class="c1">// static配下をルーティング</span>
-<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Handle</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StripPrefix</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">FileServer</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">Dir</span><span class="p">(</span><span class="s">&quot;assets/static&quot;</span><span class="p">))))</span>
-
-<span class="w">    </span><span class="c1">// user</span>
-<span class="w">    </span><span class="nx">NewUserRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span>
-<span class="p">}</span>
 </code></pre></div>
 <ul>
 <li><code>router/user_router.go</code></li>
@@ -11287,26 +11296,53 @@
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
 
-<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{</span><span class="nx">userHandler</span><span class="p">:</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">()</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">router</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">ServeMux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// カスタムルータ</span>
 <span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Method</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">MethodPost</span><span class="p">:</span>
-<span class="w">            </span><span class="nx">h</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">router</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
 <span class="w">        </span><span class="k">default</span><span class="p">:</span>
 <span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Forbidden&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">)</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">})</span>
-<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">InitView</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">InitView</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="app"><code>app/</code></h4>
+<ul>
+<li><code>server.go</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">app</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// 依存性の注入を行い、アプリケーションの構築を行います。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewServer</span><span class="p">()</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// 各handlerに紐づくルーティングを設定</span>
+<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewServeMux</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c1">// static配下をルーティング</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Handle</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StripPrefix</span><span class="p">(</span><span class="s">&quot;/static/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">FileServer</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">Dir</span><span class="p">(</span><span class="s">&quot;assets/static&quot;</span><span class="p">))))</span>
+
+<span class="w">    </span><span class="c1">// user</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">()).</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="cmd"><code>cmd/</code></h4>
@@ -11316,7 +11352,7 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/app&quot;</span>
 <span class="w">    </span><span class="s">&quot;fmt&quot;</span>
 <span class="w">    </span><span class="s">&quot;log&quot;</span>
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
@@ -11325,7 +11361,7 @@
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Server started at http://localhost:8080&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Routing</span><span class="p">()))</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">()))</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>アプリ起動後、<a href="http://localhost:8080/login">http://localhost:8080/login</a> にアクセスするとログイン画面が表示されます。</p>
@@ -11345,7 +11381,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">Templates</span><span class="w"> </span><span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span><span class="w"> </span><span class="c1">// templates埋め込み宣言</span>
 </code></pre></div>
 <ul>
-<li><code>router/base.go</code>について、埋め込んだstaticを使うよう宣言</li>
+<li><code>app/server.go</code>について、埋め込んだstaticを使うよう宣言</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">staticFiles</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">Sub</span><span class="p">(</span><span class="nx">assets</span><span class="p">.</span><span class="nx">Static</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;static&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
