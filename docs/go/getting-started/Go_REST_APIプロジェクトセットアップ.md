@@ -575,11 +575,11 @@ import (
 )
 
 type userRouter struct {
-	handler handler.UserHandler
+	userHandler handler.UserHandler
 }
 
-func NewUserRouter(handler handler.UserHandler) Router {
-	return &userRouter{handler: handler}
+func NewUserRouter(userHandler handler.UserHandler) Router {
+	return &userRouter{userHandler: userHandler}
 }
 
 func (router *userRouter) SetRouting(m *http.ServeMux) {
@@ -587,7 +587,7 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
-			router.handler.Login(w, r)
+			router.userHandler.Login(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
@@ -596,7 +596,7 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 	m.HandleFunc(basePath+"/me", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			router.handler.Me(w, r)
+			router.userHandler.Me(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
