@@ -240,9 +240,6 @@ func (h *userHandler) Login(c *echo.Context) error {
 package router
 
 import (
-	"html/template"
-	"io"
-
 	"github.com/labstack/echo/v5"
 )
 
@@ -252,8 +249,52 @@ type Router interface {
 
 // APIのベースURI
 const basePath string = "/api/v1"
+```
 
-func Routing() *echo.Echo {
+- `router/user_router.go`
+
+```go
+package router
+
+import (
+	"easyapp/internal/handler"
+
+	"github.com/labstack/echo/v5"
+)
+
+type userRouter struct {
+	userHandler handler.UserHandler
+}
+
+func NewUserRouter(userHandler handler.UserHandler) Router {
+	return &userRouter{userHandler: userHandler}
+}
+
+func (r *userRouter) SetRouting(e *echo.Echo) {
+
+	e.GET("/login", r.userHandler.InitView)
+	e.POST(basePath+"/login", r.userHandler.Login)
+}
+```
+
+#### `app/`
+
+- `server.go`
+
+```go
+package app
+
+import (
+	"easyapp/internal/handler"
+	"easyapp/internal/handler/router"
+	"io"
+	"text/template"
+
+	"github.com/labstack/echo/v5"
+)
+
+// 依存性の注入を行い、アプリケーションの構築を行います。
+func NewServer() *echo.Echo {
 
 	e := echo.New()
 
@@ -262,7 +303,7 @@ func Routing() *echo.Echo {
 	}
 	e.Static("/static", "assets/static")
 
-	NewUserRouter().SetRouting(e)
+	router.NewUserRouter(handler.NewUserHandler()).SetRouting(e)
 
 	return e
 }
@@ -277,32 +318,6 @@ func (t *Template) Render(c *echo.Context, w io.Writer, name string, data any) e
 }
 ```
 
-- `router/user_router.go`
-
-```go
-package router
-
-import (
-	"easyapp/internal/handler"
-
-	"github.com/labstack/echo/v5"
-)
-
-type userRouter struct{}
-
-func NewUserRouter() Router {
-	return &userRouter{}
-}
-
-func (r *userRouter) SetRouting(e *echo.Echo) {
-
-	h := handler.NewUserHandler()
-
-	e.GET("/login", h.InitView)
-	e.POST(basePath+"/login", h.Login)
-}
-```
-
 #### `cmd/`
 
 - `main.go`
@@ -310,11 +325,13 @@ func (r *userRouter) SetRouting(e *echo.Echo) {
 ```go
 package main
 
-import "easyapp/internal/handler/router"
+import (
+	"easyapp/internal/app"
+)
 
 func main() {
 
-	e := router.Routing()
+	e := app.NewServer()
 	if err := e.Start(":8080"); err != nil {
 		e.Logger.Error("failed to start server", "error", err)
 	}
@@ -341,7 +358,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- router/base.goについて、埋め込んだstatic, templatesを使うよう宣言
+- `app/server.go`について、埋め込んだstatic, templatesを使うよう宣言
 
 ```go
 	e.Renderer = &Template{
