@@ -4179,6 +4179,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11004,6 +11015,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cmd" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11277,9 +11299,6 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;html/template&quot;</span>
-<span class="w">    </span><span class="s">&quot;io&quot;</span>
-
 <span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
 <span class="p">)</span>
 
@@ -11289,8 +11308,49 @@
 
 <span class="c1">// APIのベースURI</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">basePath</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;/api/v1&quot;</span>
+</code></pre></div>
+<ul>
+<li><code>router/user_router.go</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">Routing</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="w"> </span><span class="p">{</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">userHandler</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">UserHandler</span><span class="p">)</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{</span><span class="nx">userHandler</span><span class="p">:</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">InitView</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="app"><code>app/</code></h4>
+<ul>
+<li><code>server.go</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">app</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;text/template&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// 依存性の注入を行い、アプリケーションの構築を行います。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewServer</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">echo</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
@@ -11299,7 +11359,7 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Static</span><span class="p">(</span><span class="s">&quot;/static&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;assets/static&quot;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">NewUserRouter</span><span class="p">().</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NewUserRouter</span><span class="p">(</span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">()).</span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span>
 <span class="p">}</span>
@@ -11313,42 +11373,19 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">templates</span><span class="p">.</span><span class="nx">ExecuteTemplate</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<ul>
-<li><code>router/user_router.go</code></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">router</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/handler&quot;</span>
-
-<span class="w">    </span><span class="s">&quot;github.com/labstack/echo/v5&quot;</span>
-<span class="p">)</span>
-
-<span class="kd">type</span><span class="w"> </span><span class="nx">userRouter</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserRouter</span><span class="p">()</span><span class="w"> </span><span class="nx">Router</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userRouter</span><span class="p">{}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">userRouter</span><span class="p">)</span><span class="w"> </span><span class="nx">SetRouting</span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">echo</span><span class="p">.</span><span class="nx">Echo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">NewUserHandler</span><span class="p">()</span>
-
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">InitView</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="nx">basePath</span><span class="o">+</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
 <h4 id="cmd"><code>cmd/</code></h4>
 <ul>
 <li><code>main.go</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="s">&quot;easyapp/internal/handler/router&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/app&quot;</span>
+<span class="p">)</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Routing</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">()</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Start</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;failed to start server&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
@@ -11371,7 +11408,7 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">Templates</span><span class="w"> </span><span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span><span class="w"> </span><span class="c1">// templates埋め込み宣言</span>
 </code></pre></div>
 <ul>
-<li>router/base.goについて、埋め込んだstatic, templatesを使うよう宣言</li>
+<li><code>app/server.go</code>について、埋め込んだstatic, templatesを使うよう宣言</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Renderer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Template</span><span class="p">{</span>
 <span class="w">        </span><span class="nx">templates</span><span class="p">:</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">Must</span><span class="p">(</span><span class="nx">template</span><span class="p">.</span><span class="nx">ParseFS</span><span class="p">(</span><span class="nx">assets</span><span class="p">.</span><span class="nx">Templates</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates/*.html&quot;</span><span class="p">))}</span>
