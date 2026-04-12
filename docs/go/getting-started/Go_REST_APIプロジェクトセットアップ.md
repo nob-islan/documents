@@ -67,6 +67,8 @@ INSERT INTO users (
 ├── cmd
 │   └── main.go                     # アプリのエントリポイント
 └── internal
+    ├── app
+    │   └── server.go               # 依存性の注入およびルーティング決定
     ├── domain
     │   └── user.go                 # ドメイン定義およびrepositoryのインターフェース
     ├── handler
@@ -548,7 +550,6 @@ func NewMeRes(name string, age int) MeRes {
 package router
 
 import (
-	"easyapp/internal/infrastructure"
 	"net/http"
 )
 
@@ -561,21 +562,6 @@ type Router interface {
 
 // APIのベースURI
 const basePath string = "/api/v1"
-
-// ルーティングを設定します。
-func Routing() *http.ServeMux {
-
-	// データベースに接続
-	db := infrastructure.ConnectDB()
-
-	// 各handlerに紐づくルーティングを設定
-	m := http.NewServeMux()
-
-	// user
-	NewUserRouter(db).SetRouting(m)
-
-	return m
-}
 ```
 
 - `user_router.go`
@@ -584,39 +570,24 @@ func Routing() *http.ServeMux {
 package router
 
 import (
-	"database/sql"
 	"easyapp/internal/handler"
-	"easyapp/internal/infrastructure/persistence"
-	"easyapp/internal/infrastructure/repository"
-	"easyapp/internal/usecase"
 	"net/http"
 )
 
 type userRouter struct {
-	db *sql.DB
+	handler handler.UserHandler
 }
 
-func NewUserRouter(db *sql.DB) Router {
-	return &userRouter{db: db}
+func NewUserRouter(handler handler.UserHandler) Router {
+	return &userRouter{handler: handler}
 }
 
-func (r *userRouter) SetRouting(m *http.ServeMux) {
+func (router *userRouter) SetRouting(m *http.ServeMux) {
 
-	h := handler.NewUserHandler(
-		usecase.NewUserUsecase(
-			repository.NewUserRepository(
-				persistence.NewUsersSql(
-					r.db,
-				),
-			),
-		),
-	)
-
-	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
-			h.Login(w, r)
+			router.handler.Login(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
@@ -625,11 +596,54 @@ func (r *userRouter) SetRouting(m *http.ServeMux) {
 	m.HandleFunc(basePath+"/me", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			h.Me(w, r)
+			router.handler.Me(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	})
+}
+```
+
+#### `internal/app/`
+
+依存性の注入およびルーティングを行い、APIの実装を決定します。
+
+- `server.go`
+
+```go
+package app
+
+import (
+	"easyapp/internal/handler"
+	"easyapp/internal/handler/router"
+	"easyapp/internal/infrastructure"
+	"easyapp/internal/infrastructure/persistence"
+	"easyapp/internal/infrastructure/repository"
+	"easyapp/internal/usecase"
+	"net/http"
+)
+
+// 依存性の注入を行い、アプリケーションの構築を行います。
+func NewServer() http.Handler {
+
+	// データベースに接続
+	db := infrastructure.ConnectDB()
+
+	// 各handlerに紐づくルーティングを設定
+	m := http.NewServeMux()
+
+	// user
+	router.NewUserRouter(handler.NewUserHandler(
+		usecase.NewUserUsecase(
+			repository.NewUserRepository(
+				persistence.NewUsersSql(
+					db,
+				),
+			),
+		),
+	)).SetRouting(m)
+
+	return m
 }
 ```
 
@@ -643,7 +657,7 @@ func (r *userRouter) SetRouting(m *http.ServeMux) {
 package main
 
 import (
-	"easyapp/internal/handler/router"
+	"easyapp/internal/app"
 	"fmt"
 	"log"
 	"net/http"
@@ -652,7 +666,7 @@ import (
 func main() {
 
 	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", router.Routing()))
+	log.Fatal(http.ListenAndServe(":8080", app.NewServer()))
 }
 ```
 
