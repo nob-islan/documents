@@ -108,16 +108,22 @@ public class MyBatisConfig {
 - テーブル定義に対応するエンティティクラスを作成します:
 
 ```java
-package nob.example.easyapp.domain.entity;
+package nob.example.easyapp.infrastructure.persistence.table;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * usersテーブルのentityクラスです。
  *
  * @author nob
  */
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 
     /** ユーザID */
