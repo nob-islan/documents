@@ -113,7 +113,6 @@ package nob.example.easyapp.infrastructure.persistence.table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * usersテーブルのentityクラスです。
@@ -121,7 +120,6 @@ import lombok.Setter;
  * @author nob
  */
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
