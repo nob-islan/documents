@@ -3,7 +3,6 @@
 Reactなど、別オリジンからAPIを呼び出す際の設定例です。
 
 - 各エンドポイントに対し、下記関数を呼び出して
-
   1. CORS設定
   1. 本来のルーティング設定
 
@@ -31,7 +30,7 @@ func corsHandleFunc(
 
 ```go
 // 各エンドポイントのルーティング設定を行います。
-func Routing() *http.ServeMux {
+func Routing() http.Handler {
 
 	// 各ハンドラに紐づくルーティングを設定
 	m := http.NewServeMux()
