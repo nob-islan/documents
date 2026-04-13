@@ -4023,10 +4023,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#routerbasego" class="md-nav__link">
+  <a href="#appservergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        router/base.go
+        app/server.go
       
     </span>
   </a>
@@ -10942,10 +10942,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#routerbasego" class="md-nav__link">
+  <a href="#appservergo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        router/base.go
+        app/server.go
       
     </span>
   </a>
@@ -11053,12 +11053,17 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     log.Fatal(http.ListenAndServe(&quot;:8080&quot;, router.Routing()))
 <span class="w"> </span> }
 </code></pre></div>
-<h3 id="routerbasego"><code>router/base.go</code></h3>
+<h3 id="appservergo"><code>app/server.go</code></h3>
 <p>swaggerページへのルーティングを設定します。</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span> package router
+<div class="highlight"><pre><span></span><code><span class="w"> </span> package app
 
 <span class="w"> </span> import (
+<span class="w"> </span>     &quot;easyapp/internal/handler&quot;
+<span class="w"> </span>     &quot;easyapp/internal/handler/router&quot;
 <span class="w"> </span>     &quot;easyapp/internal/infrastructure&quot;
+<span class="w"> </span>     &quot;easyapp/internal/infrastructure/persistence&quot;
+<span class="w"> </span>     &quot;easyapp/internal/infrastructure/repository&quot;
+<span class="w"> </span>     &quot;easyapp/internal/usecase&quot;
 <span class="w"> </span>     &quot;net/http&quot;
 
 <span class="gi">+     _ &quot;easyapp/api&quot;</span>
@@ -11066,18 +11071,8 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+     httpSwagger &quot;github.com/swaggo/http-swagger&quot;</span>
 <span class="w"> </span> )
 
-<span class="w"> </span> // routerのインターフェースです。
-<span class="w"> </span> type Router interface {
-
-<span class="w"> </span>     // ルーティング情報をセットします。
-<span class="w"> </span>     SetRouting(m *http.ServeMux)
-<span class="w"> </span> }
-
-<span class="w"> </span> // APIのベースURI
-<span class="w"> </span> const basePath string = &quot;/api/v1&quot;
-
-<span class="w"> </span> // ルーティングを設定します。
-<span class="w"> </span> func Routing() *http.ServeMux {
+<span class="w"> </span> // 依存性の注入を行い、アプリケーションの構築を行います。
+<span class="w"> </span> func NewServer() http.Handler {
 
 <span class="w"> </span>     // データベースに接続
 <span class="w"> </span>     db := infrastructure.ConnectDB()
@@ -11089,7 +11084,15 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+     m.Handle(&quot;/swagger/&quot;, httpSwagger.WrapHandler)</span>
 
 <span class="w"> </span>     // user
-<span class="w"> </span>     NewUserRouter(db).SetRouting(m)
+<span class="w"> </span>     router.NewUserRouter(handler.NewUserHandler(
+<span class="w"> </span>         usecase.NewUserUsecase(
+<span class="w"> </span>             repository.NewUserRepository(
+<span class="w"> </span>                 persistence.NewUsersSql(
+<span class="w"> </span>                     db,
+<span class="w"> </span>                 ),
+<span class="w"> </span>             ),
+<span class="w"> </span>         ),
+<span class="w"> </span>     )).SetRouting(m)
 
 <span class="w"> </span>     return m
 <span class="w"> </span> }
