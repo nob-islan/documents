@@ -44,48 +44,51 @@ go get -u github.com/swaggo/http-swagger
   }
 ```
 
-### `router/base.go`
+### `app/server.go`
 
 swaggerページへのルーティングを設定します。
 
 ```diff
-  package router
-
+  package app
+  
   import (
-	  "easyapp/internal/infrastructure"
-	  "net/http"
+      "easyapp/internal/handler"
+      "easyapp/internal/handler/router"
+      "easyapp/internal/infrastructure"
+      "easyapp/internal/infrastructure/persistence"
+      "easyapp/internal/infrastructure/repository"
+      "easyapp/internal/usecase"
+      "net/http"
 
 +	  _ "easyapp/api"
 
 +	  httpSwagger "github.com/swaggo/http-swagger"
   )
-
-  // routerのインターフェースです。
-  type Router interface {
-
-	  // ルーティング情報をセットします。
-	  SetRouting(m *http.ServeMux)
-  }
-
-  // APIのベースURI
-  const basePath string = "/api/v1"
-
-  // ルーティングを設定します。
-  func Routing() *http.ServeMux {
-
-	  // データベースに接続
-	  db := infrastructure.ConnectDB()
-
-	  // 各handlerに紐づくルーティングを設定
-	  m := http.NewServeMux()
-
+  
+  // 依存性の注入を行い、アプリケーションの構築を行います。
+  func NewServer() http.Handler {
+  
+      // データベースに接続
+      db := infrastructure.ConnectDB()
+  
+      // 各handlerに紐づくルーティングを設定
+      m := http.NewServeMux()
+ 
 +	  // swagger UIのルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
-
-	  // user
-	  NewUserRouter(db).SetRouting(m)
-
-	  return m
+      
+      // user
+      router.NewUserRouter(handler.NewUserHandler(
+          usecase.NewUserUsecase(
+              repository.NewUserRepository(
+                  persistence.NewUsersSql(
+                      db,
+                  ),
+              ),
+          ),
+      )).SetRouting(m)
+  
+      return m
   }
 ```
 
