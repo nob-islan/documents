@@ -108,7 +108,7 @@ public class MyBatisConfig {
 - テーブル定義に対応するエンティティクラスを作成します:
 
 ```java
-package nob.example.easyapp.infrastructure.persistence.table;
+package nob.example.easyapp.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
