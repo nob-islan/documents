@@ -125,12 +125,7 @@ func connectDB() (*gorm.DB, error) {
 		dbName   string = "eadb"
 	)
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s", user, password, domain, dbName)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-
-	return db, err
+	return gorm.Open(mysql.Open(dsn), &gorm.Config{})
 }
 
 // usersテーブル向けのエンティティ構造体です。
