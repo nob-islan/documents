@@ -4803,7 +4803,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        レスポンスモデルを検証
+        レスポンスを検証
       
     </span>
   </a>
@@ -10986,7 +10986,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        レスポンスモデルを検証
+        レスポンスを検証
       
     </span>
   </a>
@@ -11034,13 +11034,17 @@
 
 <h1 id="k6">k6スクリプトサンプル</h1>
 <p>Grafana k6上で実行するスクリプトのサンプル集です。</p>
-<h2 id="_1">レスポンスモデルを検証</h2>
+<p>cf. <a href="https://grafana.com/docs/k6/latest/using-k6/">https://grafana.com/docs/k6/latest/using-k6/</a></p>
+<h2 id="_1">レスポンスを検証</h2>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;k6/http&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sleep</span><span class="p">,</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;k6&quot;</span><span class="p">;</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">vus</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;10s&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">thresholds</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">http_req_duration</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;avg&lt;100&quot;</span><span class="p">],</span><span class="w"> </span><span class="c1">// 平均処理時間[ms]を検証</span>
+<span class="w">  </span><span class="p">},</span>
 <span class="p">};</span>
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
