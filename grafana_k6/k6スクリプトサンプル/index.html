@@ -4819,6 +4819,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="指定の回数だけAPIを打鍵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仮想ユーザごとに異なるリクエストを送信
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -10991,6 +11008,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="指定の回数だけAPIを打鍵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        仮想ユーザごとに異なるリクエストを送信
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -11053,6 +11087,39 @@
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;http://host.docker.internal:8080/api/v1/me?name=nob&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="_2">仮想ユーザごとに異なるリクエストを送信</h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;k6/http&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sleep</span><span class="p">,</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;k6&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">vus</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">duration</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;5s&quot;</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// virtual userのIDととそれに紐づく業務アプリ上のユーザ情報のマップ</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">usersMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">([</span>
+<span class="w">    </span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;nob1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">13</span><span class="w"> </span><span class="p">}],</span>
+<span class="w">    </span><span class="p">[</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;nob2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">706</span><span class="w"> </span><span class="p">}],</span>
+<span class="w">  </span><span class="p">]);</span>
+
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span>
+<span class="w">    </span><span class="s2">&quot;http://host.docker.internal:8080/api/v1/me&quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="s2">&quot;?name=&quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="nx">usersMap</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">__VU</span><span class="p">).</span><span class="nx">name</span><span class="p">,</span>
+<span class="w">  </span><span class="p">);</span>
+
+<span class="w">  </span><span class="nx">check</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;status is 200&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">200</span><span class="w"> </span><span class="p">});</span>
+<span class="w">  </span><span class="nx">check</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;response name is correct&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">usersMap</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">__VU</span><span class="p">).</span><span class="nx">name</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;response age is correct&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">      </span><span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">().</span><span class="nx">age</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">usersMap</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">__VU</span><span class="p">).</span><span class="nx">age</span><span class="p">,</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="nx">sleep</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 
