@@ -10968,17 +10968,17 @@
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="w"> </span><span class="s">&quot;unchecked&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rawtypes&quot;</span><span class="w"> </span><span class="p">})</span>
 <span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">SampleException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="c1">// SampleExceptionが投げられた際に動く</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">SampleExceptionResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">handleSampleException</span><span class="p">(</span><span class="n">SampleException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">SampleExceptionResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">handleSampleException</span><span class="p">(</span><span class="n">SampleException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleExceptionResponseBody</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">()),</span><span class="w"> </span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">UNPROCESSABLE_CONTENT</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleExceptionResponse</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">()),</span><span class="w"> </span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">UNPROCESSABLE_CONTENT</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * サンプル例外発生時のレスポンスボディです。</span>
-<span class="cm">     * </span>
+<span class="cm">     *</span>
 <span class="cm">     * @param message エラーメッセージ</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">SampleExceptionResponseBody</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">SampleExceptionResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
