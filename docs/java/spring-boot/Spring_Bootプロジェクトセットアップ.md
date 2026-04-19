@@ -199,8 +199,6 @@ public interface UsersRepository extends JpaRepository<Users, String> {
 ```java
 package nob.example.easyapp.service;
 
-import org.springframework.stereotype.Service;
-
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
 import nob.example.easyapp.service.model.MeInModel;
@@ -211,7 +209,6 @@ import nob.example.easyapp.service.model.MeOutModel;
  *
  * @author nob
  */
-@Service
 public interface AuthService {
 
     /**
@@ -369,7 +366,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
@@ -381,7 +377,6 @@ import nob.example.easyapp.controller.model.MeResponse;
  *
  * @author nob
  */
-@RestController
 @RequestMapping(value = "/api/v1")
 public interface AuthController {
 

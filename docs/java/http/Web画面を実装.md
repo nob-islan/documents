@@ -208,7 +208,6 @@ package nob.example.easyweb.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import nob.example.easyweb.controller.model.LoginRequest;
 import nob.example.easyweb.controller.model.LoginResponse;
@@ -218,7 +217,6 @@ import nob.example.easyweb.controller.model.LoginResponse;
  *
  * @author nob
  */
-@RestController
 @RequestMapping(value = "/api/v1")
 public interface AuthController {
 
