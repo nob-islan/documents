@@ -23,7 +23,7 @@ cf. https://springdoc.org/
 
 下記設定を追記します:
 
-```properties
+```shell
 # swagger出力用ymlファイルのエンドポイント
 springdoc.api-docs.path=/api-docs
 # swaggerドキュメント閲覧用エンドポイント

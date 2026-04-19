@@ -173,6 +173,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import nob.example.easyapp.controller.impl.AuthControllerImpl;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.MeRequest;
 import nob.example.easyapp.service.AuthService;
