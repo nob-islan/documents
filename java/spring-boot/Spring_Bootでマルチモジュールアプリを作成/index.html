@@ -11382,6 +11382,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.RequiredArgsConstructor</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.UserController</span><span class="p">;</span>
 
 <span class="cm">/**</span>
@@ -11390,14 +11391,11 @@
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Controller</span>
+<span class="nd">@RequiredArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserPage</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@NonNull</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserController</span><span class="w"> </span><span class="n">userController</span><span class="p">;</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">UserPage</span><span class="p">(</span><span class="n">UserController</span><span class="w"> </span><span class="n">userController</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">userController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userController</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ向けメッセージを表示するページを返します。</span>
