@@ -244,6 +244,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.domain.entity.Users;
 import nob.example.easyapp.repository.UsersRepository;
 import nob.example.easyapp.service.AuthService;
@@ -258,14 +259,11 @@ import nob.example.easyapp.service.model.MeOutModel;
  * @author nob
  */
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     @NonNull
     private UsersRepository usersRepository;
-
-    public AuthServiceImpl(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
 
     @Override
     public LoginOutModel login(LoginInModel inModel) {
@@ -417,6 +415,7 @@ package nob.example.easyapp.controller.impl;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
@@ -433,14 +432,11 @@ import nob.example.easyapp.service.model.MeOutModel;
  * @author nob
  */
 @RestController
+@RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
 
     @NonNull
     private AuthService authService;
-
-    public AuthControllerImpl(AuthService authService) {
-        this.authService = authService;
-    }
 
     @Override
     public LoginResponse login(LoginRequest request) {

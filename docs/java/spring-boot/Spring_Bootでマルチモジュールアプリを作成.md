@@ -106,6 +106,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.UserController;
 
 /**
@@ -114,14 +115,11 @@ import nob.example.easyapp.controller.UserController;
  * @author nob
  */
 @Controller
+@RequiredArgsConstructor
 public class UserPage {
 
     @NonNull
     private UserController userController;
-
-    public UserPage(UserController userController) {
-        this.userController = userController;
-    }
 
     /**
      * ユーザ向けメッセージを表示するページを返します。

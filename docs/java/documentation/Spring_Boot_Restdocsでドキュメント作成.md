@@ -110,6 +110,7 @@ package nob.example.easyapp.controller.impl;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
@@ -126,14 +127,11 @@ import nob.example.easyapp.service.model.MeOutModel;
  * @author nob
  */
 @RestController
+@RequiredArgsConstructor
 public class AuthControllerImpl implements AuthController {
 
     @NonNull
     private AuthService authService;
-
-    public AuthControllerImpl(AuthService authService) {
-        this.authService = authService;
-    }
 
     @Override
     public LoginResponse login(LoginRequest request) {
