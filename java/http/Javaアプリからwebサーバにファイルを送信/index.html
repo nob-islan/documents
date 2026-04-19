@@ -11213,13 +11213,11 @@ nginx.base.url<span class="o">=</span>sample/file
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * nginxにファイルをアップロードするサンプルインターフェースです。</span>
 <span class="cm"> *</span>
 <span class="cm"> */</span>
-<span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/sample&quot;</span><span class="p">)</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">NginxController</span><span class="w"> </span><span class="p">{</span>
 
