@@ -263,7 +263,7 @@ import nob.example.easyapp.service.model.MeOutModel;
 public class AuthServiceImpl implements AuthService {
 
     @NonNull
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     @Override
     public LoginOutModel login(LoginInModel inModel) {
@@ -436,7 +436,7 @@ import nob.example.easyapp.service.model.MeOutModel;
 public class AuthControllerImpl implements AuthController {
 
     @NonNull
-    private AuthService authService;
+    private final AuthService authService;
 
     @Override
     public LoginResponse login(LoginRequest request) {

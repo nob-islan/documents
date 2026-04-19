@@ -131,7 +131,7 @@ import nob.example.easyapp.service.model.MeOutModel;
 public class AuthControllerImpl implements AuthController {
 
     @NonNull
-    private AuthService authService;
+    private final AuthService authService;
 
     @Override
     public LoginResponse login(LoginRequest request) {

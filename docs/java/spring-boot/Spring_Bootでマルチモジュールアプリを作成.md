@@ -119,7 +119,7 @@ import nob.example.easyapp.controller.UserController;
 public class UserPage {
 
     @NonNull
-    private UserController userController;
+    private final UserController userController;
 
     /**
      * ユーザ向けメッセージを表示するページを返します。
