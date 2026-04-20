@@ -30,8 +30,7 @@ Javaでの開発環境のサンプルです:
       "extensions": [
         "vscjava.vscode-java-pack",
         "vmware.vscode-boot-dev-pack",
-        "vscjava.vscode-lombok",
-        "esbenp.prettier-vscode"
+        "vscjava.vscode-lombok"
       ]
     }
   }
