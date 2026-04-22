@@ -99,14 +99,16 @@ public class MyBatisConfig {
 ```java
 package nob.example.easyapp.domain.entity;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * usersテーブルのエンティティクラスです。
  *
  * @author nob
  */
-@Value
+@Getter
+@AllArgsConstructor
 public class Users {
 
     /** 管理ID */
