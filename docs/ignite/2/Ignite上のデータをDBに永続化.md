@@ -31,7 +31,6 @@ package nob.example.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * usersテーブル向けのエンティティクラスです。
@@ -39,7 +38,6 @@ import lombok.NoArgsConstructor;
  * @author nob
  */
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Users {
 
