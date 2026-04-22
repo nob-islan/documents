@@ -11356,14 +11356,16 @@ spring.datasource.driver-class-name<span class="o">=</span>org.apache.ignite.Ign
 <h3 id="domainentityusersjava"><code>domain/entity/Users.java</code></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブルのエンティティクラスです。</span>
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Value</span>
+<span class="nd">@Getter</span>
+<span class="nd">@AllArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/** 管理ID */</span>
