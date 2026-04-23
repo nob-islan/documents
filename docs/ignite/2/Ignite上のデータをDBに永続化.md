@@ -24,6 +24,47 @@ CREATE TABLE IF NOT EXISTS users (
 
 ### エンティティ提供モジュール
 
+`mvn`コマンドで作成したmavenプロジェクト上に実装することを想定しています。
+
+#### 依存関係追加
+
+lombokを使う場合は`pom.xml`に下記を追記します:
+
+```xml
+    <dependencies>
+        <!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.44</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+```
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.44</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+#### エンティティ実装
+
 エンティティを提供するモジュールはIgniteおよび業務アプリケーションの両方から参照されるため、独立したモジュールとして用意します。下記要領でエンティティクラスを実装します:
 
 ```java
@@ -192,11 +233,14 @@ export USER_LIBS=${IGNITE_HOME}/libs/nob
 
 ### 業務アプリケーションモジュール
 
+Spring Initializrによって作成されたSpring Bootプロジェクト上に実装することを想定しています。
+
 #### 依存関係追加
 
 下記を`pom.xml`に追加します:
 
 ```xml
+    <dependencies>
         <!-- Source: https://mvnrepository.com/artifact/org.apache.ignite/ignite-core -->
         <dependency>
             <groupId>org.apache.ignite</groupId>
@@ -210,21 +254,25 @@ export USER_LIBS=${IGNITE_HOME}/libs/nob
             <artifactId>sharedapp</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+    </dependencies>
 ```
 
 #### データ登録処理実装
 
 ```java
-package nob.example;
+package nob.example.easyapp;
 
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.configuration.IgniteConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import nob.example.domain.entity.Users;
 
-public class App {
+@SpringBootApplication
+public class EasyappApplication {
+
     public static void main(String[] args) {
 
         IgniteConfiguration cfg = new IgniteConfiguration();
