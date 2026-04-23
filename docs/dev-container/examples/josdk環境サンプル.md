@@ -25,6 +25,9 @@ cf. https://javaoperatorsdk.io/
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        },
         "editor.formatOnSave": true,
         "java.inlayHints.parameterNames.enabled": "none",
         "java.compile.nullAnalysis.mode": "disabled",
