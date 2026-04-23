@@ -17,6 +17,9 @@ Thymeleafを用いてJava APIおよびWebページを開発するための環境
   "customizations": {
     "vscode": {
       "settings": {
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        },
         "editor.formatOnSave": true,
         "java.inlayHints.parameterNames.enabled": "none",
         "java.compile.nullAnalysis.mode": "disabled",
