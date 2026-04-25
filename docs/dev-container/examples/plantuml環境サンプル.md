@@ -18,9 +18,7 @@ PlantUML向けの`.pu`ファイルをプレビューするための環境サン�
       "settings": {
         "editor.formatOnSave": true
       },
-      "extensions": [
-        "jebbs.plantuml"
-      ]
+      "extensions": ["jebbs.plantuml"]
     }
   }
 }
