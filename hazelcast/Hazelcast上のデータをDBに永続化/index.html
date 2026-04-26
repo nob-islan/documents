@@ -11414,7 +11414,8 @@
 <h2 id="_2">設定</h2>
 <h3 id="hazelcast-dockerxml"><code>hazelcast-docker.xml</code></h3>
 <p>設定ファイルに下記を追記します:</p>
-<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;data-connection</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my-mysql-database&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;hazelcast&gt;</span>
+<span class="w">    </span><span class="nt">&lt;data-connection</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my-mysql-database&quot;</span><span class="nt">&gt;</span>
 <span class="w">        </span><span class="nt">&lt;type&gt;</span>JDBC<span class="nt">&lt;/type&gt;</span>
 <span class="w">        </span><span class="nt">&lt;properties&gt;</span>
 <span class="w">            </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;jdbcUrl&quot;</span><span class="nt">&gt;</span>jdbc:mysql://localhost:3306/eadb<span class="nt">&lt;/property&gt;</span>
