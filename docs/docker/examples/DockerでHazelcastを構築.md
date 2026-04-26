@@ -12,6 +12,8 @@ services:
       - HZ_CLUSTERNAME=nob-hazelcast
     ports:
       - 5701:5701
+    # volumes:
+    #   - ./volumes/config/hazelcast-docker.xml:/opt/hazelcast/config/hazelcast-docker.xml
     networks:
       - hazelcast-network
 networks:
