@@ -11681,7 +11681,9 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザを検索します。</span>
 <span class="cm">     *</span>
-<span class="cm">     * @param condition</span>
+<span class="cm">     * @param userId   ユーザID</span>
+<span class="cm">     * @param userName ユーザ名</span>
+<span class="cm">     *</span>
 <span class="cm">     * @return 検索結果</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">);</span>
