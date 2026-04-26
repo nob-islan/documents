@@ -11344,7 +11344,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyBatisConfig</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nd">@Bean</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SqlSessionFactory</span><span class="w"> </span><span class="nf">sqlSessionFactory</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SqlSessionFactory</span><span class="w"> </span><span class="nf">sqlSessionFactory</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="w"> </span><span class="n">sessionFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sessionFactory</span><span class="p">.</span><span class="na">setDataSource</span><span class="p">(</span><span class="n">dataSource</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">// コンフィグファイルの読み込み</span>
@@ -11473,6 +11473,15 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm">     */</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
 <span class="p">}</span>
+</code></pre></div>
+<p>また、静的なSQLであればアノテーションに付与することで自動的に実装されます:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報を全権取得します。</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return ユーザのリスト</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Select</span><span class="p">(</span><span class="s">&quot;SELECT user_id, user_name, age, address FROM users&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectAll</span><span class="p">();</span>
 </code></pre></div>
 <h3 id="mapper-xml">Mapper xml</h3>
 <p>SQLの実体を記載するファイルです。<code>src/resources</code>配下に、mapperインターフェースと同じパッケージ構成で配置します。例として、mapperインターフェースが<code>src/main/java/nob/example/easyapp/domain/mapper</code>に配置されている場合、xmlファイルは<code>src/main/resources/nob/example/easyapp/domain/mapper</code>に配置します。</p>
