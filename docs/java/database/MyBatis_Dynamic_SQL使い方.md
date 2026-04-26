@@ -29,7 +29,7 @@ INSERT INTO users(
 
 ## 事前準備
 
-- `application.properties`に接続情報を記載します:
+### `application.properties`
 
 ```shell
 #MariaDBのドライバ設定
@@ -42,7 +42,7 @@ spring.datasource.username=root
 spring.datasource.password=password
 ```
 
-- 依存関係を`pom.xml`に記載します:
+### `pom.xml`
 
 ```xml
 		<!-- https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql -->
@@ -71,7 +71,7 @@ spring.datasource.password=password
 		</dependency>
 ```
 
-- MyBatisのコンフィグクラスを作成します:
+### `config/MyBatisConfig.java`
 
 ```java
 package nob.example.easyapp.config;
@@ -105,7 +105,7 @@ public class MyBatisConfig {
 
 ## 実装例
 
-- テーブル定義に対応するエンティティクラスを作成します:
+### `domain/entity/Users.java`
 
 ```java
 package nob.example.easyapp.domain.entity;
@@ -136,7 +136,7 @@ public class Users {
 }
 ```
 
-- mapperパッケージに、`sqlSupport`クラスおよび`mapper`クラスを作成します:
+### `domain/mapper/UsersDynamicSqlSupport.java`
 
 ```java
 package nob.example.easyapp.domain.mapper;
@@ -173,6 +173,8 @@ public class UsersDynamicSqlSupport {
     }
 }
 ```
+
+### `domain/mapper/UsersMapper.java`
 
 ```java
 package nob.example.easyapp.domain.mapper;
@@ -224,7 +226,7 @@ public interface UsersMapper {
 }
 ```
 
-- repositoryインターフェースおよび実装を作成します:
+### `repository/UsersRepository.java`
 
 ```java
 package nob.example.easyapp.repository;
@@ -256,6 +258,8 @@ public interface UsersRepository {
     public void insert(Users users);
 }
 ```
+
+### `repository/impl/UsersRepositoryImpl.java`
 
 ```java
 package nob.example.easyapp.repository.impl;
@@ -321,7 +325,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
 H2DBを使ってテストします。
 
-- h2dbの依存関係を追記します:
+### `pom.xml`
 
 ```xml
 		<!-- h2db導入 -->
@@ -338,7 +342,7 @@ H2DBを使ってテストします。
         </dependency>
 ```
 
-- `src/test/resources/application-test.properties`を下記内容で作成します:
+### `test/resources/application-test.properties`
 
 ```shell
 # エンティティクラスからスキーマを自動生成しない
@@ -351,7 +355,7 @@ spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
-- `src/test/resources/users/schema.sql`および`src/test/resources/users/data.sql`を下記要領で作成します:
+### `test/resources/users/schema.sql`
 
 ```sql
 -- schema.sql
@@ -364,6 +368,8 @@ CREATE TABLE IF NOT EXISTS users(
     , address TEXT
 );
 ```
+
+### `test/resources/users/data.sql`
 
 ```sql
 -- data.sql
@@ -378,7 +384,7 @@ INSERT INTO users(
 );
 ```
 
-- 下記要領でテストクラスを作成します:
+### `repository/UsersRepositoryImplTest.java`
 
 ```java
 package nob.example.easyapp.repository;
