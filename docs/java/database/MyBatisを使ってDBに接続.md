@@ -85,7 +85,7 @@ import org.springframework.core.io.ClassPathResource;
 public class MyBatisConfig {
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         // コンフィグファイルの読み込み
@@ -190,6 +190,18 @@ public interface UsersMapper {
      */
     void delete(Integer userId);
 }
+```
+
+また、静的なSQLであればアノテーションに付与することで自動的に実装されます:
+
+```java
+    /**
+     * ユーザ情報を全権取得します。
+     *
+     * @return ユーザのリスト
+     */
+    @Select("SELECT user_id, user_name, age, address FROM users")
+    List<Users> selectAll();
 ```
 
 ### Mapper xml
