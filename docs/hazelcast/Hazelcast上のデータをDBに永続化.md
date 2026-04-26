@@ -85,9 +85,9 @@ go get github.com/hazelcast/hazelcast-go-client
 ```go
 // ユーザ情報の構造体です。
 type Person struct {
-	Name     string     // 名前
+	Name     string // 名前
 	Password string // パスワード
-	Age      int32       // 年齢
+	Age      int32  // 年齢
 }
 ```
 
