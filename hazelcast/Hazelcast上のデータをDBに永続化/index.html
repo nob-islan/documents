@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../Nginx%E3%81%B8%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0/">
+        <link rel="prev" href="../../haproxy/%E3%83%91%E3%82%B9%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/">
       
       
-        <link rel="next" href="../../hazelcast/Hazelcast%E4%B8%8A%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92DB%E3%81%AB%E6%B0%B8%E7%B6%9A%E5%8C%96/">
+        <link rel="next" href="../../ignite/2/Ignite%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%99%E3%82%8B%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E5%AE%9F%E8%A3%85/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>パスベースのルーティング - Nob docs</title>
+        <title>Hazelcast上のデータをDBに永続化 - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#hazelcastdb" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              パスベースのルーティング
+              Hazelcast上のデータをDBに永続化
             
           </span>
         </div>
@@ -4854,20 +4854,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
         
           
           <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
@@ -4888,7 +4886,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_15">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4906,7 +4904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Kubernetes%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%81%B8%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../haproxy/Kubernetes%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3%E3%81%B8%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4934,7 +4932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Nginx%E3%81%B8%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0/" class="md-nav__link">
+      <a href="../../haproxy/Nginx%E3%81%B8%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4959,19 +4957,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../haproxy/%E3%83%91%E3%82%B9%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0/" class="md-nav__link">
         
   
   
@@ -4987,7 +4976,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -5004,18 +4992,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" checked>
         
           
           <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
@@ -5036,7 +5026,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_16">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5051,10 +5041,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../hazelcast/Hazelcast%E4%B8%8A%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92DB%E3%81%AB%E6%B0%B8%E7%B6%9A%E5%8C%96/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hazelcast上のデータをDBに永続化
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -5070,6 +5087,148 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazelcast-dockerxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hazelcast-docker.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goアプリケーションでデータ投入
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goアプリケーションでデータ投入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mappingに対応する構造体宣言
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serializer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serializerの実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazelcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hazelcastクライアント作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        保存処理の実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        取得処理の実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLでデータ投入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -11072,6 +11231,136 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事前準備
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hazelcast-dockerxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hazelcast-docker.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goアプリケーションでデータ投入
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goアプリケーションでデータ投入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mappingに対応する構造体宣言
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serializer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serializerの実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hazelcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hazelcastクライアント作成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        保存処理の実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        取得処理の実装
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLでデータ投入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -11087,37 +11376,168 @@
 
 
 
-<h1 id="_1">パスベースのルーティング</h1>
-<p>cf. <a href="https://www.haproxy.com/blog/path-based-routing-with-haproxy">https://www.haproxy.com/blog/path-based-routing-with-haproxy</a></p>
-<p><code>/api</code>配下をAPIサーバに、それ以外をWebサーバにルーティングするサンプルです:</p>
-<div class="highlight"><pre><span></span><code><span class="na">global</span>
-<span class="w">  </span><span class="na">maxconn 60000</span>
-<span class="w">  </span><span class="na">log 127.0.0.1 local0</span>
-<span class="w">  </span><span class="na">log 127.0.0.1 local1 notice</span>
-<span class="w">  </span><span class="na">user  haproxy</span>
-<span class="w">  </span><span class="na">group haproxy</span>
-<span class="w">  </span><span class="na">chroot /var/empty</span>
+<h1 id="hazelcastdb">Hazelcast上のデータをDBに永続化</h1>
+<p>Hazelcast上にキャッシュされたデータをDB上に永続化するための設定です。</p>
+<p>cf.</p>
+<ul>
+<li><a href="https://docs.hazelcast.com/hazelcast/5.6/mapstore/configuring-a-generic-mapstore#articleTitle">https://docs.hazelcast.com/hazelcast/5.6/mapstore/configuring-a-generic-mapstore#articleTitle</a></li>
+<li><a href="https://docs.hazelcast.com/hazelcast/5.6/data-connections/data-connections-configuration">https://docs.hazelcast.com/hazelcast/5.6/data-connections/data-connections-configuration</a></li>
+<li><a href="http://docs.hazelcast.com/hazelcast/5.6/serialization/compact-serialization">http://docs.hazelcast.com/hazelcast/5.6/serialization/compact-serialization</a></li>
+</ul>
+<h2 id="_1">事前準備</h2>
+<p>下記SQLによって構築されるデータベースに向けてデータを永続化することを想定します:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- hazelcast向けMapping作成SQL</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">MAPPING</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">__key</span><span class="w"> </span><span class="nb">INT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">INT</span>
+<span class="p">)</span>
+<span class="k">TYPE</span><span class="w"> </span><span class="n">IMap</span>
+<span class="k">OPTIONS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;keyFormat&#39;</span><span class="o">=</span><span class="s1">&#39;int&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;valueFormat&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;compact&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;valueCompactTypeName&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;person&#39;</span>
+<span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">-- MySQL向けテーブル作成SQL</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">eadb</span><span class="p">;</span>
 
-<span class="na">defaults</span>
-<span class="w">  </span><span class="na">mode http</span>
-<span class="w">  </span><span class="na">timeout connect 5s</span>
-<span class="w">  </span><span class="na">timeout client  30s</span>
-<span class="w">  </span><span class="na">timeout server  30s</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span>
+<span class="p">);</span>
+</code></pre></div>
+<h2 id="_2">設定</h2>
+<h3 id="hazelcast-dockerxml"><code>hazelcast-docker.xml</code></h3>
+<p>設定ファイルに下記を追記します:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;data-connection</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;my-mysql-database&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;type&gt;</span>JDBC<span class="nt">&lt;/type&gt;</span>
+<span class="w">        </span><span class="nt">&lt;properties&gt;</span>
+<span class="w">            </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;jdbcUrl&quot;</span><span class="nt">&gt;</span>jdbc:mysql://localhost:3306/eadb<span class="nt">&lt;/property&gt;</span>
+<span class="w">            </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;user&quot;</span><span class="nt">&gt;</span>root<span class="nt">&lt;/property&gt;</span>
+<span class="w">            </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;password&quot;</span><span class="nt">&gt;</span>password<span class="nt">&lt;/property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/properties&gt;</span>
+<span class="w">        </span><span class="nt">&lt;shared&gt;</span>true<span class="nt">&lt;/shared&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/data-connection&gt;</span>
 
-<span class="na">frontend website</span>
-<span class="w">  </span><span class="na">bind</span><span class="w"> </span><span class="o">:</span><span class="s">80</span>
+<span class="w">    </span><span class="nt">&lt;map</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;person&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;map-store</span><span class="w"> </span><span class="na">enabled=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;class-name&gt;</span>com.hazelcast.mapstore.GenericMapStore<span class="nt">&lt;/class-name&gt;</span>
+<span class="w">            </span><span class="nt">&lt;properties&gt;</span>
+<span class="w">                </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;data-connection-ref&quot;</span><span class="nt">&gt;</span>my-mysql-database<span class="nt">&lt;/property&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/properties&gt;</span>
+<span class="w">            </span><span class="nt">&lt;write-delay-seconds&gt;</span>5<span class="nt">&lt;/write-delay-seconds&gt;</span>
+<span class="w">            </span><span class="nt">&lt;write-batch-size&gt;</span>100<span class="nt">&lt;/write-batch-size&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/map-store&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/map&gt;</span>
+<span class="nt">&lt;/hazelcast&gt;</span>
+</code></pre></div>
+<h3 id="go">Goアプリケーションでデータ投入</h3>
+<h4 id="mapping">Mappingに対応する構造体宣言</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// ユーザ情報の構造体です。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">     </span><span class="c1">// 名前</span>
+<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// パスワード</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int32</span><span class="w">       </span><span class="c1">// 年齢</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="serializer">Serializerの実装</h4>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-<span class="w">  </span><span class="na">acl is_api path_beg /api # API側にルーティングするパス</span>
-<span class="w">  </span><span class="na">acl is_web path_beg /    # Web側にルーティングするパス</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Type</span><span class="p">()</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">TypeFor</span><span class="p">[</span><span class="o">*</span><span class="nx">Person</span><span class="p">]()</span>
+<span class="p">}</span>
 
-<span class="w">  </span><span class="na">use_backend api if is_api</span>
-<span class="w">  </span><span class="na">use_backend web if is_web</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">TypeName</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;person&quot;</span>
+<span class="p">}</span>
 
-<span class="na">backend api</span>
-<span class="w">  </span><span class="na">server a1 {APIサーバのIP}</span><span class="o">:</span><span class="s">8080 check</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Write</span><span class="p">(</span><span class="nx">writer</span><span class="w"> </span><span class="nx">serialization</span><span class="p">.</span><span class="nx">CompactWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="na">backend web</span>
-<span class="w">  </span><span class="na">server w1 {WebサーバのIP}</span><span class="o">:</span><span class="s">3000 check</span>
+<span class="w">    </span><span class="nx">person</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">value</span><span class="p">.(</span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">writer</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">writer</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">person</span><span class="p">.</span><span class="nx">Password</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">writer</span><span class="p">.</span><span class="nx">WriteInt32</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">reader</span><span class="w"> </span><span class="nx">serialization</span><span class="p">.</span><span class="nx">CompactReader</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w">     </span><span class="o">*</span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">Age</span><span class="p">:</span><span class="w">      </span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadInt32</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="hazelcast">Hazelcastクライアント作成</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// hazelcastのクライアントを返します。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HazelcastClient</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">hazelcast</span><span class="p">.</span><span class="nx">Client</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">cfg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hazelcast</span><span class="p">.</span><span class="nx">Config</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">cfg</span><span class="p">.</span><span class="nx">Cluster</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;nob-hazelcast&quot;</span>
+
+<span class="w">    </span><span class="c1">// シリアライザ登録</span>
+<span class="w">    </span><span class="nx">cfg</span><span class="p">.</span><span class="nx">Serialization</span><span class="p">.</span><span class="nx">Compact</span><span class="p">.</span><span class="nx">SetSerializers</span><span class="p">(</span><span class="nx">PersonSerializer</span><span class="p">{})</span>
+
+<span class="w">    </span><span class="nx">hz</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hazelcast</span><span class="p">.</span><span class="nx">StartNewClientWithConfig</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cfg</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;starting the client with config: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hz</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_3">保存処理の実装</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// ユーザ情報を保存します。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Save</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int32</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">TODO</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nx">hz</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">HazelcastClient</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">mp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hz</span><span class="p">.</span><span class="nx">GetMap</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;trying to get a map: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">mp</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_4">取得処理の実装</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 指定したキーのユーザ情報を取得します。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int32</span><span class="p">)</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">TODO</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nx">hz</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">HazelcastClient</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">mp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hz</span><span class="p">.</span><span class="nx">GetMap</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;person&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;trying to get a map: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mp</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="p">.(</span><span class="nx">Person</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="sql">SQLでデータ投入</h3>
+<p>下記SQLでHazelcastのMapping上にデータが投入され、非同期でMySQLに永続化されます:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- hazelcast向けサンプルデータ投入SQL</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">__key</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="p">)</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
+<span class="p">);</span>
 </code></pre></div>
 
 
