@@ -255,7 +255,7 @@ public interface UsersRepository {
     /**
      * ユーザを登録します。
      *
-     * @param users
+     * @param users ユーザ情報
      */
     public void insert(Users users);
 }
