@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS person (
 設定ファイルに下記を追記します:
 
 ```xml
+<hazelcast>
     <data-connection name="my-mysql-database">
         <type>JDBC</type>
         <properties>
