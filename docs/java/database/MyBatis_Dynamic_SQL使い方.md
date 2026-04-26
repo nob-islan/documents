@@ -245,7 +245,9 @@ public interface UsersRepository {
     /**
      * ユーザを検索します。
      *
-     * @param condition
+     * @param userId   ユーザID
+     * @param userName ユーザ名
+     *
      * @return 検索結果
      */
     public List<Users> selectByCondition(Integer userId, String userName);
