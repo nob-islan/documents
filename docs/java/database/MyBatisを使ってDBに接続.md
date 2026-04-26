@@ -61,28 +61,6 @@ spring.datasource.password=password
 </configuration>
 ```
 
-### `EasyappApplication.java`
-
-アプリ起動時にMyBatisの設定を読み込みます。
-
-```java
-package nob.example.easyapp;
-
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-@MapperScan(basePackages = "nob.example.easyapp.domain.mapper")
-public class EasyappApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(EasyappApplication.class, args);
-    }
-
-}
-```
-
 ### `MyBatisConfig.java`
 
 ```java
@@ -92,6 +70,7 @@ import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -102,6 +81,7 @@ import org.springframework.core.io.ClassPathResource;
  * @author nob
  */
 @Configuration
+@MapperScan(basePackages = "nob.example.easyapp.domain.mapper")
 public class MyBatisConfig {
 
     @Bean
@@ -134,51 +114,35 @@ public class MyBatisConfig {
 ```java
 package nob.example.easyapp.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * usersテーブルのentityクラスです。
  *
  * @author nob
  */
-@Table(name = "users")
-@Entity
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Users {
 
     /** ユーザID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
     private Integer userId;
 
     /** ユーザ名 */
-    @Column(name = "user_name", length = 20, nullable = false)
     private String userName;
 
     /** 年齢 */
-    @Column(name = "age", nullable = false)
     private Integer age;
 
     /** 住所 */
-    @Column(name = "address", nullable = true)
     private String address;
 }
 ```
 
 ### Mapperインターフェース
 
-Mapperのインターフェースです。業務処理側からはこのクラスのメソッドを呼び出します。
+Mapperのインターフェースです。repositoryからこのインターフェースのメソッドを呼び出してデータ操作を実装します。
 
 ```java
 package nob.example.easyapp.domain.mapper;
@@ -217,7 +181,7 @@ public interface UsersMapper {
      * @param userId
      * @return ユーザのリスト
      */
-    List<Users> selectByKey(Integer userId);
+    List<Users> selectByKey(String userName);
 
     /**
      * ユーザ情報を削除します。
