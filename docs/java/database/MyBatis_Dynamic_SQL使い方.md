@@ -112,7 +112,6 @@ package nob.example.easyapp.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * usersテーブルのentityクラスです。
@@ -120,7 +119,6 @@ import lombok.NoArgsConstructor;
  * @author nob
  */
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Users {
 
@@ -226,34 +224,21 @@ public interface UsersMapper {
 }
 ```
 
-- repositoryクラスを作成します:
+- repositoryインターフェースおよび実装を作成します:
 
 ```java
 package nob.example.easyapp.repository;
 
 import java.util.List;
 
-import org.mybatis.dynamic.sql.SqlBuilder;
-import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
-import org.mybatis.dynamic.sql.render.RenderingStrategies;
-import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import nob.example.easyapp.domain.entity.Users;
-import nob.example.easyapp.domain.mapper.UsersMapper;
-import nob.example.easyapp.domain.mapper.UsersDynamicSqlSupport;
 
 /**
  * usersテーブルのrepositoryクラスです。
  *
  * @author nob
  */
-@Repository
-public class UsersRepository {
-
-    @Autowired
-    private UsersMapper usersMapper;
+public interface UsersRepository {
 
     /**
      * ユーザを検索します。
@@ -261,6 +246,48 @@ public class UsersRepository {
      * @param condition
      * @return 検索結果
      */
+    public List<Users> selectByCondition(Integer userId, String userName);
+
+    /**
+     * ユーザを登録します。
+     *
+     * @param users
+     */
+    public void insert(Users users);
+}
+```
+
+```java
+package nob.example.easyapp.repository.impl;
+
+import java.util.List;
+
+import org.mybatis.dynamic.sql.SqlBuilder;
+import org.mybatis.dynamic.sql.insert.render.InsertStatementProvider;
+import org.mybatis.dynamic.sql.render.RenderingStrategies;
+import org.mybatis.dynamic.sql.select.render.SelectStatementProvider;
+import org.springframework.stereotype.Repository;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import nob.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.domain.mapper.UsersDynamicSqlSupport;
+import nob.example.easyapp.domain.mapper.UsersMapper;
+import nob.example.easyapp.repository.UsersRepository;
+
+/**
+ * UsersRepositoryの実装です。
+ *
+ * @author nob
+ */
+@Repository
+@RequiredArgsConstructor
+public class UsersRepositoryImpl implements UsersRepository {
+
+    @NonNull
+    private UsersMapper usersMapper;
+
+    @Override
     public List<Users> selectByCondition(Integer userId, String userName) {
 
         SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
@@ -273,11 +300,7 @@ public class UsersRepository {
         return usersMapper.select(selectStatement);
     }
 
-    /**
-     * ユーザを登録します。
-     *
-     * @param users
-     */
+    @Override
     public void insert(Users users) {
 
         InsertStatementProvider<Users> insertStatement = SqlBuilder.insert(users)
@@ -328,6 +351,33 @@ spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
+- `src/test/resources/users/schema.sql`および`src/test/resources/users/data.sql`を下記要領で作成します:
+
+```sql
+-- schema.sql
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users(
+    user_id int PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age int NOT NULL
+    , address TEXT
+);
+```
+
+```sql
+-- data.sql
+INSERT INTO users(
+    user_name
+    , age
+    , address
+) VALUES (
+    'test_nob'
+    , 13
+    , 'test address01'
+);
+```
+
 - 下記要領でテストクラスを作成します:
 
 ```java
@@ -358,8 +408,8 @@ import nob.example.easyapp.domain.entity.Users;
         "spring.sql.init.schema-locations=classpath:/users/schema.sql", // テーブル作成SQLのパス
         "spring.sql.init.data-locations=classpath:/users/data.sql" // データ投入SQLのパス
 })
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class UsersRepositoryTest {
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // テストごとにDBをリセット
+public class UsersRepositoryImplTest {
 
     @Autowired
     private UsersRepository usersRepository;
@@ -383,31 +433,4 @@ public class UsersRepositoryTest {
         }
     }
 }
-```
-
-- `src/test/resources/users/schema.sql`および`src/test/resources/users/data.sql`は下記要領で作成します:
-
-```sql
--- schema.sql
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE IF NOT EXISTS users(
-    user_id int PRIMARY KEY AUTO_INCREMENT
-    , user_name VARCHAR(20) NOT NULL
-    , age int NOT NULL
-    , address TEXT
-);
-```
-
-```sql
--- data.sql
-INSERT INTO users(
-    user_name
-    , age
-    , address
-) VALUES (
-    'test_nob'
-    , 13
-    , 'test address01'
-);
 ```
