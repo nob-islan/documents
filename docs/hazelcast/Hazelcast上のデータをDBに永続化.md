@@ -74,6 +74,12 @@ CREATE TABLE IF NOT EXISTS person (
 
 ### Goアプリケーションでデータ投入
 
+事前にライブラリをインストールしておいてください:
+
+```shell
+go get github.com/hazelcast/hazelcast-go-client
+```
+
 #### Mappingに対応する構造体宣言
 
 ```go
