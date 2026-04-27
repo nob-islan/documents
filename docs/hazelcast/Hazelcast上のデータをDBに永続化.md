@@ -97,11 +97,11 @@ type Person struct {
 ```go
 type PersonSerializer struct{}
 
-func (p PersonSerializer) Type() reflect.Type {
+func (s PersonSerializer) Type() reflect.Type {
 	return reflect.TypeFor[*Person]()
 }
 
-func (p PersonSerializer) TypeName() string {
+func (s PersonSerializer) TypeName() string {
 	return "person"
 }
 
@@ -113,7 +113,7 @@ func (s PersonSerializer) Write(writer serialization.CompactWriter, value any) {
 	writer.WriteInt32("age", person.Age)
 }
 
-func (p PersonSerializer) Read(reader serialization.CompactReader) any {
+func (s PersonSerializer) Read(reader serialization.CompactReader) any {
 	return Person{
 		Name:     *reader.ReadString("name"),
 		Password: *reader.ReadString("password"),
