@@ -11453,11 +11453,11 @@
 <h4 id="serializer">Serializerの実装</h4>
 <div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Type</span><span class="p">()</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Type</span><span class="p">()</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">reflect</span><span class="p">.</span><span class="nx">TypeFor</span><span class="p">[</span><span class="o">*</span><span class="nx">Person</span><span class="p">]()</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">TypeName</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">TypeName</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;person&quot;</span>
 <span class="p">}</span>
 
@@ -11469,7 +11469,7 @@
 <span class="w">    </span><span class="nx">writer</span><span class="p">.</span><span class="nx">WriteInt32</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">reader</span><span class="w"> </span><span class="nx">serialization</span><span class="p">.</span><span class="nx">CompactReader</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">PersonSerializer</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">reader</span><span class="w"> </span><span class="nx">serialization</span><span class="p">.</span><span class="nx">CompactReader</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span>
 <span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w">     </span><span class="o">*</span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">),</span>
 <span class="w">        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">),</span>
