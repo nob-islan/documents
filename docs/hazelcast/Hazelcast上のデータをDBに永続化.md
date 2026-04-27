@@ -7,7 +7,7 @@ cf.
 - https://docs.hazelcast.com/hazelcast/5.6/data-connections/data-connections-configuration
 - https://docs.hazelcast.com/hazelcast/5.6/mapstore/configuring-a-generic-mapstore
 - https://docs.hazelcast.com/hazelcast/5.6/mapstore/configuration-guide
-- http://docs.hazelcast.com/hazelcast/5.6/serialization/compact-serialization
+- https://docs.hazelcast.com/hazelcast/5.6/serialization/compact-serialization
 
 ## 事前準備
 
