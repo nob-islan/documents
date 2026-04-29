@@ -6655,7 +6655,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        単一パラメータに関わるバリデーション
+        事前準備
       
     </span>
   </a>
@@ -6664,6 +6664,17 @@
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        単一パラメータに関わるバリデーション
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         複数パラメータに関わるバリデーション
@@ -11171,7 +11182,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        単一パラメータに関わるバリデーション
+        事前準備
       
     </span>
   </a>
@@ -11180,6 +11191,17 @@
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        単一パラメータに関わるバリデーション
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         複数パラメータに関わるバリデーション
@@ -11208,7 +11230,25 @@
 
 <h1 id="_1">独自バリデーション向けアノテーションを作成</h1>
 <p>バリデーションに使うアノテーションを自作します。</p>
-<h2 id="_2">単一パラメータに関わるバリデーション</h2>
+<h2 id="_2">事前準備</h2>
+<p>下記依存関係を追加します:</p>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- Source: https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>jakarta.validation<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>jakarta.validation-api<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.1.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-validation<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>4.0.6<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<h2 id="_3">単一パラメータに関わるバリデーション</h2>
 <p>指定したパラメータが特定の値であるかをチェックするアノテーションを作成します。</p>
 <ul>
 <li>アノテーション</li>
@@ -11258,16 +11298,12 @@
 <span class="w">    </span><span class="nd">@Override</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">ConstraintValidatorContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// ユーザ名&quot;root&quot;は許可しない</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// ユーザ名&quot;nob&quot;は許可しない</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="n">value</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="_3">複数パラメータに関わるバリデーション</h2>
+<h2 id="_4">複数パラメータに関わるバリデーション</h2>
 <p>2つの日付の前後関係をチェックするアノテーションを作成します。</p>
 <ul>
 <li>アノテーション</li>
@@ -11380,16 +11416,15 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.validator</span><span class="p">;</span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertFalse</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertTrue</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Data</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * SampleValidatorのテストクラスです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleValidatorTest</span><span class="w"> </span><span class="p">{</span>
 
@@ -11397,28 +11432,17 @@
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">SampleValidator</span><span class="w"> </span><span class="n">sampleValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleValidator</span><span class="p">(</span><span class="s">&quot;startDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;endDate&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">SampleValidatorTestDto</span><span class="w"> </span><span class="n">sampleValidatorTestDto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SampleValidatorTestDto</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sampleValidatorTestDto</span><span class="p">.</span><span class="na">setStartDate</span><span class="p">(</span><span class="s">&quot;2024-07-01&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sampleValidatorTestDto</span><span class="p">.</span><span class="na">setEndDate</span><span class="p">(</span><span class="s">&quot;2024-07-02&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">sampleValidator</span><span class="p">.</span><span class="na">isValid</span><span class="p">(</span><span class="n">sampleValidatorTestDto</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">));</span>
-<span class="w">        </span><span class="n">sampleValidatorTestDto</span><span class="p">.</span><span class="na">setStartDate</span><span class="p">(</span><span class="s">&quot;2024-07-03&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sampleValidatorTestDto</span><span class="p">.</span><span class="na">setEndDate</span><span class="p">(</span><span class="s">&quot;2024-07-02&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">sampleValidator</span><span class="p">.</span><span class="na">isValid</span><span class="p">(</span><span class="n">sampleValidatorTestDto</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">));</span>
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">sampleValidator</span><span class="p">.</span><span class="na">isValid</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleValidatorTestDto</span><span class="p">(</span><span class="s">&quot;2024-07-01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2024-07-02&quot;</span><span class="p">),</span><span class="w"> </span><span class="kc">null</span><span class="p">));</span>
+<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">sampleValidator</span><span class="p">.</span><span class="na">isValid</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SampleValidatorTestDto</span><span class="p">(</span><span class="s">&quot;2024-07-03&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2024-07-02&quot;</span><span class="p">),</span><span class="w"> </span><span class="kc">null</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * SampleValidatorのテスト用dtoです。</span>
 <span class="cm">     *</span>
+<span class="cm">     * @param startDate 開始日</span>
+<span class="cm">     * @param endDate   終了日</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@Data</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleValidatorTestDto</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="cm">/** 開始日 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">startDate</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** 終了日 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">endDate</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">record</span> <span class="nc">SampleValidatorTestDto</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">startDate</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">endDate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
