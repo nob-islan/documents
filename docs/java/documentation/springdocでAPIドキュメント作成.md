@@ -278,6 +278,8 @@ easyappdoc:
 
 ## Tips
 
+cf. https://springdoc.org/properties.html
+
 ### Try it outボタンを無効化したい場合
 
 `application.properties`に下記を追加すればボタンが非表示になります:
