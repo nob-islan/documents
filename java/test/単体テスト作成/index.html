@@ -11739,7 +11739,6 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span>
@@ -11776,7 +11775,7 @@
 
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">());</span>
+<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getName</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getPassword</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
 <span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
