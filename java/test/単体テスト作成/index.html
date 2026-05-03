@@ -11516,9 +11516,9 @@
 </table>
 <h3 id="controller">controllerテスト作成</h3>
 <ul>
-<li><code>controller/AuthControllerImplTest.java</code></li>
+<li><code>controller/impl/AuthControllerImplTest.java</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
@@ -11535,7 +11535,6 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MvcResult</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl.AuthControllerImpl</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span><span class="p">;</span>
@@ -11623,9 +11622,9 @@
 </code></pre></div>
 <h3 id="service">serviceテスト作成</h3>
 <ul>
-<li><code>service/AuthServiceImplTest.java</code></li>
+<li><code>service/impl/AuthServiceImplTest.java</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
@@ -11641,7 +11640,6 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl.AuthServiceImpl</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span><span class="p">;</span>
