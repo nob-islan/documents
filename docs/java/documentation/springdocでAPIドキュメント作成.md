@@ -285,3 +285,11 @@ easyappdoc:
 ```properties
 springdoc.swagger-ui.supported-submit-methods=[]
 ```
+
+### `ModelAndView`をswaggerドキュメントに反映したい場合
+
+`springdoc.model-and-view-allowed`パラメータを変更すれば表示されます。
+
+```properties
+springdoc.model-and-view-allowed=true
+```
