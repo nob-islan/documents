@@ -6369,6 +6369,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../AssertJ%E4%BD%BF%E3%81%84%E6%96%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AssertJ使い方
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../testcontainers%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E8%A1%8C/" class="md-nav__link">
         
   
@@ -11627,7 +11655,6 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span>
 
@@ -11669,17 +11696,13 @@
 <span class="w">        </span><span class="n">LoginInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// repositoryのモック化</span>
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)));</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)));</span>
 
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// service呼び出し</span>
-<span class="w">            </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">// 結果のassert</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">valid</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// service呼び出し</span>
+<span class="w">        </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 結果のassert</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">valid</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
@@ -11692,18 +11715,13 @@
 <span class="w">        </span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// repositoryのモック化</span>
-<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)));</span>
+<span class="w">        </span><span class="n">Mockito</span><span class="p">.</span><span class="na">when</span><span class="p">(</span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">)));</span>
 
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// service呼び出し</span>
-<span class="w">            </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">// 結果のassert</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">name</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">.</span><span class="na">age</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// service呼び出し</span>
+<span class="w">        </span><span class="n">MeOutModel</span><span class="w"> </span><span class="n">outModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 結果のassert</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">outModel</span><span class="p">).</span><span class="na">usingRecursiveAssertion</span><span class="p">().</span><span class="na">isEqualTo</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -11739,7 +11757,6 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span>
 
@@ -11773,16 +11790,9 @@
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getName</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getPassword</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getAge</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">()).</span><span class="na">usingRecursiveComparison</span><span class="p">().</span><span class="na">isEqualTo</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
