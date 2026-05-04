@@ -10,10 +10,11 @@ services:
     environment:
       - HZ_NETWORK_PUBLICADDRESS=localhost:5701
       - HZ_CLUSTERNAME=nob-hazelcast
+      # - HAZELCAST_CONFIG=hazelcast-nob.xml
     ports:
       - 5701:5701
     # volumes:
-    #   - ./volumes/config/hazelcast-docker.xml:/opt/hazelcast/config/hazelcast-docker.xml
+    #   - ./volumes/config/hazelcast-nob.xml:/opt/hazelcast/hazelcast-nob.xml
     networks:
       - hazelcast-network
 networks:
