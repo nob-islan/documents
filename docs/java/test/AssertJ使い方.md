@@ -76,6 +76,11 @@ import org.springframework.stereotype.Repository;
 
 import nob.example.easyapp.domain.entity.Users;
 
+/**
+ * usersテーブルのrepositoryインターフェースです。
+ *
+ * @author nob
+ */
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
