@@ -2,7 +2,7 @@
 
 ORMライブラリ[gorm](https://gorm.io/docs/)を使ってデータベースを操作します。
 
-※ドキュメント内のTraditional APIおよびGenerics APIについて、前者は動的SQL向け、後者は静的で型安全なSQL向けのようです。新規プロジェクトについてはGenerics推奨ですが、動的SQLの生成など一部の機能については引き続きTraditionalが利用できます（see also; https://gorm.io/docs/the_generics_way.html）
+※ドキュメント内のTraditional APIおよびGenerics APIについて、前者は動的SQL向け、後者は静的で型安全なSQL向けのようです。新規プロジェクトについてはGenerics推奨ですが、一部の機能については引き続きTraditionalが利用できます（see also; https://gorm.io/docs/the_generics_way.html）。
 
 ## 事前準備
 
