@@ -11418,6 +11418,9 @@
 <div class="highlight"><pre><span></span><code>go<span class="w"> </span>install<span class="w"> </span>github.com/swaggo/swag/cmd/swag@latest
 go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>github.com/swaggo/http-swagger
 </code></pre></div>
+<p>下記コマンドでswaggerドキュメントを初期化します:</p>
+<div class="highlight"><pre><span></span><code>swag<span class="w"> </span>init<span class="w"> </span>-o<span class="w"> </span>./api<span class="w"> </span>-g<span class="w"> </span>cmd/main.go
+</code></pre></div>
 <h2 id="_2">実装</h2>
 <h3 id="cmdmaingo"><code>cmd/main.go</code></h3>
 <p>アプリケーションの概要およびメタ情報を追記します。</p>
@@ -11498,7 +11501,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     &quot;net/http&quot;
 <span class="w"> </span> )
 
-<span class="w"> </span> // 認証のハンドラインターフェースです。
+<span class="w"> </span> // 認証のhandlerインターフェースです。
 <span class="w"> </span> type UserHandler interface {
 
 <span class="w"> </span>     // 認証処理を呼び出します。
@@ -11523,15 +11526,18 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="gi">+ // @Produce json</span>
 <span class="gi">+ // @Param LoginReq body model.LoginReq true &quot;認証向けのリクエストモデル&quot;</span>
 <span class="gi">+ // @Success 200 {object} model.LoginRes &quot;正常に処理された場合&quot;</span>
-<span class="gi">+ // @Failure 422 {object} apperrors.sampleErrorRes &quot;エラーが発生した場合&quot;</span>
+<span class="gi">+ // @Failure 422 {object} apperrors.easyappBusinessErrorRes &quot;エラーが発生した場合&quot;</span>
 <span class="gi">+ // @Router /login [post]</span>
 <span class="w"> </span> func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 <span class="w"> </span>     req := model.NewLoginReq(r)
 
-<span class="w"> </span>     out, err := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+<span class="w"> </span>     out, err := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 <span class="w"> </span>     if err != nil {
-<span class="w"> </span>         apperrors.HandleError(w, err)
+<span class="w"> </span>         status, res := apperrors.ToHttpErrorRes(err)
+<span class="w"> </span>         w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
+<span class="w"> </span>         w.WriteHeader(status)
+<span class="w"> </span>         json.NewEncoder(w).Encode(res)
 <span class="w"> </span>         return
 <span class="w"> </span>     }
 
@@ -11624,36 +11630,23 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <p>例外発生時レスポンスモデルのexampleを記載します:</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span> package apperrors
 
-<span class="w"> </span> import (
-<span class="w"> </span>     &quot;encoding/json&quot;
-<span class="w"> </span>     &quot;net/http&quot;
-<span class="w"> </span> )
-
-<span class="w"> </span> // サンプルのエラーです。
-<span class="w"> </span> type SampleError struct {
+<span class="w"> </span> // easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
+<span class="w"> </span> type EasyappBusinessError struct {
 <span class="w"> </span>     message string // エラーメッセージ
 <span class="w"> </span> }
 
-<span class="w"> </span> func NewSampleError(message string) EasyappError {
-<span class="w"> </span>     return &amp;SampleError{message: message}
+<span class="w"> </span> func NewEasyappBusinessError(message string) EasyappBusinessError {
+<span class="w"> </span>     return EasyappBusinessError{message: message}
 <span class="w"> </span> }
 
-<span class="w"> </span> func (e *SampleError) Error() string {
+<span class="w"> </span> func (e EasyappBusinessError) Error() string {
 <span class="w"> </span>     return e.message
 <span class="w"> </span> }
 
-<span class="w"> </span> func (e *SampleError) ReturnError(w http.ResponseWriter) {
-
-<span class="w"> </span>     res := sampleErrorRes{Message: e.message}
-<span class="w"> </span>     w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
-<span class="w"> </span>     w.WriteHeader(http.StatusUnprocessableEntity)
-<span class="w"> </span>     json.NewEncoder(w).Encode(res)
-<span class="w"> </span> }
-
-<span class="w"> </span> // サンプルエラーのレスポンスモデルです。
-<span class="w"> </span> type sampleErrorRes struct {
+<span class="w"> </span> // easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
+<span class="w"> </span> type easyappBusinessErrorRes struct {
 <span class="gd">-     Message string `json:&quot;message&quot;` // エラーメッセージ</span>
-<span class="gi">+     Message string `json:&quot;message&quot; example:&quot;エラーが発生しました。&quot;` // エラーメッセージ</span>
+<span class="gi">+     Message string `json:&quot;message&quot; example:&quot;user not found&quot;` // エラーメッセージ</span>
 <span class="w"> </span> }
 </code></pre></div>
 <h2 id="_3">動作確認</h2>
