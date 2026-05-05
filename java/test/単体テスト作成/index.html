@@ -11622,7 +11622,7 @@
 <span class="cm">     * loginのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_login_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testLoginSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// リクエストの作成</span>
 <span class="w">        </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
@@ -11651,7 +11651,7 @@
 <span class="cm">     * meのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_me_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testMeSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// リクエストの作成</span>
 <span class="w">        </span><span class="n">MeRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeRequest</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
@@ -11718,7 +11718,7 @@
 <span class="cm">     * loginのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_login_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testLoginSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// 入力値の作成</span>
 <span class="w">        </span><span class="n">LoginInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">);</span>
@@ -11737,7 +11737,7 @@
 <span class="cm">     * meのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_me_success</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testMeSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="c1">// 入力値の作成</span>
 <span class="w">        </span><span class="n">MeInModel</span><span class="w"> </span><span class="n">inModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
@@ -11816,7 +11816,7 @@
 <span class="cm">     * findByNameのテスト 正常系</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindByNameSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>

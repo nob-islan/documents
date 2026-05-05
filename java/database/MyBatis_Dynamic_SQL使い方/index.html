@@ -12008,7 +12008,7 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="cm">     * テスト</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test_findByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">selectByCondition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob&quot;</span><span class="p">);</span>
