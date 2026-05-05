@@ -4792,10 +4792,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basego" class="md-nav__link">
+  <a href="#easyapp_business_errorgo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        base.go
+        easyapp_business_error.go
       
     </span>
   </a>
@@ -4803,10 +4803,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample_errorgo" class="md-nav__link">
+  <a href="#basego" class="md-nav__link">
     <span class="md-ellipsis">
       
-        sample_error.go
+        base.go
       
     </span>
   </a>
@@ -11338,10 +11338,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basego" class="md-nav__link">
+  <a href="#easyapp_business_errorgo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        base.go
+        easyapp_business_error.go
       
     </span>
   </a>
@@ -11349,10 +11349,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sample_errorgo" class="md-nav__link">
+  <a href="#basego" class="md-nav__link">
     <span class="md-ellipsis">
       
-        sample_error.go
+        base.go
       
     </span>
   </a>
@@ -11447,67 +11447,45 @@
 <h2 id="_2">実装例</h2>
 <h3 id="internalapperrors"><code>internal/apperrors</code></h3>
 <p>apperrorsパッケージに下記要領で独自エラーを作成します:</p>
-<h4 id="basego"><code>base.go</code></h4>
-<p>独自エラーのインターフェースおよびエラーハンドリング向け関数を宣言します。各種独自例外はこのインターフェースを実装する形で作成し、<code>HandleError</code>関数経由でレスポンスを作成します。</p>
+<h4 id="easyapp_business_errorgo"><code>easyapp_business_error.go</code></h4>
+<p>独自エラーの実装です。エラーの構造体およびHTTPレスポンス向けの構造体を定義しています。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="s">&quot;net/http&quot;</span>
-
-<span class="c1">// エラーのインターフェースです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">EasyappError</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// エラーメッセージを管理します。</span>
-<span class="w">    </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
-
-<span class="w">    </span><span class="c1">// エラー向けのレスポンスモデルを作成します。</span>
-<span class="w">    </span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// エラーのハンドリングを行います。</span>
-<span class="c1">// EasyappErrorを実装したエラーであればそのハンドリング処理を呼び出し、それ以外は500エラーを返します。</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">HandleError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="nx">EasyappError</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">e</span><span class="p">.</span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
-<span class="w">        </span><span class="k">return</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Internal server error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<h4 id="sample_errorgo"><code>sample_error.go</code></h4>
-<p>独自エラーの実装です。<code>ReturnError</code>でレスポンスモデルの作成処理を行っています。</p>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
-<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// サンプルのエラーです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">SampleError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">EasyappBusinessError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">EasyappError</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">SampleError</span><span class="p">{</span><span class="nx">message</span><span class="p">:</span><span class="w"> </span><span class="nx">message</span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewEasyappBusinessError</span><span class="p">(</span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">EasyappBusinessError</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">EasyappBusinessError</span><span class="p">{</span><span class="nx">message</span><span class="p">:</span><span class="w"> </span><span class="nx">message</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">SampleError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">EasyappBusinessError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">SampleError</span><span class="p">)</span><span class="w"> </span><span class="nx">ReturnError</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sampleErrorRes</span><span class="p">{</span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+<span class="c1">// easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">easyappBusinessErrorRes</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot; example:&quot;user not found&quot;`</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
 <span class="p">}</span>
+</code></pre></div>
+<h4 id="basego"><code>base.go</code></h4>
+<p>独自エラーがusecaseから投げられた場合のHTTPレスポンスを定義します。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
-<span class="c1">// サンプルエラーのレスポンスモデルです。</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">sampleErrorRes</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;message&quot;`</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// エラー型に対し、そのHTTPステータスおよびレスポンス構造体を返します。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ToHttpErrorRes</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">EasyappBusinessError</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnprocessableEntity</span><span class="p">,</span><span class="w"> </span><span class="nx">easyappBusinessErrorRes</span><span class="p">{</span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span><span class="w"> </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">}{</span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;unknown error&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="internalusecase"><code>internal/usecase</code></h3>
@@ -11516,16 +11494,17 @@
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">usecase</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/apperrors&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/usecase/params&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// 認証の業務処理インターフェースです。</span>
+<span class="c1">// 認証のusecaseインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UserUsecase</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を行います。</span>
-<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Login</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">type</span><span class="w"> </span><span class="nx">userUsecase</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
@@ -11536,11 +11515,11 @@
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userUsecase</span><span class="p">{</span><span class="nx">userRepository</span><span class="p">:</span><span class="w"> </span><span class="nx">userRepository</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">userUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">userUsecase</span><span class="p">)</span><span class="w"> </span><span class="nx">Login</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginIn</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">NewSampleError</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">userRepository</span><span class="p">.</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="nx">in</span><span class="p">.</span><span class="nx">Name</span><span class="p">()))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">LoginOut</span><span class="p">),</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">NewEasyappBusinessError</span><span class="p">(</span><span class="s">&quot;user not found&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginOut</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">Password</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">in</span><span class="p">.</span><span class="nx">Password</span><span class="p">()),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
@@ -11559,7 +11538,7 @@
 <span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// 認証のハンドラインターフェースです。</span>
+<span class="c1">// 認証のhandlerインターフェースです。</span>
 <span class="kd">type</span><span class="w"> </span><span class="nx">UserHandler</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// 認証処理を呼び出します。</span>
@@ -11578,9 +11557,12 @@
 
 <span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewLoginReq</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
 
-<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">userUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// EasyappErrorが返ってきたらハンドリング</span>
-<span class="w">        </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">HandleError</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h</span><span class="p">.</span><span class="nx">userUsecase</span><span class="p">.</span><span class="nx">Login</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Context</span><span class="p">(),</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">NewLoginIn</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Password</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">apperrors</span><span class="p">.</span><span class="nx">ToHttpErrorRes</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">w</span><span class="p">.</span><span class="nx">WriteHeader</span><span class="p">(</span><span class="nx">status</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">json</span><span class="p">.</span><span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span><span class="p">).</span><span class="nx">Encode</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
 <span class="w">        </span><span class="k">return</span>
 <span class="w">    </span><span class="p">}</span>
 
