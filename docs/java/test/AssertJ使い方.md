@@ -237,7 +237,7 @@ public class UsersServiceImplTest {
      * 正常系
      */
     @Test
-    void test_fetchUsers_success() {
+    void testFetchUsersSuccess() {
 
         Mockito.when(usersRepository.findByNameLike("nob"))
                 .thenReturn(List.of(new Users(1, "nob1", 13), new Users(2, "nob2", 14), new Users(3, "nob3", 15)));
@@ -255,7 +255,7 @@ public class UsersServiceImplTest {
      * inModelの中身が不正
      */
     @Test
-    void test_fetchUsers_invalidModel() {
+    void testFetchUsersInvalidModel() {
 
         // 例外発生時のインスタンス種別およびエラーメッセージを検証
         assertThatThrownBy(() -> usersService.fetchUsers(new FetchUsersInModel(null)))

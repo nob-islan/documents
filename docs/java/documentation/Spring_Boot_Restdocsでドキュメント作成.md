@@ -204,7 +204,7 @@ public class AuthControllerImplTest {
      * loginのテスト 正常系
      */
     @Test
-    void test_login_success() {
+    void testLoginSuccess() {
 
         // リクエストの作成
         LoginRequest request = new LoginRequest("nob", "passwd");
@@ -236,7 +236,7 @@ public class AuthControllerImplTest {
      * meのテスト 正常系
      */
     @Test
-    void test_me_success() {
+    void testMeSuccess() {
 
         // リクエストの作成
         MeRequest request = new MeRequest("nob");

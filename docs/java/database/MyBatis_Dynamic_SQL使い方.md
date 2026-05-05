@@ -426,7 +426,7 @@ public class UsersRepositoryImplTest {
      * テスト
      */
     @Test
-    void test_findByUserId() {
+    void testFindByUserId() {
 
         try {
             List<Users> u = usersRepository.selectByCondition(1, "test_nob");

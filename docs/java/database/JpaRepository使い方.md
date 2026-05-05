@@ -208,7 +208,7 @@ public class UsersRepositoryTest {
      * テスト
      */
     @Test
-    void test_findByUserId() {
+    void testFindByUserId() {
 
         try {
             List<Users> u = usersRepository.findByUserId(1);
