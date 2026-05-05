@@ -11599,8 +11599,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">params</span><span class="p">.</span><span class="nx">MeOut</span><span class="p">),</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// UserHandler_Loginのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserHandler_Login</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// Loginのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestLogin</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
@@ -11652,8 +11652,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// UserHandler_Meのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserHandler_Me</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// Meのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestMe</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">               </span><span class="kt">string</span><span class="w">                   </span><span class="c1">// テストケース名</span>
@@ -11753,8 +11753,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// UserUsecase_Loginのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserUsecase_Login</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// Loginのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestLogin</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// テストケース名</span>
@@ -11827,8 +11827,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// UserUsecase_Meのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserUsecase_Me</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// Meのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestMe</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">          </span><span class="kt">string</span><span class="w">                      </span><span class="c1">// テストケース名</span>
@@ -11919,8 +11919,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c1">// UserRepository_FindByNameのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UserRepository_FindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// FindByNameのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestFindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                 </span><span class="c1">// テストケース名</span>
@@ -12071,8 +12071,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="s">&quot;github.com/stretchr/testify/assert&quot;</span>
 <span class="p">)</span>
 
-<span class="c1">// UsersSql_FindByNameのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">Test_UsersSql_FindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// FindByNameのテスト</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestFindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">name</span><span class="w">                 </span><span class="kt">string</span><span class="w">           </span><span class="c1">// テストケース名</span>
