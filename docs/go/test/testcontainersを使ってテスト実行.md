@@ -78,8 +78,8 @@ func connectTestDB(t *testing.T) *sql.DB {
 各テストケースにて上記関数を呼び出してからテストを実行してください:
 
 ```go
-// userInfoRepository_Insertのテスト
-func Test_userInfoRepository_Insert(t *testing.T) {
+// Insertのテスト
+func TestInsert(t *testing.T) {
 
 	tests := []struct {
         // 省略

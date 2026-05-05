@@ -173,7 +173,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func Test_UsersSql_Save(t *testing.T) {
+func TestSave(t *testing.T) {
 
 	tests := []struct {
 		name          string            // テストケース名
@@ -278,8 +278,8 @@ func (m *mockTxManager) WithTransaction(
 	return f(ctx)
 }
 
-// UserUsecase_RegistUserのテスト
-func Test_UserUsecase_RegistUser(t *testing.T) {
+// RegistUserのテスト
+func TestRegistUser(t *testing.T) {
 
 	tests := []struct {
 		name                string                      // テストケース名
