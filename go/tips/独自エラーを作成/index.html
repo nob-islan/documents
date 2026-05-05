@@ -11448,7 +11448,7 @@
 <h3 id="internalapperrors"><code>internal/apperrors</code></h3>
 <p>apperrorsパッケージに下記要領で独自エラーを作成します:</p>
 <h4 id="easyapp_business_errorgo"><code>easyapp_business_error.go</code></h4>
-<p>独自エラーの実装です。エラーの構造体およびHTTPレスポンス向けの構造体を定義しています。</p>
+<p>独自エラーの実装です。エラーの構造体およびHTTPレスポンス向けの構造体を定義します:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
 <span class="c1">// easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。</span>
@@ -11470,7 +11470,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="basego"><code>base.go</code></h4>
-<p>独自エラーがusecaseから投げられた場合のHTTPレスポンスを定義します。</p>
+<p>独自エラーがusecaseから投げられた場合のHTTPレスポンスを定義します:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">apperrors</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
