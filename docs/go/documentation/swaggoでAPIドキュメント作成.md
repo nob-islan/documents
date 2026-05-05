@@ -16,6 +16,12 @@ go install github.com/swaggo/swag/cmd/swag@latest
 go get -u github.com/swaggo/http-swagger
 ```
 
+下記コマンドでswaggerドキュメントを初期化します:
+
+```shell
+swag init -o ./api -g cmd/main.go
+```
+
 ## 実装
 
 ### `cmd/main.go`
@@ -50,7 +56,7 @@ swaggerページへのルーティングを設定します。
 
 ```diff
   package app
-  
+
   import (
       "easyapp/internal/handler"
       "easyapp/internal/handler/router"
@@ -64,19 +70,19 @@ swaggerページへのルーティングを設定します。
 
 +	  httpSwagger "github.com/swaggo/http-swagger"
   )
-  
+
   // 依存性の注入を行い、アプリケーションの構築を行います。
   func NewServer() http.Handler {
-  
+
       // データベースに接続
       db := infrastructure.ConnectDB()
-  
+
       // 各handlerに紐づくルーティングを設定
       m := http.NewServeMux()
- 
+
 +	  // swagger UIのルーティング
 +	  m.Handle("/swagger/", httpSwagger.WrapHandler)
-      
+
       // user
       router.NewUserRouter(handler.NewUserHandler(
           usecase.NewUserUsecase(
@@ -87,7 +93,7 @@ swaggerページへのルーティングを設定します。
               ),
           ),
       )).SetRouting(m)
-  
+
       return m
   }
 ```
@@ -108,7 +114,7 @@ swaggerページへのルーティングを設定します。
 	  "net/http"
   )
 
-  // 認証のハンドラインターフェースです。
+  // 認証のhandlerインターフェースです。
   type UserHandler interface {
 
 	  // 認証処理を呼び出します。
@@ -133,15 +139,18 @@ swaggerページへのルーティングを設定します。
 + // @Produce json
 + // @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
 + // @Success 200 {object} model.LoginRes "正常に処理された場合"
-+ // @Failure 422 {object} apperrors.sampleErrorRes "エラーが発生した場合"
++ // @Failure 422 {object} apperrors.easyappBusinessErrorRes "エラーが発生した場合"
 + // @Router /login [post]
   func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	  req := model.NewLoginReq(r)
 
-	  out, err := h.userUsecase.Login(params.NewLoginIn(req.Name, req.Password))
+	  out, err := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 	  if err != nil {
-		  apperrors.HandleError(w, err)
+		  status, res := apperrors.ToHttpErrorRes(err)
+		  w.Header().Set("Content-Type", "application/json")
+		  w.WriteHeader(status)
+		  json.NewEncoder(w).Encode(res)
 		  return
 	  }
 
@@ -242,36 +251,23 @@ swaggerページへのルーティングを設定します。
 ```diff
   package apperrors
 
-  import (
-	  "encoding/json"
-	  "net/http"
-  )
-
-  // サンプルのエラーです。
-  type SampleError struct {
+  // easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
+  type EasyappBusinessError struct {
 	  message string // エラーメッセージ
   }
 
-  func NewSampleError(message string) EasyappError {
-	  return &SampleError{message: message}
+  func NewEasyappBusinessError(message string) EasyappBusinessError {
+	  return EasyappBusinessError{message: message}
   }
 
-  func (e *SampleError) Error() string {
+  func (e EasyappBusinessError) Error() string {
 	  return e.message
   }
 
-  func (e *SampleError) ReturnError(w http.ResponseWriter) {
-
-	  res := sampleErrorRes{Message: e.message}
-	  w.Header().Set("Content-Type", "application/json")
-	  w.WriteHeader(http.StatusUnprocessableEntity)
-	  json.NewEncoder(w).Encode(res)
-  }
-
-  // サンプルエラーのレスポンスモデルです。
-  type sampleErrorRes struct {
+  // easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
+  type easyappBusinessErrorRes struct {
 -	  Message string `json:"message"` // エラーメッセージ
-+	  Message string `json:"message" example:"エラーが発生しました。"` // エラーメッセージ
++	  Message string `json:"message" example:"user not found"` // エラーメッセージ
   }
 ```
 
