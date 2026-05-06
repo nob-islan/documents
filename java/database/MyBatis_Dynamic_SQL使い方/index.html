@@ -5757,10 +5757,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryimpltestjava" class="md-nav__link">
+  <a href="#repositoryimplusersrepositoryimpltestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepositoryImplTest.java
+        repository/impl/UsersRepositoryImplTest.java
       
     </span>
   </a>
@@ -11596,10 +11596,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#repositoryusersrepositoryimpltestjava" class="md-nav__link">
+  <a href="#repositoryimplusersrepositoryimpltestjava" class="md-nav__link">
     <span class="md-ellipsis">
       
-        repository/UsersRepositoryImplTest.java
+        repository/impl/UsersRepositoryImplTest.java
       
     </span>
   </a>
@@ -11852,7 +11852,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm">     *</span>
 <span class="cm">     * @return 検索結果</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserIdAndUserName</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザを登録します。</span>
@@ -11893,7 +11893,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UsersMapper</span><span class="w"> </span><span class="n">usersMapper</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@Override</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">selectByCondition</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUserIdAndUserName</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="n">SelectStatementProvider</span><span class="w"> </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SqlBuilder</span><span class="p">.</span><span class="na">select</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">users</span><span class="p">.</span><span class="na">allColumns</span><span class="p">())</span>
 <span class="w">                </span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">UsersDynamicSqlSupport</span><span class="p">.</span><span class="na">users</span><span class="p">)</span>
@@ -11970,11 +11970,10 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;test address01&#39;</span>
 <span class="p">);</span>
 </code></pre></div>
-<h3 id="repositoryusersrepositoryimpltestjava"><code>repository/UsersRepositoryImplTest.java</code></h3>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
+<h3 id="repositoryimplusersrepositoryimpltestjava"><code>repository/impl/UsersRepositoryImplTest.java</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.impl</span><span class="p">;</span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
@@ -11986,6 +11985,7 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * UsersRepositoryのテストクラスです。</span>
@@ -12008,19 +12008,11 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="cm">     * テスト</span>
 <span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindByUserId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindByUserIdAndUserName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">selectByCondition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserId</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test_nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getUserName</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;test address01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAddress</span><span class="p">());</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByUserIdAndUserName</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">u</span><span class="p">).</span><span class="na">hasSize</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">usingRecursiveFieldByFieldElementComparator</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">containsExactly</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test address01&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
