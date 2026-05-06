@@ -94,31 +94,3 @@ Prometheusの設定ファイルに下記を追記します。
 ```
 
 `docker restart prometheus`でコンテナをリスタートし、画面から`Targets`を参照すると、監視対象が追加されていることが確認できます。
-
-## Grafana
-
-`docker-compose.yaml`に下記を追記します。
-
-```yaml
-version: "3.7"
-services:
-  prometheus:
-    image: prom/prometheus
-    container_name: nob-prometheus
-    ports:
-      - 9090:9090
-    volumes:
-      - type: bind
-        source: "/srv/prometheus/prometheus.yaml"
-        target: "/etc/prometheus/prometheus.yaml"
-  grafana:
-    image: grafana/grafana
-    container_name: nob-grafana
-    ports:
-      - 3000:3000
-    volumes:
-      - "/srv/grafana:/var/lib/grafana"
-    user: "$PID:$GID"
-```
-
-`user: "$PID:$GID"`はボリューム用のディレクトリを作成するためのユーザ指定です。
