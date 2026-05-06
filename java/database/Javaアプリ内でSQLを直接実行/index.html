@@ -5520,6 +5520,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="実装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pomxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pom.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domainentityusersjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        domain/entity/Users.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testresourcesusersschemasql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test/resources/users/schema.sql
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testresourcesusersdatasql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test/resources/users/data.sql
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -11221,6 +11271,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="実装">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pomxml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pom.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domainentityusersjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        domain/entity/Users.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testresourcesusersschemasql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test/resources/users/schema.sql
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testresourcesusersdatasql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        test/resources/users/data.sql
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -11241,179 +11341,131 @@
 
 
 <h1 id="javasql">Javaアプリ内でSQLを直接実行</h1>
-<p>daoなどではなく、SQLコマンドをベタ書きして実行します。</p>
+<p>repositoryなどではなく、SQLコマンドをベタ書きして実行します。</p>
 <h2 id="_1">実装</h2>
-<ul>
-<li><code>pom.xml</code>に必要な依存関係を追加します。</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- DB --&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mariadb.jdbc<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mariadb-java-client<span class="nt">&lt;/artifactId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mybatis<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.5.0<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mybatis-spring<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.3.2<span class="nt">&lt;/version&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-jdbc<span class="nt">&lt;/artifactId&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-
-<span class="cm">&lt;!-- testcontainers --&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.testcontainers<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>testcontainers<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.testcontainers<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>junit-jupiter<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
-<span class="nt">&lt;dependency&gt;</span>
-<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.testcontainers<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>mariadb<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.18.3<span class="nt">&lt;/version&gt;</span>
-<span class="w">    </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-<span class="nt">&lt;/dependency&gt;</span>
+<h3 id="pomxml"><code>pom.xml</code></h3>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- h2db導入 --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<ul>
-<li>データベース作成用のSQLを<code>test/resources/create_table.sql</code>として配置します。</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1">-- テーブル作成</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
-<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">inp_date</span><span class="w"> </span><span class="k">TIMESTAMP</span>
+<h3 id="domainentityusersjava"><code>domain/entity/Users.java</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.AllArgsConstructor</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Getter</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * usersテーブルのentityクラスです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
+<span class="cm"> */</span>
+<span class="nd">@Getter</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Users</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/** ユーザID */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">userId</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** ユーザ名 */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userName</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** 年齢 */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** 住所 */</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">address</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="testresourcesusersschemasql"><code>test/resources/users/schema.sql</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- schema.sql</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">user_name</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">TEXT</span>
 <span class="p">);</span>
-
-<span class="c1">-- テストデータ挿入</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">name</span>
-<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;first-nob&#39;</span>
-<span class="p">),</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;second-nob&#39;</span>
-<span class="p">),</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;third-nob&#39;</span>
-<span class="p">)</span>
-<span class="p">;</span>
 </code></pre></div>
-<p>テストクラス実装後、テストをデバッグで止めてコンテナ内を確認すると下記のようにデータが入ってることが見えます。</p>
-<div class="highlight"><pre><span></span><code>MariaDB [snaildb]&gt; SELECT * FROM account;
-+----+------------+---------------------+
-| id | name       | inp_date            |
-+----+------------+---------------------+
-|  1 | first-nob  | 2023-12-09 03:20:03 |
-|  2 | second-nob | 2023-12-09 03:20:03 |
-|  3 | third-nob  | 2023-12-09 03:20:03 |
-+----+------------+---------------------+
+<h3 id="testresourcesusersdatasql"><code>test/resources/users/data.sql</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- data.sql</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">users</span><span class="p">(</span>
+<span class="w">    </span><span class="n">user_name</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">age</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">address</span>
+<span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;test_nob01&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">13</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;test address01&#39;</span>
+<span class="p">),</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;test_nob02&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">14</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;test address02&#39;</span>
+<span class="p">),</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;test_nob03&#39;</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="mi">15</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;test address03&#39;</span>
+<span class="p">);</span>
 </code></pre></div>
 <ul>
-<li>下記でサンプルのテストクラスを実装します。テストクラス実行時にテスト用のコンテナデータベースを起動し、そこに向けてSQLコマンドを発行します。</li>
+<li>下記でサンプルのテストクラスを実装します。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.sqlinspection.dao</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.impl</span><span class="p">;</span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertEquals</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Statement</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.DynamicPropertyRegistry</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.DynamicPropertySource</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.testcontainers.containers.MariaDBContainer</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.testcontainers.junit.jupiter.Container</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.testcontainers.junit.jupiter.Testcontainers</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.testcontainers.utility.DockerImageName</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.JdbcTemplate</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.annotation.DirtiesContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * SQLを実行するサンプルテストクラスです。</span>
 <span class="cm"> *</span>
+<span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@SpringBootTest</span>
-<span class="nd">@Testcontainers</span><span class="p">(</span><span class="n">disabledWithoutDocker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SampleTest</span><span class="w"> </span><span class="p">{</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// application-test.properties読み込み</span>
+<span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/users/schema.sql&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// テーブル作成SQLのパス</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/users/data.sql&quot;</span><span class="w"> </span><span class="c1">// データ投入SQLのパス</span>
+<span class="p">})</span>
+<span class="nd">@DirtiesContext</span><span class="p">(</span><span class="n">classMode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DirtiesContext</span><span class="p">.</span><span class="na">ClassMode</span><span class="p">.</span><span class="na">AFTER_EACH_TEST_METHOD</span><span class="p">)</span><span class="w"> </span><span class="c1">// テストごとにDBをリセット</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersRepositoryImplTest</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="c1">// データベースのコンテナイメージなど、DB構築に必要な設定値</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DockerImageName</span><span class="w"> </span><span class="n">MARIA_DB_IMAGE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DockerImageName</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="s">&quot;mariadb&quot;</span><span class="p">).</span><span class="na">withTag</span><span class="p">(</span><span class="s">&quot;10.5&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DATABASE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;snaildb&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">USER_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;root&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">// テスト用DBコンテナを作成</span>
-<span class="w">    </span><span class="nd">@Container</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MariaDBContainer</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">mariaDbContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MariaDBContainer</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">MARIA_DB_IMAGE_NAME</span><span class="p">)</span>
-<span class="w">            </span><span class="p">.</span><span class="na">withDatabaseName</span><span class="p">(</span><span class="n">DATABASE_NAME</span><span class="p">)</span>
-<span class="w">            </span><span class="p">.</span><span class="na">withUsername</span><span class="p">(</span><span class="n">USER_NAME</span><span class="p">)</span>
-<span class="w">            </span><span class="p">.</span><span class="na">withPassword</span><span class="p">(</span><span class="n">PASSWORD</span><span class="p">)</span>
-<span class="w">            </span><span class="p">.</span><span class="na">withInitScript</span><span class="p">(</span><span class="s">&quot;create_table.sql&quot;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// 接続情報などの設定値を投入</span>
-<span class="w">    </span><span class="nd">@DynamicPropertySource</span>
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">registerProperties</span><span class="p">(</span><span class="n">DynamicPropertyRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;spring.datasource.url&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mariaDbContainer</span><span class="p">::</span><span class="n">getJdbcUrl</span><span class="p">);</span>
-<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;spring.datasource.username&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mariaDbContainer</span><span class="p">::</span><span class="n">getUsername</span><span class="p">);</span>
-<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;spring.datasource.password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mariaDbContainer</span><span class="p">::</span><span class="n">getPassword</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * SQLを直接実行してDBのデータ内容を取得します。</span>
-<span class="cm">     *</span>
-<span class="cm">     * @throws ClassNotFoundException</span>
-<span class="cm">     * @throws SQLException</span>
-<span class="cm">     *</span>
-<span class="cm">     */</span>
 <span class="w">    </span><span class="nd">@Test</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSql</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ClassNotFoundException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// 接続先の情報を初期化</span>
-<span class="w">        </span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 問い合わせ取得結果を初期化</span>
-<span class="w">        </span><span class="n">Statement</span><span class="w"> </span><span class="n">statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// 実行結果を格納する変数を初期化</span>
-<span class="w">        </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">resultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT user_id, user_name, age, address FROM users&quot;</span><span class="p">;</span>
 
-<span class="w">        </span><span class="c1">// JDBCドライバをロード</span>
-<span class="w">        </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="n">mariaDbContainer</span><span class="p">.</span><span class="na">getDriverClassName</span><span class="p">());</span>
-<span class="w">        </span><span class="c1">// 接続先の情報をインプット（URL、ユーザ、パスワード）</span>
-<span class="w">        </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="n">mariaDbContainer</span><span class="p">.</span><span class="na">getJdbcUrl</span><span class="p">(),</span><span class="w"> </span><span class="n">mariaDbContainer</span><span class="p">.</span><span class="na">getUsername</span><span class="p">(),</span>
-<span class="w">                </span><span class="n">mariaDbContainer</span><span class="p">.</span><span class="na">getPassword</span><span class="p">());</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span>
+<span class="w">                    </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;user_id&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;user_name&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;address&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="p">});</span>
 
-<span class="w">        </span><span class="c1">// ステートメントを作成</span>
-<span class="w">        </span><span class="n">statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">createStatement</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">// SQLコマンド</span>
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM account ORDER BY id&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="c1">// SQL実行、結果を格納</span>
-<span class="w">        </span><span class="n">resultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">(</span><span class="n">sql</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// assert用の期待値map key: id, value: name</span>
-<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">idNameMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="w">        </span><span class="n">idNameMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;first-nob&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">idNameMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;second-nob&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">idNameMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;third-nob&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// 各IDについて、期待値であるidNamemap通りのnameが入っていることを確認</span>
-<span class="w">        </span><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">idNameMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="na">toString</span><span class="p">()),</span><span class="w"> </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">));</span>
-<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">hasSize</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">usingRecursiveFieldByFieldElementComparator</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">containsExactly</span><span class="p">(</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob01&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test address01&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob02&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test address02&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test_nob03&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test address03&quot;</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
