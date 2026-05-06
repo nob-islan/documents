@@ -2205,6 +2205,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../docker/examples/Docker%E3%81%A7Grafana%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DockerでGrafanaを構築
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../docker/examples/Docker%E3%81%A7HAProxy%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
         
   
@@ -2437,6 +2465,34 @@
     
   
     DockerでPortainerを構築
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../docker/examples/Docker%E3%81%A7Prometheus%E3%82%92%E6%A7%8B%E7%AF%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DockerでPrometheusを構築
   
 
     
@@ -9962,17 +10018,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#grafana" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Grafana
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -11298,17 +11343,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#grafana" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Grafana
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -11389,29 +11423,6 @@
 <span class="gi">+        - ${監視対象サーバのIPアドレス}:9100</span>
 </code></pre></div>
 <p><code>docker restart prometheus</code>でコンテナをリスタートし、画面から<code>Targets</code>を参照すると、監視対象が追加されていることが確認できます。</p>
-<h2 id="grafana">Grafana</h2>
-<p><code>docker-compose.yaml</code>に下記を追記します。</p>
-<div class="highlight"><pre><span></span><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.7&quot;</span>
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">prometheus</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prom/prometheus</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-prometheus</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9090:9090</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bind</span>
-<span class="w">        </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/srv/prometheus/prometheus.yaml&quot;</span>
-<span class="w">        </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/etc/prometheus/prometheus.yaml&quot;</span>
-<span class="w">  </span><span class="nt">grafana</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grafana/grafana</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-grafana</span>
-<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000:3000</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/grafana:/var/lib/grafana&quot;</span>
-<span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$PID:$GID&quot;</span>
-</code></pre></div>
-<p><code>user: "$PID:$GID"</code>はボリューム用のディレクトリを作成するためのユーザ指定です。</p>
 
 
 
