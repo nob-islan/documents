@@ -4,9 +4,20 @@
 
 cf. https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
-## 実装例
+## 事前準備
 
-- `application.properties`に接続情報を記載します:
+下記で構築されるテーブルを想定して実装を進めます:
+
+```sql
+CREATE TABLE IF NOT EXISTS users(
+    user_id int PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age int NOT NULL
+    , address TEXT
+);
+```
+
+### `application.properties`
 
 ```shell
 spring.application.name=easyapp
@@ -21,7 +32,7 @@ spring.datasource.username=root
 spring.datasource.password=password
 ```
 
-- `pom.xml`に下記依存関係を追記します:
+### `pom.xml`
 
 ```xml
         <!-- JpaRepository導入 -->
@@ -36,18 +47,9 @@ spring.datasource.password=password
         </dependency>
 ```
 
-- 下記で構築されるテーブルを想定して実装を進めます:
+## 実装
 
-```sql
-CREATE TABLE IF NOT EXISTS users(
-    user_id int PRIMARY KEY AUTO_INCREMENT
-    , user_name VARCHAR(20) NOT NULL
-    , age int NOT NULL
-    , address TEXT
-);
-```
-
-- テーブル定義に対応するエンティティを用意します:
+### `domain/entity/Users.java`
 
 ```java
 package nob.example.easyapp.domain.entity;
@@ -94,7 +96,7 @@ public class Users {
 }
 ```
 
-- 下記の要領でrepositoryインターフェースを作成します:
+### `repository/UsersRepository.java`
 
 ```java
 package nob.example.easyapp.repository;
@@ -140,7 +142,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 
 H2DBを使ってテストします。
 
-- h2dbの依存関係を追記します:
+### `pom.xml`
 
 ```xml
         <!-- h2db導入 -->
@@ -157,7 +159,7 @@ H2DBを使ってテストします。
 		</dependency>
 ```
 
-- `src/test/resources/application-test.properties`を下記内容で作成します:
+### `test/resources/application-test.properties`
 
 ```shell
 # エンティティクラスからスキーマを自動生成しない
@@ -170,13 +172,41 @@ spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
 
-- 下記要領でテストクラスを作成します:
+### `test/resources/users/schema.sql`
+
+```sql
+-- schema.sql
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users(
+    user_id int PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age int NOT NULL
+    , address TEXT
+);
+```
+
+### `test/resources/users/data.sql`
+
+```sql
+-- data.sql
+INSERT INTO users(
+    user_name
+    , age
+    , address
+) VALUES (
+    'test_nob'
+    , 13
+    , 'test address01'
+);
+```
+
+### `repository/UsersRepositoryTest.java`
 
 ```java
 package nob.example.easyapp.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -196,8 +226,8 @@ import nob.example.easyapp.domain.entity.Users;
 @DataJpaTest
 @ActiveProfiles("test") // application-test.properties読み込み
 @TestPropertySource(properties = {
-        "spring.sql.init.schema-locations=classpath:/resource/users/schema.sql", // テーブル作成SQLのパス
-        "spring.sql.init.data-locations=classpath:/resource/users/data.sql" // データ投入SQLのパス
+        "spring.sql.init.schema-locations=classpath:/users/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/users/data.sql" // データ投入SQLのパス
 })
 public class UsersRepositoryTest {
 
@@ -210,44 +240,9 @@ public class UsersRepositoryTest {
     @Test
     void testFindByUserId() {
 
-        try {
-            List<Users> u = usersRepository.findByUserId(1);
-            assertEquals(1, u.size());
-            assertEquals(1, u.get(0).getUserId());
-            assertEquals("test_nob", u.get(0).getUserName());
-            assertEquals(13, u.get(0).getAge());
-            assertEquals("test address01", u.get(0).getAddress());
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+        List<Users> u = usersRepository.findByUserId(1);
+        assertThat(u).hasSize(1).usingRecursiveFieldByFieldElementComparator()
+                .containsExactly(new Users(1, "test_nob", 13, "test address01"));
     }
 }
-```
-
-- `src/test/resources/resource/users/schema.sql`および`src/test/resources/resource/users/data.sql`は下記要領で作成します:
-
-```sql
--- schema.sql
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE IF NOT EXISTS users(
-    user_id int PRIMARY KEY AUTO_INCREMENT
-    , user_name VARCHAR(20) NOT NULL
-    , age int NOT NULL
-    , address TEXT
-);
-```
-
-```sql
--- data.sql
-INSERT INTO users(
-    user_name
-    , age
-    , address
-) VALUES (
-    'test_nob'
-    , 13
-    , 'test address01'
-);
 ```
