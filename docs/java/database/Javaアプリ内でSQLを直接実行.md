@@ -83,7 +83,9 @@ INSERT INTO users(
 );
 ```
 
-- 下記でサンプルのテストクラスを実装します。
+## テスト
+
+### `repository/impl/UsersRepositoryImplTest.java`
 
 ```java
 package nob.example.easyapp.repository.impl;
