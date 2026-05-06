@@ -11371,7 +11371,7 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 </code></pre></div>
 <h2 id="_2">作成手順</h2>
 <h3 id="_3">テストデータ作成</h3>
-<p><code>test/resources/sql/customerregist</code>配下にテストデータ投入向けのSQLを用意します:</p>
+<p><code>test/resources/customerregist</code>配下にテストデータ投入向けのSQLを用意します:</p>
 <ul>
 <li><code>schema.sql</code></li>
 </ul>
@@ -11490,11 +11490,8 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easybatch.job</span><span class="p">;</span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.fail</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.assertj.core.api.Assertions.assertThat</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
@@ -11506,11 +11503,10 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.JdbcTemplate</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.RowMapper</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.context.TestPropertySource</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.entity.Customer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easybatch.domain.entity.Customer</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * 顧客登録ジョブのテストクラスです。</span>
@@ -11521,8 +11517,8 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <span class="nd">@SpringBootTest</span>
 <span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 <span class="nd">@TestPropertySource</span><span class="p">(</span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/sql/customerregist/schema.sql&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/sql/customerregist/data.sql&quot;</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.schema-locations=classpath:/customerregist/schema.sql&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;spring.sql.init.data-locations=classpath:/customerregist/data.sql&quot;</span>
 <span class="p">})</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomerRegistTest</span><span class="w"> </span><span class="p">{</span>
 
@@ -11538,33 +11534,25 @@ spring.batch.job.enabled<span class="o">=</span><span class="nb">false</span>
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// ジョブ実行</span>
-<span class="w">            </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">setJob</span><span class="p">(</span><span class="n">customerRegist</span><span class="p">);</span>
-<span class="w">            </span><span class="n">JobExecution</span><span class="w"> </span><span class="n">jobExecution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">startJob</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// ジョブ実行</span>
+<span class="w">        </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">setJob</span><span class="p">(</span><span class="n">customerRegist</span><span class="p">);</span>
+<span class="w">        </span><span class="n">JobExecution</span><span class="w"> </span><span class="n">jobExecution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobOperatorTestUtils</span><span class="p">.</span><span class="na">startJob</span><span class="p">();</span>
 
-<span class="w">            </span><span class="c1">// バッチが終了していることを確認</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">BatchStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">,</span><span class="w"> </span><span class="n">jobExecution</span><span class="p">.</span><span class="na">getStatus</span><span class="p">());</span>
+<span class="w">        </span><span class="c1">// バッチが終了していることを確認</span>
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">jobExecution</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">BatchStatus</span><span class="p">.</span><span class="na">COMPLETED</span><span class="p">);</span>
 
-<span class="w">            </span><span class="c1">// 登録内容の確認</span>
-<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">customerList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="s">&quot;SELECT id, full_name, age FROM customer&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">RowMapper</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                        </span><span class="nd">@Override</span>
-<span class="w">                        </span><span class="kd">public</span><span class="w"> </span><span class="n">Customer</span><span class="w"> </span><span class="nf">mapRow</span><span class="p">(</span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Customer</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;full_name&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">));</span>
-<span class="w">                        </span><span class="p">}</span>
-<span class="w">                    </span><span class="p">});</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getId</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;snailnob01&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getFullName</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getId</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;snailnob02&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getFullName</span><span class="p">());</span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="n">customerList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="na">getAge</span><span class="p">());</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-<span class="w">            </span><span class="n">fail</span><span class="p">();</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 登録内容の確認</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Customer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">customerList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="s">&quot;SELECT id, full_name, age FROM customer&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Customer</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;full_name&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">));</span>
+<span class="w">                </span><span class="p">});</span>
+
+<span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">customerList</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">hasSize</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">usingRecursiveFieldByFieldElementComparator</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">containsExactly</span><span class="p">(</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">Customer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;snailnob01&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">Customer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;snailnob02&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
