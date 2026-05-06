@@ -1,185 +1,144 @@
 # Javaアプリ内でSQLを直接実行
 
-daoなどではなく、SQLコマンドをベタ書きして実行します。
+repositoryなどではなく、SQLコマンドをベタ書きして実行します。
 
 ## 実装
 
-- `pom.xml`に必要な依存関係を追加します。
+### `pom.xml`
 
 ```xml
-<!-- DB -->
-<dependency>
-    <groupId>org.mariadb.jdbc</groupId>
-    <artifactId>mariadb-java-client</artifactId>
-</dependency>
-
-<dependency>
-    <groupId>org.mybatis</groupId>
-    <artifactId>mybatis</artifactId>
-    <version>3.5.0</version>
-</dependency>
-<dependency>
-    <groupId>org.mybatis</groupId>
-    <artifactId>mybatis-spring</artifactId>
-    <version>1.3.2</version>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-jdbc</artifactId>
-</dependency>
-
-<!-- testcontainers -->
-<dependency>
-    <groupId>org.testcontainers</groupId>
-    <artifactId>testcontainers</artifactId>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.testcontainers</groupId>
-    <artifactId>junit-jupiter</artifactId>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.testcontainers</groupId>
-    <artifactId>mariadb</artifactId>
-    <version>1.18.3</version>
-    <scope>test</scope>
-</dependency>
+        <!-- h2db導入 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
 ```
 
-- データベース作成用のSQLを`test/resources/create_table.sql`として配置します。
-
-```sql
--- テーブル作成
-CREATE TABLE IF NOT EXISTS account (
-    id INT AUTO_INCREMENT PRIMARY KEY
-    , name VARCHAR(20) NOT NULL
-    , inp_date TIMESTAMP
-);
-
--- テストデータ挿入
-INSERT INTO account (
-    name
-) VALUES (
-    'first-nob'
-), (
-    'second-nob'
-), (
-    'third-nob'
-)
-;
-```
-
-テストクラス実装後、テストをデバッグで止めてコンテナ内を確認すると下記のようにデータが入ってることが見えます。
-
-```
-MariaDB [snaildb]> SELECT * FROM account;
-+----+------------+---------------------+
-| id | name       | inp_date            |
-+----+------------+---------------------+
-|  1 | first-nob  | 2023-12-09 03:20:03 |
-|  2 | second-nob | 2023-12-09 03:20:03 |
-|  3 | third-nob  | 2023-12-09 03:20:03 |
-+----+------------+---------------------+
-```
-
-- 下記でサンプルのテストクラスを実装します。テストクラス実行時にテスト用のコンテナデータベースを起動し、そこに向けてSQLコマンドを発行します。
+### `domain/entity/Users.java`
 
 ```java
-package com.example.sqlinspection.dao;
+package nob.example.easyapp.domain.entity;
 
-import static org.junit.Assert.assertEquals;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
+/**
+ * usersテーブルのentityクラスです。
+ *
+ * @author nob
+ */
+@Getter
+@AllArgsConstructor
+public class Users {
+
+    /** ユーザID */
+    private Integer userId;
+
+    /** ユーザ名 */
+    private String userName;
+
+    /** 年齢 */
+    private Integer age;
+
+    /** 住所 */
+    private String address;
+}
+```
+
+### `test/resources/users/schema.sql`
+
+```sql
+-- schema.sql
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users(
+    user_id int PRIMARY KEY AUTO_INCREMENT
+    , user_name VARCHAR(20) NOT NULL
+    , age int NOT NULL
+    , address TEXT
+);
+```
+
+### `test/resources/users/data.sql`
+
+```sql
+-- data.sql
+INSERT INTO users(
+    user_name
+    , age
+    , address
+) VALUES (
+    'test_nob01'
+    , 13
+    , 'test address01'
+), (
+    'test_nob02'
+    , 14
+    , 'test address02'
+), (
+    'test_nob03'
+    , 15
+    , 'test address03'
+);
+```
+
+- 下記でサンプルのテストクラスを実装します。
+
+```java
+package nob.example.easyapp.repository.impl;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.MariaDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
+
+import nob.example.easyapp.domain.entity.Users;
 
 /**
  * SQLを実行するサンプルテストクラスです。
  *
+ * @author nob
  */
 @SpringBootTest
-@Testcontainers(disabledWithoutDocker = false)
-public class SampleTest {
+@ActiveProfiles("test") // application-test.properties読み込み
+@TestPropertySource(properties = {
+        "spring.sql.init.schema-locations=classpath:/users/schema.sql", // テーブル作成SQLのパス
+        "spring.sql.init.data-locations=classpath:/users/data.sql" // データ投入SQLのパス
+})
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) // テストごとにDBをリセット
+public class UsersRepositoryImplTest {
 
-    // データベースのコンテナイメージなど、DB構築に必要な設定値
-    static final DockerImageName MARIA_DB_IMAGE_NAME = DockerImageName.parse("mariadb").withTag("10.5");
-    static final String DATABASE_NAME = "snaildb";
-    static final String USER_NAME = "root";
-    static final String PASSWORD = "";
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    // テスト用DBコンテナを作成
-    @Container
-    static final MariaDBContainer<?> mariaDbContainer = new MariaDBContainer<>(MARIA_DB_IMAGE_NAME)
-            .withDatabaseName(DATABASE_NAME)
-            .withUsername(USER_NAME)
-            .withPassword(PASSWORD)
-            .withInitScript("create_table.sql");
-
-    // 接続情報などの設定値を投入
-    @DynamicPropertySource
-    static void registerProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", mariaDbContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", mariaDbContainer::getUsername);
-        registry.add("spring.datasource.password", mariaDbContainer::getPassword);
-    }
-
-    /**
-     * SQLを直接実行してDBのデータ内容を取得します。
-     *
-     * @throws ClassNotFoundException
-     * @throws SQLException
-     *
-     */
     @Test
-    public void testSql() throws ClassNotFoundException, SQLException {
+    void test() throws Exception {
 
-        // 接続先の情報を初期化
-        Connection connection = null;
-        // 問い合わせ取得結果を初期化
-        Statement statement = null;
-        // 実行結果を格納する変数を初期化
-        ResultSet resultSet = null;
+        String query = "SELECT user_id, user_name, age, address FROM users";
 
-        // JDBCドライバをロード
-        Class.forName(mariaDbContainer.getDriverClassName());
-        // 接続先の情報をインプット（URL、ユーザ、パスワード）
-        connection = DriverManager.getConnection(mariaDbContainer.getJdbcUrl(), mariaDbContainer.getUsername(),
-                mariaDbContainer.getPassword());
+        List<Users> u = jdbcTemplate.query(query, (rs, rowNum) -> {
+            return new Users(
+                    rs.getInt("user_id"),
+                    rs.getString("user_name"),
+                    rs.getInt("age"),
+                    rs.getString("address"));
+        });
 
-        // ステートメントを作成
-        statement = connection.createStatement();
-        // SQLコマンド
-        String sql = "SELECT * FROM account ORDER BY id";
-        // SQL実行、結果を格納
-        resultSet = statement.executeQuery(sql);
-
-        // assert用の期待値map key: id, value: name
-        Map<String, String> idNameMap = new HashMap<String, String>();
-        idNameMap.put("1", "first-nob");
-        idNameMap.put("2", "second-nob");
-        idNameMap.put("3", "third-nob");
-
-        // 各IDについて、期待値であるidNamemap通りのnameが入っていることを確認
-        Integer i = 1;
-        while (resultSet.next()) {
-            assertEquals(idNameMap.get(i.toString()), resultSet.getString("name"));
-            i++;
-        }
+        assertThat(u)
+                .hasSize(3)
+                .usingRecursiveFieldByFieldElementComparator()
+                .containsExactly(
+                        new Users(1, "test_nob01", 13, "test address01"),
+                        new Users(2, "test_nob02", 14, "test address02"),
+                        new Users(3, "test_nob03", 15, "test address03"));
     }
 }
 ```
