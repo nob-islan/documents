@@ -250,7 +250,7 @@ public interface UsersRepository {
      *
      * @return 検索結果
      */
-    public List<Users> selectByCondition(Integer userId, String userName);
+    public List<Users> findByUserIdAndUserName(Integer userId, String userName);
 
     /**
      * ユーザを登録します。
@@ -294,7 +294,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     private UsersMapper usersMapper;
 
     @Override
-    public List<Users> selectByCondition(Integer userId, String userName) {
+    public List<Users> findByUserIdAndUserName(Integer userId, String userName) {
 
         SelectStatementProvider selectStatement = SqlBuilder.select(UsersDynamicSqlSupport.users.allColumns())
                 .from(UsersDynamicSqlSupport.users)
@@ -386,13 +386,12 @@ INSERT INTO users(
 );
 ```
 
-### `repository/UsersRepositoryImplTest.java`
+### `repository/impl/UsersRepositoryImplTest.java`
 
 ```java
-package nob.example.easyapp.repository;
+package nob.example.easyapp.repository.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -404,6 +403,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import nob.example.easyapp.domain.entity.Users;
+import nob.example.easyapp.repository.UsersRepository;
 
 /**
  * UsersRepositoryのテストクラスです。
@@ -426,19 +426,11 @@ public class UsersRepositoryImplTest {
      * テスト
      */
     @Test
-    void testFindByUserId() {
+    void testFindByUserIdAndUserName() {
 
-        try {
-            List<Users> u = usersRepository.selectByCondition(1, "test_nob");
-            assertEquals(1, u.size());
-            assertEquals(1, u.get(0).getUserId());
-            assertEquals("test_nob", u.get(0).getUserName());
-            assertEquals(13, u.get(0).getAge());
-            assertEquals("test address01", u.get(0).getAddress());
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail();
-        }
+        List<Users> u = usersRepository.findByUserIdAndUserName(1, "test_nob");
+        assertThat(u).hasSize(1).usingRecursiveFieldByFieldElementComparator()
+                .containsExactly(new Users(1, "test_nob", 13, "test address01"));
     }
 }
 ```
