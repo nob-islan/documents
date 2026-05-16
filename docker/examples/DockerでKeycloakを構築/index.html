@@ -2443,10 +2443,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-databasesql" class="md-nav__link">
+  <a href="#volumesinitdbdcreate-databasesql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        create-database.sql
+        volumes/initdb.d/create-database.sql
       
     </span>
   </a>
@@ -11398,10 +11398,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-databasesql" class="md-nav__link">
+  <a href="#volumesinitdbdcreate-databasesql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        create-database.sql
+        volumes/initdb.d/create-database.sql
       
     </span>
   </a>
@@ -11437,13 +11437,6 @@
 <li><a href="https://www.keycloak.org/server/all-config">https://www.keycloak.org/server/all-config</a></li>
 </ul>
 <h2 id="_1">ディレクトリ構成</h2>
-<div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span>docker-compose.yaml
-└──<span class="w"> </span>volumes
-<span class="w">    </span>└──<span class="w"> </span>db
-<span class="w">        </span>└──<span class="w"> </span>initdb.d
-<span class="w">            </span>└──<span class="w"> </span>create-database.sql
-</code></pre></div>
 <h2 id="_2">設定</h2>
 <h3 id="docker-composeyaml"><code>docker-compose.yaml</code></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
@@ -11466,13 +11459,13 @@
 <span class="w">      </span><span class="nt">db</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
 <span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">db</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">  </span><span class="nt">kdb</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">kdb</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.11</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3306:3306</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/db/initdb.d:/docker-entrypoint-initdb.d</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes/initdb.d:/docker-entrypoint-initdb.d</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keycloak_data:/var/lib/mysql</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=password</span>
@@ -11489,7 +11482,7 @@
 <span class="nt">volumes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">keycloak_data</span><span class="p">:</span>
 </code></pre></div>
-<h3 id="create-databasesql"><code>create-database.sql</code></h3>
+<h3 id="volumesinitdbdcreate-databasesql"><code>volumes/initdb.d/create-database.sql</code></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 空のデータベースのみ作成</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">kdb</span><span class="p">;</span>
 </code></pre></div>
