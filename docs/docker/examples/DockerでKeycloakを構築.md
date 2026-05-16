@@ -7,15 +7,6 @@ cf.
 
 ## ディレクトリ構成
 
-```shell
-.
-├── docker-compose.yaml
-└── volumes
-    └── db
-        └── initdb.d
-            └── create-database.sql
-```
-
 ## 設定
 
 ### `docker-compose.yaml`
@@ -41,13 +32,13 @@ services:
       db:
         condition: service_healthy
         restart: true
-  db:
-    container_name: db
+  kdb:
+    container_name: kdb
     image: mariadb:10.11
     ports:
       - 3306:3306
     volumes:
-      - ./volumes/db/initdb.d:/docker-entrypoint-initdb.d
+      - ./volumes/initdb.d:/docker-entrypoint-initdb.d
       - keycloak_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
@@ -65,7 +56,7 @@ volumes:
   keycloak_data:
 ```
 
-### `create-database.sql`
+### `volumes/initdb.d/create-database.sql`
 
 ```sql
 -- 空のデータベースのみ作成
