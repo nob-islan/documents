@@ -21,7 +21,7 @@ services:
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
       - KC_BOOTSTRAP_ADMIN_PASSWORD=password
       - KC_DB=mariadb
-      - KC_DB_URL=jdbc:mariadb://db/kdb
+      - KC_DB_URL=jdbc:mariadb://kdb/kdb
       - KC_DB_USERNAME=root
       - KC_DB_PASSWORD=password
       - KC_HTTP_ENABLED=true
