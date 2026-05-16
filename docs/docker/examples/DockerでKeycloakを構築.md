@@ -29,7 +29,7 @@ services:
       - 8080:8080
     command: start
     depends_on:
-      db:
+      kdb:
         condition: service_healthy
         restart: true
   kdb:
