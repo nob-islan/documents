@@ -23,7 +23,7 @@
     
     
       
-        <title>Aspectjでロギング処理を設定 - Nob docs</title>
+        <title>aspectjでロギング処理を設定 - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#aspectj" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Aspectjでロギング処理を設定
+              aspectjでロギング処理を設定
             
           </span>
         </div>
@@ -6682,6 +6682,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -6690,7 +6692,7 @@
   <span class="md-ellipsis">
     
   
-    Aspectjでロギング処理を設定
+    aspectjでロギング処理を設定
   
 
     
@@ -6708,7 +6710,7 @@
   <span class="md-ellipsis">
     
   
-    Aspectjでロギング処理を設定
+    aspectjでロギング処理を設定
   
 
     
@@ -6723,6 +6725,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -11339,6 +11343,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -11402,24 +11408,17 @@
 
 
 
-  <h1>Aspectjでロギング処理を設定</h1>
-
-<p>`# aspectjでロギング処理を設定</p>
+<h1 id="aspectj">aspectjでロギング処理を設定</h1>
 <p><a href="https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html">aspectj</a>を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。</p>
 <h2 id="_1">実装</h2>
 <h3 id="pomxml"><code>pom.xml</code></h3>
 <p>下記設定を依存関係を追加します:</p>
-<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/org.springframework/spring-aop --&gt;</span>
-<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
-<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-aop<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;version&gt;</span>6.2.11<span class="nt">&lt;/version&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
-<span class="w">        </span><span class="cm">&lt;!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="cm">&lt;!-- Source: https://mvnrepository.com/artifact/org.aspectj/aspectjtools --&gt;</span>
 <span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
 <span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.aspectj<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>aspectjweaver<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">            </span><span class="nt">&lt;version&gt;</span>1.9.24<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>aspectjtools<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>1.9.25.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
 <span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <h3 id="apiexeclogaspectjava"><code>ApiExecLogAspect.java</code></h3>
@@ -11439,11 +11438,9 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.aspectj.lang.annotation.Before</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.core.JsonProcessingException</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.Value</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">lombok.extern.slf4j.Slf4j</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tools.jackson.core.JacksonException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tools.jackson.databind.ObjectMapper</span><span class="p">;</span>
 
 <span class="nd">@Aspect</span>
 <span class="nd">@Component</span>
@@ -11458,33 +11455,26 @@
 <span class="w">    </span><span class="nd">@Before</span><span class="p">(</span><span class="s">&quot;within(nob.example.easyapp.controller.*..*)&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apiStartLog</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * API開始時のログのモデルです。</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param className  クラス名</span>
+<span class="cm">         * @param methodName メソッド名</span>
+<span class="cm">         * @param request    リクエストモデル</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="kd">record</span> <span class="nc">StartLog</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+
 <span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// ログのモデルを作成</span>
 <span class="w">            </span><span class="n">StartLog</span><span class="w"> </span><span class="n">startLog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StartLog</span><span class="p">(</span>
-<span class="w">                    </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getTarget</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="c1">// クラス名</span>
-<span class="w">                    </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="c1">// メソッド名</span>
-<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">().</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getArgs</span><span class="p">()));</span><span class="w"> </span><span class="c1">// リクエスト</span>
+<span class="w">                    </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getTarget</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span>
+<span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">().</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getArgs</span><span class="p">()));</span>
 
 <span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Start: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">startLog</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">JsonProcessingException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">JacksonException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
 <span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * startLogに出力するログのモデルです。</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@Value</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StartLog</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="cm">/** クラス名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** メソッド名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** リクエストモデル */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">request</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
@@ -11492,28 +11482,23 @@
 <span class="cm">     *</span>
 <span class="cm">     * @param joinPoint メソッド情報</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@AfterReturning</span><span class="p">(</span><span class="n">pointcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;within(nob.example.easyapp.controller.*..*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;result&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@AfterReturning</span><span class="p">(</span><span class="n">pointcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;within(nob.example.easyapp.controller.*..*)&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apiSuccessLog</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// ログのモデルを作成</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * API正常終了時のログのモデルです。</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param className  クラス名</span>
+<span class="cm">         * @param methodName メソッド名</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="kd">record</span> <span class="nc">SuccessLog</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+
 <span class="w">        </span><span class="n">SuccessLog</span><span class="w"> </span><span class="n">successLog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SuccessLog</span><span class="p">(</span>
 <span class="w">                </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getTarget</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="c1">// クラス名</span>
 <span class="w">                </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w"> </span><span class="c1">// メソッド名</span>
 
 <span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;End: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">successLog</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * successLogに出力するログのモデルです。</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@Value</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SuccessLog</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="cm">/** クラス名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** メソッド名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="cm">/**</span>
@@ -11525,29 +11510,22 @@
 <span class="w">    </span><span class="nd">@AfterThrowing</span><span class="p">(</span><span class="n">pointcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;within(nob.example.easyapp.controller.*..*)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">throwing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apiErrorLog</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">,</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="c1">// ログのモデルを作成</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * API異常終了時のログのモデルです。</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param className    クラス名</span>
+<span class="cm">         * @param methodName   メソッド名</span>
+<span class="cm">         * @param errorMessage エラーメッセージ</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="kd">record</span> <span class="nc">ErrorLog</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">errorMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+
 <span class="w">        </span><span class="n">ErrorLog</span><span class="w"> </span><span class="n">errorLog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErrorLog</span><span class="p">(</span>
 <span class="w">                </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getTarget</span><span class="p">().</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="c1">// クラス名</span>
 <span class="w">                </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="c1">// メソッド名</span>
 <span class="w">                </span><span class="n">error</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span><span class="w"> </span><span class="c1">// エラーメッセージ</span>
 
 <span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">errorLog</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * errorLogに出力するログのモデルです。</span>
-<span class="cm">     */</span>
-<span class="w">    </span><span class="nd">@Value</span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ErrorLog</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="cm">/** クラス名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** メソッド名 */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="p">;</span>
-
-<span class="w">        </span><span class="cm">/** エラーメッセージ */</span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
