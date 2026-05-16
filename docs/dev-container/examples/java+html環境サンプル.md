@@ -5,7 +5,7 @@ Thymeleafを用いてJava APIおよびWebページを開発するための環境
 ```json
 {
   "name": "Java",
-  "image": "mcr.microsoft.com/devcontainers/java:21-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/java:25-bookworm",
   "features": {
     // "ghcr.io/devcontainers/features/java:1": {
     //   "version": "none",
