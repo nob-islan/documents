@@ -1,4 +1,4 @@
-`# aspectjでロギング処理を設定
+# aspectjでロギング処理を設定
 
 [aspectj](https://docs.spring.io/spring-framework/reference/core/aop/ataspectj.html)を用いてAPI開始・終了およびエラー発生時のログ出力処理を行うサンプルコードです。
 
@@ -9,17 +9,12 @@
 下記設定を依存関係を追加します:
 
 ```xml
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>6.2.11</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<!-- Source: https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.24</version>
+			<artifactId>aspectjtools</artifactId>
+			<version>1.9.25.1</version>
+			<scope>compile</scope>
 		</dependency>
 ```
 
@@ -43,11 +38,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @Aspect
 @Component
@@ -62,33 +55,26 @@ public class ApiExecLogAspect {
     @Before("within(nob.example.easyapp.controller.*..*)")
     public void apiStartLog(JoinPoint joinPoint) {
 
+        /**
+         * API開始時のログのモデルです。
+         *
+         * @param className  クラス名
+         * @param methodName メソッド名
+         * @param request    リクエストモデル
+         */
+        record StartLog(String className, String methodName, String request) {
+        }
+
         try {
-            // ログのモデルを作成
             StartLog startLog = new StartLog(
-                    joinPoint.getTarget().getClass().getName(), // クラス名
-                    joinPoint.getSignature().getName(), // メソッド名
-                    new ObjectMapper().writeValueAsString(joinPoint.getArgs())); // リクエスト
+                    joinPoint.getTarget().getClass().getName(),
+                    joinPoint.getSignature().getName(),
+                    new ObjectMapper().writeValueAsString(joinPoint.getArgs()));
 
             log.info("Start: " + startLog);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * startLogに出力するログのモデルです。
-     */
-    @Value
-    private class StartLog {
-
-        /** クラス名 */
-        private String className;
-
-        /** メソッド名 */
-        private String methodName;
-
-        /** リクエストモデル */
-        private String request;
     }
 
     /**
@@ -96,28 +82,23 @@ public class ApiExecLogAspect {
      *
      * @param joinPoint メソッド情報
      */
-    @AfterReturning(pointcut = "within(nob.example.easyapp.controller.*..*)", returning = "result")
+    @AfterReturning(pointcut = "within(nob.example.easyapp.controller.*..*)")
     public void apiSuccessLog(JoinPoint joinPoint) {
 
-        // ログのモデルを作成
+        /**
+         * API正常終了時のログのモデルです。
+         *
+         * @param className  クラス名
+         * @param methodName メソッド名
+         */
+        record SuccessLog(String className, String methodName) {
+        }
+
         SuccessLog successLog = new SuccessLog(
                 joinPoint.getTarget().getClass().getName(), // クラス名
                 joinPoint.getSignature().getName()); // メソッド名
 
         log.info("End: " + successLog);
-    }
-
-    /**
-     * successLogに出力するログのモデルです。
-     */
-    @Value
-    private class SuccessLog {
-
-        /** クラス名 */
-        private String className;
-
-        /** メソッド名 */
-        private String methodName;
     }
 
     /**
@@ -129,29 +110,22 @@ public class ApiExecLogAspect {
     @AfterThrowing(pointcut = "within(nob.example.easyapp.controller.*..*)", throwing = "error")
     public void apiErrorLog(JoinPoint joinPoint, Throwable error) {
 
-        // ログのモデルを作成
+        /**
+         * API異常終了時のログのモデルです。
+         *
+         * @param className    クラス名
+         * @param methodName   メソッド名
+         * @param errorMessage エラーメッセージ
+         */
+        record ErrorLog(String className, String methodName, String errorMessage) {
+        }
+
         ErrorLog errorLog = new ErrorLog(
                 joinPoint.getTarget().getClass().getName(), // クラス名
                 joinPoint.getSignature().getName(), // メソッド名
                 error.toString()); // エラーメッセージ
 
         log.error("Error: " + errorLog);
-    }
-
-    /**
-     * errorLogに出力するログのモデルです。
-     */
-    @Value
-    private class ErrorLog {
-
-        /** クラス名 */
-        private String className;
-
-        /** メソッド名 */
-        private String methodName;
-
-        /** エラーメッセージ */
-        private String message;
     }
 }
 ```
