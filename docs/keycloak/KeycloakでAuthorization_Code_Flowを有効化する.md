@@ -2,7 +2,10 @@
 
 ## Keycloak
 
-cf. https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managing-clients_server_administration_guide
+cf.
+
+- https://www.keycloak.org/docs/latest/server_admin/index.html#assembly-managing-clients_server_administration_guide
+- https://docs.spring.io/spring-security/reference/servlet/oauth2/login/core.html
 
 ### 設定
 
