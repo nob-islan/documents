@@ -8,10 +8,9 @@ cf. https://react-redux.js.org/tutorials/quick-start
 
 プロジェクトの新規作成方法について記載します。
 
-- [Vite](https://vite.dev/)を使ってプロジェクトを新規作成します。
+- [Vite](https://vite.dev/)を使ってプロジェクトを新規作成します（cf. https://vite.dev/guide/#scaffolding-your-first-vite-project）。
 
 ```shell
-# cf. https://vite.dev/guide/?utm_source=chatgpt.com#scaffolding-your-first-vite-project
 npm create vite@latest easyweb -- --template react-ts
 cd easyweb
 npm install

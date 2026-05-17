@@ -1,6 +1,6 @@
 # KeycloakでPasskey認証を有効化する
 
-cf. https://www.keycloak.org/docs/latest/server_admin/?utm_source=chatgpt.com#_webauthn_passwordless
+cf. https://www.keycloak.org/docs/latest/server_admin/#_webauthn_passwordless
 
 ## 設定
 
