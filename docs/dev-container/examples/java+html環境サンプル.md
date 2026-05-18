@@ -12,7 +12,7 @@ Thymeleafを用いてJava APIおよびWebページを開発するための環境
     //   "installMaven": "true",
     //   "installGradle": "false"
     // },
-    // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    // "ghcr.io/devcontainers/features/docker-in-docker:3": {}
   },
   "customizations": {
     "vscode": {
