@@ -12,7 +12,7 @@
         <link rel="prev" href="../../%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/">
       
       
-        <link rel="next" href="../../../examples/cpp%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">
+        <link rel="next" href="../%E9%96%8B%E7%99%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%ABGPG%E3%82%AD%E3%83%BC%E3%82%A8%E3%83%A9%E3%83%BC/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>開発コンテナ起動時にGPGキーエラー - Nob docs</title>
+        <title>docker-in-dockerが機能しない - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gpg" class="md-skip">
+        <a href="#docker-in-docker" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              開発コンテナ起動時にGPGキーエラー
+              docker-in-dockerが機能しない
             
           </span>
         </div>
@@ -1302,7 +1302,7 @@
   <span class="md-ellipsis">
     
   
-    開発コンテナ起動時にGPGキーエラー
+    docker-in-dockerが機能しない
   
 
     
@@ -1312,6 +1312,34 @@
 
       </a>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%96%8B%E7%99%BA%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E8%B5%B7%E5%8B%95%E6%99%82%E3%81%ABGPG%E3%82%AD%E3%83%BC%E3%82%A8%E3%83%A9%E3%83%BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    開発コンテナ起動時にGPGキーエラー
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -11343,14 +11371,15 @@
 
 
 
-<h1 id="gpg">開発コンテナ起動時にGPGキーエラー</h1>
-<p>cf. <a href="https://github.com/devcontainers/images/issues/1752">https://github.com/devcontainers/images/issues/1752</a></p>
-<div class="highlight"><pre><span></span><code>4.612 Reading package lists...
-4.959 W: GPG error: https://dl.yarnpkg.com/debian stable InRelease: The following signatures couldn&#39;t be verified because the public key is not available: NO_PUBKEY 62D54FD4003F6525
-4.959 E: The repository &#39;https://dl.yarnpkg.com/debian stable InRelease&#39; is not signed.
-4.960 ERROR: Feature &quot;Docker (Docker-in-Docker)&quot; (ghcr.io/devcontainers/features/docker-in-docker) failed to install! Look at the documentation at https://github.com/devcontainers/features/tree/main/src/docker-in-docker for help troubleshooting this error.
+<h1 id="docker-in-docker"><code>docker-in-docker</code>が機能しない</h1>
+<p><code>docker</code>コマンドは使えるものの、コンテナが起動できない事象を引きました:</p>
+<div class="highlight"><pre><span></span><code>$ docker run -itd nginx:stable
+
+docker: Error response from daemon: failed to mount /tmp/containerd-mount1226524157: mount source: &quot;overlay&quot;, target: &quot;/tmp/containerd-mount1226524157&quot;, fstype: overlay, flags: 0, data: &quot;workdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/9/work,upperdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/9/fs,lowerdir=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/7/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/6/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/5/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/4/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/3/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/2/fs:/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/1/fs,index=off&quot;, err: invalid argument
+
+Run &#39;docker run --help&#39; for more information
 </code></pre></div>
-<p>上記エラー発生時は、開発コンテナ起動前にリポジトリを削除します:</p>
+<p>上記エラー発生時は、<code>Dockerfile</code>内でストレージドライバに関する設定を行い開発コンテナを起動します:</p>
 <details><summary>devcontainer.json</summary>
 
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -11359,7 +11388,7 @@
 <span class="w">    </span><span class="nt">&quot;dockerfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dockerfile&quot;</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;ghcr.io/devcontainers/features/docker-in-docker:3&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nt">&quot;ghcr.io/devcontainers/features/docker-in-docker:3.0.0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;customizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;vscode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -11381,8 +11410,8 @@
 
 <div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">mcr.microsoft.com/devcontainers/go:1.25-bookworm</span>
 
-<span class="c"># 不要なyarnリポジトリを削除</span>
-<span class="k">RUN</span><span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/apt/sources.list.d/yarn.list
+<span class="c"># Docker daemonのストレージドライバをvfsに強制する設定を配置</span>
+<span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/docker<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;storage-driver&quot;: &quot;vfs&quot;}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/docker/daemon.json
 </code></pre></div>
 
 </details>
