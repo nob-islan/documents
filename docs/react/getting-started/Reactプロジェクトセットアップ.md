@@ -44,6 +44,7 @@ Reduxを動かすために必要な改修およびサンプルコードについ
 .
 ├── eslint.config.js                 # ESLintによるコードフォーマットの設定
 ├── .prettierrc                      # Prettierによるコードフォーマットの設定
+├── vite.config.ts                   # ローカル環境における挙動の設定
 └── src
     ├── app
     │   ├── hooks.ts                 # storeを操作する関数の定義
@@ -112,6 +113,31 @@ Prettierによるフォーマットに関する設定を定義します。
   "trailingComma": "none",
   "semi": true
 }
+```
+
+#### `vite.config.ts`
+
+WebSocket接続失敗による画面リロードを防ぐための設定を追加します。
+
+```ts
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
+
+    hmr: {
+      clientPort: 5173,
+      host: "localhost",
+      protocol: "ws",
+    },
+  },
+});
 ```
 
 #### `app/store.ts`
