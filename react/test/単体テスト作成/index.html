@@ -11600,7 +11600,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="s2">&quot;@testing-library/jest-dom/vitest&quot;</span><span class="p">;</span>
 </code></pre></div>
 <ul>
-<li><code>vite.config.ts</code>を下記内容で更新します:</li>
+<li><code>vitest.config.ts</code>を下記内容で作成します:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">svelte</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@sveltejs/vite-plugin-svelte&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">svelteTesting</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@testing-library/svelte/vite&quot;</span><span class="p">;</span>
@@ -11619,6 +11619,7 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">render</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">RenderResult</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@testing-library/react&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Provider</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-redux&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MemoryRouter</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-router-dom&quot;</span><span class="p">;</span>
 
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./app/store&quot;</span><span class="p">;</span>
 
@@ -11629,8 +11630,21 @@
 <span class="cm"> * @returns Redux store付きレンダリング</span>
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">renderWithProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">ui</span><span class="o">:</span><span class="w"> </span><span class="kt">React.ReactElement</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">RenderResult</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">Provider</span><span class="w"> </span><span class="na">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}&gt;{</span><span class="nx">ui</span><span class="p">}&lt;/</span><span class="nt">Provider</span><span class="p">&gt;);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">render</span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Provider</span><span class="w"> </span><span class="na">store</span><span class="o">=</span><span class="p">{</span><span class="nx">store</span><span class="p">}&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">MemoryRouter</span><span class="p">&gt;{</span><span class="nx">ui</span><span class="p">}&lt;/</span><span class="nt">MemoryRouter</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">Provider</span><span class="p">&gt;,</span>
+<span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
+</code></pre></div>
+<ul>
+<li><code>tsconfig.app.json</code>に下記を追記します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;compilerOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;@testing-library/jest-dom&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="_3">テスト作成</h2>
 <h3 id="countertesttsx">Counter.test.tsx</h3>
