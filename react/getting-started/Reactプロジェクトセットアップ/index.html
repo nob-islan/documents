@@ -10480,6 +10480,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#viteconfigts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vite.config.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11654,6 +11665,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#viteconfigts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        vite.config.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#appstorets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11823,6 +11845,7 @@ npm<span class="w"> </span>install
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span>eslint.config.js<span class="w">                 </span><span class="c1"># ESLintによるコードフォーマットの設定</span>
 ├──<span class="w"> </span>.prettierrc<span class="w">                      </span><span class="c1"># Prettierによるコードフォーマットの設定</span>
+├──<span class="w"> </span>vite.config.ts<span class="w">                   </span><span class="c1"># ローカル環境における挙動の設定</span>
 └──<span class="w"> </span>src
 <span class="w">    </span>├──<span class="w"> </span>app
 <span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>hooks.ts<span class="w">                 </span><span class="c1"># storeを操作する関数の定義</span>
@@ -11881,6 +11904,27 @@ npm<span class="w"> </span>install
 <span class="w">  </span><span class="nt">&quot;trailingComma&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;semi&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
+</code></pre></div>
+<h4 id="viteconfigts"><code>vite.config.ts</code></h4>
+<p>WebSocket接続失敗による画面リロードを防ぐための設定を追加します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">react</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@vitejs/plugin-react&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">defineConfig</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;vite&quot;</span><span class="p">;</span>
+
+<span class="c1">// https://vite.dev/config/</span>
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">plugins</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">react</span><span class="p">()],</span>
+<span class="w">  </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">port</span><span class="o">:</span><span class="w"> </span><span class="kt">5173</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">strictPort</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+
+<span class="w">    </span><span class="nx">hmr</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">clientPort</span><span class="o">:</span><span class="w"> </span><span class="kt">5173</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">host</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">protocol</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ws&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">});</span>
 </code></pre></div>
 <h4 id="appstorets"><code>app/store.ts</code></h4>
 <p>各種reducerを取りまとめたstoreを作成します。</p>
