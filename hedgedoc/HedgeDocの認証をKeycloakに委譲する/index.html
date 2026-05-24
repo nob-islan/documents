@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../../react/tips/React%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E6%96%B9%E6%B3%95/">
+        <link rel="prev" href="../../hazelcast/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E9%81%A9%E7%94%A8/">
       
       
-        <link rel="next" href="../../squid/first-squid/">
+        <link rel="next" href="../../ignite/2/Ignite%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%99%E3%82%8B%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89%E3%82%92%E5%AE%9F%E8%A3%85/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>KMS暗号化設定 - Nob docs</title>
+        <title>HedgeDocの認証をKeycloakに委譲する - Nob docs</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#kms" class="md-skip">
+        <a href="#hedgedockeycloak" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              KMS暗号化設定
+              HedgeDocの認証をKeycloakに委譲する
             
           </span>
         </div>
@@ -5298,18 +5298,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" checked>
         
           
           <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
@@ -5330,7 +5332,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_17">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5345,10 +5347,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../hedgedoc/HedgeDoc%E3%81%AE%E8%AA%8D%E8%A8%BC%E3%82%92Keycloak%E3%81%AB%E5%A7%94%E8%AD%B2%E3%81%99%E3%82%8B/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HedgeDocの認証をKeycloakに委譲する
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -5364,6 +5393,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hedgedoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HedgeDocを構築
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keycloak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keycloakと連携
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -10748,20 +10819,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_37" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_37" >
         
           
           <label class="md-nav__link" for="__nav_37" id="__nav_37_label" tabindex="0">
@@ -10782,7 +10851,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_37_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_37_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_37">
             <span class="md-nav__icon md-icon"></span>
             
@@ -10797,37 +10866,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    KMS暗号化設定
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../rustfs/KMS%E6%9A%97%E5%8F%B7%E5%8C%96%E8%A8%AD%E5%AE%9A/" class="md-nav__link">
         
   
   
@@ -10843,82 +10885,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vault" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vault設定
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Vault設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        手順
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rustfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RustFS設定
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="RustFS設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        手順
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -11534,58 +11500,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#vault" class="md-nav__link">
+  <a href="#hedgedoc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Vault設定
+        HedgeDocを構築
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Vault設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        手順
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#rustfs" class="md-nav__link">
+  <a href="#keycloak" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RustFS設定
+        Keycloakと連携
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="RustFS設定">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        手順
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -11606,93 +11538,35 @@
 
 
 
-<h1 id="kms">KMS暗号化設定</h1>
-<p>RustFSのバケットをSSE-KMS方式で暗号化します。</p>
-<p>cf. <a href="https://docs.rustfs.com/features/encryption/#object-encryption">https://docs.rustfs.com/features/encryption/#object-encryption</a></p>
-<h2 id="vault">Vault設定</h2>
-<p>KMSとして<a href="https://developer.hashicorp.com/vault">Hashicorp Vault</a>を利用します。</p>
-<p>cf.</p>
+<h1 id="hedgedockeycloak">HedgeDocの認証をKeycloakに委譲する</h1>
+<p>KeycloakによるHedgeDocへのログインを実装します。</p>
+<h2 id="hedgedoc">HedgeDocを構築</h2>
+<p>ローカル環境におけるKeycloakとの疎通を考慮し、Dockerではなくパッケージによるマニュアルインストールを行います:</p>
+<p>cf. <a href="https://docs.hedgedoc.org/setup/manual-setup/">https://docs.hedgedoc.org/setup/manual-setup/</a></p>
+<h2 id="keycloak">Keycloakと連携</h2>
+<p>cf. <a href="https://docs.hedgedoc.org/guides/auth/keycloak/">https://docs.hedgedoc.org/guides/auth/keycloak/</a></p>
 <ul>
-<li><a href="https://developer.hashicorp.com/vault/docs/secrets/transit">https://developer.hashicorp.com/vault/docs/secrets/transit</a></li>
-<li><a href="https://github.com/rustfs/rustfs/blob/main/docs/kms/README.md">https://github.com/rustfs/rustfs/blob/main/docs/kms/README.md</a></li>
+<li>各種環境変数をexportします:</li>
 </ul>
-<h3 id="_1">手順</h3>
-<ul>
-<li>RustFS向けのポリシーを作成します。</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># cf. https://developer.hashicorp.com/vault/docs/commands/policy</span>
-cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt;&gt; ./rustfs-policy.hcl</span>
-<span class="s">path &quot;secret/*&quot; {</span>
-<span class="s">  capabilities = [&quot;create&quot;, &quot;read&quot;, &quot;update&quot;, &quot;patch&quot;, &quot;delete&quot;, &quot;list&quot;, &quot;recover&quot;]</span>
-<span class="s">}</span>
-
-<span class="s">path &quot;transits/rustfs-master/&quot; {</span>
-<span class="s">  capabilities = [&quot;read&quot;]</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-
-vault<span class="w"> </span>policy<span class="w"> </span>write<span class="w"> </span>rustfs-policy<span class="w"> </span>./rustfs-policy.hcl
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_USER_PROFILE_URL</span><span class="o">=</span>http://localhost:8080/realms/&lt;your-realm&gt;/protocol/openid-connect/userinfo
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_USER_PROFILE_USERNAME_ATTR</span><span class="o">=</span>preferred_username
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_USER_PROFILE_DISPLAY_NAME_ATTR</span><span class="o">=</span>name
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_USER_PROFILE_EMAIL_ATTR</span><span class="o">=</span>email
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_TOKEN_URL</span><span class="o">=</span>http://localhost:8080/realms/&lt;your-realm&gt;/protocol/openid-connect/token
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_AUTHORIZATION_URL</span><span class="o">=</span>http://localhost:8080/realms/&lt;your-realm&gt;/protocol/openid-connect/auth
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_CLIENT_ID</span><span class="o">=</span>&lt;your-client-id&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_CLIENT_SECRET</span><span class="o">=</span>&lt;your-client-secret&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_PROVIDERNAME</span><span class="o">=</span>Keycloak
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_OAUTH2_SCOPE</span><span class="o">=</span>openid<span class="w"> </span>email<span class="w"> </span>profile
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_DOMAIN</span><span class="o">=</span>localhost
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_PORT</span><span class="o">=</span><span class="m">3000</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_PROTOCOL_USESSL</span><span class="o">=</span><span class="nb">false</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">CMD_URL_ADDPORT</span><span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <ul>
-<li>RustFS向けのトークンを作成します。</li>
+<li>HedgeDocを起動します:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># cf. https://developer.hashicorp.com/vault/docs/commands/token</span>
-vault<span class="w"> </span>token<span class="w"> </span>create<span class="w"> </span>-policy<span class="w"> </span>rustfs-policy
-</code></pre></div>
-<ul>
-<li>transitおよびkvを有効化します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>vault<span class="w"> </span>secrets<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>transit
-vault<span class="w"> </span>secrets<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>-path<span class="o">=</span>secret<span class="w"> </span>kv-v2
-</code></pre></div>
-<ul>
-<li>暗号化キーを作成します:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>vault<span class="w"> </span>write<span class="w"> </span>transit/keys/rustfs-master<span class="w"> </span><span class="nv">type</span><span class="o">=</span>aes256-gcm96
-</code></pre></div>
-<h2 id="rustfs">RustFS設定</h2>
-<h3 id="_2">手順</h3>
-<ul>
-<li><strong>SSE設定</strong>画面において下記設定を入力します:</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>項目</th>
-<th>設定値</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Vaultサーバー</td>
-<td>VaultサーバのIP</td>
-</tr>
-<tr>
-<td>Vaultトークン</td>
-<td>上で作成したトークン</td>
-</tr>
-<tr>
-<td>Transitマウントパス</td>
-<td><code>transit</code></td>
-</tr>
-<tr>
-<td>KVマウントパス</td>
-<td><code>secret</code></td>
-</tr>
-<tr>
-<td>キーパスプレフィックス</td>
-<td><code>rustfs/kms/keys</code></td>
-</tr>
-<tr>
-<td>デフォルトキーID</td>
-<td><code>rustfs-master</code></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>KMS設定後、キーを作成できます。キー作成後、下記コマンドで確認できます:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>vault<span class="w"> </span>kv<span class="w"> </span>list<span class="w"> </span>secret/rustfs/kms/keys/
+<div class="highlight"><pre><span></span><code><span class="nv">NODE_ENV</span><span class="o">=</span>production<span class="w"> </span>yarn<span class="w"> </span>start
 </code></pre></div>
 
 
