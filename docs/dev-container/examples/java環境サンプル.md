@@ -21,8 +21,6 @@ Javaでの開発環境のサンプルです:
           "source.organizeImports": "always"
         },
         "editor.formatOnSave": true,
-        "java.format.settings.url": "./formatter/eclipse-java-google-style.xml",
-        "java.format.settings.profile": "NobStyle",
         "java.inlayHints.parameterNames.enabled": "none",
         "java.compile.nullAnalysis.mode": "disabled",
         "java.configuration.updateBuildConfiguration": "interactive",
