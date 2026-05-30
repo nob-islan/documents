@@ -34,13 +34,6 @@ mv easyapp/* .
 rm -r easyapp/
 ```
 
-## アプリ実行
-
-```shell
-mvn compile
-mvn exec:java -Dexec.mainClass="nob.example.HelloKt"
-```
-
 ## 追加設定
 
 `pom.xml`に下記警告が出ているため、追加設定を入れて警告を消します:
@@ -68,4 +61,11 @@ mvn exec:java -Dexec.mainClass="nob.example.HelloKt"
                         </goals>
                     </execution>
                 </executions>
+```
+
+## アプリ実行
+
+```shell
+mvn compile
+mvn exec:java -Dexec.mainClass="nob.example.HelloKt"
 ```
