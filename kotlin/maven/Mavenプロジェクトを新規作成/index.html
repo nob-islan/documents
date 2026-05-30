@@ -7387,7 +7387,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        アプリ実行
+        追加設定
       
     </span>
   </a>
@@ -7398,7 +7398,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        追加設定
+        アプリ実行
       
     </span>
   </a>
@@ -11803,7 +11803,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        アプリ実行
+        追加設定
       
     </span>
   </a>
@@ -11814,7 +11814,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        追加設定
+        アプリ実行
       
     </span>
   </a>
@@ -11868,11 +11868,7 @@
 <div class="highlight"><pre><span></span><code>mv<span class="w"> </span>easyapp/*<span class="w"> </span>.
 rm<span class="w"> </span>-r<span class="w"> </span>easyapp/
 </code></pre></div>
-<h2 id="_2">アプリ実行</h2>
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>compile
-mvn<span class="w"> </span>exec:java<span class="w"> </span>-Dexec.mainClass<span class="o">=</span><span class="s2">&quot;nob.example.HelloKt&quot;</span>
-</code></pre></div>
-<h2 id="_3">追加設定</h2>
+<h2 id="_2">追加設定</h2>
 <p><code>pom.xml</code>に下記警告が出ているため、追加設定を入れて警告を消します:</p>
 <blockquote>
 <p>Plugin execution not covered by lifecycle configuration: org.jetbrains.kotlin:kotlin-maven-plugin:2.2.0:compile (execution: compile, phase: compile)</p>
@@ -11896,6 +11892,10 @@ mvn<span class="w"> </span>exec:java<span class="w"> </span>-Dexec.mainClass<spa
 <span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
 <span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
 <span class="w">                </span><span class="nt">&lt;/executions&gt;</span>
+</code></pre></div>
+<h2 id="_3">アプリ実行</h2>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>compile
+mvn<span class="w"> </span>exec:java<span class="w"> </span>-Dexec.mainClass<span class="o">=</span><span class="s2">&quot;nob.example.HelloKt&quot;</span>
 </code></pre></div>
 
 
