@@ -11,6 +11,7 @@
 - **[Go環境サンプル](./dev-container/examples/go環境サンプル.md)**
 - **[Kindサンプル](./dev-container/examples/kindサンプル.md)**
 - **[Java環境サンプル](./dev-container/examples/java環境サンプル.md)**
+- **[Kotlin環境サンプル](./dev-container/examples/kotlin環境サンプル.md)**
 - **[React環境サンプル](./dev-container/examples/react環境サンプル.md)**
 - **[Kubebuilder環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)**
 </div>
