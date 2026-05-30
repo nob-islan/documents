@@ -18,7 +18,10 @@ Kotlinでの環境サンプルです。最新のJDKだとKotlinのみ動かな�
     "vscode": {
       "settings": {
         "editor.formatOnSave": true,
-        "editor.inlayHints.enabled": "off"
+        "editor.inlayHints.enabled": "off",
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "always"
+        }
       },
       "extensions": ["jetbrains.kotlin-server"]
     }
