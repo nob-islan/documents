@@ -12266,298 +12266,299 @@ spring.datasource.password<span class="o">=</span>password
 <h3 id="_4">クラス一覧</h3>
 <h4 id="domainentityuserskt"><code>domain/entity/Users.kt</code></h4>
 <p>データベースのテーブル定義に対応するエンティティを定義します。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.domain.entity
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity</span>
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+<span class="k">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Column</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Entity</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Id</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">jakarta.persistence.Table</span>
 
-@Table(name = &quot;users&quot;)
-@Entity
-class Users(
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="nd">@Entity</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">Users</span><span class="p">(</span>
 
-    /**
-     * ユーザ名
-     */
-    @Id
-    @Column(name = &quot;name&quot;, length = 8, nullable = false)
-    val name: String,
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Id</span>
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 
-    /**
-     * パスワード
-     */
-    @Column(name = &quot;password&quot;, length = 32, nullable = false)
-    val password: String,
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * パスワード</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 
-    /**
-     * 年齢
-     */
-    @Column(name = &quot;age&quot;, nullable = false)
-    val age: Int
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 年齢</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">age</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="p">)</span>
 </code></pre></div>
 <h4 id="repositoryusersrepositorykt"><code>repository/UsersRepository.kt</code></h4>
 <p>データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.repository
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span>
 
-import nob.example.easyapp.domain.entity.Users
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
-import java.util.*
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">java.util.*</span>
 
-/**
- * usersテーブル向けrepositoryのインターフェースです。
- */
-@Repository
-interface UsersRepository : JpaRepository&lt;Users, String&gt; {
+<span class="cm">/**</span>
+<span class="cm"> * usersテーブル向けrepositoryのインターフェースです。</span>
+<span class="cm"> */</span>
+<span class="nd">@Repository</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nc">UsersRepository</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-    /**
-     * ユーザ情報を取得します。
-     */
-    fun findByName(name: String): Optional&lt;Users&gt;
-}
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報を取得します。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="serviceauthservicekt"><code>service/AuthService.kt</code></h4>
 <p>業務処理を担うクラスのインターフェースを定義します。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.service
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service</span>
 
-import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.MeInModel
-import nob.example.easyapp.service.model.MeOutModel
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span>
 
-/**
- * 認証サービスのインターフェースです。
- */
-interface AuthService {
+<span class="cm">/**</span>
+<span class="cm"> * 認証サービスのインターフェースです。</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nc">AuthService</span><span class="w"> </span><span class="p">{</span>
 
-    /**
-     * 認証処理を行います。
-     */
-    fun login(inModel: LoginInModel): LoginOutModel
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証処理を行います。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">):</span><span class="w"> </span><span class="n">LoginOutModel</span>
 
-    /**
-     * ユーザ情報を取得します。
-     */
-    fun me(inModel: MeInModel): MeOutModel
-}
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報を取得します。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">):</span><span class="w"> </span><span class="n">MeOutModel</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="serviceimplauthserviceimplkt"><code>service/impl/AuthServiceImpl.kt</code></h4>
 <p>サービスを実装します。アプリの業務処理はこのクラスで行います。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.service.impl
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.impl</span>
 
-import nob.example.easyapp.repository.UsersRepository
-import nob.example.easyapp.service.AuthService
-import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.MeInModel
-import nob.example.easyapp.service.model.MeOutModel
-import org.springframework.stereotype.Service
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository.UsersRepository</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginOutModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeOutModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span>
 
-/**
- * AuthServiceの実装です。
- */
-@Service
-class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthService {
+<span class="cm">/**</span>
+<span class="cm"> * AuthServiceの実装です。</span>
+<span class="cm"> */</span>
+<span class="nd">@Service</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">AuthServiceImpl</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">usersRepository</span><span class="p">:</span><span class="w"> </span><span class="n">UsersRepository</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AuthService</span><span class="w"> </span><span class="p">{</span>
 
-    override fun login(inModel: LoginInModel): LoginOutModel {
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">):</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="p">{</span>
 
-        val optUsers = usersRepository.findByName(inModel.name)
-        if (optUsers.isEmpty) {
-            return LoginOutModel(false)
-        }
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 
-        return LoginOutModel(optUsers.get().password == inModel.password)
-    }
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">password</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">inModel</span><span class="p">.</span><span class="na">password</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    override fun me(inModel: MeInModel): MeOutModel {
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">):</span><span class="w"> </span><span class="n">MeOutModel</span><span class="w"> </span><span class="p">{</span>
 
-        val optUsers = usersRepository.findByName(inModel.name)
-        if (optUsers.isPresent) {
-            return MeOutModel(optUsers.get().name, optUsers.get().age)
-        }
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">age</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 
-        return MeOutModel(&quot;Unknown user&quot;, 0)
-    }
-}
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;Unknown user&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="servicemodelauthmodelkt"><code>service/model/AuthModel.kt</code></h4>
 <p>各種業務処理の入力・出力モデルを定義します。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.service.model
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model</span>
 
-/**
- * 認証向けの入力モデルです。
- */
-data class LoginInModel(
-    /**
-     * ユーザ名
-     */
-    val name: String,
+<span class="cm">/**</span>
+<span class="cm"> * 認証向けの入力モデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LoginInModel</span><span class="p">(</span>
 
-    /**
-     * パスワード
-     */
-    val password: String
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 
-/**
- * 認証向けの出力モデルです。
- */
-data class LoginOutModel(
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * パスワード</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
 
-    /**
-     * 認証可否
-     */
-    val valid: Boolean
-)
+<span class="cm">/**</span>
+<span class="cm"> * 認証向けの出力モデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LoginOutModel</span><span class="p">(</span>
 
-/**
- * ユーザ情報取得向けの入力モデルです。
- */
-data class MeInModel(
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証可否</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">valid</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span>
+<span class="p">)</span>
 
-    /**
-     * ユーザ名
-     */
-    val name: String
-)
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得向けの入力モデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MeInModel</span><span class="p">(</span>
 
-/**
- * ユーザ情報取得向けの出力モデルです。
- */
-data class MeOutModel(
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
 
-    /**
-     * ユーザ名
-     */
-    val name: String,
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得向けの出力モデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MeOutModel</span><span class="p">(</span>
 
-    /**
-     * 年齢
-     */
-    val age: Int
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 年齢</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">age</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="p">)</span>
 </code></pre></div>
 <h4 id="controllerauthcontrollerkt"><code>controller/AuthController.kt</code></h4>
 <p>APIとしての外部契約を定義します。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.controller
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller</span>
 
-import nob.example.easyapp.controller.model.LoginRequest
-import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.MeRequest
-import nob.example.easyapp.controller.model.MeResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.PostMapping</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestBody</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span>
 
-/**
- * 認証コントローラーのインターフェースです。
- */
-@RequestMapping(&quot;/api/v1&quot;)
-interface AuthController {
+<span class="cm">/**</span>
+<span class="cm"> * 認証コントローラーのインターフェースです。</span>
+<span class="cm"> */</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nc">AuthController</span><span class="w"> </span><span class="p">{</span>
 
-    /**
-     * 認証処理を呼び出します。
-     */
-    @PostMapping(&quot;/login&quot;)
-    fun login(@RequestBody req: LoginRequest): LoginResponse
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証処理を呼び出します。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">req</span><span class="p">:</span><span class="w"> </span><span class="n">LoginRequest</span><span class="p">):</span><span class="w"> </span><span class="n">LoginResponse</span>
 
-    /**
-     * ユーザ情報取得処理を呼び出します。
-     */
-    @GetMapping(&quot;/me&quot;)
-    fun me(req: MeRequest): MeResponse
-}
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ情報取得処理を呼び出します。</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/me&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">req</span><span class="p">:</span><span class="w"> </span><span class="n">MeRequest</span><span class="p">):</span><span class="w"> </span><span class="n">MeResponse</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="controllerimplauthcontrollerimplkt"><code>controller/impl/AuthControllerImpl.kt</code></h4>
 <p>APIを実装します。ここでは業務処理は行わず、ビジネスロジックの呼び出しのみ行います。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.controller.impl
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.impl</span>
 
-import nob.example.easyapp.controller.AuthController
-import nob.example.easyapp.controller.model.LoginRequest
-import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.MeRequest
-import nob.example.easyapp.controller.model.MeResponse
-import nob.example.easyapp.service.AuthService
-import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.MeInModel
-import org.springframework.web.bind.annotation.RestController
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.AuthController</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginRequest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.LoginResponse</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeRequest</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model.MeResponse</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.AuthService</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.LoginInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.service.model.MeInModel</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span>
 
-/**
- * AuthControllerの実装です。
- */
-@RestController
-class AuthControllerImpl(private val authService: AuthService) : AuthController {
+<span class="cm">/**</span>
+<span class="cm"> * AuthControllerの実装です。</span>
+<span class="cm"> */</span>
+<span class="nd">@RestController</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">AuthControllerImpl</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">authService</span><span class="p">:</span><span class="w"> </span><span class="n">AuthService</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">AuthController</span><span class="w"> </span><span class="p">{</span>
 
-    override fun login(req: LoginRequest): LoginResponse {
-        return LoginResponse(authService.login(LoginInModel(req.name, req.password)).valid)
-    }
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">req</span><span class="p">:</span><span class="w"> </span><span class="n">LoginRequest</span><span class="p">):</span><span class="w"> </span><span class="n">LoginResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LoginResponse</span><span class="p">(</span><span class="n">authService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">LoginInModel</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">.</span><span class="na">password</span><span class="p">)).</span><span class="na">valid</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    override fun me(req: MeRequest): MeResponse {
-        val out = authService.me(MeInModel(req.name))
-        return MeResponse(out.name, out.age)
-    }
-}
+<span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">req</span><span class="p">:</span><span class="w"> </span><span class="n">MeRequest</span><span class="p">):</span><span class="w"> </span><span class="n">MeResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authService</span><span class="p">.</span><span class="na">me</span><span class="p">(</span><span class="n">MeInModel</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">name</span><span class="p">))</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MeResponse</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="na">age</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h4 id="controllermodelauthmodelkt"><code>controller/model/AuthModel.kt</code></h4>
 <p>各種APIのリクエスト・レスポンスモデルを定義します。</p>
-<div class="highlight"><pre><span></span><code>package nob.example.easyapp.controller.model
+<div class="highlight"><pre><span></span><code><span class="k">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.controller.model</span>
 
-/**
- * 認証向けのリクエストモデルです。
- */
-data class LoginRequest(
+<span class="cm">/**</span>
+<span class="cm"> * 認証向けのリクエストモデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LoginRequest</span><span class="p">(</span>
 
-    /**
-     * ユーザ名
-     */
-    val name: String,
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 
-    /**
-     * パスワード
-     */
-    val password: String
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * パスワード</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">password</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
 
-/**
- * 認証向けのレスポンスモデルです。
- */
-data class LoginResponse(
+<span class="cm">/**</span>
+<span class="cm"> * 認証向けのレスポンスモデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">LoginResponse</span><span class="p">(</span>
 
-    /**
-     * 認証可否
-     */
-    val valid: Boolean
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 認証可否</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">valid</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span>
+<span class="p">)</span>
 
-/**
- * ユーザ情報取得向けのリクエストモデルです。
- */
-data class MeRequest(
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得向けのリクエストモデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MeRequest</span><span class="p">(</span>
 
-    /**
-     * ユーザ名
-     */
-    val name: String
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<span class="p">)</span>
 
-/**
- * ユーザ情報取得向けのレスポンスモデルです。
- */
-data class MeResponse(
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得向けのレスポンスモデルです。</span>
+<span class="cm"> */</span>
+<span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">MeResponse</span><span class="p">(</span>
 
-    /**
-     * ユーザ名
-     */
-    val name: String,
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * ユーザ名</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span>
 
-    /**
-     * 年齢
-     */
-    val age: Int
-)
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * 年齢</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">age</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<span class="p">)</span>
 </code></pre></div>
 <h2 id="_5">起動</h2>
 <p>下記コマンドでアプリを起動します。</p>
