@@ -80,9 +80,7 @@ httpリクエストのルーティングを行う関数を格納するパッケ�
 
 ### `internal/infrastructure/repository`
 
-persistence配下の処理を呼び出し、domainおよびデータベース間でデータを操作する関数を格納するパッケージです。
-
-domainとテーブル定義とが1:1に対応している場合はpersistenceパッケージを省略し、repositoryの実装でSQLを発行してください。
+domainとデータベース間とでデータを操作する関数を格納するパッケージです。
 
 ### `internal/logging`
 
