@@ -61,46 +61,44 @@ func SetTx(ctx context.Context, tx *gorm.DB) context.Context {
 }
 ```
 
-- `persistence`配下のsqlについて、トランザクションを取得する処理を追記します:
+- `repository`配下のsqlについて、トランザクションを取得する処理を追記します:
 
 ```go
-package persistence
+package repository
 
 import (
 	"context"
+	"easyapp/internal/domain"
 	"easyapp/internal/infrastructure"
 	"easyapp/internal/infrastructure/persistence/table"
 
 	"gorm.io/gorm"
 )
 
-type UsersSql interface {
-
-	// ユーザ情報を保存します。
-	Save(ctx context.Context, u table.Users) error
-}
-
-type usersSql struct {
+type userRepository struct {
 	db *gorm.DB
 }
 
-func NewUsersSql(db *gorm.DB) UsersSql {
-	return &usersSql{db: db}
+func NewUserRepository(db *gorm.DB) domain.UserRepository {
+	return &userRepository{db: db}
 }
 
-func (s *usersSql) Save(ctx context.Context, u table.Users) error {
+func (r *userRepository) Save(ctx context.Context, user domain.User) error {
 
 	// トランザクションがあれば取得
-	db := s.db
+	db := r.db
 	if tx := infrastructure.GetTx(ctx); tx != nil {
 		db = tx
 	}
 
-	if err := gorm.G[table.Users](db).Create(ctx, &u); err != nil {
-		return err
-	}
-
-	return nil
+	return gorm.G[table.Users](db).Create(
+		ctx,
+		&table.Users{
+			Name:     user.Name(),
+			Password: user.Password(),
+			Age:      user.Age(),
+		},
+	)
 }
 ```
 
@@ -116,10 +114,11 @@ import (
 	"easyapp/internal/usecase/params"
 )
 
+// 認証のusecaseインターフェースです。
 type UserUsecase interface {
 
-	// ユーザ情報を保存します。
-	RegistUser(ctx context.Context, in params.RegistUserIn) (params.RegistUserOut, error)
+	// ユーザ情報を登録します。
+	Regist(ctx context.Context, in params.RegistIn) (params.RegistOut, error)
 }
 
 type userUsecase struct {
@@ -131,44 +130,39 @@ func NewUserUsecase(
 	userRepository domain.UserRepository,
 	txManager infrastructure.TxManager,
 ) UserUsecase {
-	return &userUsecase{userRepository: userRepository, txManager: txManager}
+	return &userUsecase{
+		userRepository: userRepository,
+		txManager:      txManager,
+	}
 }
 
-func (u *userUsecase) RegistUser(
-	ctx context.Context,
-	in params.RegistUserIn,
-) (
-	params.RegistUserOut,
-	error,
-) {
+func (u *userUsecase) Regist(ctx context.Context, in params.RegistIn) (params.RegistOut, error) {
 
 	// トランザクションを開始しつつ業務処理を実行
 	if err := u.txManager.WithTransaction(ctx, func(ctx context.Context) error {
 		return u.userRepository.Save(ctx, domain.NewUser(in.Name(), in.Password(), in.Age()))
 	}); err != nil {
-		return params.NewRegistUserOut(false), err
+		return params.NewRegistOut(false), err
 	}
 
-	return params.NewRegistUserOut(true), nil
+	return params.NewRegistOut(true), nil
 }
 ```
 
 ## テスト
 
-- `users_sql_test.go`
+- `users_repository_test.go`
 
 ```go
-package persistence
+package repository
 
 import (
 	"context"
+	"easyapp/internal/domain"
 	"easyapp/internal/infrastructure"
-	"easyapp/internal/infrastructure/persistence/table"
-	"easyapp/internal/infrastructure/persistence/test"
-	"errors"
+	"easyapp/internal/infrastructure/repository/test"
 	"testing"
 
-	"github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"
 )
@@ -177,65 +171,50 @@ func TestSave(t *testing.T) {
 
 	tests := []struct {
 		name          string            // テストケース名
+		ctx           context.Context   // コンテキスト
 		withTx        bool              // トランザクション有無
-		users         table.Users       // 入力値
+		users         domain.User       // 入力値
 		setup         func(db *gorm.DB) // 事前セットアップ関数
 		expectedError error             // 期待されるエラー
 	}{
 		{
 			name:          "success without tx",
+			ctx:           context.Background(),
 			withTx:        false,
-			users:         table.Users{Name: "nob", Password: "passwd", Age: 13},
+			users:         domain.NewUser("nob", "passwd", 13),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
 		},
 		{
 			name:          "success with tx",
+			ctx:           context.Background(),
 			withTx:        true,
-			users:         table.Users{Name: "nob", Password: "passwd", Age: 13},
+			users:         domain.NewUser("nob", "passwd", 13),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
-		},
-		{
-			name:   "failed to query",
-			withTx: false,
-			users:  table.Users{Name: "nob", Password: "passwd", Age: 13},
-			setup: func(db *gorm.DB) {
-				db.Exec("DROP TABLE users") // クエリエラーのためにテーブル破棄
-			},
-			expectedError: sqlite3.Error{},
 		},
 	}
 
 	for _, testcase := range tests {
 
 		t.Run(testcase.name, func(t *testing.T) {
-
 			// テストデータベースに接続
 			db := test.ConnectTestDB(t, "users")
 
 			// 事前セットアップ
 			testcase.setup(db)
 
-			ctx := context.Background()
-
 			// トランザクション開始
 			if testcase.withTx {
 				tx := db.Begin()
-				ctx = infrastructure.SetTx(context.Background(), tx)
+				testcase.ctx = infrastructure.SetTx(context.Background(), tx)
 			}
 
 			// sqlの実行
-			result := NewUsersSql(db).Save(ctx, testcase.users)
+			result := NewUserRepository(db).Save(testcase.ctx, testcase.users)
 
 			// レスポンスの確認
-			if result != nil {
-				var sqliteError sqlite3.Error
-				errors.As(result, &sqliteError)
-			} else {
-				assert.Equal(t, testcase.expectedError, result)
-			}
-
+			assert.Equal(t, testcase.expectedError, result)
 		})
 	}
 }
@@ -283,14 +262,14 @@ func TestRegistUser(t *testing.T) {
 
 	tests := []struct {
 		name                string                      // テストケース名
-		requestBody         params.RegistUserIn         // リクエストボディ
+		requestBody         params.RegistIn             // リクエストボディ
 		setupRepositoryMock func(m *mockUserRepository) // repositoryモック設定
-		expectedBody        params.RegistUserOut        // 期待されるレスポンスボディ
+		expectedBody        params.RegistOut            // 期待されるレスポンスボディ
 		expectedError       error                       // 期待されるエラー
 	}{
 		{
 			name:        "success",
-			requestBody: params.NewRegistUserIn("nob", "passwd", 13),
+			requestBody: params.NewRegistIn("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
 					"Save",
@@ -300,12 +279,12 @@ func TestRegistUser(t *testing.T) {
 					nil,
 				)
 			},
-			expectedBody:  params.NewRegistUserOut(true),
+			expectedBody:  params.NewRegistOut(true),
 			expectedError: nil,
 		},
 		{
 			name:        "repository error",
-			requestBody: params.NewRegistUserIn("nob", "passwd", 13),
+			requestBody: params.NewRegistIn("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
 					"Save",
@@ -315,7 +294,7 @@ func TestRegistUser(t *testing.T) {
 					errors.New("repository error"),
 				)
 			},
-			expectedBody:  params.NewRegistUserOut(false),
+			expectedBody:  params.NewRegistOut(false),
 			expectedError: errors.New("repository error"),
 		},
 	}
@@ -331,7 +310,7 @@ func TestRegistUser(t *testing.T) {
 			testcase.setupRepositoryMock(mockRepository)
 
 			// usecaseの実行
-			result, err := NewUserUsecase(mockRepository, mockTxManager).RegistUser(
+			result, err := NewUserUsecase(mockRepository, mockTxManager).Regist(
 				context.Background(),
 				testcase.requestBody,
 			)
