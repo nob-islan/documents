@@ -11816,6 +11816,41 @@
 </ul>
 <div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>easyapp.zip<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>easyapp.zip
 </code></pre></div>
+<ul>
+<li><code>pom.xml</code>の警告を消すため、下記設定を追加します:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&lt;build&gt;</span>
+<span class="w">        </span><span class="nt">&lt;pluginManagement&gt;</span>
+<span class="w">            </span><span class="nt">&lt;plugins&gt;</span>
+<span class="w">                </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;groupId&gt;</span>org.eclipse.m2e<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;artifactId&gt;</span>lifecycle-mapping<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;lifecycleMappingMetadata&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;pluginExecutions&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;pluginExecution&gt;</span>
+<span class="w">                                    </span><span class="nt">&lt;pluginExecutionFilter&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;groupId&gt;</span>org.jetbrains.kotlin<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;artifactId&gt;</span>kotlin-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;versionRange&gt;</span>[${kotlin.version},)<span class="nt">&lt;/versionRange&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;goals&gt;</span>
+<span class="w">                                            </span><span class="nt">&lt;goal&gt;</span>compile<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                                            </span><span class="nt">&lt;goal&gt;</span>test-compile<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;/goals&gt;</span>
+<span class="w">                                    </span><span class="nt">&lt;/pluginExecutionFilter&gt;</span>
+<span class="w">                                    </span><span class="nt">&lt;action&gt;</span>
+<span class="w">                                        </span><span class="nt">&lt;ignore/&gt;</span>
+<span class="w">                                    </span><span class="nt">&lt;/action&gt;</span>
+<span class="w">                                </span><span class="nt">&lt;/pluginExecution&gt;</span>
+<span class="w">                            </span><span class="nt">&lt;/pluginExecutions&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;/lifecycleMappingMetadata&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/configuration&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/plugins&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/pluginManagement&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/build&gt;</span>
+</code></pre></div>
 
 
 
