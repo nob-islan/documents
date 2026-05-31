@@ -12455,7 +12455,9 @@
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testFindByNameSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
+<span class="w">        </span><span class="c1">// repository呼び出し</span>
 <span class="w">        </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// 結果のassert</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()).</span><span class="na">isTrue</span><span class="p">();</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">()).</span><span class="na">usingRecursiveComparison</span><span class="p">().</span><span class="na">isEqualTo</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">));</span>
 <span class="w">    </span><span class="p">}</span>

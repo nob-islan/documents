@@ -12248,7 +12248,6 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">        </span><span class="p">)</span>
 <span class="w">            </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
 <span class="w">            </span><span class="p">.</span><span class="na">andReturn</span><span class="p">()</span>
-
 <span class="w">        </span><span class="c1">// 結果の検証</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">response</span><span class="p">.</span><span class="na">contentAsString</span><span class="p">).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">LoginResponse</span><span class="p">(</span><span class="kc">true</span><span class="p">)))</span>
 <span class="w">    </span><span class="p">}</span>
@@ -12273,7 +12272,6 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">        </span><span class="p">)</span>
 <span class="w">            </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
 <span class="w">            </span><span class="p">.</span><span class="na">andReturn</span><span class="p">()</span>
-
 <span class="w">        </span><span class="c1">// 結果の検証</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">response</span><span class="p">.</span><span class="na">contentAsString</span><span class="p">).</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">MeResponse</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">)))</span>
 <span class="w">    </span><span class="p">}</span>
@@ -12409,7 +12407,9 @@ spring.jpa.database-platform<span class="o">=</span>org.hibernate.dialect.H2Dial
 <span class="w">    </span><span class="nd">@Test</span>
 <span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">testFindByNameSuccess</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
+<span class="w">        </span><span class="c1">// repository呼び出し</span>
 <span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// 結果のassert</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">).</span><span class="na">isTrue</span><span class="p">()</span>
 <span class="w">        </span><span class="n">assertThat</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">()).</span><span class="na">usingRecursiveComparison</span><span class="p">().</span><span class="na">isEqualTo</span><span class="p">(</span><span class="n">Users</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">))</span>
 <span class="w">    </span><span class="p">}</span>
