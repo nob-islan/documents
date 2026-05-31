@@ -17,7 +17,7 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 │   │   ├── model        # APIのリクエスト・レスポンス構造体
 │   │   └── router       # httpリクエストのルーティング
 │   ├── infrastructure   # データベースなど外部接続設定
-│   │   ├── persistence  # データベースへのアクセス
+│   │   ├── persistence  # データベース向け定義
 │   │   │   └── table    # テーブル定義に対応した構造体
 │   │   └── repository   # ドメイン操作
 │   ├── logging          # ログ出力制御
@@ -72,7 +72,7 @@ httpリクエストのルーティングを行う関数を格納するパッケ�
 
 ### `internal/infrastructure/persistence`
 
-データベースにアクセスしてSQLを実行する関数を格納するパッケージです。各domain単位でファイルを作成し、SQL群とdomainとが1:1に対応するようにしてください。
+データベース向けの定義を格納するパッケージです。
 
 ### `internal/infrastructure/persistence/table`
 
