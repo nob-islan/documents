@@ -47,7 +47,7 @@ jobs:
       - name: Test with the Go CLI
         run: |
           go install gotest.tools/gotestsum@latest
-          gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository ./internal/infrastructure/persistence
+          gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository
           go tool cover -html=coverage.txt -o coverage.html
           go tool cover -func=coverage.txt
       - name: Upload Go test results

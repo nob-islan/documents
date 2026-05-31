@@ -80,10 +80,6 @@ INSERT INTO users (
     │   └── user_handler.go         # APIとしてのインターフェースおよび実装
     ├── infrastructure
     │   ├── db.go                   # データベース接続設定
-    │   ├── persistence
-    │   │   ├── table
-    │   │   │   └── users_row.go    # テーブル定義に対応した構造体
-    │   │   └── users_sql.go        # ドメイン操作のためのSQL定義
     │   └── repository
     │       └── user_repository.go  # データベース操作の統括
     └── usecase
@@ -132,20 +128,7 @@ func (u User) Age() int {
 type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(ctx context.Context, q FindByNameQuery) User
-}
-
-// ユーザ情報取得時のクエリです。
-type FindByNameQuery struct {
-	name string // 名前
-}
-
-func NewFindByNameQuery(name string) FindByNameQuery {
-	return FindByNameQuery{name: name}
-}
-
-func (q FindByNameQuery) Name() string {
-	return q.name
+	FindByName(ctx context.Context, targetName string) User
 }
 ```
 
@@ -193,68 +176,6 @@ func ConnectDB() *sql.DB {
 }
 ```
 
-#### `internal/infrastructure/persistence/`
-
-データベースを操作するためのクエリ発行処理を実装します。
-
-- `users_sql.go`
-
-```go
-package persistence
-
-import (
-	"context"
-	"database/sql"
-	"easyapp/internal/infrastructure/persistence/table"
-)
-
-type UsersSql interface {
-
-	// ユーザ情報取得SQLを発行します。
-	FindByName(ctx context.Context, targetName string) table.Users
-}
-
-type usersSql struct {
-	db *sql.DB
-}
-
-func NewUsersSql(db *sql.DB) UsersSql {
-	return &usersSql{db: db}
-}
-
-func (s *usersSql) FindByName(ctx context.Context, targetName string) table.Users {
-
-	const sql string = "SELECT * FROM users WHERE name = ?"
-
-	// クエリ実行
-	row := s.db.QueryRowContext(ctx, sql, targetName)
-
-	var name string
-	var password string
-	var age int
-	row.Scan(&name, &password, &age)
-
-	return table.Users{Name: name, Password: password, Age: age}
-}
-```
-
-#### `internal/infrastructure/persistence/table`
-
-データベースのテーブル定義に対応する構造体を宣言します。
-
-- `users_row.go`
-
-```go
-package table
-
-// usersテーブルのrow定義です。
-type Users struct {
-	Name     string // ユーザ名
-	Password string // パスワード
-	Age      int    // 年齢
-}
-```
-
 #### `internal/infrastructure/repository/`
 
 persistenceを呼び出してドメイン・テーブル間のデータをやり取りします。
@@ -266,23 +187,31 @@ package repository
 
 import (
 	"context"
+	"database/sql"
 	"easyapp/internal/domain"
-	"easyapp/internal/infrastructure/persistence"
 )
 
 type userRepository struct {
-	usersSql persistence.UsersSql
+	db *sql.DB
 }
 
-func NewUserRepository(usersSql persistence.UsersSql) domain.UserRepository {
-	return &userRepository{usersSql: usersSql}
+func NewUserRepository(db *sql.DB) domain.UserRepository {
+	return &userRepository{db: db}
 }
 
-func (r *userRepository) FindByName(ctx context.Context, q domain.FindByNameQuery) domain.User {
+func (r *userRepository) FindByName(ctx context.Context, targetName string) domain.User {
 
-	u := r.usersSql.FindByName(ctx, q.Name())
+	const sql string = "SELECT * FROM users WHERE name = ?"
 
-	return domain.NewUser(u.Name, u.Password, u.Age)
+	// クエリ実行
+	row := r.db.QueryRowContext(ctx, sql, targetName)
+
+	var name string
+	var password string
+	var age int
+	row.Scan(&name, &password, &age)
+
+	return domain.NewUser(name, password, age)
 }
 ```
 
@@ -322,7 +251,7 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 
 func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.LoginOut {
 
-	user := u.userRepository.FindByName(ctx, domain.NewFindByNameQuery(in.Name()))
+	user := u.userRepository.FindByName(ctx, in.Name())
 	if user.Name() == "" {
 		return params.NewLoginOut(false)
 	}
@@ -331,7 +260,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.Login
 
 func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, error) {
 
-	user := u.userRepository.FindByName(ctx, domain.NewFindByNameQuery(in.Name()))
+	user := u.userRepository.FindByName(ctx, in.Name())
 	if user.Name() == "" {
 		return *new(params.MeOut), errors.New("no such user")
 	}
@@ -617,7 +546,6 @@ import (
 	"easyapp/internal/handler"
 	"easyapp/internal/handler/router"
 	"easyapp/internal/infrastructure"
-	"easyapp/internal/infrastructure/persistence"
 	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/usecase"
 	"net/http"
@@ -636,9 +564,7 @@ func NewServer() http.Handler {
 	router.NewUserRouter(handler.NewUserHandler(
 		usecase.NewUserUsecase(
 			repository.NewUserRepository(
-				persistence.NewUsersSql(
-					db,
-				),
+				db,
 			),
 		),
 	)).SetRouting(m)
