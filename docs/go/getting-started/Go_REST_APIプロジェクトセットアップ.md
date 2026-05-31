@@ -81,7 +81,7 @@ INSERT INTO users (
     ├── infrastructure
     │   ├── db.go                   # データベース接続設定
     │   └── repository
-    │       └── user_repository.go  # データベース操作の統括
+    │       └── user_repository.go  # ドメインの取得/永続化
     └── usecase
         ├── params
         │   └── user_params.go      # 業務処理の入力・出力モデル構造体
