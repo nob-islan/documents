@@ -127,7 +127,7 @@ spring.datasource.password=password
 
 データベースのテーブル定義に対応するエンティティを定義します。
 
-```kt
+```kotlin
 package nob.example.easyapp.domain.entity
 
 import jakarta.persistence.Column
@@ -164,7 +164,7 @@ class Users(
 
 データベースにアクセスするrepositoryインターフェースを定義します。JpaRepositoryによって実装が自動生成されます。
 
-```kt
+```kotlin
 package nob.example.easyapp.repository
 
 import nob.example.easyapp.domain.entity.Users
@@ -189,7 +189,7 @@ interface UsersRepository : JpaRepository<Users, String> {
 
 業務処理を担うクラスのインターフェースを定義します。
 
-```kt
+```kotlin
 package nob.example.easyapp.service
 
 import nob.example.easyapp.service.model.LoginInModel
@@ -218,7 +218,7 @@ interface AuthService {
 
 サービスを実装します。アプリの業務処理はこのクラスで行います。
 
-```kt
+```kotlin
 package nob.example.easyapp.service.impl
 
 import nob.example.easyapp.repository.UsersRepository
@@ -261,13 +261,14 @@ class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthServic
 
 各種業務処理の入力・出力モデルを定義します。
 
-```kt
+```kotlin
 package nob.example.easyapp.service.model
 
 /**
  * 認証向けの入力モデルです。
  */
 data class LoginInModel(
+
     /**
      * ユーザ名
      */
@@ -322,7 +323,7 @@ data class MeOutModel(
 
 APIとしての外部契約を定義します。
 
-```kt
+```kotlin
 package nob.example.easyapp.controller
 
 import nob.example.easyapp.controller.model.LoginRequest
@@ -358,7 +359,7 @@ interface AuthController {
 
 APIを実装します。ここでは業務処理は行わず、ビジネスロジックの呼び出しのみ行います。
 
-```kt
+```kotlin
 package nob.example.easyapp.controller.impl
 
 import nob.example.easyapp.controller.AuthController
@@ -392,7 +393,7 @@ class AuthControllerImpl(private val authService: AuthService) : AuthController 
 
 各種APIのリクエスト・レスポンスモデルを定義します。
 
-```kt
+```kotlin
 package nob.example.easyapp.controller.model
 
 /**
