@@ -25,3 +25,39 @@ curl https://start.spring.io/starter.zip \
 ```shell
 unzip easyapp.zip && rm -rf easyapp.zip
 ```
+
+- `pom.xml`の警告を消すため、下記設定を追加します:
+
+```xml
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jetbrains.kotlin</groupId>
+										<artifactId>kotlin-maven-plugin</artifactId>
+										<versionRange>[${kotlin.version},)</versionRange>
+										<goals>
+											<goal>compile</goal>
+											<goal>test-compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore/>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+```
