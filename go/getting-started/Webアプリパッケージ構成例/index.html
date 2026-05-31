@@ -12196,7 +12196,7 @@
 │<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>model<span class="w">        </span><span class="c1"># APIのリクエスト・レスポンス構造体</span>
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>router<span class="w">       </span><span class="c1"># httpリクエストのルーティング</span>
 │<span class="w">   </span>├──<span class="w"> </span>infrastructure<span class="w">   </span><span class="c1"># データベースなど外部接続設定</span>
-│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>persistence<span class="w">  </span><span class="c1"># データベースへのアクセス</span>
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>persistence<span class="w">  </span><span class="c1"># データベース向け定義</span>
 │<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>table<span class="w">    </span><span class="c1"># テーブル定義に対応した構造体</span>
 │<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>repository<span class="w">   </span><span class="c1"># ドメイン操作</span>
 │<span class="w">   </span>├──<span class="w"> </span>logging<span class="w">          </span><span class="c1"># ログ出力制御</span>
@@ -12227,7 +12227,7 @@
 <h3 id="internalinfrastructure"><code>internal/infrastructure</code></h3>
 <p>データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。</p>
 <h3 id="internalinfrastructurepersistence"><code>internal/infrastructure/persistence</code></h3>
-<p>データベースにアクセスしてSQLを実行する関数を格納するパッケージです。各domain単位でファイルを作成し、SQL群とdomainとが1:1に対応するようにしてください。</p>
+<p>データベース向けの定義を格納するパッケージです。</p>
 <h3 id="internalinfrastructurepersistencetable"><code>internal/infrastructure/persistence/table</code></h3>
 <p>データベースの各テーブル定義に対応した構造体を格納するパッケージです。</p>
 <h3 id="internalinfrastructurerepository"><code>internal/infrastructure/repository</code></h3>
