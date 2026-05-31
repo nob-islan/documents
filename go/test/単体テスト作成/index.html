@@ -4833,18 +4833,7 @@
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persistence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        persistenceテスト作成
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="persistenceテスト作成">
+    <nav class="md-nav" aria-label="repositoryテスト作成">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -11975,18 +11964,7 @@
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#persistence" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        persistenceテスト作成
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="persistenceテスト作成">
+    <nav class="md-nav" aria-label="repositoryテスト作成">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -12301,9 +12279,9 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 
 <span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUserRepository</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span>
 <span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">q</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span>
 <span class="p">)</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">q</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">)</span>
 <span class="p">}</span>
 
@@ -12323,7 +12301,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
@@ -12337,7 +12315,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
@@ -12351,7 +12329,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">                </span><span class="p">)</span>
@@ -12398,7 +12376,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">                </span><span class="p">)</span>
@@ -12413,7 +12391,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
 <span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
+<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
 <span class="w">                    </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">{},</span>
 <span class="w">                </span><span class="p">)</span>
@@ -12447,77 +12425,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="repository">repositoryテスト作成</h3>
-<p><code>user_repository.go</code>と同じパッケージにテストファイルを作成します。</p>
-<ul>
-<li><code>user_repository_test.go</code></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;context&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/table&quot;</span>
-<span class="w">    </span><span class="s">&quot;testing&quot;</span>
-
-<span class="w">    </span><span class="s">&quot;github.com/stretchr/testify/assert&quot;</span>
-<span class="w">    </span><span class="s">&quot;github.com/stretchr/testify/mock&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// モックの定義</span>
-<span class="kd">type</span><span class="w"> </span><span class="nx">mockUsersSql</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Mock</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">args</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Called</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="mi">0</span><span class="p">).(</span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// FindByNameのテスト</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">TestFindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">                 </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">query</span><span class="w">        </span><span class="nx">domain</span><span class="p">.</span><span class="nx">FindByNameQuery</span><span class="w"> </span><span class="c1">// クエリパラメータ</span>
-<span class="w">        </span><span class="nx">setupMock</span><span class="w">    </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w">  </span><span class="c1">// モック設定</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w">            </span><span class="c1">// 期待されるレスポンスボディ</span>
-<span class="w">    </span><span class="p">}{</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">query</span><span class="p">:</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewFindByNameQuery</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">),</span>
-<span class="w">            </span><span class="nx">setupMock</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">mockUsersSql</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nx">m</span><span class="p">.</span><span class="nx">On</span><span class="p">(</span>
-<span class="w">                    </span><span class="s">&quot;FindByName&quot;</span><span class="p">,</span>
-<span class="w">                    </span><span class="nx">mock</span><span class="p">.</span><span class="nx">Anything</span><span class="p">,</span>
-<span class="w">                    </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="p">).</span><span class="nx">Return</span><span class="p">(</span>
-<span class="w">                    </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">},</span>
-<span class="w">                </span><span class="p">)</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">tests</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">        </span><span class="c1">// モックリポジトリ初期化</span>
-<span class="w">        </span><span class="nx">mockSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">mockUsersSql</span><span class="p">)</span>
-
-<span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="c1">// モックの期待される動作を定義</span>
-<span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setupMock</span><span class="p">(</span><span class="nx">mockSql</span><span class="p">)</span>
-
-<span class="w">            </span><span class="c1">// repositoryの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserRepository</span><span class="p">(</span><span class="nx">mockSql</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
-
-<span class="w">            </span><span class="c1">// レスポンスの検証</span>
-<span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
-<span class="w">        </span><span class="p">})</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h3 id="persistence">persistenceテスト作成</h3>
-<p>データベースへのアクセスを行うpersistenceのテスト作成例です。</p>
+<p>データベースへのアクセスを行うrepositoryのテスト作成例です。</p>
 <h4 id="_5">ディレクトリ構成</h4>
 <div class="highlight"><pre><span></span><code>.
 ├──<span class="w"> </span><span class="nb">test</span>
@@ -12526,8 +12434,8 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 │<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">    </span><span class="c1"># テストデータ</span>
 │<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">  </span><span class="c1"># テーブル定義</span>
 │<span class="w">   </span>└──<span class="w"> </span>db.go<span class="w">               </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
-├──<span class="w"> </span>users_sql.go
-└──<span class="w"> </span>users_sql_test.go
+├──<span class="w"> </span>user_repository.go
+└──<span class="w"> </span>user_repository_test.go
 </code></pre></div>
 <h4 id="_6">一時データベース準備</h4>
 <ul>
@@ -12610,15 +12518,15 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 </code></pre></div>
 <h4 id="_8">テストケース作成</h4>
 <ul>
-<li><code>users_sql_test.go</code></li>
+<li><code>user_repository_test.go</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">persistence</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">repository</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;context&quot;</span>
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/table&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/persistence/test&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/repository/test&quot;</span>
 <span class="w">    </span><span class="s">&quot;testing&quot;</span>
 
 <span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/mattn/go-sqlite3&quot;</span>
@@ -12629,31 +12537,30 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="kd">func</span><span class="w"> </span><span class="nx">TestFindByName</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="nx">tests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">name</span><span class="w">                 </span><span class="kt">string</span><span class="w">           </span><span class="c1">// テストケース名</span>
-<span class="w">        </span><span class="nx">queryParam</span><span class="w">           </span><span class="kt">string</span><span class="w">           </span><span class="c1">// クエリパラメータ</span>
-<span class="w">        </span><span class="nx">setup</span><span class="w">                </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="c1">// 事前セットアップ関数</span>
-<span class="w">        </span><span class="nx">expectedBody</span><span class="w">         </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="w">      </span><span class="c1">// 期待されるレスポンスボディ</span>
+<span class="w">        </span><span class="nx">name</span><span class="w">         </span><span class="kt">string</span><span class="w">           </span><span class="c1">// テストケース名</span>
+<span class="w">        </span><span class="nx">query</span><span class="w">        </span><span class="kt">string</span><span class="w">           </span><span class="c1">// クエリパラメータ</span>
+<span class="w">        </span><span class="nx">setup</span><span class="w">        </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="c1">// 事前セットアップ関数</span>
+<span class="w">        </span><span class="nx">expectedBody</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="w">      </span><span class="c1">// 期待されるレスポンスボディ</span>
 <span class="w">    </span><span class="p">}{</span>
 <span class="w">        </span><span class="p">{</span>
 <span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">         </span><span class="s">&quot;success&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">queryParam</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">query</span><span class="p">:</span><span class="w">        </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w">        </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">},</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="nx">domain</span><span class="p">.</span><span class="nx">NewUser</span><span class="p">(</span><span class="s">&quot;nob&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;passwd&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">        </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">       </span><span class="s">&quot;query error&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">queryParam</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;query error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">query</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nob&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">setup</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="nx">db</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="s">&quot;DROP TABLE users&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// クエリエラー時のテスト向けにテーブルを壊す</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">Users</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">expectedBody</span><span class="p">:</span><span class="w"> </span><span class="o">*</span><span class="nb">new</span><span class="p">(</span><span class="nx">domain</span><span class="p">.</span><span class="nx">User</span><span class="p">),</span>
 <span class="w">        </span><span class="p">},</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">tests</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-
 <span class="w">            </span><span class="c1">// テストデータベースに接続</span>
 <span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
 <span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
@@ -12661,10 +12568,10 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">            </span><span class="c1">// 事前セットアップ</span>
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
 
-<span class="w">            </span><span class="c1">// sqlの実行</span>
-<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUsersSql</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// repositoryの実行</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewUserRepository</span><span class="p">(</span><span class="nx">db</span><span class="p">).</span><span class="nx">FindByName</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">query</span><span class="p">)</span>
 
-<span class="w">            </span><span class="c1">// レスポンスの確認</span>
+<span class="w">            </span><span class="c1">// レスポンスの検証</span>
 <span class="w">            </span><span class="nx">assert</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">expectedBody</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
 <span class="w">        </span><span class="p">})</span>
 <span class="w">    </span><span class="p">}</span>

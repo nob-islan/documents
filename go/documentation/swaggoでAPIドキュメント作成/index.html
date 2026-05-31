@@ -12006,7 +12006,6 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     &quot;easyapp/internal/handler&quot;
 <span class="w"> </span>     &quot;easyapp/internal/handler/router&quot;
 <span class="w"> </span>     &quot;easyapp/internal/infrastructure&quot;
-<span class="w"> </span>     &quot;easyapp/internal/infrastructure/persistence&quot;
 <span class="w"> </span>     &quot;easyapp/internal/infrastructure/repository&quot;
 <span class="w"> </span>     &quot;easyapp/internal/usecase&quot;
 <span class="w"> </span>     &quot;net/http&quot;
@@ -12032,9 +12031,7 @@ go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>g
 <span class="w"> </span>     router.NewUserRouter(handler.NewUserHandler(
 <span class="w"> </span>         usecase.NewUserUsecase(
 <span class="w"> </span>             repository.NewUserRepository(
-<span class="w"> </span>                 persistence.NewUsersSql(
-<span class="w"> </span>                     db,
-<span class="w"> </span>                 ),
+<span class="w"> </span>                 db,
 <span class="w"> </span>             ),
 <span class="w"> </span>         ),
 <span class="w"> </span>     )).SetRouting(m)
