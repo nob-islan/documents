@@ -178,7 +178,7 @@ func ConnectDB() *sql.DB {
 
 #### `internal/infrastructure/repository/`
 
-persistenceを呼び出してドメイン・テーブル間のデータをやり取りします。
+SQLを実行してドメイン・テーブル間のデータをやり取りします。
 
 - `user_repository.go`
 
