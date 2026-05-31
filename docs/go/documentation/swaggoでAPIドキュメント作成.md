@@ -61,7 +61,6 @@ swaggerページへのルーティングを設定します。
       "easyapp/internal/handler"
       "easyapp/internal/handler/router"
       "easyapp/internal/infrastructure"
-      "easyapp/internal/infrastructure/persistence"
       "easyapp/internal/infrastructure/repository"
       "easyapp/internal/usecase"
       "net/http"
@@ -87,9 +86,7 @@ swaggerページへのルーティングを設定します。
       router.NewUserRouter(handler.NewUserHandler(
           usecase.NewUserUsecase(
               repository.NewUserRepository(
-                  persistence.NewUsersSql(
-                      db,
-                  ),
+                  db,
               ),
           ),
       )).SetRouting(m)
