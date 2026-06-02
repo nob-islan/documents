@@ -12387,7 +12387,6 @@ spring.datasource.password<span class="o">=</span>password
 <span class="k">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">java.util.*</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * usersテーブル向けrepositoryのインターフェースです。</span>
@@ -12398,7 +12397,7 @@ spring.datasource.password<span class="o">=</span>password
 <span class="w">    </span><span class="cm">/**</span>
 <span class="cm">     * ユーザ情報を取得します。</span>
 <span class="cm">     */</span>
-<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Users</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">findByName</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">Users?</span>
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="serviceauthservicekt"><code>service/AuthService.kt</code></h4>
@@ -12446,22 +12445,16 @@ spring.datasource.password<span class="o">=</span>password
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">LoginInModel</span><span class="p">):</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">password</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">inModel</span><span class="p">.</span><span class="na">password</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">LoginOutModel</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">password</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">inModel</span><span class="p">.</span><span class="na">password</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">inModel</span><span class="p">:</span><span class="w"> </span><span class="n">MeInModel</span><span class="p">):</span><span class="w"> </span><span class="n">MeOutModel</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">optUsers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">isPresent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">optUsers</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">age</span><span class="p">)</span>
-<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kd">val</span><span class="w"> </span><span class="nv">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersRepository</span><span class="p">.</span><span class="na">findByName</span><span class="p">(</span><span class="n">inModel</span><span class="p">.</span><span class="na">name</span><span class="p">)</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;Unknown user&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="s">&quot;Unknown user&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">MeOutModel</span><span class="p">(</span><span class="n">users</span><span class="p">.</span><span class="na">name</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="na">age</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
