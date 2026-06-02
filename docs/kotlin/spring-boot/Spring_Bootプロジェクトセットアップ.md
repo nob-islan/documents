@@ -170,7 +170,6 @@ package nob.example.easyapp.repository
 import nob.example.easyapp.domain.entity.Users
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
-import java.util.*
 
 /**
  * usersテーブル向けrepositoryのインターフェースです。
@@ -181,7 +180,7 @@ interface UsersRepository : JpaRepository<Users, String> {
     /**
      * ユーザ情報を取得します。
      */
-    fun findByName(name: String): Optional<Users>
+    fun findByName(name: String): Users?
 }
 ```
 
@@ -237,22 +236,16 @@ class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthServic
 
     override fun login(inModel: LoginInModel): LoginOutModel {
 
-        val optUsers = usersRepository.findByName(inModel.name)
-        if (optUsers.isEmpty) {
-            return LoginOutModel(false)
-        }
+        val users = usersRepository.findByName(inModel.name) ?: return LoginOutModel(false)
 
-        return LoginOutModel(optUsers.get().password == inModel.password)
+        return LoginOutModel(users.password == inModel.password)
     }
 
     override fun me(inModel: MeInModel): MeOutModel {
 
-        val optUsers = usersRepository.findByName(inModel.name)
-        if (optUsers.isPresent) {
-            return MeOutModel(optUsers.get().name, optUsers.get().age)
-        }
+        val users = usersRepository.findByName(inModel.name) ?: return MeOutModel("Unknown user", 0)
 
-        return MeOutModel("Unknown user", 0)
+        return MeOutModel(users.name, users.age)
     }
 }
 ```
