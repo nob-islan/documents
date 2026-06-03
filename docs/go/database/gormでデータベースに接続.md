@@ -171,14 +171,14 @@ func ConnectTestDB(t *testing.T, table string) *gorm.DB {
 	}
 
 	// schema.sqlを読み込み・実行
-	schema, err := os.ReadFile("test/data/" + table + "/schema.sql")
+	schema, err := os.ReadFile("testdata/" + table + "/schema.sql")
 	if err != nil {
 		t.Fatalf("failed to read schema: %v", err)
 	}
 	db.Exec(string(schema))
 
 	// data.sqlを読み込み・実行
-	data, err := os.ReadFile("test/data/" + table + "/data.sql")
+	data, err := os.ReadFile("testdata/" + table + "/data.sql")
 	if err != nil {
 		t.Fatalf("failed to read data: %v", err)
 	}
