@@ -18,7 +18,6 @@ services:
       - PGID=1000
       - TZ=Asia/Tokyo
     volumes:
-      - ./volumes:/opt/workspace
       # - /path/to/openvscode-server/config:/config
     ports:
       - 3000:3000
