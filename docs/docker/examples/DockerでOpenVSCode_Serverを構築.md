@@ -1,5 +1,7 @@
 # DockerでOpenVSCode Serverを構築
 
+cf. https://hub.docker.com/r/linuxserver/openvscode-server
+
 ## 構築
 
 ### 起動
@@ -9,15 +11,20 @@
 ```yaml
 services:
   openvscode:
-    container_name: nob-openvscode
     image: lscr.io/linuxserver/openvscode-server:latest
+    container_name: openvscode
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./volumes:/opt/workspace
+      # - /path/to/openvscode-server/config:/config
     ports:
       - 3000:3000
-    volumes:
-      - ./volumes:/home/workspace
 ```
 
-`{サーバのアドレス}:3000`にアクセスするとVSCodeの画面が表示されます。
+http://localhost:3000 にアクセスするとVSCodeの画面が表示されます。
 
 ### httpsで通信を行う
 
