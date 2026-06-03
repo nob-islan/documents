@@ -10,7 +10,7 @@
 services:
   openvscode:
     container_name: nob-openvscode
-    image: gitpod/openvscode-server:1.92.1
+    image: lscr.io/linuxserver/openvscode-server:latest
     ports:
       - 3000:3000
     volumes:
