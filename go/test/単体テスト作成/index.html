@@ -12511,12 +12511,11 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <p>データベースへのアクセスを行うrepositoryのテスト作成例です。</p>
 <h4 id="_5">ディレクトリ構成</h4>
 <div class="highlight"><pre><span></span><code>.
-├──<span class="w"> </span><span class="nb">test</span>
-│<span class="w">   </span>├──<span class="w"> </span>data
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>users
-│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">    </span><span class="c1"># テストデータ</span>
-│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">  </span><span class="c1"># テーブル定義</span>
-│<span class="w">   </span>└──<span class="w"> </span>db.go<span class="w">               </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
+├──<span class="w"> </span>testdata
+│<span class="w">   </span>├──<span class="w"> </span>db.go<span class="w">                </span><span class="c1"># 一時データベースへの接続向けutil関数</span>
+│<span class="w">   </span>└──<span class="w"> </span>users
+│<span class="w">       </span>├──<span class="w"> </span>data.sql<span class="w">         </span><span class="c1"># テストデータ</span>
+│<span class="w">       </span>└──<span class="w"> </span>schema.sql<span class="w">       </span><span class="c1"># テーブル定義</span>
 ├──<span class="w"> </span>user_repository.go
 └──<span class="w"> </span>user_repository_test.go
 </code></pre></div>
@@ -12529,7 +12528,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <ul>
 <li><code>db.go</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">test</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">testdata</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
@@ -12546,7 +12545,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// schema.sqlを読み込み・実行</span>
-<span class="w">    </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;test/data/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/schema.sql&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">schema</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;testdata/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/schema.sql&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;failed to read schema: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
@@ -12556,7 +12555,7 @@ go<span class="w"> </span>get<span class="w"> </span>github.com/stretchr/testify
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// data.sqlを読み込み・実行</span>
-<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;test/data/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/data.sql&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;testdata/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/data.sql&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;failed to read data: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
