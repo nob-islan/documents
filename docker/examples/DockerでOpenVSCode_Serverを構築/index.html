@@ -12012,19 +12012,25 @@
 
 
 <h1 id="dockeropenvscode-server">DockerでOpenVSCode Serverを構築</h1>
+<p>cf. <a href="https://hub.docker.com/r/linuxserver/openvscode-server">https://hub.docker.com/r/linuxserver/openvscode-server</a></p>
 <h2 id="_1">構築</h2>
 <h3 id="_2">起動</h3>
 <p><code>docker-compose.yaml</code>を下記で作成します:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">openvscode</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nob-openvscode</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lscr.io/linuxserver/openvscode-server:latest</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openvscode</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PUID=1000</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PGID=1000</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TZ=Asia/Tokyo</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes:/opt/workspace</span>
+<span class="w">      </span><span class="c1"># - /path/to/openvscode-server/config:/config</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000:3000</span>
-<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./volumes:/home/workspace</span>
 </code></pre></div>
-<p><code>{サーバのアドレス}:3000</code>にアクセスするとVSCodeの画面が表示されます。</p>
+<p><a href="http://localhost:3000">http://localhost:3000</a> にアクセスするとVSCodeの画面が表示されます。</p>
 <h3 id="https">httpsで通信を行う</h3>
 <p>http通信だとmarkdownのプレビューができないなど不都合があるので、自己証明書を発行してリバースプロキシ経由でhttps通信をできるようにします。ここでは例としてパッケージ版のnginxサーバを立ててプロキシサーバとします。</p>
 <h4 id="nginx">nginxインストール</h4>
