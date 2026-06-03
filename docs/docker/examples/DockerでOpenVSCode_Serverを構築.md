@@ -17,8 +17,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Tokyo
-    volumes:
-      # - /path/to/openvscode-server/config:/config
+    # volumes:
+    #   - /path/to/openvscode-server/config:/config
     ports:
       - 3000:3000
 ```
