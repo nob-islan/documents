@@ -43,7 +43,7 @@ public class SampleServiceImpl implements SampleService {
     /**
      * 名前が未入力の場合に補完します。
      *
-     * @return
+     * @return 名前未入力者向けのデフォルト名
      */
     private String complementName() {
 
@@ -186,7 +186,7 @@ name = "snail"
     /**
      * 名前が未入力の場合に補完します。
      *
-     * @return
+     * @return 名前未入力者向けのデフォルト名
      */
     private String complementName() {
 
