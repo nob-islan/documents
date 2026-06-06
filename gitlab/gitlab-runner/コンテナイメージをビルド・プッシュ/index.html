@@ -11959,10 +11959,7 @@
 <p><a href="https://github.com/GoogleContainerTools/kaniko">kaniko</a>がメンテナンスされなくなったため、<a href="https://docs.docker.com/build/buildkit/">BuildKit</a>を使ってコンテナイメージを作成するためのGitLab CI向け設定を記載します。</p>
 <p>cf.</p>
 <ul>
-<li><a href="https://docs.gitlab.com/ja-jp/ci/docker/using_buildkit/">BuildKitでDockerイメージを作成</a><ul>
-<li>Docker executorではrootlessモードで動かせなかったため上記を参考にしつつrootモードで構成します。</li>
-</ul>
-</li>
+<li><a href="https://docs.gitlab.com/ja-jp/ci/docker/using_buildkit/">BuildKitでDockerイメージを作成</a></li>
 </ul>
 <h2 id="_2">設定</h2>
 <h3 id="_3">環境変数</h3>
@@ -11989,8 +11986,10 @@
 <span class="nt">push</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">moby/buildkit:latest</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">moby/buildkit:rootless</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">BUILDKITD_FLAGS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--oci-worker-no-process-sandbox</span>
 <span class="w">  </span><span class="nt">before_script</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p ~/.docker</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;{\&quot;auths\&quot;:{\&quot;$HARBOR_HOST\&quot;:{\&quot;username\&quot;:\&quot;$HARBOR_USERNAME\&quot;,\&quot;password\&quot;:\&quot;$HARBOR_PASSWORD\&quot;}}}&quot; &gt; ~/.docker/config.json</span>
