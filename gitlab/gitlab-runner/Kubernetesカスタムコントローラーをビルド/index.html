@@ -11939,7 +11939,7 @@
 <h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
 <p>cf.</p>
 <ul>
-<li><a href="https://docs.gitlab.com/ee/ci/docker/using_kaniko.html">Using kaniko</a></li>
+<li><a href="https://docs.gitlab.com/ci/docker/using_buildkit/">Build Docker images with BuildKit</a></li>
 <li><a href="https://docs.gitlab.com/ci/yaml/#release">release</a></li>
 </ul>
 <p>下記ステージで構成します:</p>
@@ -11949,7 +11949,7 @@
 </ul>
 </li>
 <li>ビルド<ul>
-<li>タグが切られたタイミングで、kanikoを使ってコントローラーのコンテナイメージをビルドします。</li>
+<li>タグが切られたタイミングで、BuildKitを使ってコントローラーのコンテナイメージをビルドします。</li>
 <li>並行して、コントローラーデプロイ向けのマニフェストファイルを生成し、artifactに含めます。</li>
 </ul>
 </li>
@@ -11974,16 +11974,20 @@
 <span class="nt">build_image</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcr.io/kaniko-project/executor:debug</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">moby/buildkit:rootless</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p /kaniko/.docker</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;{\&quot;auths\&quot;:{\&quot;${HARBOR_HOST}\&quot;:{\&quot;auth\&quot;:\&quot;$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\&quot;}}}&quot; &gt; /kaniko/.docker/config.json</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
-<span class="w">      </span><span class="no">/kaniko/executor</span>
-<span class="w">      </span><span class="no">--context &quot;${CI_PROJECT_DIR}&quot;</span>
-<span class="w">      </span><span class="no">--dockerfile &quot;${CI_PROJECT_DIR}/Dockerfile&quot;</span>
-<span class="w">      </span><span class="no">--destination &quot;${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG&quot;</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">BUILDKITD_FLAGS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--oci-worker-no-process-sandbox</span>
+<span class="w">  </span><span class="nt">before_script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p ~/.docker</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;{\&quot;auths\&quot;:{\&quot;$HARBOR_HOST\&quot;:{\&quot;username\&quot;:\&quot;$HARBOR_USERNAME\&quot;,\&quot;password\&quot;:\&quot;$HARBOR_PASSWORD\&quot;}}}&quot; &gt; ~/.docker/config.json</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="c1"># registry.insecure=trueを付与してHTTP通信を許可</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">buildctl-daemonless.sh build \</span>
+<span class="w">        </span><span class="no">--frontend dockerfile.v0 \</span>
+<span class="w">        </span><span class="no">--local context=. \</span>
+<span class="w">        </span><span class="no">--local dockerfile=. \</span>
+<span class="w">        </span><span class="no">--output type=image,name=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:${CI_COMMIT_TAG},push=true,registry.insecure=true</span>
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 <span class="nt">build_manifest</span><span class="p">:</span>

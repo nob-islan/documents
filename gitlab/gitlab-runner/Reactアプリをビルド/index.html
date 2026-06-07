@@ -11952,6 +11952,7 @@
 <ul>
 <li><a href="https://vitest.dev/guide/reporters.html#junit-reporter">Vitest JUnit Reporter</a></li>
 <li><a href="https://docs.gitlab.com/ci/testing/unit_test_report_examples/">Unit test report examples</a></li>
+<li><a href="https://docs.gitlab.com/ci/docker/using_buildkit/">Build Docker images with BuildKit</a></li>
 </ul>
 <p>下記ステージで構成します:</p>
 <ul>
@@ -11979,7 +11980,7 @@
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd ${MODULE}</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm install</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npx vitest --reporter=junit --outputFile=junit.xml --coverage</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npx vitest --reporter=junit --outputFile=junit.xml --coverage</span><span class="w"> </span><span class="c1"># カバレッジレポートを出力するために依存関係の追加が必要なことに注意</span>
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 <span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
@@ -12005,17 +12006,21 @@
 <span class="nt">push</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">push</span>
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcr.io/kaniko-project/executor:debug</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">moby/buildkit:rootless</span>
 <span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p /kaniko/.docker</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;{\&quot;auths\&quot;:{\&quot;${HARBOR_HOST}\&quot;:{\&quot;auth\&quot;:\&quot;$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\&quot;}}}&quot; &gt; /kaniko/.docker/config.json</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
-<span class="w">      </span><span class="no">/kaniko/executor</span>
-<span class="w">      </span><span class="no">--context &quot;${CI_PROJECT_DIR}&quot;</span>
-<span class="w">      </span><span class="no">--dockerfile &quot;${CI_PROJECT_DIR}/Dockerfile&quot;</span>
-<span class="w">      </span><span class="no">--build-arg ARTIFACT_PATH=${ARTIFACT_PATH}</span>
-<span class="w">      </span><span class="no">--destination &quot;${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG}&quot;</span>
+<span class="w">  </span><span class="nt">variables</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">BUILDKITD_FLAGS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">--oci-worker-no-process-sandbox</span>
+<span class="w">  </span><span class="nt">before_script</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir -p ~/.docker</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;{\&quot;auths\&quot;:{\&quot;$HARBOR_HOST\&quot;:{\&quot;username\&quot;:\&quot;$HARBOR_USERNAME\&quot;,\&quot;password\&quot;:\&quot;$HARBOR_PASSWORD\&quot;}}}&quot; &gt; ~/.docker/config.json</span>
+<span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="c1"># registry.insecure=trueを付与してHTTP通信を許可</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">buildctl-daemonless.sh build \</span>
+<span class="w">        </span><span class="no">--frontend dockerfile.v0 \</span>
+<span class="w">        </span><span class="no">--local context=${CI_PROJECT_DIR} \</span>
+<span class="w">        </span><span class="no">--local dockerfile=${MODULE} \</span>
+<span class="w">        </span><span class="no">--opt build-arg:ARTIFACT_PATH=${ARTIFACT_PATH} \</span>
+<span class="w">        </span><span class="no">--output type=image,name=${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG},push=true,registry.insecure=true</span>
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_TAG</span>
 </code></pre></div>
