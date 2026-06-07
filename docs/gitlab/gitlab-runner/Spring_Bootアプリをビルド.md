@@ -21,54 +21,6 @@ COPY ${ARTIFACT_PATH} /${ARTIFACT_NAME}
 CMD ["sh", "-c", "java -jar /${artifact_name}"]
 ```
 
-### `pom.xml`
-
-カバレッジレポートを出力するために依存関係を追加する必要があります:
-
-```xml
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.13</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-```
-
-```xml
-<project>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                    <reports>
-                        <report>report</report>
-                    </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-</project>
-```
-
 ### `.gitlab-ci.yml`
 
 cf.
@@ -100,7 +52,7 @@ test:
   image: eclipse-temurin:25
   script:
     - ./mvnw verify -Dtest="${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test" # controller, service, repositoryのみテスト
-    - ./mvnw test jacoco:report
+    - ./mvnw test jacoco:report # カバレッジレポートを出力するために依存関係の追加が必要なことに注意
   artifacts:
     when: always
     reports:
