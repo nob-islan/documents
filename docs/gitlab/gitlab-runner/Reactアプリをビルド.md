@@ -24,6 +24,7 @@ cf.
 
 - [Vitest JUnit Reporter](https://vitest.dev/guide/reporters.html#junit-reporter)
 - [Unit test report examples](https://docs.gitlab.com/ci/testing/unit_test_report_examples/)
+- [Build Docker images with BuildKit](https://docs.gitlab.com/ci/docker/using_buildkit/)
 
 下記ステージで構成します:
 
@@ -48,7 +49,7 @@ test:
   script:
     - cd ${MODULE}
     - npm install
-    - npx vitest --reporter=junit --outputFile=junit.xml --coverage
+    - npx vitest --reporter=junit --outputFile=junit.xml --coverage # カバレッジレポートを出力するために依存関係の追加が必要なことに注意
   artifacts:
     when: always
     paths:
@@ -74,17 +75,21 @@ build:
 push:
   stage: push
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: moby/buildkit:rootless
     entrypoint: [""]
-  script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"${HARBOR_HOST}\":{\"auth\":\"$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
-    - >-
-      /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --build-arg ARTIFACT_PATH=${ARTIFACT_PATH}
-      --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG}"
+  variables:
+    BUILDKITD_FLAGS: --oci-worker-no-process-sandbox
+  before_script:
+    - mkdir -p ~/.docker
+    - echo "{\"auths\":{\"$HARBOR_HOST\":{\"username\":\"$HARBOR_USERNAME\",\"password\":\"$HARBOR_PASSWORD\"}}}" > ~/.docker/config.json
+  script: # registry.insecure=trueを付与してHTTP通信を許可
+    - |
+      buildctl-daemonless.sh build \
+        --frontend dockerfile.v0 \
+        --local context=${CI_PROJECT_DIR} \
+        --local dockerfile=${MODULE} \
+        --opt build-arg:ARTIFACT_PATH=${ARTIFACT_PATH} \
+        --output type=image,name=${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG},push=true,registry.insecure=true
   rules:
     - if: $CI_COMMIT_TAG
 ```

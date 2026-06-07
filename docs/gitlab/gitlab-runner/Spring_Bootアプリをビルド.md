@@ -27,7 +27,7 @@ cf.
 
 - [UT結果をWebで確認](https://docs.gitlab.com/ci/testing/unit_test_report_examples/#maven)
 - [ジョブのアーティファクト](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
-- [kanikoを使ってコンテナイメージビルド・push](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
+- [BuildKitでDockerイメージを作成](https://docs.gitlab.com/ci/docker/using_buildkit/)
 
 下記ステージで構成します:
 
@@ -77,18 +77,22 @@ build:
 push:
   stage: push
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: moby/buildkit:rootless
     entrypoint: [""]
-  script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"${HARBOR_HOST}\":{\"auth\":\"$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
-    - >-
-      /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --build-arg ARTIFACT_PATH=${ARTIFACT_PATH}
-      --build-arg ARTIFACT_NAME=${ARTIFACT_NAME}
-      --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG}"
+  variables:
+    BUILDKITD_FLAGS: --oci-worker-no-process-sandbox
+  before_script:
+    - mkdir -p ~/.docker
+    - echo "{\"auths\":{\"$HARBOR_HOST\":{\"username\":\"$HARBOR_USERNAME\",\"password\":\"$HARBOR_PASSWORD\"}}}" > ~/.docker/config.json
+  script: # registry.insecure=trueを付与してHTTP通信を許可
+    - |
+      buildctl-daemonless.sh build \
+        --frontend dockerfile.v0 \
+        --local context=. \
+        --local dockerfile=. \
+        --opt build-arg:ARTIFACT_PATH=${ARTIFACT_PATH} \
+        --opt build-arg:ARTIFACT_NAME=${ARTIFACT_NAME} \
+        --output type=image,name=${HARBOR_HOST}/${HARBOR_PROJECT}/${MODULE}:${CI_COMMIT_TAG},push=true,registry.insecure=true
   rules:
     - if: $CI_COMMIT_TAG
 ```

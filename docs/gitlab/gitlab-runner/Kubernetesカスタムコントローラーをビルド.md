@@ -8,7 +8,7 @@ GitLab Runnerを使ってKubernetesカスタムコントローラーのコンテ
 
 cf.
 
-- [Using kaniko](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html)
+- [Build Docker images with BuildKit](https://docs.gitlab.com/ci/docker/using_buildkit/)
 - [release](https://docs.gitlab.com/ci/yaml/#release)
 
 下記ステージで構成します:
@@ -16,7 +16,7 @@ cf.
 - テスト
   - テスト関数を一括実行し、カバレッジを出力します。
 - ビルド
-  - タグが切られたタイミングで、kanikoを使ってコントローラーのコンテナイメージをビルドします。
+  - タグが切られたタイミングで、BuildKitを使ってコントローラーのコンテナイメージをビルドします。
   - 並行して、コントローラーデプロイ向けのマニフェストファイルを生成し、artifactに含めます。
 - リリース
   - 上記イメージビルドに併せてリリースを作成します。リリース画面からコントローラーのマニフェストがダウンロードできます。
@@ -38,16 +38,20 @@ test:
 build_image:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: moby/buildkit:rootless
     entrypoint: [""]
-  script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"${HARBOR_HOST}\":{\"auth\":\"$(echo -n ${HARBOR_USERNAME}:${HARBOR_PASSWORD} | base64)\"}}}" > /kaniko/.docker/config.json
-    - >-
-      /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --destination "${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG"
+  variables:
+    BUILDKITD_FLAGS: --oci-worker-no-process-sandbox
+  before_script:
+    - mkdir -p ~/.docker
+    - echo "{\"auths\":{\"$HARBOR_HOST\":{\"username\":\"$HARBOR_USERNAME\",\"password\":\"$HARBOR_PASSWORD\"}}}" > ~/.docker/config.json
+  script: # registry.insecure=trueを付与してHTTP通信を許可
+    - |
+      buildctl-daemonless.sh build \
+        --frontend dockerfile.v0 \
+        --local context=. \
+        --local dockerfile=. \
+        --output type=image,name=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:${CI_COMMIT_TAG},push=true,registry.insecure=true
   rules:
     - if: $CI_COMMIT_TAG
 build_manifest:
