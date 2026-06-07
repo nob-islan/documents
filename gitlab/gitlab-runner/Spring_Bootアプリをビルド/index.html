@@ -3876,17 +3876,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pomxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pom.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11912,17 +11901,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pomxml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pom.xml
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gitlab-ciyml" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11972,48 +11950,6 @@
 
 <span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sh&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;java -jar /${artifact_name}&quot;</span><span class="p">]</span>
 </code></pre></div>
-<h3 id="pomxml"><code>pom.xml</code></h3>
-<p>カバレッジレポートを出力するために依存関係を追加する必要があります:</p>
-<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
-<span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
-<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">                </span><span class="nt">&lt;version&gt;</span>0.8.13<span class="nt">&lt;/version&gt;</span>
-<span class="w">                </span><span class="nt">&lt;executions&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;execution&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;goals&gt;</span>
-<span class="w">                            </span><span class="nt">&lt;goal&gt;</span>prepare-agent<span class="nt">&lt;/goal&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;execution&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;id&gt;</span>report<span class="nt">&lt;/id&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;phase&gt;</span>test<span class="nt">&lt;/phase&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;goals&gt;</span>
-<span class="w">                            </span><span class="nt">&lt;goal&gt;</span>report<span class="nt">&lt;/goal&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;/goals&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;/execution&gt;</span>
-<span class="w">                </span><span class="nt">&lt;/executions&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/plugins&gt;</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;project&gt;</span>
-<span class="w">    </span><span class="nt">&lt;reporting&gt;</span>
-<span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
-<span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
-<span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.jacoco<span class="nt">&lt;/groupId&gt;</span>
-<span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>jacoco-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-<span class="w">                </span><span class="nt">&lt;reportSets&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;reportSet&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;reports&gt;</span>
-<span class="w">                        </span><span class="nt">&lt;report&gt;</span>report<span class="nt">&lt;/report&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;/reports&gt;</span>
-<span class="w">                    </span><span class="nt">&lt;/reportSet&gt;</span>
-<span class="w">                </span><span class="nt">&lt;/reportSets&gt;</span>
-<span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
-<span class="w">        </span><span class="nt">&lt;/plugins&gt;</span>
-<span class="w">    </span><span class="nt">&lt;/reporting&gt;</span>
-<span class="nt">&lt;/project&gt;</span>
-</code></pre></div>
 <h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
 <p>cf.</p>
 <ul>
@@ -12042,7 +11978,7 @@
 <span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eclipse-temurin:25</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./mvnw verify -Dtest=&quot;${BASE_PACKAGE}.${MODULE}.controller.*Test,${BASE_PACKAGE}.${MODULE}.service.*Test,${BASE_PACKAGE}.${MODULE}.repository.*Test&quot;</span><span class="w"> </span><span class="c1"># controller, service, repositoryのみテスト</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./mvnw test jacoco:report</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./mvnw test jacoco:report</span><span class="w"> </span><span class="c1"># カバレッジレポートを出力するために依存関係の追加が必要なことに注意</span>
 <span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 <span class="w">    </span><span class="nt">reports</span><span class="p">:</span>
