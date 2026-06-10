@@ -14,7 +14,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
     healthcheck:
-      test: mariadb -u root -ppassword
+      test: ["CMD", "mariadb", "-u", "root", "-ppassword", "edb", "-e", "SELECT 1"]
       start_period: 5s
       interval: 5s
       timeout: 5s
