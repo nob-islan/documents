@@ -1,4 +1,4 @@
-# Docker config
+# Docker configサンプル
 
 docker configを使ってコンテナ内の設定ファイルをyamlに記載します。
 
