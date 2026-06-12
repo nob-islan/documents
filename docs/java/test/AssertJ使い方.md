@@ -72,7 +72,6 @@ package nob.example.easyapp.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import nob.example.easyapp.domain.entity.Users;
 
@@ -81,7 +80,6 @@ import nob.example.easyapp.domain.entity.Users;
  *
  * @author nob
  */
-@Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
     /**
