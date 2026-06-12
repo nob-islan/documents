@@ -12,8 +12,6 @@ cf.
 ### `application-h2.properties`
 
 ```shell
-spring.application.name=easyapp
-
 spring.datasource.driver-class-name=org.h2.Driver
 spring.datasource.url=jdbc:h2:mem:eadb
 spring.datasource.username=sa
