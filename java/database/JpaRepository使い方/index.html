@@ -12296,7 +12296,6 @@ spring.datasource.password<span class="o">=</span>password
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">nob.example.easyapp.repository</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">nob.example.easyapp.domain.entity.Users</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
@@ -12306,7 +12305,6 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> *</span>
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
-<span class="nd">@Repository</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UsersRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Users</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="cm">/**</span>
