@@ -9,14 +9,14 @@ cf. https://argo-workflows.readthedocs.io/en/latest/quick-start/
 - Argo Workflowsのバージョンを指定します（see also; https://github.com/argoproj/argo-workflows）:
 
 ```shell
-ARGO_WORKFLOWS_VERSION="v3.7.3"
+ARGO_WORKFLOWS_VERSION="v4.0.6"
 ```
 
 - Argo Workflowsをインストールします:
 
 ```shell
 kubectl create namespace argo
-kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
+kubectl apply --server-side -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
 ```
 
 - Argo WorkflowsのAPI Serverにアクセスできるよう、サービスタイプを変更します:
@@ -39,7 +39,7 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
 fi
 
 # Download the binary
-curl -sLO "https://github.com/argoproj/argo-workflows/releases/download/v3.7.3/argo-$ARGO_OS-amd64.gz"
+curl -sLO "https://github.com/argoproj/argo-workflows/releases/download/v4.0.6/argo-$ARGO_OS-amd64.gz"
 
 # Unzip
 gunzip "argo-$ARGO_OS-amd64.gz"
