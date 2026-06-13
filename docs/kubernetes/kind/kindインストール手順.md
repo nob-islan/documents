@@ -4,12 +4,6 @@
 
 cf. https://kind.sigs.k8s.io/docs/user/quick-start/
 
-## スペック
-
-- Ubuntu20.04.1 LTS
-  - メモリ2GB以上
-  - 空き容量20GB以上
-
 ## インストール手順
 
 ### 前提
@@ -26,13 +20,11 @@ cf.
 kindのダウンロード
 
 ```shell
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
-```
+# For AMD64 / x86_64
+[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-amd64
 
-【M1 Mac対応】kindのダウンロード
-
-```shell
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
+# For ARM64
+[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-arm64
 ```
 
 kindバイナリを実行可能にする
