@@ -12040,7 +12040,9 @@ kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> 
 <span class="c1"># ロードバランサがない場合 type: NodePort</span>
 kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> </span>argo-server<span class="w"> </span>-n<span class="w"> </span>argo<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;: {&quot;type&quot;: &quot;NodePort&quot;, &quot;ports&quot;: [{&quot;name&quot;: &quot;web&quot;, &quot;port&quot;: 2746, &quot;protocol&quot;: &quot;TCP&quot;, &quot;targetPort&quot;: 2746, &quot;nodePort&quot;: 32746}]}}&#39;</span>
 </code></pre></div>
-<p>完了後、<a href="https://localhost:32746">https://localhost:32746</a> からGUIにアクセスできます。</p>
+<ul>
+<li>完了後、<a href="https://localhost:32746">https://localhost:32746</a> からGUIにアクセスできます。</li>
+</ul>
 <ul>
 <li>Argo Workflows CLIをインストールします（cf. <a href="https://github.com/argoproj/argo-workflows/releases/">https://github.com/argoproj/argo-workflows/releases/</a>）:</li>
 </ul>
