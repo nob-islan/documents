@@ -12016,9 +12016,12 @@
 
 <h1 id="_1">トラブルシュート集</h1>
 <h2 id="multipass"><code>multipass</code>コマンドが返ってこなくなった</h2>
-<p>各種VMは生きているが、<code>multipass</code>コマンドが返ってこなくなったケースです。下記コマンド実施後、10秒程度待ってから再実行してください:</p>
+<p>各種VMは生きているが、<code>multipass</code>コマンドが返ってこなくなったケースです:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># multipassdを止める</span>
-sudo<span class="w"> </span>launchctl<span class="w"> </span>bootout<span class="w"> </span>system<span class="w"> </span>/Library/LaunchDaemons/com.canonical.multipassd.plist
+sudo<span class="w"> </span>launchctl<span class="w"> </span>bootout<span class="w"> </span>system/com.canonical.multipassd
+
+<span class="c1"># プロセスキル</span>
+sudo<span class="w"> </span>pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span>qemu-system
 
 <span class="c1"># multipassdを再起動</span>
 sudo<span class="w"> </span>launchctl<span class="w"> </span>bootstrap<span class="w"> </span>system<span class="w"> </span>/Library/LaunchDaemons/com.canonical.multipassd.plist
