@@ -8761,17 +8761,6 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        スペック
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         インストール手順
       
     </span>
@@ -8781,7 +8770,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         前提
@@ -8808,7 +8797,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         使い方
@@ -12042,17 +12031,6 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        スペック
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         インストール手順
       
     </span>
@@ -12062,7 +12040,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         前提
@@ -12089,7 +12067,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         使い方
@@ -12119,16 +12097,8 @@
 <h1 id="kind">kindインストール手順</h1>
 <p>ローカルでマルチノードk8s環境を立ち上げるツールであるkindをインストールします。</p>
 <p>cf. <a href="https://kind.sigs.k8s.io/docs/user/quick-start/">https://kind.sigs.k8s.io/docs/user/quick-start/</a></p>
-<h2 id="_1">スペック</h2>
-<ul>
-<li>Ubuntu20.04.1 LTS<ul>
-<li>メモリ2GB以上</li>
-<li>空き容量20GB以上</li>
-</ul>
-</li>
-</ul>
-<h2 id="_2">インストール手順</h2>
-<h3 id="_3">前提</h3>
+<h2 id="_1">インストール手順</h2>
+<h3 id="_2">前提</h3>
 <p><code>docker</code>および<code>kubectl</code>をインストールしてください。</p>
 <p>cf.</p>
 <ul>
@@ -12137,10 +12107,11 @@
 </ul>
 <h3 id="kind_1">kindのインストール</h3>
 <p>kindのダウンロード</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-amd64
-</code></pre></div>
-<p>【M1 Mac対応】kindのダウンロード</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.14.0/kind-linux-arm64
+<div class="highlight"><pre><span></span><code><span class="c1"># For AMD64 / x86_64</span>
+<span class="o">[</span><span class="w"> </span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x86_64<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-amd64
+
+<span class="c1"># For ARM64</span>
+<span class="o">[</span><span class="w"> </span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>aarch64<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-Lo<span class="w"> </span>./kind<span class="w"> </span>https://kind.sigs.k8s.io/dl/v0.32.0/kind-linux-arm64
 </code></pre></div>
 <p>kindバイナリを実行可能にする</p>
 <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>./kind
@@ -12151,7 +12122,7 @@
 <p>インストールされていることを確認</p>
 <div class="highlight"><pre><span></span><code>kind<span class="w"> </span>version
 </code></pre></div>
-<h2 id="_4">使い方</h2>
+<h2 id="_3">使い方</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># クラスタ構築</span>
 kind<span class="w"> </span>create<span class="w"> </span>cluster
 </code></pre></div>
