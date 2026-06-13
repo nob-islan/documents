@@ -12023,13 +12023,13 @@
 <ul>
 <li>Argo Workflowsのバージョンを指定します（see also; <a href="https://github.com/argoproj/argo-workflows">https://github.com/argoproj/argo-workflows</a>）:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nv">ARGO_WORKFLOWS_VERSION</span><span class="o">=</span><span class="s2">&quot;v3.7.3&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nv">ARGO_WORKFLOWS_VERSION</span><span class="o">=</span><span class="s2">&quot;v4.0.6&quot;</span>
 </code></pre></div>
 <ul>
 <li>Argo Workflowsをインストールします:</li>
 </ul>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>create<span class="w"> </span>namespace<span class="w"> </span>argo
-kubectl<span class="w"> </span>apply<span class="w"> </span>-n<span class="w"> </span>argo<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;https://github.com/argoproj/argo-workflows/releases/download/</span><span class="si">${</span><span class="nv">ARGO_WORKFLOWS_VERSION</span><span class="si">}</span><span class="s2">/quick-start-minimal.yaml&quot;</span>
+kubectl<span class="w"> </span>apply<span class="w"> </span>--server-side<span class="w"> </span>-n<span class="w"> </span>argo<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;https://github.com/argoproj/argo-workflows/releases/download/</span><span class="si">${</span><span class="nv">ARGO_WORKFLOWS_VERSION</span><span class="si">}</span><span class="s2">/quick-start-minimal.yaml&quot;</span>
 </code></pre></div>
 <ul>
 <li>Argo WorkflowsのAPI Serverにアクセスできるよう、サービスタイプを変更します:</li>
@@ -12050,7 +12050,7 @@ kubectl<span class="w"> </span>patch<span class="w"> </span>svc<span class="w"> 
 <span class="k">fi</span>
 
 <span class="c1"># Download the binary</span>
-curl<span class="w"> </span>-sLO<span class="w"> </span><span class="s2">&quot;https://github.com/argoproj/argo-workflows/releases/download/v3.7.3/argo-</span><span class="nv">$ARGO_OS</span><span class="s2">-amd64.gz&quot;</span>
+curl<span class="w"> </span>-sLO<span class="w"> </span><span class="s2">&quot;https://github.com/argoproj/argo-workflows/releases/download/v4.0.6/argo-</span><span class="nv">$ARGO_OS</span><span class="s2">-amd64.gz&quot;</span>
 
 <span class="c1"># Unzip</span>
 gunzip<span class="w"> </span><span class="s2">&quot;argo-</span><span class="nv">$ARGO_OS</span><span class="s2">-amd64.gz&quot;</span>
