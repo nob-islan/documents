@@ -29,6 +29,8 @@ kubectl patch svc argo-server -n argo -p '{"spec": {"type": "LoadBalancer"}}'
 kubectl patch svc argo-server -n argo -p '{"spec": {"type": "NodePort", "ports": [{"name": "web", "port": 2746, "protocol": "TCP", "targetPort": 2746, "nodePort": 32746}]}}'
 ```
 
+完了後、https://localhost:32746 からGUIにアクセスできます。
+
 - Argo Workflows CLIをインストールします（cf. https://github.com/argoproj/argo-workflows/releases/）:
 
 ```shell
