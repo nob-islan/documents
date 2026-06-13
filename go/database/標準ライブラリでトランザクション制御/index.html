@@ -12234,10 +12234,9 @@
 <span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/domain&quot;</span>
 <span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure&quot;</span>
-<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/repository/test&quot;</span>
+<span class="w">    </span><span class="s">&quot;easyapp/internal/infrastructure/repository/testdata&quot;</span>
 <span class="w">    </span><span class="s">&quot;testing&quot;</span>
 
-<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/mattn/go-sqlite3&quot;</span>
 <span class="w">    </span><span class="s">&quot;github.com/stretchr/testify/assert&quot;</span>
 <span class="p">)</span>
 
@@ -12273,7 +12272,7 @@
 
 <span class="w">        </span><span class="nx">t</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">testcase</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// テストデータベースに接続</span>
-<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">testdata</span><span class="p">.</span><span class="nx">ConnectTestDB</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users&quot;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="c1">// 事前セットアップ</span>
 <span class="w">            </span><span class="nx">testcase</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
