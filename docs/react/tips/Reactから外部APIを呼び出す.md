@@ -298,7 +298,7 @@ export const Me = () => {
       </Modal>
       {meState.profile ?? <div>{meState.profile}</div>}
       <div>
-        <button onClick={() => handleOnClickSearch("nobb")}>検索</button>
+        <button onClick={() => handleOnClickSearch("nob")}>検索</button>
       </div>
     </>
   );
