@@ -12265,13 +12265,14 @@
 <div class="highlight"><pre><span></span><code>.
 └──<span class="w"> </span>features
 <span class="w">    </span>└──<span class="w"> </span>me
-<span class="w">        </span>├──<span class="w"> </span>meApi.ts<span class="w">     </span><span class="c1"># API呼び出しの実体</span>
-<span class="w">        </span>├──<span class="w"> </span>meHooks.ts<span class="w">   </span><span class="c1"># Modalの開閉などの画面操作</span>
-<span class="w">        </span>├──<span class="w"> </span>meSlice.ts<span class="w">   </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
-<span class="w">        </span>├──<span class="w"> </span>meStyles.ts<span class="w">  </span><span class="c1"># Modal向けstyle定義</span>
-<span class="w">        </span>├──<span class="w"> </span>meThunks.ts<span class="w">  </span><span class="c1"># API呼び出しなど非同期処理を伴うロジック</span>
-<span class="w">        </span>├──<span class="w"> </span>Me.tsx<span class="w">       </span><span class="c1"># 画面コンポーネント</span>
-<span class="w">        </span>└──<span class="w"> </span>meTypes.ts<span class="w">   </span><span class="c1"># 各種構造体</span>
+<span class="w">        </span>├──<span class="w"> </span>meApi.ts<span class="w">        </span><span class="c1"># API呼び出しの実体</span>
+<span class="w">        </span>├──<span class="w"> </span>meHooks.ts<span class="w">      </span><span class="c1"># Modalの開閉などの画面操作</span>
+<span class="w">        </span>├──<span class="w"> </span>me.module.scss<span class="w">  </span><span class="c1"># 画面装飾</span>
+<span class="w">        </span>├──<span class="w"> </span>meSlice.ts<span class="w">      </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
+<span class="w">        </span>├──<span class="w"> </span>meStyles.ts<span class="w">     </span><span class="c1"># Modal向けstyle定義</span>
+<span class="w">        </span>├──<span class="w"> </span>meThunks.ts<span class="w">     </span><span class="c1"># API呼び出しなど非同期処理を伴うロジック</span>
+<span class="w">        </span>├──<span class="w"> </span>Me.tsx<span class="w">          </span><span class="c1"># 画面コンポーネント</span>
+<span class="w">        </span>└──<span class="w"> </span>meTypes.ts<span class="w">      </span><span class="c1"># 各種構造体</span>
 </code></pre></div>
 <h2 id="_2">サンプルコード</h2>
 <h3 id="featuresmemeapits"><code>features/me/meApi.ts</code></h3>
@@ -12465,7 +12466,7 @@
 <span class="cm">   * 検索ボタン押下時の動作を定義します。</span>
 <span class="cm">   */</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">})).</span><span class="nx">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">}));</span>
 <span class="w">  </span><span class="p">};</span>
 
 <span class="w">  </span><span class="cm">/**</span>
@@ -12499,9 +12500,13 @@
 <span class="p">};</span>
 </code></pre></div>
 <h3 id="featuresmemetsx"><code>features/me/Me.tsx</code></h3>
-<p>stateの値を使って画面のレンダリングを行います。事前に<a href="https://www.npmjs.com/package/react-modal">react-modal</a>をインストールしておいてください。</p>
+<p>事前に<a href="https://www.npmjs.com/package/react-modal">react-modal</a>をインストールしておいてください。</p>
 <div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>--save<span class="w"> </span>react-modal<span class="w"> </span>@types/react-modal
 </code></pre></div>
+<p>また、<code>main.tsx</code>に下記を追加してください。</p>
+<div class="highlight"><pre><span></span><code><span class="nx">Modal</span><span class="p">.</span><span class="nx">setAppElement</span><span class="p">(</span><span class="s2">&quot;#root&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>stateの値を使って画面のレンダリングを行います。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">Modal</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-modal&quot;</span><span class="p">;</span>
 
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
