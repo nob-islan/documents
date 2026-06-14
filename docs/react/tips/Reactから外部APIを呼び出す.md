@@ -11,13 +11,14 @@ cf.
 
 ```shell
 .
-└── src
-    └── features
-        └── me
-            ├── meApi.ts     # API呼び出し
-            ├── meSlice.ts   # 画面の状態管理
-            ├── meThunks.ts  # フロント側のビジネスロジック
-            └── Me.tsx       # 画面のレンダリング
+└── features
+    └── me
+        ├── meApi.ts     # API呼び出しの実体
+        ├── meHooks.ts   # Modalの開閉などの画面操作
+        ├── meSlice.ts   # コンポーネントの状態およびアクションの定義
+        ├── meStyles.ts  # Modal向けstyle定義
+        ├── meThunks.ts  # API呼び出しなど非同期処理を伴うロジック
+        └── Me.tsx       # 画面コンポーネント
 ```
 
 ## サンプルコード
@@ -141,7 +142,7 @@ export const fetchMeThunk = createAsyncThunk<
 API呼び出し時の状態管理を`extraReducers`で行います。
 
 ```ts
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import { fetchMeThunk } from "./meThunks";
 
@@ -152,18 +153,27 @@ type MeState = {
   profile: string;
   loading: boolean;
   errorMessage?: string;
+  isModalOpen: boolean;
 };
 
 const initialState: MeState = {
   profile: "",
   loading: false,
   errorMessage: undefined,
+  isModalOpen: false,
 };
 
 const meSlice = createSlice({
   name: "me",
   initialState,
-  reducers: {},
+  reducers: {
+    /**
+     * モーダルの開閉制御
+     */
+    setIsModalOpen: (state: MeState, action: PayloadAction<boolean>) => {
+      state.isModalOpen = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       /**
@@ -185,21 +195,87 @@ const meSlice = createSlice({
        */
       .addCase(fetchMeThunk.rejected, (state, action) => {
         state.errorMessage = action.payload?.message;
+        state.isModalOpen = true;
         state.loading = false;
       });
   },
 });
 
+export const { setIsModalOpen } = meSlice.actions;
+
 export default meSlice.reducer;
+```
+
+### `features/me/meHooks.ts`
+
+ボタンクリック時など画面操作時の挙動を定義します。
+
+```ts
+import { useAppDispatch } from "../../app/hooks";
+import { setIsModalOpen } from "./meSlice";
+import { fetchMeThunk } from "./meThunks";
+
+/**
+ * ユーザ情報取得・表示コンポーネント向けのHooksです。
+ *
+ * @returns ユーザ情報取得・表示コンポーネント向けHooks
+ */
+export const useMeHooks = () => {
+  const dispatch = useAppDispatch();
+
+  /**
+   * 検索ボタン押下時の動作を定義します。
+   */
+  const handleOnClickSearch = async (name: string) => {
+    await dispatch(fetchMeThunk({ name: name })).unwrap();
+  };
+
+  /**
+   * エラーメッセージモーダルクローズ時の動作を定義します。
+   */
+  const handleOnRequestClose = () => {
+    dispatch(setIsModalOpen(false));
+  };
+
+  return { handleOnClickSearch, handleOnRequestClose };
+};
+```
+
+### `features/me/meStyles.ts`
+
+Modal向けのstyle定義です。
+
+```ts
+/**
+ * エラーメッセージモーダル向けのstyleです。
+ */
+export const modalStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    color: "#000000",
+  },
+};
 ```
 
 ### `features/me/Me.tsx`
 
-stateの値を使って画面のレンダリングを行います。
+stateの値を使って画面のレンダリングを行います。事前に[react-modal](https://www.npmjs.com/package/react-modal)をインストールしておいてください。
+
+```shell
+npm install --save react-modal @types/react-modal
+```
 
 ```tsx
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchMeThunk } from "./meThunks";
+import Modal from "react-modal";
+
+import { useAppSelector } from "../../app/hooks";
+import { useMeHooks } from "./meHooks";
+import { modalStyles } from "./meStyles";
 
 /**
  * ユーザ情報を取得・表示するコンポーネントです。
@@ -208,18 +284,22 @@ import { fetchMeThunk } from "./meThunks";
  */
 export const Me = () => {
   const meState = useAppSelector((state) => state.me);
-  const dispatch = useAppDispatch();
+  const { handleOnClickSearch, handleOnRequestClose } = useMeHooks();
 
   return (
     <>
-      {meState.errorMessage ? (
-        <div>{meState.errorMessage}</div>
-      ) : (
-        <div>{meState.profile}</div>
-      )}
-      <button onClick={() => dispatch(fetchMeThunk({ name: "nob" }))}>
-        検索
-      </button>
+      <Modal
+        isOpen={meState.isModalOpen}
+        onRequestClose={handleOnRequestClose}
+        style={modalStyles}
+        contentLabel="Error message Modal"
+      >
+        {meState.errorMessage ?? <div>{meState.errorMessage}</div>}
+      </Modal>
+      {meState.profile ?? <div>{meState.profile}</div>}
+      <div>
+        <button onClick={() => handleOnClickSearch("nobb")}>検索</button>
+      </div>
     </>
   );
 };
