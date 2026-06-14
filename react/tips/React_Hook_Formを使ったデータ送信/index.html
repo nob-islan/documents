@@ -11259,6 +11259,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresauthauthtypests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/auth/authTypes.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresauthauththunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11274,6 +11285,17 @@
     <span class="md-ellipsis">
       
         features/auth/authSlice.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuresauthauthhooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/auth/authHooks.ts
       
     </span>
   </a>
@@ -12145,6 +12167,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresauthauthtypests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/auth/authTypes.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresauthauththunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -12160,6 +12193,17 @@
     <span class="md-ellipsis">
       
         features/auth/authSlice.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuresauthauthhooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/auth/authHooks.ts
       
     </span>
   </a>
@@ -12217,13 +12261,15 @@
 </code></pre></div>
 <h2 id="_2">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.
-└──<span class="w"> </span>src
-<span class="w">    </span>└──<span class="w"> </span>features
-<span class="w">        </span>└──<span class="w"> </span>auth
-<span class="w">            </span>├──<span class="w"> </span>authApi.ts
-<span class="w">            </span>├──<span class="w"> </span>authSlice.ts
-<span class="w">            </span>├──<span class="w"> </span>authThunks.ts
-<span class="w">            </span>└──<span class="w"> </span>Auth.tsx
+└──<span class="w"> </span>features
+<span class="w">    </span>└──<span class="w"> </span>auth
+<span class="w">        </span>├──<span class="w"> </span>authApi.ts
+<span class="w">        </span>├──<span class="w"> </span>authHooks.ts
+<span class="w">        </span>├──<span class="w"> </span>auth.module.scss
+<span class="w">        </span>├──<span class="w"> </span>authSlice.ts
+<span class="w">        </span>├──<span class="w"> </span>authThunks.ts
+<span class="w">        </span>├──<span class="w"> </span>Auth.tsx
+<span class="w">        </span>└──<span class="w"> </span>authTypes.ts
 </code></pre></div>
 <h2 id="_3">実装</h2>
 <h3 id="featuresauthauthapits"><code>features/auth/authApi.ts</code></h3>
@@ -12283,19 +12329,22 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">valid</span><span class="o">:</span><span class="w"> </span><span class="kt">data.valid</span><span class="w"> </span><span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
-<h3 id="featuresauthauththunksts"><code>features/auth/authThunks.ts</code></h3>
-<p>画面仕様に合わせた型<code>LoginForm</code>から<code>LoginApiRequest</code>にデータを詰め替えてAPI呼び出し関数を実行します。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authApi&quot;</span><span class="p">;</span>
-
-<span class="cm">/**</span>
+<h3 id="featuresauthauthtypests"><code>features/auth/authTypes.ts</code></h3>
+<p>画面からAPIなどに渡す型定義を格納します。</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
 <span class="cm"> * ログインリクエスト情報を画面から渡すモデルです。</span>
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">password</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
+</code></pre></div>
+<h3 id="featuresauthauththunksts"><code>features/auth/authThunks.ts</code></h3>
+<p>画面仕様に合わせた型<code>LoginForm</code>から<code>LoginApiRequest</code>にデータを詰め替えてAPI呼び出し関数を実行します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authApi&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authTypes&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログイン成功時の状態をactionに渡すモデルです。</span>
@@ -12386,13 +12435,37 @@
 
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">authSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
 </code></pre></div>
+<h3 id="featuresauthauthhooksts"><code>features/auth/authHooks.ts</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">loginThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authTypes&quot;</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ログインコンポーネント向けのHooksです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @returns ログインコンポーネント向けHooks</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useAuthHooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * ログインボタン押下時の動作を定義します。</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleClickLogin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">(</span><span class="nx">form</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleClickLogin</span><span class="w"> </span><span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="featuresauthauthtsx"><code>features/auth/Auth.tsx</code></h3>
 <p>入力された認証向けのデータを<code>LoginForm</code>にセットします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-hook-form&quot;</span><span class="p">;</span>
 
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./auth.module.scss&quot;</span><span class="p">;</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">LoginForm</span><span class="p">,</span><span class="w"> </span><span class="nx">loginThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authThunks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAuthHooks</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authHooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">LoginForm</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./authTypes&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ログイン画面のコンポーネントです。</span>
@@ -12402,12 +12475,12 @@
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">register</span><span class="p">,</span><span class="w"> </span><span class="nx">handleSubmit</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useForm</span><span class="p">&lt;</span><span class="nt">LoginForm</span><span class="p">&gt;();</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">authState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">auth</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleClickLogin</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAuthHooks</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">container</span><span class="p">}&gt;</span>
 <span class="w">      </span><span class="p">&lt;</span><span class="nt">form</span>
-<span class="w">        </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">((</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">loginThunk</span><span class="p">(</span><span class="nx">form</span><span class="p">)))}</span>
+<span class="w">        </span><span class="na">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmit</span><span class="p">((</span><span class="nx">form</span><span class="o">:</span><span class="w"> </span><span class="kt">LoginForm</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleClickLogin</span><span class="p">(</span><span class="nx">form</span><span class="p">))}</span>
 <span class="w">      </span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">inputWrapper</span><span class="p">}&gt;</span>
 <span class="w">          </span><span class="p">&lt;</span><span class="nt">input</span>

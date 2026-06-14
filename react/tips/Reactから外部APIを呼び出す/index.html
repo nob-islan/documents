@@ -11276,6 +11276,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresmemetypests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meTypes.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresmemethunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -11324,6 +11335,17 @@
     <span class="md-ellipsis">
       
         features/me/Me.tsx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuresmememodulescss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/me.module.scss
       
     </span>
   </a>
@@ -12134,6 +12156,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresmemetypests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meTypes.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresmemethunksts" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -12188,6 +12221,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#featuresmememodulescss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/me.module.scss
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12226,7 +12270,8 @@
 <span class="w">        </span>├──<span class="w"> </span>meSlice.ts<span class="w">   </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
 <span class="w">        </span>├──<span class="w"> </span>meStyles.ts<span class="w">  </span><span class="c1"># Modal向けstyle定義</span>
 <span class="w">        </span>├──<span class="w"> </span>meThunks.ts<span class="w">  </span><span class="c1"># API呼び出しなど非同期処理を伴うロジック</span>
-<span class="w">        </span>└──<span class="w"> </span>Me.tsx<span class="w">       </span><span class="c1"># 画面コンポーネント</span>
+<span class="w">        </span>├──<span class="w"> </span>Me.tsx<span class="w">       </span><span class="c1"># 画面コンポーネント</span>
+<span class="w">        </span>└──<span class="w"> </span>meTypes.ts<span class="w">   </span><span class="c1"># 各種構造体</span>
 </code></pre></div>
 <h2 id="_2">サンプルコード</h2>
 <h3 id="featuresmemeapits"><code>features/me/meApi.ts</code></h3>
@@ -12286,23 +12331,18 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ok</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">data.name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">data.age</span><span class="w"> </span><span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
-<h3 id="featuresmemethunksts"><code>features/me/meThunks.ts</code></h3>
-<p>フロント側で行う業務処理を実装します。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
-
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meApi&quot;</span><span class="p">;</span>
-
-<span class="cm">/**</span>
-<span class="cm"> * リクエスト情報を画面から渡すモデルです。</span>
+<h3 id="featuresmemetypests"><code>features/me/meTypes.ts</code></h3>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得処理時の入力モデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeForm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得成功時の状態をactionに渡すモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
 <span class="p">};</span>
@@ -12310,16 +12350,23 @@
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得失敗時の状態をactionに渡すモデルです。</span>
 <span class="cm"> */</span>
-<span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">FetchMeError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="p">};</span>
+</code></pre></div>
+<h3 id="featuresmemethunksts"><code>features/me/meThunks.ts</code></h3>
+<p>非同期処理をハンドリングします。。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meApi&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">FetchMeArgs</span><span class="p">,</span><span class="w"> </span><span class="nx">FetchMeError</span><span class="p">,</span><span class="w"> </span><span class="nx">FetchMeSuccess</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meTypes&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報取得APIを呼び出して取得したユーザ情報をstateに保持します。</span>
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchMeThunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createAsyncThunk</span><span class="o">&lt;</span>
 <span class="w">  </span><span class="nx">FetchMeSuccess</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">FetchMeForm</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">FetchMeArgs</span><span class="p">,</span>
 <span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectValue</span><span class="o">:</span><span class="w"> </span><span class="kt">FetchMeError</span><span class="w"> </span><span class="p">}</span>
 <span class="o">&gt;</span><span class="p">(</span><span class="s2">&quot;me/fetch&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">rejectWithValue</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
@@ -12417,7 +12464,7 @@
 <span class="w">  </span><span class="cm">/**</span>
 <span class="cm">   * 検索ボタン押下時の動作を定義します。</span>
 <span class="cm">   */</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSearchClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">})).</span><span class="nx">unwrap</span><span class="p">();</span>
 <span class="w">  </span><span class="p">};</span>
 
@@ -12429,7 +12476,7 @@
 <span class="w">  </span><span class="p">};</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">handleSearchClick</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">handleClickSearch</span><span class="p">,</span>
 <span class="w">    </span><span class="nx">handleRequestClose</span><span class="p">,</span>
 <span class="w">  </span><span class="p">};</span>
 <span class="p">};</span>
@@ -12458,6 +12505,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">Modal</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-modal&quot;</span><span class="p">;</span>
 
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">style</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./me.module.scss&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meHooks&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">modalStyles</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meStyles&quot;</span><span class="p">;</span>
 
@@ -12471,7 +12519,7 @@
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleRequestClose</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="p">&lt;&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">container</span><span class="p">}&gt;</span>
 <span class="w">      </span><span class="p">&lt;</span><span class="nt">Modal</span>
 <span class="w">        </span><span class="na">isOpen</span><span class="o">=</span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">isModalOpen</span><span class="p">}</span>
 <span class="w">        </span><span class="na">onRequestClose</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRequestClose</span><span class="p">}</span>
@@ -12480,13 +12528,45 @@
 <span class="w">      </span><span class="p">&gt;</span>
 <span class="w">        </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;}</span>
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">Modal</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;}</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="p">(</span><span class="s2">&quot;nob&quot;</span><span class="p">)}&gt;</span><span class="nx">検索</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">)}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">searchButtonWrapper</span><span class="p">}&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span>
+<span class="w">          </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="p">(</span><span class="s2">&quot;nob&quot;</span><span class="p">)}</span>
+<span class="w">          </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">style</span><span class="p">.</span><span class="nx">searchButton</span><span class="p">}</span>
+<span class="w">        </span><span class="p">&gt;</span>
+<span class="w">          </span><span class="nx">検索</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">    </span><span class="p">&lt;/&gt;</span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
+</code></pre></div>
+<h3 id="featuresmememodulescss"><code>features/me/me.module.scss</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nv">$fontSize</span><span class="o">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+<span class="nv">$borderRadius</span><span class="o">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="nc">.container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">text-align</span><span class="nd">:</span><span class="w"> </span><span class="nt">center</span><span class="o">;</span>
+
+<span class="w">  </span><span class="nc">.searchButtonWrapper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">padding</span><span class="nd">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
+
+<span class="w">    </span><span class="nc">.searchButton</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">border-radius</span><span class="nd">:</span><span class="w"> </span><span class="err">$</span><span class="nt">borderRadius</span><span class="o">;</span>
+<span class="w">      </span><span class="nt">width</span><span class="nd">:</span><span class="w"> </span><span class="nt">120px</span><span class="o">;</span>
+<span class="w">      </span><span class="nt">height</span><span class="nd">:</span><span class="w"> </span><span class="nt">40px</span><span class="o">;</span>
+<span class="w">      </span><span class="nt">font-size</span><span class="nd">:</span><span class="w"> </span><span class="err">$</span><span class="nt">fontSize</span><span class="o">;</span>
+<span class="w">      </span><span class="nt">background-color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#ff9900</span><span class="o">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nc">.searchButton</span><span class="nd">:hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">cursor</span><span class="nd">:</span><span class="w"> </span><span class="nt">pointer</span><span class="o">;</span>
+<span class="w">      </span><span class="nt">background-color</span><span class="nd">:</span><span class="w"> </span><span class="nn">#fa6f00</span><span class="o">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 
