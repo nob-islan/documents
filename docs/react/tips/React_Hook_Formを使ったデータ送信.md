@@ -206,6 +206,8 @@ export default authSlice.reducer;
 
 ### `features/auth/authHooks.ts`
 
+ボタンクリック時など画面操作時の挙動を定義します。
+
 ```ts
 import { useAppDispatch } from "../../app/hooks";
 import { loginThunk } from "./authThunks";

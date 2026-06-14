@@ -13,13 +13,14 @@ cf.
 .
 └── features
     └── me
-        ├── meApi.ts     # API呼び出しの実体
-        ├── meHooks.ts   # Modalの開閉などの画面操作
-        ├── meSlice.ts   # コンポーネントの状態およびアクションの定義
-        ├── meStyles.ts  # Modal向けstyle定義
-        ├── meThunks.ts  # API呼び出しなど非同期処理を伴うロジック
-        ├── Me.tsx       # 画面コンポーネント
-        └── meTypes.ts   # 各種構造体
+        ├── meApi.ts        # API呼び出しの実体
+        ├── meHooks.ts      # Modalの開閉などの画面操作
+        ├── me.module.scss  # 画面装飾
+        ├── meSlice.ts      # コンポーネントの状態およびアクションの定義
+        ├── meStyles.ts     # Modal向けstyle定義
+        ├── meThunks.ts     # API呼び出しなど非同期処理を伴うロジック
+        ├── Me.tsx          # 画面コンポーネント
+        └── meTypes.ts      # 各種構造体
 ```
 
 ## サンプルコード
@@ -233,7 +234,7 @@ export const useMeHooks = () => {
    * 検索ボタン押下時の動作を定義します。
    */
   const handleClickSearch = async (name: string) => {
-    await dispatch(fetchMeThunk({ name: name })).unwrap();
+    await dispatch(fetchMeThunk({ name: name }));
   };
 
   /**
@@ -273,11 +274,19 @@ export const modalStyles = {
 
 ### `features/me/Me.tsx`
 
-stateの値を使って画面のレンダリングを行います。事前に[react-modal](https://www.npmjs.com/package/react-modal)をインストールしておいてください。
+事前に[react-modal](https://www.npmjs.com/package/react-modal)をインストールしておいてください。
 
 ```shell
 npm install --save react-modal @types/react-modal
 ```
+
+また、`main.tsx`に下記を追加してください。
+
+```tsx
+Modal.setAppElement("#root");
+```
+
+stateの値を使って画面のレンダリングを行います。
 
 ```tsx
 import Modal from "react-modal";
