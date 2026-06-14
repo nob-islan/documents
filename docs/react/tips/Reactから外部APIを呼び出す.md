@@ -88,6 +88,8 @@ export const me = async (req: MeRequest): Promise<MeResponse> => {
 
 ### `features/me/meTypes.ts`
 
+画面からAPIなどに渡す型定義を格納します。
+
 ```ts
 /**
  * ユーザ情報取得処理時の入力モデルです。
