@@ -226,18 +226,21 @@ export const useMeHooks = () => {
   /**
    * 検索ボタン押下時の動作を定義します。
    */
-  const handleOnClickSearch = async (name: string) => {
+  const handleSearchClick = async (name: string) => {
     await dispatch(fetchMeThunk({ name: name })).unwrap();
   };
 
   /**
    * エラーメッセージモーダルクローズ時の動作を定義します。
    */
-  const handleOnRequestClose = () => {
+  const handleRequestClose = () => {
     dispatch(setIsModalOpen(false));
   };
 
-  return { handleOnClickSearch, handleOnRequestClose };
+  return {
+    handleSearchClick,
+    handleRequestClose,
+  };
 };
 ```
 
@@ -284,13 +287,13 @@ import { modalStyles } from "./meStyles";
  */
 export const Me = () => {
   const meState = useAppSelector((state) => state.me);
-  const { handleOnClickSearch, handleOnRequestClose } = useMeHooks();
+  const { handleClickSearch, handleRequestClose } = useMeHooks();
 
   return (
     <>
       <Modal
         isOpen={meState.isModalOpen}
-        onRequestClose={handleOnRequestClose}
+        onRequestClose={handleRequestClose}
         style={modalStyles}
         contentLabel="Error message Modal"
       >
@@ -298,7 +301,7 @@ export const Me = () => {
       </Modal>
       {meState.profile ?? <div>{meState.profile}</div>}
       <div>
-        <button onClick={() => handleOnClickSearch("nob")}>検索</button>
+        <button onClick={() => handleClickSearch("nob")}>検索</button>
       </div>
     </>
   );
