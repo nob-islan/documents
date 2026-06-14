@@ -258,10 +258,12 @@ export const useMeHooks = () => {
 Modal向けのstyle定義です。
 
 ```ts
+import type { Styles } from "react-modal";
+
 /**
  * エラーメッセージモーダル向けのstyleです。
  */
-export const modalStyles = {
+export const modalStyles: Styles = {
   content: {
     top: "50%",
     left: "50%",
