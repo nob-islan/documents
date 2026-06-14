@@ -18,7 +18,8 @@ cf.
         ├── meSlice.ts   # コンポーネントの状態およびアクションの定義
         ├── meStyles.ts  # Modal向けstyle定義
         ├── meThunks.ts  # API呼び出しなど非同期処理を伴うロジック
-        └── Me.tsx       # 画面コンポーネント
+        ├── Me.tsx       # 画面コンポーネント
+        └── meTypes.ts   # 各種構造体
 ```
 
 ## サンプルコード
@@ -84,26 +85,20 @@ export const me = async (req: MeRequest): Promise<MeResponse> => {
 };
 ```
 
-### `features/me/meThunks.ts`
-
-フロント側で行う業務処理を実装します。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。
+### `features/me/meTypes.ts`
 
 ```ts
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
-import { me } from "./meApi";
-
 /**
- * リクエスト情報を画面から渡すモデルです。
+ * ユーザ情報取得処理時の入力モデルです。
  */
-type FetchMeForm = {
+export type FetchMeArgs = {
   name: string;
 };
 
 /**
  * ユーザ情報取得成功時の状態をactionに渡すモデルです。
  */
-type FetchMeSuccess = {
+export type FetchMeSuccess = {
   name: string;
   age: number;
 };
@@ -111,16 +106,27 @@ type FetchMeSuccess = {
 /**
  * ユーザ情報取得失敗時の状態をactionに渡すモデルです。
  */
-type FetchMeError = {
+export type FetchMeError = {
   message: string;
 };
+```
+
+### `features/me/meThunks.ts`
+
+非同期処理をハンドリングします。。API呼び出し関数を実行し、その結果に対応した型を戻すことでslice側で状態の更新が行われます。
+
+```ts
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { me } from "./meApi";
+import type { FetchMeArgs, FetchMeError, FetchMeSuccess } from "./meTypes";
 
 /**
  * ユーザ情報取得APIを呼び出して取得したユーザ情報をstateに保持します。
  */
 export const fetchMeThunk = createAsyncThunk<
   FetchMeSuccess,
-  FetchMeForm,
+  FetchMeArgs,
   { rejectValue: FetchMeError }
 >("me/fetch", async (form, { rejectWithValue }) => {
   try {
@@ -226,7 +232,7 @@ export const useMeHooks = () => {
   /**
    * 検索ボタン押下時の動作を定義します。
    */
-  const handleSearchClick = async (name: string) => {
+  const handleClickSearch = async (name: string) => {
     await dispatch(fetchMeThunk({ name: name })).unwrap();
   };
 
@@ -238,7 +244,7 @@ export const useMeHooks = () => {
   };
 
   return {
-    handleSearchClick,
+    handleClickSearch,
     handleRequestClose,
   };
 };
@@ -277,6 +283,7 @@ npm install --save react-modal @types/react-modal
 import Modal from "react-modal";
 
 import { useAppSelector } from "../../app/hooks";
+import style from "./me.module.scss";
 import { useMeHooks } from "./meHooks";
 import { modalStyles } from "./meStyles";
 
@@ -290,7 +297,7 @@ export const Me = () => {
   const { handleClickSearch, handleRequestClose } = useMeHooks();
 
   return (
-    <>
+    <div className={style.container}>
       <Modal
         isOpen={meState.isModalOpen}
         onRequestClose={handleRequestClose}
@@ -299,11 +306,46 @@ export const Me = () => {
       >
         {meState.errorMessage ?? <div>{meState.errorMessage}</div>}
       </Modal>
-      {meState.profile ?? <div>{meState.profile}</div>}
-      <div>
-        <button onClick={() => handleClickSearch("nob")}>検索</button>
+      {meState.profile ?? (
+        <div className={style.profile}>{meState.profile}</div>
+      )}
+      <div className={style.searchButtonWrapper}>
+        <button
+          onClick={() => handleClickSearch("nob")}
+          className={style.searchButton}
+        >
+          検索
+        </button>
       </div>
-    </>
+    </div>
   );
 };
+```
+
+### `features/me/me.module.scss`
+
+```scss
+$fontSize: 18px;
+$borderRadius: 10px;
+
+.container {
+  text-align: center;
+
+  .searchButtonWrapper {
+    padding: 20px;
+
+    .searchButton {
+      border-radius: $borderRadius;
+      width: 120px;
+      height: 40px;
+      font-size: $fontSize;
+      background-color: #ff9900;
+    }
+
+    .searchButton:hover {
+      cursor: pointer;
+      background-color: #fa6f00;
+    }
+  }
+}
 ```

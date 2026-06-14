@@ -12,13 +12,15 @@ npm install react-hook-form
 
 ```shell
 .
-└── src
-    └── features
-        └── auth
-            ├── authApi.ts
-            ├── authSlice.ts
-            ├── authThunks.ts
-            └── Auth.tsx
+└── features
+    └── auth
+        ├── authApi.ts
+        ├── authHooks.ts
+        ├── auth.module.scss
+        ├── authSlice.ts
+        ├── authThunks.ts
+        ├── Auth.tsx
+        └── authTypes.ts
 ```
 
 ## 実装
@@ -84,6 +86,20 @@ export const login = async (req: LoginRequest): Promise<LoginResponse> => {
 };
 ```
 
+### `features/auth/authTypes.ts`
+
+画面からAPIなどに渡す型定義を格納します。
+
+```ts
+/**
+ * ログインリクエスト情報を画面から渡すモデルです。
+ */
+export type LoginForm = {
+  name: string;
+  password: string;
+};
+```
+
 ### `features/auth/authThunks.ts`
 
 画面仕様に合わせた型`LoginForm`から`LoginApiRequest`にデータを詰め替えてAPI呼び出し関数を実行します。
@@ -92,14 +108,7 @@ export const login = async (req: LoginRequest): Promise<LoginResponse> => {
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { login } from "./authApi";
-
-/**
- * ログインリクエスト情報を画面から渡すモデルです。
- */
-export type LoginForm = {
-  name: string;
-  password: string;
-};
+import type { LoginForm } from "./authTypes";
 
 /**
  * ログイン成功時の状態をactionに渡すモデルです。
@@ -195,6 +204,32 @@ const authSlice = createSlice({
 export default authSlice.reducer;
 ```
 
+### `features/auth/authHooks.ts`
+
+```ts
+import { useAppDispatch } from "../../app/hooks";
+import { loginThunk } from "./authThunks";
+import type { LoginForm } from "./authTypes";
+
+/**
+ * ログインコンポーネント向けのHooksです。
+ *
+ * @returns ログインコンポーネント向けHooks
+ */
+export const useAuthHooks = () => {
+  const dispatch = useAppDispatch();
+
+  /**
+   * ログインボタン押下時の動作を定義します。
+   */
+  const handleClickLogin = async (form: LoginForm) => {
+    await dispatch(loginThunk(form));
+  };
+
+  return { handleClickLogin };
+};
+```
+
 ### `features/auth/Auth.tsx`
 
 入力された認証向けのデータを`LoginForm`にセットします。
@@ -202,9 +237,10 @@ export default authSlice.reducer;
 ```tsx
 import { useForm } from "react-hook-form";
 
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import style from "./auth.module.scss";
-import { type LoginForm, loginThunk } from "./authThunks";
+import { useAuthHooks } from "./authHooks";
+import type { LoginForm } from "./authTypes";
 
 /**
  * ログイン画面のコンポーネントです。
@@ -214,12 +250,12 @@ import { type LoginForm, loginThunk } from "./authThunks";
 export const Auth = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
   const authState = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch();
+  const { handleClickLogin } = useAuthHooks();
 
   return (
     <div className={style.container}>
       <form
-        onSubmit={handleSubmit((form: LoginForm) => dispatch(loginThunk(form)))}
+        onSubmit={handleSubmit((form: LoginForm) => handleClickLogin(form))}
       >
         <div className={style.inputWrapper}>
           <input
