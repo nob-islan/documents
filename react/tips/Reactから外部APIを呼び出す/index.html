@@ -12417,18 +12417,21 @@
 <span class="w">  </span><span class="cm">/**</span>
 <span class="cm">   * 検索ボタン押下時の動作を定義します。</span>
 <span class="cm">   */</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSearchClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">})).</span><span class="nx">unwrap</span><span class="p">();</span>
 <span class="w">  </span><span class="p">};</span>
 
 <span class="w">  </span><span class="cm">/**</span>
 <span class="cm">   * エラーメッセージモーダルクローズ時の動作を定義します。</span>
 <span class="cm">   */</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleRequestClose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">setIsModalOpen</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
 <span class="w">  </span><span class="p">};</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="p">};</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">handleSearchClick</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">handleRequestClose</span><span class="p">,</span>
+<span class="w">  </span><span class="p">};</span>
 <span class="p">};</span>
 </code></pre></div>
 <h3 id="featuresmemestylests"><code>features/me/meStyles.ts</code></h3>
@@ -12465,13 +12468,13 @@
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">meState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">me</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleRequestClose</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;&gt;</span>
 <span class="w">      </span><span class="p">&lt;</span><span class="nt">Modal</span>
 <span class="w">        </span><span class="na">isOpen</span><span class="o">=</span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">isModalOpen</span><span class="p">}</span>
-<span class="w">        </span><span class="na">onRequestClose</span><span class="o">=</span><span class="p">{</span><span class="nx">handleOnRequestClose</span><span class="p">}</span>
+<span class="w">        </span><span class="na">onRequestClose</span><span class="o">=</span><span class="p">{</span><span class="nx">handleRequestClose</span><span class="p">}</span>
 <span class="w">        </span><span class="na">style</span><span class="o">=</span><span class="p">{</span><span class="nx">modalStyles</span><span class="p">}</span>
 <span class="w">        </span><span class="na">contentLabel</span><span class="o">=</span><span class="s">&quot;Error message Modal&quot;</span>
 <span class="w">      </span><span class="p">&gt;</span>
@@ -12479,7 +12482,7 @@
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">Modal</span><span class="p">&gt;</span>
 <span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;}</span>
 <span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">(</span><span class="s2">&quot;nob&quot;</span><span class="p">)}&gt;</span><span class="nx">検索</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleClickSearch</span><span class="p">(</span><span class="s2">&quot;nob&quot;</span><span class="p">)}&gt;</span><span class="nx">検索</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">    </span><span class="p">&lt;/&gt;</span>
 <span class="w">  </span><span class="p">);</span>
