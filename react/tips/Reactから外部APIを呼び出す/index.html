@@ -11298,6 +11298,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresmemehooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meHooks.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuresmemestylests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meStyles.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresmemetsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -12134,6 +12156,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#featuresmemehooksts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meHooks.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#featuresmemestylests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        features/me/meStyles.ts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#featuresmemetsx" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -12175,13 +12219,14 @@
 </ul>
 <h2 id="_1">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.
-└──<span class="w"> </span>src
-<span class="w">    </span>└──<span class="w"> </span>features
-<span class="w">        </span>└──<span class="w"> </span>me
-<span class="w">            </span>├──<span class="w"> </span>meApi.ts<span class="w">     </span><span class="c1"># API呼び出し</span>
-<span class="w">            </span>├──<span class="w"> </span>meSlice.ts<span class="w">   </span><span class="c1"># 画面の状態管理</span>
-<span class="w">            </span>├──<span class="w"> </span>meThunks.ts<span class="w">  </span><span class="c1"># フロント側のビジネスロジック</span>
-<span class="w">            </span>└──<span class="w"> </span>Me.tsx<span class="w">       </span><span class="c1"># 画面のレンダリング</span>
+└──<span class="w"> </span>features
+<span class="w">    </span>└──<span class="w"> </span>me
+<span class="w">        </span>├──<span class="w"> </span>meApi.ts<span class="w">     </span><span class="c1"># API呼び出しの実体</span>
+<span class="w">        </span>├──<span class="w"> </span>meHooks.ts<span class="w">   </span><span class="c1"># Modalの開閉などの画面操作</span>
+<span class="w">        </span>├──<span class="w"> </span>meSlice.ts<span class="w">   </span><span class="c1"># コンポーネントの状態およびアクションの定義</span>
+<span class="w">        </span>├──<span class="w"> </span>meStyles.ts<span class="w">  </span><span class="c1"># Modal向けstyle定義</span>
+<span class="w">        </span>├──<span class="w"> </span>meThunks.ts<span class="w">  </span><span class="c1"># API呼び出しなど非同期処理を伴うロジック</span>
+<span class="w">        </span>└──<span class="w"> </span>Me.tsx<span class="w">       </span><span class="c1"># 画面コンポーネント</span>
 </code></pre></div>
 <h2 id="_2">サンプルコード</h2>
 <h3 id="featuresmemeapits"><code>features/me/meApi.ts</code></h3>
@@ -12292,7 +12337,7 @@
 </code></pre></div>
 <h3 id="featuresmemeslicets"><code>features/me/meSlice.ts</code></h3>
 <p>API呼び出し時の状態管理を<code>extraReducers</code>で行います。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">,</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">PayloadAction</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@reduxjs/toolkit&quot;</span><span class="p">;</span>
 
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMeThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meThunks&quot;</span><span class="p">;</span>
 
@@ -12303,18 +12348,27 @@
 <span class="w">  </span><span class="nx">profile</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
 <span class="w">  </span><span class="nx">errorMessage?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">isModalOpen</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">initialState</span><span class="o">:</span><span class="w"> </span><span class="kt">MeState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">profile</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">loading</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">errorMessage</span><span class="o">:</span><span class="w"> </span><span class="kt">undefined</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">isModalOpen</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
 <span class="p">};</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">meSlice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createSlice</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;me&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">initialState</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">reducers</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">  </span><span class="nx">reducers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * モーダルの開閉制御</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">setIsModalOpen</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">MeState</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="kt">PayloadAction</span><span class="o">&lt;</span><span class="kt">boolean</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">state</span><span class="p">.</span><span class="nx">isModalOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="p">;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nx">extraReducers</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">builder</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">builder</span>
 <span class="w">      </span><span class="cm">/**</span>
@@ -12336,17 +12390,73 @@
 <span class="cm">       */</span>
 <span class="w">      </span><span class="p">.</span><span class="nx">addCase</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">.</span><span class="nx">rejected</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">payload</span><span class="o">?</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">isModalOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">state</span><span class="p">.</span><span class="nx">loading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 <span class="w">      </span><span class="p">});</span>
 <span class="w">  </span><span class="p">},</span>
 <span class="p">});</span>
 
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">setIsModalOpen</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">meSlice</span><span class="p">.</span><span class="nx">actions</span><span class="p">;</span>
+
 <span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">meSlice</span><span class="p">.</span><span class="nx">reducer</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="featuresmemetsx"><code>features/me/Me.tsx</code></h3>
-<p>stateの値を使って画面のレンダリングを行います。</p>
-<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<h3 id="featuresmemehooksts"><code>features/me/meHooks.ts</code></h3>
+<p>ボタンクリック時など画面操作時の挙動を定義します。</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">setIsModalOpen</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meSlice&quot;</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">fetchMeThunk</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meThunks&quot;</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * ユーザ情報取得・表示コンポーネント向けのHooksです。</span>
+<span class="cm"> *</span>
+<span class="cm"> * @returns ユーザ情報取得・表示コンポーネント向けHooks</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * 検索ボタン押下時の動作を定義します。</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">name</span><span class="w"> </span><span class="p">})).</span><span class="nx">unwrap</span><span class="p">();</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * エラーメッセージモーダルクローズ時の動作を定義します。</span>
+<span class="cm">   */</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">setIsModalOpen</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span>
+<span class="w">  </span><span class="p">};</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="featuresmemestylests"><code>features/me/meStyles.ts</code></h3>
+<p>Modal向けのstyle定義です。</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * エラーメッセージモーダル向けのstyleです。</span>
+<span class="cm"> */</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">modalStyles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">top</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;50%&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">left</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;50%&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">right</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">bottom</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">marginRight</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;-50%&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">transform</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;translate(-50%, -50%)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="featuresmemetsx"><code>features/me/Me.tsx</code></h3>
+<p>stateの値を使って画面のレンダリングを行います。事前に<a href="https://www.npmjs.com/package/react-modal">react-modal</a>をインストールしておいてください。</p>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>--save<span class="w"> </span>react-modal<span class="w"> </span>@types/react-modal
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">Modal</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;react-modal&quot;</span><span class="p">;</span>
+
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../../app/hooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meHooks&quot;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">modalStyles</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;./meStyles&quot;</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * ユーザ情報を取得・表示するコンポーネントです。</span>
@@ -12355,18 +12465,22 @@
 <span class="cm"> */</span>
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">Me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">meState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">me</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useAppDispatch</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">,</span><span class="w"> </span><span class="nx">handleOnRequestClose</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useMeHooks</span><span class="p">();</span>
 
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="p">&lt;&gt;</span>
-<span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="w">      </span><span class="p">)}</span>
-<span class="w">      </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchMeThunk</span><span class="p">({</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;nob&quot;</span><span class="w"> </span><span class="p">}))}&gt;</span>
-<span class="w">        </span><span class="nx">検索</span>
-<span class="w">      </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">Modal</span>
+<span class="w">        </span><span class="na">isOpen</span><span class="o">=</span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">isModalOpen</span><span class="p">}</span>
+<span class="w">        </span><span class="na">onRequestClose</span><span class="o">=</span><span class="p">{</span><span class="nx">handleOnRequestClose</span><span class="p">}</span>
+<span class="w">        </span><span class="na">style</span><span class="o">=</span><span class="p">{</span><span class="nx">modalStyles</span><span class="p">}</span>
+<span class="w">        </span><span class="na">contentLabel</span><span class="o">=</span><span class="s">&quot;Error message Modal&quot;</span>
+<span class="w">      </span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">errorMessage</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;}</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">Modal</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{</span><span class="nx">meState</span><span class="p">.</span><span class="nx">profile</span><span class="p">}&lt;/</span><span class="nt">div</span><span class="p">&gt;}</span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span><span class="w"> </span><span class="na">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleOnClickSearch</span><span class="p">(</span><span class="s2">&quot;nobb&quot;</span><span class="p">)}&gt;</span><span class="nx">検索</span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="w">    </span><span class="p">&lt;/&gt;</span>
 <span class="w">  </span><span class="p">);</span>
 <span class="p">};</span>
