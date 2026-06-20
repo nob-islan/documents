@@ -55,6 +55,8 @@ toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
 scheme = "slate"
+primary = "black"
+accent = "deep purple"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to light mode"
 
