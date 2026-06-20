@@ -12124,7 +12124,7 @@
 
 <h1 id="_1">トラブルシュート集</h1>
 <h2 id="gitlabrunner">GitLabのドメインをRunner側で名前解決</h2>
-<p>GitLabにドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runnerのコンテナ内の<code>/srv/gitlab/gitlab-runner/config/config.toml</code>に下記を追加します。</p>
+<p>GitLabにドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は<code>config.toml</code>に下記を追加します。</p>
 <p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">[runners.docker]</span>
 <span class="w">    </span><span class="n">extra_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${ドメイン名}:${GitLabのIPアドレス}&quot;</span><span class="p">]</span>
