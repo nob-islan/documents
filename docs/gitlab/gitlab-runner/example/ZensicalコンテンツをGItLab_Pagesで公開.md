@@ -1,15 +1,17 @@
-# MkDocsコンテンツをGItLab Pagesで公開
+# ZensicalコンテンツをGItLab Pagesで公開
+
+cf. https://zensical.org/docs/publish-your-site/#gitlab-pages
 
 ## ディレクトリ構成
 
-プロジェクトのルートディレクトリにmkdocs.ymlが配置されている前提とします:
+プロジェクトのルートディレクトリに`zensical.toml`が配置されている前提とします:
 
 ```
 .
 ├──docs
 │   └──index.md
 ├── .gitlab-ci.yml
-└──mkdocs.yml
+└──zensical.toml
 ```
 
 ## 設定ファイル
@@ -25,14 +27,10 @@ image: python:slim
 pages:
   stage: deploy
   script:
-    - pip install mkdocs
-    - pip install mkdocs-material
-    - mkdocs build
-    - mkdir public
-    - mv site/* public/
-  artifacts:
-    paths:
-      - public
+    - pip install zensical
+    - zensical build --clean
+  pages:
+    publish: site
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 ```
