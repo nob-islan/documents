@@ -3607,17 +3607,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#dockerrunnergitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dockerネットワーク内でRunnerからGitLabに疎通をとる
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -11653,17 +11642,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#dockerrunnergitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dockerネットワーク内でRunnerからGitLabに疎通をとる
-      </span>
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -11685,15 +11663,6 @@
 <p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">[runners.docker]</span>
 <span class="w">    </span><span class="n">extra_hosts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${ドメイン名}:${GitLabのIPアドレス}&quot;</span><span class="p">]</span>
-</code></pre></div>
-<h2 id="dockerrunnergitlab">Dockerネットワーク内でRunnerからGitLabに疎通をとる</h2>
-<p>同一docker-compose内でGitLabおよびGitLab Runnerを起動している場合において、runner側からGitLabに疎通をとるために<code>config.toml</code>に下記を追加します。</p>
-<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
-<div class="highlight"><pre><span></span><code><span class="k">[[runners]]</span>
-<span class="w">  </span><span class="n">clone_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://${GitLabのサービス名}&quot;</span>
-
-<span class="w">  </span><span class="k">[runners.docker]</span>
-<span class="w">    </span><span class="n">network_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${ネットワーク名}&quot;</span>
 </code></pre></div>
 
 

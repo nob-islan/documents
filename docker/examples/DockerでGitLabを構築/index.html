@@ -2256,6 +2256,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dockerrunnergitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dockerネットワーク内でRunnerからGitLabに疎通をとる
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gitlab-ssl" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -11739,6 +11750,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#dockerrunnergitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Dockerネットワーク内でRunnerからGitLabに疎通をとる
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gitlab-ssl" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -11788,7 +11810,7 @@
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/logs:/var/log/gitlab&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
 </code></pre></div>
-<p><code>docker-compose up -d</code>でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502であれば根気良く待ってください。しばらく待って<code>http://${IP_address}:80</code>にアクセスするとgitlabの画面が表示されます。<br />
+<p><code>docker compose up -d</code>でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502であれば根気良く待ってください。しばらく待って<code>http://${IP_address}:80</code>にアクセスするとgitlabの画面が表示されます。<br />
 rootユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>nob-gitlab<span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;Password:&#39;</span><span class="w"> </span>/etc/gitlab/initial_root_password
 </code></pre></div>
@@ -11850,7 +11872,16 @@ total 12
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/gitlab-runner/config:/etc/gitlab-runner&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
 </code></pre></div>
-<p><code>docker-compose up -d</code>を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。</p>
+<p><code>docker compose up -d</code>を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。</p>
+<h3 id="dockerrunnergitlab">Dockerネットワーク内でRunnerからGitLabに疎通をとる</h3>
+<p>同一docker-compose内でGitLabおよびGitLab Runnerを起動している場合において、runner側からGitLabに疎通をとるために<code>config.toml</code>に下記を追加します。</p>
+<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
+<div class="highlight"><pre><span></span><code><span class="k">[[runners]]</span>
+<span class="w">  </span><span class="n">clone_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://${GitLabのサービス名}&quot;</span>
+
+<span class="w">  </span><span class="k">[runners.docker]</span>
+<span class="w">    </span><span class="n">network_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${ネットワーク名}&quot;</span>
+</code></pre></div>
 <h3 id="gitlab-ssl">GitLabが 自己証明書でSSL通信をしている場合</h3>
 <p>runnerコンテナの中に、GitLab本体が使っている証明書<code>{ドメイン名}.crt</code>として配置する必要があります。例として、<code>docker-compose.yaml</code>に下記を追加してください:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>

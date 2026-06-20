@@ -11770,7 +11770,7 @@ AWSコンソール上に表示されるDBのエンドポイントを控えてお
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/srv/gitlab/data:/var/opt/gitlab&quot;</span>
 </code></pre></div>
 <h2 id="_1">起動</h2>
-<p><code>docker-compose up</code>でOK。初期パスワードは以下で確認できます。</p>
+<p><code>docker compose up</code>でOK。初期パスワードは以下で確認できます。</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>gitlab-test<span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;Password:&#39;</span><span class="w"> </span>/etc/gitlab/initial_root_password
 </code></pre></div>
 
