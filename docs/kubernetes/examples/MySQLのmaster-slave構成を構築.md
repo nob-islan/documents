@@ -103,7 +103,7 @@ spec:
 
 ### mysql-common-secret.yaml
 
-mysql-[0|1]に共通するSecretです。`kubectl`コマンドのdry-runによってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
+mysql-0, mysql-1に共通するSecretです。`kubectl`コマンドのdry-runによってマニフェストを生成しています（cf. [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#use-raw-data)）。
 
 ```yaml
 apiVersion: v1

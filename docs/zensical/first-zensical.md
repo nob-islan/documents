@@ -42,6 +42,12 @@ Copyright &copy; nob
 [project.extra]
 generator = false
 
+[project.theme]
+features = [
+    "content.code.copy"
+]
+variant = "classic"
+
 [[project.theme.palette]]
 scheme = "default"
 toggle.icon = "lucide/moon"
@@ -52,7 +58,6 @@ scheme = "slate"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to light mode"
 
-[project.markdown_extensions.abbr]
 [project.markdown_extensions.pymdownx.highlight]
 [project.markdown_extensions.pymdownx.superfences]
 [project.markdown_extensions.pymdownx.magiclink]
