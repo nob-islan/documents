@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../Kubernetes%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/">
+        <link rel="prev" href="../Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/">
       
       
-        <link rel="next" href="../React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/">
+        <link rel="next" href="../%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEGitLab_Runner/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>MkDocsコンテンツをGItLab Pagesで公開 - Nob docs</title>
+        <title>ZensicalコンテンツをGItLab Pagesで公開 - Nob docs</title>
       
     
     
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mkdocsgitlab-pages" class="md-skip">
+        <a href="#zensicalgitlab-pages" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MkDocsコンテンツをGItLab Pagesで公開
+              ZensicalコンテンツをGItLab Pagesで公開
             
           </span>
         </div>
@@ -3688,6 +3688,60 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Reactアプリをビルド
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Spring Bootアプリをビルド
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -3709,7 +3763,7 @@
   <span class="md-ellipsis">
     
   
-  MkDocsコンテンツをGItLab Pagesで公開
+  ZensicalコンテンツをGItLab Pagesで公開
 
     
   </span>
@@ -3726,7 +3780,7 @@
   <span class="md-ellipsis">
     
   
-  MkDocsコンテンツをGItLab Pagesで公開
+  ZensicalコンテンツをGItLab Pagesで公開
 
     
   </span>
@@ -3794,60 +3848,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../React%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Reactアプリをビルド
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Spring_Boot%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%83%93%E3%83%AB%E3%83%89/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  Spring Bootアプリをビルド
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -11715,14 +11715,15 @@
                 
                   
 
-<h1 id="mkdocsgitlab-pages">MkDocsコンテンツをGItLab Pagesで公開</h1>
+<h1 id="zensicalgitlab-pages">ZensicalコンテンツをGItLab Pagesで公開</h1>
+<p>cf. <a href="https://zensical.org/docs/publish-your-site/#gitlab-pages">https://zensical.org/docs/publish-your-site/#gitlab-pages</a></p>
 <h2 id="_1">ディレクトリ構成</h2>
-<p>プロジェクトのルートディレクトリにmkdocs.ymlが配置されている前提とします:</p>
+<p>プロジェクトのルートディレクトリに<code>zensical.toml</code>が配置されている前提とします:</p>
 <div class="highlight"><pre><span></span><code>.
 ├──docs
 │   └──index.md
 ├── .gitlab-ci.yml
-└──mkdocs.yml
+└──zensical.toml
 </code></pre></div>
 <h2 id="_2">設定ファイル</h2>
 <h3 id="gitlab-ciyml"><code>.gitlab-ci.yml</code></h3>
@@ -11733,14 +11734,10 @@
 <span class="nt">pages</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deploy</span>
 <span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install mkdocs</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install mkdocs-material</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdocs build</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mkdir public</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mv site/* public/</span>
-<span class="w">  </span><span class="nt">artifacts</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">public</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install zensical</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zensical build --clean</span>
+<span class="w">  </span><span class="nt">pages</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">publish</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">site</span>
 <span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH</span>
 </code></pre></div>
