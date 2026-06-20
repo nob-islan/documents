@@ -2363,28 +2363,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runnerトラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.ymlサンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3816,6 +3794,34 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../../gitlab/gitlab-runner/trouble-shoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    トラブルシュート集
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     
     
     
@@ -3825,10 +3831,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_5_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_5_3" >
         
           
-          <label class="md-nav__link" for="__nav_12_5_2" id="__nav_12_5_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_12_5_3" id="__nav_12_5_3_label" tabindex="0">
             
   
   
@@ -3846,8 +3852,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_12_5_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_5_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -4012,6 +4018,34 @@
     
   
     Spring Bootアプリをビルド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gitlab/gitlab-runner/example/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEGitLab_Runner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめてのGitLab Runner
   
 
     
@@ -12161,28 +12195,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Runnerトラブルシュート
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gitlab-ciyml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        .gitlab-ci.ymlサンプル
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -12286,33 +12298,6 @@ total 12
 <p>runnerコンテナの中に、GitLab本体が使っている証明書<code>{ドメイン名}.crt</code>として配置する必要があります。例として、<code>docker-compose.yaml</code>に下記を追加してください:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./volumes/ssl/server.crt:/etc/gitlab-runner/certs/${ドメイン名}.crt&quot;</span>
-</code></pre></div>
-<h2 id="runner">Runnerトラブルシュート</h2>
-<p>GitLabにドメインを当てているなどしていて「名前解決ができない」のようなメッセージが出て落ちる場合は、runnerのコンテナ内の<code>/srv/gitlab/gitlab-runner/config/config.toml</code>に下記を追加します。</p>
-<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
-<div class="highlight"><pre><span></span><code>  [runners.docker]
-  ...
-    extra_hosts = [&quot;${ドメイン名}:${GitLabのIPアドレス}&quot;]
-</code></pre></div>
-<h2 id="gitlab-ciyml">.gitlab-ci.ymlサンプル</h2>
-<div class="highlight"><pre><span></span><code><span class="nt">stages</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-
-<span class="nt">job_build</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Building the project&quot;</span>
-
-<span class="nt">job_test1</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the first test&quot;</span>
-
-<span class="nt">job_test2</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
-<span class="w">  </span><span class="nt">script</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;This is the second test&quot;</span>
 </code></pre></div>
 
 
