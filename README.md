@@ -10,7 +10,7 @@ https://nobislandocuments.pages.dev/
 
 ## 開発方法
 
-開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown形式で作成されたドキュメントについて[MkDocs](https://www.mkdocs.org/)にてレンダリングします。
+開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown形式で作成されたドキュメントについて[Zensical](https://zensical.org/)にてレンダリングします。
 
 ### ドキュメント追加
 
@@ -18,15 +18,15 @@ https://nobislandocuments.pages.dev/
 
 ### 動作確認
 
-- mkdocsを起動します:
+- Zensicalを起動します:
 
 ```shell
-mkdocs serve
+zensical serve
 ```
 
-起動後、http://127.0.0.1:8000/ 上で作成したドキュメントを確認できます。
+起動後、http://localhost:8000/ 上で作成したドキュメントを確認できます。
 
 ## デプロイ方法
 
-- mainブランチに push されるとgithub actionが実行され、`mkdocs build`コマンドで 外部公開向けのファイルが gh-pagesブランチにpushされます。
+- mainブランチに push されるとgithub actionが実行され、`zensical build`コマンドで 外部公開向けのファイルが gh-pagesブランチにpushされます。
 - gh-pagesブランチに変更が入ると Cloudflare上のnobislandocumentプロジェクトでビルドが走り、ドキュメントが更新されます。

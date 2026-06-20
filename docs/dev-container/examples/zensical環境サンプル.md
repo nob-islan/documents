@@ -1,6 +1,6 @@
-# MkDocs環境サンプル
+# Zensical環境サンプル
 
-[MkDocs](https://www.mkdocs.org/)によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを`postcreate.sh`でインストールします:
+[Zensical](https://zensical.org/)によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを`postcreate.sh`でインストールします:
 
 ## ディレクトリ構成
 
@@ -17,7 +17,7 @@
 
 ```json
 {
-  "name": "MkDocs",
+  "name": "Zensical",
   "image": "mcr.microsoft.com/devcontainers/python:3",
   "postCreateCommand": "bash .devcontainer/scripts/postcreate.sh",
   "features": {},
@@ -37,6 +37,5 @@
 ```shell
 #!/bin/bash
 
-pip install mkdocs
-pip install mkdocs-material
+pip install zensical
 ```
