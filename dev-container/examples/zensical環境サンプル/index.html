@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../marp%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">
+        <link rel="prev" href="../react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">
       
       
-        <link rel="next" href="../plantuml%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/">
+        <link rel="next" href="../../../dnsmasq/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6%E3%81%AEdnsmasq/">
       
       
         
@@ -23,7 +23,7 @@
     
     
       
-        <title>MkDocs環境サンプル - Nob docs</title>
+        <title>Zensical環境サンプル - Nob docs</title>
       
     
     
@@ -79,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mkdocs" class="md-skip">
+        <a href="#zensical" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MkDocs環境サンプル
+              Zensical環境サンプル
             
           </span>
         </div>
@@ -1661,6 +1661,60 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../plantuml%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  PlantUML環境サンプル
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  React環境サンプル
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1682,7 +1736,7 @@
   <span class="md-ellipsis">
     
   
-  MkDocs環境サンプル
+  Zensical環境サンプル
 
     
   </span>
@@ -1699,7 +1753,7 @@
   <span class="md-ellipsis">
     
   
-  MkDocs環境サンプル
+  Zensical環境サンプル
 
     
   </span>
@@ -1778,60 +1832,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../plantuml%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  PlantUML環境サンプル
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../react%E7%92%B0%E5%A2%83%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-  React環境サンプル
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -11735,8 +11735,8 @@
                 
                   
 
-<h1 id="mkdocs">MkDocs環境サンプル</h1>
-<p><a href="https://www.mkdocs.org/">MkDocs</a>によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを<code>postcreate.sh</code>でインストールします:</p>
+<h1 id="zensical">Zensical環境サンプル</h1>
+<p><a href="https://zensical.org/">Zensical</a>によるドキュメント作成ができる環境サンプルです。ベースイメージをpythonとし、必要なライブラリを<code>postcreate.sh</code>でインストールします:</p>
 <h2 id="_1">ディレクトリ構成</h2>
 <div class="highlight"><pre><span></span><code>.devcontainer/
 ├──<span class="w"> </span>devcontainer.json
@@ -11746,7 +11746,7 @@
 <h2 id="_2">設定</h2>
 <h3 id="devcontainerjson"><code>devcontainer.json</code></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MkDocs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Zensical&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mcr.microsoft.com/devcontainers/python:3&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bash .devcontainer/scripts/postcreate.sh&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
@@ -11763,8 +11763,7 @@
 <h3 id="postcreatesh"><code>postcreate.sh</code></h3>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-pip<span class="w"> </span>install<span class="w"> </span>mkdocs
-pip<span class="w"> </span>install<span class="w"> </span>mkdocs-material
+pip<span class="w"> </span>install<span class="w"> </span>zensical
 </code></pre></div>
 
 
