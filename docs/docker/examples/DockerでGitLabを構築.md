@@ -22,7 +22,7 @@ services:
       - "/srv/gitlab/data:/var/opt/gitlab"
 ```
 
-`docker-compose up -d`でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502であれば根気良く待ってください。しばらく待って`http://${IP_address}:80`にアクセスするとgitlabの画面が表示されます。  
+`docker compose up -d`でコンテナを起動します。アクセスできるようになるまでに数分ラグがあります。Error: 502であれば根気良く待ってください。しばらく待って`http://${IP_address}:80`にアクセスするとgitlabの画面が表示されます。  
 rootユーザのパスワードはサーバ内のファイルに記載されているため、以下のコマンドで調べられます。
 
 ```shell
@@ -101,7 +101,21 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
-`docker-compose up -d`を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。
+`docker compose up -d`を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。
+
+### Dockerネットワーク内でRunnerからGitLabに疎通をとる
+
+同一docker-compose内でGitLabおよびGitLab Runnerを起動している場合において、runner側からGitLabに疎通をとるために`config.toml`に下記を追加します。
+
+cf. https://docs.gitlab.com/runner/configuration/advanced-configuration/
+
+```toml
+[[runners]]
+  clone_url = "http://${GitLabのサービス名}"
+
+  [runners.docker]
+    network_mode = "${ネットワーク名}"
+```
 
 ### GitLabが 自己証明書でSSL通信をしている場合
 

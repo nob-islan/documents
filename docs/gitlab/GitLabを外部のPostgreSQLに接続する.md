@@ -76,4 +76,4 @@ gitlab_rails['db_host'] = '${PostgreSQLのIPアドレス}'
 gitlab_rails['db_port'] = 5432
 ```
 
-あとはいつも通り`docker-compose up -d`で起動すればOKです。
+あとはいつも通り`docker compose up -d`で起動すればOKです。

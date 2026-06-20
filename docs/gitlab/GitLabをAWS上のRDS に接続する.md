@@ -90,7 +90,7 @@ services:
 
 ## 起動
 
-`docker-compose up`でOK。初期パスワードは以下で確認できます。
+`docker compose up`でOK。初期パスワードは以下で確認できます。
 
 ```shell
 sudo docker exec -it gitlab-test grep 'Password:' /etc/gitlab/initial_root_password
