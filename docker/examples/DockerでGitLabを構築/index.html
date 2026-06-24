@@ -2256,17 +2256,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dockerrunnergitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dockerネットワーク内でRunnerからGitLabに疎通をとる
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gitlab-ssl" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -3663,6 +3652,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../gitlab/gitlab-runner/Docker%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E5%86%85%E3%81%A7Runner%E3%81%8B%E3%82%89GitLab%E3%81%AB%E7%96%8E%E9%80%9A%E3%82%92%E3%81%A8%E3%82%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Dockerネットワーク内でRunnerからGitLabに疎通をとる
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../gitlab/gitlab-runner/GitLab%20Runner%E3%82%92Kubernetes%20executor%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99/" class="md-nav__link">
         
   
@@ -3725,10 +3741,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_5_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12_5_4" >
         
           
-          <label class="md-nav__link" for="__nav_12_5_3" id="__nav_12_5_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_12_5_4" id="__nav_12_5_4_label" tabindex="0">
             
   
   
@@ -3745,8 +3761,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_12_5_3">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_12_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12_5_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -11856,17 +11872,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dockerrunnergitlab" class="md-nav__link">
-    <span class="md-ellipsis">
-      <span class="md-typeset">
-        Dockerネットワーク内でRunnerからGitLabに疎通をとる
-      </span>
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gitlab-ssl" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
@@ -11978,15 +11983,6 @@ total 12
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;/var/run/docker.sock:/var/run/docker.sock&quot;</span>
 </code></pre></div>
 <p><code>docker compose up -d</code>を実行してコンテナを作成。起動後、GitLab GUI上の "Create project runner" から作成したコマンドから、対話形式でrunnerを構築できます。</p>
-<h3 id="dockerrunnergitlab">Dockerネットワーク内でRunnerからGitLabに疎通をとる</h3>
-<p>同一docker-compose内でGitLabおよびGitLab Runnerを起動している場合において、runner側からGitLabに疎通をとるために<code>config.toml</code>に下記を追加します。</p>
-<p>cf. <a href="https://docs.gitlab.com/runner/configuration/advanced-configuration/">https://docs.gitlab.com/runner/configuration/advanced-configuration/</a></p>
-<div class="highlight"><pre><span></span><code><span class="k">[[runners]]</span>
-<span class="w">  </span><span class="n">clone_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://${GitLabのサービス名}&quot;</span>
-
-<span class="w">  </span><span class="k">[runners.docker]</span>
-<span class="w">    </span><span class="n">network_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${ネットワーク名}&quot;</span>
-</code></pre></div>
 <h3 id="gitlab-ssl">GitLabが 自己証明書でSSL通信をしている場合</h3>
 <p>runnerコンテナの中に、GitLab本体が使っている証明書<code>{ドメイン名}.crt</code>として配置する必要があります。例として、<code>docker-compose.yaml</code>に下記を追加してください:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">volumes</span><span class="p">:</span>
