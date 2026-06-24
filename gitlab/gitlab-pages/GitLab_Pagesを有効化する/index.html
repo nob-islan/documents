@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../00_config/favicon.png">
-      <meta name="generator" content="zensical-0.0.45">
+      <meta name="generator" content="zensical-0.0.46">
     
     
       
@@ -30,7 +30,7 @@
       
         
       
-      <link rel="stylesheet" href="../../../assets/stylesheets/classic/main.a2001754.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/classic/main.82a87433.min.css">
       
         
           
@@ -12092,7 +12092,7 @@ address=/.pages.example.nob/{gitlab IP}
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>dnsmasq
 </code></pre></div>
 <h4 id="gitlab-gitlab-runner">GitLab, GitLab Runner</h4>
-<p>下記でdocker-composeを作成します:</p>
+<p>下記でdocker-composeを作成します。<code>pages_external_url</code>および<code>gitlab_pages['enable']</code>でGitLab Pagesを有効化します:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gitlab/gitlab-ee:latest</span>
@@ -12101,9 +12101,8 @@ address=/.pages.example.nob/{gitlab IP}
 <span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
 <span class="w">        </span><span class="no">external_url &quot;http://gitlab.example.nob&quot;</span>
 <span class="w">        </span><span class="no">gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2022</span>
-<span class="w">      </span><span class="c1"># 以下pages向け設定</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">pages_external_url &quot;http://pages.example.nob&quot;</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">gitlab_pages[&#39;enable&#39;] = true</span>
+<span class="w">        </span><span class="no">pages_external_url &quot;http://pages.example.nob&quot;</span>
+<span class="w">        </span><span class="no">gitlab_pages[&#39;enable&#39;] = true</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;2022:22&quot;</span>
@@ -12242,10 +12241,10 @@ address=/.pages.example.nob/{gitlab IP}
     
       
       
-      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["content.code.copy"],"search":"../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["content.code.copy"],"search":"../../../assets/javascripts/workers/search.b6b7e04f.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.6e5f0216.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ee611ef6.min.js"></script>
       
     
   </body>
