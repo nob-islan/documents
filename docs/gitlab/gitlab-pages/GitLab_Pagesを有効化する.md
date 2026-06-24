@@ -37,7 +37,7 @@ sudo systemctl restart dnsmasq
 
 #### GitLab, GitLab Runner
 
-下記でdocker-composeを作成します:
+下記でdocker-composeを作成します。`pages_external_url`および`gitlab_pages['enable']`でGitLab Pagesを有効化します:
 
 ```yaml
 services:
@@ -48,7 +48,6 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url "http://gitlab.example.nob"
         gitlab_rails['gitlab_shell_ssh_port'] = 2022
-      # 以下pages向け設定
         pages_external_url "http://pages.example.nob"
         gitlab_pages['enable'] = true
     ports:
