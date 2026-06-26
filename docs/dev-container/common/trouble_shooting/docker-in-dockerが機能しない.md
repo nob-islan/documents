@@ -21,7 +21,7 @@ Run 'docker run --help' for more information
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:3.0.0": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:4.0.0": {}
   },
   "customizations": {
     "vscode": {

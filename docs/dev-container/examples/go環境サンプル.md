@@ -7,7 +7,7 @@ Goでの開発環境のサンプルです:
   "name": "Go",
   "image": "mcr.microsoft.com/devcontainers/go:1.25-bookworm",
   "features": {
-    // "ghcr.io/devcontainers/features/docker-in-docker:3": {}
+    // "ghcr.io/devcontainers/features/docker-in-docker:4": {}
   },
   "customizations": {
     "vscode": {
