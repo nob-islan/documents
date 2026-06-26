@@ -12468,9 +12468,11 @@ spring.datasource.password<span class="o">=</span>password
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.job.Job</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.job.parameters.JobParametersBuilder</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.batch.core.launch.JobOperator</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.scheduling.annotation.Scheduled</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.NonNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.RequiredArgsConstructor</span><span class="p">;</span>
 
 <span class="cm">/**</span>
 <span class="cm"> * 顧客登録ジョブの実行計画を定義するクラスです。</span>
@@ -12478,12 +12480,13 @@ spring.datasource.password<span class="o">=</span>password
 <span class="cm"> * @author nob</span>
 <span class="cm"> */</span>
 <span class="nd">@Component</span>
+<span class="nd">@RequiredArgsConstructor</span>
 <span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomerRegistJobOperator</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">JobOperator</span><span class="w"> </span><span class="n">jobOperator</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="nd">@NonNull</span>
 <span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Job</span><span class="w"> </span><span class="n">customerRegist</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nd">@Scheduled</span><span class="p">(</span><span class="n">cron</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0 * * * * *&quot;</span><span class="p">)</span>
