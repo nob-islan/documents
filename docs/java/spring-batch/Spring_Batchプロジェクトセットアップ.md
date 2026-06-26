@@ -305,9 +305,11 @@ package nob.example.easybatch.job.customerregist;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.parameters.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobOperator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 顧客登録ジョブの実行計画を定義するクラスです。
@@ -315,12 +317,13 @@ import org.springframework.stereotype.Component;
  * @author nob
  */
 @Component
+@RequiredArgsConstructor
 public class CustomerRegistJobOperator {
 
-    @Autowired
+    @NonNull
     private JobOperator jobOperator;
 
-    @Autowired
+    @NonNull
     private Job customerRegist;
 
     @Scheduled(cron = "0 * * * * *")
