@@ -9399,7 +9399,7 @@
   <a href="#kubelet" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kubelet</code>の設定
+        kubeletの設定
       </span>
     </span>
   </a>
@@ -9410,7 +9410,7 @@
   <a href="#kube-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-proxy</code>の設定
+        kube-proxyの設定
       </span>
     </span>
   </a>
@@ -12350,7 +12350,7 @@
   <a href="#kubelet" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kubelet</code>の設定
+        kubeletの設定
       </span>
     </span>
   </a>
@@ -12361,7 +12361,7 @@
   <a href="#kube-proxy" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-proxy</code>の設定
+        kube-proxyの設定
       </span>
     </span>
   </a>
@@ -12557,7 +12557,7 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; configs/temp/10-bri
 <span class="s">WantedBy=multi-user.target</span>
 <span class="s">EOF</span>
 </code></pre></div>
-<p>バイナリファイルおよびsystemdユニットファイルを<code>kube-w01</code>, <code>kube-w02</code>にコピーします。</p>
+<p>バイナリファイルおよびsystemdユニットファイルをkube-w01、kube-w02にコピーします。</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>HOST<span class="w"> </span><span class="k">in</span><span class="w"> </span>kube-w01<span class="w"> </span>kube-w02<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="nv">SUBNET</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span><span class="si">${</span><span class="nv">HOST</span><span class="si">}</span><span class="w"> </span>machines.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">4</span><span class="k">)</span>
 <span class="w">  </span>sed<span class="w"> </span><span class="s2">&quot;s|SUBNET|</span><span class="nv">$SUBNET</span><span class="s2">|g&quot;</span><span class="w"> </span>configs/temp/10-bridge.conf<span class="w"> </span>&gt;<span class="w"> </span>configs/10-bridge.conf
@@ -12585,7 +12585,7 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; configs/temp/10-bri
 <span class="k">done</span>
 </code></pre></div>
 <h2 id="_2">ワーカーノードの設定</h2>
-<p><code>kube-w01</code>, <code>kube-w02</code>それぞれで実行します。</p>
+<p>kube-w01、kube-w02それぞれで実行します。</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">WORKER</span><span class="o">=</span>kube-w0x
 </code></pre></div>
 <h3 id="_3">バイナリのインストール</h3>
@@ -12628,19 +12628,19 @@ ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER
 ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv containerd-config.toml /etc/containerd/config.toml&quot;</span>
 ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv containerd.service /etc/systemd/system/&quot;</span>
 </code></pre></div>
-<h3 id="kubelet"><code>kubelet</code>の設定</h3>
-<p><code>kubelet</code>設定ファイルを配置します。</p>
+<h3 id="kubelet">kubeletの設定</h3>
+<p>kubelet設定ファイルを配置します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv kubelet-config.yaml /var/lib/kubelet/&quot;</span>
 ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv kubelet.service /etc/systemd/system/&quot;</span>
 </code></pre></div>
-<h3 id="kube-proxy"><code>kube-proxy</code>の設定</h3>
-<p><code>kube-proxy</code>設定ファイルを配置します。</p>
+<h3 id="kube-proxy">kube-proxyの設定</h3>
+<p>kube-proxy設定ファイルを配置します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv kube-proxy-config.yaml /var/lib/kube-proxy/&quot;</span>
 ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mv kube-proxy.service /etc/systemd/system/&quot;</span>
 </code></pre></div>
 <h2 id="_4">ワーカーノードの起動</h2>
 <p>各種サービスを起動します。それぞれのサービスが起動しているかを確認するには<code>sudo systemctl status xxx</code>コマンドを実行してください。ログを表示する場合は<code>journalctl -u xxx</code>コマンドを実行してください。</p>
-<p><code>kube-w01</code>, <code>kube-w02</code>それぞれで実行します。</p>
+<p>kube-w01、kube-w02それぞれで実行します。</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">WORKER</span><span class="o">=</span>kube-w0x
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">WORKER</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo systemctl daemon-reload&quot;</span>

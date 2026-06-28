@@ -9247,7 +9247,7 @@
   <a href="#kubeletkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kubelet</code>向けKubernetes設定ファイル
+        kubelet向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -9258,7 +9258,7 @@
   <a href="#kube-proxykubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-proxy</code>向けKubernetes設定ファイル
+        kube-proxy向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -9269,7 +9269,7 @@
   <a href="#kube-controller-managerkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-controller-manager</code>向けKubernetes設定ファイル
+        kube-controller-manager向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -9280,7 +9280,7 @@
   <a href="#kube-schedulerkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-scheduler</code>向けKubernetes設定ファイル
+        kube-scheduler向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -9291,7 +9291,7 @@
   <a href="#adminkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>admin</code>ユーザ向けKubernetes設定ファイル
+        adminユーザ向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12284,7 +12284,7 @@
   <a href="#kubeletkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kubelet</code>向けKubernetes設定ファイル
+        kubelet向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12295,7 +12295,7 @@
   <a href="#kube-proxykubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-proxy</code>向けKubernetes設定ファイル
+        kube-proxy向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12306,7 +12306,7 @@
   <a href="#kube-controller-managerkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-controller-manager</code>向けKubernetes設定ファイル
+        kube-controller-manager向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12317,7 +12317,7 @@
   <a href="#kube-schedulerkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>kube-scheduler</code>向けKubernetes設定ファイル
+        kube-scheduler向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12328,7 +12328,7 @@
   <a href="#adminkubernetes" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>admin</code>ユーザ向けKubernetes設定ファイル
+        adminユーザ向けKubernetes設定ファイル
       </span>
     </span>
   </a>
@@ -12369,9 +12369,9 @@
 <h1 id="4-kubernetes">4. 認証用のKubernetes構成ファイルの生成</h1>
 <p><a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">kubeconfig</a>ファイルを作成し、Kubernetes APIサーバへの疎通および認証を通します。</p>
 <h2 id="_1">クライアント認証の作成</h2>
-<p><code>kubelet</code>および<code>admin</code>ユーザ向けのkubeconfigファイルを作成します。</p>
-<h3 id="kubeletkubernetes"><code>kubelet</code>向けKubernetes設定ファイル</h3>
-<p><code>kubelet</code>サービス用のkubeconfigファイルを生成します。</p>
+<p>kubeletおよびadminユーザ向けのkubeconfigファイルを作成します。</p>
+<h3 id="kubeletkubernetes">kubelet向けKubernetes設定ファイル</h3>
+<p>kubeletサービス用のkubeconfigファイルを生成します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>HOST<span class="w"> </span><span class="k">in</span><span class="w"> </span>kube-w01<span class="w"> </span>kube-w02<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
@@ -12400,8 +12400,8 @@
 <div class="highlight"><pre><span></span><code>$ ls kube-w*.kubeconfig
 kube-w01.kubeconfig  kube-w02.kubeconfig
 </code></pre></div>
-<h3 id="kube-proxykubernetes"><code>kube-proxy</code>向けKubernetes設定ファイル</h3>
-<p><code>kube-proxy</code>サービス用のkubeconfigファイルを生成します。</p>
+<h3 id="kube-proxykubernetes">kube-proxy向けKubernetes設定ファイル</h3>
+<p>kube-proxyサービス用のkubeconfigファイルを生成します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--embed-certs<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
@@ -12428,8 +12428,8 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 <div class="highlight"><pre><span></span><code>$ ls kube-proxy.kubeconfig
 kube-proxy.kubeconfig
 </code></pre></div>
-<h3 id="kube-controller-managerkubernetes"><code>kube-controller-manager</code>向けKubernetes設定ファイル</h3>
-<p><code>kube-controller-manager</code>サービス用のkubeconfigファイルを生成します。</p>
+<h3 id="kube-controller-managerkubernetes">kube-controller-manager向けKubernetes設定ファイル</h3>
+<p>kube-controller-managerサービス用のkubeconfigファイルを生成します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--embed-certs<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
@@ -12456,8 +12456,8 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 <div class="highlight"><pre><span></span><code>$ ls kube-controller-manager.kubeconfig
 kube-controller-manager.kubeconfig
 </code></pre></div>
-<h3 id="kube-schedulerkubernetes"><code>kube-scheduler</code>向けKubernetes設定ファイル</h3>
-<p><code>kube-scheduler</code>サービス用のkubeconfigファイルを生成します。</p>
+<h3 id="kube-schedulerkubernetes">kube-scheduler向けKubernetes設定ファイル</h3>
+<p>kube-schedulerサービス用のkubeconfigファイルを生成します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--embed-certs<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
@@ -12484,8 +12484,8 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 <div class="highlight"><pre><span></span><code>$ ls kube-scheduler.kubeconfig
 kube-scheduler.kubeconfig
 </code></pre></div>
-<h3 id="adminkubernetes"><code>admin</code>ユーザ向けKubernetes設定ファイル</h3>
-<p><code>admin</code>ユーザ用のkubeconfigファイルを生成します。</p>
+<h3 id="adminkubernetes">adminユーザ向けKubernetes設定ファイル</h3>
+<p>adminユーザ用のkubeconfigファイルを生成します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--embed-certs<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
@@ -12513,13 +12513,13 @@ kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span cl
 admin.kubeconfig
 </code></pre></div>
 <h2 id="kubernetes">Kubernetes構成ファイルの配布</h2>
-<p><code>kube-controller-manager</code>および<code>kube-scheduler</code>向けのkubeconfigファイルを<code>kube-c01</code>に配布します。</p>
+<p>kube-controller-managerおよびkube-scheduler向けのkubeconfigファイルをkube-c01に配布します。</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span>admin.kubeconfig<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>kube-controller-manager.kubeconfig<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>kube-scheduler.kubeconfig<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>nob@kube-c01:~/
 </code></pre></div>
-<p><code>kubelet</code>および<code>kube-proxy</code>向けのkubeconfigファイルを<code>kube-w01</code>, <code>kube-w02</code>に配布します。</p>
+<p>kubeletおよびkube-proxy向けのkubeconfigファイルをkube-w01、kube-w02に配布します。</p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span>HOST<span class="w"> </span><span class="k">in</span><span class="w"> </span>kube-w01<span class="w"> </span>kube-w02<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span>ssh<span class="w"> </span>nob@<span class="si">${</span><span class="nv">HOST</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo mkdir -p /var/lib/{kube-proxy,kubelet}&quot;</span>
 

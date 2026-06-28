@@ -12225,7 +12225,7 @@
 <h1 id="9-kubectl">9. <code>kubectl</code>の設定</h1>
 <p>リモートでKubernetesを操作するために<code>kubectl</code>のセットアップを行います。</p>
 <h2 id="kubernetes">管理者向けKubernetes設定ファイルの作成</h2>
-<p><code>admin</code>ユーザ向けkubeconfigファイルを作成します。<code>~/.kube/config</code>に出力されます。</p>
+<p>adminユーザ向けkubeconfigファイルを作成します。<code>~/.kube/config</code>に出力されます。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>config<span class="w"> </span>set-cluster<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--certificate-authority<span class="o">=</span>ca.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--embed-certs<span class="o">=</span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>

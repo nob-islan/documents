@@ -9300,7 +9300,7 @@
   <a href="#etcd" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>クラスタの設定
+        etcdクラスタの設定
       </span>
     </span>
   </a>
@@ -9312,7 +9312,7 @@
   <a href="#etcd_1" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>バイナリのインストール
+        etcdバイナリのインストール
       </span>
     </span>
   </a>
@@ -9323,7 +9323,7 @@
   <a href="#etcd_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>サーバーの設定
+        etcdサーバーの設定
       </span>
     </span>
   </a>
@@ -9339,7 +9339,7 @@
   <a href="#etcd_3" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>クラスタの起動
+        etcdクラスタの起動
       </span>
     </span>
   </a>
@@ -12261,7 +12261,7 @@
   <a href="#etcd" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>クラスタの設定
+        etcdクラスタの設定
       </span>
     </span>
   </a>
@@ -12273,7 +12273,7 @@
   <a href="#etcd_1" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>バイナリのインストール
+        etcdバイナリのインストール
       </span>
     </span>
   </a>
@@ -12284,7 +12284,7 @@
   <a href="#etcd_2" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>サーバーの設定
+        etcdサーバーの設定
       </span>
     </span>
   </a>
@@ -12300,7 +12300,7 @@
   <a href="#etcd_3" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        <code>etcd</code>クラスタの起動
+        etcdクラスタの起動
       </span>
     </span>
   </a>
@@ -12322,10 +12322,10 @@
                 
                   
 
-<h1 id="6-etcd">6. <code>etcd</code>クラスタの構築</h1>
+<h1 id="6-etcd">6. etcdクラスタの構築</h1>
 <p>Kubernetesクラスタの状態を保存する<a href="https://github.com/etcd-io/etcd">etcd</a>を構築します。</p>
 <h2 id="_1">事前準備</h2>
-<p><code>etcd</code>向けsystemdユニットファイルを作成します。</p>
+<p>etcd向けsystemdユニットファイルを作成します。</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>units
 cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; units/etcd.service</span>
 <span class="s">[Unit]</span>
@@ -12351,18 +12351,18 @@ cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; units/etcd.service<
 <span class="s">WantedBy=multi-user.target</span>
 <span class="s">EOF</span>
 </code></pre></div>
-<p><code>etcd</code>バイナリファイルおよびsystemdユニットファイルを<code>kube-c01</code>にコピーします。</p>
+<p>etcdバイナリファイルおよびsystemdユニットファイルをkube-c01にコピーします。</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>downloads/controller/etcd<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>downloads/client/etcdctl<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>units/etcd.service<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>nob@kube-c01:~/
 </code></pre></div>
-<h2 id="etcd"><code>etcd</code>クラスタの設定</h2>
-<h3 id="etcd_1"><code>etcd</code>バイナリのインストール</h3>
+<h2 id="etcd">etcdクラスタの設定</h2>
+<h3 id="etcd_1">etcdバイナリのインストール</h3>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo mv etcd etcdctl /usr/local/bin/&quot;</span>
 </code></pre></div>
-<h3 id="etcd_2"><code>etcd</code>サーバーの設定</h3>
+<h3 id="etcd_2">etcdサーバーの設定</h3>
 <p>証明書を配置します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo mkdir -p /etc/etcd /var/lib/etcd&quot;</span>
 ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo chmod 700 /var/lib/etcd&quot;</span>
@@ -12371,8 +12371,8 @@ ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">
 <p>systemdユニットファイルを作成します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo mv etcd.service /etc/systemd/system/&quot;</span>
 </code></pre></div>
-<h2 id="etcd_3"><code>etcd</code>クラスタの起動</h2>
-<p><code>etcd</code>クラスタを起動します。</p>
+<h2 id="etcd_3">etcdクラスタの起動</h2>
+<p>etcdクラスタを起動します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo systemctl daemon-reload&quot;</span>
 ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo systemctl enable etcd&quot;</span>
 ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;sudo systemctl start etcd&quot;</span>

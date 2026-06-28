@@ -12267,14 +12267,27 @@
                   
 
 <h1 id="2-jumpbox">2. Jumpboxの設定</h1>
-<p>各種ノードへのモジュール配布およびリモートでのコマンド実行を担う<code>jumpbox</code>をセットアップします。</p>
+<p>各種ノードへのモジュール配布およびリモートでのコマンド実行を担うjumpboxをセットアップします。</p>
 <h2 id="_1">コマンドのインストール</h2>
 <p>必要なコマンドをインストールします。</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>wget<span class="w"> </span>curl<span class="w"> </span>vim<span class="w"> </span>openssl<span class="w"> </span>git
 </code></pre></div>
 <h2 id="_2">バイナリのダウンロード</h2>
-<p>必要なバイナリ一覧について記載した<code>downloads.txt</code>を作成します。</p>
+<p>必要なバイナリ一覧について記載した<code>downloads.txt</code>を作成します。ダウンロード元の情報については下記を参照してください。</p>
+<ul>
+<li><a href="https://dl.k8s.io/">dl.k8s.io</a></li>
+<li><a href="https://kubernetes.io/docs/reference/kubectl/kubectl/">kubectl</a></li>
+<li><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/">kube-scheduler</a></li>
+<li><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/">kube-proxy</a></li>
+<li><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a></li>
+<li><a href="https://github.com/kubernetes-sigs/cri-tools/">cri-tools</a></li>
+<li><a href="https://github.com/opencontainers/runc/">runc</a></li>
+<li><a href="https://github.com/containernetworking/plugins/">CNI plugins</a></li>
+<li><a href="https://github.com/containerd/containerd/">containerd</a></li>
+<li><a href="https://github.com/etcd-io/etcd/">etcd</a></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nv">ARCH</span><span class="o">=</span><span class="k">$(</span>dpkg<span class="w"> </span>--print-architecture<span class="k">)</span>
 cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; downloads.txt</span>
 <span class="s">https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kubectl</span>

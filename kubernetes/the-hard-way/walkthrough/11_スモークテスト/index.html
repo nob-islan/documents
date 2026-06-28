@@ -12272,7 +12272,7 @@
 <p>Secretを作成します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>kubernetes-the-hard-way<span class="w"> </span>--from-literal<span class="o">=</span><span class="s2">&quot;mykey=mydata&quot;</span>
 </code></pre></div>
-<p><code>etcd</code>に保存されている秘密情報の16進ダンプを出力し、データが暗号化されていることを確認します。</p>
+<p>etcdに保存されている秘密情報の16進ダンプを出力し、データが暗号化されていることを確認します。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>nob@kube-c01<span class="w"> </span><span class="s2">&quot;etcdctl get /registry/secrets/default/kubernetes-the-hard-way | hexdump -C&quot;</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>$ ssh nob@kube-c01 &quot;etcdctl get /registry/secrets/default/kubernetes-the-hard-way | hexdump -C&quot;
@@ -12370,7 +12370,7 @@ Accept-Ranges: bytes
 2026/06/28 08:51:03 [notice] 1#1: start worker process 30
 10.200.0.1 - - [28/Jun/2026:08:51:28 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/8.18.0&quot; &quot;-&quot;
 </code></pre></div>
-<p>作成したDeployment, Serviceを削除します。</p>
+<p>作成したDeployment、Serviceを削除します。</p>
 <div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>delete<span class="w"> </span>deployment<span class="w"> </span>nginx
 kubectl<span class="w"> </span>delete<span class="w"> </span>service<span class="w"> </span>nginx
 </code></pre></div>

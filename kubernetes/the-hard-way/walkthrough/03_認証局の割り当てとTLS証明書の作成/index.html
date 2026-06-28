@@ -12267,7 +12267,14 @@
                   
 
 <h1 id="3-tls">3. 認証局の割り当ておよびTLS証明書の作成</h1>
-<p><code>openssl</code>を用いて認証局を割り当てて<code>kube-apiserver</code>, <code>kube-controller-manager</code>, <code>kube-scheduler</code>, <code>kubelet</code>, <code>kube-proxy</code>それぞれのTLS証明書を作成します。</p>
+<p><code>openssl</code>を用いて認証局を割り当てて下記に対するTLS証明書を作成します。</p>
+<ul>
+<li>kube-apiserver</li>
+<li>kube-controller-manager</li>
+<li>kube-scheduler</li>
+<li>kubelet</li>
+<li>kube-proxy</li>
+</ul>
 <h2 id="_1">認証局の割り当て</h2>
 <p>Kubernetesコンポーネントの証明書を生成するために必要なすべての詳細を定義した<code>ca.conf</code>を作成します。</p>
 <div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; ca.conf</span>
@@ -12493,7 +12500,7 @@ openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> 
 ca.crt  ca.key
 </code></pre></div>
 <h2 id="_2">クライアント証明書、サーバ証明書の作成</h2>
-<p>各Kubernetesコンポーネントのクライアント証明書とサーバー証明書、および<code>admin</code> Kubernetesユーザーのクライアント証明書を生成します。</p>
+<p>各Kubernetesコンポーネントのクライアント証明書とサーバー証明書、およびadmin Kubernetesユーザーのクライアント証明書を生成します。</p>
 <div class="highlight"><pre><span></span><code><span class="nv">certs</span><span class="o">=(</span>
 <span class="w">  </span><span class="s2">&quot;admin&quot;</span><span class="w"> </span><span class="s2">&quot;kube-w01&quot;</span><span class="w"> </span><span class="s2">&quot;kube-w02&quot;</span>
 <span class="w">  </span><span class="s2">&quot;kube-proxy&quot;</span><span class="w"> </span><span class="s2">&quot;kube-scheduler&quot;</span>
@@ -12549,7 +12556,7 @@ service-accounts.csr
 service-accounts.key
 </code></pre></div>
 <h2 id="_3">クライアント証明書、サーバ証明書の配布</h2>
-<p>必要な証明書を<code>kube-c01</code>, <code>kube-w01</code>, <code>kube-w02</code>にコピーします。</p>
+<p>必要な証明書をkube-c01、kube-w01、kube-w02にコピーします。</p>
 <div class="highlight"><pre><span></span><code>scp<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>ca.key<span class="w"> </span>ca.crt<span class="w"> </span>kube-api-server.key<span class="w"> </span>kube-api-server.crt<span class="w"> </span>service-accounts.key<span class="w"> </span>service-accounts.crt<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>nob@kube-c01:~/

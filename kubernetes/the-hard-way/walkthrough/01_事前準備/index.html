@@ -12369,7 +12369,7 @@
 <h1 id="1">1. 事前準備</h1>
 <p>クラスタ本体、およびそれをサポートするマシンを用意します。</p>
 <h2 id="_1">登場人物</h2>
-<p>本稿で使うマシンとその役割は下記です:</p>
+<p>本稿で使うマシンとその役割は下記です。</p>
 <table>
 <thead>
 <tr>
@@ -12379,19 +12379,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>jumpbox</code></td>
+<td>jumpbox</td>
 <td>各種ノードへのモジュールの配布、リモートでのコマンド実行</td>
 </tr>
 <tr>
-<td><code>kube-c01</code></td>
+<td>kube-c01</td>
 <td>コントロールプレーンおよびルーティング</td>
 </tr>
 <tr>
-<td><code>kube-w01</code></td>
+<td>kube-w01</td>
 <td>ワーカーノード1</td>
 </tr>
 <tr>
-<td><code>kube-w02</code></td>
+<td>kube-w02</td>
 <td>ワーカーノード2</td>
 </tr>
 </tbody>
@@ -12414,7 +12414,7 @@ XXX.XXX.XXX.XXX kube-w01.kubernetes.local kube-w01 10.200.0.0/24
 XXX.XXX.XXX.XXX kube-w02.kubernetes.local kube-w02 10.200.1.0/24
 </code></pre></div>
 <h3 id="ssh">パスワードレスでのSSH接続</h3>
-<p><code>jumpbox</code>から各種サーバにSSHで接続できるようにします。既に設定されている場合はスキップしてください。また、パスワードでのログインを許可していない場合は事前に許可をしておいてください。</p>
+<p>jumpboxから各種サーバにSSHで接続できるようにします。既に設定されている場合はスキップしてください。また、パスワードでのログインを許可していない場合は事前に許可をしておいてください。</p>
 <p>SSHキーを作成します。</p>
 <div class="highlight"><pre><span></span><code>ssh-keygen
 </code></pre></div>
@@ -12429,13 +12429,13 @@ XXX.XXX.XXX.XXX kube-w02.kubernetes.local kube-w02 10.200.1.0/24
 <span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>machines.txt
 </code></pre></div>
 <h3 id="sudo">パスワードレスでの<code>sudo</code>実行</h3>
-<p><code>jumpbox</code>からリモートでコマンド実行をする際にパスワードレスで<code>sudo</code>が実行できるようにします。</p>
+<p>jumpboxからリモートでコマンド実行をする際にパスワードレスで<code>sudo</code>が実行できるようにします。</p>
 <div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-t<span class="w"> </span>nob@<span class="sb">`</span>grep<span class="w"> </span>kube-c01<span class="w"> </span>machines.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="sb">`</span><span class="w"> </span><span class="s2">&quot;echo &#39;nob ALL=(ALL:ALL) NOPASSWD: ALL&#39; | sudo tee /etc/sudoers.d/nob &gt;/dev/null&quot;</span>
 ssh<span class="w"> </span>-t<span class="w"> </span>nob@<span class="sb">`</span>grep<span class="w"> </span>kube-w01<span class="w"> </span>machines.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="sb">`</span><span class="w"> </span><span class="s2">&quot;echo &#39;nob ALL=(ALL:ALL) NOPASSWD: ALL&#39; | sudo tee /etc/sudoers.d/nob &gt;/dev/null&quot;</span>
 ssh<span class="w"> </span>-t<span class="w"> </span>nob@<span class="sb">`</span>grep<span class="w"> </span>kube-w02<span class="w"> </span>machines.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="sb">`</span><span class="w"> </span><span class="s2">&quot;echo &#39;nob ALL=(ALL:ALL) NOPASSWD: ALL&#39; | sudo tee /etc/sudoers.d/nob &gt;/dev/null&quot;</span>
 </code></pre></div>
 <h3 id="_4">ホスト名の設定</h3>
-<p><code>jumpbox</code>からリモートでコマンドを実行する際に指定するホスト名を<code>kube-c01</code>, <code>kube-w01</code>, <code>kube-w02</code>に割り当てます。</p>
+<p>jumpboxからリモートでコマンドを実行する際に指定するホスト名をkube-c01、kube-w01、kube-w02に割り当てます。</p>
 <div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>IP<span class="w"> </span>FQDN<span class="w"> </span>HOST<span class="w"> </span>SUBNET<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span>ssh<span class="w"> </span>-n<span class="w"> </span>nob@<span class="si">${</span><span class="nv">IP</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo sed -i &#39;s/^127.0.1.1.*/127.0.1.1\t</span><span class="si">${</span><span class="nv">FQDN</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">HOST</span><span class="si">}</span><span class="s2">/&#39; /etc/hosts&quot;</span>
 <span class="w">  </span>ssh<span class="w"> </span>-n<span class="w"> </span>nob@<span class="si">${</span><span class="nv">IP</span><span class="si">}</span><span class="w"> </span><span class="s2">&quot;sudo hostnamectl set-hostname </span><span class="si">${</span><span class="nv">HOST</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -12448,7 +12448,7 @@ ssh<span class="w"> </span>-t<span class="w"> </span>nob@<span class="sb">`</spa
 <span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>machines.txt
 </code></pre></div>
 <h3 id="_5">ホスト検索テーブルの設定</h3>
-<p><code>jumpbox</code>からホスト名で疎通が取れるように<code>/etc/hosts</code>を設定します。</p>
+<p>jumpboxからホスト名で疎通が取れるように<code>/etc/hosts</code>を設定します。</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>hosts
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# From Kubernetes The Hard Way&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>hosts
 </code></pre></div>
