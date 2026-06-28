@@ -4,7 +4,7 @@
 
 ## 管理者向けKubernetes設定ファイルの作成
 
-`admin`ユーザ向けkubeconfigファイルを作成します。`~/.kube/config`に出力されます。
+adminユーザ向けkubeconfigファイルを作成します。`~/.kube/config`に出力されます。
 
 ```shell
 kubectl config set-cluster kubernetes-the-hard-way \

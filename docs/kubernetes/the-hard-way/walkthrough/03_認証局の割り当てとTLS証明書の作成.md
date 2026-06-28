@@ -1,6 +1,12 @@
 # 3. 認証局の割り当ておよびTLS証明書の作成
 
-`openssl`を用いて認証局を割り当てて`kube-apiserver`, `kube-controller-manager`, `kube-scheduler`, `kubelet`, `kube-proxy`それぞれのTLS証明書を作成します。
+`openssl`を用いて認証局を割り当てて下記に対するTLS証明書を作成します。
+
+- kube-apiserver
+- kube-controller-manager
+- kube-scheduler
+- kubelet
+- kube-proxy
 
 ## 認証局の割り当て
 
@@ -240,7 +246,7 @@ ca.crt  ca.key
 
 ## クライアント証明書、サーバ証明書の作成
 
-各Kubernetesコンポーネントのクライアント証明書とサーバー証明書、および`admin` Kubernetesユーザーのクライアント証明書を生成します。
+各Kubernetesコンポーネントのクライアント証明書とサーバー証明書、およびadmin Kubernetesユーザーのクライアント証明書を生成します。
 
 ```shell
 certs=(
@@ -307,7 +313,7 @@ service-accounts.key
 
 ## クライアント証明書、サーバ証明書の配布
 
-必要な証明書を`kube-c01`, `kube-w01`, `kube-w02`にコピーします。
+必要な証明書をkube-c01、kube-w01、kube-w02にコピーします。
 
 ```shell
 scp \

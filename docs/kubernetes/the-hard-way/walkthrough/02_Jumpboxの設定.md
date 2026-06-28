@@ -1,6 +1,6 @@
 # 2. Jumpboxの設定
 
-各種ノードへのモジュール配布およびリモートでのコマンド実行を担う`jumpbox`をセットアップします。
+各種ノードへのモジュール配布およびリモートでのコマンド実行を担うjumpboxをセットアップします。
 
 ## コマンドのインストール
 
@@ -13,7 +13,19 @@ sudo apt install -y wget curl vim openssl git
 
 ## バイナリのダウンロード
 
-必要なバイナリ一覧について記載した`downloads.txt`を作成します。
+必要なバイナリ一覧について記載した`downloads.txt`を作成します。ダウンロード元の情報については下記を参照してください。
+
+- [dl.k8s.io](https://dl.k8s.io/)
+  - [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/)
+  - [kube-apiserver](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
+  - [kube-scheduler](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/)
+  - [kube-proxy](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/)
+  - [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/)
+- [cri-tools](https://github.com/kubernetes-sigs/cri-tools/)
+- [runc](https://github.com/opencontainers/runc/)
+- [CNI plugins](https://github.com/containernetworking/plugins/)
+- [containerd](https://github.com/containerd/containerd/)
+- [etcd](https://github.com/etcd-io/etcd/)
 
 ```shell
 ARCH=$(dpkg --print-architecture)

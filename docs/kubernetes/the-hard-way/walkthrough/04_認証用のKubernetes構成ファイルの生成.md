@@ -4,11 +4,11 @@
 
 ## クライアント認証の作成
 
-`kubelet`および`admin`ユーザ向けのkubeconfigファイルを作成します。
+kubeletおよびadminユーザ向けのkubeconfigファイルを作成します。
 
-### `kubelet`向けKubernetes設定ファイル
+### kubelet向けKubernetes設定ファイル
 
-`kubelet`サービス用のkubeconfigファイルを生成します。
+kubeletサービス用のkubeconfigファイルを生成します。
 
 ```shell
 for HOST in kube-w01 kube-w02; do
@@ -45,9 +45,9 @@ $ ls kube-w*.kubeconfig
 kube-w01.kubeconfig  kube-w02.kubeconfig
 ```
 
-### `kube-proxy`向けKubernetes設定ファイル
+### kube-proxy向けKubernetes設定ファイル
 
-`kube-proxy`サービス用のkubeconfigファイルを生成します。
+kube-proxyサービス用のkubeconfigファイルを生成します。
 
 ```shell
 kubectl config set-cluster kubernetes-the-hard-way \
@@ -82,9 +82,9 @@ $ ls kube-proxy.kubeconfig
 kube-proxy.kubeconfig
 ```
 
-### `kube-controller-manager`向けKubernetes設定ファイル
+### kube-controller-manager向けKubernetes設定ファイル
 
-`kube-controller-manager`サービス用のkubeconfigファイルを生成します。
+kube-controller-managerサービス用のkubeconfigファイルを生成します。
 
 ```shell
 kubectl config set-cluster kubernetes-the-hard-way \
@@ -119,9 +119,9 @@ $ ls kube-controller-manager.kubeconfig
 kube-controller-manager.kubeconfig
 ```
 
-### `kube-scheduler`向けKubernetes設定ファイル
+### kube-scheduler向けKubernetes設定ファイル
 
-`kube-scheduler`サービス用のkubeconfigファイルを生成します。
+kube-schedulerサービス用のkubeconfigファイルを生成します。
 
 ```shell
 kubectl config set-cluster kubernetes-the-hard-way \
@@ -156,9 +156,9 @@ $ ls kube-scheduler.kubeconfig
 kube-scheduler.kubeconfig
 ```
 
-### `admin`ユーザ向けKubernetes設定ファイル
+### adminユーザ向けKubernetes設定ファイル
 
-`admin`ユーザ用のkubeconfigファイルを生成します。
+adminユーザ用のkubeconfigファイルを生成します。
 
 ```shell
 kubectl config set-cluster kubernetes-the-hard-way \
@@ -195,7 +195,7 @@ admin.kubeconfig
 
 ## Kubernetes構成ファイルの配布
 
-`kube-controller-manager`および`kube-scheduler`向けのkubeconfigファイルを`kube-c01`に配布します。
+kube-controller-managerおよびkube-scheduler向けのkubeconfigファイルをkube-c01に配布します。
 
 ```shell
 scp admin.kubeconfig \
@@ -204,7 +204,7 @@ scp admin.kubeconfig \
   nob@kube-c01:~/
 ```
 
-`kubelet`および`kube-proxy`向けのkubeconfigファイルを`kube-w01`, `kube-w02`に配布します。
+kubeletおよびkube-proxy向けのkubeconfigファイルをkube-w01、kube-w02に配布します。
 
 ```shell
 for HOST in kube-w01 kube-w02; do

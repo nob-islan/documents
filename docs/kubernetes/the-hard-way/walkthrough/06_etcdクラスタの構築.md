@@ -1,10 +1,10 @@
-# 6. `etcd`クラスタの構築
+# 6. etcdクラスタの構築
 
 Kubernetesクラスタの状態を保存する[etcd](https://github.com/etcd-io/etcd)を構築します。
 
 ## 事前準備
 
-`etcd`向けsystemdユニットファイルを作成します。
+etcd向けsystemdユニットファイルを作成します。
 
 ```shell
 mkdir units
@@ -33,7 +33,7 @@ WantedBy=multi-user.target
 EOF
 ```
 
-`etcd`バイナリファイルおよびsystemdユニットファイルを`kube-c01`にコピーします。
+etcdバイナリファイルおよびsystemdユニットファイルをkube-c01にコピーします。
 
 ```shell
 scp \
@@ -43,15 +43,15 @@ scp \
   nob@kube-c01:~/
 ```
 
-## `etcd`クラスタの設定
+## etcdクラスタの設定
 
-### `etcd`バイナリのインストール
+### etcdバイナリのインストール
 
 ```shell
 ssh nob@kube-c01 "sudo mv etcd etcdctl /usr/local/bin/"
 ```
 
-### `etcd`サーバーの設定
+### etcdサーバーの設定
 
 証明書を配置します。
 
@@ -67,9 +67,9 @@ systemdユニットファイルを作成します。
 ssh nob@kube-c01 "sudo mv etcd.service /etc/systemd/system/"
 ```
 
-## `etcd`クラスタの起動
+## etcdクラスタの起動
 
-`etcd`クラスタを起動します。
+etcdクラスタを起動します。
 
 ```shell
 ssh nob@kube-c01 "sudo systemctl daemon-reload"
