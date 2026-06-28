@@ -13,7 +13,9 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:4": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {
+      "moby": false
+    },
     "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
     "ghcr.io/mpriscella/features/kind:1": {}
   },

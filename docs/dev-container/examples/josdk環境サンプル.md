@@ -17,7 +17,9 @@ cf. https://javaoperatorsdk.io/
       "version": "none",
       "installMaven": "true"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:4": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {
+      "moby": false
+    },
     "ghcr.io/mpriscella/features/kind:1": {},
     "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
     "ghcr.io/rio/features/kustomize:1": {}

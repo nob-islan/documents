@@ -7,7 +7,9 @@ C++での開発環境サンプルです:
   "name": "C++",
   "image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-24.04",
   "features": {
-    // "ghcr.io/devcontainers/features/docker-in-docker:4": {}
+    // "ghcr.io/devcontainers/features/docker-in-docker:4": {
+    //   "moby": false
+    // }
   },
   "customizations": {
     "vscode": {

@@ -7,7 +7,9 @@ Goのテンプレートエンジンを用いてAPIおよびWebページを開発
   "name": "Go",
   "image": "mcr.microsoft.com/devcontainers/go:1.25-bookworm",
   "features": {
-    // "ghcr.io/devcontainers/features/docker-in-docker:4": {}
+    // "ghcr.io/devcontainers/features/docker-in-docker:4": {
+    //   "moby": false
+    // }
   },
   "customizations": {
     "vscode": {

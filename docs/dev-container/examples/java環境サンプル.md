@@ -12,7 +12,9 @@ Javaでの開発環境のサンプルです:
     //   "installMaven": "true",
     //   "installGradle": "false"
     // },
-    // "ghcr.io/devcontainers/features/docker-in-docker:4": {}
+    // "ghcr.io/devcontainers/features/docker-in-docker:4": {
+    //   "moby": false
+    // }
   },
   "customizations": {
     "vscode": {
