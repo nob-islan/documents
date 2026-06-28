@@ -11,7 +11,9 @@
   "name": "Kind",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:4": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {
+      "moby": false
+    },
     "ghcr.io/devcontainers-extra/features/kind:1": {},
     "ghcr.io/devcontainers-extra/features/kubectl-asdf:2": {},
     "ghcr.io/audacioustux/devcontainers/kustomize:1": {}
