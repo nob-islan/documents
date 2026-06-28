@@ -13,7 +13,7 @@ sudo apt install -y wget curl vim openssl git
 
 ## バイナリのダウンロード
 
-必要なバイナリ一覧について記載した`downloads.txt`を作成します。TODO バージョン調整、環境変数化
+必要なバイナリ一覧について記載した`downloads.txt`を作成します。
 
 ```shell
 ARCH=$(dpkg --print-architecture)
