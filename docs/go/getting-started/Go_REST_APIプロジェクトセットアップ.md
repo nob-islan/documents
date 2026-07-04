@@ -124,6 +124,16 @@ func (u User) Age() int {
 	return u.age
 }
 
+// ユーザが存在するかを判定します。
+func (u User) Exists() bool {
+	return !(u.name == "")
+}
+
+// パスワードが正しいかを判定します。
+func (u User) VerifyPassword(password string) bool {
+	return u.password == password
+}
+
 // ユーザ情報ドメイン向けrepositoryのインターフェースです。
 type UserRepository interface {
 
@@ -252,16 +262,16 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.LoginOut {
 
 	user := u.userRepository.FindByName(ctx, in.Name())
-	if user.Name() == "" {
+	if !user.Exists() {
 		return params.NewLoginOut(false)
 	}
-	return params.NewLoginOut(user.Password() == in.Password())
+	return params.NewLoginOut(user.VerifyPassword(in.Password()))
 }
 
 func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, error) {
 
 	user := u.userRepository.FindByName(ctx, in.Name())
-	if user.Name() == "" {
+	if !user.Exists() {
 		return *new(params.MeOut), errors.New("no such user")
 	}
 	return params.NewMeOut(user.Name(), user.Age()), nil
