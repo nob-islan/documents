@@ -181,21 +181,21 @@ L  = Seattle
 # from the address range (10.32.0.0/24) reserved for internal cluster
 # services.
 
-[kube-api-server]
-distinguished_name = kube-api-server_distinguished_name
+[kube-apiserver]
+distinguished_name = kube-apiserver_distinguished_name
 prompt             = no
-req_extensions     = kube-api-server_req_extensions
+req_extensions     = kube-apiserver_req_extensions
 
-[kube-api-server_req_extensions]
+[kube-apiserver_req_extensions]
 basicConstraints     = CA:FALSE
 extendedKeyUsage     = clientAuth, serverAuth
 keyUsage             = critical, digitalSignature, keyEncipherment
 nsCertType           = client, server
 nsComment            = "Kube API Server Certificate"
-subjectAltName       = @kube-api-server_alt_names
+subjectAltName       = @kube-apiserver_alt_names
 subjectKeyIdentifier = hash
 
-[kube-api-server_alt_names]
+[kube-apiserver_alt_names]
 IP.0  = 127.0.0.1
 IP.1  = 10.32.0.1
 DNS.0 = kubernetes
@@ -206,7 +206,7 @@ DNS.4 = kubernetes.svc.cluster.local
 DNS.5 = kube-c01.kubernetes.local
 DNS.6 = api-server.kubernetes.local
 
-[kube-api-server_distinguished_name]
+[kube-apiserver_distinguished_name]
 CN = kubernetes
 C  = US
 ST = Washington
@@ -253,7 +253,7 @@ certs=(
   "admin" "kube-w01" "kube-w02"
   "kube-proxy" "kube-scheduler"
   "kube-controller-manager"
-  "kube-api-server"
+  "kube-apiserver"
   "service-accounts"
 )
 ```
@@ -288,9 +288,9 @@ admin.csr
 admin.key
 ca.crt
 ca.key
-kube-api-server.crt
-kube-api-server.csr
-kube-api-server.key
+kube-apiserver.crt
+kube-apiserver.csr
+kube-apiserver.key
 kube-controller-manager.crt
 kube-controller-manager.csr
 kube-controller-manager.key
@@ -317,7 +317,7 @@ service-accounts.key
 
 ```shell
 scp \
-  ca.key ca.crt kube-api-server.key kube-api-server.crt service-accounts.key service-accounts.crt \
+  ca.key ca.crt kube-apiserver.key kube-apiserver.crt service-accounts.key service-accounts.crt \
   nob@kube-c01:~/
 ```
 

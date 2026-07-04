@@ -31,9 +31,9 @@ kubectl get nodes
 
 ```
 $ kubectl get nodes
-NAME       STATUS   ROLES    AGE    VERSION
-kube-w01   Ready    <none>   2m9s   v1.32.3
-kube-w02   Ready    <none>   2m2s   v1.32.3
+NAME       STATUS   ROLES    AGE   VERSION
+kube-w01   Ready    <none>   45s   v1.35.5
+kube-w02   Ready    <none>   48s   v1.35.5
 ```
 
 次: [Podネットワークの割り当て](./10_Podネットワークの割り当て.md)

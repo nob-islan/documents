@@ -72,18 +72,18 @@ ls -oh downloads
 
 ```
 $ ls -oh downloads
-total 566M
--rw-rw-r-- 1 nob 51M Jan  6  2025 cni-plugins-linux-amd64-v1.6.2.tgz
--rw-rw-r-- 1 nob 38M Mar 18  2025 containerd-2.1.0-beta.0-linux-amd64.tar.gz
--rw-rw-r-- 1 nob 19M Dec  9  2024 crictl-v1.32.0-linux-amd64.tar.gz
--rw-rw-r-- 1 nob 23M Mar 27  2025 etcd-v3.6.0-rc.3-linux-amd64.tar.gz
--rw-rw-r-- 1 nob 89M Mar 12  2025 kube-apiserver
--rw-rw-r-- 1 nob 83M Mar 12  2025 kube-controller-manager
--rw-rw-r-- 1 nob 64M Mar 12  2025 kube-proxy
--rw-rw-r-- 1 nob 63M Mar 12  2025 kube-scheduler
--rw-rw-r-- 1 nob 55M Mar 12  2025 kubectl
--rw-rw-r-- 1 nob 74M Mar 12  2025 kubelet
--rw-rw-r-- 1 nob 12M Mar  4  2025 runc.amd64
+total 489M
+-rw-rw-r-- 1 nob 53M Sep  1  2025 cni-plugins-linux-amd64-v1.8.0.tgz
+-rw-rw-r-- 1 nob 34M Jun 18 23:11 containerd-2.2.5-linux-amd64.tar.gz
+-rw-rw-r-- 1 nob 19M Dec 10  2025 crictl-v1.35.0-linux-amd64.tar.gz
+-rw-rw-r-- 1 nob 24M Jul  1 20:38 etcd-v3.6.13-linux-amd64.tar.gz
+-rw-rw-r-- 1 nob 82M May 12 15:36 kube-apiserver
+-rw-rw-r-- 1 nob 69M May 12 15:36 kube-controller-manager
+-rw-rw-r-- 1 nob 42M May 12 15:36 kube-proxy
+-rw-rw-r-- 1 nob 46M May 12 15:36 kube-scheduler
+-rw-rw-r-- 1 nob 56M May 12 15:36 kubectl
+-rw-rw-r-- 1 nob 56M May 12 15:36 kubelet
+-rw-rw-r-- 1 nob 12M Jun 13 17:22 runc.amd64
 ```
 
 ダウンロードしたファイルを展開します。
@@ -123,8 +123,8 @@ kubectl version --client
 
 ```
 $ kubectl version --client
-Client Version: v1.32.3
-Kustomize Version: v5.5.0
+Client Version: v1.35.5
+Kustomize Version: v5.7.1
 ```
 
 次: [認証局の割り当ておよびTLS証明書の作成](./03_認証局の割り当てとTLS証明書の作成.md)
