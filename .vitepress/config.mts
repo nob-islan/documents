@@ -7,6 +7,9 @@ const vitePressOptions = {
   title: "Nob docs",
   description: "Nob tech document",
   themeConfig: {
+    head: [["link", { rel: "icon", href: "/favicon.ico" }]],
+    logo: "icon.png",
+
     docFooter: {
       prev: false,
       next: false,
@@ -18,16 +21,14 @@ const vitePressOptions = {
       provider: "local",
     },
   },
+
+  ignoreDeadLinks: true,
 };
 
 const vitePressSidebarOptions = {
   documentRootPath: "docs",
   collapsed: true,
   useTitleFromFileHeading: true,
-  sortMenusByName: false,
-  manualSortFileNameByPriority: [
-    "top.md", // ←これを最上位に固定
-  ],
 };
 
 export default defineConfig(
