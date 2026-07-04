@@ -132,12 +132,16 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const d
 <span class="line"><span>To further debug and diagnose cluster problems, use &#39;kubectl cluster-info dump&#39;.</span></span></code></pre></div><h2 id="kubelet認証のためのrbacの設定" tabindex="-1">kubelet認証のためのRBACの設定 <a class="header-anchor" href="#kubelet認証のためのrbacの設定" aria-label="Permalink to “kubelet認証のためのRBACの設定”">​</a></h2><p>Kubernetes APIサーバが各ワーカーノード上のKubelet APIにアクセスできるようにRBAC権限を設定します。</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ssh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nob@kube-c01</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;kubectl apply -f kube-apiserver-to-kubelet.yaml --kubeconfig admin.kubeconfig&quot;</span></span></code></pre></div><h2 id="動作確認" tabindex="-1">動作確認 <a class="header-anchor" href="#動作確認" aria-label="Permalink to “動作確認”">​</a></h2><p>コントロールプレーンが正常に起動、動作していることを確認します。</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">curl</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --cacert</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ca.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> https://kube-c01.kubernetes.local:6443/version</span></span></code></pre></div><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>$ curl --cacert ca.crt https://kube-c01.kubernetes.local:6443/version</span></span>
 <span class="line"><span>{</span></span>
 <span class="line"><span>  &quot;major&quot;: &quot;1&quot;,</span></span>
-<span class="line"><span>  &quot;minor&quot;: &quot;32&quot;,</span></span>
-<span class="line"><span>  &quot;gitVersion&quot;: &quot;v1.32.3&quot;,</span></span>
-<span class="line"><span>  &quot;gitCommit&quot;: &quot;32cc146f75aad04beaaa245a7157eb35063a9f99&quot;,</span></span>
+<span class="line"><span>  &quot;minor&quot;: &quot;35&quot;,</span></span>
+<span class="line"><span>  &quot;emulationMajor&quot;: &quot;1&quot;,</span></span>
+<span class="line"><span>  &quot;emulationMinor&quot;: &quot;35&quot;,</span></span>
+<span class="line"><span>  &quot;minCompatibilityMajor&quot;: &quot;1&quot;,</span></span>
+<span class="line"><span>  &quot;minCompatibilityMinor&quot;: &quot;34&quot;,</span></span>
+<span class="line"><span>  &quot;gitVersion&quot;: &quot;v1.35.5&quot;,</span></span>
+<span class="line"><span>  &quot;gitCommit&quot;: &quot;6636cbce3bbef91ff61d36658757179426f9e1b2&quot;,</span></span>
 <span class="line"><span>  &quot;gitTreeState&quot;: &quot;clean&quot;,</span></span>
-<span class="line"><span>  &quot;buildDate&quot;: &quot;2025-03-11T19:52:21Z&quot;,</span></span>
-<span class="line"><span>  &quot;goVersion&quot;: &quot;go1.23.6&quot;,</span></span>
+<span class="line"><span>  &quot;buildDate&quot;: &quot;2026-05-12T09:50:51Z&quot;,</span></span>
+<span class="line"><span>  &quot;goVersion&quot;: &quot;go1.25.9&quot;,</span></span>
 <span class="line"><span>  &quot;compiler&quot;: &quot;gc&quot;,</span></span>
 <span class="line"><span>  &quot;platform&quot;: &quot;linux/amd64&quot;</span></span>
 <span class="line"><span>}</span></span></code></pre></div><p>次: <a href="./08_ワーカーノードの構築.html">ワーカーノードの構築</a></p>`,47)])])}const g=i(l,[["render",t]]);export{d as __pageData,g as default};

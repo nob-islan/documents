@@ -166,21 +166,21 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const c
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"># from the address range (10.32.0.0/24) reserved for internal cluster</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"># services.</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-api-server]</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">distinguished_name = kube-api-server_distinguished_name</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-apiserver]</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">distinguished_name = kube-apiserver_distinguished_name</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">prompt             = no</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">req_extensions     = kube-api-server_req_extensions</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">req_extensions     = kube-apiserver_req_extensions</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-api-server_req_extensions]</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-apiserver_req_extensions]</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">basicConstraints     = CA:FALSE</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">extendedKeyUsage     = clientAuth, serverAuth</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">keyUsage             = critical, digitalSignature, keyEncipherment</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">nsCertType           = client, server</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">nsComment            = &quot;Kube API Server Certificate&quot;</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">subjectAltName       = @kube-api-server_alt_names</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">subjectAltName       = @kube-apiserver_alt_names</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">subjectKeyIdentifier = hash</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-api-server_alt_names]</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-apiserver_alt_names]</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">IP.0  = 127.0.0.1</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">IP.1  = 10.32.0.1</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">DNS.0 = kubernetes</span></span>
@@ -191,7 +191,7 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const c
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">DNS.5 = kube-c01.kubernetes.local</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">DNS.6 = api-server.kubernetes.local</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-api-server_distinguished_name]</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">[kube-apiserver_distinguished_name]</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">CN = kubernetes</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">C  = US</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">ST = Washington</span></span>
@@ -214,7 +214,7 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const c
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;admin&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;kube-w01&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;kube-w02&quot;</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;kube-proxy&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;kube-scheduler&quot;</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;kube-controller-manager&quot;</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;kube-api-server&quot;</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;kube-apiserver&quot;</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  &quot;service-accounts&quot;</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span></code></pre></div><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> i </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> \${certs[</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">*</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]}; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">do</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  openssl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> genrsa</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -out</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;\${</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">i</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">}.key&quot;</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 4096</span></span>
@@ -235,9 +235,9 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const c
 <span class="line"><span>admin.key</span></span>
 <span class="line"><span>ca.crt</span></span>
 <span class="line"><span>ca.key</span></span>
-<span class="line"><span>kube-api-server.crt</span></span>
-<span class="line"><span>kube-api-server.csr</span></span>
-<span class="line"><span>kube-api-server.key</span></span>
+<span class="line"><span>kube-apiserver.crt</span></span>
+<span class="line"><span>kube-apiserver.csr</span></span>
+<span class="line"><span>kube-apiserver.key</span></span>
 <span class="line"><span>kube-controller-manager.crt</span></span>
 <span class="line"><span>kube-controller-manager.csr</span></span>
 <span class="line"><span>kube-controller-manager.key</span></span>
@@ -256,7 +256,7 @@ import{_ as i,o as a,c as n,a6 as e}from"./chunks/framework.C3mgXFrM.js";const c
 <span class="line"><span>service-accounts.crt</span></span>
 <span class="line"><span>service-accounts.csr</span></span>
 <span class="line"><span>service-accounts.key</span></span></code></pre></div><h2 id="クライアント証明書、サーバ証明書の配布" tabindex="-1">クライアント証明書、サーバ証明書の配布 <a class="header-anchor" href="#クライアント証明書、サーバ証明書の配布" aria-label="Permalink to “クライアント証明書、サーバ証明書の配布”">​</a></h2><p>必要な証明書をkube-c01、kube-w01、kube-w02にコピーします。</p><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">scp</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> \\</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  ca.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ca.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-api-server.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-api-server.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> service-accounts.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> service-accounts.crt</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> \\</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  ca.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ca.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-apiserver.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-apiserver.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> service-accounts.key</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> service-accounts.crt</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> \\</span></span>
 <span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">  nob@kube-c01:~/</span></span></code></pre></div><div class="language-shell"><button title="Copy Code" class="copy"></button><span class="lang">shell</span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> HOST </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">in</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-w01</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> kube-w02</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">; </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">do</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  ssh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nob@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">\${HOST} </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;sudo mkdir -p /var/lib/kubelet&quot;</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  scp</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ca.crt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nob@</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">\${HOST}</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">:~/</span></span>
