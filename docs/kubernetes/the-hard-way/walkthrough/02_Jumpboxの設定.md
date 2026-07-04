@@ -8,7 +8,7 @@
 
 ```shell
 sudo apt update
-sudo apt install -y wget curl vim openssl git
+sudo apt install -y wget curl vim openssl
 ```
 
 ## バイナリのダウンロード
@@ -37,7 +37,7 @@ KUBE_PROXY_VERSION=v1.35.5
 KUBELET_VERSION=v1.35.5
 CRI_TOOLS_VERSION=v1.35.0
 RUNC_VERSION=v1.4.3
-CNI_PRUGINS_VERSION=V1.8.0
+CNI_PRUGINS_VERSION=v1.8.0
 CONTAINERD_VERSION=2.2.5
 ETCD_VERSION=v3.6.13
 
