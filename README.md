@@ -10,7 +10,7 @@ https://nobislandocuments.pages.dev/
 
 ## 開発方法
 
-開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown形式で作成されたドキュメントについて[Zensical](https://zensical.org/)にてレンダリングします。
+開発環境は[.devcontainer](.devcontainer/devcontainer.json)にて提供しています。markdown形式で作成されたドキュメントについて[VitePress](https://vitepress.dev/ja/)にてレンダリングします。
 
 ### ドキュメント追加
 
@@ -18,15 +18,15 @@ https://nobislandocuments.pages.dev/
 
 ### 動作確認
 
-- Zensicalを起動します:
+- VitePressを起動します:
 
 ```shell
-zensical serve
+npm run docs:dev -- --host
 ```
 
-起動後、http://localhost:8000/ 上で作成したドキュメントを確認できます。
+起動後、http://localhost:5173/ 上で作成したドキュメントを確認できます。
 
 ## デプロイ方法
 
-- mainブランチに push されるとgithub actionが実行され、`zensical build`コマンドで 外部公開向けのファイルが gh-pagesブランチにpushされます。
+- mainブランチに push されるとgithub actionが実行され、外部公開向けのファイルが gh-pagesブランチにpushされます。
 - gh-pagesブランチに変更が入ると Cloudflare上のnobislandocumentプロジェクトでビルドが走り、ドキュメントが更新されます。
