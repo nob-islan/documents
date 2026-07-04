@@ -1,0 +1,1 @@
+import{_ as a,o as r,c as i,a6 as l}from"./chunks/framework.C3mgXFrM.js";const u=JSON.parse('{"title":"Home","description":"","frontmatter":{},"headers":[],"relativePath":"index.md","filePath":"index.md"}'),t={name:"index.md"};function d(n,e,o,h,c,s){return r(),i("div",null,[...e[0]||(e[0]=[l("",15)])])}const m=a(t,[["render",d]]);export{u as __pageData,m as default};
