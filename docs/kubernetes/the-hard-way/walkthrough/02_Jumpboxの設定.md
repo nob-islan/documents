@@ -29,18 +29,30 @@ sudo apt install -y wget curl vim openssl git
 
 ```shell
 ARCH=$(dpkg --print-architecture)
+KUBECTL_VERSION=v1.35.5
+KUBE_APISERVER_VERSION=v1.35.5
+KUBE_CONTROLLER_MANAGER_VERSION=v1.35.5
+KUBE_SCHEDULER_VERSION=v1.35.5
+KUBE_PROXY_VERSION=v1.35.5
+KUBELET_VERSION=v1.35.5
+CRI_TOOLS_VERSION=v1.35.0
+RUNC_VERSION=v1.4.3
+CNI_PRUGINS_VERSION=V1.8.0
+CONTAINERD_VERSION=2.2.5
+ETCD_VERSION=v3.6.13
+
 cat << EOF > downloads.txt
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kubectl
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kube-apiserver
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kube-controller-manager
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kube-scheduler
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kube-proxy
-https://dl.k8s.io/v1.32.3/bin/linux/${ARCH}/kubelet
-https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.32.0/crictl-v1.32.0-linux-${ARCH}.tar.gz
-https://github.com/opencontainers/runc/releases/download/v1.3.0-rc.1/runc.${ARCH}
-https://github.com/containernetworking/plugins/releases/download/v1.6.2/cni-plugins-linux-${ARCH}-v1.6.2.tgz
-https://github.com/containerd/containerd/releases/download/v2.1.0-beta.0/containerd-2.1.0-beta.0-linux-${ARCH}.tar.gz
-https://github.com/etcd-io/etcd/releases/download/v3.6.0-rc.3/etcd-v3.6.0-rc.3-linux-${ARCH}.tar.gz
+https://dl.k8s.io/${KUBECTL_VERSION}/bin/linux/${ARCH}/kubectl
+https://dl.k8s.io/${KUBE_APISERVER_VERSION}/bin/linux/${ARCH}/kube-apiserver
+https://dl.k8s.io/${KUBE_CONTROLLER_MANAGER_VERSION}/bin/linux/${ARCH}/kube-controller-manager
+https://dl.k8s.io/${KUBE_SCHEDULER_VERSION}/bin/linux/${ARCH}/kube-scheduler
+https://dl.k8s.io/${KUBE_PROXY_VERSION}/bin/linux/${ARCH}/kube-proxy
+https://dl.k8s.io/${KUBELET_VERSION}/bin/linux/${ARCH}/kubelet
+https://github.com/kubernetes-sigs/cri-tools/releases/download/${CRI_TOOLS_VERSION}/crictl-${CRI_TOOLS_VERSION}-linux-${ARCH}.tar.gz
+https://github.com/opencontainers/runc/releases/download/${RUNC_VERSION}/runc.${ARCH}
+https://github.com/containernetworking/plugins/releases/download/${CNI_PRUGINS_VERSION}/cni-plugins-linux-${ARCH}-${CNI_PRUGINS_VERSION}.tgz
+https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz
+https://github.com/etcd-io/etcd/releases/download/${ETCD_VERSION}/etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz
 EOF
 ```
 
@@ -78,10 +90,10 @@ total 566M
 
 ```shell
 mkdir -p downloads/{client,cni-plugins,controller,worker}
-tar -xvf downloads/crictl-v1.32.0-linux-${ARCH}.tar.gz -C downloads/worker/
-tar -xvf downloads/containerd-2.1.0-beta.0-linux-${ARCH}.tar.gz --strip-components 1 -C downloads/worker/
-tar -xvf downloads/cni-plugins-linux-${ARCH}-v1.6.2.tgz -C downloads/cni-plugins/
-tar -xvf downloads/etcd-v3.6.0-rc.3-linux-${ARCH}.tar.gz -C downloads/ --strip-components 1 etcd-v3.6.0-rc.3-linux-${ARCH}/etcdctl etcd-v3.6.0-rc.3-linux-${ARCH}/etcd
+tar -xvf downloads/crictl-${CRI_TOOLS_VERSION}-linux-${ARCH}.tar.gz -C downloads/worker/
+tar -xvf downloads/containerd-${CONTAINERD_VERSION}-linux-${ARCH}.tar.gz --strip-components 1 -C downloads/worker/
+tar -xvf downloads/cni-plugins-linux-${ARCH}-${CNI_PRUGINS_VERSION}.tgz -C downloads/cni-plugins/
+tar -xvf downloads/etcd-${ETCD_VERSION}-linux-${ARCH}.tar.gz -C downloads/ --strip-components 1 etcd-${ETCD_VERSION}-linux-${ARCH}/etcdctl etcd-${ETCD_VERSION}-linux-${ARCH}/etcd
 mv downloads/{etcdctl,kubectl} downloads/client/
 mv downloads/{etcd,kube-apiserver,kube-controller-manager,kube-scheduler} downloads/controller/
 mv downloads/{kubelet,kube-proxy} downloads/worker/
