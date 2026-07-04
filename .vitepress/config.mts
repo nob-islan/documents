@@ -1,7 +1,8 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, UserConfig } from "vitepress";
 import { withSidebar } from "vitepress-sidebar";
+import { VitePressSidebarOptions } from "vitepress-sidebar/types";
 
-const vitePressOptions = {
+const vitePressOptions: UserConfig = {
   srcDir: "docs",
 
   title: "Nob docs",
@@ -22,10 +23,10 @@ const vitePressOptions = {
     },
   },
 
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: "localhostLinks",
 };
 
-const vitePressSidebarOptions = {
+const vitePressSidebarOptions: VitePressSidebarOptions = {
   documentRootPath: "docs",
   collapsed: true,
   useTitleFromFileHeading: true,
