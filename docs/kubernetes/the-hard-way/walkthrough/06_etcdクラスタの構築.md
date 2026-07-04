@@ -58,7 +58,7 @@ ssh nob@kube-c01 "sudo mv etcd etcdctl /usr/local/bin/"
 ```shell
 ssh nob@kube-c01 "sudo mkdir -p /etc/etcd /var/lib/etcd"
 ssh nob@kube-c01 "sudo chmod 700 /var/lib/etcd"
-ssh nob@kube-c01 "sudo cp ca.crt kube-api-server.key kube-api-server.crt /etc/etcd/"
+ssh nob@kube-c01 "sudo cp ca.crt kube-apiserver.key kube-apiserver.crt /etc/etcd/"
 ```
 
 systemdユニットファイルを作成します。
