@@ -1,17 +1,28 @@
 {
-  "name": "Documents",
-  "image": "mcr.microsoft.com/devcontainers/python:3",
-  "postCreateCommand": "bash .devcontainer/scripts/postcreate.sh",
+  "name": "VitePress",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
   "features": {},
   "customizations": {
     "vscode": {
       "settings": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "eslint.validate": ["typescript", "javascript"],
+        "[typescript]": {
+          "editor.tabSize": 2,
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[javascript]": {
+          "editor.tabSize": 2,
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[css]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
       },
-      "extensions": [
-        "esbenp.prettier-vscode",
-        "shd101wyy.markdown-preview-enhanced"
-      ]
+      "extensions": ["Vue.volar", "esbenp.prettier-vscode"]
     }
   }
 }
