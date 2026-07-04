@@ -8,7 +8,7 @@
 
 ```shell
 sudo apt update
-sudo apt install -y wget curl vim openssl
+sudo apt install -y wget curl openssl
 ```
 
 ## バイナリのダウンロード
