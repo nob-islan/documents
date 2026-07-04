@@ -19,12 +19,12 @@ GitLab Pagesを有効化します。
 
 - GitLab本体は`gitlab.example.nob`, Pagesは`pages.example.nob`で名前解決できるようにします:
 
-```conf
+```ini
 # /etc/dnsmasq-hostsに記載
 {gitlab IP} gitlab.example.nob
 ```
 
-```conf
+```ini
 # /etc/dnsmasq.confに記載
 address=/.pages.example.nob/{gitlab IP}
 ```
@@ -107,12 +107,12 @@ services:
 
 - GitLab本体は`gitlab.example.nob`, Pagesは`pages.example.nob`で名前解決できるようにします:
 
-```conf
+```ini
 # /etc/dnsmasq-hostsに記載
 {gitlab IP} gitlab.example.nob
 ```
 
-```conf
+```ini
 # /etc/dnsmasq.confに記載
 address=/.pages.example.nob/{gitlab IP}
 ```

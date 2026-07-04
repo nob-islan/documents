@@ -35,7 +35,7 @@ http_access [allow|deny] {acl名}
 
 - プライベートIPからのアクセスのみ許可する設定
 
-```conf
+```ini
 include /etc/squid/conf.d/*.conf
 
 http_port 3128

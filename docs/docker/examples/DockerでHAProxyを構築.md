@@ -17,7 +17,7 @@ services:
 
 - `haproxy.cfg`を下記で作成します（see also; [Configuration file composition](https://www.haproxy.com/documentation/haproxy-configuration-tutorials/proxying-essentials/configuration-basics/overview/#configuration-file-composition)）:
 
-```config
+```ini
 global
   maxconn 60000
   log 127.0.0.1 local0

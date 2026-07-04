@@ -25,7 +25,7 @@ unzip keycloak-26.5.0.zip
 
 - `conf/keycloak.conf`を下記で作成します:
 
-```conf
+```ini
 # Basic settings for running in production. Change accordingly before deploying the server.
 
 # Database

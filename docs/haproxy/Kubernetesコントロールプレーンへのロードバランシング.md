@@ -2,7 +2,7 @@
 
 Kubernetesのコントロールプレーンを冗長化した際に前段にHAProxyをロードバランサとして置く際の設定サンプルです。
 
-```cfg
+```ini
 global
   maxconn 60000
   log 127.0.0.1 local0

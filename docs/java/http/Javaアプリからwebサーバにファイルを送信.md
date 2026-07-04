@@ -23,7 +23,7 @@ root
 
 `default.conf`を下記で作成します。`# for file upload`のところ以外はデフォルトのままです。
 
-```conf
+```ini
 server {
     listen       80;
     listen  [::]:80;

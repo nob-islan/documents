@@ -75,7 +75,7 @@ Zabbixサーバの構築方法および、監視対象のサーバへのエー�
 
 - `/etc/zabbix/zabbix_server.conf`を編集
 
-  ```conf
+  ```ini
   DBPassword={password}
   ```
 
@@ -120,7 +120,7 @@ http://localhost/zabbix にアクセスするとログイン画面が表示さ�
 
 - `/etc/zabbix/zabbix_agentd.conf`を編集
 
-  ```conf
+  ```ini
   Server=${ZabbixサーバのIPアドレス}
   ServerActive=${ZabbixサーバのIPアドレス}
   ```

@@ -8,7 +8,7 @@ cf. https://www.fluentd.org/guides/recipes/docker-logging
 
 - `/etc/fluent/fluentd.conf`を下記で設定します:
 
-```conf
+```ini
 <match *.*>
   @type stdout
 </match>

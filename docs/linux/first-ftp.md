@@ -21,7 +21,7 @@ sudo useradd -m ftpuser && sudo passwd ftpuser
 
 - `/etc/vsftpd.conf`編集
 
-```conf
+```ini
 # クライアントを待ち受ける
 listen=YES
 

@@ -20,7 +20,7 @@ sudo systemctl stop ${サービス名}
 
 - `/etc/dnsmasq.conf`を編集
 
-```conf
+```ini
 # DNSのポートを指定
 port=53
 
@@ -46,13 +46,13 @@ domain=example.nob
 
 - `/etc/dnsmasq-hosts`を作成
 
-```conf
+```ini
 192.168.151.1 ${任意のホスト名}
 ```
 
 - `/etc/dnsmasq-resolv.conf`を作成
 
-```conf
+```ini
 nameserver 8.8.8.8
 ```
 
