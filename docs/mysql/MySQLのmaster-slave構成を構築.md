@@ -94,7 +94,7 @@ CREATE TABLE users(
 
 #### mysql-master/my.cnf
 
-```cnf
+```ini
 [mysqld]
 server-id = 1
 log-bin = mysql-bin
@@ -124,7 +124,7 @@ GRANT USAGE ON *.* TO 'monitor'@'%';
 
 #### mysql-slave/my.cnf
 
-```cnf
+```ini
 [mysqld]
 server-id = 2
 relay-log = relay-bin
@@ -135,7 +135,7 @@ enforce-gtid-consistency = ON
 
 #### proxysql/proxysql.cnf
 
-```cnf
+```ini
 mysql_variables =
 {
     interfaces="0.0.0.0:3306"

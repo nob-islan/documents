@@ -50,7 +50,7 @@ find / -name pg_hba.conf 2> /dev/null
 
 ファイルの末尾に以下を追記
 
-```conf
+```ini
 host    all             all             192.168.144.0/24           trust
 ```
 

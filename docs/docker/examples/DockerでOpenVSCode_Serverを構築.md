@@ -57,7 +57,7 @@ sudo openssl x509 -days 3650 -req -signkey /etc/nginx/ssl/server.key -in /etc/ng
 
 `/etc/nginx/conf.d/ssl.conf`を下記で作成します:
 
-```conf
+```ini
 server {
     listen 443 ssl;
     ssl_certificate     /etc/nginx/ssl/server.crt;

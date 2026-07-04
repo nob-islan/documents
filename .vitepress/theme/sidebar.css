@@ -1,0 +1,22 @@
+/* サイドバーのグループ間の線を消す */
+.VPSidebar .group + .group {
+  border-top: none !important;
+}
+
+/* ===サイドバーの行間調整=== */
+.VPSidebar .group {
+  padding: 0 !important;
+}
+
+.VPSidebarItem.level-0.collapsible.collapsed {
+  padding: 0;
+}
+
+.VPSidebarItem.level-0.collapsible {
+  padding: 0;
+}
+
+/* ディレクトリ直下のドキュメント表題のネスト */
+.VPSidebarItem.level-1 {
+  padding-left: 16px;
+}

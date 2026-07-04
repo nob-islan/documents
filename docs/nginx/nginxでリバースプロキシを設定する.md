@@ -2,7 +2,7 @@
 
 nginx経由でサービスにアクセスする構成を取る際の設定です。
 
-```conf
+```ini
 server {
     server_name  {IPアドレス};
     listen 443 ssl;

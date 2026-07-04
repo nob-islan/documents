@@ -2,7 +2,7 @@
 
 下記の要領で`/etc/nginx/conf.d/easyapp.conf`を作成するとリクエストをルーティングできます:
 
-```conf
+```ini
 server {
     listen 80 default_server;
 

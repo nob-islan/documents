@@ -16,7 +16,7 @@ cf. https://www.rabbitmq.com/docs/management-cli
 
 - 設定ファイルを作成します:
 
-```conf
+```ini
 [default]
 username = "admin"
 password = "password"

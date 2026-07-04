@@ -1,0 +1,7 @@
+/* 右側アウトライン（TOC）の折り返し */
+.VPDocAsideOutline .outline-link {
+  white-space: normal;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 10px;
+}

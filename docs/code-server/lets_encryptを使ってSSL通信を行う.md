@@ -17,7 +17,7 @@ sudo apt install -y nginx certbot python3-certbot-nginx
 
 - `/etc/nginx/sites-available/code-server`ファイルを下記で作成します:
 
-```config
+```ini
 server {
     listen 80;
     listen [::]:80;
