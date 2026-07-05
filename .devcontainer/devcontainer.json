@@ -20,6 +20,9 @@
         },
         "[css]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[vue]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
         }
       },
       "extensions": ["Vue.volar", "esbenp.prettier-vscode"]
