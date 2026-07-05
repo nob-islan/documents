@@ -19,10 +19,9 @@
   border: 1px solid var(--vp-c-divider);
   border-radius: 10px;
   padding: 12px;
-  transition: 0.15s;
+  transition: 0.2s;
 }
 
-/* ホバー */
 .grid.cards li:hover {
   border-color: var(--vp-c-brand);
   transform: translateY(-2px);
@@ -31,15 +30,16 @@
 /* リンク */
 .grid.cards a {
   text-decoration: none;
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-brand-1);
   font-weight: 700;
 }
 
-/* 説明文（<br>以降） */
-.grid.cards br + * {
-  display: block;
-  margin-top: 6px;
-  font-size: 13px;
+.grid.cards a:hover {
+  text-decoration: underline;
+}
+
+/* 説明部分 */
+.grid.cards.explain {
+  margin: 0;
   color: var(--vp-c-text-2);
-  font-weight: normal;
 }

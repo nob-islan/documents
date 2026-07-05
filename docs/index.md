@@ -22,7 +22,7 @@
 <div class="grid cards">
 
 - [Dockerインストール](./docker/Dockerインストール.md)
-  <br> Dockerのインストール手順です。スクリプトによって自動化しています。
+  <span class="grid cards explain"> Dockerのインストール手順です。スクリプトによって自動化しています。 </span>
 
 </div>
 
@@ -31,11 +31,11 @@
 <div class="grid cards">
 
 - [Kubernetesクラスター構築手順](./kubernetes/getting-started/Kubernetesクラスター構築手順.md)
-  <br> kubeadmを使ったKubernetesクラスター構築手順書です。
+  <span class="grid cards explain"> kubeadmを使ったKubernetesクラスター構築手順書です。 </span>
 - [Kubebuilderプロジェクトセットアップ](./kubernetes/custom-controller/kubebuilder/Kubebuilderプロジェクトセットアップ.md)
-  <br> Kubebuilderを使ってカスタムコントローラーを実装するサンプルです。
+  <span class="grid cards explain"> Kubebuilderを使ってカスタムコントローラーを実装するサンプルです。 </span>
 - [Kubernetes the hard way](./kubernetes/the-hard-way/walkthrough/00_イントロダクション.md)
-  <br> Kubernetesを手動で構築する学習用ウォークスルーです。
+  <span class="grid cards explain"> Kubernetesを手動で構築する学習用ウォークスルーです。 </span>
 
 </div>
 
@@ -44,9 +44,9 @@
 <div class="grid cards">
 
 - [Go REST APIプロジェクトセットアップ](./go/getting-started/Go_REST_APIプロジェクトセットアップ.md)
-  <br> Goの標準ライブラリでREST APIを実装するサンプルです。
+  <span class="grid cards explain"> Goの標準ライブラリでREST APIを実装するサンプルです。 </span>
 - [echoでREST APIを実装](./go/echo/echoでREST_APIを実装.md)
-  <br> echoフレームワークでREST APIを実装するサンプルです。
+  <span class="grid cards explain"> echoフレームワークでREST APIを実装するサンプルです。 </span>
 
 </div>
 
@@ -55,7 +55,7 @@
 <div class="grid cards">
 
 - [Spring Bootプロジェクトセットアップ](./java/spring-boot/Spring_Bootプロジェクトセットアップ.md)
-  <br> Spring BootでREST APIを実装するサンプルです。
+  <span class="grid cards explain"> Spring BootでREST APIを実装するサンプルです。 </span>
 
 </div>
 
@@ -64,6 +64,6 @@
 <div class="grid cards">
 
 - [Reactプロジェクトセットアップ](./react/getting-started/Reactプロジェクトセットアップ.md)
-  <br> React・Redux・TypeScriptでUIを実装するサンプルです。
+  <span class="grid cards explain"> React・Redux・TypeScriptでUIを実装するサンプルです。 </span>
 
 </div>
