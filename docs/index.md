@@ -6,64 +6,103 @@
 
 ### Dev container
 
-<div class="grid cards">
+<div class="grid cards wrapper">
+  <a href="./dev-container/examples/go環境サンプル">
+    <div class="grid cards title">Go環境サンプル</div>
+    <div class="grid cards explain"></div>
+  </a>
+</div>
 
-- [Go環境サンプル](./dev-container/examples/go環境サンプル.md)
-- [Kindサンプル](./dev-container/examples/kindサンプル.md)
-- [Java環境サンプル](./dev-container/examples/java環境サンプル.md)
-- [Kotlin環境サンプル](./dev-container/examples/kotlin環境サンプル.md)
-- [React環境サンプル](./dev-container/examples/react環境サンプル.md)
-- [Kubebuilder環境サンプル](./dev-container/examples/kubebuilder環境サンプル.md)
+<div class="grid cards wrapper">
+  <a href="./dev-container/examples/kindサンプル">
+    <div class="grid cards title">Kindサンプル</div>
+    <div class="grid cards explain"></div>
+  </a>
+</div>
 
+<div class="grid cards wrapper">
+  <a href="./dev-container/examples/java環境サンプル">
+    <div class="grid cards title">Java環境サンプル</div>
+    <div class="grid cards explain"></div>
+  </a>
+</div>
+
+<div class="grid cards wrapper">
+  <a href="./dev-container/examples/react環境サンプル">
+    <div class="grid cards title">React環境サンプル</div>
+    <div class="grid cards explain"></div>
+  </a>
+</div>
+
+<div class="grid cards wrapper">
+  <a href="./dev-container/examples/kubebuilder環境サンプル">
+    <div class="grid cards title">Kubebuilder環境サンプル</div>
+    <div class="grid cards explain"></div>
+  </a>
 </div>
 
 ### Docker
 
-<div class="grid cards">
-
-- [Dockerインストール](./docker/Dockerインストール.md)
-  <span class="grid cards explain"> Dockerのインストール手順です。スクリプトによって自動化しています。 </span>
-
+<div class="grid cards wrapper">
+  <a href="./docker/Dockerインストール">
+    <div class="grid cards title">Dockerインストール</div>
+    <div class="grid cards explain">Dockerのインストール手順です。スクリプトによって自動化しています。</div>
+  </a>
 </div>
 
 ### Kubernetes
 
-<div class="grid cards">
+<div class="grid cards wrapper">
+  <a href="./kubernetes/getting-started/Kubernetesクラスター構築手順">
+    <div class="grid cards title">Kubernetesクラスター構築手順</div>
+    <div class="grid cards explain">kubeadmを使ったKubernetesクラスター構築手順書です。</div>
+  </a>
+</div>
 
-- [Kubernetesクラスター構築手順](./kubernetes/getting-started/Kubernetesクラスター構築手順.md)
-  <span class="grid cards explain"> kubeadmを使ったKubernetesクラスター構築手順書です。 </span>
-- [Kubebuilderプロジェクトセットアップ](./kubernetes/custom-controller/kubebuilder/Kubebuilderプロジェクトセットアップ.md)
-  <span class="grid cards explain"> Kubebuilderを使ってカスタムコントローラーを実装するサンプルです。 </span>
-- [Kubernetes the hard way](./kubernetes/the-hard-way/walkthrough/00_イントロダクション.md)
-  <span class="grid cards explain"> Kubernetesを手動で構築する学習用ウォークスルーです。 </span>
+<div class="grid cards wrapper">
+  <a href="./kubernetes/custom-controller/kubebuilder/Kubebuilderプロジェクトセットアップ">
+    <div class="grid cards title">Kubebuilderプロジェクトセットアップ</div>
+    <div class="grid cards explain">Kubebuilderを使ってカスタムコントローラーを実装するサンプルです。</div>
+  </a>
+</div>
 
+<div class="grid cards wrapper">
+  <a href="./kubernetes/the-hard-way/walkthrough/00_イントロダクション">
+    <div class="grid cards title">Kubernetes the hard way</div>
+    <div class="grid cards explain">Kubernetesを手動で構築する学習用ウォークスルーです。</div>
+  </a>
 </div>
 
 ### Go
 
-<div class="grid cards">
+<div class="grid cards wrapper">
+  <a href="./go/getting-started/Go_REST_APIプロジェクトセットアップ">
+    <div class="grid cards title">Go REST APIプロジェクトセットアップ</div>
+    <div class="grid cards explain">Goの標準ライブラリでREST APIを実装するサンプルです。</div>
+  </a>
+</div>
 
-- [Go REST APIプロジェクトセットアップ](./go/getting-started/Go_REST_APIプロジェクトセットアップ.md)
-  <span class="grid cards explain"> Goの標準ライブラリでREST APIを実装するサンプルです。 </span>
-- [echoでREST APIを実装](./go/echo/echoでREST_APIを実装.md)
-  <span class="grid cards explain"> echoフレームワークでREST APIを実装するサンプルです。 </span>
-
+<div class="grid cards wrapper">
+  <a href="./go/echo/echoでREST_APIを実装">
+    <div class="grid cards title">echoでREST APIを実装</div>
+    <div class="grid cards explain">echoフレームワークでREST APIを実装するサンプルです。</div>
+  </a>
 </div>
 
 ### Java
 
-<div class="grid cards">
-
-- [Spring Bootプロジェクトセットアップ](./java/spring-boot/Spring_Bootプロジェクトセットアップ.md)
-  <span class="grid cards explain"> Spring BootでREST APIを実装するサンプルです。 </span>
-
+<div class="grid cards wrapper">
+  <a href="./java/spring-boot/Spring_Bootプロジェクトセットアップ">
+    <div class="grid cards title">Spring Bootプロジェクトセットアップ</div>
+    <div class="grid cards explain">Spring BootでREST APIを実装するサンプルです。</div>
+  </a>
 </div>
 
 ### React
 
-<div class="grid cards">
-
-- [Reactプロジェクトセットアップ](./react/getting-started/Reactプロジェクトセットアップ.md)
-  <span class="grid cards explain"> React・Redux・TypeScriptでUIを実装するサンプルです。 </span>
-
+<div class="grid cards wrapper">
+  <a href="./react/getting-started/Reactプロジェクトセットアップ">
+    <div class="grid cards title">Reactプロジェクトセットアップ</div>
+    <div class="grid cards explain">React・Redux・TypeScriptでUIを実装するサンプルです。</div>
+  </a>
 </div>

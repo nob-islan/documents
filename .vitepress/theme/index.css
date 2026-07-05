@@ -1,28 +1,14 @@
-/* === grid cards === */
-.grid.cards {
+/* カード枠 */
+.grid.cards.wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
-  margin: 12px 0 24px;
-}
-
-/* 各カード */
-.grid.cards ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Markdownのliをカード化 */
-.grid.cards li {
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
   border-radius: 10px;
-  padding: 12px;
   transition: 0.2s;
+  margin: 12px;
 }
 
-.grid.cards li:hover {
+.grid.cards.wrapper:hover {
   border-color: var(--vp-c-brand);
   transform: translateY(-2px);
 }
@@ -30,16 +16,22 @@
 /* リンク */
 .grid.cards a {
   text-decoration: none;
+}
+
+/* タイトル */
+.grid.cards.title {
+  margin: 0;
+  padding: 12px 12px 0 12px;
+  border: 0;
   color: var(--vp-c-brand-1);
   font-weight: 700;
 }
 
-.grid.cards a:hover {
-  text-decoration: underline;
-}
-
-/* 説明部分 */
+/* 説明 */
 .grid.cards.explain {
   margin: 0;
+  padding: 0 12px 12px 12px;
+  border: 0;
   color: var(--vp-c-text-2);
+  font-weight: 500;
 }
