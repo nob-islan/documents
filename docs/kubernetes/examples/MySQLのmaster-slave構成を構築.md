@@ -136,7 +136,7 @@ data:
 
 ### `mysql-master-temp.yaml`
 
-master向けのmy.cnfおよび`init.sql`です。
+master向けの`my.cnf`および`init.sql`です。
 
 ```yaml
 apiVersion: v1
@@ -170,7 +170,7 @@ data:
 
 ### `mysql-slave-temp.yaml`
 
-slave向けのmy.cnfおよび`init.sql`です。
+slave向けの`my.cnf`および`init.sql`です。
 
 ```yaml
 apiVersion: v1
