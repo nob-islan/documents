@@ -22,7 +22,7 @@ MySQLデータベースについてmaster-slave方式で冗長構成を構築し
 
 ## 設定ファイル準備
 
-### docker-compose.yaml
+### `docker-compose.yaml`
 
 - mysql-master: 書き込み処理およびslaveがダウンした際の読み取り処理を担当
 - mysql-slave: 読み取り専用
@@ -63,9 +63,9 @@ services:
       - ./volumes/proxysql/proxysql.cnf:/etc/proxysql.cnf
 ```
 
-### volumes
+### `volumes`
 
-#### mysql-master/initdb.d/init.sql
+#### `mysql-master/initdb.d/init.sql`
 
 ```sql
 -- レプリケーション担当ユーザ作成
@@ -92,7 +92,7 @@ CREATE TABLE users(
 );
 ```
 
-#### mysql-master/my.cnf
+#### `mysql-master/my.cnf`
 
 ```ini
 [mysqld]
@@ -103,7 +103,7 @@ gtid-mode = ON
 enforce-gtid-consistency = ON
 ```
 
-#### mysql-slave/initdb.d/init.sql
+#### `mysql-slave/initdb.d/init.sql`
 
 ```sql
 -- レプリカ設定
@@ -122,7 +122,7 @@ CREATE USER IF NOT EXISTS 'monitor'@'%' IDENTIFIED BY 'monitorpass';
 GRANT USAGE ON *.* TO 'monitor'@'%';
 ```
 
-#### mysql-slave/my.cnf
+#### `mysql-slave/my.cnf`
 
 ```ini
 [mysqld]
@@ -133,7 +133,7 @@ gtid-mode = ON
 enforce-gtid-consistency = ON
 ```
 
-#### proxysql/proxysql.cnf
+#### `proxysql/proxysql.cnf`
 
 ```ini
 mysql_variables =
