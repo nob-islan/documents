@@ -11,7 +11,7 @@ MySQLをmaster-slave構成で起動するマニフェストのサンプルです
 - StatefulSetでMysql Podを2台起動し、それぞれにmaster / slaveの状態を持たせます。
 - initContainerで、ボリュームを介してそれぞれのコンテナに設定ファイルを渡します:
   - mysql-docker-entrypoint-initdb: データーベース初期構築向けSQL
-  - mysql-conf: master / slaveの設定を持たせるmy.cnf
+  - mysql-conf: master / slaveの設定を持たせる`my.cnf`
 - volumeClaimTemplatesを使って各Podのバックアップを取ります。
 
 ```yaml
@@ -136,7 +136,7 @@ data:
 
 ### `mysql-master-temp.yaml`
 
-master向けのmy.cnfおよびinit.sqlです。
+master向けのmy.cnfおよび`init.sql`です。
 
 ```yaml
 apiVersion: v1
@@ -170,7 +170,7 @@ data:
 
 ### `mysql-slave-temp.yaml`
 
-slave向けのmy.cnfおよびinit.sqlです。
+slave向けのmy.cnfおよび`init.sql`です。
 
 ```yaml
 apiVersion: v1
