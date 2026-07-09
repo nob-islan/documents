@@ -53,7 +53,7 @@ spec:
     - http:
         paths:
           - pathType: Prefix
-            path: /sample
+            path: /api
             backend:
               service:
                 name: sample-service
@@ -102,9 +102,9 @@ spec:
 - curlで疎通確認をとります:
 
 ```
-$ curl {kind IP}:80/sample/greet
+$ curl {kind IP}:80/api/v1/greet
 Hello, World!
 
-$ curl {kind IP}:80/sample/bye
+$ curl {kind IP}:80/api/v1/bye
 GoodBye, World!
 ```
