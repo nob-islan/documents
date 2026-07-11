@@ -6,7 +6,7 @@
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
-### エラー回避のための設定
+### 事前準備
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/
 
