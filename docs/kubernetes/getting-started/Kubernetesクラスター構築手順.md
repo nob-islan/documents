@@ -2,11 +2,13 @@
 
 公式ドキュメントに従ってKubernetesクラスターを構築します。
 
-## 事前準備
+## コントロールプレーン、ワーカーノード共通セットアップ
 
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
 ### エラー回避のための設定
+
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/_print/
 
 swapを無効化します。
 
@@ -15,10 +17,6 @@ sudo swapoff -a
 ```
 
 ただし、上記の方法だとノードを再起動するとswapが再度有効化されてしまいます。永続的に無効化したい場合は`/etc/fstab`ファイルのswapに関する行をコメントアウトしてリブートします。
-
-## コントロールプレーン、ワーカーノード共通セットアップ
-
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
 ### コンテナランタイムのインストール
 
