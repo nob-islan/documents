@@ -16,7 +16,7 @@ sudo swapoff -a
 
 ただし、上記の方法だとノードを再起動するとswapが再度有効化されてしまいます。永続的に無効化したい場合は`/etc/fstab`ファイルのswapに関する行をコメントアウトしてリブートします。
 
-## コントロールプレーン構築
+## コントロールプレーン、ワーカーノード共通セットアップ
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
 
@@ -101,6 +101,8 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
+## コントロールプレーン構築
+
 ### コントロールプレーンの起動
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#コントロールプレーンノードの初期化
@@ -162,12 +164,8 @@ kubectl get nodes
 
 ## ワーカーノード構築
 
-cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
-
-### kubeXXXインストール
-
-コントロールプレーン構築の「コンテナランタイムのインストール」および「kubeadm, kubelet, kubectlのインストール」と同様の手順を踏んでください。
-
 ### ノードをクラスターに参加させる
+
+cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
 
 先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードのStatusがReadyになります。
