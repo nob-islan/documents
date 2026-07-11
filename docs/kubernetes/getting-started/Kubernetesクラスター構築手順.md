@@ -88,6 +88,8 @@ sudo systemctl restart containerd
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#kubeadm-kubelet-kubectlのインストール
 
+（kubectlはコントロールプレーンのみインストールすれば十分です。）
+
 ```shell
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
