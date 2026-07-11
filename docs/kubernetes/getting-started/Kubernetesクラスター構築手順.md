@@ -117,7 +117,7 @@ sudo kubeadm init \
   --apiserver-advertise-address=${APISERVER_ADVERTISE_ADDRESS}
 ```
 
-一般ユーザでも`kubectl`コマンドを叩けるようにします。
+一般ユーザでも`kubectl`コマンドを実行できるようにします。
 
 ```shell
 mkdir -p $HOME/.kube
@@ -168,4 +168,4 @@ kubectl get nodes
 
 cf. https://kubernetes.io/ja/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#join-nodes
 
-先に控えた`kubeadm join`コマンドを叩きます。しばらく経ってから`kubectl get nodes`するとノードのStatusがReadyになります。
+先に控えた`kubeadm join`コマンドを実行します。しばらく経ってから`kubectl get nodes`するとノードのStatusがReadyになります。
