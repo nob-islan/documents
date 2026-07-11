@@ -151,7 +151,7 @@ kubectl apply -f kube-flannel.yml
 flannelのリソースが作成されることを確認します:
 
 ```shell
-watch kubectl get pods -n kube-flannel
+kubectl get pods -n kube-flannel
 ```
 
 ノードのステータスがReadyになっていれば完了です。
