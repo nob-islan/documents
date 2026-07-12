@@ -1,6 +1,6 @@
 /* サイドバーのグループ間の線を消す */
 .VPSidebar .group + .group {
-  border-top: none !important;
+  border-top: none;
 }
 
 /* ===サイドバーの行間調整=== */
@@ -19,4 +19,10 @@
 /* ディレクトリ直下のドキュメント表題のネスト */
 .VPSidebarItem.level-1 {
   padding-left: 16px;
+}
+
+/* サイドバーの文字列幅 */
+.VPSidebarItem .text {
+  padding: 6px 0;
+  line-height: 20px;
 }
