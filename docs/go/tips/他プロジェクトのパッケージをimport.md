@@ -12,7 +12,7 @@ package inspect
 import "fmt"
 
 // 名前を入力すると自己紹介します。
-func Echo(name string) {
+func Greet(name string) {
 
 	r := fmt.Sprintf("I am %s", name)
 	fmt.Println(r)
@@ -47,6 +47,6 @@ import "nob-gitlab.local/nob/easygo/pkg/inspect"
 func main() {
 
 	// easygoモジュールのinspectパッケージを利用
-	inspect.Echo("nob")
+	inspect.Greet("nob")
 }
 ```
