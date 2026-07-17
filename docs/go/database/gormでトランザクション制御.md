@@ -178,7 +178,7 @@ func TestSave(t *testing.T) {
 		expectedError error             // 期待されるエラー
 	}{
 		{
-			name:          "success without tx",
+			name:          "SuccessWithoutTx",
 			ctx:           context.Background(),
 			withTx:        false,
 			users:         domain.NewUser("nob", "passwd", 13),
@@ -186,7 +186,7 @@ func TestSave(t *testing.T) {
 			expectedError: nil,
 		},
 		{
-			name:          "success with tx",
+			name:          "SuccessWithTx",
 			ctx:           context.Background(),
 			withTx:        true,
 			users:         domain.NewUser("nob", "passwd", 13),
@@ -268,7 +268,7 @@ func TestRegistUser(t *testing.T) {
 		expectedError       error                       // 期待されるエラー
 	}{
 		{
-			name:        "success",
+			name:        "Success",
 			requestBody: params.NewRegistIn("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
@@ -283,7 +283,7 @@ func TestRegistUser(t *testing.T) {
 			expectedError: nil,
 		},
 		{
-			name:        "repository error",
+			name:        "RepositoryError",
 			requestBody: params.NewRegistIn("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
