@@ -7,7 +7,7 @@
 SQLiteをインストールします。
 
 ```shell
-go get github.com/mattn/go-sqlite3
+go get modernc.org/sqlite
 ```
 
 ## 実装
@@ -24,13 +24,13 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 // データベースに接続します。
 func ConnectDB() *sql.DB {
 
-	db, err := sql.Open("sqlite3", ":memory:")
+	db, err := sql.Open("sqlite", ":memory:")
 	if err != nil {
 		log.Fatalf("failed to open in-memory db: %v", err)
 	}
