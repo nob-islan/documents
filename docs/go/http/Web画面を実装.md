@@ -285,7 +285,7 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### `bootstrap/`
+#### `internal/bootstrap/`
 
 - `server.go`
 

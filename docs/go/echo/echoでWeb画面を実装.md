@@ -11,17 +11,20 @@ cf. https://echo.labstack.com/docs/templates
 │   │   ├── index.js
 │   │   └── style.css
 │   └── templates
-│       └── login.html
+│       └── index.html
 ├── cmd
 │   └── main.go
 ├── go.mod
 ├── go.sum
 └── internal
-    └── handler
-        ├── user_handler.go
-        └── router
-            ├── user_router.go
-            └── base.go
+    ├── bootstrap
+    │   └── server.go
+    └── presentation
+        └── handler
+            ├── router
+            │   ├── base.go
+            │   └── user_router.go
+            └── user_handler.go
 ```
 
 ## サンプルコード
@@ -50,9 +53,9 @@ go get github.com/labstack/echo/v5
 
 ### 実装
 
-#### `assets/`
+#### `assets/templates`
 
-- `templates/index.html`
+- `index.html`
 
 ```html
 <!-- define / endで囲む必要があるので注意 -->
@@ -95,7 +98,9 @@ go get github.com/labstack/echo/v5
 {{end}}
 ```
 
-- `static/index.js`
+#### `assets/static`
+
+- `index.js`
 
 ```js
 function handleOnclickButton() {
@@ -121,7 +126,7 @@ function handleOnclickButton() {
 }
 ```
 
-- `static/style.css`
+- `style.css`
 
 ```css
 body {
@@ -164,7 +169,7 @@ body {
 }
 ```
 
-#### `internal/handler/`
+#### `internal/presentation/handler/`
 
 - `user_handler.go`
 
@@ -234,7 +239,9 @@ func (h *userHandler) Login(c *echo.Context) error {
 }
 ```
 
-- `router/base.go`
+#### `internal/presentation/handler/router`
+
+- `base.go`
 
 ```go
 package router
@@ -251,13 +258,13 @@ type Router interface {
 const basePath string = "/api/v1"
 ```
 
-- `router/user_router.go`
+- `user_router.go`
 
 ```go
 package router
 
 import (
-	"easyapp/internal/handler"
+	"easyapp/internal/presentation/handler"
 
 	"github.com/labstack/echo/v5"
 )
@@ -277,16 +284,16 @@ func (r *userRouter) SetRouting(e *echo.Echo) {
 }
 ```
 
-#### `app/`
+#### `internal/bootstrap/`
 
 - `server.go`
 
 ```go
-package app
+package bootstrap
 
 import (
-	"easyapp/internal/handler"
-	"easyapp/internal/handler/router"
+	"easyapp/internal/presentation/handler"
+	"easyapp/internal/presentation/handler/router"
 	"io"
 	"text/template"
 
@@ -325,13 +332,11 @@ func (t *Template) Render(c *echo.Context, w io.Writer, name string, data any) e
 ```go
 package main
 
-import (
-	"easyapp/internal/app"
-)
+import "easyapp/internal/bootstrap"
 
 func main() {
 
-	e := app.NewServer()
+	e := bootstrap.NewServer()
 	if err := e.Start(":8080"); err != nil {
 		e.Logger.Error("failed to start server", "error", err)
 	}
@@ -358,7 +363,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- `app/server.go`について、埋め込んだstatic, templatesを使うよう宣言
+- `server.go`について、埋め込んだstatic, templatesを使うよう宣言
 
 ```go
 	e.Renderer = &Template{
