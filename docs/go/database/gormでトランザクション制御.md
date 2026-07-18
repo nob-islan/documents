@@ -4,7 +4,7 @@ cf. https://gorm.io/docs/transactions.html
 
 ## 実装
 
-- `infrastructure/tx_manager.go`を新規作成します:
+- `internal/infrastructure/tx_manager.go`を新規作成します:
 
 ```go
 package infrastructure
@@ -109,9 +109,9 @@ package usecase
 
 import (
 	"context"
+	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
 	"easyapp/internal/infrastructure"
-	"easyapp/internal/usecase/params"
 )
 
 // 認証のusecaseインターフェースです。
@@ -160,7 +160,7 @@ import (
 	"context"
 	"easyapp/internal/domain"
 	"easyapp/internal/infrastructure"
-	"easyapp/internal/infrastructure/repository/test"
+	"easyapp/internal/infrastructure/repository/testdata"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -199,7 +199,7 @@ func TestSave(t *testing.T) {
 
 		t.Run(testcase.name, func(t *testing.T) {
 			// テストデータベースに接続
-			db := test.ConnectTestDB(t, "users")
+			db := testdata.ConnectTestDB(t, "users")
 
 			// 事前セットアップ
 			testcase.setup(db)
@@ -227,8 +227,8 @@ package usecase
 
 import (
 	"context"
+	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
-	"easyapp/internal/usecase/params"
 	"errors"
 	"testing"
 
