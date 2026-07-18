@@ -67,25 +67,27 @@ INSERT INTO users (
 ├── cmd
 │   └── main.go                     # アプリのエントリポイント
 └── internal
-    ├── app
+    ├── application
+    │   └── usecase
+    │       ├── params
+    │       │   └── user_params.go  # 業務処理の入力・出力モデル構造体
+    │       └── user_usecase.go     # 業務処理のインターフェースおよび実装
+    ├── bootstrap
     │   └── server.go               # 依存性の注入およびルーティング設定
     ├── domain
     │   └── user.go                 # ドメイン定義およびrepositoryのインターフェース
-    ├── handler
-    │   ├── model
-    │   │   └── user_model.go       # APIのリクエスト・レスポンス構造体
-    │   ├── router
-    │   │   ├── base.go             # エンドポイントのルーター統括
-    │   │   └── user_router.go      # 業務処理ごとのルーター
-    │   └── user_handler.go         # APIとしてのインターフェースおよび実装
     ├── infrastructure
     │   ├── db.go                   # データベース接続設定
     │   └── repository
     │       └── user_repository.go  # ドメインの取得/永続化
-    └── usecase
-        ├── params
-        │   └── user_params.go      # 業務処理の入力・出力モデル構造体
-        └── user_usecase.go         # 業務処理のインターフェースおよび実装
+    └── presentation
+        └── handler
+            ├── model
+            │   └── user_model.go   # APIのリクエスト・レスポンス構造体
+            ├── router
+            │   ├── base.go         # エンドポイントのルーター統括
+            │   └── user_router.go  # 業務処理ごとのルーター
+            └── user_handler.go     # APIとしての外部契約
 ```
 
 ### パッケージ一覧
@@ -225,7 +227,7 @@ func (r *userRepository) FindByName(ctx context.Context, targetName string) doma
 }
 ```
 
-#### `internal/usecase/`
+#### `internal/application/usecase/`
 
 usecaseを定義・実装します。アプリの業務はここで処理されます。
 
@@ -236,8 +238,8 @@ package usecase
 
 import (
 	"context"
+	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
-	"easyapp/internal/usecase/params"
 	"errors"
 )
 
@@ -278,7 +280,7 @@ func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, err
 }
 ```
 
-#### `internal/usecase/params/`
+#### `internal/application/usecase/params/`
 
 usecase向けの関数の入力・出力モデル構造体を定義します。
 
@@ -350,7 +352,7 @@ func (o MeOut) Age() int {
 }
 ```
 
-#### `internal/handler/`
+#### `internal/presentation/handler/`
 
 handlerを定義・実装します。usecaseを呼び出し、レスポンスを作成します。
 
@@ -360,9 +362,9 @@ handlerを定義・実装します。usecaseを呼び出し、レスポンスを
 package handler
 
 import (
-	"easyapp/internal/handler/model"
-	"easyapp/internal/usecase"
-	"easyapp/internal/usecase/params"
+	"easyapp/internal/application/usecase"
+	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/model"
 	"encoding/json"
 	"net/http"
 )
@@ -420,7 +422,7 @@ func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-#### `internal/handler/model/`
+#### `internal/presentation/handler/model/`
 
 handler向けの関数の入力・出力モデル構造体を定義します。
 
@@ -479,7 +481,7 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### `internal/handler/router/`
+#### `internal/presentation/handler/router/`
 
 リクエストのルーティングを実装します。
 
@@ -509,7 +511,7 @@ const basePath string = "/api/v1"
 package router
 
 import (
-	"easyapp/internal/handler"
+	"easyapp/internal/presentation/handler"
 	"net/http"
 )
 
@@ -543,21 +545,21 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### `internal/app/`
+#### `internal/bootstrap/`
 
 依存性の注入およびルーティングを行い、APIの実装を決定します。
 
 - `server.go`
 
 ```go
-package app
+package bootstrap
 
 import (
-	"easyapp/internal/handler"
-	"easyapp/internal/handler/router"
+	"easyapp/internal/application/usecase"
 	"easyapp/internal/infrastructure"
 	"easyapp/internal/infrastructure/repository"
-	"easyapp/internal/usecase"
+	"easyapp/internal/presentation/handler"
+	"easyapp/internal/presentation/handler/router"
 	"net/http"
 )
 
@@ -593,7 +595,7 @@ func NewServer() http.Handler {
 package main
 
 import (
-	"easyapp/internal/app"
+	"easyapp/internal/bootstrap"
 	"fmt"
 	"log"
 	"net/http"
@@ -602,7 +604,7 @@ import (
 func main() {
 
 	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", app.NewServer()))
+	log.Fatal(http.ListenAndServe(":8080", bootstrap.NewServer()))
 }
 ```
 
