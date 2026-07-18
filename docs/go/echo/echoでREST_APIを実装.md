@@ -4,7 +4,7 @@ cf. https://echo.labstack.com/docs
 
 ## サンプルコード
 
-echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装します。usecase配下はフレームワークに依存しないので省略します。
+echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装します。アプリケーション層以下はフレームワークに依存しないので省略します。
 
 ### ディレクトリ構成
 
@@ -13,16 +13,16 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 ├── cmd
 │   └── main.go
 └── internal
-    ├── app
+    ├── bootstrap
     │   └── server.go
-    └── handler
-        ├── user_handler.go
-        ├── user_handler_test.go
-        ├── model
-        │   └── user_model.go
-        └── router
-            ├── user_router.go
-            └── base.go
+    └── presentation
+        └── handler
+            ├── model
+            │   └── user_model.go
+            ├── router
+            │   ├── base.go
+            │   └── user_router.go
+            └── user_handler.go
 ```
 
 ### プロジェクト作成
@@ -41,7 +41,7 @@ go get github.com/labstack/echo/v5
 
 ### 実装
 
-#### `internal/handler/`
+#### `internal/presentation/handler/`
 
 - `user_handler.go`
 
@@ -49,9 +49,9 @@ go get github.com/labstack/echo/v5
 package handler
 
 import (
-	"easyapp/internal/handler/model"
-	"easyapp/internal/usecase"
-	"easyapp/internal/usecase/params"
+	"easyapp/internal/application/usecase"
+	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/model"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -116,7 +116,7 @@ func (h *userHandler) Me(c *echo.Context) error {
 }
 ```
 
-#### `internal/handler/model/`
+#### `internal/presentation/handler/model/`
 
 - `user_model.go`
 
@@ -174,7 +174,7 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### `internal/handler/router/`
+#### `internal/presentation/handler/router/`
 
 - `base.go`
 
@@ -198,7 +198,7 @@ const basePath string = "/api/v1"
 package router
 
 import (
-	"easyapp/internal/handler"
+	"easyapp/internal/presentation/handler"
 
 	"github.com/labstack/echo/v5"
 )
@@ -218,17 +218,17 @@ func (r *userRouter) SetRouting(e *echo.Echo) {
 }
 ```
 
-#### `internal/app/`
+#### `internal/bootstrap/`
 
 - `server.go`
 
 ```go
-package app
+package bootstrap
 
 import (
-	"easyapp/internal/handler"
-	"easyapp/internal/handler/router"
-	"easyapp/internal/usecase"
+	"easyapp/internal/application/usecase"
+	"easyapp/internal/presentation/handler"
+	"easyapp/internal/presentation/handler/router"
 
 	"github.com/labstack/echo/v5"
 )
@@ -251,12 +251,12 @@ func NewServer() *echo.Echo {
 package main
 
 import (
-	"easyapp/internal/app"
+	"easyapp/internal/bootstrap"
 )
 
 func main() {
 
-	e := app.NewServer()
+	e := bootstrap.NewServer()
 	if err := e.Start(":8080"); err != nil {
 		e.Logger.Error("failed to start server", "error", err)
 	}
