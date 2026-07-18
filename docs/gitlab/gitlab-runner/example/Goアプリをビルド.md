@@ -49,7 +49,7 @@ test:
   image: golang:1.25
   script:
     - go install gotest.tools/gotestsum@latest
-    - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/handler ./internal/usecase ./internal/infrastructure/repository
+    - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/presentation/handler ./internal/application/usecase ./internal/infrastructure/repository
     - go tool cover -html=coverage.txt -o coverage.html
     - go tool cover -func=coverage.txt
   coverage: '/total:\s+\(statements\)\s+.+%/'
