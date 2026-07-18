@@ -28,244 +28,240 @@ swag init -o ./api -g cmd/main.go
 
 アプリケーションの概要およびメタ情報を追記します。
 
-```diff
-  package main
+```go
+package main
 
-  import (
-	  "easyapp/internal/handler/router"
-	  "fmt"
-	  "log"
-	  "net/http"
-  )
+import (
+	"easyapp/internal/bootstrap"
+	"fmt"
+	"log"
+	"net/http"
+)
 
-+ // @title Easy App
-+ // @version 1.0.0
-+ // @description サンプルのREST APIです。
-+ //
-+ // @BasePath /api/v1
-  func main() {
+// @title Easy App
+// @version 1.0.0
+// @description サンプルのREST APIです。
+//
+// @BasePath /api/v1
+func main() {
 
-	  fmt.Println("Server started at http://localhost:8080")
-	  log.Fatal(http.ListenAndServe(":8080", router.Routing()))
-  }
+	fmt.Println("Server started at http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", bootstrap.NewServer()))
+}
+
 ```
 
-### `app/server.go`
+### `bootstrap/server.go`
 
 swaggerページへのルーティングを設定します。
 
-```diff
-  package app
+```go
+package bootstrap
 
-  import (
-      "easyapp/internal/handler"
-      "easyapp/internal/handler/router"
-      "easyapp/internal/infrastructure"
-      "easyapp/internal/infrastructure/repository"
-      "easyapp/internal/usecase"
-      "net/http"
+import (
+	"easyapp/internal/application/usecase"
+	"easyapp/internal/infrastructure"
+	"easyapp/internal/infrastructure/repository"
+	"easyapp/internal/presentation/handler"
+	"easyapp/internal/presentation/handler/router"
+	"net/http"
 
-+	  _ "easyapp/api"
+	_ "easyapp/api" // apiパッケージ配下のドキュメントをimport
 
-+	  httpSwagger "github.com/swaggo/http-swagger"
-  )
+	httpSwagger "github.com/swaggo/http-swagger" // http-swaggerをimport
+)
 
-  // 依存性の注入を行い、アプリケーションの構築を行います。
-  func NewServer() http.Handler {
+// 依存性の注入を行い、アプリケーションの構築を行います。
+func NewServer() http.Handler {
 
-      // データベースに接続
-      db := infrastructure.ConnectDB()
+	// データベースに接続
+	db := infrastructure.ConnectDB()
 
-      // 各handlerに紐づくルーティングを設定
-      m := http.NewServeMux()
+	// 各handlerに紐づくルーティングを設定
+	m := http.NewServeMux()
 
-+	  // swagger UIのルーティング
-+	  m.Handle("/swagger/", httpSwagger.WrapHandler)
+	// swagger UIのルーティング
+	m.Handle("/swagger/", httpSwagger.WrapHandler)
 
-      // user
-      router.NewUserRouter(handler.NewUserHandler(
-          usecase.NewUserUsecase(
-              repository.NewUserRepository(
-                  db,
-              ),
-          ),
-      )).SetRouting(m)
+	// user
+	router.NewUserRouter(handler.NewUserHandler(
+		usecase.NewUserUsecase(
+			repository.NewUserRepository(
+				db,
+			),
+		),
+	)).SetRouting(m)
 
-      return m
-  }
+	return m
+}
 ```
 
-### `handler/user_handler.go`
+### `handler/presentation/user_handler.go`
 
-各APIのインターフェース仕様を記載します:
+各APIのインターフェース仕様を関数部分に記載します:
 
-```diff
-  package handler
+```go
+package handler
 
-  import (
-	  "easyapp/internal/apperrors"
-	  "easyapp/internal/handler/model"
-	  "easyapp/internal/usecase"
-	  "easyapp/internal/usecase/params"
-	  "encoding/json"
-	  "net/http"
-  )
+import (
+	"easyapp/internal/application/usecase"
+	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/model"
+	"encoding/json"
+	"net/http"
+)
 
-  // 認証のhandlerインターフェースです。
-  type UserHandler interface {
+// 認証のhandlerインターフェースです。
+type UserHandler interface {
 
-	  // 認証処理を呼び出します。
-	  Login(w http.ResponseWriter, r *http.Request)
+	// 認証処理を呼び出します。
+	Login(w http.ResponseWriter, r *http.Request)
 
-	  // ユーザ情報取得処理を呼び出します。
-	  Me(w http.ResponseWriter, r *http.Request)
-  }
+	// ユーザ情報取得処理を呼び出します。
+	Me(w http.ResponseWriter, r *http.Request)
+}
 
-  type userHandler struct {
-	  userUsecase usecase.UserUsecase
-  }
+type userHandler struct {
+	userUsecase usecase.UserUsecase
+}
 
-  func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
-	  return &userHandler{userUsecase: userUsecase}
-  }
+func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
+	return &userHandler{userUsecase: userUsecase}
+}
 
-+ // @Summary 認証
-+ // @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
-+ // @Tags User
-+ // @Accept json
-+ // @Produce json
-+ // @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
-+ // @Success 200 {object} model.LoginRes "正常に処理された場合"
-+ // @Failure 422 {object} apperrors.easyappBusinessErrorRes "エラーが発生した場合"
-+ // @Router /login [post]
-  func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
+// @Summary 認証
+// @Description 認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
+// @Success 200 {object} model.LoginRes "正常に処理された場合"
+// @Failure 422 {object} apperrors.easyappBusinessErrorRes "エラーが発生した場合"
+// @Router /login [post]
+func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	  req := model.NewLoginReq(r)
+	req := model.NewLoginReq(r)
 
-	  out, err := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
-	  if err != nil {
-		  status, res := apperrors.ToHttpErrorRes(err)
-		  w.Header().Set("Content-Type", "application/json")
-		  w.WriteHeader(status)
-		  json.NewEncoder(w).Encode(res)
-		  return
-	  }
+	out := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 
-	  res := model.NewLoginRes(out.Valid())
-	  w.Header().Set("Content-Type", "application/json")
-	  w.WriteHeader(http.StatusOK)
-	  json.NewEncoder(w).Encode(res)
-  }
+	res := model.NewLoginRes(out.Valid())
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(res)
+}
 
-+ // @Summary ユーザ情報取得
-+ // @Description ユーザ情報を取得します。
-+ // @Tags User
-+ // @Accept json
-+ // @Produce json
-+ // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
-+ // @Success 200 {object} model.MeRes "正常に処理された場合"
-+ // @Router /me [get]
-  func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
+// @Summary ユーザ情報取得
+// @Description ユーザ情報を取得します。
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
+// @Success 200 {object} model.MeRes "正常に処理された場合"
+// @Router /me [get]
+func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 
-	  req := model.NewMeReq(r)
+	req := model.NewMeReq(r)
 
-	  out := h.userUsecase.Me(params.NewMeIn(req.Name))
+	out, err := h.userUsecase.Me(r.Context(), params.NewMeIn(req.Name))
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(struct {
+			Message string `json:"message"`
+		}{
+			Message: err.Error(),
+		})
+		return
+	}
 
-	  res := model.NewMeRes(out.Name(), out.Age())
-	  w.Header().Set("Content-Type", "application/json")
-	  w.WriteHeader(http.StatusOK)
-	  json.NewEncoder(w).Encode(res)
-  }
+	res := model.NewMeRes(out.Name(), out.Age())
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(res)
+}
 ```
 
 ### `model/user_model.go`
 
 各モデルクラスのexample記載します:
 
-```diff
-  package model
+```go
+ package model
 
-  import (
-	  "encoding/json"
-	  "net/http"
-  )
+import (
+	"encoding/json"
+	"net/http"
+)
 
-  // 認証向けのリクエストモデルです。
-  type LoginReq struct {
--	  Name     string `json:"name"`     // ユーザ名
--	  Password string `json:"password"` // パスワード
-+	  Name     string `json:"name" example:"nob"`        // ユーザ名
-+	  Password string `json:"password" example:"passwd"` // パスワード
-  }
+// 認証向けのリクエストモデルです。
+type LoginReq struct {
+	Name     string `json:"name" example:"nob"`        // ユーザ名
+	Password string `json:"password" example:"passwd"` // パスワード
+}
 
-  func NewLoginReq(r *http.Request) LoginReq {
+func NewLoginReq(r *http.Request) LoginReq {
 
-	  var req LoginReq
-	  decoder := json.NewDecoder(r.Body)
-	  if err := decoder.Decode(&req); err != nil {
-		  return *new(LoginReq)
-	  }
-	  return req
-  }
+	var req LoginReq
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&req); err != nil {
+		return *new(LoginReq)
+	}
+	return req
+}
 
-  // 認証向けのレスポンスモデルです。
-  type LoginRes struct {
-- 	  Valid bool `json:"valid"` // 認証可否
-+	  Valid bool `json:"valid" example:"true"` // 認証可否
-  }
+// 認証向けのレスポンスモデルです。
+type LoginRes struct {
+	Valid bool `json:"valid" example:"true"` // 認証可否
+}
 
-  func NewLoginRes(valid bool) LoginRes {
-	  return LoginRes{Valid: valid}
-  }
+func NewLoginRes(valid bool) LoginRes {
+	return LoginRes{Valid: valid}
+}
 
-  // ユーザ情報取得向けのリクエストモデルです。
-  type MeReq struct {
-- 	  Name string `json:"name"` // ユーザ名
-+	  Name string `json:"name" example:"nob"` // ユーザ名
-  }
+// ユーザ情報取得向けのリクエストモデルです。
+type MeReq struct {
+	Name string `json:"name" example:"nob"` // ユーザ名
+}
 
-  func NewMeReq(r *http.Request) MeReq {
-	  return MeReq{Name: r.URL.Query().Get("name")}
-  }
+func NewMeReq(r *http.Request) MeReq {
+	return MeReq{Name: r.URL.Query().Get("name")}
+}
 
-  // ユーザ情報取得向けのレスポンスモデルです。
-  type MeRes struct {
--	  Name string `json:"name"` // ユーザ名
--	  Age  int    `json:"age"`  // 年齢
-+	  Name string `json:"name" example:"nob"` // ユーザ名
-+	  Age  int    `json:"age" example:"13"`   // 年齢
-  }
+// ユーザ情報取得向けのレスポンスモデルです。
+type MeRes struct {
+	Name string `json:"name" example:"nob"` // ユーザ名
+	Age  int    `json:"age" example:"13"`   // 年齢
+}
 
-  func NewMeRes(name string, age int) MeRes {
-	  return MeRes{Name: name, Age: age}
-  }
+func NewMeRes(name string, age int) MeRes {
+	return MeRes{Name: name, Age: age}
+}
 ```
 
-### `apperrors/sample_error.go`
+### `apperrors/easyapp_business_error.go`
 
 例外発生時レスポンスモデルのexampleを記載します:
 
-```diff
-  package apperrors
+```go
+package apperrors
 
-  // easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
-  type EasyappBusinessError struct {
-	  message string // エラーメッセージ
-  }
+// easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
+type EasyappBusinessError struct {
+	message string // エラーメッセージ
+}
 
-  func NewEasyappBusinessError(message string) EasyappBusinessError {
-	  return EasyappBusinessError{message: message}
-  }
+func NewEasyappBusinessError(message string) EasyappBusinessError {
+	return EasyappBusinessError{message: message}
+}
 
-  func (e EasyappBusinessError) Error() string {
-	  return e.message
-  }
+func (e EasyappBusinessError) Error() string {
+	return e.message
+}
 
-  // easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
-  type easyappBusinessErrorRes struct {
--	  Message string `json:"message"` // エラーメッセージ
-+	  Message string `json:"message" example:"user not found"` // エラーメッセージ
-  }
+// easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
+type easyappBusinessErrorRes struct {
+	Message string `json:"message" example:"user not found"` // エラーメッセージ
+}
 ```
 
 ## 動作確認
