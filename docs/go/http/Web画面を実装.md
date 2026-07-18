@@ -16,13 +16,14 @@
 │   └── main.go
 ├── go.mod
 └── internal
-    ├── app
+    ├── bootstrap
     │   └── server.go
-    └── handler
-        ├── user_handler.go
-        └── router
-            ├── user_router.go
-            └── base.go
+    └── presentation
+        └── handler
+            ├── router
+            │   ├── base.go
+            │   └── user_router.go
+            └── user_handler.go
 ```
 
 ## サンプルコード
@@ -37,9 +38,9 @@
 
 ### 実装
 
-#### `assets/`
+#### `assets/templates`
 
-- `templates/index.html`
+- `index.html`
 
 ```html
 <!DOCTYPE html>
@@ -79,7 +80,9 @@
 </html>
 ```
 
-- `static/index.js`
+#### `assets/static`
+
+- `index.js`
 
 ```js
 function handleOnclickButton() {
@@ -105,7 +108,7 @@ function handleOnclickButton() {
 }
 ```
 
-- `static/style.css`
+- `style.css`
 
 ```css
 body {
@@ -148,7 +151,7 @@ body {
 }
 ```
 
-#### `internal/handler/`
+#### `internal/presentation/handler/`
 
 - `user_handler.go`
 
@@ -227,7 +230,9 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-- `router/base.go`
+#### `internal/presentation/handler/router/`
+
+- `base.go`
 
 ```go
 package router
@@ -247,13 +252,13 @@ type Router interface {
 const basePath string = "/api/v1"
 ```
 
-- `router/user_router.go`
+- `user_router.go`
 
 ```go
 package router
 
 import (
-	"easyapp/internal/handler"
+	"easyapp/internal/presentation/handler"
 	"net/http"
 )
 
@@ -280,16 +285,16 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 }
 ```
 
-#### `app/`
+#### `bootstrap/`
 
 - `server.go`
 
 ```go
-package app
+package bootstrap
 
 import (
-	"easyapp/internal/handler"
-	"easyapp/internal/handler/router"
+	"easyapp/internal/presentation/handler"
+	"easyapp/internal/presentation/handler/router"
 	"net/http"
 )
 
@@ -317,7 +322,7 @@ func NewServer() http.Handler {
 package main
 
 import (
-	"easyapp/internal/app"
+	"easyapp/internal/bootstrap"
 	"fmt"
 	"log"
 	"net/http"
@@ -326,7 +331,7 @@ import (
 func main() {
 
 	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", app.NewServer()))
+	log.Fatal(http.ListenAndServe(":8080", bootstrap.NewServer()))
 }
 ```
 
@@ -350,7 +355,7 @@ var Static embed.FS // static埋め込み宣言
 var Templates embed.FS // templates埋め込み宣言
 ```
 
-- `app/server.go`について、埋め込んだstaticを使うよう宣言
+- `server.go`について、埋め込んだstaticを使うよう宣言
 
 ```go
 	staticFiles, err := fs.Sub(assets.Static, "static")
@@ -360,7 +365,7 @@ var Templates embed.FS // templates埋め込み宣言
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(staticFiles))))
 ```
 
-- `handler/user_handler.go`について、埋め込んだtemplatesを使うよう宣言
+- `user_handler.go`について、埋め込んだtemplatesを使うよう宣言
 
 ```go
 	tmpl, err := template.ParseFS(assets.Templates, "templates/index.html")
