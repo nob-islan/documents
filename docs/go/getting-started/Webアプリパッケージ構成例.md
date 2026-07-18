@@ -5,68 +5,61 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 ```shell
 .
 ├── api                  # APIドキュメント
-├── assets
-│   ├── static           # js, css, favicon等
-│   └── templates        # html
 ├── cmd                  # エントリポイント
 ├── internal
-│   ├── app              # 依存性の注入およびルーティング
 │   ├── apperrors        # 独自エラー定義およびそのハンドリング
-│   ├── domain           # ドメイン構造体
-│   ├── handler          # APIリクエストをハンドリング、業務処理呼び出し
-│   │   ├── model        # APIのリクエスト・レスポンス構造体
-│   │   └── router       # httpリクエストのルーティング
-│   ├── infrastructure   # データベースなど外部接続設定
+│   ├── application      # アプリケーション層
+│   │   └── usecase      # 業務処理
+│   │       └── params   # 業務処理の入力・出力モデル
+│   ├── bootstrap        # 依存性の注入およびルーティング
+│   ├── domain           # ドメイン構造体、ビジネスロジックおよびrepositoryインターフェース
+│   ├── infrastructure   # インフラストラクチャ層
 │   │   ├── persistence  # データベース向け定義
 │   │   │   └── table    # テーブル定義に対応した構造体
-│   │   └── repository   # ドメイン操作
+│   │   └── repository   # ドメイン操作の実装
 │   ├── logging          # ログ出力制御
-│   └── usecase          # 業務処理
-│       └── params       # 業務処理の入力・出力モデル
+│   └── presentation     # プレゼンテーション層
+│       └── handler      # APIとしての外部契約
+│           ├── model    # APIのリクエスト・レスポンス構造体
+│           └── router   # httpリクエストのルーティング
 └── scripts              # 開発支援ツール
 ```
 
-## パッケージ解説
-
-### `api`
+## `api`
 
 swaggerなどのAPIドキュメント、およびそれを生成する関数を格納するパッケージです。
 
-### `assets`
-
-静的コンテンツを格納するパッケージです。本パッケージの直下に`assets.go`を設け、`go:embed`を使ってこれらの静的ファイルを呼び出します。
-
-### `cmd`
+## `cmd`
 
 アプリケーションのエントリポイントとなる関数を格納するパッケージです。基本的に`main.go`のみが格納されます。
 
-### `internal/app`
-
-依存性の注入およびルーティングの設定を行い、各APIの実装を行うパッケージです。
-
-### `internal/apperrors`
+## `internal/apperrors`
 
 アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。
 
-### `internal/domain`
+## `internal/application`
 
-業務処理の中心となるドメイン構造体およびそれを操作するrepositoryインターフェースを格納するパッケージです。
+アプリケーションの業務処理実装を格納するパッケージです。
 
-値のチェックなど、1つのdomainで完結する業務処理についてはこのパッケージ内で実装してください。
+### `internal/application/usecase`
 
-### `internal/handler`
+業務処理を行う関数を格納するパッケージです。関数内に直接処理を実装するか、`domain`内の処理を呼び出す形で業務を実施します。
 
-リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。
+#### `internal/application/usecase/params`
 
-### `internal/handler/model`
+業務処理の入力・出力モデルとなる構造体を格納するパッケージです。
 
-APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
+## `internal/bootstrap`
 
-### `internal/handler/router`
+依存性の注入およびルーティングの設定を行い、各APIの実装を行うパッケージです。
 
-httpリクエストのルーティングを行う関数を格納するパッケージです。
+## `internal/domain`
 
-### `internal/infrastructure`
+業務処理の中心となるドメイン構造体およびそれを操作する`repository`インターフェースを格納するパッケージです。
+
+1つの`domain`で完結する業務処理についてはこのパッケージ内で実装してください。
+
+## `internal/infrastructure`
 
 データベースや他APIなどの外部接続に関する設定を行う関数を格納するパッケージです。
 
@@ -74,26 +67,34 @@ httpリクエストのルーティングを行う関数を格納するパッケ�
 
 データベース向けの定義を格納するパッケージです。
 
-### `internal/infrastructure/persistence/table`
+#### `internal/infrastructure/persistence/table`
 
 データベースの各テーブル定義に対応した構造体を格納するパッケージです。
 
 ### `internal/infrastructure/repository`
 
-domainとデータベース間とでデータを操作する関数を格納するパッケージです。
+`domain`とデータベース間とでデータを操作する関数を格納するパッケージです。
 
-### `internal/logging`
+## `internal/logging`
 
 ログレベル別の文言出力など、ログ出力を制御するパッケージです。
 
-### `internal/usecase`
+## `internal/presentation`
 
-業務処理を行う関数を格納するパッケージです。関数内に直接処理を実装するか、domain内の処理を呼び出す形で業務を実施します。
+APIとしての外部契約を格納するパッケージです。
 
-### `internal/usecase/params`
+### `internal/presentation/handler`
 
-業務処理の入力・出力モデルとなる構造体を格納するパッケージです。
+リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。
 
-### `scripts`
+#### `internal/presentation/handler/model`
+
+APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
+
+#### `internal/presentation/handler/router`
+
+httpリクエストのルーティングを行う関数を格納するパッケージです。
+
+## `scripts`
 
 テストカバレッジの作成やAPIドキュメントの自動生成などの開発支援ツールを格納するパッケージです。
