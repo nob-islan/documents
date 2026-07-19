@@ -85,19 +85,19 @@ func TestInsert(t *testing.T) {
         // 省略
 	}
 
-	for _, testcase := range tests {
+	for _, test := range tests {
 
-		t.Run(testcase.name, func(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 
 			// テストデータベースおよびrepository初期化
 			db := connectTestDB(t)
 			r := &userInfoRepository{db: db}
 
 			// repositoryの実行
-			err := r.Insert(testcase.requestEntity)
+			err := r.Insert(test.requestEntity)
 
 			// レスポンスの確認
-			assert.Equal(t, testcase.expectedError, err)
+			assert.Equal(t, test.expectedError, err)
 		})
 	}
 }

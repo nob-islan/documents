@@ -195,26 +195,26 @@ func TestSave(t *testing.T) {
 		},
 	}
 
-	for _, testcase := range tests {
+	for _, test := range tests {
 
-		t.Run(testcase.name, func(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 			// テストデータベースに接続
 			db := testdata.ConnectTestDB(t, "users")
 
 			// 事前セットアップ
-			testcase.setup(db)
+			test.setup(db)
 
 			// トランザクション開始
-			if testcase.withTx {
+			if test.withTx {
 				tx := db.Begin()
-				testcase.ctx = infrastructure.SetTx(context.Background(), tx)
+				test.ctx = infrastructure.SetTx(context.Background(), tx)
 			}
 
 			// sqlの実行
-			result := NewUserRepository(db).Save(testcase.ctx, testcase.users)
+			result := NewUserRepository(db).Save(test.ctx, test.users)
 
 			// レスポンスの確認
-			assert.Equal(t, testcase.expectedError, result)
+			assert.Equal(t, test.expectedError, result)
 		})
 	}
 }
@@ -299,25 +299,25 @@ func TestRegistUser(t *testing.T) {
 		},
 	}
 
-	for _, testcase := range tests {
+	for _, test := range tests {
 
 		// モック初期化
 		mockRepository := new(mockUserRepository)
 		mockTxManager := new(mockTxManager)
 
-		t.Run(testcase.name, func(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 			// モックの期待される動作を定義
-			testcase.setupRepositoryMock(mockRepository)
+			test.setupRepositoryMock(mockRepository)
 
 			// usecaseの実行
 			result, err := NewUserUsecase(mockRepository, mockTxManager).Regist(
 				context.Background(),
-				testcase.requestBody,
+				test.requestBody,
 			)
 
 			// レスポンスの検証
-			assert.Equal(t, testcase.expectedBody, result)
-			assert.Equal(t, testcase.expectedError, err)
+			assert.Equal(t, test.expectedBody, result)
+			assert.Equal(t, test.expectedError, err)
 		})
 	}
 }
