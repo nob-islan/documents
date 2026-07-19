@@ -1,4 +1,4 @@
-# コンテナイメージをビルド・プッシュ
+# BuildKitでコンテナイメージをビルド・プッシュ
 
 [kaniko](https://github.com/GoogleContainerTools/kaniko)がメンテナンスされなくなったため、[BuildKit](https://docs.docker.com/build/buildkit/)を使ってコンテナイメージを作成するためのGitLab CI向け設定を記載します。
 
@@ -19,7 +19,7 @@ GitLab上に、下記要領で環境変数を登録しておいてください:
 
 ### `config.toml`
 
-GitLab Runnerサーバ上のコンフィグファイルについて、下記修正を入れてください:
+docker executorでrunnerを動かす場合は、GitLab Runnerサーバ上のコンフィグファイルについて下記修正を入れてください（cf. [Advanced configuration](https://docs.gitlab.com/runner/configuration/advanced-configuration/#the-runnersdocker-section)）:
 
 ```toml
   [runners.docker]
@@ -30,8 +30,6 @@ GitLab Runnerサーバ上のコンフィグファイルについて、下記修�
 
 ```yaml
 stages:
-  - test
-  - build
   - push
 variables:
   MODULE: easyapp # アプリのモジュール名
