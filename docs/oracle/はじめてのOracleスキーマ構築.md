@@ -24,7 +24,7 @@ sqlplus / as sysdba
 ```sql
 CREATE PLUGGABLE DATABASE nobpdb
 ADMIN USER nob IDENTIFIED BY nobpass
-FILE_NAME_CONVERT = ('/opt/oracle/oradata/XE/pdbseed/', '/opt/oracle/oradata/XE/nobpdb/');
+FILE_NAME_CONVERT = ('/opt/oracle/oradata/FREE/pdbseed/', '/opt/oracle/oradata/FREE/nobpdb/');
 ```
 
 - `nobpdb`が作成されたことを確認します:
@@ -78,7 +78,13 @@ GRANT CONNECT, RESOURCE TO easydb;
 GRANT UNLIMITED TABLESPACE TO easydb;
 ```
 
-- 一度sqlplusからログアウトし、`easydb`スキーマにログインします:
+- 一度sqlplusからログアウトします:
+
+```sql
+quit;
+```
+
+- `easydb`スキーマにログインします:
 
 ```shell
 sqlplus easydb/easydbpass@//localhost:1521/nobpdb

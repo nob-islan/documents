@@ -8,7 +8,7 @@ cf. https://hub.docker.com/r/gvenzl/oracle-xe
 services:
   db:
     container_name: oracle
-    image: gvenzl/oracle-xe:latest
+    image: gvenzl/oracle-free:latest
     ports:
       - 1521:1521
     environment:
