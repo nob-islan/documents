@@ -1,6 +1,6 @@
 # DockerでOracleDBを構築
 
-cf. https://hub.docker.com/r/gvenzl/oracle-xe
+cf. https://hub.docker.com/r/gvenzl/oracle-free
 
 公式ではありませんが信頼性の高いOracleデータベースのイメージです。
 
