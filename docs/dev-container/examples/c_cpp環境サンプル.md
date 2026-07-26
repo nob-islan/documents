@@ -1,6 +1,6 @@
 # C/C++環境サンプル
 
-C/C++での開発環境サンプルです:
+C/C++での開発環境サンプルです。`C_Cpp.clang_format_style`の設定項目については[Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)を参照ください:
 
 ```json
 {
@@ -17,7 +17,7 @@ C/C++での開発環境サンプルです:
         "editor.formatOnSave": true,
         "files.insertFinalNewline": true,
         "files.trimFinalNewlines": true,
-        "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 4, AllowShortFunctionsOnASingleLine: None }",
+        "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, IndentWidth: 4, AllowShortFunctionsOnASingleLine: None, PointerAlignment: Left }",
         "[c]": {
           "editor.defaultFormatter": "ms-vscode.cpptools"
         },
