@@ -83,73 +83,160 @@ sudo adduser test-user
 sudo chmod 777 /var/spool/mail
 ```
 
-- 自分自身にメールを送信します。下記はコマンド例です。コメント部分は出力内容です。
+- 自分自身にメールを送信します。下記はコマンド例およびその出力です。
 
 ```shell
 telnet localhost 25
-# Trying 127.0.0.1...
-# Connected to localhost.
-# Escape character is '^]'.
-# 220 ip-10-0-0-200.ap-northeast-1.compute.internal ESMTP Postfix (Ubuntu)
+```
+
+```
+nob@postfix:~$ telnet localhost 25
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+220 postfix ESMTP Postfix (Ubuntu)
+```
+
+```shell
 helo localhost
-# 250 ip-10-0-0-200.ap-northeast-1.compute.internal
-mail from: test-user@ip-10-0-0-200.ap-northeast-1.compute.internal
-# 250 2.1.0 Ok
-rcpt to: test-user@ip-10-0-0-200.ap-northeast-1.compute.internal
-# 250 2.1.5 Ok
+```
+
+```
+helo localhost
+250 postfix
+```
+
+```shell
+mail from: test-user@postfix
+```
+
+```
+mail from: test-user@postfix
+250 2.1.0 Ok
+```
+
+```shell
+rcpt to: test-user@postfix
+```
+
+```
+rcpt to: test-user@postfix
+250 2.1.5 Ok
+```
+
+```shell
 data
-# 354 End data with <CR><LF>.<CR><LF>
+```
+
+```
+data
+354 End data with <CR><LF>.<CR><LF>
+```
+
+```shell
 'This is a mail send test.'
 'Can you read this mail?'
 .
-# 250 2.0.0 Ok: queued as B956E401EA
+```
+
+```
+'This is a mail send test.'
+'Can you read this mail?'
+.
+250 2.0.0 Ok: queued as B57AF57DF
+```
+
+```shell
 quit
-# 221 2.0.0 Bye
-# Connection closed by foreign host.
+```
+
+```
+quit
+221 2.0.0 Bye
+Connection closed by foreign host.
 ```
 
 ## メール受信テスト
 
-- 受信確認のコマンド例です。コメント部分は出力内容です。
+- 受信確認のコマンド例およびその出力です。
 
 ```shell
 telnet localhost 143
-# Trying 127.0.0.1...
-# Connected to localhost.
-# Escape character is '^]'.
-# * OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE LITERAL+ AUTH=PLAIN AUTH=LOGIN] Dovecot (Ubuntu) ready.
-1 login test-user p@ssw0rd
-# 1 OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DISPLAY THREAD=REFERENCES THREAD=REFS THREAD=ORDEREDSUBJECT MULTIAPPEND URL-PARTIAL CATENATE UNSELECT CHILDREN NAMESPACE UIDPLUS LIST-EXTENDED I18NLEVEL=1 CONDSTORE QRESYNC ESEARCH ESORT SEARCHRES WITHIN CONTEXT=SEARCH LIST-STATUS BINARY MOVE SNIPPET=FUZZY PREVIEW=FUZZY PREVIEW STATUS=SIZE SAVEDATE LITERAL+ NOTIFY SPECIAL-USE] Logged in
-2 list "" *
-# * LIST (\HasNoChildren) "." INBOX
-# 2 OK List completed (0.009 + 0.000 + 0.008 secs).
-3 select INBOX
-# * FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
-# * OK [PERMANENTFLAGS (\Answered \Flagged \Deleted \Seen \Draft \*)] Flags permitted.
-# * 2 EXISTS
-# * 2 RECENT
-# * OK [UNSEEN 1] First unseen.
-# * OK [UIDVALIDITY 1726069921] UIDs valid
-# * OK [UIDNEXT 3] Predicted next UID
-# 3 OK [READ-WRITE] Select completed (0.005 + 0.000 + 0.004 secs).
-4 fetch 1 body[]
-# * 1 FETCH (FLAGS (\Seen \Recent) BODY[] {702}
-# Return-Path: <test-user@ip-10-0-0-200.ap-northeast-1.compute.internal>
-# X-Original-To: test-user@ip-10-0-0-200.ap-northeast-1.compute.internal
-# Delivered-To: test-user@ip-10-0-0-200.ap-northeast-1.compute.internal
-# Received: from localhost (localhost [127.0.0.1])
-# 	by ip-10-0-0-200.ap-northeast-1.compute.internal (Postfix) with SMTP id 03B9B401EA
-# 	for <test-user@ip-10-0-0-200.ap-northeast-1.compute.internal>; Wed, 11 Sep 2024 15:22:52 +0000 (UTC)
-# Message-Id: <20240911152259.03B9B401EA@ip-10-0-0-200.ap-northeast-1.compute.internal>
-# Date: Wed, 11 Sep 2024 15:22:52 +0000 (UTC)
-# From: test-user@ip-10-0-0-200.ap-northeast-1.compute.internal
+```
 
-# 'This is a mail send test.'
-# 'Can you read this mail?'
-# )
-# 4 OK Fetch completed (0.001 + 0.000 secs).
+```
+nob@postfix:~$ telnet localhost 143
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+* OK [CAPABILITY IMAP4rev1 LOGIN-REFERRALS ID ENABLE IDLE SASL-IR LITERAL+ AUTH=PLAIN AUTH=LOGIN] Dovecot ready.
+```
+
+```shell
+1 login test-user p@ssw0rd
+```
+
+```
+1 login test-user p@ssw0rd
+1 OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE SORT SORT=DISPLAY THREAD=REFERENCES THREAD=REFS THREAD=ORDEREDSUBJECT MULTIAPPEND URL-PARTIAL CATENATE UNSELECT CHILDREN NAMESPACE UIDPLUS LIST-EXTENDED I18NLEVEL=1 CONDSTORE QRESYNC ESEARCH ESORT SEARCHRES WITHIN CONTEXT=SEARCH LIST-STATUS BINARY MOVE REPLACE SNIPPET=FUZZY PREVIEW=FUZZY PREVIEW SPECIAL-USE STATUS=SIZE SAVEDATE COMPRESS=DEFLATE INPROGRESS NOTIFY LITERAL+] Logged in
+```
+
+```shell
+2 list "" *
+```
+
+```
+2 list "" *
+* LIST (\HasNoChildren) "." INBOX
+2 OK List completed (0.013 + 0.000 + 0.012 secs).
+```
+
+```shell
+3 select INBOX
+```
+
+```
+3 select INBOX
+* FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+* OK [PERMANENTFLAGS (\Answered \Flagged \Deleted \Seen \Draft \*)] Flags permitted.
+* 1 EXISTS
+* 1 RECENT
+* OK [UNSEEN 1] First unseen.
+* OK [UIDVALIDITY 1785591263] UIDs valid
+* OK [UIDNEXT 2] Predicted next UID
+3 OK [READ-WRITE] Select completed (0.007 + 0.000 + 0.006 secs).
+```
+
+```shell
+4 fetch 1 body[]
+```
+
+```
+4 fetch 1 body[]
+* 1 FETCH (FLAGS (\Seen \Recent) BODY[] {438}
+Return-Path: <test-user@postfix>
+X-Original-To: test-user@postfix
+Delivered-To: test-user@postfix
+Received: from localhost (localhost [127.0.0.1])
+	by postfix (Postfix) with SMTP id B57AF57DF
+	for <test-user@postfix>; Sat, 01 Aug 2026 13:30:44 +0000 (UTC)
+Message-Id: <20260801133114.B57AF57DF@postfix>
+Date: Sat, 01 Aug 2026 13:30:44 +0000 (UTC)
+From: test-user@postfix
+
+'This is a mail send test.'
+'Can you read this mail?'
+)
+4 OK Fetch completed (0.001 + 0.000 secs).
+```
+
+```shell
 5 logout
-# * BYE Logging out
-# 5 OK Logout completed (0.001 + 0.000 secs).
-# Connection closed by foreign host.
+```
+
+```
+5 logout
+* BYE Logging out
+5 OK Logout completed (0.001 + 0.000 secs).
+Connection closed by foreign host.
 ```
