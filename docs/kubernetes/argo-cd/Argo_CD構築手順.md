@@ -10,7 +10,7 @@ cf. https://argo-cd.readthedocs.io/en/stable/getting_started/
 
 ```shell
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 - Argo CDのAPI Serverにアクセスできるよう、サービスタイプを変更します:
