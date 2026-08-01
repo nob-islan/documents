@@ -1,6 +1,8 @@
 # ローカル用Postfixを構築
 
-ローカルで動かせるPostfixサーバをAWS EC2を用いて立てます。
+ローカルで動かせるPostfixサーバを立てます。
+
+cf. https://www.postfix.org/STANDARD_CONFIGURATION_README.html
 
 ## 構築手順
 
@@ -27,7 +29,6 @@ sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.org
 ```
 
 - 設定ファイルを編集します:
-
   - `/etc/postfix/main.cf`
     - `home_mailbox = Maildir/`: メールボックスの形式設定
 
@@ -43,16 +44,21 @@ sudo systemctl restart postfix
 sudo apt install dovecot-core dovecot-pop3d dovecot-imapd
 ```
 
-- 設定ファイルを編集します:
+- メールディレクトリを作成します。
 
+```shell
+maildirmake.dovecot ~/Maildir
+```
+
+- 設定ファイルを編集します:
   - `/etc/dovecot/dovecot.conf`
     - `protocols = imap pop3`: 使用するプロトコル
     - `listen = *`: IPv4のみ使用
   - `/etc/dovecot/conf.d/10-mail.conf`
-    - `#mail_location = mbox:~/mail:INBOX=/var/mail/%u`: もとあったファイルの場所設定をコメントアウト
-    - `mail_location = maildir:~/Maildir`: ファイルの場所を指定
+    - `mail_driver = maildir`
+    - `mail_home = /home/%{user | username}`
+    - `mail_path = ~/Maildir`
   - `/etc/dovecot/conf.d/10-auth.conf`
-    - `disable_plaintext_auth = no`: 平文認証を許可
     - `auth_mechanisms = plain login`
   - `/etc/dovecot/conf.d/10-ssl.conf`
     - `ssl = no`: SSL未使用
