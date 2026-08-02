@@ -30,5 +30,3 @@ npm run docs:dev -- --host
 
 - mainブランチに push されるとgithub actionが実行され、外部公開向けのファイルが gh-pagesブランチにpushされます。
 - gh-pagesブランチに変更が入ると Cloudflare上のnobislandocumentプロジェクトでビルドが走り、ドキュメントが更新されます。
-
-a
