@@ -6,6 +6,8 @@ cf. https://www.postfix.org/STANDARD_CONFIGURATION_README.html
 
 ## 構築手順
 
+### インストール
+
 - Postfixをインストールします。
 
 ```shell
@@ -22,22 +24,6 @@ sudo apt install postfix
 postconf | grep mail_version
 ```
 
-- 設定ファイルのバックアップを取ります。
-
-```shell
-sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.org
-```
-
-- 設定ファイルを編集します:
-  - `/etc/postfix/main.cf`
-    - `home_mailbox = Maildir/`: メールボックスの形式設定
-
-- Postfixを再起動します。
-
-```shell
-sudo systemctl restart postfix
-```
-
 - Dovecotをインストールします。
 
 ```shell
@@ -50,18 +36,51 @@ sudo apt install dovecot-core dovecot-pop3d dovecot-imapd
 maildirmake.dovecot ~/Maildir
 ```
 
-- 設定ファイルを編集します:
-  - `/etc/dovecot/dovecot.conf`
-    - `protocols = imap pop3`: 使用するプロトコル
-    - `listen = *`: IPv4のみ使用
-  - `/etc/dovecot/conf.d/10-mail.conf`
-    - `mail_driver = maildir`
-    - `mail_home = /home/%{user | username}`
-    - `mail_path = ~/Maildir`
-  - `/etc/dovecot/conf.d/10-auth.conf`
-    - `auth_mechanisms = plain login`
-  - `/etc/dovecot/conf.d/10-ssl.conf`
-    - `ssl = no`: SSL未使用
+### 設定ファイル作成
+
+#### `/etc/postfix/main.cf`
+
+```ini
+home_mailbox = Maildir/
+```
+
+#### `/etc/dovecot/dovecot.conf`
+
+```ini
+protocols = imap pop3
+```
+
+```ini
+listen = *
+```
+
+#### `/etc/dovecot/conf.d/10-mail.conf`
+
+```ini
+mail_driver = maildir
+mail_home = /home/%{user | username}
+mail_path = ~/Maildir
+```
+
+#### `/etc/dovecot/conf.d/10-auth.conf`
+
+```ini
+auth_mechanisms = plain login
+```
+
+#### `/etc/dovecot/conf.d/10-ssl.conf`
+
+```ini
+ssl = no
+```
+
+### 設定ファイル適用
+
+- Postfixを再起動します。
+
+```shell
+sudo systemctl restart postfix
+```
 
 - dovecotを再起動します。
 
@@ -134,16 +153,18 @@ data
 ```
 
 ```shell
-'This is a mail send test.'
-'Can you read this mail?'
+Subject: Postfix Test
+
+Hello Postfix!
 .
 ```
 
 ```
-'This is a mail send test.'
-'Can you read this mail?'
+Subject: Postfix Test
+
+Hello Postfix!
 .
-250 2.0.0 Ok: queued as B57AF57DF
+250 2.0.0 Ok: queued as D9710C47FB
 ```
 
 ```shell
