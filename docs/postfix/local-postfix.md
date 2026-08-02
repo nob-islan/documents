@@ -109,11 +109,11 @@ telnet localhost 25
 ```
 
 ```
-nob@postfix:~$ telnet localhost 25
+nob@nob-postfix:~$ telnet localhost 25
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
-220 postfix ESMTP Postfix (Ubuntu)
+220 nob-postfix ESMTP Postfix (Ubuntu)
 ```
 
 ```shell
@@ -122,24 +122,24 @@ helo localhost
 
 ```
 helo localhost
-250 postfix
+250 nob-postfix
 ```
 
 ```shell
-mail from: test-user@postfix
+mail from: test-user@nob-postfix
 ```
 
 ```
-mail from: test-user@postfix
+mail from: test-user@nob-postfix
 250 2.1.0 Ok
 ```
 
 ```shell
-rcpt to: test-user@postfix
+rcpt to: test-user@nob-postfix
 ```
 
 ```
-rcpt to: test-user@postfix
+rcpt to: test-user@nob-postfix
 250 2.1.5 Ok
 ```
 
@@ -164,7 +164,7 @@ Subject: Postfix Test
 
 Hello Postfix!
 .
-250 2.0.0 Ok: queued as D9710C47FB
+250 2.0.0 Ok: queued as 2B02BC47D5
 ```
 
 ```shell
@@ -186,7 +186,7 @@ telnet localhost 143
 ```
 
 ```
-nob@postfix:~$ telnet localhost 143
+nob@nob-postfix:~$ telnet localhost 143
 Trying 127.0.0.1...
 Connected to localhost.
 Escape character is '^]'.
@@ -209,7 +209,7 @@ Escape character is '^]'.
 ```
 2 list "" *
 * LIST (\HasNoChildren) "." INBOX
-2 OK List completed (0.013 + 0.000 + 0.012 secs).
+2 OK List completed (0.007 + 0.000 + 0.006 secs).
 ```
 
 ```shell
@@ -223,9 +223,9 @@ Escape character is '^]'.
 * 1 EXISTS
 * 1 RECENT
 * OK [UNSEEN 1] First unseen.
-* OK [UIDVALIDITY 1785591263] UIDs valid
+* OK [UIDVALIDITY 1785640003] UIDs valid
 * OK [UIDNEXT 2] Predicted next UID
-3 OK [READ-WRITE] Select completed (0.007 + 0.000 + 0.006 secs).
+3 OK [READ-WRITE] Select completed (0.004 + 0.000 + 0.003 secs).
 ```
 
 ```shell
@@ -234,19 +234,19 @@ Escape character is '^]'.
 
 ```
 4 fetch 1 body[]
-* 1 FETCH (FLAGS (\Seen \Recent) BODY[] {438}
-Return-Path: <test-user@postfix>
-X-Original-To: test-user@postfix
-Delivered-To: test-user@postfix
-Received: from localhost (localhost [127.0.0.1])
-	by postfix (Postfix) with SMTP id B57AF57DF
-	for <test-user@postfix>; Sat, 01 Aug 2026 13:30:44 +0000 (UTC)
-Message-Id: <20260801133114.B57AF57DF@postfix>
-Date: Sat, 01 Aug 2026 13:30:44 +0000 (UTC)
-From: test-user@postfix
+* 1 FETCH (FLAGS (\Seen \Recent) BODY[] {450}
+Return-Path: <test-user@nob-postfix>
+X-Original-To: test-user@nob-postfix
+Delivered-To: test-user@nob-postfix
+Received: from localhost (localhost [IPv6:::1])
+        by nob-postfix (Postfix) with SMTP id 2B02BC47D5
+        for <test-user@nob-postfix>; Sun, 02 Aug 2026 03:04:27 +0000 (UTC)
+Subject: Postfix Test
+Message-Id: <20260802030452.2B02BC47D5@nob-postfix>
+Date: Sun, 02 Aug 2026 03:04:27 +0000 (UTC)
+From: test-user@nob-postfix
 
-'This is a mail send test.'
-'Can you read this mail?'
+Hello Postfix!
 )
 4 OK Fetch completed (0.001 + 0.000 secs).
 ```
