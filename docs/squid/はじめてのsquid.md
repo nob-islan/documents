@@ -1,5 +1,7 @@
 # はじめてのsquid
 
+[squid](https://www.squid-cache.org/)を使ってプロキシを構築します。
+
 ## インストール
 
 ```shell
