@@ -177,6 +177,9 @@ spring.datasource.url=jdbc:mariadb://localhost/ebdb
 spring.datasource.username=root
 # パスワード
 spring.datasource.password=password
+
+# アプリ起動時にジョブを動かさない
+spring.batch.job.enabled=false
 ```
 
 ### ディレクトリ構成
