@@ -16,7 +16,7 @@ cf. https://docs.spring.io/initializr/docs/0.9.1/reference/html/#command-line
 ```shell
 curl https://start.spring.io/starter.zip \
   -d javaVersion=25 \
-  -d dependencies=batch,lombok,mariadb,data-jpa \
+  -d dependencies=batch,lombok,mariadb,batch-jdbc \
   -d type=maven-project \
   -d language=java \
   -d name=easybatch \
