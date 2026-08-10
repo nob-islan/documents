@@ -1,4 +1,4 @@
-import { defineConfig, UserConfig } from "vitepress";
+import { UserConfig } from "vitepress";
 import { withSidebar } from "vitepress-sidebar";
 import { VitePressSidebarOptions } from "vitepress-sidebar/types";
 import { withMermaid } from "vitepress-mermaid-plugin";
