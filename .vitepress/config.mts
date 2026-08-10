@@ -1,6 +1,7 @@
 import { defineConfig, UserConfig } from "vitepress";
 import { withSidebar } from "vitepress-sidebar";
 import { VitePressSidebarOptions } from "vitepress-sidebar/types";
+import { withMermaid } from "vitepress-mermaid-plugin";
 
 const vitePressOptions: UserConfig = {
   srcDir: "docs",
@@ -32,6 +33,6 @@ const vitePressSidebarOptions: VitePressSidebarOptions = {
   useTitleFromFileHeading: true,
 };
 
-export default defineConfig(
+export default withMermaid(
   withSidebar(vitePressOptions, vitePressSidebarOptions),
 );

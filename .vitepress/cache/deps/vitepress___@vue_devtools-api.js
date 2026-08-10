@@ -1,3 +1,5 @@
+import "./chunk-Q4AC2O6Z.js";
+
 // node_modules/@vue/devtools-shared/dist/index.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
