@@ -217,7 +217,7 @@ nob.example.easyapp.controller.SampleController
 nob.example.easyapp.EasyappApplication
 ```
 
-- `methods {class.name}`でクラス内のメソッド一覧を確認できます。
+- `methods {class.name}`でクラス内のメソッド一覧を確認できます:
 
 ```
 > methods nob.example.easyapp.service.impl.SampleServiceImpl
