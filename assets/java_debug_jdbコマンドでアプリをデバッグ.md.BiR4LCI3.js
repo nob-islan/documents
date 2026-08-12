@@ -108,7 +108,7 @@ import{_ as a,o as i,c as n,a6 as e}from"./chunks/framework.C05ZgNLH.js";const o
 <span class="line"><span>nob.example.easyapp.service.SampleService</span></span>
 <span class="line"><span>nob.example.easyapp.controller.impl.SampleControllerImpl</span></span>
 <span class="line"><span>nob.example.easyapp.controller.SampleController</span></span>
-<span class="line"><span>nob.example.easyapp.EasyappApplication</span></span></code></pre></div><ul><li><code>methods {class.name}}</code>でクラス内のメソッド一覧を確認できます。</li></ul><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>&gt; methods nob.example.easyapp.service.impl.SampleServiceImpl</span></span>
+<span class="line"><span>nob.example.easyapp.EasyappApplication</span></span></code></pre></div><ul><li><code>methods {class.name}</code>でクラス内のメソッド一覧を確認できます。</li></ul><div class="language-"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e;" tabindex="0" dir="ltr"><code><span class="line"><span>&gt; methods nob.example.easyapp.service.impl.SampleServiceImpl</span></span>
 <span class="line"><span>** methods list **</span></span>
 <span class="line"><span>nob.example.easyapp.service.impl.SampleServiceImpl &lt;init&gt;()</span></span>
 <span class="line"><span>nob.example.easyapp.service.impl.SampleServiceImpl greeting(nob.example.easyapp.service.model.SampleInModel)</span></span>
