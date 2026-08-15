@@ -25,7 +25,7 @@ services:
       - 8081:8080
 ```
 
-### `create_db.sql`
+### `volumes/initdb.d/create_db.sql`
 
 テーブル作成、初期データ投入などを行うSQLファイルです。
 
