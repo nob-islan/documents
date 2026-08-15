@@ -37,7 +37,7 @@ CREATE DATABASE eadb;
 CREATE TABLE eadb.users (
     id INT PRIMARY KEY AUTO_INCREMENT
     , username VARCHAR(10)
-    , age VARCHAR(3)
+    , age INT
 );
 
 -- ユーザ作成
