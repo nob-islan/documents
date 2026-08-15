@@ -83,9 +83,7 @@ GRANT USAGE ON *.* TO 'monitor'@'%';
 -- 業務テーブル構築
 CREATE DATABASE snaildb;
 
-USE snaildb;
-
-CREATE TABLE users(
+CREATE TABLE snaildb.users(
     id INT PRIMARY KEY AUTO_INCREMENT
     , name VARCHAR(20) NOT NULL
     , age INT NOT NULL

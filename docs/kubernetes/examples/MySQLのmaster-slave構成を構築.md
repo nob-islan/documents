@@ -163,9 +163,8 @@ data:
     GRANT USAGE ON *.* TO 'monitor'@'%';
     -- 業務テーブル作成
     CREATE DATABASE eadb;
-    USE eadb;
-    CREATE TABLE users (name VARCHAR(8) PRIMARY KEY, password VARCHAR(32));
-    INSERT INTO users (name, password) VALUES ('nob', 'passwd');
+    CREATE TABLE eadb.users (name VARCHAR(8) PRIMARY KEY, password VARCHAR(32));
+    INSERT INTO eadb.users (name, password) VALUES ('nob', 'passwd');
 ```
 
 ### `mysql-slave-temp.yaml`
