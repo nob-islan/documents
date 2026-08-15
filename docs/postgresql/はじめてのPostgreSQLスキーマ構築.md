@@ -112,15 +112,19 @@ GRANT ALL ON ALL TABLES IN SCHEMA easyschema TO easyschemauser;
 - ユーザに割り当てられた権限を確認します:
 
 ```sql
-SELECT * FROM pg_roles WHERE rolname = 'easyschemauser';
+\dn+
 ```
 
 ```
-easydb=# SELECT * FROM pg_roles WHERE rolname = 'easyschemauser';
-    rolname     | rolsuper | rolinherit | rolcreaterole | rolcreatedb | rolcanlogin | rolreplication | rolconnlimit | rolpassword | rolvaliduntil | rolbypassrls | rolconfig |  oid
-----------------+----------+------------+---------------+-------------+-------------+----------------+--------------+-------------+---------------+--------------+-----------+-------
- easyschemauser | f        | t          | f             | f           | t           | f              |           -1 | ********    |               | f            |           | 16391
-(1 row)
+easydb=# \dn+
+                                         List of schemas
+    Name    |       Owner       |           Access privileges            |      Description
+------------+-------------------+----------------------------------------+------------------------
+ easyschema | root              | root=UC/root                          +|
+            |                   | easyschemauser=U/root                  |
+ public     | pg_database_owner | pg_database_owner=UC/pg_database_owner+| standard public schema
+            |                   | =U/pg_database_owner                   |
+(2 rows)
 ```
 
 - （任意）スキーマ検索パスを設定します:
