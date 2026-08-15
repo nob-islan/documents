@@ -32,9 +32,8 @@ OPTIONS (
 ```sql
 -- MySQL向けテーブル作成SQL
 CREATE DATABASE eadb;
-USE eadb;
 
-CREATE TABLE IF NOT EXISTS person (
+CREATE TABLE IF NOT EXISTS eadb.person (
     id bigint PRIMARY KEY
     , name varchar(8)
     , password varchar(32)

@@ -40,21 +40,24 @@ services:
 
 ```sql
 CREATE DATABASE eadb;
-USE eadb;
 
-CREATE TABLE users (
+CREATE TABLE eadb.users (
     id INT PRIMARY KEY AUTO_INCREMENT
     , name VARCHAR(8)
     , age INT
 );
 
-INSERT INTO users (
+INSERT INTO eadb.users (
     name
     , age
 ) VALUES (
     'nob'
     , 13
 );
+
+CREATE USER eadbuser;
+
+GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```
 
 ### アプリ実装
@@ -121,8 +124,8 @@ func connectDB() (*gorm.DB, error) {
 
 	// データベース接続
 	const (
-		user     string = "root"
-		password string = "password"
+		user     string = "eadbuser"
+		password string = "eadbpass"
 		domain   string = "localhost:3306"
 		dbName   string = "eadb"
 	)

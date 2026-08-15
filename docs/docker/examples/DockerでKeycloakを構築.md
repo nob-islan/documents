@@ -5,8 +5,6 @@ cf.
 - https://www.keycloak.org/getting-started/getting-started-docker
 - https://www.keycloak.org/server/all-config
 
-## ディレクトリ構成
-
 ## 設定
 
 ### `docker-compose.yaml`

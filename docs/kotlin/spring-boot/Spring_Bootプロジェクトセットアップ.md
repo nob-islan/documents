@@ -89,15 +89,14 @@ services:
 
 ```sql
 CREATE DATABASE eadb;
-USE eadb;
 
-CREATE TABLE users (
+CREATE TABLE eadb.users (
     name VARCHAR(8) PRIMARY KEY
     , password VARCHAR(32) NOT NULL
     , age INT NOT NULL
 );
 
-INSERT INTO users (
+INSERT INTO eadb.users (
     name
     , password
     , age
@@ -106,19 +105,25 @@ INSERT INTO users (
     , 'passwd'
     , 13
 );
+
+CREATE USER eadbuser;
+
+GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```
 
 #### `src/main/resources/application.properties`
 
 ```shell
+spring.application.name=easyapp
+
 # MariaDBのドライバ設定
 spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 # 接続用URL
 spring.datasource.url=jdbc:mariadb://localhost/eadb
 # ユーザ名
-spring.datasource.username=root
+spring.datasource.username=eadbuser
 # パスワード
-spring.datasource.password=password
+spring.datasource.password=eadbpass
 ```
 
 ### クラス一覧

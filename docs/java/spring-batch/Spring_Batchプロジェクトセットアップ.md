@@ -58,21 +58,20 @@ services:
 
 ```sql
 CREATE DATABASE ebdb;
-USE ebdb;
 
-CREATE TABLE sign_up (
+CREATE TABLE ebdb.sign_up (
     last_name VARCHAR(24) NOT NULL
     , first_name VARCHAR(24) NOT NULL
     , age INT NOT NULL
 );
 
-CREATE TABLE customer (
+CREATE TABLE ebdb.customer (
     id INT PRIMARY KEY AUTO_INCREMENT
     , full_name VARCHAR(48) NOT NULL
     , age INT NOT NULL
 );
 
-INSERT INTO sign_up (
+INSERT INTO ebdb.sign_up (
     last_name
     , first_name
     , age
@@ -89,18 +88,18 @@ INSERT INTO sign_up (
 -- メタテーブル作成
 -- https://spring.pleiades.io/spring-batch/reference/schema-appendix.html を参考にMariaDB向けに少し弄っています。
 
-CREATE SEQUENCE BATCH_STEP_EXECUTION_SEQ;
-CREATE SEQUENCE BATCH_JOB_EXECUTION_SEQ;
-CREATE SEQUENCE BATCH_JOB_SEQ;
+CREATE SEQUENCE ebdb.BATCH_STEP_EXECUTION_SEQ;
+CREATE SEQUENCE ebdb.BATCH_JOB_EXECUTION_SEQ;
+CREATE SEQUENCE ebdb.BATCH_JOB_SEQ;
 
-CREATE TABLE BATCH_JOB_INSTANCE  (
+CREATE TABLE ebdb.BATCH_JOB_INSTANCE  (
     JOB_INSTANCE_ID BIGINT  PRIMARY KEY ,
     VERSION BIGINT,
     JOB_NAME VARCHAR(100) NOT NULL ,
     JOB_KEY VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE BATCH_JOB_EXECUTION  (
+CREATE TABLE ebdb.BATCH_JOB_EXECUTION  (
     JOB_EXECUTION_ID BIGINT  PRIMARY KEY ,
     VERSION BIGINT,
     JOB_INSTANCE_ID BIGINT NOT NULL,
@@ -115,7 +114,7 @@ CREATE TABLE BATCH_JOB_EXECUTION  (
     references BATCH_JOB_INSTANCE(JOB_INSTANCE_ID)
 );
 
-CREATE TABLE BATCH_JOB_EXECUTION_PARAMS  (
+CREATE TABLE ebdb.BATCH_JOB_EXECUTION_PARAMS  (
     JOB_EXECUTION_ID BIGINT NOT NULL ,
     PARAMETER_NAME VARCHAR(100) NOT NULL ,
     PARAMETER_TYPE VARCHAR(100) NOT NULL ,
@@ -125,7 +124,7 @@ CREATE TABLE BATCH_JOB_EXECUTION_PARAMS  (
     references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
 );
 
-CREATE TABLE BATCH_STEP_EXECUTION  (
+CREATE TABLE ebdb.BATCH_STEP_EXECUTION  (
     STEP_EXECUTION_ID BIGINT NOT NULL PRIMARY KEY ,
     VERSION BIGINT NOT NULL,
     STEP_NAME VARCHAR(100) NOT NULL,
@@ -149,7 +148,7 @@ CREATE TABLE BATCH_STEP_EXECUTION  (
     references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
 );
 
-CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT  (
+CREATE TABLE ebdb.BATCH_JOB_EXECUTION_CONTEXT  (
     JOB_EXECUTION_ID BIGINT PRIMARY KEY,
     SHORT_CONTEXT VARCHAR(2500) NOT NULL,
     SERIALIZED_CONTEXT TEXT,
@@ -157,13 +156,17 @@ CREATE TABLE BATCH_JOB_EXECUTION_CONTEXT  (
     references BATCH_JOB_EXECUTION(JOB_EXECUTION_ID)
 );
 
-CREATE TABLE BATCH_STEP_EXECUTION_CONTEXT  (
+CREATE TABLE ebdb.BATCH_STEP_EXECUTION_CONTEXT  (
     STEP_EXECUTION_ID BIGINT PRIMARY KEY,
     SHORT_CONTEXT VARCHAR(2500) NOT NULL,
     SERIALIZED_CONTEXT TEXT,
     constraint STEP_EXEC_CTX_FK foreign key (STEP_EXECUTION_ID)
     references BATCH_STEP_EXECUTION(STEP_EXECUTION_ID)
 );
+
+CREATE USER ebdbuser;
+
+GRANT ALL ON ebdb.* TO ebdbuser@'%' IDENTIFIED BY 'ebdbpass';
 ```
 
 #### `src/main/resources/application.properties`
@@ -174,11 +177,11 @@ spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
 # 接続用URL
 spring.datasource.url=jdbc:mariadb://localhost/ebdb
 # ユーザ名
-spring.datasource.username=root
+spring.datasource.username=ebdbuser
 # パスワード
-spring.datasource.password=password
+spring.datasource.password=ebdbpass
 
-# アプリ起動時にジョブを動かさない
+# アプリ起動時にジョブを実行しない
 spring.batch.job.enabled=false
 ```
 
@@ -561,7 +564,7 @@ public class CustomerRegistConfig {
 下記コマンドで`customer`テーブルにデータが入っていることを確認できます。
 
 ```
-$ docker exec -it ebdb mariadb -u root -p ebdb -e "SELECT * FROM customer;"
+$ docker exec -it ebdb mariadb -u ebdbuser -p ebdb -e "SELECT * FROM customer;"
 Enter password:
 +----+------------+-----+
 | id | full_name  | age |

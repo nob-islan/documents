@@ -41,15 +41,14 @@ services:
 
 ```sql
 CREATE DATABASE eadb;
-USE eadb;
 
-CREATE TABLE users (
+CREATE TABLE eadb.users (
     name VARCHAR(8) PRIMARY KEY
     , password VARCHAR(32) NOT NULL
     , age INT NOT NULL
 );
 
-INSERT INTO users (
+INSERT INTO eadb.users (
     name
     , password
     , age
@@ -58,6 +57,10 @@ INSERT INTO users (
     , 'passwd'
     , 13
 );
+
+CREATE USER eadbuser;
+
+GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```
 
 ### パッケージ構成
@@ -165,8 +168,8 @@ import (
 func ConnectDB() *sql.DB {
 
 	const (
-		user       string = "root"
-		password   string = "password"
+		user       string = "eadbuser"
+		password   string = "eadbpass"
 		domain     string = "localhost:3306"
 		dbName     string = "eadb"
 		driverName string = "mysql"

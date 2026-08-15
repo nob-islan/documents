@@ -10,9 +10,8 @@ cf. https://ignite.apache.org/docs/ignite2/latest/persistence/external-storage
 
 ```sql
 CREATE DATABASE eadb;
-USE eadb;
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS eadb.users (
     id bigint PRIMARY KEY
     , name varchar(8)
     , password varchar(32)

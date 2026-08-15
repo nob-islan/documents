@@ -10,12 +10,10 @@ cf. https://github.com/Masterminds/squirrel
 
 ```sql
 -- データベース作成
-CREATE DATABASE snaildb;
-
-USE snaildb;
+CREATE DATABASE eadb;
 
 -- テーブル作成
-CREATE TABLE users(
+CREATE TABLE eadb.users(
     user_id int PRIMARY KEY AUTO_INCREMENT
     , username VARCHAR(20) NOT NULL
     , age int NOT NULL
@@ -23,7 +21,7 @@ CREATE TABLE users(
 );
 
 -- テストデータ1
-INSERT INTO users(
+INSERT INTO eadb.users(
     username
     , age
     , remarks
@@ -34,7 +32,7 @@ INSERT INTO users(
 );
 
 -- テストデータ2
-INSERT INTO users(
+INSERT INTO eadb.users(
     username
     , age
     , remarks
@@ -43,6 +41,10 @@ INSERT INTO users(
     , 706
     , "This is a second data"
 );
+
+CREATE USER eadbuser;
+
+GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```
 
 ### ライブラリインストール
@@ -61,10 +63,10 @@ go get github.com/go-sql-driver/mysql
 func connectDB() (*sql.DB, error) {
 
 	const (
-		user     = "root"           // データベースのユーザ名
-		password = "password"       // データベースのパスワード
+		user     = "eadbuser"       // データベースのユーザ名
+		password = "eadbpass"       // データベースのパスワード
 		host     = "localhost:3306" // データベースのホスト
-		database = "snaildb"        // データベース名
+		database = "eadb"           // データベース名
 	)
 
 	// データベース接続
