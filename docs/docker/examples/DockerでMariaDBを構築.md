@@ -40,7 +40,8 @@ CREATE TABLE eadb.users (
     , age VARCHAR(3)
 );
 
+-- ユーザ作成
 CREATE USER eadbuser;
-
+-- テーブルへの権限付与
 GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```
