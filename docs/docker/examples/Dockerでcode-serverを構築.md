@@ -18,6 +18,8 @@ services:
     container_name: code-server
     ports:
       - 8080:8080
+    # volumes:
+    #   - ./volumes/config.yaml:/home/coder/.config/code-server/config.yaml
 ```
 
 http://localhost:8080 にアクセスするとVSCodeの画面が表示されます。
