@@ -1,6 +1,6 @@
 # DockerでOpenVSCode Serverを構築
 
-cf. https://hub.docker.com/r/linuxserver/openvscode-server
+cf. https://hub.docker.com/r/gitpod/openvscode-server
 
 ## 構築
 
@@ -10,15 +10,9 @@ cf. https://hub.docker.com/r/linuxserver/openvscode-server
 
 ```yaml
 services:
-  openvscode:
-    image: lscr.io/linuxserver/openvscode-server:latest
-    container_name: openvscode
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Tokyo
-    # volumes:
-    #   - /path/to/openvscode-server/config:/config
+  openvscode-server:
+    image: gitpod/openvscode-server:latest
+    container_name: openvscode-server
     ports:
       - 3000:3000
 ```
