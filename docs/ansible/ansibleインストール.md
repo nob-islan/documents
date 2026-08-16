@@ -6,7 +6,7 @@
 
 ### インストール
 
-[公式ドキュメント](https://docs.ansible.com/ansible/2.9_ja/installation_guide/intro_installation.html)を参考にansibleをインストールします。
+[公式ドキュメント](https://docs.ansible.com/projects/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu)を参考にansibleをインストールします。
 
 ```shell
 sudo apt update
