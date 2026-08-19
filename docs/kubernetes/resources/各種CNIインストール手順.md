@@ -16,9 +16,10 @@ cf. https://github.com/flannel-io/flannel#deploying-flannel-manually
 # sudo kubeadm init \
 #   --pod-network-cidr={podのcidr} \
 #   --apiserver-advertise-address={コントロールプレーンノードのIP}
+export APISERVER_ADVERTISE_ADDRESS=`hostname -I | awk '{print $1}'`
 sudo kubeadm init \
   --pod-network-cidr=10.20.0.0/16 \
-  --apiserver-advertise-address=192.168.1.1
+  --apiserver-advertise-address=${APISERVER_ADVERTISE_ADDRESS}
 ```
 
 - flannelのマニフェストをダウンロードします:
@@ -49,7 +50,7 @@ kubectl apply -f kube-flannel.yml
 - flannelのリソースが作成されることを確認します:
 
 ```shell
-watch kubectl get pods -n kube-flannel
+kubectl wait --for condition=Ready pod --all -n kube-flannel
 ```
 
 ## Calico
@@ -64,9 +65,10 @@ cf. https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed
 # sudo kubeadm init \
 #   --pod-network-cidr={podのcidr} \
 #   --apiserver-advertise-address={コントロールプレーンノードのIP}
+export APISERVER_ADVERTISE_ADDRESS=`hostname -I | awk '{print $1}'`
 sudo kubeadm init \
   --pod-network-cidr=10.20.0.0/16 \
-  --apiserver-advertise-address=192.168.1.1
+  --apiserver-advertise-address=${APISERVER_ADVERTISE_ADDRESS}
 ```
 
 - Tigera operatorおよびCRDをインストールします:
@@ -85,7 +87,6 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.30.2/manifests/cu
 - `custom-resources.yaml`の`spec.calicoNetwork.ipPools.cidr`を先に設定したpodのcidrに合わせます:
 
 ```yml
-Installation
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
@@ -94,12 +95,12 @@ spec:
   # Configures Calico networking.
   calicoNetwork:
     ipPools:
-    - name: default-ipv4-ippool
-      blockSize: 26
-      cidr: 192.168.0.0/16 # 👈👈👈👈👈
-      encapsulation: VXLANCrossSubnet
-      natOutgoing: Enabled
-      nodeSelector: all()
+      - name: default-ipv4-ippool
+        blockSize: 26
+        cidr: 192.168.0.0/16 # 👈👈👈👈👈
+        encapsulation: VXLANCrossSubnet
+        natOutgoing: Enabled
+        nodeSelector: all()
 ```
 
 - Calicoのリソースを作成します:
@@ -111,5 +112,5 @@ kubectl create -f custom-resources.yaml
 - Calicoのリソースが作成されることを確認します:
 
 ```shell
-watch kubectl get pods -n calico-system
+kubectl wait --for condition=Ready pod --all -n calico-system
 ```
