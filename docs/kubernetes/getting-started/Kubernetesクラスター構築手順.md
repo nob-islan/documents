@@ -153,7 +153,7 @@ kubectl apply -f kube-flannel.yml
 flannelのリソースが作成されることを確認します:
 
 ```shell
-kubectl get pods -n kube-flannel
+kubectl wait --for condition=Ready pod --all -n kube-flannel
 ```
 
 ノードのステータスがReadyになっていれば完了です。
