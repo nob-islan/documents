@@ -91,7 +91,7 @@ APIとしての外部契約を格納するパッケージです。
 
 APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
 
-#### `internal/presentation/router`
+### `internal/presentation/router`
 
 httpリクエストのルーティングを行う関数を格納するパッケージです。
 
