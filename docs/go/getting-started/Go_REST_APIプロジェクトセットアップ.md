@@ -410,11 +410,13 @@ func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(struct {
-			Message string `json:"message"`
-		}{
-			Message: err.Error(),
-		})
+		json.NewEncoder(w).Encode(
+			struct {
+				Message string `json:"message"`
+			}{
+				Message: err.Error(),
+			},
+		)
 		return
 	}
 
