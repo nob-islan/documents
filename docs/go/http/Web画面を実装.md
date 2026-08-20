@@ -19,11 +19,11 @@
     ├── bootstrap
     │   └── server.go
     └── presentation
-        └── handler
-            ├── router
-            │   ├── base.go
-            │   └── user_router.go
-            └── user_handler.go
+        ├── handler
+        │   └── user_handler.go
+        └── router
+            ├── base.go
+            └── user_router.go
 ```
 
 ## サンプルコード
@@ -230,7 +230,7 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-#### `internal/presentation/handler/router/`
+#### `internal/presentation/router/`
 
 - `base.go`
 
@@ -294,7 +294,7 @@ package bootstrap
 
 import (
 	"easyapp/internal/presentation/handler"
-	"easyapp/internal/presentation/handler/router"
+	"easyapp/internal/presentation/router"
 	"net/http"
 )
 

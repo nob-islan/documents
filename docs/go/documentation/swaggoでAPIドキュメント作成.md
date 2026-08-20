@@ -63,7 +63,7 @@ import (
 	"easyapp/internal/infrastructure"
 	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/presentation/handler"
-	"easyapp/internal/presentation/handler/router"
+	"easyapp/internal/presentation/router"
 	"net/http"
 
 	_ "easyapp/api" // apiパッケージ配下のドキュメントをimport

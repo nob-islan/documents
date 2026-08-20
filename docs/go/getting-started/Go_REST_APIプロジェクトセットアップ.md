@@ -84,13 +84,13 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
     │   └── repository
     │       └── user_repository.go  # ドメインの取得/永続化
     └── presentation
-        └── handler
-            ├── model
-            │   └── user_model.go   # APIのリクエスト・レスポンス構造体
-            ├── router
-            │   ├── base.go         # エンドポイントのルーター統括
-            │   └── user_router.go  # 業務処理ごとのルーター
-            └── user_handler.go     # APIとしての外部契約
+        ├── handler
+        │   ├── model
+        │   │   └── user_model.go   # APIのリクエスト・レスポンス構造体
+        │   └── user_handler.go     # APIとしての外部契約
+        └── router
+            ├── base.go             # エンドポイントのルーター統括
+            └── user_router.go      # エンドポイントとハンドラの紐付け
 ```
 
 ### パッケージ一覧
@@ -484,7 +484,7 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### `internal/presentation/handler/router/`
+#### `internal/presentation/router/`
 
 リクエストのルーティングを実装します。
 
@@ -562,7 +562,7 @@ import (
 	"easyapp/internal/infrastructure"
 	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/presentation/handler"
-	"easyapp/internal/presentation/handler/router"
+	"easyapp/internal/presentation/router"
 	"net/http"
 )
 

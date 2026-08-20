@@ -16,13 +16,13 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
     ├── bootstrap
     │   └── server.go
     └── presentation
-        └── handler
-            ├── model
-            │   └── user_model.go
-            ├── router
-            │   ├── base.go
-            │   └── user_router.go
-            └── user_handler.go
+        ├── handler
+        │   ├── model
+        │   │   └── user_model.go
+        │   └── user_handler.go
+        └── router
+            ├── base.go
+            └── user_router.go
 ```
 
 ### プロジェクト作成
@@ -174,7 +174,7 @@ func NewMeRes(name string, age int) MeRes {
 }
 ```
 
-#### `internal/presentation/handler/router/`
+#### `internal/presentation/router/`
 
 - `base.go`
 
@@ -228,7 +228,7 @@ package bootstrap
 import (
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/presentation/handler"
-	"easyapp/internal/presentation/handler/router"
+	"easyapp/internal/presentation/router"
 
 	"github.com/labstack/echo/v5"
 )

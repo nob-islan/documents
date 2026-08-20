@@ -19,9 +19,9 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 │   │   └── repository   # ドメイン操作の実装
 │   ├── logging          # ログ出力制御
 │   └── presentation     # プレゼンテーション層
-│       └── handler      # APIとしての外部契約
-│           ├── model    # APIのリクエスト・レスポンス構造体
-│           └── router   # httpリクエストのルーティング
+│       ├── handler      # APIとしての外部契約
+│       │   └── model    # APIのリクエスト・レスポンス構造体
+│       └── router       # httpリクエストのルーティング
 └── scripts              # 開発支援ツール
 ```
 
@@ -91,7 +91,7 @@ APIとしての外部契約を格納するパッケージです。
 
 APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
 
-#### `internal/presentation/handler/router`
+#### `internal/presentation/router`
 
 httpリクエストのルーティングを行う関数を格納するパッケージです。
 
