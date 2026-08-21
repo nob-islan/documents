@@ -30,7 +30,7 @@ sudo apt-get update && sudo apt-get install cloudflared
 cloudflared tunnel --protocol http2 --url http://localhost:8080
 ```
 
-ログに出力されるリンクからlocalhostのコンテンツにアクセスできます。
+ログに出力されるリンクからlocalhostのコンテンツにアクセスできます。コンテンツがhttpsでの疎通を要求する場合は`--no-tls-verify`を追加してください。
 
 ### コンテンツの公開をService化
 
