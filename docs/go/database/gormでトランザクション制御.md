@@ -151,7 +151,7 @@ func (u *userUsecase) Regist(ctx context.Context, in params.RegistIn) (params.Re
 
 ## テスト
 
-- `users_repository_test.go`
+- `user_repository_test.go`
 
 ```go
 package repository
@@ -173,7 +173,7 @@ func TestSave(t *testing.T) {
 		name          string            // テストケース名
 		ctx           context.Context   // コンテキスト
 		withTx        bool              // トランザクション有無
-		users         domain.User       // 入力値
+		user          domain.User       // 入力値
 		setup         func(db *gorm.DB) // 事前セットアップ関数
 		expectedError error             // 期待されるエラー
 	}{
@@ -181,7 +181,7 @@ func TestSave(t *testing.T) {
 			name:          "SuccessWithoutTx",
 			ctx:           context.Background(),
 			withTx:        false,
-			users:         domain.NewUser("nob", "passwd", 13),
+			user:          domain.NewUser("nob", "passwd", 13),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
 		},
@@ -189,7 +189,7 @@ func TestSave(t *testing.T) {
 			name:          "SuccessWithTx",
 			ctx:           context.Background(),
 			withTx:        true,
-			users:         domain.NewUser("nob", "passwd", 13),
+			user:          domain.NewUser("nob", "passwd", 13),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
 		},
@@ -199,7 +199,7 @@ func TestSave(t *testing.T) {
 
 		t.Run(test.name, func(t *testing.T) {
 			// テストデータベースに接続
-			db := testdata.ConnectTestDB(t, "users")
+			db := testdata.ConnectTestDB(t, "user")
 
 			// 事前セットアップ
 			test.setup(db)
@@ -211,7 +211,7 @@ func TestSave(t *testing.T) {
 			}
 
 			// sqlの実行
-			result := NewUserRepository(db).Save(test.ctx, test.users)
+			result := NewUserRepository(db).Save(test.ctx, test.user)
 
 			// レスポンスの確認
 			assert.Equal(t, test.expectedError, result)
