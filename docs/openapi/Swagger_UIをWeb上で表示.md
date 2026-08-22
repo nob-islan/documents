@@ -27,6 +27,7 @@
         SwaggerUIBundle({
           url: "./swagger.json",
           dom_id: "#swagger-ui",
+          // supportedSubmitMethods: [], // Try it outボタンを無効化
         });
       };
     </script>
