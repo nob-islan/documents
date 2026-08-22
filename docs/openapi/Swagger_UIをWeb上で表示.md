@@ -10,7 +10,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <title>API Documentation</title>
+    <title>Swagger UI</title>
 
     <link
       rel="stylesheet"
