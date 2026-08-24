@@ -12,6 +12,10 @@ cf. https://vitepress.dev/ja/guide/getting-started
 
 サイドバーを自動生成します。
 
+### [vitepress-mermaid-plugin](https://www.npmjs.com/package/vitepress-mermaid-plugin)
+
+mermaidで描いた図をレンダリングできるようにします。
+
 ## サンプルコード
 
 ### `config.mts`
