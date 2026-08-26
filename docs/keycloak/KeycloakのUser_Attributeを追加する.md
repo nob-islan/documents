@@ -5,7 +5,9 @@
 ## Keycloak設定
 
 - Realm settings -> User profileからattributeを作成します。
-- Clients -> {対象のClient} -> Client scopes -> {対象のClient}-dedicatedからmapperを追加します。
+- Client scopes -> Create client scopeからclient scopeを作成します。
+- Mappers -> Configure new mapper -> User AttributeからMapperを追加します。
+- Clients -> {対象のClient} -> Client scopes -> Add client scopeからclient scopeを追加します。
 
 ## 業務アプリ実装
 
