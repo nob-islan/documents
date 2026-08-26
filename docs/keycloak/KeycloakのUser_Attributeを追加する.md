@@ -5,6 +5,7 @@
 ## Keycloak設定
 
 - Realm settings -> User profileからattributeを作成します。
+  - Who can edit?についてUserを追加して、ユーザ作成画面で設定できるようにします。
 - Client scopes -> Create client scopeからclient scopeを作成します。
 - Mappers -> Configure new mapper -> User AttributeからMapperを追加します。
 - Clients -> {対象のClient} -> Client scopes -> Add client scopeからclient scopeを追加します。
