@@ -334,7 +334,7 @@ import nob.example.easyapp.service.model.MeInModel
 import org.springframework.web.bind.annotation.*
 
 /**
- * 認証コントローラーのインターフェースです。
+ * 認証コントローラーです。
  */
 @RestController
 @RequestMapping("/api/v1")

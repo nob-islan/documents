@@ -381,7 +381,7 @@ import nob.example.easyapp.service.model.MeInModel;
 import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * 認証コントローラーのインターフェースです。
+ * 認証コントローラーです。
  *
  * @author nob
  */
