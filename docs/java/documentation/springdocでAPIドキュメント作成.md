@@ -67,6 +67,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -74,20 +75,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
 import nob.example.easyapp.controller.model.MeRequest;
 import nob.example.easyapp.controller.model.MeResponse;
 import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponse;
+import nob.example.easyapp.service.AuthService;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.MeInModel;
+import nob.example.easyapp.service.model.MeOutModel;
 
 /**
  * 認証コントローラーのインターフェースです。
  *
  * @author nob
  */
+@RestController
 @RequestMapping(value = "/api/v1")
+@RequiredArgsConstructor
 @Tag(name = "Auth", description = "認証APIです。")
-public interface AuthController {
+public class AuthController {
+
+    @NonNull
+    private final AuthService authService;
 
     /**
      * 認証処理を呼び出します。
@@ -101,7 +113,10 @@ public interface AuthController {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
             @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponse.class)))
     })
-    LoginResponse login(@RequestBody LoginRequest request);
+    public LoginResponse login(@RequestBody LoginRequest request) {
+
+        return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
+    }
 
     /**
      * ユーザ情報取得処理を呼び出します。
@@ -114,7 +129,11 @@ public interface AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
     })
-    MeResponse me(@ParameterObject MeRequest request); // GETリクエストのパラメータを表示するために@ParameterObjectを追加
+    MeResponse me(@ParameterObject MeRequest request) {
+
+        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
+        return new MeResponse(meOutModel.name(), meOutModel.age());
+    }
 }
 ```
 

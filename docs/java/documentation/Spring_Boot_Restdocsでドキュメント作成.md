@@ -57,7 +57,7 @@ cf. https://spring.pleiades.io/guides/gs/testing-restdocs
 
 ### API実装
 
-- コントローラインターフェース
+- コントローラ
 
 ```java
 package nob.example.easyapp.controller;
@@ -66,50 +66,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
-
-/**
- * 認証コントローラーのインターフェースです。
- *
- * @author nob
- */
-@RequestMapping(value = "/api/v1")
-public interface AuthController {
-
-    /**
-     * 認証処理を呼び出します。
-     *
-     * @param request 認証リクエスト
-     * @return 認証結果
-     */
-    @PostMapping(value = "/login")
-    LoginResponse login(@RequestBody LoginRequest request);
-
-    /**
-     * ユーザ情報取得処理を呼び出します。
-     *
-     * @param request ユーザ情報取得リクエスト
-     * @return ユーザ情報
-     */
-    @GetMapping(value = "/me")
-    MeResponse me(MeRequest request);
-}
-```
-
-- コントローラ実装
-
-```java
-package nob.example.easyapp.controller.impl;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
 import nob.example.easyapp.controller.model.MeRequest;
@@ -120,25 +80,38 @@ import nob.example.easyapp.service.model.MeInModel;
 import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * AuthControllerの実装クラスです。
+ * 認証コントローラーのインターフェースです。
  *
  * @author nob
  */
 @RestController
+@RequestMapping(value = "/api/v1")
 @RequiredArgsConstructor
-public class AuthControllerImpl implements AuthController {
+public class AuthController {
 
     @NonNull
     private final AuthService authService;
 
-    @Override
-    public LoginResponse login(LoginRequest request) {
+    /**
+     * 認証処理を呼び出します。
+     *
+     * @param request 認証リクエスト
+     * @return 認証結果
+     */
+    @PostMapping(value = "/login")
+    public LoginResponse login(@RequestBody LoginRequest request) {
 
         return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
 
-    @Override
-    public MeResponse me(MeRequest request) {
+    /**
+     * ユーザ情報取得処理を呼び出します。
+     *
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
+     */
+    @GetMapping(value = "/me")
+    MeResponse me(MeRequest request) {
 
         MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
         return new MeResponse(meOutModel.name(), meOutModel.age());
@@ -153,9 +126,9 @@ package nob.example.easyapp.controller;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
@@ -173,7 +146,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import nob.example.easyapp.controller.impl.AuthControllerImpl;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.MeRequest;
 import nob.example.easyapp.service.AuthService;
@@ -184,13 +156,13 @@ import nob.example.easyapp.service.model.MeOutModel;
 import tools.jackson.databind.ObjectMapper;
 
 /**
- * AuthControllerImplのテストクラスです。
+ * AuthControllerのテストクラスです。
  *
  * @author nob
  */
-@WebMvcTest(AuthControllerImpl.class)
+@WebMvcTest(AuthController.class)
 @AutoConfigureRestDocs(outputDir = "target/snippets")
-public class AuthControllerImplTest {
+public class AuthControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

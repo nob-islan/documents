@@ -328,59 +328,31 @@ import nob.example.easyapp.controller.model.LoginRequest
 import nob.example.easyapp.controller.model.LoginResponse
 import nob.example.easyapp.controller.model.MeRequest
 import nob.example.easyapp.controller.model.MeResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
+import nob.example.easyapp.service.AuthService
+import nob.example.easyapp.service.model.LoginInModel
+import nob.example.easyapp.service.model.MeInModel
+import org.springframework.web.bind.annotation.*
 
 /**
  * 認証コントローラーのインターフェースです。
  */
+@RestController
 @RequestMapping("/api/v1")
-interface AuthController {
+class AuthController(private val authService: AuthService) {
 
     /**
      * 認証処理を呼び出します。
      */
     @PostMapping("/login")
-    fun login(@RequestBody req: LoginRequest): LoginResponse
+    fun login(@RequestBody req: LoginRequest): LoginResponse {
+        return LoginResponse(authService.login(LoginInModel(req.name, req.password)).valid)
+    }
 
     /**
      * ユーザ情報取得処理を呼び出します。
      */
     @GetMapping("/me")
-    fun me(req: MeRequest): MeResponse
-}
-```
-
-#### `controller/impl/AuthControllerImpl.kt`
-
-APIを実装します。ここでは業務処理は行わず、ビジネスロジックの呼び出しのみ行います。
-
-```kotlin
-package nob.example.easyapp.controller.impl
-
-import nob.example.easyapp.controller.AuthController
-import nob.example.easyapp.controller.model.LoginRequest
-import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.MeRequest
-import nob.example.easyapp.controller.model.MeResponse
-import nob.example.easyapp.service.AuthService
-import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.MeInModel
-import org.springframework.web.bind.annotation.RestController
-
-/**
- * AuthControllerの実装です。
- */
-@RestController
-class AuthControllerImpl(private val authService: AuthService) : AuthController {
-
-    override fun login(req: LoginRequest): LoginResponse {
-        return LoginResponse(authService.login(LoginInModel(req.name, req.password)).valid)
-    }
-
-    override fun me(req: MeRequest): MeResponse {
+    fun me(req: MeRequest): MeResponse {
         val out = authService.me(MeInModel(req.name))
         return MeResponse(out.name, out.age)
     }

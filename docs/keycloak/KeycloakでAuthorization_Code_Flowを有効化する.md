@@ -29,9 +29,27 @@ cf.
 
 ### 実装
 
+#### `application.properties`
+
+```shell
+server.port=8081
+
+spring.security.oauth2.client.registration.keycloak.client-id=easyapp
+spring.security.oauth2.client.registration.keycloak.client-secret=TODO_ADD_CLIENT_SECRET
+spring.security.oauth2.client.registration.keycloak.scope=openid
+spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
+spring.security.oauth2.client.registration.keycloak.redirect-uri={baseUrl}/login/oauth2/code/{registrationId}
+spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/realms/easyapp
+```
+
 #### `pom.xml`
 
 ```xml
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,7 +71,6 @@ cf.
 ```java
 package nob.example.easyapp.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -66,6 +83,9 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 /**
  * 認証向けのコンフィグクラスです。
  *
@@ -73,9 +93,10 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
  */
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
+    @NonNull
     private ClientRegistrationRepository clientRegistrationRepository;
 
     @Bean
@@ -119,6 +140,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import nob.example.easyapp.controller.model.MeResponse;
 
@@ -127,8 +149,9 @@ import nob.example.easyapp.controller.model.MeResponse;
  *
  * @author nob
  */
+@RestController
 @RequestMapping(value = "/api/v1")
-public interface UserController {
+public class UserController {
 
     /**
      * ユーザ情報取得APIです。
@@ -136,31 +159,6 @@ public interface UserController {
      * @return ユーザ情報
      */
     @GetMapping("/me")
-    MeResponse me(@AuthenticationPrincipal OAuth2User user);
-}
-```
-
-#### `controller/impl/UserControllerImpl.java`
-
-```java
-package nob.example.easyapp.controller.impl;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.RestController;
-
-import nob.example.easyapp.controller.UserController;
-import nob.example.easyapp.controller.model.MeResponse;
-
-/**
- * UserControllerの実装です。
- *
- * @author nob
- */
-@RestController
-public class UserControllerImpl implements UserController {
-
-    @Override
     public MeResponse me(@AuthenticationPrincipal OAuth2User user) {
         return new MeResponse(user.getAttribute("preferred_username"), 13);
     }
@@ -304,19 +302,6 @@ const handleOnclickLogoutButton = () => {
   window.location.href = "/api/v1/revoke";
   // ログアウト処理後の画面遷移はSpring Securityに任せる
 };
-```
-
-#### `application.properties`
-
-```shell
-server.port=8081
-
-spring.security.oauth2.client.registration.keycloak.client-id=easyapp
-spring.security.oauth2.client.registration.keycloak.client-secret=TODO_ADD_CLIENT_SECRET
-spring.security.oauth2.client.registration.keycloak.scope=openid
-spring.security.oauth2.client.registration.keycloak.authorization-grant-type=authorization_code
-spring.security.oauth2.client.registration.keycloak.redirect-uri={baseUrl}/login/oauth2/code/{registrationId}
-spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/realms/easyapp
 ```
 
 ## API打鍵

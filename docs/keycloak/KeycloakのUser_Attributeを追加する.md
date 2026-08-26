@@ -12,7 +12,7 @@
 下記サンプルでは`birth_date`を取得し、それを元に年齢を計算しています:
 
 ```java
-package nob.example.easyapp.controller.impl;
+package nob.example.easyapp.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,21 +21,28 @@ import java.time.ZoneId;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nob.example.easyapp.controller.UserController;
 import nob.example.easyapp.controller.model.MeResponse;
 
 /**
- * UserControllerの実装です。
+ * ユーザ情報APIのインターフェースです。
  *
  * @author nob
  */
 @RestController
-public class UserControllerImpl implements UserController {
+@RequestMapping(value = "/api/v1")
+public class UserController {
 
-    @Override
-    public MeResponse me(@AuthenticationPrincipal OAuth2User user) {
+    /**
+     * ユーザ情報取得APIです。
+     *
+     * @return ユーザ情報
+     */
+    @GetMapping("/me")
+    MeResponse me(@AuthenticationPrincipal OAuth2User user) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {

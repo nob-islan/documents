@@ -212,7 +212,6 @@ http-nio-8080-exec-2[1] cont
 nob.example.easyapp.service.model.SampleInModel
 nob.example.easyapp.service.impl.SampleServiceImpl
 nob.example.easyapp.service.SampleService
-nob.example.easyapp.controller.impl.SampleControllerImpl
 nob.example.easyapp.controller.SampleController
 nob.example.easyapp.EasyappApplication
 ```

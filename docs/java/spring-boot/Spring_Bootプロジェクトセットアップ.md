@@ -98,8 +98,6 @@ spring.datasource.password=eadbpass
 .
 ├── controller                       # APIとしての外部契約
 │   ├── AuthController.java
-│   ├── impl                         # APIとしての実装
-│   │   └── AuthControllerImpl.java
 │   └── model                        # APIのリクエスト・レスポンスモデル
 │       ├── LoginRequest.java
 │       ├── LoginResponse.java
@@ -369,52 +367,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
-
-/**
- * 認証コントローラーのインターフェースです。
- *
- * @author nob
- */
-@RequestMapping(value = "/api/v1")
-public interface AuthController {
-
-    /**
-     * 認証処理を呼び出します。
-     *
-     * @param request 認証リクエスト
-     * @return 認証結果
-     */
-    @PostMapping(value = "/login")
-    LoginResponse login(@RequestBody LoginRequest request);
-
-    /**
-     * ユーザ情報取得処理を呼び出します。
-     *
-     * @param request ユーザ情報取得リクエスト
-     * @return ユーザ情報
-     */
-    @GetMapping(value = "/me")
-    MeResponse me(MeRequest request);
-}
-```
-
-#### `controller/impl/AuthControllerImpl.java`
-
-APIを実装します。ここでは業務処理は行わず、ビジネスロジックの呼び出しのみ行います。
-
-```java
-package nob.example.easyapp.controller.impl;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import nob.example.easyapp.controller.AuthController;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
 import nob.example.easyapp.controller.model.MeRequest;
@@ -425,25 +381,38 @@ import nob.example.easyapp.service.model.MeInModel;
 import nob.example.easyapp.service.model.MeOutModel;
 
 /**
- * AuthControllerの実装クラスです。
+ * 認証コントローラーのインターフェースです。
  *
  * @author nob
  */
 @RestController
+@RequestMapping(value = "/api/v1")
 @RequiredArgsConstructor
-public class AuthControllerImpl implements AuthController {
+public class AuthController {
 
     @NonNull
     private final AuthService authService;
 
-    @Override
-    public LoginResponse login(LoginRequest request) {
+    /**
+     * 認証処理を呼び出します。
+     *
+     * @param request 認証リクエスト
+     * @return 認証結果
+     */
+    @PostMapping(value = "/login")
+    public LoginResponse login(@RequestBody LoginRequest request) {
 
         return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
 
-    @Override
-    public MeResponse me(MeRequest request) {
+    /**
+     * ユーザ情報取得処理を呼び出します。
+     *
+     * @param request ユーザ情報取得リクエスト
+     * @return ユーザ情報
+     */
+    @GetMapping(value = "/me")
+    MeResponse me(MeRequest request) {
 
         MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
         return new MeResponse(meOutModel.name(), meOutModel.age());
