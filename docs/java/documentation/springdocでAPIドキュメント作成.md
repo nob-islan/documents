@@ -113,7 +113,7 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合"),
             @ApiResponse(responseCode = "422", description = "エラーが発生した場合", content = @Content(schema = @Schema(implementation = SampleExceptionResponse.class)))
     })
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    LoginResponse login(@RequestBody LoginRequest request) {
 
         return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }

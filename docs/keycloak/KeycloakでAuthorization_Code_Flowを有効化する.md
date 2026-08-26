@@ -159,7 +159,7 @@ public class UserController {
      * @return ユーザ情報
      */
     @GetMapping("/me")
-    public MeResponse me(@AuthenticationPrincipal OAuth2User user) {
+    MeResponse me(@AuthenticationPrincipal OAuth2User user) {
         return new MeResponse(user.getAttribute("preferred_username"), 13);
     }
 }

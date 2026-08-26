@@ -53,7 +53,7 @@ public class UserController {
      * @return 固定メッセージ
      */
     @GetMapping(value = "/message")
-    public String message() {
+    String message() {
         return "Hello, nob!";
     }
 }

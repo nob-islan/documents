@@ -99,7 +99,7 @@ public class AuthController {
      * @return 認証結果
      */
     @PostMapping(value = "/login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    LoginResponse login(@RequestBody LoginRequest request) {
 
         return new LoginResponse(authService.login(new LoginInModel(request.name(), request.password())).valid());
     }
