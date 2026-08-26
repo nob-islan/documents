@@ -22,4 +22,4 @@ cf. https://www.keycloak.org/docs/latest/server_admin/#_webauthn_passwordless
 
 ### Passkey登録の必須化
 
-- Authentication -> Required actionsからWebauthn Register PasswordlessのSet as default actionをOnにします。
+- Authentication -> Required actionsからWebauthn Register PasswordlessのSet as default actionをOnにすることで、ユーザ作成時にパスキー作成を強制できます。
