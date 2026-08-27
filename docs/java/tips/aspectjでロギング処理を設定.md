@@ -23,7 +23,7 @@
 - `apiSuccessLog`: API正常終了時
 - `apiErrorLog`: API異常終了時
 
-いずれも`"within(nob.example.easyapp.controller.*..*)"`を指定しているため、各コントローラー内のメソッド動作時に呼ばれるようになっています。
+いずれも`"execution(* nob.example.easyapp.controller..*(..))"`を指定しているため、各コントローラー内のメソッド動作時に呼ばれるようになっています。
 
 ```java
 package nob.example.easyapp.aspect;
@@ -49,7 +49,7 @@ public class ApiExecLogAspect {
      *
      * @param joinPoint メソッド情報
      */
-    @Before("within(nob.example.easyapp.controller.*..*)")
+    @Before("execution(* nob.example.easyapp.controller..*(..))")
     public void apiStartLog(JoinPoint joinPoint) {
 
         /**
@@ -79,7 +79,7 @@ public class ApiExecLogAspect {
      *
      * @param joinPoint メソッド情報
      */
-    @AfterReturning(pointcut = "within(nob.example.easyapp.controller.*..*)")
+    @AfterReturning(pointcut = "execution(* nob.example.easyapp.controller..*(..))")
     public void apiSuccessLog(JoinPoint joinPoint) {
 
         /**
@@ -104,7 +104,7 @@ public class ApiExecLogAspect {
      * @param joinPoint メソッド情報
      * @param error
      */
-    @AfterThrowing(pointcut = "within(nob.example.easyapp.controller.*..*)", throwing = "error")
+    @AfterThrowing(pointcut = "execution(* nob.example.easyapp.controller..*(..))", throwing = "error")
     public void apiErrorLog(JoinPoint joinPoint, Throwable error) {
 
         /**
