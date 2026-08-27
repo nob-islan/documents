@@ -9,12 +9,9 @@
 下記設定を依存関係を追加します:
 
 ```xml
-		<!-- Source: https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>1.9.25.1</version>
-			<scope>compile</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aspectj</artifactId>
 		</dependency>
 ```
 
