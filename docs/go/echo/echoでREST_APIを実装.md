@@ -11,7 +11,8 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 ```shell
 .
 ├── cmd
-│   └── main.go
+│   └── server
+│       └── main.go
 └── internal
     ├── bootstrap
     │   └── server.go
@@ -21,8 +22,7 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
         │   │   └── user_model.go
         │   └── user_handler.go
         └── router
-            ├── base.go
-            └── user_router.go
+            └── router.go
 ```
 
 ### プロジェクト作成
