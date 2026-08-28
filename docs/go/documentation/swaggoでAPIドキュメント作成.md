@@ -19,12 +19,12 @@ go get -u github.com/swaggo/http-swagger
 下記コマンドでswaggerドキュメントを初期化します:
 
 ```shell
-swag init -o ./api -g cmd/main.go
+swag init -o ./api -g cmd/server/main.go
 ```
 
 ## 実装
 
-### `cmd/main.go`
+### `cmd/server/main.go`
 
 アプリケーションの概要およびメタ情報を追記します。
 
@@ -84,13 +84,16 @@ func NewServer() http.Handler {
 	m.Handle("/swagger/", httpSwagger.WrapHandler)
 
 	// user
-	router.NewUserRouter(handler.NewUserHandler(
-		usecase.NewUserUsecase(
-			repository.NewUserRepository(
-				db,
+	router.SetUserHandlerRouting(
+		m,
+		handler.NewUserHandler(
+			usecase.NewUserUsecase(
+				repository.NewUserRepository(
+					db,
+				),
 			),
 		),
-	)).SetRouting(m)
+	)
 
 	return m
 }
@@ -111,22 +114,13 @@ import (
 	"net/http"
 )
 
-// 認証のhandlerインターフェースです。
-type UserHandler interface {
-
-	// 認証処理を呼び出します。
-	Login(w http.ResponseWriter, r *http.Request)
-
-	// ユーザ情報取得処理を呼び出します。
-	Me(w http.ResponseWriter, r *http.Request)
-}
-
-type userHandler struct {
+// 認証のhandlerです。
+type UserHandler struct {
 	userUsecase usecase.UserUsecase
 }
 
 func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
-	return &userHandler{userUsecase: userUsecase}
+	return UserHandler{userUsecase: userUsecase}
 }
 
 // @Summary 認証
@@ -138,7 +132,7 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Success 200 {object} model.LoginRes "正常に処理された場合"
 // @Failure 422 {object} apperrors.easyappBusinessErrorRes "エラーが発生した場合"
 // @Router /login [post]
-func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
@@ -158,7 +152,7 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
 // @Success 200 {object} model.MeRes "正常に処理された場合"
 // @Router /me [get]
-func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
@@ -166,11 +160,13 @@ func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(struct {
-			Message string `json:"message"`
-		}{
-			Message: err.Error(),
-		})
+		json.NewEncoder(w).Encode(
+			struct {
+				Message string `json:"message"`
+			}{
+				Message: err.Error(),
+			},
+		)
 		return
 	}
 
@@ -186,7 +182,7 @@ func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
 各モデルクラスのexample記載します:
 
 ```go
- package model
+package model
 
 import (
 	"encoding/json"
@@ -269,13 +265,13 @@ type easyappBusinessErrorRes struct {
 下記コマンドでswaggerドキュメントを生成します:
 
 ```shell
-swag init -o ./api -g cmd/main.go
+swag init -o ./api -g cmd/server/main.go
 ```
 
 アプリを起動します:
 
 ```shell
-go run cmd/main.go
+go run cmd/server/main.go
 ```
 
 アプリ起動後、http://localhost:8080/swagger/index.html でswaggerドキュメントを確認できます。
