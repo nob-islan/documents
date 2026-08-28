@@ -560,7 +560,7 @@ func NewServer() http.Handler {
 }
 ```
 
-#### `cmd/`
+#### `cmd/server/`
 
 アプリケーションのエントリポイントです。
 
@@ -588,7 +588,7 @@ func main() {
 下記コマンドでアプリを起動します。
 
 ```shell
-go run cmd/main.go
+go run cmd/server/main.go
 ```
 
 下記コマンドでAPIを打鍵できます。
