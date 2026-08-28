@@ -372,25 +372,16 @@ import (
 	"net/http"
 )
 
-// 認証のhandlerインターフェースです。
-type UserHandler interface {
-
-	// 認証処理を呼び出します。
-	Login(w http.ResponseWriter, r *http.Request)
-
-	// ユーザ情報取得処理を呼び出します。
-	Me(w http.ResponseWriter, r *http.Request)
-}
-
-type userHandler struct {
+// 認証のhandlerです。
+type UserHandler struct {
 	userUsecase usecase.UserUsecase
 }
 
 func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
-	return &userHandler{userUsecase: userUsecase}
+	return UserHandler{userUsecase: userUsecase}
 }
 
-func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewLoginReq(r)
 
@@ -402,7 +393,7 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-func (h *userHandler) Me(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewMeReq(r)
 
