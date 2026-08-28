@@ -23,8 +23,7 @@
         ├── handler
         │   └── user_handler.go
         └── router
-            ├── base.go
-            └── user_router.go
+            └── router.go
 ```
 
 ## サンプルコード
