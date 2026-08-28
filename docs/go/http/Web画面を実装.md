@@ -13,7 +13,8 @@
 │   └── templates
 │       └── index.html
 ├── cmd
-│   └── main.go
+│   └── server
+│       └── main.go
 ├── go.mod
 └── internal
     ├── bootstrap
@@ -165,22 +166,13 @@ import (
 )
 
 // 認証機能のhandlerです。
-type UserHandler interface {
-
-	// 初期表示処理を行います。
-	InitView(w http.ResponseWriter, r *http.Request)
-
-	// ログイン処理を行います。
-	Login(w http.ResponseWriter, r *http.Request)
-}
-
-type userHandler struct{}
+type UserHandler struct{}
 
 func NewUserHandler() UserHandler {
-	return &userHandler{}
+	return UserHandler{}
 }
 
-func (h *userHandler) InitView(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) InitView(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, err := template.ParseFiles("assets/templates/index.html")
 	if err != nil {
@@ -197,7 +189,7 @@ func (h *userHandler) InitView(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
+func (h UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var req struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -232,27 +224,7 @@ func (h *userHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 #### `internal/presentation/router/`
 
-- `base.go`
-
-```go
-package router
-
-import (
-	"net/http"
-)
-
-// routerのインターフェースです。
-type Router interface {
-
-	// ルーティング情報をセットします。
-	SetRouting(m *http.ServeMux)
-}
-
-// APIのベースURI
-const basePath string = "/api/v1"
-```
-
-- `user_router.go`
+- `router.go`
 
 ```go
 package router
@@ -262,26 +234,21 @@ import (
 	"net/http"
 )
 
-type userRouter struct {
-	userHandler handler.UserHandler
-}
+// APIのベースURI
+const basePath string = "/api/v1"
 
-func NewUserRouter(userHandler handler.UserHandler) Router {
-	return &userRouter{userHandler: userHandler}
-}
+// UserHandler向けのルーティングをセットします。
+func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 
-func (router *userRouter) SetRouting(m *http.ServeMux) {
-
-	// カスタムルータ
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
-			router.userHandler.Login(w, r)
+			h.Login(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
 	})
-	m.HandleFunc("/login", router.userHandler.InitView)
+	m.HandleFunc("/login", h.InitView)
 }
 ```
 
@@ -308,13 +275,13 @@ func NewServer() http.Handler {
 	m.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("assets/static"))))
 
 	// user
-	router.NewUserRouter(handler.NewUserHandler()).SetRouting(m)
+	router.SetUserHandlerRouting(m, handler.NewUserHandler())
 
 	return m
 }
 ```
 
-#### `cmd/`
+#### `cmd/server/`
 
 - `main.go`
 
