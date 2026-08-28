@@ -13,7 +13,8 @@ cf. https://echo.labstack.com/docs/templates
 │   └── templates
 │       └── index.html
 ├── cmd
-│   └── main.go
+│   └── server
+│       └── main.go
 ├── go.mod
 ├── go.sum
 └── internal
@@ -23,8 +24,7 @@ cf. https://echo.labstack.com/docs/templates
         ├── handler
         │   └── user_handler.go
         └── router
-            ├── base.go
-            └── user_router.go
+            └── router.go
 ```
 
 ## サンプルコード
@@ -182,27 +182,18 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-// 認証機能のhandlerです。
-type UserHandler interface {
-
-	// 初期表示処理を行います。
-	InitView(c *echo.Context) error
-
-	// ログイン処理を行います。
-	Login(c *echo.Context) error
-}
-
-type userHandler struct{}
+// ユーザ機能のhandlerです。
+type UserHandler struct{}
 
 func NewUserHandler() UserHandler {
-	return &userHandler{}
+	return UserHandler{}
 }
 
-func (h *userHandler) InitView(c *echo.Context) error {
+func (h *UserHandler) InitView(c *echo.Context) error {
 	return c.Render(http.StatusOK, "login", struct{ ButtonText string }{ButtonText: "ログイン"})
 }
 
-func (h *userHandler) Login(c *echo.Context) error {
+func (h *UserHandler) Login(c *echo.Context) error {
 
 	req := new(struct {
 		Name     string `json:"name"`     // ユーザ名
@@ -241,24 +232,7 @@ func (h *userHandler) Login(c *echo.Context) error {
 
 #### `internal/presentation/router`
 
-- `base.go`
-
-```go
-package router
-
-import (
-	"github.com/labstack/echo/v5"
-)
-
-type Router interface {
-	SetRouting(e *echo.Echo)
-}
-
-// APIのベースURI
-const basePath string = "/api/v1"
-```
-
-- `user_router.go`
+- `router.go`
 
 ```go
 package router
@@ -269,18 +243,14 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-type userRouter struct {
-	userHandler handler.UserHandler
-}
+// APIのベースURI
+const basePath string = "/api/v1"
 
-func NewUserRouter(userHandler handler.UserHandler) Router {
-	return &userRouter{userHandler: userHandler}
-}
+// UserHandler向けのルーティングをセットします。
+func SetUserHandlerRouting(e *echo.Echo, h handler.UserHandler) {
 
-func (r *userRouter) SetRouting(e *echo.Echo) {
-
-	e.GET("/login", r.userHandler.InitView)
-	e.POST(basePath+"/login", r.userHandler.Login)
+	e.GET("/login", h.InitView)
+	e.POST(basePath+"/login", h.Login)
 }
 ```
 
@@ -310,7 +280,7 @@ func NewServer() *echo.Echo {
 	}
 	e.Static("/static", "assets/static")
 
-	router.NewUserRouter(handler.NewUserHandler()).SetRouting(e)
+	router.SetUserHandlerRouting(e, handler.NewUserHandler())
 
 	return e
 }
@@ -325,7 +295,7 @@ func (t *Template) Render(c *echo.Context, w io.Writer, name string, data any) e
 }
 ```
 
-#### `cmd/`
+#### `cmd/server/`
 
 - `main.go`
 
