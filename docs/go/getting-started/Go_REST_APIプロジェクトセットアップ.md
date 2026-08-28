@@ -68,7 +68,8 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```shell
 .
 ├── cmd
-│   └── main.go                     # アプリのエントリポイント
+│   └── server
+│       └── main.go                 # アプリのエントリポイント
 └── internal
     ├── application
     │   └── usecase
@@ -89,8 +90,7 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
         │   │   └── user_model.go   # APIのリクエスト・レスポンス構造体
         │   └── user_handler.go     # APIとしての外部契約
         └── router
-            ├── base.go             # エンドポイントのルーター統括
-            └── user_router.go      # エンドポイントとハンドラの紐付け
+            └── router.go           # エンドポイントとハンドラの紐付け 
 ```
 
 ### パッケージ一覧
