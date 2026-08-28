@@ -481,27 +481,7 @@ func NewMeRes(name string, age int) MeRes {
 
 リクエストのルーティングを実装します。
 
-- `base.go`
-
-```go
-package router
-
-import (
-	"net/http"
-)
-
-// routerのインターフェースです。
-type Router interface {
-
-	// ルーティング情報をセットします。
-	SetRouting(m *http.ServeMux)
-}
-
-// APIのベースURI
-const basePath string = "/api/v1"
-```
-
-- `user_router.go`
+- `router.go`
 
 ```go
 package router
@@ -511,20 +491,16 @@ import (
 	"net/http"
 )
 
-type userRouter struct {
-	userHandler handler.UserHandler
-}
+// APIのベースURI
+const basePath string = "/api/v1"
 
-func NewUserRouter(userHandler handler.UserHandler) Router {
-	return &userRouter{userHandler: userHandler}
-}
-
-func (router *userRouter) SetRouting(m *http.ServeMux) {
+// UserHandler向けのルーティングをセットします。
+func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 
 	m.HandleFunc(basePath+"/login", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodPost:
-			router.userHandler.Login(w, r)
+			h.Login(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
@@ -533,7 +509,7 @@ func (router *userRouter) SetRouting(m *http.ServeMux) {
 	m.HandleFunc(basePath+"/me", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			router.userHandler.Me(w, r)
+			h.Me(w, r)
 		default:
 			http.Error(w, "Forbidden", http.StatusForbidden)
 		}
@@ -569,13 +545,16 @@ func NewServer() http.Handler {
 	m := http.NewServeMux()
 
 	// user
-	router.NewUserRouter(handler.NewUserHandler(
-		usecase.NewUserUsecase(
-			repository.NewUserRepository(
-				db,
+	router.SetUserHandlerRouting(
+		m,
+		handler.NewUserHandler(
+			usecase.NewUserUsecase(
+				repository.NewUserRepository(
+					db,
+				),
 			),
 		),
-	)).SetRouting(m)
+	)
 
 	return m
 }
