@@ -244,7 +244,7 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 		case http.MethodPost:
 			h.Login(w, r)
 		default:
-			http.Error(w, "Forbidden", http.StatusForbidden)
+			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
 	})
 	m.HandleFunc("/login", h.InitView)

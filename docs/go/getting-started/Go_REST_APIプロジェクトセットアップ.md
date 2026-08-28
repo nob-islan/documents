@@ -90,7 +90,7 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
         │   │   └── user_model.go   # APIのリクエスト・レスポンス構造体
         │   └── user_handler.go     # APIとしての外部契約
         └── router
-            └── router.go           # エンドポイントとハンドラの紐付け 
+            └── router.go           # エンドポイントとハンドラの紐付け
 ```
 
 ### パッケージ一覧
@@ -502,7 +502,7 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 		case http.MethodPost:
 			h.Login(w, r)
 		default:
-			http.Error(w, "Forbidden", http.StatusForbidden)
+			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
 	})
 
@@ -511,7 +511,7 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 		case http.MethodGet:
 			h.Me(w, r)
 		default:
-			http.Error(w, "Forbidden", http.StatusForbidden)
+			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
 	})
 }
