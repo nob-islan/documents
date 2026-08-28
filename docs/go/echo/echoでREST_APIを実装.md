@@ -57,25 +57,15 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-// 認証のhandlerインターフェースです。
-type UserHandler interface {
-
-	// 認証処理を呼び出します。
-	Login(c *echo.Context) error
-
-	// ユーザ情報取得処理を呼び出します。
-	Me(c *echo.Context) error
-}
-
-type userHandler struct {
+type UserHandler struct {
 	userUsecase usecase.UserUsecase
 }
 
 func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
-	return &userHandler{userUsecase: userUsecase}
+	return UserHandler{userUsecase: userUsecase}
 }
 
-func (h *userHandler) Login(c *echo.Context) error {
+func (h *UserHandler) Login(c *echo.Context) error {
 
 	// jsonパースエラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
@@ -95,7 +85,7 @@ func (h *userHandler) Login(c *echo.Context) error {
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *userHandler) Me(c *echo.Context) error {
+func (h *UserHandler) Me(c *echo.Context) error {
 
 	// クエリパラメータ取得
 	req := model.NewMeReq(c)
@@ -176,23 +166,7 @@ func NewMeRes(name string, age int) MeRes {
 
 #### `internal/presentation/router/`
 
-- `base.go`
-
-```go
-package router
-
-import (
-	"github.com/labstack/echo/v5"
-)
-
-type Router interface {
-	SetRouting(e *echo.Echo)
-}
-
-const basePath string = "/api/v1"
-```
-
-- `user_router.go`
+- `router.go`
 
 ```go
 package router
@@ -203,18 +177,14 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-type userRouter struct {
-	userHandler handler.UserHandler
-}
+// APIのベースURI
+const basePath string = "/api/v1"
 
-func NewUserRouter(userHandler handler.UserHandler) Router {
-	return &userRouter{userHandler: userHandler}
-}
+// UserHandler向けのルーティングをセットします。
+func SetUserHandlerRouting(e *echo.Echo, h handler.UserHandler) {
 
-func (r *userRouter) SetRouting(e *echo.Echo) {
-
-	e.POST(basePath+"/login", r.userHandler.Login)
-	e.GET(basePath+"/me", r.userHandler.Me)
+	e.POST(basePath+"/login", h.Login)
+	e.GET(basePath+"/me", h.Me)
 }
 ```
 
@@ -227,6 +197,8 @@ package bootstrap
 
 import (
 	"easyapp/internal/application/usecase"
+	"easyapp/internal/infrastructure"
+	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/presentation/handler"
 	"easyapp/internal/presentation/router"
 
@@ -237,13 +209,13 @@ func NewServer() *echo.Echo {
 
 	e := echo.New()
 
-	router.NewUserRouter(handler.NewUserHandler(usecase.NewUserUsecase())).SetRouting(e)
+	router.SetUserHandlerRouting(e, handler.NewUserHandler(usecase.NewUserUsecase()))
 
 	return e
 }
 ```
 
-#### `cmd/`
+#### `cmd/server/`
 
 - `main.go`
 
@@ -268,7 +240,7 @@ func main() {
 下記コマンドでアプリを起動します。
 
 ```shell
-go run cmd/main.go
+go run cmd/server/main.go
 ```
 
 下記コマンドでAPIを打鍵できます。
