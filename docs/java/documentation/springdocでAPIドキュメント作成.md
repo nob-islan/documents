@@ -125,13 +125,13 @@ public class AuthController {
      * @return ユーザ情報
      */
     @GetMapping(value = "/users")
-    @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.user:説明文}")
+    @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.users:説明文}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
     })
     GetUserResponse getUser(@ParameterObject GetUserRequest request) {
 
-        GetUserOutModel getUserOutModel = authService.user(new GetUserInModel(request.name()));
+        GetUserOutModel getUserOutModel = authService.getUser(new GetUserInModel(request.name()));
         return new GetUserResponse(getUserOutModel.name(), getUserOutModel.age());
     }
 }
@@ -287,7 +287,7 @@ easyappdoc:
       v1:
         login: |
           認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
-        user: |
+        users: |
           ユーザ情報を取得します。
 ```
 
