@@ -85,9 +85,9 @@ func (h *UserHandler) Login(c *echo.Context) error {
 
 func (h *UserHandler) GetUser(c *echo.Context) error {
 
-	req := model.NewUserReq(c)
+	req := model.NewGetUserReq(c)
 
-	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusNotFound,
@@ -98,7 +98,7 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 		)
 	}
 
-	return c.JSON(http.StatusOK, model.NewUserRes(out.Name(), out.Age()))
+	return c.JSON(http.StatusOK, model.NewGetUserRes(out.Name(), out.Age()))
 }
 ```
 
