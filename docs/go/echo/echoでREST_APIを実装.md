@@ -90,7 +90,7 @@ func (h *UserHandler) Me(c *echo.Context) error {
 	// クエリパラメータ取得
 	req := model.NewMeReq(c)
 
-	// usecase呼び出し 業務エラー発生時はStatus500を返す
+	// usecase呼び出し 業務エラー発生時はStatus404を返す
 	out, err := h.userUsecase.Me(c.Request().Context(), params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
