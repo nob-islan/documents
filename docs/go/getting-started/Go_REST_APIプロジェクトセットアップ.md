@@ -251,7 +251,7 @@ type UserUsecase interface {
 	Login(ctx context.Context, in params.LoginIn) params.LoginOut
 
 	// ユーザ情報を取得します。
-	Me(ctx context.Context, in params.MeIn) (params.MeOut, error)
+	User(ctx context.Context, in params.UserIn) (params.UserOut, error)
 }
 
 type userUsecase struct {
@@ -271,13 +271,13 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.Login
 	return params.NewLoginOut(user.VerifyPassword(in.Password()))
 }
 
-func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, error) {
+func (u *userUsecase) User(ctx context.Context, in params.UserIn) (params.UserOut, error) {
 
 	user, err := u.userRepository.FindByName(ctx, in.Name())
 	if err != nil {
-		return params.MeOut{}, errors.New("no such user")
+		return params.UserOut{}, errors.New("no such user")
 	}
-	return params.NewMeOut(user.Name(), user.Age()), nil
+	return params.NewUserOut(user.Name(), user.Age()), nil
 }
 ```
 
@@ -322,33 +322,33 @@ func (o LoginOut) Valid() bool {
 }
 
 // ユーザ情報取得向けの入力モデルです。
-type MeIn struct {
+type UserIn struct {
 	name string // ユーザ名
 }
 
-func NewMeIn(name string) MeIn {
-	return MeIn{name: name}
+func NewUserIn(name string) UserIn {
+	return UserIn{name: name}
 }
 
-func (i MeIn) Name() string {
+func (i UserIn) Name() string {
 	return i.name
 }
 
 // ユーザ情報取得向けの出力モデルです。
-type MeOut struct {
+type UserOut struct {
 	name string // ユーザ名
 	age  int    // 年齢
 }
 
-func NewMeOut(name string, age int) MeOut {
-	return MeOut{name: name, age: age}
+func NewUserOut(name string, age int) UserOut {
+	return UserOut{name: name, age: age}
 }
 
-func (o MeOut) Name() string {
+func (o UserOut) Name() string {
 	return o.name
 }
 
-func (o MeOut) Age() int {
+func (o UserOut) Age() int {
 	return o.age
 }
 ```
@@ -403,11 +403,11 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewMeReq(r)
+	req := model.NewUserReq(r)
 
-	out, err := h.userUsecase.Me(r.Context(), params.NewMeIn(req.Name))
+	out, err := h.userUsecase.User(r.Context(), params.NewUserIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -421,7 +421,7 @@ func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := model.NewMeRes(out.Name(), out.Age())
+	res := model.NewUserRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -468,22 +468,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type MeReq struct {
+type UserReq struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewMeReq(r *http.Request) MeReq {
-	return MeReq{Name: r.URL.Query().Get("name")}
+func NewUserReq(r *http.Request) UserReq {
+	return UserReq{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type MeRes struct {
+type UserRes struct {
 	Name string `json:"name"` // ユーザ名
 	Age  int    `json:"age"`  // 年齢
 }
 
-func NewMeRes(name string, age int) MeRes {
-	return MeRes{Name: name, Age: age}
+func NewUserRes(name string, age int) UserRes {
+	return UserRes{Name: name, Age: age}
 }
 ```
 
@@ -516,10 +516,10 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 		}
 	})
 
-	m.HandleFunc(basePath+"/me", func(w http.ResponseWriter, r *http.Request) {
+	m.HandleFunc(basePath+"/user", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			h.Me(w, r)
+			h.User(w, r)
 		default:
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
@@ -606,6 +606,6 @@ go run cmd/server/main.go
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /me
-curl -X GET localhost:8080/api/v1/me?name=nob
+# /user
+curl -X GET localhost:8080/api/v1/user?name=nob
 ```

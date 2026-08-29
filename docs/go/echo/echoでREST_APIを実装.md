@@ -83,11 +83,11 @@ func (h *UserHandler) Login(c *echo.Context) error {
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *UserHandler) Me(c *echo.Context) error {
+func (h *UserHandler) User(c *echo.Context) error {
 
-	req := model.NewMeReq(c)
+	req := model.NewUserReq(c)
 
-	out, err := h.userUsecase.Me(c.Request().Context(), params.NewMeIn(req.Name))
+	out, err := h.userUsecase.User(c.Request().Context(), params.NewUserIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusNotFound,
@@ -98,7 +98,7 @@ func (h *UserHandler) Me(c *echo.Context) error {
 		)
 	}
 
-	return c.JSON(http.StatusOK, model.NewMeRes(out.Name(), out.Age()))
+	return c.JSON(http.StatusOK, model.NewUserRes(out.Name(), out.Age()))
 }
 ```
 
@@ -141,22 +141,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type MeReq struct {
+type UserReq struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewMeReq(c *echo.Context) MeReq {
-	return MeReq{Name: c.QueryParam("name")}
+func NewUserReq(c *echo.Context) UserReq {
+	return UserReq{Name: c.QueryParam("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type MeRes struct {
+type UserRes struct {
 	Name string `json:"name"` // ユーザ名
 	Age  int    `json:"age"`  // 年齢
 }
 
-func NewMeRes(name string, age int) MeRes {
-	return MeRes{Name: name, Age: age}
+func NewUserRes(name string, age int) UserRes {
+	return UserRes{Name: name, Age: age}
 }
 ```
 
@@ -180,7 +180,7 @@ const basePath string = "/api/v1"
 func SetUserHandlerRouting(e *echo.Echo, h handler.UserHandler) {
 
 	e.POST(basePath+"/login", h.Login)
-	e.GET(basePath+"/me", h.Me)
+	e.GET(basePath+"/user", h.User)
 }
 ```
 
@@ -244,8 +244,8 @@ go run cmd/server/main.go
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /me
-curl -X GET localhost:8080/api/v1/me?name=nob
+# /user
+curl -X GET localhost:8080/api/v1/user?name=nob
 ```
 
 ## APIドキュメントについて

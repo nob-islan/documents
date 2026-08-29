@@ -72,12 +72,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
+import nob.example.easyapp.controller.model.UserRequest;
+import nob.example.easyapp.controller.model.UserResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -110,11 +110,11 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/me")
-    MeResponse me(MeRequest request) {
+    @GetMapping(value = "/user")
+    UserResponse user(UserRequest request) {
 
-        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
-        return new MeResponse(meOutModel.name(), meOutModel.age());
+        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
+        return new UserResponse(userOutModel.name(), userOutModel.age());
     }
 }
 ```
@@ -147,12 +147,12 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.MeRequest;
+import nob.example.easyapp.controller.model.UserRequest;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 import tools.jackson.databind.ObjectMapper;
 
 /**
@@ -205,22 +205,22 @@ public class AuthControllerTest {
     }
 
     /**
-     * meのテスト 正常系
+     * userのテスト 正常系
      */
     @Test
-    void testMeSuccess() {
+    void testUserSuccess() {
 
         // リクエストの作成
-        MeRequest request = new MeRequest("nob");
+        UserRequest request = new UserRequest("nob");
 
         // serviceのモック化
-        Mockito.when(authService.me(new MeInModel(request.name()))).thenReturn(new MeOutModel("nob", 13));
+        Mockito.when(authService.user(new UserInModel(request.name()))).thenReturn(new UserOutModel("nob", 13));
 
         try {
-            mockMvc.perform(get("/api/v1/me")
+            mockMvc.perform(get("/api/v1/user")
                     .queryParam("name", "nob")
                     .contentType(MediaType.APPLICATION_JSON))
-                    .andDo(document("asciidoc/api/v1/me",
+                    .andDo(document("asciidoc/api/v1/user",
                             preprocessRequest(prettyPrint()),
                             preprocessResponse(prettyPrint()),
                             queryParameters(
@@ -274,23 +274,23 @@ include::{login}/curl-request.adoc[]
 .example response
 include::{login}/response-body.adoc[]
 
-=== Me
+=== User
 
 ユーザ情報を取得します。
 
-:me: {auth}/me
+:user: {auth}/user
 
 .query parameter
-include::{me}/query-parameters.adoc[]
+include::{user}/query-parameters.adoc[]
 
 .response field
-include::{me}/response-fields.adoc[]
+include::{user}/response-fields.adoc[]
 
 .example request
-include::{me}/curl-request.adoc[]
+include::{user}/curl-request.adoc[]
 
 .example response
-include::{me}/response-body.adoc[]
+include::{user}/response-body.adoc[]
 ```
 
 `:xxx:`で適宜変数を定め、`include::`で生成したスニペットを読み込んでいます。

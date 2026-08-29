@@ -79,13 +79,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
+import nob.example.easyapp.controller.model.UserRequest;
+import nob.example.easyapp.controller.model.UserResponse;
 import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -124,15 +124,15 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/me")
-    @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.me:説明文}")
+    @GetMapping(value = "/user")
+    @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.user:説明文}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
     })
-    MeResponse me(@ParameterObject MeRequest request) {
+    UserResponse user(@ParameterObject UserRequest request) {
 
-        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
-        return new MeResponse(meOutModel.name(), meOutModel.age());
+        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
+        return new UserResponse(userOutModel.name(), userOutModel.age());
     }
 }
 ```
@@ -183,7 +183,7 @@ public record LoginResponse(
 }
 ```
 
-#### `MeRequest.java`
+#### `UserRequest.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -198,12 +198,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author nob
  */
 @Schema(description = "ユーザ情報取得向けのリクエストモデル", type = "object")
-public record MeRequest(
+public record UserRequest(
         @Schema(description = "ユーザ名", type = "string", example = "nob") String name) {
 }
 ```
 
-#### `MeResponse.java`
+#### `UserResponse.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -219,7 +219,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author nob
  */
 @Schema(description = "ユーザ情報取得向けのレスポンスモデル", type = "object")
-public record MeResponse(
+public record UserResponse(
         @Schema(description = "ユーザ名", type = "string", example = "nob") String name,
         @Schema(description = "年齢", type = "integer", example = "13") Integer age) {
 }
@@ -287,7 +287,7 @@ easyappdoc:
       v1:
         login: |
           認証処理を行います。リクエストに不備があった場合はエラーレスポンスを返します。
-        me: |
+        user: |
           ユーザ情報を取得します。
 ```
 

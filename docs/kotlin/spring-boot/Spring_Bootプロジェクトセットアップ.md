@@ -200,8 +200,8 @@ package nob.example.easyapp.service
 
 import nob.example.easyapp.service.model.LoginInModel
 import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.MeInModel
-import nob.example.easyapp.service.model.MeOutModel
+import nob.example.easyapp.service.model.UserInModel
+import nob.example.easyapp.service.model.UserOutModel
 
 /**
  * 認証サービスのインターフェースです。
@@ -216,7 +216,7 @@ interface AuthService {
     /**
      * ユーザ情報を取得します。
      */
-    fun me(inModel: MeInModel): MeOutModel
+    fun me(inModel: UserInModel): UserOutModel
 }
 ```
 
@@ -231,8 +231,8 @@ import nob.example.easyapp.repository.UsersRepository
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
 import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.MeInModel
-import nob.example.easyapp.service.model.MeOutModel
+import nob.example.easyapp.service.model.UserInModel
+import nob.example.easyapp.service.model.UserOutModel
 import org.springframework.stereotype.Service
 
 /**
@@ -248,11 +248,11 @@ class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthServic
         return LoginOutModel(users.password == inModel.password)
     }
 
-    override fun me(inModel: MeInModel): MeOutModel {
+    override fun me(inModel: UserInModel): UserOutModel {
 
-        val users = usersRepository.findByName(inModel.name) ?: return MeOutModel("Unknown user", 0)
+        val users = usersRepository.findByName(inModel.name) ?: return UserOutModel("Unknown user", 0)
 
-        return MeOutModel(users.name, users.age)
+        return UserOutModel(users.name, users.age)
     }
 }
 ```
@@ -294,7 +294,7 @@ data class LoginOutModel(
 /**
  * ユーザ情報取得向けの入力モデルです。
  */
-data class MeInModel(
+data class UserInModel(
 
     /**
      * ユーザ名
@@ -305,7 +305,7 @@ data class MeInModel(
 /**
  * ユーザ情報取得向けの出力モデルです。
  */
-data class MeOutModel(
+data class UserOutModel(
 
     /**
      * ユーザ名
@@ -328,11 +328,11 @@ package nob.example.easyapp.controller
 
 import nob.example.easyapp.controller.model.LoginRequest
 import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.MeRequest
-import nob.example.easyapp.controller.model.MeResponse
+import nob.example.easyapp.controller.model.UserRequest
+import nob.example.easyapp.controller.model.UserResponse
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.MeInModel
+import nob.example.easyapp.service.model.UserInModel
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -354,9 +354,9 @@ class AuthController(private val authService: AuthService) {
      * ユーザ情報取得処理を呼び出します。
      */
     @GetMapping("/me")
-    fun me(req: MeRequest): MeResponse {
-        val out = authService.me(MeInModel(req.name))
-        return MeResponse(out.name, out.age)
+    fun me(req: UserRequest): UserResponse {
+        val out = authService.me(UserInModel(req.name))
+        return UserResponse(out.name, out.age)
     }
 }
 ```
@@ -398,7 +398,7 @@ data class LoginResponse(
 /**
  * ユーザ情報取得向けのリクエストモデルです。
  */
-data class MeRequest(
+data class UserRequest(
 
     /**
      * ユーザ名
@@ -409,7 +409,7 @@ data class MeRequest(
 /**
  * ユーザ情報取得向けのレスポンスモデルです。
  */
-data class MeResponse(
+data class UserResponse(
 
     /**
      * ユーザ名

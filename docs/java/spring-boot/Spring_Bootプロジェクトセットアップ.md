@@ -101,8 +101,8 @@ spring.datasource.password=eadbpass
 │   └── model                        # APIのリクエスト・レスポンスモデル
 │       ├── LoginRequest.java
 │       ├── LoginResponse.java
-│       ├── MeRequest.java
-│       └── MeResponse.java
+│       ├── UserRequest.java
+│       └── UserResponse.java
 ├── domain
 │   └── entity                       # データベースのテーブル定義に対応するエンティティ
 │       └── Users.java
@@ -115,8 +115,8 @@ spring.datasource.password=eadbpass
     └── model                        # 業務処理の入力・出力モデル
         ├── LoginInModel.java
         ├── LoginOutModel.java
-        ├── MeInModel.java
-        └── MeOutModel.java
+        ├── UserInModel.java
+        └── UserOutModel.java
 ```
 
 ### クラス一覧
@@ -202,8 +202,8 @@ package nob.example.easyapp.service;
 
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 
 /**
  * 認証サービスのインターフェースです。
@@ -226,7 +226,7 @@ public interface AuthService {
      * @param inModel ユーザ情報検索条件
      * @return ユーザ情報
      */
-    MeOutModel me(MeInModel inModel);
+    UserOutModel me(UserInModel inModel);
 }
 ```
 
@@ -248,8 +248,8 @@ import nob.example.easyapp.repository.UsersRepository;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 
 /**
  * AuthServiceの実装クラスです。
@@ -275,13 +275,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public MeOutModel me(MeInModel inModel) {
+    public UserOutModel me(UserInModel inModel) {
 
         Optional<Users> optUsers = usersRepository.findByName(inModel.name());
         if (optUsers.isPresent()) {
-            return new MeOutModel(optUsers.get().getName(), optUsers.get().getAge());
+            return new UserOutModel(optUsers.get().getName(), optUsers.get().getAge());
         }
-        return new MeOutModel("Unknown user", 0);
+        return new UserOutModel("Unknown user", 0);
     }
 }
 ```
@@ -323,7 +323,7 @@ public record LoginOutModel(Boolean valid) {
 }
 ```
 
-#### `service/model/MeInModel.java`
+#### `service/model/UserInModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -335,11 +335,11 @@ package nob.example.easyapp.service.model;
  *
  * @author nob
  */
-public record MeInModel(String name) {
+public record UserInModel(String name) {
 }
 ```
 
-#### `service/model/MeOutModel.java`
+#### `service/model/UserOutModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -352,7 +352,7 @@ package nob.example.easyapp.service.model;
  *
  * @author nob
  */
-public record MeOutModel(String name, Integer age) {
+public record UserOutModel(String name, Integer age) {
 }
 ```
 
@@ -373,12 +373,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.MeRequest;
-import nob.example.easyapp.controller.model.MeResponse;
+import nob.example.easyapp.controller.model.UserRequest;
+import nob.example.easyapp.controller.model.UserResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.MeInModel;
-import nob.example.easyapp.service.model.MeOutModel;
+import nob.example.easyapp.service.model.UserInModel;
+import nob.example.easyapp.service.model.UserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -411,11 +411,11 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/me")
-    MeResponse me(MeRequest request) {
+    @GetMapping(value = "/user")
+    UserResponse user(UserRequest request) {
 
-        MeOutModel meOutModel = authService.me(new MeInModel(request.name()));
-        return new MeResponse(meOutModel.name(), meOutModel.age());
+        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
+        return new UserResponse(userOutModel.name(), userOutModel.age());
     }
 }
 ```
@@ -457,7 +457,7 @@ public record LoginResponse(Boolean valid) {
 }
 ```
 
-#### `controller/model/MeRequest.java`
+#### `controller/model/UserRequest.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -469,11 +469,11 @@ package nob.example.easyapp.controller.model;
  *
  * @author nob
  */
-public record MeRequest(String name) {
+public record UserRequest(String name) {
 }
 ```
 
-#### `controller/model/MeResponse.java`
+#### `controller/model/UserResponse.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -486,7 +486,7 @@ package nob.example.easyapp.controller.model;
  *
  * @author nob
  */
-public record MeResponse(String name, Integer age) {
+public record UserResponse(String name, Integer age) {
 }
 ```
 
@@ -503,6 +503,6 @@ public record MeResponse(String name, Integer age) {
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /me
-curl -X GET localhost:8080/api/v1/me?name=nob
+# /user
+curl -X GET localhost:8080/api/v1/user?name=nob
 ```

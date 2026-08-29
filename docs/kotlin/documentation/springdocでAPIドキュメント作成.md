@@ -60,12 +60,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import nob.example.easyapp.controller.model.LoginRequest
 import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.MeRequest
-import nob.example.easyapp.controller.model.MeResponse
+import nob.example.easyapp.controller.model.UserRequest
+import nob.example.easyapp.controller.model.UserResponse
 import nob.example.easyapp.handler.SampleExceptionHandler
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.MeInModel
+import nob.example.easyapp.service.model.UserInModel
 import org.springdoc.core.annotations.ParameterObject
 import org.springframework.web.bind.annotation.*
 
@@ -102,16 +102,16 @@ class AuthController(private val authService: AuthService) {
     /**
      * ユーザ情報取得処理を呼び出します。
      */
-    @GetMapping("/me")
+    @GetMapping("/user")
     @Operation(summary = "ユーザ情報取得", description = "ユーザ情報を取得します。")
     @ApiResponses(
         value = [
             ApiResponse(responseCode = "200", description = "正常に処理された場合")
         ]
     )
-    fun me(@ParameterObject req: MeRequest): MeResponse {
-        val out = authService.me(MeInModel(req.name))
-        return MeResponse(out.name, out.age)
+    fun user(@ParameterObject req: UserRequest): UserResponse {
+        val out = authService.user(UserInModel(req.name))
+        return UserResponse(out.name, out.age)
     }
 }
 ```
@@ -156,7 +156,7 @@ data class LoginResponse(
 /**
  * ユーザ情報取得向けのリクエストモデルです。
  */
-data class MeRequest(
+data class UserRequest(
 
     /**
      * ユーザ名
@@ -168,7 +168,7 @@ data class MeRequest(
 /**
  * ユーザ情報取得向けのレスポンスモデルです。
  */
-data class MeResponse(
+data class UserResponse(
 
     /**
      * ユーザ名

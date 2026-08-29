@@ -149,14 +149,14 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param MeReq query model.MeReq false "ユーザ情報取得向けのリクエストモデル"
-// @Success 200 {object} model.MeRes "正常に処理された場合"
-// @Router /me [get]
-func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
+// @Param UserReq query model.UserReq false "ユーザ情報取得向けのリクエストモデル"
+// @Success 200 {object} model.UserRes "正常に処理された場合"
+// @Router /user [get]
+func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewMeReq(r)
+	req := model.NewUserReq(r)
 
-	out, err := h.userUsecase.Me(r.Context(), params.NewMeIn(req.Name))
+	out, err := h.userUsecase.User(r.Context(), params.NewUserIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -170,7 +170,7 @@ func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := model.NewMeRes(out.Name(), out.Age())
+	res := model.NewUserRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -215,22 +215,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type MeReq struct {
+type UserReq struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 }
 
-func NewMeReq(r *http.Request) MeReq {
-	return MeReq{Name: r.URL.Query().Get("name")}
+func NewUserReq(r *http.Request) UserReq {
+	return UserReq{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type MeRes struct {
+type UserRes struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 	Age  int    `json:"age" example:"13"`   // 年齢
 }
 
-func NewMeRes(name string, age int) MeRes {
-	return MeRes{Name: name, Age: age}
+func NewUserRes(name string, age int) UserRes {
+	return UserRes{Name: name, Age: age}
 }
 ```
 
