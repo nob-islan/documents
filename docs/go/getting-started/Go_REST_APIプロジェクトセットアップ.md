@@ -275,7 +275,7 @@ func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, err
 
 	user, err := u.userRepository.FindByName(ctx, in.Name())
 	if err != nil {
-		return params.MeOut{}, errors.New("no such user")
+		return params.MeOut{}, errors.New("No such user")
 	}
 	return params.NewMeOut(user.Name(), user.Age()), nil
 }
@@ -381,7 +381,19 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewLoginReq(r)
+	req, err := model.NewLoginReq(r)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(
+			struct {
+				Message string `json:"message"`
+			}{
+				Message: "bad request",
+			},
+		)
+		return
+	}
 
 	out := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 
@@ -436,14 +448,14 @@ type LoginReq struct {
 	Password string `json:"password"` // パスワード
 }
 
-func NewLoginReq(r *http.Request) LoginReq {
+func NewLoginReq(r *http.Request) (LoginReq, error) {
 
 	var req LoginReq
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return LoginReq{}
+		return LoginReq{}, err
 	}
-	return req
+	return req, nil
 }
 
 // 認証向けのレスポンスモデルです。
