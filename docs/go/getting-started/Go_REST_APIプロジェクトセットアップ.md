@@ -389,7 +389,7 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 			struct {
 				Message string `json:"message"`
 			}{
-				Message: "bad request",
+				Message: "Bad request",
 			},
 		)
 		return
