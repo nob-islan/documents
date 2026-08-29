@@ -74,7 +74,7 @@ func (h *UserHandler) Login(c *echo.Context) error {
 			http.StatusBadRequest,
 			echo.NewHTTPError(
 				http.StatusBadRequest,
-				"Bad request",
+				"bad request",
 			),
 		)
 	}

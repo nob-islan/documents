@@ -275,7 +275,7 @@ func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, err
 
 	user, err := u.userRepository.FindByName(ctx, in.Name())
 	if err != nil {
-		return params.MeOut{}, errors.New("No such user")
+		return params.MeOut{}, errors.New("no such user")
 	}
 	return params.NewMeOut(user.Name(), user.Age()), nil
 }
@@ -389,7 +389,7 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 			struct {
 				Message string `json:"message"`
 			}{
-				Message: "Bad request",
+				Message: "bad request",
 			},
 		)
 		return
