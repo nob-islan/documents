@@ -36,7 +36,7 @@ rm -r easyapp/
 
 ## 追加設定
 
-`pom.xml`に下記警告が出ているため、追加設定を入れて警告を消します:
+`pom.xml`に下記警告が出ている場合は追加設定を入れて警告を消します:
 
 > Plugin execution not covered by lifecycle configuration: org.jetbrains.kotlin:kotlin-maven-plugin:2.2.0:compile (execution: compile, phase: compile)
 

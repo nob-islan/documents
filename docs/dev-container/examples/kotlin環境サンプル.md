@@ -1,26 +1,21 @@
 # Kotlin環境サンプル
 
-Kotlinでの環境サンプルです。最新のJDKだとKotlinのみ動かない場合があるので注意してください。Spring Bootでの開発を想定しています。`mvn`コマンドなどを利用する場合、Java向けの環境をそのまま利用してください。
+Kotlinでの環境サンプルです。最新のJDKだとKotlinのみ動かない場合があるので注意してください。
 
 ## 設定
-
-### `Dockerfile`
-
-```Dockerfile
-FROM eclipse-temurin:21-jdk
-
-RUN apt update && apt install -y curl unzip
-```
 
 ### `devcontainer.json`
 
 ```json
 {
   "name": "Kotlin",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "mcr.microsoft.com/devcontainers/java:21-bookworm",
   "features": {
+    // "ghcr.io/devcontainers/features/java:1": {
+    //   "version": "none",
+    //   "installMaven": "true",
+    //   "installGradle": "false"
+    // },
     // "ghcr.io/devcontainers/features/docker-in-docker:4": {
     //   "moby": false
     // }
