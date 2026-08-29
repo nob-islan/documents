@@ -97,7 +97,7 @@ func (h *UserHandler) Me(c *echo.Context) error {
 			http.StatusNotFound,
 			echo.NewHTTPError(
 				http.StatusNotFound,
-				"Internal server error",
+				"not found",
 			),
 		)
 	}
