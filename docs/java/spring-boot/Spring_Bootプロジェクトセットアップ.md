@@ -96,23 +96,23 @@ spring.datasource.password=eadbpass
 
 ```shell
 .
-├── controller                       # APIとしての外部契約
+├── controller                    # APIとしての外部契約
 │   ├── AuthController.java
-│   └── model                        # APIのリクエスト・レスポンスモデル
+│   └── model                     # APIのリクエスト・レスポンスモデル
 │       ├── LoginRequest.java
 │       ├── LoginResponse.java
 │       ├── UserRequest.java
 │       └── UserResponse.java
 ├── domain
-│   └── entity                       # データベースのテーブル定義に対応するエンティティ
+│   └── entity                    # データベースのテーブル定義に対応するエンティティ
 │       └── Users.java
-├── repository                       # データベース操作のインターフェース
+├── repository                    # データベース操作のインターフェース
 │   └── UsersRepository.java
-└── service                          # 業務処理のインターフェース
+└── service                       # 業務処理のインターフェース
     ├── AuthService.java
-    ├── impl                         # 業務処理の実装
+    ├── impl                      # 業務処理の実装
     │   └── AuthServiceImpl.java
-    └── model                        # 業務処理の入力・出力モデル
+    └── model                     # 業務処理の入力・出力モデル
         ├── LoginInModel.java
         ├── LoginOutModel.java
         ├── UserInModel.java
@@ -226,7 +226,7 @@ public interface AuthService {
      * @param inModel ユーザ情報検索条件
      * @return ユーザ情報
      */
-    UserOutModel me(UserInModel inModel);
+    UserOutModel user(UserInModel inModel);
 }
 ```
 
@@ -275,7 +275,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserOutModel me(UserInModel inModel) {
+    public UserOutModel user(UserInModel inModel) {
 
         Optional<Users> optUsers = usersRepository.findByName(inModel.name());
         if (optUsers.isPresent()) {
@@ -503,6 +503,6 @@ public record UserResponse(String name, Integer age) {
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /user
-curl -X GET localhost:8080/api/v1/user?name=nob
+# /users
+curl -X GET localhost:8080/api/v1/users?name=nob
 ```
