@@ -129,11 +129,6 @@ func (u User) Age() int {
 	return u.age
 }
 
-// ユーザが存在するかを判定します。
-func (u User) Exists() bool {
-	return !(u.name == "")
-}
-
 // パスワードが正しいかを判定します。
 func (u User) VerifyPassword(password string) bool {
 	return u.password == password
@@ -143,7 +138,7 @@ func (u User) VerifyPassword(password string) bool {
 type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(ctx context.Context, targetName string) User
+	FindByName(ctx context.Context, targetName string) (User, error)
 }
 ```
 
@@ -214,7 +209,7 @@ func NewUserRepository(db *sql.DB) domain.UserRepository {
 	return &userRepository{db: db}
 }
 
-func (r *userRepository) FindByName(ctx context.Context, targetName string) domain.User {
+func (r *userRepository) FindByName(ctx context.Context, targetName string) (domain.User, error) {
 
 	const sql string = "SELECT * FROM users WHERE name = ?"
 
@@ -224,9 +219,12 @@ func (r *userRepository) FindByName(ctx context.Context, targetName string) doma
 	var name string
 	var password string
 	var age int
-	row.Scan(&name, &password, &age)
+	err := row.Scan(&name, &password, &age)
+	if err != nil {
+		return domain.User{}, err
+	}
 
-	return domain.NewUser(name, password, age)
+	return domain.NewUser(name, password, age), nil
 }
 ```
 
@@ -266,8 +264,8 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 
 func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.LoginOut {
 
-	user := u.userRepository.FindByName(ctx, in.Name())
-	if !user.Exists() {
+	user, err := u.userRepository.FindByName(ctx, in.Name())
+	if err != nil {
 		return params.NewLoginOut(false)
 	}
 	return params.NewLoginOut(user.VerifyPassword(in.Password()))
@@ -275,9 +273,9 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.Login
 
 func (u *userUsecase) Me(ctx context.Context, in params.MeIn) (params.MeOut, error) {
 
-	user := u.userRepository.FindByName(ctx, in.Name())
-	if !user.Exists() {
-		return *new(params.MeOut), errors.New("no such user")
+	user, err := u.userRepository.FindByName(ctx, in.Name())
+	if err != nil {
+		return params.MeOut{}, errors.New("no such user")
 	}
 	return params.NewMeOut(user.Name(), user.Age()), nil
 }
@@ -443,7 +441,7 @@ func NewLoginReq(r *http.Request) LoginReq {
 	var req LoginReq
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return *new(LoginReq)
+		return LoginReq{}
 	}
 	return req
 }

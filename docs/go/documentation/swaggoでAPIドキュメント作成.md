@@ -200,7 +200,7 @@ func NewLoginReq(r *http.Request) LoginReq {
 	var req LoginReq
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return *new(LoginReq)
+		return LoginReq{}
 	}
 	return req
 }
