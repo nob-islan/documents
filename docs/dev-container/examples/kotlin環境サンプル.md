@@ -5,7 +5,8 @@ Kotlinでの環境サンプルです。最新のJDKだとKotlinのみ動かな�
 ```json
 {
   "name": "Kotlin",
-  "image": "mcr.microsoft.com/devcontainers/java:21-bookworm",
+  // "image": "mcr.microsoft.com/devcontainers/java:21-bookworm", // mvnコマンドなどが必要な場合はこちらを使用
+  "image": "eclipse-temurin:21-jdk",
   "features": {
     // "ghcr.io/devcontainers/features/java:1": {
     //   "version": "none",

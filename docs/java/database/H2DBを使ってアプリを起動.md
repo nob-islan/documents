@@ -9,6 +9,15 @@ cf.
 
 ## 実装
 
+### `application.properties`
+
+```shell
+spring.application.name=easyapp
+
+# # 常にapplication-h2.propertiesを読み込ませる場合
+# spring.profiles.active=h2
+```
+
 ### `application-h2.properties`
 
 ```shell
