@@ -47,6 +47,20 @@ spring.sql.init.data-locations=classpath:h2db/data/*.sql
 		</dependency>
 ```
 
+### `resources/h2db/data/users.sql`
+
+```sql
+INSERT INTO users (
+    name
+    , password
+    , age
+) VALUES (
+    'nob'
+    , 'passwd'
+    , 13
+);
+```
+
 ### `domain/entity/Users.java`
 
 [Jakarta Persistence](https://jakarta.ee/learn/docs/jakartaee-tutorial/current/persist/persistence-intro/persistence-intro.html)のアノテーションを付与することで、起動時に自動でDDLが発行されます。
@@ -87,20 +101,6 @@ public class Users {
     @Column(name = "age", nullable = false)
     private Integer age;
 }
-```
-
-### `resources/h2db/data/users.sql`
-
-```sql
-INSERT INTO users (
-    name
-    , password
-    , age
-) VALUES (
-    'nob'
-    , 'passwd'
-    , 13
-);
 ```
 
 ## 起動
