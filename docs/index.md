@@ -12,7 +12,7 @@
 
 <DocCard href="./dev-container/examples/java環境サンプル" title="Java環境サンプル" />
 
-<DocCard href="./dev-container/examples/kotlin環境サンプル.md" title="Kotlin環境サンプル" />
+<DocCard href="./dev-container/examples/kotlin環境サンプル" title="Kotlin環境サンプル" />
 
 <DocCard href="./dev-container/examples/react環境サンプル" title="React環境サンプル" />
 
