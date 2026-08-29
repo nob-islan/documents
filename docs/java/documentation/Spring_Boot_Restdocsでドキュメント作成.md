@@ -214,7 +214,7 @@ public class AuthControllerTest {
         GetUserRequest request = new GetUserRequest("nob");
 
         // serviceのモック化
-        Mockito.when(authService.user(new GetUserInModel(request.name()))).thenReturn(new GetUserOutModel("nob", 13));
+        Mockito.when(authService.getUser(new GetUserInModel(request.name()))).thenReturn(new GetUserOutModel("nob", 13));
 
         try {
             mockMvc.perform(get("/api/v1/users")
@@ -278,19 +278,19 @@ include::{login}/response-body.adoc[]
 
 ユーザ情報を取得します。
 
-:user: {auth}/users
+:users: {auth}/users
 
 .query parameter
-include::{user}/query-parameters.adoc[]
+include::{users}/query-parameters.adoc[]
 
 .response field
-include::{user}/response-fields.adoc[]
+include::{users}/response-fields.adoc[]
 
 .example request
-include::{user}/curl-request.adoc[]
+include::{users}/curl-request.adoc[]
 
 .example response
-include::{user}/response-body.adoc[]
+include::{users}/response-body.adoc[]
 ```
 
 `:xxx:`で適宜変数を定め、`include::`で生成したスニペットを読み込んでいます。
