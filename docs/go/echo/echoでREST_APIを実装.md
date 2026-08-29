@@ -180,7 +180,7 @@ const basePath string = "/api/v1"
 func SetUserHandlerRouting(e *echo.Echo, h handler.UserHandler) {
 
 	e.POST(basePath+"/login", h.Login)
-	e.GET(basePath+"/user", h.User)
+	e.GET(basePath+"/users", h.User)
 }
 ```
 
@@ -244,8 +244,8 @@ go run cmd/server/main.go
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /user
-curl -X GET localhost:8080/api/v1/user?name=nob
+# /users
+curl -X GET localhost:8080/api/v1/users?name=nob
 ```
 
 ## APIドキュメントについて

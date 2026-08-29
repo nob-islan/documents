@@ -102,7 +102,7 @@ class AuthController(private val authService: AuthService) {
     /**
      * ユーザ情報取得処理を呼び出します。
      */
-    @GetMapping("/user")
+    @GetMapping("/users")
     @Operation(summary = "ユーザ情報取得", description = "ユーザ情報を取得します。")
     @ApiResponses(
         value = [

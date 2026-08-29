@@ -151,7 +151,7 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param UserReq query model.UserReq false "ユーザ情報取得向けのリクエストモデル"
 // @Success 200 {object} model.UserRes "正常に処理された場合"
-// @Router /user [get]
+// @Router /users [get]
 func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewUserReq(r)

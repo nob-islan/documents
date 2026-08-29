@@ -411,7 +411,7 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/users")
     UserResponse user(UserRequest request) {
 
         UserOutModel userOutModel = authService.user(new UserInModel(request.name()));

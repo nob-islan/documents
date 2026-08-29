@@ -516,7 +516,7 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 		}
 	})
 
-	m.HandleFunc(basePath+"/user", func(w http.ResponseWriter, r *http.Request) {
+	m.HandleFunc(basePath+"/users", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			h.User(w, r)
@@ -606,6 +606,6 @@ go run cmd/server/main.go
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /user
-curl -X GET localhost:8080/api/v1/user?name=nob
+# /users
+curl -X GET localhost:8080/api/v1/users?name=nob
 ```

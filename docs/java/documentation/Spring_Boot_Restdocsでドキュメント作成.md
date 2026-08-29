@@ -110,7 +110,7 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/users")
     UserResponse user(UserRequest request) {
 
         UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
@@ -217,10 +217,10 @@ public class AuthControllerTest {
         Mockito.when(authService.user(new UserInModel(request.name()))).thenReturn(new UserOutModel("nob", 13));
 
         try {
-            mockMvc.perform(get("/api/v1/user")
+            mockMvc.perform(get("/api/v1/users")
                     .queryParam("name", "nob")
                     .contentType(MediaType.APPLICATION_JSON))
-                    .andDo(document("asciidoc/api/v1/user",
+                    .andDo(document("asciidoc/api/v1/users",
                             preprocessRequest(prettyPrint()),
                             preprocessResponse(prettyPrint()),
                             queryParameters(
@@ -278,7 +278,7 @@ include::{login}/response-body.adoc[]
 
 ユーザ情報を取得します。
 
-:user: {auth}/user
+:user: {auth}/users
 
 .query parameter
 include::{user}/query-parameters.adoc[]

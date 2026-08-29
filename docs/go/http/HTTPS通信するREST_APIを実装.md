@@ -24,7 +24,7 @@ import (
 
 func main() {
 	// エンドポイントのルーティング
-	http.HandleFunc("/user", getUserInfo)
+	http.HandleFunc("/users", getUserInfo)
 
 	// サーバーの起動
 	fmt.Println("Server started at https://localhost:443")
@@ -70,5 +70,5 @@ type userInfo struct {
 ```shell
 # 自己証明書を使う場合はSSLの検証に引っかかる可能性があるので -k オプションで回避しています。
 # devcontainerで起動したアプリに対し、ホストOSのブラウザからであれば疎通が取れました。
-curl -k https://localhost:443/user
+curl -k https://localhost:443/users
 ```

@@ -66,7 +66,7 @@ type UserResponse = UserSuccess | UserError;
  * @returns ユーザ情報
  */
 export const user = async (req: UserRequest): Promise<UserResponse> => {
-  const url = new URL("/api/v1/user", window.location.origin);
+  const url = new URL("/api/v1/users", window.location.origin);
 
   url.search = new URLSearchParams({
     name: req.name,

@@ -19,7 +19,7 @@ import (
 func main() {
 
 	// エンドポイントのルーティング
-	http.HandleFunc("/user", getUserinfo)
+	http.HandleFunc("/users", getUserinfo)
 
 	// サーバーの起動
 	fmt.Println("Server started at http://localhost:8080")
@@ -77,7 +77,7 @@ func main() {
 	m := http.NewServeMux()
 
 	// カスタムルータ
-	m.HandleFunc("/user", func(w http.ResponseWriter, r *http.Request) {
+	m.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			getUserinfo(w, r)
@@ -156,9 +156,9 @@ type (
 下記のようにリクエストに対しレスポンスが得られます:
 
 ```
-$ curl -X GET localhost:8080/user?username=nob
+$ curl -X GET localhost:8080/users?username=nob
 {"id":706,"name":"nob","age":13}
 
-$ curl -X POST -H "Content-Type: application/json" -d '{"name": "nob", "age": 13}' localhost:8080/user
+$ curl -X POST -H "Content-Type: application/json" -d '{"name": "nob", "age": 13}' localhost:8080/users
 {"message":"success"}
 ```

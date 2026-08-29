@@ -124,7 +124,7 @@ public class AuthController {
      * @param request ユーザ情報取得リクエスト
      * @return ユーザ情報
      */
-    @GetMapping(value = "/user")
+    @GetMapping(value = "/users")
     @Operation(summary = "ユーザ情報取得", description = "${easyappdoc.describe.api.v1.user:説明文}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
