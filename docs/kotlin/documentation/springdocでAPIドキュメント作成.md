@@ -60,12 +60,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import nob.example.easyapp.controller.model.LoginRequest
 import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.UserRequest
-import nob.example.easyapp.controller.model.UserResponse
+import nob.example.easyapp.controller.model.GetUserRequest
+import nob.example.easyapp.controller.model.GetUserResponse
 import nob.example.easyapp.handler.SampleExceptionHandler
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.UserInModel
+import nob.example.easyapp.service.model.GetUserInModel
 import org.springdoc.core.annotations.ParameterObject
 import org.springframework.web.bind.annotation.*
 
@@ -109,9 +109,9 @@ class AuthController(private val authService: AuthService) {
             ApiResponse(responseCode = "200", description = "正常に処理された場合")
         ]
     )
-    fun user(@ParameterObject req: UserRequest): UserResponse {
-        val out = authService.user(UserInModel(req.name))
-        return UserResponse(out.name, out.age)
+    fun getUser(@ParameterObject req: GetUserRequest): GetUserResponse {
+        val out = authService.getUser(GetUserInModel(req.name))
+        return GetUserResponse(out.name, out.age)
     }
 }
 ```
@@ -156,7 +156,7 @@ data class LoginResponse(
 /**
  * ユーザ情報取得向けのリクエストモデルです。
  */
-data class UserRequest(
+data class GetUserRequest(
 
     /**
      * ユーザ名
@@ -168,7 +168,7 @@ data class UserRequest(
 /**
  * ユーザ情報取得向けのレスポンスモデルです。
  */
-data class UserResponse(
+data class GetUserResponse(
 
     /**
      * ユーザ名

@@ -83,11 +83,11 @@ func (h *UserHandler) Login(c *echo.Context) error {
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
 }
 
-func (h *UserHandler) User(c *echo.Context) error {
+func (h *UserHandler) GetUser(c *echo.Context) error {
 
 	req := model.NewUserReq(c)
 
-	out, err := h.userUsecase.User(c.Request().Context(), params.NewUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewUserIn(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusNotFound,
@@ -141,22 +141,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type UserReq struct {
+type GetUserReq struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewUserReq(c *echo.Context) UserReq {
-	return UserReq{Name: c.QueryParam("name")}
+func NewGetUserReq(c *echo.Context) GetUserReq {
+	return GetUserReq{Name: c.QueryParam("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type UserRes struct {
+type GetUserRes struct {
 	Name string `json:"name"` // ユーザ名
 	Age  int    `json:"age"`  // 年齢
 }
 
-func NewUserRes(name string, age int) UserRes {
-	return UserRes{Name: name, Age: age}
+func NewGetUserRes(name string, age int) GetUserRes {
+	return GetUserRes{Name: name, Age: age}
 }
 ```
 
@@ -180,7 +180,7 @@ const basePath string = "/api/v1"
 func SetUserHandlerRouting(e *echo.Echo, h handler.UserHandler) {
 
 	e.POST(basePath+"/login", h.Login)
-	e.GET(basePath+"/users", h.User)
+	e.GET(basePath+"/users", h.GetUser)
 }
 ```
 

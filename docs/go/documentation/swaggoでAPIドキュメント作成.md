@@ -152,11 +152,11 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Param UserReq query model.UserReq false "ユーザ情報取得向けのリクエストモデル"
 // @Success 200 {object} model.UserRes "正常に処理された場合"
 // @Router /users [get]
-func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	req := model.NewUserReq(r)
 
-	out, err := h.userUsecase.User(r.Context(), params.NewUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(r.Context(), params.NewUserIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)

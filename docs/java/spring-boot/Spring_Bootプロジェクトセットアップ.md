@@ -101,8 +101,8 @@ spring.datasource.password=eadbpass
 │   └── model                     # APIのリクエスト・レスポンスモデル
 │       ├── LoginRequest.java
 │       ├── LoginResponse.java
-│       ├── UserRequest.java
-│       └── UserResponse.java
+│       ├── GetUserRequest.java
+│       └── GetUserResponse.java
 ├── domain
 │   └── entity                    # データベースのテーブル定義に対応するエンティティ
 │       └── Users.java
@@ -115,8 +115,8 @@ spring.datasource.password=eadbpass
     └── model                     # 業務処理の入力・出力モデル
         ├── LoginInModel.java
         ├── LoginOutModel.java
-        ├── UserInModel.java
-        └── UserOutModel.java
+        ├── GetUserInModel.java
+        └── GetUserOutModel.java
 ```
 
 ### クラス一覧
@@ -202,8 +202,8 @@ package nob.example.easyapp.service;
 
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 
 /**
  * 認証サービスのインターフェースです。
@@ -226,7 +226,7 @@ public interface AuthService {
      * @param inModel ユーザ情報検索条件
      * @return ユーザ情報
      */
-    UserOutModel user(UserInModel inModel);
+    GetUserOutModel getUser(GetUserInModel inModel);
 }
 ```
 
@@ -248,8 +248,8 @@ import nob.example.easyapp.repository.UsersRepository;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 
 /**
  * AuthServiceの実装クラスです。
@@ -275,13 +275,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserOutModel user(UserInModel inModel) {
+    public GetUserOutModel getUser(GetUserInModel inModel) {
 
         Optional<Users> optUsers = usersRepository.findByName(inModel.name());
         if (optUsers.isPresent()) {
-            return new UserOutModel(optUsers.get().getName(), optUsers.get().getAge());
+            return new GetUserOutModel(optUsers.get().getName(), optUsers.get().getAge());
         }
-        return new UserOutModel("Unknown user", 0);
+        return new GetUserOutModel("Unknown user", 0);
     }
 }
 ```
@@ -323,7 +323,7 @@ public record LoginOutModel(Boolean valid) {
 }
 ```
 
-#### `service/model/UserInModel.java`
+#### `service/model/GetUserInModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -335,11 +335,11 @@ package nob.example.easyapp.service.model;
  *
  * @author nob
  */
-public record UserInModel(String name) {
+public record GetUserInModel(String name) {
 }
 ```
 
-#### `service/model/UserOutModel.java`
+#### `service/model/GetUserOutModel.java`
 
 ```java
 package nob.example.easyapp.service.model;
@@ -352,7 +352,7 @@ package nob.example.easyapp.service.model;
  *
  * @author nob
  */
-public record UserOutModel(String name, Integer age) {
+public record GetUserOutModel(String name, Integer age) {
 }
 ```
 
@@ -373,12 +373,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.UserRequest;
-import nob.example.easyapp.controller.model.UserResponse;
+import nob.example.easyapp.controller.model.GetUserRequest;
+import nob.example.easyapp.controller.model.GetUserResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -412,10 +412,10 @@ public class AuthController {
      * @return ユーザ情報
      */
     @GetMapping(value = "/users")
-    UserResponse user(UserRequest request) {
+    GetUserResponse getUser(GetUserRequest request) {
 
-        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
-        return new UserResponse(userOutModel.name(), userOutModel.age());
+        GetUserOutModel getUserOutModel = authService.getUser(new GetUserInModel(request.name()));
+        return new GetUserResponse(getUserOutModel.name(), getUserOutModel.age());
     }
 }
 ```
@@ -457,7 +457,7 @@ public record LoginResponse(Boolean valid) {
 }
 ```
 
-#### `controller/model/UserRequest.java`
+#### `controller/model/GetUserRequest.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -469,11 +469,11 @@ package nob.example.easyapp.controller.model;
  *
  * @author nob
  */
-public record UserRequest(String name) {
+public record GetUserRequest(String name) {
 }
 ```
 
-#### `controller/model/UserResponse.java`
+#### `controller/model/GetUserResponse.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -486,7 +486,7 @@ package nob.example.easyapp.controller.model;
  *
  * @author nob
  */
-public record UserResponse(String name, Integer age) {
+public record GetUserResponse(String name, Integer age) {
 }
 ```
 

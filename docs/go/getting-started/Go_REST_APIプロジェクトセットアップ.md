@@ -251,7 +251,7 @@ type UserUsecase interface {
 	Login(ctx context.Context, in params.LoginIn) params.LoginOut
 
 	// ユーザ情報を取得します。
-	User(ctx context.Context, in params.UserIn) (params.UserOut, error)
+	GetUser(ctx context.Context, in params.GetUserIn) (params.GetUserOut, error)
 }
 
 type userUsecase struct {
@@ -271,13 +271,13 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginIn) params.Login
 	return params.NewLoginOut(user.VerifyPassword(in.Password()))
 }
 
-func (u *userUsecase) User(ctx context.Context, in params.UserIn) (params.UserOut, error) {
+func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserIn) (params.GetUserOut, error) {
 
 	user, err := u.userRepository.FindByName(ctx, in.Name())
 	if err != nil {
-		return params.UserOut{}, errors.New("no such user")
+		return params.GetUserOut{}, errors.New("no such user")
 	}
-	return params.NewUserOut(user.Name(), user.Age()), nil
+	return params.NewGetUserOut(user.Name(), user.Age()), nil
 }
 ```
 
@@ -322,33 +322,33 @@ func (o LoginOut) Valid() bool {
 }
 
 // ユーザ情報取得向けの入力モデルです。
-type UserIn struct {
+type GetUserIn struct {
 	name string // ユーザ名
 }
 
-func NewUserIn(name string) UserIn {
-	return UserIn{name: name}
+func NewGetUserIn(name string) GetUserIn {
+	return GetUserIn{name: name}
 }
 
-func (i UserIn) Name() string {
+func (i GetUserIn) Name() string {
 	return i.name
 }
 
 // ユーザ情報取得向けの出力モデルです。
-type UserOut struct {
+type GetUserOut struct {
 	name string // ユーザ名
 	age  int    // 年齢
 }
 
-func NewUserOut(name string, age int) UserOut {
-	return UserOut{name: name, age: age}
+func NewGetUserOut(name string, age int) GetUserOut {
+	return GetUserOut{name: name, age: age}
 }
 
-func (o UserOut) Name() string {
+func (o GetUserOut) Name() string {
 	return o.name
 }
 
-func (o UserOut) Age() int {
+func (o GetUserOut) Age() int {
 	return o.age
 }
 ```
@@ -403,11 +403,11 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewUserReq(r)
+	req := model.NewGetUserReq(r)
 
-	out, err := h.userUsecase.User(r.Context(), params.NewUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -421,7 +421,7 @@ func (h *UserHandler) User(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := model.NewUserRes(out.Name(), out.Age())
+	res := model.NewGetUserRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -468,22 +468,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type UserReq struct {
+type GetUserReq struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewUserReq(r *http.Request) UserReq {
-	return UserReq{Name: r.URL.Query().Get("name")}
+func NewGetUserReq(r *http.Request) GetUserReq {
+	return GetUserReq{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type UserRes struct {
+type GetUserRes struct {
 	Name string `json:"name"` // ユーザ名
 	Age  int    `json:"age"`  // 年齢
 }
 
-func NewUserRes(name string, age int) UserRes {
-	return UserRes{Name: name, Age: age}
+func NewGetUserRes(name string, age int) GetUserRes {
+	return GetUserRes{Name: name, Age: age}
 }
 ```
 

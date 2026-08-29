@@ -72,12 +72,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.UserRequest;
-import nob.example.easyapp.controller.model.UserResponse;
+import nob.example.easyapp.controller.model.GetUserRequest;
+import nob.example.easyapp.controller.model.GetUserResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -111,10 +111,10 @@ public class AuthController {
      * @return ユーザ情報
      */
     @GetMapping(value = "/users")
-    UserResponse user(UserRequest request) {
+    GetUserResponse getUser(GetUserRequest request) {
 
-        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
-        return new UserResponse(userOutModel.name(), userOutModel.age());
+        GetUserOutModel getUserOutModel = authService.getUser(new GetUserInModel(request.name()));
+        return new GetUserResponse(getUserOutModel.name(), getUserOutModel.age());
     }
 }
 ```
@@ -147,12 +147,12 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import nob.example.easyapp.controller.model.LoginRequest;
-import nob.example.easyapp.controller.model.UserRequest;
+import nob.example.easyapp.controller.model.GetUserRequest;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
 import nob.example.easyapp.service.model.LoginOutModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 import tools.jackson.databind.ObjectMapper;
 
 /**
@@ -205,16 +205,16 @@ public class AuthControllerTest {
     }
 
     /**
-     * userのテスト 正常系
+     * getUserのテスト 正常系
      */
     @Test
-    void testUserSuccess() {
+    void testGetUserSuccess() {
 
         // リクエストの作成
-        UserRequest request = new UserRequest("nob");
+        GetUserRequest request = new GetUserRequest("nob");
 
         // serviceのモック化
-        Mockito.when(authService.user(new UserInModel(request.name()))).thenReturn(new UserOutModel("nob", 13));
+        Mockito.when(authService.user(new GetUserInModel(request.name()))).thenReturn(new GetUserOutModel("nob", 13));
 
         try {
             mockMvc.perform(get("/api/v1/users")

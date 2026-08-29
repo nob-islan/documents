@@ -79,13 +79,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.LoginResponse;
-import nob.example.easyapp.controller.model.UserRequest;
-import nob.example.easyapp.controller.model.UserResponse;
+import nob.example.easyapp.controller.model.GetUserRequest;
+import nob.example.easyapp.controller.model.GetUserResponse;
 import nob.example.easyapp.handler.SampleExceptionHandler.SampleExceptionResponse;
 import nob.example.easyapp.service.AuthService;
 import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.UserInModel;
-import nob.example.easyapp.service.model.UserOutModel;
+import nob.example.easyapp.service.model.GetUserInModel;
+import nob.example.easyapp.service.model.GetUserOutModel;
 
 /**
  * 認証コントローラーです。
@@ -129,10 +129,10 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "正常に処理された場合")
     })
-    UserResponse user(@ParameterObject UserRequest request) {
+    GetUserResponse getUser(@ParameterObject GetUserRequest request) {
 
-        UserOutModel userOutModel = authService.user(new UserInModel(request.name()));
-        return new UserResponse(userOutModel.name(), userOutModel.age());
+        GetUserOutModel getUserOutModel = authService.user(new GetUserInModel(request.name()));
+        return new GetUserResponse(getUserOutModel.name(), getUserOutModel.age());
     }
 }
 ```
@@ -183,7 +183,7 @@ public record LoginResponse(
 }
 ```
 
-#### `UserRequest.java`
+#### `GetUserRequest.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -198,12 +198,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author nob
  */
 @Schema(description = "ユーザ情報取得向けのリクエストモデル", type = "object")
-public record UserRequest(
+public record GetUserRequest(
         @Schema(description = "ユーザ名", type = "string", example = "nob") String name) {
 }
 ```
 
-#### `UserResponse.java`
+#### `GetUserResponse.java`
 
 ```java
 package nob.example.easyapp.controller.model;
@@ -219,7 +219,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @author nob
  */
 @Schema(description = "ユーザ情報取得向けのレスポンスモデル", type = "object")
-public record UserResponse(
+public record GetUserResponse(
         @Schema(description = "ユーザ名", type = "string", example = "nob") String name,
         @Schema(description = "年齢", type = "integer", example = "13") Integer age) {
 }

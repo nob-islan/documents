@@ -200,8 +200,8 @@ package nob.example.easyapp.service
 
 import nob.example.easyapp.service.model.LoginInModel
 import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.UserInModel
-import nob.example.easyapp.service.model.UserOutModel
+import nob.example.easyapp.service.model.GetUserInModel
+import nob.example.easyapp.service.model.GetUserOutModel
 
 /**
  * 認証サービスのインターフェースです。
@@ -216,7 +216,7 @@ interface AuthService {
     /**
      * ユーザ情報を取得します。
      */
-    fun user(inModel: UserInModel): UserOutModel
+    fun getUser(inModel: GetUserInModel): GetUserOutModel
 }
 ```
 
@@ -231,8 +231,8 @@ import nob.example.easyapp.repository.UsersRepository
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
 import nob.example.easyapp.service.model.LoginOutModel
-import nob.example.easyapp.service.model.UserInModel
-import nob.example.easyapp.service.model.UserOutModel
+import nob.example.easyapp.service.model.GetUserInModel
+import nob.example.easyapp.service.model.GetUserOutModel
 import org.springframework.stereotype.Service
 
 /**
@@ -248,11 +248,11 @@ class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthServic
         return LoginOutModel(users.password == inModel.password)
     }
 
-    override fun user(inModel: UserInModel): UserOutModel {
+    override fun getUser(inModel: GetUserInModel): GetUserOutModel {
 
-        val users = usersRepository.findByName(inModel.name) ?: return UserOutModel("Unknown user", 0)
+        val users = usersRepository.findByName(inModel.name) ?: return GetUserOutModel("Unknown user", 0)
 
-        return UserOutModel(users.name, users.age)
+        return GetUserOutModel(users.name, users.age)
     }
 }
 ```
@@ -294,7 +294,7 @@ data class LoginOutModel(
 /**
  * ユーザ情報取得向けの入力モデルです。
  */
-data class UserInModel(
+data class GetUserInModel(
 
     /**
      * ユーザ名
@@ -305,7 +305,7 @@ data class UserInModel(
 /**
  * ユーザ情報取得向けの出力モデルです。
  */
-data class UserOutModel(
+data class GetUserOutModel(
 
     /**
      * ユーザ名
@@ -328,11 +328,11 @@ package nob.example.easyapp.controller
 
 import nob.example.easyapp.controller.model.LoginRequest
 import nob.example.easyapp.controller.model.LoginResponse
-import nob.example.easyapp.controller.model.UserRequest
-import nob.example.easyapp.controller.model.UserResponse
+import nob.example.easyapp.controller.model.GetUserRequest
+import nob.example.easyapp.controller.model.GetUserResponse
 import nob.example.easyapp.service.AuthService
 import nob.example.easyapp.service.model.LoginInModel
-import nob.example.easyapp.service.model.UserInModel
+import nob.example.easyapp.service.model.GetUserInModel
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -354,9 +354,9 @@ class AuthController(private val authService: AuthService) {
      * ユーザ情報取得処理を呼び出します。
      */
     @GetMapping("/users")
-    fun user(req: UserRequest): UserResponse {
-        val out = authService.user(UserInModel(req.name))
-        return UserResponse(out.name, out.age)
+    fun getUser(req: GetUserRequest): GetUserResponse {
+        val out = authService.getUser(GetUserInModel(req.name))
+        return GetUserResponse(out.name, out.age)
     }
 }
 ```
@@ -398,7 +398,7 @@ data class LoginResponse(
 /**
  * ユーザ情報取得向けのリクエストモデルです。
  */
-data class UserRequest(
+data class GetUserRequest(
 
     /**
      * ユーザ名
@@ -409,7 +409,7 @@ data class UserRequest(
 /**
  * ユーザ情報取得向けのレスポンスモデルです。
  */
-data class UserResponse(
+data class GetUserResponse(
 
     /**
      * ユーザ名
