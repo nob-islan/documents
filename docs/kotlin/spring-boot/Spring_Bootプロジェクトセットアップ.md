@@ -26,7 +26,7 @@ curl https://start.spring.io/starter.zip \
 unzip easyapp.zip && rm -rf easyapp.zip
 ```
 
-- `pom.xml`の下記警告を消すため、下記設定を追加します:
+- `pom.xml`の下記警告が出ている場合は下記設定を追加します:
 
 > Plugin execution not covered by lifecycle configuration: org.jetbrains.kotlin:kotlin-maven-plugin:2.3.21:compile (execution: compile, phase: compile)
 
