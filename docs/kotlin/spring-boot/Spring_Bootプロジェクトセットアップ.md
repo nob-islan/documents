@@ -216,7 +216,7 @@ interface AuthService {
     /**
      * ユーザ情報を取得します。
      */
-    fun me(inModel: UserInModel): UserOutModel
+    fun user(inModel: UserInModel): UserOutModel
 }
 ```
 
@@ -248,7 +248,7 @@ class AuthServiceImpl(private val usersRepository: UsersRepository) : AuthServic
         return LoginOutModel(users.password == inModel.password)
     }
 
-    override fun me(inModel: UserInModel): UserOutModel {
+    override fun user(inModel: UserInModel): UserOutModel {
 
         val users = usersRepository.findByName(inModel.name) ?: return UserOutModel("Unknown user", 0)
 
@@ -353,9 +353,9 @@ class AuthController(private val authService: AuthService) {
     /**
      * ユーザ情報取得処理を呼び出します。
      */
-    @GetMapping("/me")
-    fun me(req: UserRequest): UserResponse {
-        val out = authService.me(UserInModel(req.name))
+    @GetMapping("/users")
+    fun user(req: UserRequest): UserResponse {
+        val out = authService.user(UserInModel(req.name))
         return UserResponse(out.name, out.age)
     }
 }
@@ -436,6 +436,6 @@ data class UserResponse(
 ```shell
 # /login
 curl -X POST -H 'Content-Type: application/json' -d '{"name": "nob", "password": "passwd"}' localhost:8080/api/v1/login
-# /me
-curl -X GET localhost:8080/api/v1/me?name=nob
+# /users
+curl -X GET localhost:8080/api/v1/users?name=nob
 ```
