@@ -67,7 +67,6 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 
 func (h *UserHandler) Login(c *echo.Context) error {
 
-	// jsonパースエラー発生時はStatus400を返す
 	req, err := model.NewLoginReq(c)
 	if err != nil {
 		return c.JSON(
@@ -79,7 +78,6 @@ func (h *UserHandler) Login(c *echo.Context) error {
 		)
 	}
 
-	// usecase呼び出し
 	out := h.userUsecase.Login(c.Request().Context(), params.NewLoginIn(req.Name, req.Password))
 
 	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
@@ -87,10 +85,8 @@ func (h *UserHandler) Login(c *echo.Context) error {
 
 func (h *UserHandler) Me(c *echo.Context) error {
 
-	// クエリパラメータ取得
 	req := model.NewMeReq(c)
 
-	// usecase呼び出し 業務エラー発生時はStatus404を返す
 	out, err := h.userUsecase.Me(c.Request().Context(), params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
