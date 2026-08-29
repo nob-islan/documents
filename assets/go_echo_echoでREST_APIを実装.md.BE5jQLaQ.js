@@ -39,7 +39,7 @@ import{_ as i,o as a,c as n,a6 as h}from"./chunks/framework.C05ZgNLH.js";const g
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">			http.StatusBadRequest,</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">			echo.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">NewHTTPError</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">				http.StatusBadRequest,</span></span>
-<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">				&quot;Bad request&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">				&quot;bad request&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">			),</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">		)</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">	}</span></span>
