@@ -146,13 +146,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.controller.model.GetUserRequest;
+import nob.example.easyapp.controller.model.LoginRequest;
 import nob.example.easyapp.service.AuthService;
-import nob.example.easyapp.service.model.LoginInModel;
-import nob.example.easyapp.service.model.LoginOutModel;
 import nob.example.easyapp.service.model.GetUserInModel;
 import nob.example.easyapp.service.model.GetUserOutModel;
+import nob.example.easyapp.service.model.LoginInModel;
+import nob.example.easyapp.service.model.LoginOutModel;
 import tools.jackson.databind.ObjectMapper;
 
 /**
@@ -214,7 +214,8 @@ public class AuthControllerTest {
         GetUserRequest request = new GetUserRequest("nob");
 
         // serviceのモック化
-        Mockito.when(authService.getUser(new GetUserInModel(request.name()))).thenReturn(new GetUserOutModel("nob", 13));
+        Mockito.when(authService.getUser(new GetUserInModel(request.name())))
+                .thenReturn(new GetUserOutModel("nob", 13));
 
         try {
             mockMvc.perform(get("/api/v1/users")
@@ -274,7 +275,7 @@ include::{login}/curl-request.adoc[]
 .example response
 include::{login}/response-body.adoc[]
 
-=== User
+=== Get User
 
 ユーザ情報を取得します。
 
