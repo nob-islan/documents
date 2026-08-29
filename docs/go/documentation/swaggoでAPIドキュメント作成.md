@@ -134,7 +134,19 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Router /login [post]
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewLoginReq(r)
+	req, err := model.NewLoginReq(r)
+	if err != nil {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(
+			struct {
+				Message string `json:"message"`
+			}{
+				Message: "bad request",
+			},
+		)
+		return
+	}
 
 	out := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
 
@@ -149,14 +161,14 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param UserReq query model.UserReq false "ユーザ情報取得向けのリクエストモデル"
-// @Success 200 {object} model.UserRes "正常に処理された場合"
+// @Param GetUserReq query model.GetUserReq false "ユーザ情報取得向けのリクエストモデル"
+// @Success 200 {object} model.GetUserRes "正常に処理された場合"
 // @Router /users [get]
 func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewUserReq(r)
+	req := model.NewGetUserReq(r)
 
-	out, err := h.userUsecase.GetUser(r.Context(), params.NewUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserIn(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -170,7 +182,7 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := model.NewUserRes(out.Name(), out.Age())
+	res := model.NewGetUserRes(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -195,14 +207,14 @@ type LoginReq struct {
 	Password string `json:"password" example:"passwd"` // パスワード
 }
 
-func NewLoginReq(r *http.Request) LoginReq {
+func NewLoginReq(r *http.Request) (LoginReq, error) {
 
 	var req LoginReq
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return LoginReq{}
+		return LoginReq{}, err
 	}
-	return req
+	return req, nil
 }
 
 // 認証向けのレスポンスモデルです。
@@ -215,22 +227,22 @@ func NewLoginRes(valid bool) LoginRes {
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type UserReq struct {
+type GetUserReq struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 }
 
-func NewUserReq(r *http.Request) UserReq {
-	return UserReq{Name: r.URL.Query().Get("name")}
+func NewGetUserReq(r *http.Request) GetUserReq {
+	return GetUserReq{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type UserRes struct {
+type GetUserRes struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 	Age  int    `json:"age" example:"13"`   // 年齢
 }
 
-func NewUserRes(name string, age int) UserRes {
-	return UserRes{Name: name, Age: age}
+func NewGetUserRes(name string, age int) GetUserRes {
+	return GetUserRes{Name: name, Age: age}
 }
 ```
 

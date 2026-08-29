@@ -519,7 +519,7 @@ func SetUserHandlerRouting(m *http.ServeMux, h handler.UserHandler) {
 	m.HandleFunc(basePath+"/users", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			h.User(w, r)
+			h.GetUser(w, r)
 		default:
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		}
