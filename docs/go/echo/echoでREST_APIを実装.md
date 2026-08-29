@@ -94,9 +94,9 @@ func (h *UserHandler) Me(c *echo.Context) error {
 	out, err := h.userUsecase.Me(c.Request().Context(), params.NewMeIn(req.Name))
 	if err != nil {
 		return c.JSON(
-			http.StatusInternalServerError,
+			http.StatusNotFound,
 			echo.NewHTTPError(
-				http.StatusInternalServerError,
+				http.StatusNotFound,
 				"Internal server error",
 			),
 		)
