@@ -288,7 +288,7 @@ import{_ as i,o as a,c as n,a6 as h}from"./chunks/framework.C05ZgNLH.js";const g
 <span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">			struct</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">				Message </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">string</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> \`json:&quot;message&quot;\`</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">			}{</span></span>
-<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">				Message: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;bad request&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">				Message: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;Bad request&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">			},</span></span>
 <span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">		)</span></span>
 <span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">		return</span></span>
