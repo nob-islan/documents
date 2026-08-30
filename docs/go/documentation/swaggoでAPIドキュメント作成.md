@@ -207,7 +207,7 @@ type LoginRequest struct {
 	Password string `json:"password" example:"passwd"` // パスワード
 }
 
-func NewLoginRequest(r *http.Request) (LoginReq, error) {
+func NewLoginRequest(r *http.Request) (LoginRequest, error) {
 
 	var req LoginRequest
 	decoder := json.NewDecoder(r.Body)

@@ -121,7 +121,7 @@ type LoginRequest struct {
 	Password string `json:"password"` // パスワード
 }
 
-func NewLoginRequest(c *echo.Context) (LoginReq, error) {
+func NewLoginRequest(c *echo.Context) (LoginRequest, error) {
 
 	req := new(LoginRequest)
 	if err := c.Bind(req); err != nil {
