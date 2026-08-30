@@ -348,7 +348,7 @@ func (o GetUserOutput) Name() string {
 	return o.name
 }
 
-func (o GetUserOutout) Age() int {
+func (o GetUserOutput) Age() int {
 	return o.age
 }
 ```
