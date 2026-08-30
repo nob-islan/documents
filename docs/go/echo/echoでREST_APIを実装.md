@@ -67,7 +67,7 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 
 func (h *UserHandler) Login(c *echo.Context) error {
 
-	req, err := model.NewLoginReq(c)
+	req, err := model.NewLoginRequest(c)
 	if err != nil {
 		return c.JSON(
 			http.StatusBadRequest,
@@ -78,16 +78,16 @@ func (h *UserHandler) Login(c *echo.Context) error {
 		)
 	}
 
-	out := h.userUsecase.Login(c.Request().Context(), params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
 
-	return c.JSON(http.StatusOK, model.NewLoginRes(out.Valid()))
+	return c.JSON(http.StatusOK, model.NewLoginResponse(out.Valid()))
 }
 
 func (h *UserHandler) GetUser(c *echo.Context) error {
 
-	req := model.NewGetUserReq(c)
+	req := model.NewGetUserRequest(c)
 
-	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
 		return c.JSON(
 			http.StatusNotFound,
@@ -98,7 +98,7 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 		)
 	}
 
-	return c.JSON(http.StatusOK, model.NewGetUserRes(out.Name(), out.Age()))
+	return c.JSON(http.StatusOK, model.NewGetUserResponse(out.Name(), out.Age()))
 }
 ```
 
@@ -116,47 +116,47 @@ import (
 )
 
 // 認証向けのリクエストモデルです。
-type LoginReq struct {
+type LoginRequest struct {
 	Name     string `json:"name"`     // ユーザ名
 	Password string `json:"password"` // パスワード
 }
 
-func NewLoginReq(c *echo.Context) (LoginReq, error) {
+func NewLoginRequest(c *echo.Context) (LoginReq, error) {
 
-	req := new(LoginReq)
+	req := new(LoginRequest)
 	if err := c.Bind(req); err != nil {
-		return LoginReq{}, errors.New("invalid request")
+		return LoginRequest{}, errors.New("invalid request")
 	}
 
 	return *req, nil
 }
 
 // 認証向けのレスポンスモデルです。
-type LoginRes struct {
+type LoginResponse struct {
 	Valid bool `json:"valid"` // 認証可否
 }
 
-func NewLoginRes(valid bool) LoginRes {
-	return LoginRes{Valid: valid}
+func NewLoginResponse(valid bool) LoginResponse {
+	return LoginResponse{Valid: valid}
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type GetUserReq struct {
+type GetUserRequest struct {
 	Name string `json:"name"` // ユーザ名
 }
 
-func NewGetUserReq(c *echo.Context) GetUserReq {
-	return GetUserReq{Name: c.QueryParam("name")}
+func NewGetUserRequest(c *echo.Context) GetUserRequest {
+	return GetUserRequest{Name: c.QueryParam("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type GetUserRes struct {
+type GetUserResponse struct {
 	Name string `json:"name"` // ユーザ名
 	Age  int    `json:"age"`  // 年齢
 }
 
-func NewGetUserRes(name string, age int) GetUserRes {
-	return GetUserRes{Name: name, Age: age}
+func NewGetUserResponse(name string, age int) GetUserResponse {
+	return GetUserResponse{Name: name, Age: age}
 }
 ```
 

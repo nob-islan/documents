@@ -128,13 +128,13 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param LoginReq body model.LoginReq true "認証向けのリクエストモデル"
-// @Success 200 {object} model.LoginRes "正常に処理された場合"
-// @Failure 422 {object} apperrors.easyappBusinessErrorRes "エラーが発生した場合"
+// @Param LoginRequest body model.LoginRequest true "認証向けのリクエストモデル"
+// @Success 200 {object} model.LoginResponse "正常に処理された場合"
+// @Failure 422 {object} apperrors.easyappBusinessErrorResponse "エラーが発生した場合"
 // @Router /login [post]
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
-	req, err := model.NewLoginReq(r)
+	req, err := model.NewLoginRequest(r)
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
@@ -148,9 +148,9 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	out := h.userUsecase.Login(r.Context(), params.NewLoginIn(req.Name, req.Password))
+	out := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
 
-	res := model.NewLoginRes(out.Valid())
+	res := model.NewLoginResponse(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -161,14 +161,14 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param GetUserReq query model.GetUserReq false "ユーザ情報取得向けのリクエストモデル"
-// @Success 200 {object} model.GetUserRes "正常に処理された場合"
+// @Param GetUserRequest query model.GetUserRequest false "ユーザ情報取得向けのリクエストモデル"
+// @Success 200 {object} model.GetUserResponse "正常に処理された場合"
 // @Router /users [get]
 func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
-	req := model.NewGetUserReq(r)
+	req := model.NewGetUserRequest(r)
 
-	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserIn(req.Name))
+	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
@@ -182,7 +182,7 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res := model.NewGetUserRes(out.Name(), out.Age())
+	res := model.NewGetUserResponse(out.Name(), out.Age())
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(res)
@@ -202,47 +202,47 @@ import (
 )
 
 // 認証向けのリクエストモデルです。
-type LoginReq struct {
+type LoginRequest struct {
 	Name     string `json:"name" example:"nob"`        // ユーザ名
 	Password string `json:"password" example:"passwd"` // パスワード
 }
 
-func NewLoginReq(r *http.Request) (LoginReq, error) {
+func NewLoginRequest(r *http.Request) (LoginReq, error) {
 
-	var req LoginReq
+	var req LoginRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return LoginReq{}, err
+		return LoginRequest{}, err
 	}
 	return req, nil
 }
 
 // 認証向けのレスポンスモデルです。
-type LoginRes struct {
+type LoginResponse struct {
 	Valid bool `json:"valid" example:"true"` // 認証可否
 }
 
-func NewLoginRes(valid bool) LoginRes {
-	return LoginRes{Valid: valid}
+func NewLoginResponse(valid bool) LoginResponse {
+	return LoginResponse{Valid: valid}
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type GetUserReq struct {
+type GetUserRequest struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 }
 
-func NewGetUserReq(r *http.Request) GetUserReq {
-	return GetUserReq{Name: r.URL.Query().Get("name")}
+func NewGetUserRequest(r *http.Request) GetUserRequest {
+	return GetUserRequest{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type GetUserRes struct {
+type GetUserResponse struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 	Age  int    `json:"age" example:"13"`   // 年齢
 }
 
-func NewGetUserRes(name string, age int) GetUserRes {
-	return GetUserRes{Name: name, Age: age}
+func NewGetUserResponse(name string, age int) GetUserResponse {
+	return GetUserResponse{Name: name, Age: age}
 }
 ```
 
@@ -267,7 +267,7 @@ func (e EasyappBusinessError) Error() string {
 }
 
 // easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
-type easyappBusinessErrorRes struct {
+type easyappBusinessErrorResponse struct {
 	Message string `json:"message" example:"user not found"` // エラーメッセージ
 }
 ```

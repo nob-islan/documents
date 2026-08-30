@@ -121,7 +121,7 @@ type Userinfo struct {
 func registUserinfo(w http.ResponseWriter, r *http.Request) {
 
 	// リクエストボディ解析
-	var req RegistReq
+	var req RegistRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
 		http.Error(w, "internal server error", http.StatusInternalServerError)
@@ -129,7 +129,7 @@ func registUserinfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 業務処理実行（擬似APIなのでresを作成するのみ）
-	res := RegistRes{
+	res := RegistResponse{
 		Message: "success",
 	}
 
@@ -141,13 +141,13 @@ func registUserinfo(w http.ResponseWriter, r *http.Request) {
 
 type (
 	// registUserinfoのリクエストボディ
-	RegistReq struct {
+	RegistRequest struct {
 		Name string `json:"name"` // 名前
 		Age  int    `json:"age"`  // 年齢
 	}
 
 	// registUserinfoのレスポンスボディ
-	RegistRes struct {
+	RegistResponse struct {
 		Message string `json:"message"` // 登録成否
 	}
 )

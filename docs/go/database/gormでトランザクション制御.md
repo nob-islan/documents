@@ -118,7 +118,7 @@ import (
 type UserUsecase interface {
 
 	// ユーザ情報を登録します。
-	Regist(ctx context.Context, in params.RegistIn) (params.RegistOut, error)
+	Regist(ctx context.Context, in params.RegistInput) (params.RegistOutput, error)
 }
 
 type userUsecase struct {
@@ -136,16 +136,16 @@ func NewUserUsecase(
 	}
 }
 
-func (u *userUsecase) Regist(ctx context.Context, in params.RegistIn) (params.RegistOut, error) {
+func (u *userUsecase) Regist(ctx context.Context, in params.RegistInput) (params.RegistOutput, error) {
 
 	// トランザクションを開始しつつ業務処理を実行
 	if err := u.txManager.WithTransaction(ctx, func(ctx context.Context) error {
 		return u.userRepository.Save(ctx, domain.NewUser(in.Name(), in.Password(), in.Age()))
 	}); err != nil {
-		return params.NewRegistOut(false), err
+		return params.NewRegistOutput(false), err
 	}
 
-	return params.NewRegistOut(true), nil
+	return params.NewRegistOutput(true), nil
 }
 ```
 
@@ -262,14 +262,14 @@ func TestRegistUser(t *testing.T) {
 
 	tests := []struct {
 		name                string                      // テストケース名
-		requestBody         params.RegistIn             // リクエストボディ
+		requestBody         params.RegistInput          // リクエストボディ
 		setupRepositoryMock func(m *mockUserRepository) // repositoryモック設定
-		expectedBody        params.RegistOut            // 期待されるレスポンスボディ
+		expectedBody        params.RegistOutput         // 期待されるレスポンスボディ
 		expectedError       error                       // 期待されるエラー
 	}{
 		{
 			name:        "Success",
-			requestBody: params.NewRegistIn("nob", "passwd", 13),
+			requestBody: params.NewRegistInput("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
 					"Save",
@@ -279,12 +279,12 @@ func TestRegistUser(t *testing.T) {
 					nil,
 				)
 			},
-			expectedBody:  params.NewRegistOut(true),
+			expectedBody:  params.NewRegistOutput(true),
 			expectedError: nil,
 		},
 		{
 			name:        "RepositoryError",
-			requestBody: params.NewRegistIn("nob", "passwd", 13),
+			requestBody: params.NewRegistInput("nob", "passwd", 13),
 			setupRepositoryMock: func(m *mockUserRepository) {
 				m.On(
 					"Save",
@@ -294,7 +294,7 @@ func TestRegistUser(t *testing.T) {
 					errors.New("repository error"),
 				)
 			},
-			expectedBody:  params.NewRegistOut(false),
+			expectedBody:  params.NewRegistOutput(false),
 			expectedError: errors.New("repository error"),
 		},
 	}
