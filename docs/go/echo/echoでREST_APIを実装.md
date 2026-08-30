@@ -125,7 +125,7 @@ func NewLoginReq(c *echo.Context) (LoginReq, error) {
 
 	req := new(LoginReq)
 	if err := c.Bind(req); err != nil {
-		return LoginReq{}, errors.New("不正なリクエストです。")
+		return LoginReq{}, errors.New("invalid request")
 	}
 
 	return *req, nil
