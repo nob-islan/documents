@@ -130,7 +130,7 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Produce json
 // @Param LoginRequest body model.LoginRequest true "認証向けのリクエストモデル"
 // @Success 200 {object} model.LoginResponse "正常に処理された場合"
-// @Failure 422 {object} apperrors.easyappBusinessErrorResponse "エラーが発生した場合"
+// @Failure 422 {object} validation.ValidationError "バリデーションエラーが発生した場合"
 // @Router /login [post]
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
