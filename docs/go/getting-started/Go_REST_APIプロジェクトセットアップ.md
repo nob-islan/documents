@@ -185,8 +185,9 @@ func (v Password) verify(password string) bool {
 	return v.value == password
 }
 
+// 年齢
 type Age struct {
-	value int // 年齢
+	value int
 }
 
 func (v Age) Value() int {
