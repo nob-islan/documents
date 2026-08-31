@@ -94,9 +94,9 @@ func (r *userRepository) Save(ctx context.Context, user domain.User) error {
 	return gorm.G[table.Users](db).Create(
 		ctx,
 		&table.Users{
-			Name:     user.Name(),
-			Password: user.Password(),
-			Age:      user.Age(),
+			Name:     user.Name().Value(),
+			Password: user.Password().Value(),
+			Age:      user.Age().Value(),
 		},
 	)
 }
@@ -191,7 +191,7 @@ func TestSave(t *testing.T) {
 				u, _ := domain.NewUser("nob", "passwd", 13)
 				return u
 			}(),
-			setup:         func(db *sql.DB) {},
+			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
 		},
 		{
@@ -202,7 +202,7 @@ func TestSave(t *testing.T) {
 				u, _ := domain.NewUser("nob", "passwd", 13)
 				return u
 			}(),
-			setup:         func(db *sql.DB) {},
+			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
 		},
 	}
@@ -286,9 +286,9 @@ func TestRegistUser(t *testing.T) {
 				m.On(
 					"Save",
 					mock.Anything,
-					func() domain.Name {
-						n, _ := domain.NewName("nob")
-						return n
+					func() domain.User {
+						u, _ := domain.NewUser("nob", "passwd", 13)
+						return u
 					}(),
 				).Return(
 					nil,
@@ -304,9 +304,9 @@ func TestRegistUser(t *testing.T) {
 				m.On(
 					"Save",
 					mock.Anything,
-					func() domain.Name {
-						n, _ := domain.NewName("nob")
-						return n
+					func() domain.User {
+						u, _ := domain.NewUser("nob", "passwd", 13)
+						return u
 					}(),
 				).Return(
 					errors.New("repository error"),
