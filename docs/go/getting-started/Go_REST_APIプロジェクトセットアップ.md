@@ -117,19 +117,19 @@ type User struct {
 }
 
 func NewUser(name string, password string, age int) (User, error) {
-	n, err := NewName(name)
+	userName, err := NewName(name)
 	if err != nil {
 		return User{}, err
 	}
-	p, err := NewPassword(password)
+	userPassword, err := NewPassword(password)
 	if err != nil {
 		return User{}, err
 	}
-	a, err := NewAge(age)
+	userAge, err := NewAge(age)
 	if err != nil {
 		return User{}, err
 	}
-	return User{name: n, password: p, age: a}, nil
+	return User{name: userName, password: userPassword, age: userAge}, nil
 }
 
 func (u User) Name() Name {
