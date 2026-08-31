@@ -52,16 +52,7 @@ func NewServer() *echo.Echo {
 	// データベースに接続
 	db := infrastructure.ConnectDB()
 
-	router.SetUserHandlerRouting(
-		e,
-		handler.NewUserHandler(
-			usecase.NewUserUsecase(
-				repository.NewUserRepository(
-					db,
-				),
-			),
-		),
-	)
+	router.SetUserHandlerRouting(e, handler.NewUserHandler(usecase.NewUserUsecase()))
 
 	return e
 }
