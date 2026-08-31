@@ -104,41 +104,100 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 ```go
 package domain
 
-import "context"
+import (
+	"context"
+	"errors"
+)
 
 // ユーザ情報ドメインです。
 type User struct {
-	name     string // ユーザ名
-	password string // パスワード
-	age      int    // 年齢
+	name     Name     // ユーザ名
+	password Password // パスワード
+	age      Age      // 年齢
 }
 
-func NewUser(name string, password string, age int) User {
-	return User{name: name, password: password, age: age}
+func NewUser(name string, password string, age int) (User, error) {
+	n, err := NewName(name)
+	if err != nil {
+		return User{}, err
+	}
+	p, err := NewPassword(password)
+	if err != nil {
+		return User{}, err
+	}
+	a, err := NewAge(age)
+	if err != nil {
+		return User{}, err
+	}
+	return User{name: n, password: p, age: a}, nil
 }
 
-func (u User) Name() string {
+func (u User) Name() Name {
 	return u.name
 }
 
-func (u User) Password() string {
-	return u.password
-}
-
-func (u User) Age() int {
+func (u User) Age() Age {
 	return u.age
 }
 
 // パスワードが正しいかを判定します。
 func (u User) VerifyPassword(password string) bool {
-	return u.password == password
+	return u.password.verify(password)
 }
 
 // ユーザ情報ドメイン向けrepositoryのインターフェースです。
 type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(ctx context.Context, targetName string) (User, error)
+	FindByName(ctx context.Context, targetName Name) (User, error)
+}
+
+// ユーザ名
+type Name struct {
+	value string
+}
+
+func NewName(value string) (Name, error) {
+	if value == "" {
+		return Name{}, errors.New("input name")
+	}
+	return Name{value: value}, nil
+}
+
+func (v Name) Value() string {
+	return v.value
+}
+
+// パスワード
+type Password struct {
+	value string
+}
+
+func NewPassword(value string) (Password, error) {
+	if value == "" {
+		return Password{}, errors.New("input password")
+	}
+	return Password{value: value}, nil
+}
+
+// パスワードが正しいかを判定します。
+func (v Password) verify(password string) bool {
+	return v.value == password
+}
+
+type Age struct {
+	value int // 年齢
+}
+
+func (v Age) Value() int {
+	return v.value
+}
+
+func NewAge(value int) (Age, error) {
+	if value < 0 {
+		return Age{}, errors.New("input a value of 0 or greater for age")
+	}
+	return Age{value: value}, nil
 }
 ```
 
@@ -199,6 +258,7 @@ import (
 	"context"
 	"database/sql"
 	"easyapp/internal/domain"
+	"errors"
 )
 
 type userRepository struct {
@@ -209,22 +269,22 @@ func NewUserRepository(db *sql.DB) domain.UserRepository {
 	return &userRepository{db: db}
 }
 
-func (r *userRepository) FindByName(ctx context.Context, targetName string) (domain.User, error) {
+func (r *userRepository) FindByName(ctx context.Context, targetName domain.Name) (domain.User, error) {
 
-	const sql string = "SELECT * FROM users WHERE name = ?"
+	const sql string = "SELECT name, password, age FROM users WHERE name = ?"
 
 	// クエリ実行
-	row := r.db.QueryRowContext(ctx, sql, targetName)
+	row := r.db.QueryRowContext(ctx, sql, targetName.Value())
 
 	var name string
 	var password string
 	var age int
 	err := row.Scan(&name, &password, &age)
 	if err != nil {
-		return domain.User{}, err
+		return domain.User{}, errors.New("query error")
 	}
 
-	return domain.NewUser(name, password, age), nil
+	return domain.NewUser(name, password, age)
 }
 ```
 
@@ -264,7 +324,11 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 
 func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) params.LoginOutput {
 
-	user, err := u.userRepository.FindByName(ctx, in.Name())
+	name, err := domain.NewName(in.Name())
+	if err != nil {
+		return params.LoginOutput{}
+	}
+	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
 		return params.NewLoginOutput(false)
 	}
@@ -273,11 +337,15 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) params.Lo
 
 func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (params.GetUserOutput, error) {
 
-	user, err := u.userRepository.FindByName(ctx, in.Name())
+	name, err := domain.NewName(in.Name())
+	if err != nil {
+		return params.GetUserOutput{}, errors.New("invalid input")
+	}
+	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
 		return params.GetUserOutput{}, errors.New("no such user")
 	}
-	return params.NewGetUserOutput(user.Name(), user.Age()), nil
+	return params.NewGetUserOutput(user.Name().Value(), user.Age().Value()), nil
 }
 ```
 
