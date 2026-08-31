@@ -271,12 +271,12 @@ func NewUserRepository(db *sql.DB) domain.UserRepository {
 	return &userRepository{db: db}
 }
 
-func (r *userRepository) FindByName(ctx context.Context, targetName domain.Name) (domain.User, error) {
+func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (domain.User, error) {
 
 	const sql string = "SELECT name, password, age FROM users WHERE name = ?"
 
 	// クエリ実行
-	row := r.db.QueryRowContext(ctx, sql, targetName.Value())
+	row := r.db.QueryRowContext(ctx, sql, target.Value())
 
 	var name string
 	var password string
@@ -331,9 +331,11 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) params.Lo
 		return params.LoginOutput{}
 	}
 	user, err := u.userRepository.FindByName(ctx, name)
+
 	if err != nil {
 		return params.NewLoginOutput(false)
 	}
+
 	return params.NewLoginOutput(user.VerifyPassword(in.Password()))
 }
 
@@ -343,10 +345,12 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 	if err != nil {
 		return params.GetUserOutput{}, errors.New("invalid input")
 	}
+
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
 		return params.GetUserOutput{}, errors.New("no such user")
 	}
+
 	return params.NewGetUserOutput(user.Name().Value(), user.Age().Value()), nil
 }
 ```

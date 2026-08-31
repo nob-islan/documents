@@ -143,8 +143,8 @@ func (u *userUsecase) Regist(ctx context.Context, in params.RegistInput) (params
 		return u.userRepository.Save(
 			ctx,
 			func() domain.User {
-				u, _ := domain.NewUser(in.Name(), in.Password(), in.Age())
-				return u
+				user, _ := domain.NewUser(in.Name(), in.Password(), in.Age())
+				return user
 			}(),
 		)
 	}); err != nil {
@@ -188,8 +188,8 @@ func TestSave(t *testing.T) {
 			ctx:    context.Background(),
 			withTx: false,
 			user: func() domain.User {
-				u, _ := domain.NewUser("nob", "passwd", 13)
-				return u
+				user, _ := domain.NewUser("nob", "passwd", 13)
+				return user
 			}(),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
@@ -199,8 +199,8 @@ func TestSave(t *testing.T) {
 			ctx:    context.Background(),
 			withTx: true,
 			user: func() domain.User {
-				u, _ := domain.NewUser("nob", "passwd", 13)
-				return u
+				user, _ := domain.NewUser("nob", "passwd", 13)
+				return user
 			}(),
 			setup:         func(db *gorm.DB) {},
 			expectedError: nil,
@@ -287,8 +287,8 @@ func TestRegistUser(t *testing.T) {
 					"Save",
 					mock.Anything,
 					func() domain.User {
-						u, _ := domain.NewUser("nob", "passwd", 13)
-						return u
+						user, _ := domain.NewUser("nob", "passwd", 13)
+						return user
 					}(),
 				).Return(
 					nil,
@@ -305,8 +305,8 @@ func TestRegistUser(t *testing.T) {
 					"Save",
 					mock.Anything,
 					func() domain.User {
-						u, _ := domain.NewUser("nob", "passwd", 13)
-						return u
+						user, _ := domain.NewUser("nob", "passwd", 13)
+						return user
 					}(),
 				).Return(
 					errors.New("repository error"),
