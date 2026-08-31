@@ -129,6 +129,7 @@ func NewUser(name string, password string, age int) (User, error) {
 	if err != nil {
 		return User{}, err
 	}
+
 	return User{name: userName, password: userPassword, age: userAge}, nil
 }
 
