@@ -140,7 +140,13 @@ func (u *userUsecase) Regist(ctx context.Context, in params.RegistInput) (params
 
 	// トランザクションを開始しつつ業務処理を実行
 	if err := u.txManager.WithTransaction(ctx, func(ctx context.Context) error {
-		return u.userRepository.Save(ctx, domain.NewUser(in.Name(), in.Password(), in.Age()))
+		return u.userRepository.Save(
+			ctx,
+			func() domain.User {
+				u, _ := domain.NewUser(in.Name(), in.Password(), in.Age())
+				return u
+			}(),
+		)
 	}); err != nil {
 		return params.NewRegistOutput(false), err
 	}
@@ -178,19 +184,25 @@ func TestSave(t *testing.T) {
 		expectedError error             // 期待されるエラー
 	}{
 		{
-			name:          "SuccessWithoutTx",
-			ctx:           context.Background(),
-			withTx:        false,
-			user:          domain.NewUser("nob", "passwd", 13),
-			setup:         func(db *gorm.DB) {},
+			name:   "SuccessWithoutTx",
+			ctx:    context.Background(),
+			withTx: false,
+			user: func() domain.User {
+				u, _ := domain.NewUser("nob", "passwd", 13)
+				return u
+			}(),
+			setup:         func(db *sql.DB) {},
 			expectedError: nil,
 		},
 		{
-			name:          "SuccessWithTx",
-			ctx:           context.Background(),
-			withTx:        true,
-			user:          domain.NewUser("nob", "passwd", 13),
-			setup:         func(db *gorm.DB) {},
+			name:   "SuccessWithTx",
+			ctx:    context.Background(),
+			withTx: true,
+			user: func() domain.User {
+				u, _ := domain.NewUser("nob", "passwd", 13)
+				return u
+			}(),
+			setup:         func(db *sql.DB) {},
 			expectedError: nil,
 		},
 	}
@@ -274,7 +286,10 @@ func TestRegistUser(t *testing.T) {
 				m.On(
 					"Save",
 					mock.Anything,
-					domain.NewUser("nob", "passwd", 13),
+					func() domain.Name {
+						n, _ := domain.NewName("nob")
+						return n
+					}(),
 				).Return(
 					nil,
 				)
@@ -289,7 +304,10 @@ func TestRegistUser(t *testing.T) {
 				m.On(
 					"Save",
 					mock.Anything,
-					domain.NewUser("nob", "passwd", 13),
+					func() domain.Name {
+						n, _ := domain.NewName("nob")
+						return n
+					}(),
 				).Return(
 					errors.New("repository error"),
 				)
