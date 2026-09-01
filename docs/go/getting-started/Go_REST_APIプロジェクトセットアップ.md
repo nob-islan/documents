@@ -260,7 +260,6 @@ import (
 	"context"
 	"database/sql"
 	"easyapp/internal/domain"
-	"errors"
 )
 
 type userRepository struct {
@@ -283,10 +282,7 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 	var age int
 	err := row.Scan(&name, &password, &age)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return domain.User{}, nil
-		}
-		return domain.User{}, errors.New("database error")
+		return domain.User{}, err
 	}
 
 	return domain.NewUser(name, password, age)
@@ -304,6 +300,7 @@ package usecase
 
 import (
 	"context"
+	"database/sql"
 	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
 	"errors"
@@ -356,6 +353,9 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return params.GetUserOutput{}, nil
+		}
 		return params.GetUserOutput{}, DatabaseErr
 	}
 
