@@ -163,6 +163,9 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param GetUserRequest query model.GetUserRequest false "ユーザ情報取得向けのリクエストモデル"
 // @Success 200 {object} model.GetUserResponse "正常に処理された場合"
+// @Failure 400 {object} httperror.validationErrorResponse "バリデーションエラーが発生した場合"
+// @Failure 422 {object} httperror.businessErrorResponse "業務エラーが発生した場合"
+// @Failure 500 {object} httperror.systemErrorResponse "システムエラーが発生した場合"
 // @Router /users [get]
 func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
@@ -170,8 +173,20 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
+		if err.Error() == usecase.DatabaseErr.Error() {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(
+				struct {
+					Message string `json:"message"`
+				}{
+					Message: err.Error(),
+				},
+			)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(w).Encode(
 			struct {
 				Message string `json:"message"`
