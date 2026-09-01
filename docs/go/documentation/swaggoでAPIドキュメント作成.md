@@ -246,29 +246,29 @@ func NewGetUserResponse(name string, age int) GetUserResponse {
 }
 ```
 
-### `apperrors/easyapp_business_error.go`
+### `apperrors/business_error.go`
 
 例外発生時レスポンスモデルのexampleを記載します:
 
 ```go
 package apperrors
 
-// easyappの業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
-type EasyappBusinessError struct {
+// 業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
+type BusinessError struct {
 	message string // エラーメッセージ
 }
 
-func NewEasyappBusinessError(message string) EasyappBusinessError {
-	return EasyappBusinessError{message: message}
+func NewBusinessError(message string) BusinessError {
+	return BusinessError{message: message}
 }
 
-func (e EasyappBusinessError) Error() string {
+func (e BusinessError) Error() string {
 	return e.message
 }
 
-// easyappの業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
-type easyappBusinessErrorResponse struct {
-	Message string `json:"message" example:"user not found"` // エラーメッセージ
+// 業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
+type businessErrorResponse struct {
+	Message string `json:"message" example:"no such user"` // エラーメッセージ
 }
 ```
 
