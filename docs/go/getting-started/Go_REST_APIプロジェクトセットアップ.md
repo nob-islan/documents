@@ -273,17 +273,20 @@ func NewUserRepository(db *sql.DB) domain.UserRepository {
 
 func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (domain.User, error) {
 
-	const sql string = "SELECT name, password, age FROM users WHERE name = ?"
+	const query string = "SELECT name, password, age FROM users WHERE name = ?"
 
 	// クエリ実行
-	row := r.db.QueryRowContext(ctx, sql, target.Value())
+	row := r.db.QueryRowContext(ctx, query, target.Value())
 
 	var name string
 	var password string
 	var age int
 	err := row.Scan(&name, &password, &age)
 	if err != nil {
-		return domain.User{}, errors.New("query error")
+		if errors.Is(err, sql.ErrNoRows) {
+			return domain.User{}, nil
+		}
+		return domain.User{}, errors.New("database error")
 	}
 
 	return domain.NewUser(name, password, age)
@@ -324,6 +327,11 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 	return &userUsecase{userRepository: userRepository}
 }
 
+var (
+	InvalidInputErr = errors.New("invalid input")
+	DatabaseErr     = errors.New("database error")
+)
+
 func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) params.LoginOutput {
 
 	name, err := domain.NewName(in.Name())
@@ -343,12 +351,12 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.GetUserOutput{}, errors.New("invalid input")
+		return params.GetUserOutput{}, InvalidInputErr
 	}
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
-		return params.GetUserOutput{}, errors.New("no such user")
+		return params.GetUserOutput{}, DatabaseErr
 	}
 
 	return params.NewGetUserOutput(user.Name().Value(), user.Age().Value()), nil
@@ -483,8 +491,20 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
+		if err.Error() == usecase.DatabaseErr.Error() {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(
+				struct {
+					Message string `json:"message"`
+				}{
+					Message: err.Error(),
+				},
+			)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusNotFound)
+		w.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(w).Encode(
 			struct {
 				Message string `json:"message"`
