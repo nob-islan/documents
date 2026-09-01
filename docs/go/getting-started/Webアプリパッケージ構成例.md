@@ -4,25 +4,27 @@ GoでWebアプリケーションを開発する際のプロジェクトのパッ
 
 ```shell
 .
-├── api                  # APIドキュメント
-├── cmd                  # エントリポイント
+├── api                    # APIドキュメント
+├── cmd                    # エントリポイント
 ├── internal
-│   ├── apperrors        # 独自エラー定義およびそのハンドリング
-│   ├── application      # アプリケーション層
-│   │   └── usecase      # 業務処理
-│   │       └── params   # 業務処理の入力・出力モデル
-│   ├── bootstrap        # 依存性の注入およびルーティング
-│   ├── domain           # ドメイン構造体、ビジネスロジックおよびrepositoryインターフェース
-│   ├── infrastructure   # インフラストラクチャ層
-│   │   ├── persistence  # データベース向け定義
-│   │   │   └── table    # テーブル定義に対応した構造体
-│   │   └── repository   # ドメイン操作の実装
-│   ├── logging          # ログ出力制御
-│   └── presentation     # プレゼンテーション層
-│       ├── handler      # APIとしての外部契約
-│       │   └── model    # APIのリクエスト・レスポンス構造体
-│       └── router       # httpリクエストのルーティング
-└── scripts              # 開発支援ツール
+│   ├── apperrors          # 独自エラー定義
+│   ├── application        # アプリケーション層
+│   │   └── usecase        # 業務処理
+│   │       └── params     # 業務処理の入力・出力モデル
+│   ├── bootstrap          # 依存性の注入およびルーティング
+│   ├── domain             # ドメイン構造体、ビジネスロジックおよびrepositoryインターフェース
+│   ├── infrastructure     # インフラストラクチャ層
+│   │   ├── persistence    # データベース向け定義
+│   │   │   └── table      # テーブル定義に対応した構造体
+│   │   └── repository     # ドメイン操作の実装
+│   ├── logging            # ログ出力制御
+│   ├── presentation       # プレゼンテーション層
+│   │   ├── handler        # APIとしての外部契約
+│   │   │   ├── httperror  # エラーレスポンス構造体およびハンドリング
+│   │   │   └── model      # APIのリクエスト・レスポンス構造体
+│   │   └── router         # httpリクエストのルーティング
+│   └── validation         # リクエストのバリデーション初期化
+└── scripts                # 開発支援ツール
 ```
 
 ## `api`
@@ -35,7 +37,7 @@ swaggerなどのAPIドキュメント、およびそれを生成する関数を�
 
 ## `internal/apperrors`
 
-アプリケーション内で独自に定義するエラーおよびそのハンドリング関数を格納するパッケージです。
+アプリケーション内で独自に定義するエラーを格納するパッケージです。
 
 ## `internal/application`
 
@@ -87,6 +89,10 @@ APIとしての外部契約を格納するパッケージです。
 
 リクエストモデルのjsonの解析およびバリデーションを行なって、業務処理を呼び出すハンドラ関数を格納するパッケージです。
 
+#### `internal/presentation/handler/httperror`
+
+APIのエラーレスポンスモデル構造体およびそのハンドリング関数を格納するパッケージです。
+
 #### `internal/presentation/handler/model`
 
 APIのリクエスト・レスポンスモデルとなる構造体を格納するパッケージです。
@@ -94,6 +100,10 @@ APIのリクエスト・レスポンスモデルとなる構造体を格納す�
 ### `internal/presentation/router`
 
 httpリクエストのルーティングを行う関数を格納するパッケージです。
+
+## `internal/validation`
+
+リクエストモデルのバリデータを格納するパッケージです。
 
 ## `scripts`
 
