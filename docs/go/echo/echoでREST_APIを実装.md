@@ -89,11 +89,20 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 
 	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
+		if err.Error() == usecase.DatabaseErr.Error() {
+			return c.JSON(
+				http.StatusInternalServerError,
+				echo.NewHTTPError(
+					http.StatusInternalServerError,
+					err.Error(),
+				),
+			)
+		}
 		return c.JSON(
-			http.StatusNotFound,
+			http.StatusUnprocessableEntity,
 			echo.NewHTTPError(
-				http.StatusNotFound,
-				"not found",
+				http.StatusUnprocessableEntity,
+				err.Error(),
 			),
 		)
 	}
