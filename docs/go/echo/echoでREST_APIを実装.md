@@ -49,9 +49,11 @@ go get github.com/labstack/echo/v5
 package handler
 
 import (
+	"easyapp/internal/apperrors"
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/presentation/handler/model"
+	"errors"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -80,7 +82,7 @@ func (h *UserHandler) Login(c *echo.Context) error {
 
 	out, err := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
 	if err != nil {
-		if err.Error() == usecase.DatabaseErr.Error() {
+		if errors.Is(err, apperrors.DatabaseErr) {
 			return c.JSON(
 				http.StatusInternalServerError,
 				echo.NewHTTPError(
@@ -107,7 +109,7 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 
 	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		if err.Error() == usecase.DatabaseErr.Error() {
+		if errors.Is(err, apperrors.DatabaseErr) {
 			return c.JSON(
 				http.StatusInternalServerError,
 				echo.NewHTTPError(
