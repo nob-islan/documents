@@ -310,7 +310,7 @@ import (
 type UserUsecase interface {
 
 	// 認証処理を行います。
-	Login(ctx context.Context, in params.LoginInput) params.LoginOutput
+	Login(ctx context.Context, in params.LoginInput) (params.LoginOutput, error)
 
 	// ユーザ情報を取得します。
 	GetUser(ctx context.Context, in params.GetUserInput) (params.GetUserOutput, error)
@@ -329,19 +329,22 @@ var (
 	DatabaseErr     = errors.New("database error")
 )
 
-func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) params.LoginOutput {
+func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.LoginOutput, error) {
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.LoginOutput{}
+		return params.LoginOutput{}, InvalidInputErr
 	}
+
 	user, err := u.userRepository.FindByName(ctx, name)
-
 	if err != nil {
-		return params.NewLoginOutput(false)
+		if errors.Is(err, sql.ErrNoRows) {
+			return params.NewLoginOutput(false), nil
+		}
+		return params.LoginOutput{}, DatabaseErr
 	}
 
-	return params.NewLoginOutput(user.VerifyPassword(in.Password()))
+	return params.NewLoginOutput(user.VerifyPassword(in.Password())), nil
 }
 
 func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (params.GetUserOutput, error) {
@@ -477,7 +480,31 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	out := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
+	out, err := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
+	if err != nil {
+		if err.Error() == usecase.DatabaseErr.Error() {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(
+				struct {
+					Message string `json:"message"`
+				}{
+					Message: err.Error(),
+				},
+			)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		json.NewEncoder(w).Encode(
+			struct {
+				Message string `json:"message"`
+			}{
+				Message: err.Error(),
+			},
+		)
+		return
+	}
 
 	res := model.NewLoginResponse(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
