@@ -71,6 +71,8 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
 │   └── server
 │       └── main.go                 # アプリのエントリポイント
 └── internal
+    ├── apperrors
+    │   └── apperrors.go            # 汎用的なアプリエラー定義
     ├── application
     │   └── usecase
     │       ├── params
@@ -205,6 +207,23 @@ func NewAge(value int) (Age, error) {
 }
 ```
 
+#### `internal/apperrors/`
+
+汎用的なアプリケーションエラー文言を定義します。
+
+- `apperrors.go`
+
+```go
+package apperrors
+
+import "errors"
+
+var (
+	InvalidInputErr = errors.New("invalid input")
+	DatabaseErr     = errors.New("database error")
+)
+```
+
 #### `internal/infrastructure/`
 
 データベースへの接続設定を記載します。
@@ -261,6 +280,7 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"easyapp/internal/apperrors"
 	"easyapp/internal/domain"
 	"errors"
 )
@@ -288,7 +308,7 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 		if errors.Is(err, sql.ErrNoRows) {
 			return domain.User{}, domain.NoSuchUser
 		}
-		return domain.User{}, errors.New("database error")
+		return domain.User{}, apperrors.DatabaseErr
 	}
 
 	return domain.NewUser(name, password, age)
@@ -306,6 +326,7 @@ package usecase
 
 import (
 	"context"
+	"easyapp/internal/apperrors"
 	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
 	"errors"
@@ -329,16 +350,11 @@ func NewUserUsecase(userRepository domain.UserRepository) UserUsecase {
 	return &userUsecase{userRepository: userRepository}
 }
 
-var (
-	InvalidInputErr = errors.New("invalid input")
-	DatabaseErr     = errors.New("database error")
-)
-
 func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.LoginOutput, error) {
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.LoginOutput{}, InvalidInputErr
+		return params.LoginOutput{}, apperrors.InvalidInputErr
 	}
 
 	user, err := u.userRepository.FindByName(ctx, name)
@@ -346,7 +362,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 		if errors.Is(err, domain.NoSuchUser) {
 			return params.LoginOutput{}, nil
 		}
-		return params.LoginOutput{}, DatabaseErr
+		return params.LoginOutput{}, apperrors.DatabaseErr
 	}
 
 	return params.NewLoginOutput(user.VerifyPassword(in.Password())), nil
@@ -356,7 +372,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.GetUserOutput{}, InvalidInputErr
+		return params.GetUserOutput{}, apperrors.InvalidInputErr
 	}
 
 	user, err := u.userRepository.FindByName(ctx, name)
@@ -364,7 +380,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 		if errors.Is(err, domain.NoSuchUser) {
 			return params.GetUserOutput{}, nil
 		}
-		return params.GetUserOutput{}, DatabaseErr
+		return params.GetUserOutput{}, apperrors.DatabaseErr
 	}
 
 	return params.NewGetUserOutput(user.Name().Value(), user.Age().Value()), nil
@@ -453,10 +469,12 @@ handlerを定義・実装します。usecaseを呼び出し、レスポンスを
 package handler
 
 import (
+	"easyapp/internal/apperrors"
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/presentation/handler/model"
 	"encoding/json"
+	"errors"
 	"net/http"
 )
 
@@ -487,7 +505,7 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
 	if err != nil {
-		if err.Error() == usecase.DatabaseErr.Error() {
+		if errors.Is(err, apperrors.DatabaseErr) {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(
@@ -523,7 +541,7 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		if err.Error() == usecase.DatabaseErr.Error() {
+		if errors.Is(err, apperrors.DatabaseErr) {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(
