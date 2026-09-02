@@ -288,7 +288,7 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 		if errors.Is(err, sql.ErrNoRows) {
 			return domain.User{}, domain.NoSuchUser
 		}
-		return domain.User{}, err
+		return domain.User{}, errors.New("database error")
 	}
 
 	return domain.NewUser(name, password, age)
@@ -344,7 +344,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
 		if errors.Is(err, domain.NoSuchUser) {
-			return params.GetUserOutput{}, nil
+			return params.LoginOutput{}, nil
 		}
 		return params.LoginOutput{}, DatabaseErr
 	}
