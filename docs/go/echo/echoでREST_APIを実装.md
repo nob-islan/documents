@@ -152,7 +152,7 @@ func NewLoginRequest(c *echo.Context) (LoginRequest, error) {
 
 	req := new(LoginRequest)
 	if err := c.Bind(req); err != nil {
-		return LoginRequest{}, errors.New("invalid request")
+		return LoginRequest{}, err
 	}
 
 	return *req, nil

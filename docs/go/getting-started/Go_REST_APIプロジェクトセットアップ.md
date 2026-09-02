@@ -153,6 +153,8 @@ type UserRepository interface {
 	FindByName(ctx context.Context, targetName Name) (User, error)
 }
 
+var NoSuchUser = errors.New("no such user")
+
 // ユーザ名
 type Name struct {
 	value string
@@ -260,6 +262,7 @@ import (
 	"context"
 	"database/sql"
 	"easyapp/internal/domain"
+	"errors"
 )
 
 type userRepository struct {
@@ -282,6 +285,9 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 	var age int
 	err := row.Scan(&name, &password, &age)
 	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return domain.User{}, domain.NoSuchUser
+		}
 		return domain.User{}, err
 	}
 
@@ -300,7 +306,6 @@ package usecase
 
 import (
 	"context"
-	"database/sql"
 	"easyapp/internal/application/usecase/params"
 	"easyapp/internal/domain"
 	"errors"
@@ -338,8 +343,8 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return params.NewLoginOutput(false), nil
+		if errors.Is(err, domain.NoSuchUser) {
+			return params.GetUserOutput{}, nil
 		}
 		return params.LoginOutput{}, DatabaseErr
 	}
@@ -356,7 +361,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
+		if errors.Is(err, domain.NoSuchUser) {
 			return params.GetUserOutput{}, nil
 		}
 		return params.GetUserOutput{}, DatabaseErr
@@ -570,7 +575,6 @@ type LoginRequest struct {
 }
 
 func NewLoginRequest(r *http.Request) (LoginRequest, error) {
-
 	var req LoginRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
