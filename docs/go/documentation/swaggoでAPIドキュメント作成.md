@@ -109,6 +109,7 @@ package handler
 import (
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/httperror"
 	"easyapp/internal/presentation/handler/model"
 	"encoding/json"
 	"net/http"
@@ -130,25 +131,29 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Produce json
 // @Param LoginRequest body model.LoginRequest true "認証向けのリクエストモデル"
 // @Success 200 {object} model.LoginResponse "正常に処理された場合"
-// @Failure 400 {object} httperror.validationErrorResponse "バリデーションエラーが発生した場合"
+// @Failure 400 {object} httperror.badRequestErrorResponse "リクエスト不正エラーが発生した場合"
+// @Failure 422 {object} httperror.validationErrorResponse "バリデーションエラーが発生した場合"
+// @Failure 500 {object} httperror.systemErrorResponse "システムエラーが発生した場合"
 // @Router /login [post]
 func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req, err := model.NewLoginRequest(r)
 	if err != nil {
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(
-			struct {
-				Message string `json:"message"`
-			}{
-				Message: "bad request",
-			},
-		)
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
-	out := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
+	out, err := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
+	if err != nil {
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
+		return
+	}
 
 	res := model.NewLoginResponse(out.Valid())
 	w.Header().Set("Content-Type", "application/json")
@@ -163,7 +168,6 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Produce json
 // @Param GetUserRequest query model.GetUserRequest false "ユーザ情報取得向けのリクエストモデル"
 // @Success 200 {object} model.GetUserResponse "正常に処理された場合"
-// @Failure 400 {object} httperror.validationErrorResponse "バリデーションエラーが発生した場合"
 // @Failure 422 {object} httperror.businessErrorResponse "業務エラーが発生した場合"
 // @Failure 500 {object} httperror.systemErrorResponse "システムエラーが発生した場合"
 // @Router /users [get]
@@ -173,27 +177,10 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		if err.Error() == usecase.DatabaseErr.Error() {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(
-				struct {
-					Message string `json:"message"`
-				}{
-					Message: err.Error(),
-				},
-			)
-			return
-		}
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnprocessableEntity)
-		json.NewEncoder(w).Encode(
-			struct {
-				Message string `json:"message"`
-			}{
-				Message: err.Error(),
-			},
-		)
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
