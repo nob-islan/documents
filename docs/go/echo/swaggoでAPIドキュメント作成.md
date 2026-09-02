@@ -11,7 +11,7 @@ cf.
 
 ```shell
 go install github.com/swaggo/swag/v2/cmd/swag@latest
-go get -u github.com/swaggo/echo-swagger
+go get -u github.com/swaggo/echo-swagger/v2
 ```
 
 下記コマンドでswaggerドキュメントを初期化します:
