@@ -202,8 +202,6 @@ package bootstrap
 
 import (
 	"easyapp/internal/application/usecase"
-	"easyapp/internal/infrastructure"
-	"easyapp/internal/infrastructure/repository"
 	"easyapp/internal/presentation/handler"
 	"easyapp/internal/presentation/router"
 
