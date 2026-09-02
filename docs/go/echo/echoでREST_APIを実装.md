@@ -78,7 +78,25 @@ func (h *UserHandler) Login(c *echo.Context) error {
 		)
 	}
 
-	out := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
+	out, err := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
+	if err != nil {
+		if err.Error() == usecase.DatabaseErr.Error() {
+			return c.JSON(
+				http.StatusInternalServerError,
+				echo.NewHTTPError(
+					http.StatusInternalServerError,
+					err.Error(),
+				),
+			)
+		}
+		return c.JSON(
+			http.StatusUnprocessableEntity,
+			echo.NewHTTPError(
+				http.StatusUnprocessableEntity,
+				err.Error(),
+			),
+		)
+	}
 
 	return c.JSON(http.StatusOK, model.NewLoginResponse(out.Valid()))
 }
