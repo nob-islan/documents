@@ -227,8 +227,6 @@ var (
 )
 ```
 
-#### `internal/presentation/handler/httperror`
-
 #### `internal/infrastructure/`
 
 データベースへの接続設定を記載します。
@@ -626,7 +624,7 @@ func ToHttpErrorResponse(err error) (int, any) {
 	}
 }
 
-// エラー発生時のレスポンスです。
+// エラーレスポンスです。
 type errorResponse struct {
 	Message string `json:"message"` // エラーメッセージ
 }
