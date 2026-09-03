@@ -88,6 +88,8 @@ GRANT ALL ON eadb.* TO eadbuser@'%' IDENTIFIED BY 'eadbpass';
     │       └── user_repository.go  # ドメインの取得/永続化
     └── presentation
         ├── handler
+        │   ├── httperror
+        │   │   └── httperror.go    # エラーハンドリング
         │   ├── model
         │   │   └── user_model.go   # APIのリクエスト・レスポンス構造体
         │   └── user_handler.go     # APIとしての外部契約
@@ -219,10 +221,13 @@ package apperrors
 import "errors"
 
 var (
+	BadRequestErr   = errors.New("bad request")
 	InvalidInputErr = errors.New("invalid input")
 	DatabaseErr     = errors.New("database error")
 )
 ```
+
+#### `internal/presentation/handler/httperror`
 
 #### `internal/infrastructure/`
 
@@ -469,12 +474,11 @@ handlerを定義・実装します。usecaseを呼び出し、レスポンスを
 package handler
 
 import (
-	"easyapp/internal/apperrors"
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/httperror"
 	"easyapp/internal/presentation/handler/model"
 	"encoding/json"
-	"errors"
 	"net/http"
 )
 
@@ -491,41 +495,19 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	req, err := model.NewLoginRequest(r)
 	if err != nil {
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(
-			struct {
-				Message string `json:"message"`
-			}{
-				Message: "bad request",
-			},
-		)
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
 	out, err := h.userUsecase.Login(r.Context(), params.NewLoginInput(req.Name, req.Password))
 	if err != nil {
-		if errors.Is(err, apperrors.DatabaseErr) {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(
-				struct {
-					Message string `json:"message"`
-				}{
-					Message: err.Error(),
-				},
-			)
-			return
-		}
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnprocessableEntity)
-		json.NewEncoder(w).Encode(
-			struct {
-				Message string `json:"message"`
-			}{
-				Message: err.Error(),
-			},
-		)
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
@@ -541,27 +523,10 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 
 	out, err := h.userUsecase.GetUser(r.Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		if errors.Is(err, apperrors.DatabaseErr) {
-			w.Header().Set("Content-Type", "application/json")
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(
-				struct {
-					Message string `json:"message"`
-				}{
-					Message: err.Error(),
-				},
-			)
-			return
-		}
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusUnprocessableEntity)
-		json.NewEncoder(w).Encode(
-			struct {
-				Message string `json:"message"`
-			}{
-				Message: err.Error(),
-			},
-		)
+		w.WriteHeader(httpStatus)
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
@@ -582,6 +547,7 @@ handler向けの関数の入力・出力モデル構造体を定義します。
 package model
 
 import (
+	"easyapp/internal/apperrors"
 	"encoding/json"
 	"net/http"
 )
@@ -596,7 +562,7 @@ func NewLoginRequest(r *http.Request) (LoginRequest, error) {
 	var req LoginRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return LoginRequest{}, err
+		return LoginRequest{}, apperrors.BadRequestErr
 	}
 	return req, nil
 }
@@ -627,6 +593,42 @@ type GetUserResponse struct {
 
 func NewGetUserResponse(name string, age int) GetUserResponse {
 	return GetUserResponse{Name: name, Age: age}
+}
+```
+
+#### `internal/presentation/handler/httperror`
+
+業務処理層から返ってきたエラーをハンドリングし、エラーレスポンスを作成します。
+
+- `httperror.go`
+
+```go
+package httperror
+
+import (
+	"easyapp/internal/apperrors"
+	"errors"
+	"net/http"
+)
+
+// エラー型に対し、そのHTTPステータスおよびレスポンス構造体を返します。
+func ToHttpErrorResponse(err error) (int, any) {
+
+	switch {
+	case errors.Is(err, apperrors.BadRequestErr):
+		return http.StatusBadRequest, errorResponse{Message: err.Error()}
+	case errors.Is(err, apperrors.InvalidInputErr):
+		return http.StatusUnprocessableEntity, errorResponse{Message: err.Error()}
+	case errors.Is(err, apperrors.DatabaseErr):
+		return http.StatusInternalServerError, errorResponse{Message: err.Error()}
+	default:
+		return http.StatusInternalServerError, errorResponse{Message: "unknown error"}
+	}
+}
+
+// エラー発生時のレスポンスです。
+type errorResponse struct {
+	Message string `json:"message"` // エラーメッセージ
 }
 ```
 
