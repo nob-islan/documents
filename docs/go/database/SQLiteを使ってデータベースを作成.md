@@ -21,8 +21,8 @@ package infrastructure
 
 import (
 	"database/sql"
+	"easyapp/internal/infrastructure/sqlite"
 	"log"
-	"os"
 
 	_ "modernc.org/sqlite"
 )
@@ -36,21 +36,13 @@ func ConnectDB() *sql.DB {
 	}
 
 	// schema.sqlを読み込み・実行
-	schema, err := os.ReadFile("internal/infrastructure/sqlite/schema.sql")
-	if err != nil {
-		log.Fatalf("failed to read schema: %v", err)
-	}
-	_, err = db.Exec(string(schema))
+	_, err = db.Exec(sqlite.SchemaSql)
 	if err != nil {
 		log.Fatalf("failed to execute schema: %v", err)
 	}
 
 	// data.sqlを読み込み・実行
-	data, err := os.ReadFile("internal/infrastructure/sqlite/data.sql")
-	if err != nil {
-		log.Fatalf("failed to read data: %v", err)
-	}
-	_, err = db.Exec(string(data))
+	_, err = db.Exec(sqlite.DataSql)
 	if err != nil {
 		log.Fatalf("failed to execute data: %v", err)
 	}
@@ -66,6 +58,20 @@ func ConnectDB() *sql.DB {
 ```
 
 ### `internal/infrastructure/sqlite/`
+
+- `sqlite.go`
+
+```go
+package sqlite
+
+import _ "embed"
+
+//go:embed schema.sql
+var SchemaSql string
+
+//go:embed data.sql
+var DataSql string
+```
 
 - `schema.sql`
 
