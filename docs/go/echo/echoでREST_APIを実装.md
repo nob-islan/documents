@@ -14,10 +14,14 @@ echoを使って簡易的なGETメソッドおよびPOSTメソッドを実装し
 │   └── server
 │       └── main.go
 └── internal
+    ├── apperrors
+    │   └── apperrors.go
     ├── bootstrap
     │   └── server.go
     └── presentation
         ├── handler
+        │   ├── httperror
+        │   │   └── httperror.go
         │   ├── model
         │   │   └── user_model.go
         │   └── user_handler.go
@@ -49,11 +53,10 @@ go get github.com/labstack/echo/v5
 package handler
 
 import (
-	"easyapp/internal/apperrors"
 	"easyapp/internal/application/usecase"
 	"easyapp/internal/application/usecase/params"
+	"easyapp/internal/presentation/handler/httperror"
 	"easyapp/internal/presentation/handler/model"
-	"errors"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -71,33 +74,14 @@ func (h *UserHandler) Login(c *echo.Context) error {
 
 	req, err := model.NewLoginRequest(c)
 	if err != nil {
-		return c.JSON(
-			http.StatusBadRequest,
-			echo.NewHTTPError(
-				http.StatusBadRequest,
-				"bad request",
-			),
-		)
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
+		return c.JSON(httpStatus, res)
 	}
 
 	out, err := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
 	if err != nil {
-		if errors.Is(err, apperrors.DatabaseErr) {
-			return c.JSON(
-				http.StatusInternalServerError,
-				echo.NewHTTPError(
-					http.StatusInternalServerError,
-					err.Error(),
-				),
-			)
-		}
-		return c.JSON(
-			http.StatusUnprocessableEntity,
-			echo.NewHTTPError(
-				http.StatusUnprocessableEntity,
-				err.Error(),
-			),
-		)
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
+		return c.JSON(httpStatus, res)
 	}
 
 	return c.JSON(http.StatusOK, model.NewLoginResponse(out.Valid()))
@@ -109,22 +93,8 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 
 	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		if errors.Is(err, apperrors.DatabaseErr) {
-			return c.JSON(
-				http.StatusInternalServerError,
-				echo.NewHTTPError(
-					http.StatusInternalServerError,
-					err.Error(),
-				),
-			)
-		}
-		return c.JSON(
-			http.StatusUnprocessableEntity,
-			echo.NewHTTPError(
-				http.StatusUnprocessableEntity,
-				err.Error(),
-			),
-		)
+		httpStatus, res := httperror.ToHttpErrorResponse(err)
+		return c.JSON(httpStatus, res)
 	}
 
 	return c.JSON(http.StatusOK, model.NewGetUserResponse(out.Name(), out.Age()))
@@ -139,7 +109,7 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 package model
 
 import (
-	"errors"
+	"easyapp/internal/apperrors"
 
 	"github.com/labstack/echo/v5"
 )
@@ -154,7 +124,7 @@ func NewLoginRequest(c *echo.Context) (LoginRequest, error) {
 
 	req := new(LoginRequest)
 	if err := c.Bind(req); err != nil {
-		return LoginRequest{}, err
+		return LoginRequest{}, apperrors.BadRequestErr
 	}
 
 	return *req, nil
