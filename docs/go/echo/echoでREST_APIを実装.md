@@ -74,14 +74,12 @@ func (h *UserHandler) Login(c *echo.Context) error {
 
 	req, err := model.NewLoginRequest(c)
 	if err != nil {
-		httpStatus, res := httperror.ToHttpErrorResponse(err)
-		return c.JSON(httpStatus, res)
+		return c.JSON(httperror.ToHttpErrorResponse(err))
 	}
 
 	out, err := h.userUsecase.Login(c.Request().Context(), params.NewLoginInput(req.Name, req.Password))
 	if err != nil {
-		httpStatus, res := httperror.ToHttpErrorResponse(err)
-		return c.JSON(httpStatus, res)
+		return c.JSON(httperror.ToHttpErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, model.NewLoginResponse(out.Valid()))
@@ -93,8 +91,7 @@ func (h *UserHandler) GetUser(c *echo.Context) error {
 
 	out, err := h.userUsecase.GetUser(c.Request().Context(), params.NewGetUserInput(req.Name))
 	if err != nil {
-		httpStatus, res := httperror.ToHttpErrorResponse(err)
-		return c.JSON(httpStatus, res)
+		return c.JSON(httperror.ToHttpErrorResponse(err))
 	}
 
 	return c.JSON(http.StatusOK, model.NewGetUserResponse(out.Name(), out.Age()))
