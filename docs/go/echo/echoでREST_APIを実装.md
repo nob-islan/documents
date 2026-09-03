@@ -118,7 +118,6 @@ type LoginRequest struct {
 }
 
 func NewLoginRequest(c *echo.Context) (LoginRequest, error) {
-
 	req := new(LoginRequest)
 	if err := c.Bind(req); err != nil {
 		return LoginRequest{}, apperrors.BadRequestErr
