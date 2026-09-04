@@ -8,7 +8,7 @@ cf. https://www.keycloak.org/docs/latest/server_admin/#_webauthn_passwordless
 
 - Authenticationからflowを作成します（ビルトインのbrowserフローを複製すると簡単です）。
   - `WebAuthn Passwordless Authenticator`を追加します。
-  - 例えば下記の構成のフローを作成します:
+  - 例えば下記の構成のフローを作成します（Requirementは一律Alternativeとしてください）:
 
     ```
     execution: Cookie
