@@ -14,7 +14,7 @@ cf. https://www.keycloak.org/docs/latest/server_admin/#_webauthn_passwordless
     execution: Cookie
     execution: Identity Provider Redirector
     execution: WebAuthn Passwordless Authenticator
-    form: Password login
+    flow: Password login
         step: Username Password Form
     ```
 
