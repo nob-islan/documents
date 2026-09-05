@@ -221,9 +221,9 @@ package apperrors
 import "errors"
 
 var (
-	BadRequestErr   = errors.New("bad request")
-	InvalidInputErr = errors.New("invalid input")
-	DatabaseErr     = errors.New("database error")
+	ErrBadRequest        = errors.New("bad request")
+	ErrInvalidInput      = errors.New("invalid input")
+	ErrDatabaseOperation = errors.New("database error")
 )
 ```
 
@@ -311,7 +311,7 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 		if errors.Is(err, sql.ErrNoRows) {
 			return domain.User{}, domain.NoSuchUser
 		}
-		return domain.User{}, apperrors.DatabaseErr
+		return domain.User{}, apperrors.ErrDatabaseOperation
 	}
 
 	return domain.NewUser(name, password, age)
@@ -357,7 +357,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.LoginOutput{}, apperrors.InvalidInputErr
+		return params.LoginOutput{}, apperrors.ErrInvalidInput
 	}
 
 	user, err := u.userRepository.FindByName(ctx, name)
@@ -365,7 +365,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 		if errors.Is(err, domain.NoSuchUser) {
 			return params.LoginOutput{}, nil
 		}
-		return params.LoginOutput{}, apperrors.DatabaseErr
+		return params.LoginOutput{}, apperrors.ErrDatabaseOperation
 	}
 
 	return params.NewLoginOutput(user.VerifyPassword(in.Password())), nil
@@ -375,7 +375,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	name, err := domain.NewName(in.Name())
 	if err != nil {
-		return params.GetUserOutput{}, apperrors.InvalidInputErr
+		return params.GetUserOutput{}, apperrors.ErrInvalidInput
 	}
 
 	user, err := u.userRepository.FindByName(ctx, name)
@@ -383,7 +383,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 		if errors.Is(err, domain.NoSuchUser) {
 			return params.GetUserOutput{}, nil
 		}
-		return params.GetUserOutput{}, apperrors.DatabaseErr
+		return params.GetUserOutput{}, apperrors.ErrDatabaseOperation
 	}
 
 	return params.NewGetUserOutput(user.Name().Value(), user.Age().Value()), nil
@@ -560,7 +560,7 @@ func NewLoginRequest(r *http.Request) (loginRequest, error) {
 	var req loginRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return loginRequest{}, apperrors.BadRequestErr
+		return loginRequest{}, apperrors.ErrBadRequest
 	}
 	return req, nil
 }
@@ -613,11 +613,11 @@ import (
 func ToHttpErrorResponse(err error) (int, any) {
 
 	switch {
-	case errors.Is(err, apperrors.BadRequestErr):
+	case errors.Is(err, apperrors.ErrBadRequest):
 		return http.StatusBadRequest, errorResponse{Message: err.Error()}
-	case errors.Is(err, apperrors.InvalidInputErr):
+	case errors.Is(err, apperrors.ErrInvalidInput):
 		return http.StatusUnprocessableEntity, errorResponse{Message: err.Error()}
-	case errors.Is(err, apperrors.DatabaseErr):
+	case errors.Is(err, apperrors.ErrDatabaseOperation):
 		return http.StatusInternalServerError, errorResponse{Message: err.Error()}
 	default:
 		return http.StatusInternalServerError, errorResponse{Message: "unknown error"}

@@ -120,7 +120,7 @@ type loginRequest struct {
 func NewLoginRequest(c *echo.Context) (loginRequest, error) {
 	req := new(loginRequest)
 	if err := c.Bind(req); err != nil {
-		return loginRequest{}, apperrors.BadRequestErr
+		return loginRequest{}, apperrors.ErrBadRequest
 	}
 
 	return *req, nil
