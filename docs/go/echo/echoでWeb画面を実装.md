@@ -215,7 +215,7 @@ func (h *UserHandler) Login(c *echo.Context) error {
 			struct {
 				Message string `json:"message"` // メッセージ
 			}{
-				Message: "Input your credentials",
+				Message: "input your credentials",
 			},
 		)
 	}
