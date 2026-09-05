@@ -28,7 +28,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
+          go-version: "1.26"
       - name: Test with the Go CLI
         run: |
           go install gotest.tools/gotestsum@latest

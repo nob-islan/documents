@@ -46,10 +46,10 @@
 ### `Dockerfile`
 
 ```Dockerfile
-FROM mcr.microsoft.com/devcontainers/go:1.25-bookworm
+FROM mcr.microsoft.com/devcontainers/go:1.26-bookworm
 
 # Kubebuilderインストール
-RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.9.0/kubebuilder_linux_arm64"
+RUN curl -L -o kubebuilder "https://github.com/kubernetes-sigs/kubebuilder/releases/download/v4.15.0/kubebuilder_linux_arm64"
 RUN chmod +x ./kubebuilder
 RUN mv ./kubebuilder /usr/local/bin/kubebuilder
 ```

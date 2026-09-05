@@ -43,7 +43,7 @@ cf. https://github.com/devcontainers/images/issues/1752
 <details><summary>Dockerfile</summary>
 
 ```Dockerfile
-FROM mcr.microsoft.com/devcontainers/go:1.25-bookworm
+FROM mcr.microsoft.com/devcontainers/go:1.26-bookworm
 
 # 不要なyarnリポジトリを削除
 RUN rm -f /etc/apt/sources.list.d/yarn.list

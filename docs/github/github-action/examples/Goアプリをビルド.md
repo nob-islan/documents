@@ -18,7 +18,7 @@ cf.
 ### `Dockerfile`
 
 ```Dockerfile
-FROM golang:1.25
+FROM golang:1.26
 
 COPY ./main /main
 
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
+          go-version: "1.26"
       - name: Test with the Go CLI
         run: |
           go install gotest.tools/gotestsum@latest
@@ -64,7 +64,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
+          go-version: "1.26"
       - name: Build
         run: |
           go build cmd/server/main.go

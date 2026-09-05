@@ -31,7 +31,7 @@ variables:
 test:
   stage: test
   image:
-    name: golang:1.25
+    name: golang:1.26
   script:
     - go install gotest.tools/gotestsum@latest
     - make test
@@ -57,7 +57,7 @@ build_image:
 build_manifest:
   stage: build
   image:
-    name: alpine/k8s:1.34.1
+    name: alpine/k8s:1.36.4
   script:
     - cd ${CI_PROJECT_DIR}/config/manager && kustomize edit set image controller=${HARBOR_HOST}/${HARBOR_PROJECT}/${CONTROLLER}:$CI_COMMIT_TAG
     - cd ${CI_PROJECT_DIR} && mkdir deploy

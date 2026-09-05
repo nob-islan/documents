@@ -7,7 +7,7 @@ GitLab Runnerを使ってGoアプリケーションのコンテナイメージ�
 ### `Dockerfile`
 
 ```Dockerfile
-FROM golang:1.25
+FROM golang:1.26
 
 # 後述のci.yamlから渡される環境変数
 ARG ARTIFACT_PATH
@@ -46,7 +46,7 @@ variables:
   ARTIFACT_PATH: main # ビルド成果物のパス
 test:
   stage: test
-  image: golang:1.25
+  image: golang:1.26
   script:
     - go install gotest.tools/gotestsum@latest
     - gotestsum --junitfile report.xml -- -coverprofile=coverage.txt ./internal/presentation/handler ./internal/application/usecase ./internal/infrastructure/repository
@@ -63,7 +63,7 @@ test:
     - if: $CI_COMMIT_TAG
 build:
   stage: build
-  image: golang:1.25
+  image: golang:1.26
   script:
     - go build cmd/server/main.go
   artifacts:

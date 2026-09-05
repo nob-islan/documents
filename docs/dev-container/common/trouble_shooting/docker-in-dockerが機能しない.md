@@ -42,7 +42,7 @@ Run 'docker run --help' for more information
 <details><summary>Dockerfile</summary>
 
 ```Dockerfile
-FROM mcr.microsoft.com/devcontainers/go:1.25-bookworm
+FROM mcr.microsoft.com/devcontainers/go:1.26-bookworm
 
 # Docker daemonのストレージドライバをvfsに強制する設定を配置
 RUN mkdir -p /etc/docker && echo '{"storage-driver": "vfs"}' > /etc/docker/daemon.json
