@@ -154,7 +154,7 @@ func (u User) VerifyPassword(password string) bool {
 type UserRepository interface {
 
 	// ユーザ情報を取得します。
-	FindByName(ctx context.Context, targetName Name) (User, error)
+	FindByName(ctx context.Context, target Name) (User, error)
 }
 
 var NoSuchUser = errors.New("no such user")
