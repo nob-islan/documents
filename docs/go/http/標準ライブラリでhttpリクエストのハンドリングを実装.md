@@ -98,7 +98,7 @@ func getUserinfo(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("username")
 
 	// 業務処理実行（擬似APIなのでuserinfoを作成するのみ）
-	u := Userinfo{
+	u := userinfo{
 		Id:   706,
 		Name: q,
 		Age:  13,
@@ -111,7 +111,7 @@ func getUserinfo(w http.ResponseWriter, r *http.Request) {
 }
 
 // ユーザ情報のドメイン構造体です。
-type Userinfo struct {
+type userinfo struct {
 	Id   int    `json:"id"`   // 管理ID
 	Name string `json:"name"` // 名前
 	Age  int    `json:"age"`  // 年齢
@@ -121,7 +121,7 @@ type Userinfo struct {
 func registUserinfo(w http.ResponseWriter, r *http.Request) {
 
 	// リクエストボディ解析
-	var req RegistRequest
+	var req registRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
 		http.Error(w, "internal server error", http.StatusInternalServerError)
@@ -129,7 +129,7 @@ func registUserinfo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 業務処理実行（擬似APIなのでresを作成するのみ）
-	res := RegistResponse{
+	res := registResponse{
 		Message: "success",
 	}
 
@@ -141,13 +141,13 @@ func registUserinfo(w http.ResponseWriter, r *http.Request) {
 
 type (
 	// registUserinfoのリクエストボディ
-	RegistRequest struct {
+	registRequest struct {
 		Name string `json:"name"` // 名前
 		Age  int    `json:"age"`  // 年齢
 	}
 
 	// registUserinfoのレスポンスボディ
-	RegistResponse struct {
+	registResponse struct {
 		Message string `json:"message"` // 登録成否
 	}
 )
