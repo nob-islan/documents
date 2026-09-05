@@ -67,7 +67,7 @@ jobs:
           go-version: "1.25"
       - name: Build
         run: |
-          go build cmd/main.go
+          go build cmd/server/main.go
       - name: Log in to Docker Hub
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:

@@ -65,7 +65,7 @@ build:
   stage: build
   image: golang:1.25
   script:
-    - go build cmd/main.go
+    - go build cmd/server/main.go
   artifacts:
     paths:
       - ${ARTIFACT_PATH}
