@@ -248,25 +248,12 @@ func NewGetUserResponse(name string, age int) GetUserResponse {
 }
 ```
 
-### `apperrors/business_error.go`
+### `httperror/httperror.go`
 
 例外発生時レスポンスモデルのexampleを記載します:
 
 ```go
-package apperrors
-
-// 業務エラー向け構造体です。想定内のエラーが発生した場合に返るエラーです。
-type BusinessError struct {
-	message string // エラーメッセージ
-}
-
-func NewBusinessError(message string) BusinessError {
-	return BusinessError{message: message}
-}
-
-func (e BusinessError) Error() string {
-	return e.message
-}
+package httperror
 
 // 業務エラーレスポンスモデルです。想定内のエラーが発生した場合に返るエラーです。
 type businessErrorResponse struct {
