@@ -118,12 +118,12 @@ type loginRequest struct {
 }
 
 func NewLoginRequest(c *echo.Context) (loginRequest, error) {
-	req := new(loginRequest)
-	if err := c.Bind(req); err != nil {
+	var req loginRequest
+	if err := c.Bind(&req); err != nil {
 		return loginRequest{}, apperrors.ErrBadRequest
 	}
 
-	return *req, nil
+	return req, nil
 }
 
 // 認証向けのレスポンスモデルです。
