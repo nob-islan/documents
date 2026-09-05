@@ -59,20 +59,6 @@ func ConnectDB() *sql.DB {
 
 ### `internal/infrastructure/sqlite/`
 
-- `sqlite.go`
-
-```go
-package sqlite
-
-import _ "embed"
-
-//go:embed schema.sql
-var SchemaSql string
-
-//go:embed data.sql
-var DataSql string
-```
-
 - `schema.sql`
 
 ```sql
@@ -96,4 +82,18 @@ INSERT INTO users (
     , 'passwd'
     , 13
 );
+```
+
+- `sqlite.go`
+
+```go
+package sqlite
+
+import _ "embed"
+
+//go:embed schema.sql
+var SchemaSql string
+
+//go:embed data.sql
+var DataSql string
 ```
