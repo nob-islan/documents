@@ -129,8 +129,8 @@ func NewUserHandler(userUsecase usecase.UserUsecase) UserHandler {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param LoginRequest body model.LoginRequest true "認証向けのリクエストモデル"
-// @Success 200 {object} model.LoginResponse "正常に処理された場合"
+// @Param loginRequest body model.loginRequest true "認証向けのリクエストモデル"
+// @Success 200 {object} model.loginResponse "正常に処理された場合"
 // @Failure 400 {object} httperror.badRequestErrorResponse "リクエスト不正エラーが発生した場合"
 // @Failure 422 {object} httperror.validationErrorResponse "バリデーションエラーが発生した場合"
 // @Failure 500 {object} httperror.systemErrorResponse "システムエラーが発生した場合"
@@ -166,8 +166,8 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 // @Tags User
 // @Accept json
 // @Produce json
-// @Param GetUserRequest query model.GetUserRequest false "ユーザ情報取得向けのリクエストモデル"
-// @Success 200 {object} model.GetUserResponse "正常に処理された場合"
+// @Param getUserRequest query model.getUserRequest false "ユーザ情報取得向けのリクエストモデル"
+// @Success 200 {object} model.getUserResponse "正常に処理された場合"
 // @Failure 422 {object} httperror.businessErrorResponse "業務エラーが発生した場合"
 // @Failure 500 {object} httperror.systemErrorResponse "システムエラーが発生した場合"
 // @Router /users [get]
@@ -204,47 +204,47 @@ import (
 )
 
 // 認証向けのリクエストモデルです。
-type LoginRequest struct {
+type loginRequest struct {
 	Name     string `json:"name" example:"nob"`        // ユーザ名
 	Password string `json:"password" example:"passwd"` // パスワード
 }
 
-func NewLoginRequest(r *http.Request) (LoginRequest, error) {
+func NewLoginRequest(r *http.Request) (loginRequest, error) {
 
-	var req LoginRequest
+	var req loginRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
-		return LoginRequest{}, err
+		return loginRequest{}, err
 	}
 	return req, nil
 }
 
 // 認証向けのレスポンスモデルです。
-type LoginResponse struct {
+type loginResponse struct {
 	Valid bool `json:"valid" example:"true"` // 認証可否
 }
 
-func NewLoginResponse(valid bool) LoginResponse {
-	return LoginResponse{Valid: valid}
+func NewLoginResponse(valid bool) loginResponse {
+	return loginResponse{Valid: valid}
 }
 
 // ユーザ情報取得向けのリクエストモデルです。
-type GetUserRequest struct {
+type getUserRequest struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 }
 
-func NewGetUserRequest(r *http.Request) GetUserRequest {
-	return GetUserRequest{Name: r.URL.Query().Get("name")}
+func NewGetUserRequest(r *http.Request) getUserRequest {
+	return getUserRequest{Name: r.URL.Query().Get("name")}
 }
 
 // ユーザ情報取得向けのレスポンスモデルです。
-type GetUserResponse struct {
+type getUserResponse struct {
 	Name string `json:"name" example:"nob"` // ユーザ名
 	Age  int    `json:"age" example:"13"`   // 年齢
 }
 
-func NewGetUserResponse(name string, age int) GetUserResponse {
-	return GetUserResponse{Name: name, Age: age}
+func NewGetUserResponse(name string, age int) getUserResponse {
+	return getUserResponse{Name: name, Age: age}
 }
 ```
 
