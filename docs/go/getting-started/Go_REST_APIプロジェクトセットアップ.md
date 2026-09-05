@@ -157,7 +157,7 @@ type UserRepository interface {
 	FindByName(ctx context.Context, target Name) (User, error)
 }
 
-var NoSuchUser = errors.New("no such user")
+var ErrNoSuchUser = errors.New("no such user")
 
 // ユーザ名
 type Name struct {
@@ -309,7 +309,7 @@ func (r *userRepository) FindByName(ctx context.Context, target domain.Name) (do
 	err := row.Scan(&name, &password, &age)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return domain.User{}, domain.NoSuchUser
+			return domain.User{}, domain.ErrNoSuchUser
 		}
 		return domain.User{}, apperrors.ErrDatabaseOperation
 	}
@@ -362,7 +362,7 @@ func (u *userUsecase) Login(ctx context.Context, in params.LoginInput) (params.L
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
-		if errors.Is(err, domain.NoSuchUser) {
+		if errors.Is(err, domain.ErrNoSuchUser) {
 			return params.LoginOutput{}, nil
 		}
 		return params.LoginOutput{}, apperrors.ErrDatabaseOperation
@@ -380,7 +380,7 @@ func (u *userUsecase) GetUser(ctx context.Context, in params.GetUserInput) (para
 
 	user, err := u.userRepository.FindByName(ctx, name)
 	if err != nil {
-		if errors.Is(err, domain.NoSuchUser) {
+		if errors.Is(err, domain.ErrNoSuchUser) {
 			return params.GetUserOutput{}, nil
 		}
 		return params.GetUserOutput{}, apperrors.ErrDatabaseOperation
