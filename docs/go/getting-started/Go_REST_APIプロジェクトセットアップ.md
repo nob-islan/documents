@@ -157,7 +157,12 @@ type UserRepository interface {
 	FindByName(ctx context.Context, target Name) (User, error)
 }
 
-var ErrNoSuchUser = errors.New("no such user")
+var (
+	ErrInvalidName     = errors.New("invalid name")
+	ErrInvalidPassword = errors.New("invalid password")
+	ErrInvalidAge      = errors.New("invalid age")
+	ErrNoSuchUser      = errors.New("no such user")
+)
 
 // ユーザ名
 type Name struct {
@@ -166,7 +171,7 @@ type Name struct {
 
 func NewName(value string) (Name, error) {
 	if value == "" {
-		return Name{}, errors.New("input name")
+		return Name{}, ErrInvalidName
 	}
 	return Name{value: value}, nil
 }
@@ -182,7 +187,7 @@ type Password struct {
 
 func NewPassword(value string) (Password, error) {
 	if value == "" {
-		return Password{}, errors.New("input password")
+		return Password{}, ErrInvalidPassword
 	}
 	return Password{value: value}, nil
 }
@@ -203,7 +208,7 @@ func (v Age) Value() int {
 
 func NewAge(value int) (Age, error) {
 	if value < 0 {
-		return Age{}, errors.New("input a value of 0 or greater for age")
+		return Age{}, ErrInvalidAge
 	}
 	return Age{value: value}, nil
 }
