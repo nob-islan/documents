@@ -103,26 +103,27 @@ go get github.com/labstack/echo/v5
 - `index.js`
 
 ```js
-function handleOnclickButton() {
+async function handleOnclickButton() {
   const name = document.getElementById("name").value;
   const password = document.getElementById("password").value;
-  fetch("/api/v1/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: name,
-      password: password,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert(data.message);
-    })
-    .catch((error) => {
-      console.log(error);
+
+  try {
+    const res = await fetch("/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        password: password,
+      }),
     });
+
+    const data = await response.json();
+    alert(data.message);
+  } catch (error) {
+    alert(error);
+  }
 }
 ```
 
