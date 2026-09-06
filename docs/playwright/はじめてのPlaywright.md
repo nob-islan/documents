@@ -51,7 +51,7 @@ npx playwright install chromium
 ```shell
 sudo apt update
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_arm64.deb
-sudo apt install google-chrome-stable_current_arm64.deb
+sudo apt install -y ./google-chrome-stable_current_arm64.deb
 sudo rm google-chrome-stable_current_arm64.deb
 ```
 
