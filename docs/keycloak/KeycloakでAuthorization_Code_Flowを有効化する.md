@@ -257,10 +257,18 @@ const handleOnclickMeButton = () => {
     <title>easyapp</title>
   </head>
   <body>
-    <div id="me">
-      <div id="preferred_username"><!-- ユーザ名 --></div>
-      <div id="name"><!-- 氏名 --></div>
-    </div>
+    <table id="me">
+      <tbody>
+        <tr>
+          <th align="left">ユーザ名</th>
+          <td id="preferred_username"><!-- ユーザ名 --></td>
+        </tr>
+        <tr>
+          <th align="left">氏名</th>
+          <td id="name"><!-- 氏名 --></td>
+        </tr>
+      </tbody>
+    </table>
     <button onclick="handleOnclickLogoutButton()">ログアウト</button>
   </body>
 
