@@ -40,6 +40,29 @@ npx playwright show-report --host 0.0.0.0
 
 ### chromiumインストール
 
+cf. https://playwright.dev/docs/browsers
+
 ```shell
 npx playwright install chromium
+```
+
+### Chromeインストール
+
+```shell
+sudo apt update
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_arm64.deb
+sudo apt install google-chrome-stable_current_arm64.deb
+sudo rm google-chrome-stable_current_arm64.deb
+```
+
+Chromeをテスト対象に含めるには、`playwright.config.js`に下記を追加します:
+
+```js
+    {
+      name: "chrome",
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+      },
+    },
 ```
