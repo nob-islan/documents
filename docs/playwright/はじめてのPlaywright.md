@@ -52,7 +52,7 @@ npx playwright install chromium
 sudo apt update
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_arm64.deb
 sudo apt install -y ./google-chrome-stable_current_arm64.deb
-sudo rm google-chrome-stable_current_arm64.deb
+sudo rm ./google-chrome-stable_current_arm64.deb
 ```
 
 Chromeをテスト対象に含めるには、`playwright.config.js`に下記を追加します:
