@@ -36,7 +36,12 @@ npx playwright show-report --host 0.0.0.0
 
 ### テスト失敗時にブラウザでテスト結果を表示する挙動を止める
 
-`playwright.config.js`について、`reporter`を`html`から`list`に変更してください。
+`playwright.config.js`について、`reporter`を下記要領で変更してください。
+
+```diff
+- reporter: "html",
++ reporter: [["html", { open: "never" }]],
+```
 
 ### chromiumインストール
 
