@@ -160,7 +160,7 @@ public class UserController {
      */
     @GetMapping("/me")
     MeResponse me(@AuthenticationPrincipal OAuth2User user) {
-        return new MeResponse(user.getAttribute("preferred_username"), 13);
+        return new MeResponse(user.getAttribute("preferred_username"), user.getAttribute("name"));
     }
 }
 ```
@@ -173,12 +173,12 @@ package nob.example.easyapp.controller.model;
 /**
  * ユーザ情報確認APIのレスポンスモデルです。
  *
- * @param name ユーザ名
- * @param age  年齢
+ * @param preferredUsername ユーザ名
+ * @param name              氏名
  *
  * @author nob
  */
-public record MeResponse(String name, Integer age) {
+public record MeResponse(String preferredUsername, String name) {
 }
 ```
 
@@ -258,8 +258,8 @@ const handleOnclickMeButton = () => {
   </head>
   <body>
     <div id="me">
-      <div id="name"><!-- ユーザ名 --></div>
-      <div id="age"><!-- 年齢 --></div>
+      <div id="preferred_username"><!-- ユーザ名 --></div>
+      <div id="name"><!-- 氏名 --></div>
     </div>
     <button onclick="handleOnclickLogoutButton()">ログアウト</button>
   </body>
@@ -271,29 +271,36 @@ const handleOnclickMeButton = () => {
 #### `static/me.js`
 
 ```js
-// 画面初期表示時にユーザ情報取得APIをコールして画面表示
-fetch("/api/v1/me", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then((res) => {
+/**
+ * 画面初期表示時にユーザ情報取得APIをコールして画面表示します。
+ *
+ * @returns ユーザ情報
+ */
+const me = async () => {
+  try {
+    const res = await fetch("/api/v1/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     if (res.status === 401) {
       window.location.href = "/oauth2/authorization/keycloak";
       return;
     }
-    return res.json();
-  })
-  .then((data) => {
+
+    const data = await res.json();
+    const preferredUsername = document.getElementById("preferred_username");
+    preferredUsername.textContent = data.preferredUsername;
     const name = document.getElementById("name");
     name.textContent = data.name;
-    const age = document.getElementById("age");
-    age.textContent = data.age;
-  })
-  .catch((error) => {
+  } catch (error) {
     console.log(error);
-  });
+  }
+};
+
+me();
 
 /**
  * ログアウトボタン押下時の挙動を定義します。
