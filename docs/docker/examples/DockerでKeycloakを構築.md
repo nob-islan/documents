@@ -13,7 +13,7 @@ cf.
 services:
   keycloak:
     container_name: keycloak
-    image: quay.io/keycloak/keycloak:26.5.3
+    image: quay.io/keycloak/keycloak
     environment:
       - KC_HOSTNAME=localhost
       - KC_BOOTSTRAP_ADMIN_USERNAME=admin
