@@ -16,7 +16,7 @@ npm init playwright@latest
 npx playwright install --with-deps
 ```
 
-また、VSCode向けの拡張機能[Playwright Test for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)
+また、VSCode向けの拡張機能[Playwright Test for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright)が提供されているので、必要に応じてインストールしてください。
 
 ## テスト実行
 
