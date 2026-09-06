@@ -25,3 +25,9 @@ npx playwright install --with-deps
 ```shell
 npx playwright test
 ```
+
+- 下記コマンドでブラウザからテスト結果を確認できます:
+
+```shell
+npx playwright show-report --host 0.0.0.0
+```
